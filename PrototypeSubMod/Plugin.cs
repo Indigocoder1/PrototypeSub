@@ -39,7 +39,6 @@ namespace PrototypeSubMod
     [BepInDependency("com.lee23.theredplague", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.danithedani.deepercreatures", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.lee23.epicweather", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInIncompatibility("com.mikjaw.subnautica.vehicleframework.mod")]
     public class Plugin : BaseUnityPlugin
     {
         private const string GUID = "com.prototech.prototypesub";
@@ -480,6 +479,7 @@ namespace PrototypeSubMod
                 harmony.Patch(originalMethod, transpiler: new HarmonyMethod(structureTranspiler));
             }
 
+            /*
             if (Chainloader.PluginInfos.ContainsKey("com.mikjaw.subnautica.vehicleframework.mod"))
             {
                 var smallEnoughPrefix = AccessTools.Method(typeof(VehicleFrameworkCompat_Patches),
@@ -513,6 +513,7 @@ namespace PrototypeSubMod
                 harmony.Patch(onDockedMethod, transpiler: new HarmonyMethod(onVehicleDockedTranspiler));
                 harmony.Patch(dockedPositionMethod, transpiler: new HarmonyMethod(dockedPositionTranspiler));
             }
+            */
 
             sw.Stop();
             Logger.LogInfo($"Dependant patches registered in {sw.ElapsedMilliseconds}ms");
