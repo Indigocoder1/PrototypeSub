@@ -39,6 +39,7 @@ namespace PrototypeSubMod
     [BepInDependency("com.lee23.theredplague", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.danithedani.deepercreatures", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.lee23.epicweather", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInIncompatibility("com.mikjaw.subnautica.vehicleframework.mod")]
     public class Plugin : BaseUnityPlugin
     {
         private const string GUID = "com.prototech.prototypesub";
@@ -179,10 +180,10 @@ namespace PrototypeSubMod
 
             string modName = Language.main.Get("ProtoModName");
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadBundleTask, Language.main.Get("ProtoWaitLoadingBundle"));
-            WaitScreenHandler.RegisterAsyncLoadTask(modName, LoadPrefabsTask, Language.main.Get("ProtoWaitLoadingPrefabs"));
-            WaitScreenHandler.RegisterAsyncLoadTask(modName, LoadStructuresTask, Language.main.Get("ProtoWaitRegisteringStructures"));
-            WaitScreenHandler.RegisterAsyncLoadTask(modName, LoadMiscellaneousTask, Language.main.Get("ProtoWaitRegisteringMiscellaneous"));
-            WaitScreenHandler.RegisterAsyncLoadTask(modName, LoadScenesBundle, Language.main.Get("ProtoWaitRegisteringScenes"));
+            WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadPrefabsTask, Language.main.Get("ProtoWaitLoadingPrefabs"));
+            WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadStructuresTask, Language.main.Get("ProtoWaitRegisteringStructures"));
+            WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadMiscellaneousTask, Language.main.Get("ProtoWaitRegisteringMiscellaneous"));
+            WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadScenesBundle, Language.main.Get("ProtoWaitRegisteringScenes"));
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadAudioBundle, Language.main.Get("ProtoWaitRegisteringAudio"));
 
             ModMessageSystem.SendGlobal("FindMyUpdates", "https://raw.githubusercontent.com/Indigocoder1/PrototypeSub/refs/heads/main/PrototypeSubMod/Version.json");
