@@ -1,5 +1,7 @@
 This project would not be possible without the following people:
 
-Octolinkg (Modeling)
+Octolink (Modeling)
 Deamoz (Sound design) - https://youtube.com/@deamozmusic?si=PF_fCmGpqYd_sA43
 Indigocoder (Programming)
+Lyonic (Programmer)
+ClubEar (2D Artist)
