@@ -302,7 +302,7 @@ namespace PrototypeSubMod
                 { IonPrism_Craftable.prefabInfo.TechType, new PowerConfigData(10) }
             };
             
-            ROTACompatManager.AddCompatiblePowerSources();
+            //ROTACompatManager.AddCompatiblePowerSources();
             Logger.LogDebug($"Setup power sources");
             
             yield return EnsureBatteryComponents();
