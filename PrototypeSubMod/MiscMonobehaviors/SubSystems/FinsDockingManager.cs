@@ -50,4 +50,6 @@ public class FinsDockingManager : MonoBehaviour
             animator.SetTrigger(DockingGrab);
         }
     }
+
+    public ProtoFinsManager GetFinsManager() => finsManager;
 }

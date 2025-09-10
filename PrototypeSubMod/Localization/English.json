@@ -157,6 +157,7 @@
   // Vehicle access
   "ProtoAccessVehicle": "Access docked vehicle",
   "ProtoNoVehicleDocked": "No vehicle docked",
+  "ProtoDockNotUnlocked": "Can't dock; not enough fins",
   "VehicleAccessEquipment": "Vehicle Access",
   "VehicleFrameworkNoStorage": "No storage in vehicle!",
   

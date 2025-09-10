@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PrototypeSubMod.Docking;
+using PrototypeSubMod.StructureLoading;
 using UnityEngine;
 
 namespace PrototypeSubMod.VehicleAccess;
@@ -17,6 +19,7 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
     [SerializeField] private VehicleDockingBay dockingBay;
 
     private ProtoVehicleAccessManager accessManager;
+    private ProtoDockingManager dockingManager;
     private uGUI_InventoryTab inventoryTab;
     
     private void Start()
@@ -27,7 +30,8 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
     private void Initialize()
     {
         if (equipment != null) return;
-        
+
+        dockingManager = dockingBay.GetComponentInChildren<ProtoDockingManager>(true);
         equipment = new(gameObject, transform);
         equipment.SetLabel(EQUIPMENT_LABEL);
         equipment.AddSlots(new[] { SLOT_NAME });
@@ -41,7 +45,20 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
     
     public void OnHover(HandTargetEventData eventData)
     {
-        string key = dockingBay.dockedVehicle ? "ProtoAccessVehicle" : "ProtoNoVehicleDocked";
+        string key = string.Empty;
+        if (dockingBay.dockedVehicle)
+        {
+            key = "ProtoAccessVehicle";
+        }
+        else if (!dockingManager.DockUnlocked())
+        {
+            key = "ProtoDockNotUnlocked";
+        }
+        else
+        {
+            key = "ProtoNoVehicleDocked";
+        }
+        
         var main = HandReticle.main;
         main.SetText(HandReticle.TextType.Hand, key, true, GameInput.Button.LeftHand);
         main.SetText(HandReticle.TextType.HandSubscript, string.Empty, false);

@@ -86,6 +86,8 @@ public class ProtoDockingManager : MonoBehaviour, IProtoEventListener, IProtoTre
         UWE.CoroutineHost.StartCoroutine(UndockDelayed());
     }
 
+    public bool DockUnlocked() => finsDockingManager.GetFinsManager().GetInstalledFinCount() >= 2;
+
     // Called via VehicleDockingBay Invoke
     private void UnlockDoors()
     {
