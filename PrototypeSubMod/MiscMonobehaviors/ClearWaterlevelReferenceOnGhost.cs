@@ -15,12 +15,12 @@ public class ClearWaterlevelReferenceOnGhost : MonoBehaviour
 
     private void OnEnable()
     {
-        FreecamController_Patches.resetWaterLevel += ForceOnTriggerExit;
+        FreecamController_Patches.onExitFreecam += ForceOnTriggerExit;
     }
 
     private void OnDisable()
     {
-        FreecamController_Patches.resetWaterLevel -= ForceOnTriggerExit;
+        FreecamController_Patches.onExitFreecam -= ForceOnTriggerExit;
     }
 
     private void ForceOnTriggerExit()
