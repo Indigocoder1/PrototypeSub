@@ -58049,7 +58049,6 @@ MonoBehaviour:
   m_Script: {fileID: -522649159, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chair: {fileID: 7526695556347667783}
 --- !u!1 &4421605342121612035
 GameObject:
   m_ObjectHideFlags: 0
@@ -102463,7 +102462,7 @@ MonoBehaviour:
   m_Script: {fileID: 1821204786, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeDistance: 75
+  freezeDistance: 50
   colliderActivationStages:
   - {fileID: 3978616846450223179}
   - {fileID: 9188298232664328197}
