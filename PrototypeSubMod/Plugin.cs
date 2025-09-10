@@ -40,6 +40,7 @@ namespace PrototypeSubMod
     [BepInDependency("com.lee23.theredplague", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.danithedani.deepercreatures", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.lee23.epicweather", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.aci.thesilence", BepInDependency.DependencyFlags.SoftDependency)]
     public class Plugin : BaseUnityPlugin
     {
         private const string GUID = "com.prototech.prototypesub";
@@ -478,6 +479,15 @@ namespace PrototypeSubMod
                 var structureTranspiler = AccessTools.Method(typeof(StructureLoading_Patches), nameof(StructureLoading_Patches.RegisterStructure_Transpiler));
                 var originalMethod = AccessTools.Method(structureLoadingType, "RegisterStructure");
                 harmony.Patch(originalMethod, transpiler: new HarmonyMethod(structureTranspiler));
+            }
+            
+            if (Chainloader.PluginInfos.ContainsKey("com.aci.thesilence"))
+            {
+                var grabType = AccessTools.TypeByName("CallOfTheVoid.Mono.Creatures.Silence.SilenceCyclopsGrab");
+                var originalMethod = AccessTools.Method(grabType, "SpawnPilotWindowLeakFX");
+                Logger.LogInfo($"Type = {grabType}");
+                var prefix = AccessTools.Method(typeof(SilenceCyclopsGrab_Patches), nameof(SilenceCyclopsGrab_Patches.SpawnPilotWindowLeakFX_Prefix));
+                harmony.Patch(originalMethod, prefix: new HarmonyMethod(prefix));
             }
 
             /*
