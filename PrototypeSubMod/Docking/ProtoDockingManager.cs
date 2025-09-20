@@ -56,6 +56,14 @@ public class ProtoDockingManager : MonoBehaviour, IProtoEventListener, IProtoTre
             interfloorTeleporter.StartTeleportPlayer();
         }
 
+        if (!Plugin.GlobalSaveData.hasDockedVehicle)
+        {
+            var hintText = Language.main.Get("ProtoUndockVehicleHint");
+            Hint.main.message.SetText(hintText, TextAnchor.MiddleCenter);
+            Hint.main.message.Show();
+            Plugin.GlobalSaveData.hasDockedVehicle = true;
+        }
+        
         Invoke(nameof(StoreVehicle), 0.1f);
     }
 

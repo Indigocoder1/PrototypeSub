@@ -160,6 +160,7 @@
   "ProtoDockNotUnlocked": "Can't dock; not enough fins",
   "VehicleAccessEquipment": "Vehicle Access",
   "VehicleFrameworkNoStorage": "No storage in vehicle!",
+  "ProtoUndockVehicleHint": "Undock vehicles in the cockpit radial menu",
   
   // Deployables terminal
   "UseDeployableTerminal": "Access deployable storage",
