@@ -1,10 +1,13 @@
 ﻿using System.Collections;
+using PrototypeSubMod.UI.AbilitySelection;
+using PrototypeSubMod.UI.ActivatedAbilities;
 using UnityEngine;
 
 namespace PrototypeSubMod.MiscMonobehaviors.SubSystems;
 
-internal class ToggleMinimap : MonoBehaviour
+internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
 {
+    [SerializeField] private Sprite minimapSprite;
     [SerializeField] private FMOD_CustomEmitter nearfieldSFX;
     [SerializeField] private GameObject positionDisplay;
     [SerializeField] private int maxSpawnWaitFrames = 10;
@@ -64,5 +67,32 @@ internal class ToggleMinimap : MonoBehaviour
 
         miniWorld.active = active;
         positionDisplay.SetActive(active);
+        nearfieldSFX.Stop();
     }
+    
+    // Called by BroadcastMessage in SubRoot.OnPlayerExited
+    public void SaveEngineStateAndPowerDown()
+    {
+        ToggleMap(false);
+        GetComponentInParent<SubRoot>().GetComponentInChildren<TetherManager>(true)
+            .UpdateIcon(this);
+    }
+
+    public bool OnActivated()
+    {
+        ToggleMap();
+        return true;
+    }
+
+    public void OnSelectedChanged(bool changed) { }
+
+    public bool GetActive()
+    {
+        return miniWorld.active;
+    }
+
+    public bool GetCanActivate() => true;
+    public bool GetShouldShow() => true;
+    public Sprite GetSprite() => minimapSprite;
+    public TechType GetTechType() => TechType.None;
 }

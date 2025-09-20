@@ -32,7 +32,6 @@ public class TetherManager : MonoBehaviour, IUIElement
     [SerializeField] private float minTimeBetweenActivationSFX;
     [SerializeField] private float tetherSensitivity;
     [SerializeField] private float tetherLength;
-    [SerializeField] private float cursorAngleMultiplier;
 
     private RadialIcon lastIcon;
     private RadialIcon selectedIcon;

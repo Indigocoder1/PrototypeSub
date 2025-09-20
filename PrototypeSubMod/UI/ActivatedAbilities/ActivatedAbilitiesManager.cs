@@ -17,11 +17,13 @@ internal class ActivatedAbilitiesManager : MonoBehaviour
     
     private void Start()
     {
-        tetherManager.onAbilityActivatedChanged += OnAbilitySelectedChanged;
+        tetherManager.onAbilityActivatedChanged += OnAbilityActivatedChanged;
     }
 
-    public void OnAbilitySelectedChanged(IAbilityIcon icon)
+    public void OnAbilityActivatedChanged(IAbilityIcon icon)
     {
+        Plugin.Logger.LogInfo($"Icon = {icon} | Active = {icon.GetActive()} | Contains key = {activeAbilities.ContainsKey(icon)}");
+        
         if (icon == null) return;
         
         if (icon.GetActive() && !activeAbilities.ContainsKey(icon))

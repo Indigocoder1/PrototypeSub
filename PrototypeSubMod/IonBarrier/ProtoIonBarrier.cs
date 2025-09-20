@@ -164,7 +164,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
         else
         {
             var icon = selectionMenuManager.GetAbilityIcons().FirstOrDefault(i => i == (IAbilityIcon)this);
-            abilitiesManager.OnAbilitySelectedChanged(icon);
+            abilitiesManager.OnAbilityActivatedChanged(icon);
             DeactivateShield();
             StartCoroutine(ResetCooldownDelayed());
             sfxEmitter.Stop();
