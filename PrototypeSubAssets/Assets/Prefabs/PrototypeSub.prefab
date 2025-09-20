@@ -37122,14 +37122,14 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 187.71956
+      outSlope: 347.17297
       tangentMode: 1
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.046408836
+      outWeight: 0.048618782
     - serializedVersion: 3
       time: 1
-      value: 120
+      value: 240
       inSlope: -5.486855
       outSlope: -5.486855
       tangentMode: 0
@@ -37176,8 +37176,8 @@ MonoBehaviour:
   chargeConsumptionAmount: 2
   cooldownTime: 15
   sphereGrowTime: 2
-  minFreezeTime: 6
-  maxFreezeTime: 10
+  minFreezeTime: 18
+  maxFreezeTime: 30
   sphereVisual: {fileID: 7725678437211151818}
 --- !u!1 &2781741736608405633
 GameObject:
