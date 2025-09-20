@@ -97889,7 +97889,7 @@ MonoBehaviour:
   enabledVoiceline: {fileID: 6483919966900499796}
   invalidOperationNotification: {fileID: 5744166132657847796}
   fovIncrease: 15
-  speedBaseBonus: 5
+  speedBaseBonus: 7
   turningTorqueMultiplier: 2
   secondsToDrainCharge: 10
   chanceForHullBreach: 0.13
