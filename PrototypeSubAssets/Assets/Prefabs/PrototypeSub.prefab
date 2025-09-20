@@ -82552,15 +82552,14 @@ MonoBehaviour:
       type: 3}
   - techType: 0
     techTypeName: PrecursorIonCrystal
-    sprite: {fileID: -1450011792581638677, guid: 55b93a4a2af93ae4f95edf85f769fa97,
-      type: 3}
-    miniSprite: {fileID: 377874519351607539, guid: 55b93a4a2af93ae4f95edf85f769fa97,
+    sprite: {fileID: 886651430563254225, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
+    miniSprite: {fileID: 6933162915353875447, guid: 55b93a4a2af93ae4f95edf85f769fa97,
       type: 3}
   - techType: 0
     techTypeName: PrecursorIonCrystalMatrix
-    sprite: {fileID: -5264763157098494952, guid: 55b93a4a2af93ae4f95edf85f769fa97,
+    sprite: {fileID: -1450011792581638677, guid: 55b93a4a2af93ae4f95edf85f769fa97,
       type: 3}
-    miniSprite: {fileID: -4873619699262502144, guid: 55b93a4a2af93ae4f95edf85f769fa97,
+    miniSprite: {fileID: 377874519351607539, guid: 55b93a4a2af93ae4f95edf85f769fa97,
       type: 3}
   - techType: 0
     techTypeName: AlienBuildingBlock
@@ -82582,14 +82581,14 @@ MonoBehaviour:
   - WarperRemnant
   sprites:
   - {fileID: 6206539617200806277, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
+  - {fileID: 886651430563254225, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
   - {fileID: -1450011792581638677, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
-  - {fileID: -5264763157098494952, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
   - {fileID: 4021787709011250288, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
   - {fileID: 7279628489089990709, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
   miniSprites:
   - {fileID: -1056771476702761385, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
+  - {fileID: 6933162915353875447, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
   - {fileID: 377874519351607539, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
-  - {fileID: -4873619699262502144, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
   - {fileID: -3524691722737881840, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
   - {fileID: 365715231366053831, guid: 55b93a4a2af93ae4f95edf85f769fa97, type: 3}
 --- !u!114 &6076772638808965751
