@@ -23283,19 +23283,11 @@ MonoBehaviour:
   subRoot: {fileID: 6246764057006774658}
   motorHandler: {fileID: 1047782073636578443}
   overheatNotification: {fileID: 1863483386814636405}
-  secondsToFillCharge: 60
+  secondsToFillCharge: 20
   activeNoiseValue: 125
-  empChargeUpTime: 300
-  overheatVoicelineThreshold: 250
-  empOxygenDisableTime: 150
-  empSpawner: {fileID: 7640392073296606028}
-  empNotification: {fileID: 8035613408392098138}
-  empSoundEffect: {fileID: 2634704454324673011}
   generatorStart: {fileID: 705987101837682260}
   generatorStop: {fileID: 4475118672701369497}
   generatorLoop: {fileID: 5499652777392008206}
-  soundEffectVolume: 20
-  disableElectronicsTime: 20
 --- !u!114 &7640392073296606028
 MonoBehaviour:
   m_ObjectHideFlags: 0
