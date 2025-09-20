@@ -1,18 +1,21 @@
-﻿using PrototypeSubMod.MotorHandler;
-using PrototypeSubMod.PowerSystem;
+﻿using PrototypeSubMod.PowerSystem;
+using PrototypeSubMod.PressureConverters;
 using PrototypeSubMod.Upgrades;
 using UnityEngine;
 
-namespace PrototypeSubMod.PressureConverters;
+namespace PrototypeSubMod.DepthOptimizers;
 
 internal class ProtoDepthOptimizers : ProtoUpgrade, IPowerModifier
 {
+    private static readonly int HydrolockEnabled = Animator.StringToHash("HydrolockEnabled");
+    
     [SerializeField] private CrushDamage crushDamage;
     [SerializeField] private float activationDepth;
     [SerializeField] private int chargeReduction;
     [SerializeField] private float passiveChargeMultiplier;
     [SerializeField] private FMOD_CustomEmitter depthOptimizersActivate;
     [SerializeField] private FMOD_CustomEmitter depthOptimizersDeactivate;
+    [SerializeField] private Animator hydrolockController;
 
     private float originalCrushDepth;
     
@@ -42,6 +45,8 @@ internal class ProtoDepthOptimizers : ProtoUpgrade, IPowerModifier
         {
             crushDamage.crushDepth = originalCrushDepth;
         }
+        
+        hydrolockController.SetBool(HydrolockEnabled, enabled);
     }
 
     public override bool GetUpgradeEnabled() => upgradeEnabled;

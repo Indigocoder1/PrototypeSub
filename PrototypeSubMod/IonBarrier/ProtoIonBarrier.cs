@@ -24,7 +24,6 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
     [SerializeField] private float maxShieldIntensity;
     [SerializeField] private float defaultReduction;
     [SerializeField] private DamageReductor[] damageReductors;
-    [SerializeField] private Animator hydrolockController;
     [SerializeField] private VoiceNotification shieldsUpNotification;
 
     [SerializeField, HideInInspector] private float[] multipliers;
@@ -169,8 +168,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
             StartCoroutine(ResetCooldownDelayed());
             sfxEmitter.Stop();
         }
-
-        hydrolockController.SetBool("HydrolockEnabled", enabled);
+        
         shieldActive = enabled;
     }
 

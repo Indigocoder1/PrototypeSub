@@ -22,8 +22,6 @@ internal class ActivatedAbilitiesManager : MonoBehaviour
 
     public void OnAbilityActivatedChanged(IAbilityIcon icon)
     {
-        Plugin.Logger.LogInfo($"Icon = {icon} | Active = {icon.GetActive()} | Contains key = {activeAbilities.ContainsKey(icon)}");
-        
         if (icon == null) return;
         
         if (icon.GetActive() && !activeAbilities.ContainsKey(icon))

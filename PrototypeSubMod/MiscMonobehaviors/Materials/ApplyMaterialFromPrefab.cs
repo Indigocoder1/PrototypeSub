@@ -42,7 +42,7 @@ public class ApplyMaterialFromPrefab : MonoBehaviour, IMaterialModifier
 
         foreach (var r in applyTo)
         {
-            var mats = applyToSharedMaterials ? r.sharedMaterials : rend.materials;
+            var mats = applyToSharedMaterials ? r.sharedMaterials : r.materials;
             mats[applyIndex] = rend.materials[copyIndex];
 
             if (applyToSharedMaterials)
