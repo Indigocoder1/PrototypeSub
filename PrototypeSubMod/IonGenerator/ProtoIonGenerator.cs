@@ -13,21 +13,10 @@ internal class ProtoIonGenerator : ProtoUpgrade
     [SerializeField] private VoiceNotification overheatNotification;
     [SerializeField] private float secondsToFillCharge;
     [SerializeField] private float activeNoiseValue;
-    [SerializeField] private float empChargeUpTime = 300;
-    [SerializeField] private float overheatVoicelineThreshold;
-    [SerializeField] private float empOxygenDisableTime = 150f;
-
-    [Header("EMP")] [SerializeField] private EmpSpawner empSpawner;
-    [SerializeField] private VoiceNotification empNotification;
-    [SerializeField] private FMOD_CustomEmitter empSoundEffect;
     [SerializeField] private FMOD_CustomEmitter generatorStart;
     [SerializeField] private FMOD_CustomEmitter generatorStop;
     [SerializeField] private FMOD_CustomEmitter generatorLoop;
-    [SerializeField] private float soundEffectVolume = 20f;
-    [SerializeField] private float disableElectronicsTime;
     
-    private bool empFired;
-    private float currentEMPChargeTime;
     private float energyMultiplier = 1;
     private float chargePerSec;
 
@@ -53,50 +42,6 @@ internal class ProtoIonGenerator : ProtoUpgrade
         {
             motorHandler.RemoveOverrideNoiseValue(this);
         }
-
-        if (!upgradeEnabled)
-        {
-            if (currentEMPChargeTime > 0)
-            {
-                currentEMPChargeTime -= Time.deltaTime;
-            }
-            else
-            {
-                empFired = false;
-            }
-
-            return;
-        }
-
-        if (currentEMPChargeTime >= overheatVoicelineThreshold && !empFired)
-        {
-            subRoot.voiceNotificationManager.PlayVoiceNotification(overheatNotification, false, true);
-        }
-
-        if (currentEMPChargeTime < empChargeUpTime && !empFired)
-        {
-            currentEMPChargeTime += Time.deltaTime;
-            subRoot.powerRelay.AddEnergy(chargePerSec * Time.deltaTime * energyMultiplier, out _);
-        }
-        else if (!empFired)
-        {
-            StartCoroutine(FireEMP());
-            empFired = true;
-        }
-    }
-
-    private IEnumerator FireEMP()
-    {
-        subRoot.voiceNotificationManager.PlayVoiceNotification(empNotification, false, true);
-        yield return new WaitForSeconds(9.7f);
-
-        //Do EMP thing
-        upgradeEnabled = false;
-        empSpawner.FireEMP(disableElectronicsTime);
-
-        subRoot.powerRelay.DisableElectronicsForTime(empOxygenDisableTime);
-        Utils.PlayEnvSound(empSoundEffect, empSpawner.GetSpawnPos().position, soundEffectVolume);
-        SetUpgradeEnabled(false);
     }
 
     public void SetEnergyMultiplier(float multiplier)
@@ -118,6 +63,7 @@ internal class ProtoIonGenerator : ProtoUpgrade
         else
         {
             generatorLoop.Stop();
+            generatorStop.Play();
         }
 
         return true;
