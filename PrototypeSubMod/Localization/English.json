@@ -163,8 +163,8 @@
   "ProtoUndockVehicleHint": "Undock vehicles in the cockpit radial menu",
   
   // Deployables terminal
-  "UseDeployableTerminal": "Access deployable storage",
-  "ProtoDeployableEquipmentLabel": "Deployable Storage",
+  "UseDeployableTerminal": "Access launch bay",
+  "ProtoDeployableEquipmentLabel": "Launch bay",
   
   // PDA voicelines
   "OnEnterDefenseMoonpool": "Warning: Scans indicate the structural integral integrity of this facility may have been disturbed by the landing path of the Aurora.<duration=7681>\nThis information is legal conjecture until proven by the appropriate galactic federation authorities.<delay=8152><duration=6010>",
