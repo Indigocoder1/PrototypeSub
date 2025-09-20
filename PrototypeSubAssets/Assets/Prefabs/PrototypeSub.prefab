@@ -94647,9 +94647,9 @@ MonoBehaviour:
   m_Script: {fileID: 241587388, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapColor: {r: 0.227451, g: 0.5294118, b: 0.34509805, a: 0.35686275}
+  mapColor: {r: 0.227451, g: 0.5294118, b: 0.34509805, a: 0.6117647}
   mapScale: 40
-  fadeRadius: 200
+  fadeRadius: 500
   fadeSharpness: 0.01
   globalOffset: {x: 1.905, y: 4.048, z: 1.6}
 --- !u!114 &4792689671795778335
