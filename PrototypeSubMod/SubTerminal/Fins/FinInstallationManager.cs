@@ -74,7 +74,7 @@ public class FinInstallationManager : MonoBehaviour
 
         installationButtons[Mathf.Min(finsManager.GetInstalledFinCount(), installationButtons.Length - 1)].LockTechType();
         finsManager.SetInstalledFinCount(finsManager.GetInstalledFinCount() + 1);
-        if (finsManager.GetInstalledFinCount() < 4)
+        if (finsManager.GetInstalledFinCount() < installationButtons.Length)
         {
             installationButtons[finsManager.GetInstalledFinCount()].UnlockTechType();
         }

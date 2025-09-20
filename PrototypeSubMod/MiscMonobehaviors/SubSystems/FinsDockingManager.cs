@@ -8,7 +8,7 @@ public class FinsDockingManager : MonoBehaviour
     private static readonly int DockingPrep = Animator.StringToHash("DockingPrep");
     private static readonly int DockingGrab = Animator.StringToHash("DockingGrab");
 
-    [SerializeField] private Animator[] firstTwoFins;
+    [SerializeField] private Animator[] dockingPrepFins;
 
     private ProtoFinsManager finsManager;
 
@@ -37,7 +37,7 @@ public class FinsDockingManager : MonoBehaviour
 
     public void SetDockingPrep(bool prepActive)
     {
-        foreach (var animator in firstTwoFins)
+        foreach (var animator in dockingPrepFins)
         {
             animator.SetBool(DockingPrep, prepActive);
         }
@@ -45,7 +45,7 @@ public class FinsDockingManager : MonoBehaviour
 
     public void StartGrabAnimation()
     {
-        foreach (var animator in firstTwoFins)
+        foreach (var animator in dockingPrepFins)
         {
             animator.SetTrigger(DockingGrab);
         }

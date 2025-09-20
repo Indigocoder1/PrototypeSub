@@ -12,6 +12,8 @@ namespace PrototypeSubMod.MiscMonobehaviors.SubSystems;
 
 public class ProtoFinsManager : MonoBehaviour, ISaveDataListener
 {
+    public const int FinsForDocking = 1;
+    
     private static readonly int EngineOn = Animator.StringToHash("FinsActive");
     private static readonly int ResetAnimState = Animator.StringToHash("ResetAnimState");
 

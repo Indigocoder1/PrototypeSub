@@ -45745,11 +45745,9 @@ MonoBehaviour:
   m_Script: {fileID: 1147876821, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstTwoFins:
+  dockingPrepFins:
   - {fileID: 1245069608248468291}
-  - {fileID: 5076923666619011014}
   - {fileID: 7727523288274348814}
-  - {fileID: 7323229139027883423}
 --- !u!114 &7436474336179930832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107297,7 +107295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8384549081919636321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7939681853043994607}
