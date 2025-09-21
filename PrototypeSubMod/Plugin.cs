@@ -26,6 +26,7 @@ using PrototypeSubMod.Pathfinding.SaveSystem;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
 using PrototypeSubMod.VehicleAccess;
+using SubLibrary.Handlers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UWE;
@@ -186,7 +187,7 @@ namespace PrototypeSubMod
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadMiscellaneousTask, Language.main.Get("ProtoWaitRegisteringMiscellaneous"));
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadScenesBundle, Language.main.Get("ProtoWaitRegisteringScenes"));
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadAudioBundle, Language.main.Get("ProtoWaitRegisteringAudio"));
-
+            
             ModMessageSystem.SendGlobal("FindMyUpdates", "https://raw.githubusercontent.com/Indigocoder1/PrototypeSub/refs/heads/main/PrototypeSubMod/Version.json");
 
             sw.Stop();
@@ -198,7 +199,7 @@ namespace PrototypeSubMod
             if (Initialized) yield break;
             
             Initialized = true;
-
+            
             yield return new WaitUntil(() => CraftData.cacheInitialized && CraftTree.initialized);
             yield return new WaitForEndOfFrame();
 
@@ -223,6 +224,11 @@ namespace PrototypeSubMod
 
                 guardianPrefab.EnsureComponent<DestroyOnStart>();
             }
+        }
+
+        private void Start()
+        {
+            UWE.CoroutineHost.StartCoroutine(CyclopsReferenceHandler.EnsureCyclopsReference());
         }
 
         private IEnumerator LoadBundleTask(WaitScreenHandler.WaitScreenTask waitTask)
@@ -405,7 +411,7 @@ namespace PrototypeSubMod
                 TitleAssetBundle.LoadAsset<Sprite>("ArchwayFacilityScreen"), 4, storyGoalRequirement: "OnUnlocked_ArchwayUpgradeText_Native");
             var hullData = new LoadingScreenHandler.LoadingScreenData(
                 TitleAssetBundle.LoadAsset<Sprite>("HullFacilityScreen"), 5, storyGoalRequirement: "OnUnlocked_HullUpgradeText_Native");
-
+            
             LoadingScreenHandler.RegisterLoadingScreen(addonName, new[]
             {
                 constructedData,

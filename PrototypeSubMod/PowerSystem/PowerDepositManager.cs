@@ -214,5 +214,14 @@ public class PowerDepositManager : MonoBehaviour, IItemSelectorManager
         
         reactorAnimator.SetBool(PowerFull, powerSystem.StorageSlotsFull());
         reactorWasOpen = !powerSystem.StorageSlotsFull();
+
+        UWE.CoroutineHost.StartCoroutine(NotifyNoFireExtinguishersDelayed());
+    }
+
+    private IEnumerator NotifyNoFireExtinguishersDelayed()
+    {
+        yield return new WaitForSeconds(12f);
+        
+        PDALog.Add("NotifyPlayerNoExtinguishers");
     }
 }

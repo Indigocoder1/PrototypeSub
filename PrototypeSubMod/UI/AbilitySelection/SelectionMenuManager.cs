@@ -91,15 +91,16 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
 
     public void RefreshIcons()
     {
+        RetrieveIconsToShow();
+        distributor.RegenerateIcons(iconsToShow);
+        
         var selectedIcon = tetherManager.GetSelectedIcon();
         if (selectedIcon && !selectedIcon.GetAbility().GetShouldShow())
         {
             selectedIcon.GetAbility().OnSelectedChanged(false);
             tetherManager.SelectIcon(distributor.GetIconAtIndex(defaultAbilityIndex).GetComponent<RadialIcon>(), true);
         }
-
-        RetrieveIconsToShow();
-        distributor.RegenerateIcons(iconsToShow);
+        
         tetherManager.RegenerateHighlightArc();
     }
 
