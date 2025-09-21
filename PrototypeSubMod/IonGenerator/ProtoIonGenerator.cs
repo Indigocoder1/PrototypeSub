@@ -1,6 +1,6 @@
 ﻿using PrototypeSubMod.MotorHandler;
 using PrototypeSubMod.Upgrades;
-using System.Collections;
+using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.PowerSystem;
 using UnityEngine;
 
@@ -8,16 +8,15 @@ namespace PrototypeSubMod.IonGenerator;
 
 internal class ProtoIonGenerator : ProtoUpgrade
 {
-    [SerializeField] private SubRoot subRoot;
     [SerializeField] private ProtoMotorHandler motorHandler;
-    [SerializeField] private VoiceNotification overheatNotification;
     [SerializeField] private float secondsToFillCharge;
     [SerializeField] private float activeNoiseValue;
     [SerializeField] private FMOD_CustomEmitter generatorStart;
     [SerializeField] private FMOD_CustomEmitter generatorStop;
     [SerializeField] private FMOD_CustomEmitter generatorLoop;
+    [SerializeField] private EmissionColorController emissionController;
+    [SerializeField] private PrototypePowerSystem powerSystem;
     
-    private float energyMultiplier = 1;
     private float chargePerSec;
 
     private void Start()
@@ -37,16 +36,12 @@ internal class ProtoIonGenerator : ProtoUpgrade
         if (upgradeEnabled)
         {
             motorHandler.AddOverrideNoiseValue(new ProtoMotorHandler.ValueRegistrar(this, activeNoiseValue));
+            powerSystem.GetPowerSources()[0].ModifyPower(chargePerSec * Time.deltaTime, out _);
         }
         else
         {
             motorHandler.RemoveOverrideNoiseValue(this);
         }
-    }
-
-    public void SetEnergyMultiplier(float multiplier)
-    {
-        energyMultiplier = multiplier;
     }
 
     public override bool OnActivated()
@@ -67,6 +62,19 @@ internal class ProtoIonGenerator : ProtoUpgrade
         }
 
         return true;
+    }
+
+    public override void SetUpgradeEnabled(bool enabled)
+    {
+        base.SetUpgradeEnabled(enabled);
+        if (enabled)
+        {
+            emissionController.RegisterTempColor(new EmissionColorController.EmissionRegistrarData(this, Color.black));
+        }
+        else
+        {
+            emissionController.RemoveTempColor(this);
+        }
     }
 
     public override void OnSelectedChanged(bool changed) { }

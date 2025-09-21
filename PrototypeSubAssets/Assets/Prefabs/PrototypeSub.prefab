@@ -23282,14 +23282,14 @@ MonoBehaviour:
   techType: {fileID: 11400000, guid: dfaf2516331be2e44836808eddc7e85a, type: 2}
   enableWithInstallation: []
   installedAtStart: 0
-  subRoot: {fileID: 6246764057006774658}
   motorHandler: {fileID: 1047782073636578443}
-  overheatNotification: {fileID: 1863483386814636405}
   secondsToFillCharge: 20
   activeNoiseValue: 125
   generatorStart: {fileID: 705987101837682260}
   generatorStop: {fileID: 4475118672701369497}
   generatorLoop: {fileID: 5499652777392008206}
+  emissionController: {fileID: 3371763760948927259}
+  powerSystem: {fileID: 7912620590259993429}
 --- !u!114 &7640392073296606028
 MonoBehaviour:
   m_ObjectHideFlags: 0
