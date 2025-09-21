@@ -182,6 +182,7 @@
   "OnEnterPrecursorGun": "Warning: Detecting invasive analysis of vital signs and neural matter originating within this facility.<duration=7275>\nBe weary of potential hivemind assimilation.<delay=7363><duration=2877>",
   "ProtoOnEnterGrandReef": "Detecting artificial subterranean pathways and several faint energy signatures in the region.",
   "ProtoApproachEngineFacility": "Detecting an artificial alien structure nearby. Downloading clearance key blueprints from local safety broadcast;<duration=7050>\nTo all personnel: facility has suffered damage from external megafauna<delay=7118><duration=4813>\nDeadzone mapping initiative suspended. Evacuate immediately.<delay=11922><duration=3991>",
+  "OnScanDisabledWyrm": "Instances of this structure appear to connect to a network of underground tunnels throughout this region.<delay=501><duration=6341>\nDetecting a substantial energy signature at the network's core.<delay=7025><duration=3834>",
   
   // Upgrade tech types
   "ProtoEmergencyWarp": "Emergency Warp",

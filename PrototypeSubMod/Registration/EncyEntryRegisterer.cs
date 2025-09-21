@@ -2,6 +2,7 @@
 using Nautilus.Handlers;
 using PrototypeSubMod.Prefabs;
 using System.Collections.Generic;
+using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs.FacilityProps.Hull;
 using UnityEngine;
 
@@ -198,6 +199,10 @@ internal static class EncyEntryRegisterer
             blueprint = decorativeWormType
         };
         PDAHandler.AddCustomScannerEntry(decorativeWormEntryData);
+        PDAEncyclopedia_Patches.EncyclopediaUnlockEvents.Add("ProtoDecorativeWormEncy", () =>
+        {
+            PDALog.Add("OnScanDisabledWyrm");
+        });
         #endregion
         
         #region Hanging Worm
