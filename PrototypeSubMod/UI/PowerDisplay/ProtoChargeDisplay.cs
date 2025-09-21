@@ -69,7 +69,7 @@ public class ProtoChargeDisplay : MonoBehaviour, IUIElement
         chargesLastCheck = currentSource.GetRemainingCharges();
     }
     
-    private void UpdateCharges(float chargeChange)
+    public void UpdateCharges(float chargeChange)
     {
         var currentSource = powerSystem.GetPowerSources()[0];
         if (currentSource == null || powerSystem.GetInstalledSourceCount() == 0) return;

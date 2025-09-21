@@ -2,6 +2,7 @@
 using PrototypeSubMod.Upgrades;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.PowerSystem;
+using PrototypeSubMod.UI.PowerDisplay;
 using UnityEngine;
 
 namespace PrototypeSubMod.IonGenerator;
@@ -16,12 +17,14 @@ internal class ProtoIonGenerator : ProtoUpgrade
     [SerializeField] private FMOD_CustomEmitter generatorLoop;
     [SerializeField] private EmissionColorController emissionController;
     [SerializeField] private PrototypePowerSystem powerSystem;
-    
+
+    private ProtoChargeDisplay chargeDisplay;
     private float chargePerSec;
 
     private void Start()
     {
         chargePerSec = PrototypePowerSystem.CHARGE_POWER_AMOUNT / secondsToFillCharge;
+        chargeDisplay = GetComponentInParent<SubRoot>().GetComponentInChildren<ProtoChargeDisplay>(true);
     }
 
     private void Update()
@@ -36,7 +39,13 @@ internal class ProtoIonGenerator : ProtoUpgrade
         if (upgradeEnabled)
         {
             motorHandler.AddOverrideNoiseValue(new ProtoMotorHandler.ValueRegistrar(this, activeNoiseValue));
-            powerSystem.GetPowerSources()[0].ModifyPower(chargePerSec * Time.deltaTime, out _);
+            var firstItem = powerSystem.GetPowerSources()[0];
+            if (firstItem != null)
+            {
+                float chargeDelta = chargePerSec * Time.deltaTime;
+                firstItem.ModifyPower(chargeDelta, out _);
+                chargeDisplay.UpdateCharges(chargeDelta);
+            }
         }
         else
         {
