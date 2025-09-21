@@ -250,6 +250,7 @@
   
   // HUD
   "ProtoToggleStrafe": "Toggle strafe",
+  "ProtoRadialHint": "Open radial menu",
 
   // Voice Notifications
   "Proto_AbandonShip": "{0}: Warning: Critical hull failure! Pressure destabilizing! Abandon ship!",

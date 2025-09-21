@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using PrototypeSubMod.PrototypeStory;
 using PrototypeSubMod.UI.ActivatedAbilities;
 using PrototypeSubMod.Utility;
+using Story;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -233,6 +234,7 @@ public class TetherManager : MonoBehaviour, IUIElement
         selectionHighlight.gameObject.SetActive(open);
         if (open)
         {
+            GoalManager.main.OnCustomGoalEvent("ProtoOpenRadialWheel");
             timeOpened = Time.time;
             FMODUWE.PlayOneShot(openSFX, transform.position, 0.1f);
         }
