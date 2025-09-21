@@ -2,6 +2,7 @@
 using Nautilus.Utility.MaterialModifiers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PrototypeSubMod.Utility;
@@ -30,7 +31,11 @@ internal class ProtoMaterialModifier : MaterialModifier
 
     public override bool BlockShaderConversion(Material material, Renderer renderer, MaterialUtils.MaterialType materialType)
     {
-        return renderer is ParticleSystemRenderer || renderer.TryGetComponent<DontApplySNShaders>(out _);
+        if (renderer is ParticleSystemRenderer) return true;
+
+        if (!renderer.TryGetComponent<DontApplySNShaders>(out var dontApply)) return false;
+
+        return dontApply.blacklistedMaterials.Count == 0 || dontApply.blacklistedMaterials.Any(m => m.shader == material.shader);
     }
 
     public override void EditMaterial(Material material, Renderer renderer, int materialIndex, MaterialUtils.MaterialType materialType)
