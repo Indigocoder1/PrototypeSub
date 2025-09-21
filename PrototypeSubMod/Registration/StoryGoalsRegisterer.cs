@@ -207,6 +207,21 @@ internal static class StoryGoalsRegisterer
             KnownTech.Add(DefenseFacilityKey.prefabInfo.TechType);
             PDAEncyclopedia.Add("DefenseFacilityTabletEncy", true);
         });
+
+        StoryGoalHandler.RegisterLocationGoal("ProtoApproachEngineFacility", Story.GoalType.Story, new Vector3(-530, -465, 1530), 300,
+            3);
+        StoryGoalHandler.RegisterCustomEvent("ProtoApproachEngineFacility", () =>
+        {
+            PDALog.Add("ProtoApproachEngineFacility");
+        });
+
+        StoryGoalHandler.RegisterCompoundGoal("UnlockEngineFacilityKey", Story.GoalType.Story, 16,
+            "ProtoApproachEngineFacility");
+        StoryGoalHandler.RegisterCustomEvent("UnlockEngineFacilityKey", () =>
+        {
+            KnownTech.Add(EngineFacilityKey.prefabInfo.TechType);
+            PDAEncyclopedia.Add("EngineFacilityTabletEncy", true);
+        });
         
         StoryGoalHandler.RegisterCustomEvent("OnEnterStoryEndProximity", () =>
         {

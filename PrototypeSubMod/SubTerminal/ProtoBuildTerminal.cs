@@ -197,18 +197,6 @@ internal class ProtoBuildTerminal : Crafter
         }
         
         PDALog.Add(buildFinishPdaKey);
-
-        float delay = 0.5f;
-        var data = Language.main.GetMetaData(buildFinishPdaKey);
-        for (int i = 0; i < data.lineCount; i++)
-        {
-            delay += data.GetLine(i).duration;
-        }
-        
-        yield return new WaitForSeconds(delay);
-        
-        KnownTech.Add(EngineFacilityKey.prefabInfo.TechType);
-        PDAEncyclopedia.Add("EngineFacilityTabletEncy", true);
     }
 
     private IEnumerator RecentralizeSubDelayed()
