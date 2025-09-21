@@ -102032,7 +102032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b9334f10b45fd774180fcae94a1ac026, type: 2}
-  health: 2000
+  health: 3000
   startHealthPercent: 1
   damageClip: {fileID: 0}
   deathClip: {fileID: 0}
