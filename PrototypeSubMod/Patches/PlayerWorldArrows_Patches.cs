@@ -22,7 +22,7 @@ public class PlayerWorldArrows_Patches
             foreach (var effectHandler in CloakEffectHandler.EffectHandlers)
             {
                 var subRoot = effectHandler.GetComponentInParent<SubRoot>();
-                if (subRoot)
+                if (subRoot && subRoot.GetComponent<CyclopsMotorMode>().engineOn)
                 {
                     transform = subRoot.transform.Find("PrototypeHUD/MiddleStatus/RadialHintTarget");
                     return true;
