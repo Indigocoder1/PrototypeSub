@@ -64,6 +64,10 @@ public class FinFoldManager : MonoBehaviour
             var hitInfo = hitInfos[i];
             if (!LayerID.IsMaskContainsLayer(layerMask, hitInfo.collider.gameObject.layer)) continue;
 
+            if (hitInfo.transform.name == "PrototypeSub(Clone)") continue;
+            
+            if (hitInfo.transform.parent && hitInfo.transform.parent.name == "PrototypeSub(Clone)") continue;
+            
             if (hitInfo.rigidbody != null && hitInfo.rigidbody.mass < minMassForFold) continue;
             
             hitObject = true;
