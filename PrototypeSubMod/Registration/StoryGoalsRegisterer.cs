@@ -163,6 +163,18 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Interceptor Facility Locked
+        StoryGoalHandler.RegisterLocationGoal("OnApproachInterceptorFacility", Story.GoalType.Story,
+            new Vector3(547, -709, 955), 400, 1);
+        StoryGoalHandler.RegisterCustomEvent("OnApproachInterceptorFacility", () =>
+        {
+            if (!Plugin.GlobalSaveData.EngineFacilityPointsRepaired)
+            {
+                PDALog.Add("ProtoRevisitInterceptorFacility");
+            }
+        });
+        #endregion
+        
         StoryGoalHandler.RegisterCustomEvent("HullFacilityMainLights", null);
         StoryGoalHandler.RegisterCustomEvent("HullFacilityWyrmLights", null);
         

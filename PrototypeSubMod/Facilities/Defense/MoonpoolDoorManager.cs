@@ -27,9 +27,13 @@ internal class MoonpoolDoorManager : MonoBehaviour
         else
         {
             CancelInvoke(nameof(CheckIfPlayerClose));
-            CancelInvoke(nameof(PlaySearchSound));
             InvokeRepeating(nameof(CheckIfPlayerClose), 0, checkIntermittance);
-            InvokeRepeating(nameof(PlaySearchSound), 0, searchSoundIntermittance);
+            
+            if (Plugin.GlobalSaveData.EngineFacilityPointsRepaired)
+            {
+                CancelInvoke(nameof(PlaySearchSound));
+                InvokeRepeating(nameof(PlaySearchSound), 0, searchSoundIntermittance);
+            }
         }
     }
 
@@ -48,17 +52,22 @@ internal class MoonpoolDoorManager : MonoBehaviour
 
     private void CheckIfPlayerClose()
     {
-        if (!Plugin.GlobalSaveData.EngineFacilityPointsRepaired) return;
-
         if (playerDistanceTracker.distanceToPlayer > noEntryPlayerDistance) return;
 
-        if (Player.main.currentSub != null)
+        if (Player.main.currentSub != null && Plugin.GlobalSaveData.EngineFacilityPointsRepaired)
         {
             var doorTransmitter = Player.main.currentSub.GetComponentInChildren<ProtoDoorTransmitter>();
             if (doorTransmitter != null) return;
         }
 
-        StoryGoalManager.main.OnGoalComplete("OnMoonpoolNoPrototype");
+        if (!Plugin.GlobalSaveData.EngineFacilityPointsRepaired)
+        {
+            PDALog.Add("ProtoRevisitDefenseFacility");
+        }
+        else
+        {
+            StoryGoalManager.main.OnGoalComplete("OnMoonpoolNoPrototype");
+        }
     }
 
     private void PlaySearchSound()
