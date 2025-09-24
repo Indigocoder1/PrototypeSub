@@ -86,6 +86,10 @@ internal static class StoryGoalsRegisterer
         {
             PDAEncyclopedia.Add("ProtoFacilitiesEncy", true);
         });
+        StoryGoalHandler.RegisterCustomEvent("ProtoFacilityLocationsHint", () =>
+        {
+            PDALog.Add("ProtoFacilityLocationsHint", true);
+        });
         #endregion
 
         #region Defense Audit Logs
@@ -195,6 +199,12 @@ internal static class StoryGoalsRegisterer
             var relayType1 = (TechType)Enum.Parse(typeof(TechType), "ProtoRelayUpgrade1");
             KnownTech.Add(relayType1);
         });
+        
+        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 67.5f,
+            "PrototypeCrafted");
+        StoryGoalHandler.RegisterCompoundGoal("ProtoFacilityLocationsHint", Story.GoalType.Story, 60,
+            "PrototypeCrafted");
+        
         StoryGoalHandler.RegisterCustomEvent("WyrmControlsUnlocked", null);
         StoryGoalHandler.RegisterCustomEvent("HullFacilityTeleporterUnlocked", null);
         StoryGoalHandler.RegisterCustomEvent("EngineFacilityTeleporterUnlocked", null);

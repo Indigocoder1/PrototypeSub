@@ -186,7 +186,8 @@
   "OnScanDisabledWyrm": "Instances of this structure appear to connect to a network of underground tunnels throughout this region.<delay=501><duration=6341>\nDetecting a substantial energy signature at the network's core.<delay=7025><duration=3834>",
   "ProtoRevisitDefenseFacility": "Detecting an alien facility in the region. The facility appears to be inaccessible at this time.<duration=5743>\nRevisiting at a later time is recommended.<delay=5720><duration=2844>",
   "ProtoRevisitInterceptorFacility": "Detecting an alien facility in the region. The facility appears to be inaccessible at this time.<duration=5743>\nRevisiting at a later time is recommended.<delay=5720><duration=2844>",
-
+  "ProtoFacilityLocationsHint": "This vessel's construction has prompted a broadcast from a nearby alien source. Downloading summary to databank.",
+  
   // Upgrade tech types
   "ProtoEmergencyWarp": "Emergency Warp",
   "Tooltip_ProtoEmergencyWarp": "Allows the Prototype to warp back to the Quarantine Enforcement Platform",

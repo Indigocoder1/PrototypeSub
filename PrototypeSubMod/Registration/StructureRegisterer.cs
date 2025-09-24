@@ -19,7 +19,7 @@ internal static class StructureRegisterer
         yield return Structure.RegisterFromBundle("EngineFacilityAdditions");
         yield return Structure.RegisterFromBundle("EngineFacilityExteriorObjects");
         yield return Structure.RegisterFromBundle("DefenseMoonpool");
-        //yield return Structure.RegisterFromBundle("ProtoItemDisplayCases");
+        yield return Structure.RegisterFromBundle("ProtoItemDisplayCases");
         yield return Structure.RegisterFromBundle("ProtoIslands");
         yield return Structure.RegisterFromBundle("ProtoWarpCore");
         yield return Structure.RegisterFromBundle("DefenseFacilityDebris");

@@ -28,6 +28,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_OnScanWyrm", "OnScanDisabledWyrm"));
         PDALog_Patches.entries.Add(("PDA_RevisitLater", "ProtoRevisitDefenseFacility"));
         PDALog_Patches.entries.Add(("PDA_RevisitLater", "ProtoRevisitInterceptorFacility"));
+        PDALog_Patches.entries.Add(("PDA_FacilityLocations", "ProtoFacilityLocationsHint"));
         
         PDALog_Patches.orionEntries.Add(("Proto_StoryEndPingVoiceline", "Proto_StoryEndPingVoiceline"));
         PDALog_Patches.orionEntries.Add(("Proto_AdminFacilityOnline", "Proto_AdminFacilityOnline"));
