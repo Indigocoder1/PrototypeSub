@@ -133,28 +133,6 @@
       "priority": 0
     },
     {
-      "classId": "HullFacilityOutpost",
-      "id": "10d742a7-42a2-45f4-963b-1fe2ee7b7a30",
-      "position": {
-        "x": -155.816116,
-        "y": -70.82916,
-        "z": -223.399429
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 1.0
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "cellLevel": 2,
-      "priority": 0
-    },
-    {
       "classId": "05c3df2b-8710-4aec-b2cb-242846e040a5",
       "id": "a90f2e48-d129-4f9b-a0b2-a4a2b131fe10",
       "position": {

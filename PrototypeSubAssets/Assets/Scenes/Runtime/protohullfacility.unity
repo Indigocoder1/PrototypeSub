@@ -1668,6 +1668,90 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 3f23a2ece5613db4dbb773b85ff9a3a2, type: 3}
   parent: {fileID: 215357921}
   removeLWEs: 1
+--- !u!1001 &222372060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 552874891}
+    m_Modifications:
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.516113
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -23.89943
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661316845212092686, guid: 3fec84c6d6f43a6428d4744a02591713,
+        type: 3}
+      propertyPath: m_Name
+      value: HullFacilityOutpost
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3443479054208104579, guid: 3fec84c6d6f43a6428d4744a02591713, type: 3}
+    - {fileID: 1329802856855264266, guid: 3fec84c6d6f43a6428d4744a02591713, type: 3}
+    - {fileID: 9214525068045661567, guid: 3fec84c6d6f43a6428d4744a02591713, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 3fec84c6d6f43a6428d4744a02591713, type: 3}
+--- !u!4 &222372061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7661316845212092673, guid: 3fec84c6d6f43a6428d4744a02591713,
+    type: 3}
+  m_PrefabInstance: {fileID: 222372060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &222372062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7661316845212092686, guid: 3fec84c6d6f43a6428d4744a02591713,
+    type: 3}
+  m_PrefabInstance: {fileID: 222372060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &226350480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,6 +1814,7 @@ MonoBehaviour:
   m_Script: {fileID: 988076807, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacklistedMaterials: []
 --- !u!114 &226350484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4637,6 +4722,76 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1860292538198785583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &552874890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 552874891}
+  - component: {fileID: 552874893}
+  - component: {fileID: 552874894}
+  m_Layer: 0
+  m_Name: OutpostObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &552874891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552874890}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -124.3, y: -70.82916, z: -199.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 222372061}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &552874893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552874890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -587570496, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorSky: 0
+  customSkyPrefab: {fileID: 0}
+  dynamic: 0
+  emissiveFromPower: 0
+  renderers: []
+--- !u!114 &552874894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552874890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 549652397, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadDistance1: 150
+  loadDistance2: 0
+  loadDistance1Objects:
+  - {fileID: 222372062}
+  loadDistance2Objects: []
+  checkInterval: 1
+  sceneName: 
+  manageScene: 0
 --- !u!1 &553979401
 GameObject:
   m_ObjectHideFlags: 0
@@ -12837,6 +12992,7 @@ MonoBehaviour:
   m_Script: {fileID: 988076807, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacklistedMaterials: []
 --- !u!114 &1894533253
 MonoBehaviour:
   m_ObjectHideFlags: 0
