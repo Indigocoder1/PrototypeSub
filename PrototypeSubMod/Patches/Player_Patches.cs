@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using PrototypeSubMod.MiscMonobehaviors;
 using PrototypeSubMod.Utility;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ internal class Player_Patches
     [HarmonyPatch(nameof(Player.Start)), HarmonyPostfix]
     private static void Start_Postfix()
     {
+        Player.main.gameObject.AddComponent<FactorManager>();
         Camera.main.gameObject.AddComponent<LightDistortionApplier>();
         Camera.main.gameObject.AddComponent<ProtoScreenTeleporterFXManager>();
         Camera.main.gameObject.AddComponent<CloakCutoutApplier>();

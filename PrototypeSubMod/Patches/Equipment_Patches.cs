@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using PrototypeSubMod.Factors;
+using PrototypeSubMod.MiscMonobehaviors;
 
 namespace PrototypeSubMod.Patches;
 
@@ -13,6 +15,12 @@ internal class Equipment_Patches
     [HarmonyPatch(nameof(Equipment.AllowedToAdd)), HarmonyPostfix]
     private static void AllowedToAdd_Postfix(Equipment __instance, Pickupable pickupable, ref bool __result)
     {
+        if (pickupable != null && pickupable.TryGetComponent(out Factor factor))
+        {
+            __result = !Player.main.GetComponent<FactorManager>().ContainsFactor(factor.name);
+            return;
+        }
+        
         if (!__instance.owner) return;
 
         if (__instance.typeToSlots.ElementAt(0).Key != Plugin.DummyPowerType) return;
