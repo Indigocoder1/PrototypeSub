@@ -1,6 +1,8 @@
-﻿using Nautilus.Assets;
+﻿using System.Collections;
+using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Utility;
+using PrototypeSubMod.Utility;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs;
@@ -20,12 +22,14 @@ public static class ProtoPhaseGate
         prefab.Register();
     }
 
-    private static GameObject GetGameObject()
+    private static IEnumerator GetGameObject(IOut<GameObject> prefabOut)
     {
         var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("PhaseGate");
         var instance = GameObject.Instantiate(prefab);
-        MaterialUtils.ApplySNShaders(instance);
+
+        yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
         
-        return instance;
+        MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(6));
+        prefabOut.Set(instance);
     }
 }

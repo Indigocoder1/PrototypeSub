@@ -19,15 +19,26 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private SelectionMenuManager selectionMenuManager;
     [SerializeField] private Sprite radialIcon;
     [SerializeField] private Vector3 localGhostOffset;
+    [SerializeField] private BoxCollider checkBounds;
 
     private GameObject ghostObject;
     private int phaseGateItemCount;
+    private int checkLayerMask;
     private readonly List<string> availableLightSlots = new();
 
     private void Start()
     {
         UWE.CoroutineHost.StartCoroutine(GetPhaseGatePrefab());
         UWE.CoroutineHost.StartCoroutine(SpawnGhostObject());
+
+        checkLayerMask = (1 << LayerID.TerrainCollider) | (1 << LayerID.BaseClipProxy) | (1 << LayerID.Vehicle);
+        storageTerminal.equipment.onEquip += (slot, item) =>
+        {
+            if (item.techType == ProtoPhaseGateItem.PrefabInfo.TechType)
+            {
+                selectionMenuManager.RefreshIcons();
+            }
+        };
     }
 
     private IEnumerator GetPhaseGatePrefab()
@@ -87,9 +98,17 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             return false;
         }
 
+        bool hitObject = Physics.CheckBox(checkBounds.transform.position, checkBounds.transform.localScale / 2, checkBounds.transform.rotation, checkLayerMask);
+        if (hitObject)
+        {
+            ErrorMessage.AddError($"Not enough room for deployment!");
+            return false;
+        }
+        
         Instantiate(_phaseGatePrefab, ghostObject.transform.position, ghostObject.transform.rotation);
         ghostObject.SetActive(false);
         storageTerminal.equipment.RemoveItem(availableLightSlots[0], false, false);
+        RecalculateDeployableTotals();
         
         return true;
     }
