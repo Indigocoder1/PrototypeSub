@@ -47,6 +47,8 @@ internal static class PrefabRegisterer
         HullFacilityKey.Register();
         DefenseFacilityKey.Register();
         EngineFacilityKey.Register();
+        ProtoPhaseGate.Register();
+        ProtoPhaseGateItem.Register();
         
         yield return new WaitForEndOfFrame();
         

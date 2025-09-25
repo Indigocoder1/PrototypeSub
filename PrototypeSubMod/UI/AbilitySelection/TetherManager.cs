@@ -68,6 +68,7 @@ public class TetherManager : MonoBehaviour, IUIElement
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         selectionHighlight.gameObject.SetActive(false);
+        selectionHighlight.enabled = true;
 
         RegenerateHighlightArc();
     }

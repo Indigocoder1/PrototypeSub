@@ -3,6 +3,7 @@ using PrototypeSubMod.Upgrades;
 using System.Collections;
 using System.Collections.Generic;
 using PrototypeSubMod.PowerSystem;
+using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.UI.AbilitySelection;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ internal class ProtoDeployableManager : ProtoUpgrade
     private bool canDeployLight = true;
 
     private int lightCount;
-    private List<string> availableLightSlots = new();
+    private readonly List<string> availableLightSlots = new();
 
     public void TryLaunchLight()
     {
@@ -73,12 +74,13 @@ internal class ProtoDeployableManager : ProtoUpgrade
     public void RecalculateDeployableTotals()
     {
         lightCount = 0;
-
+        availableLightSlots.Clear();
+        
         foreach (var slot in DeployablesStorageTerminal.LightBeaconSlots)
         {
             var item = storageTerminal.equipment.GetItemInSlot(slot);
 
-            if (item != null)
+            if (item != null && item.techType == DeployableLight_Craftable.prefabInfo.TechType)
             {
                 availableLightSlots.Add(slot);
                 lightCount++;
