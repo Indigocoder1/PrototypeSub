@@ -1,0 +1,117 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Nautilus.Utility;
+using PrototypeSubMod.DeployablesTerminal;
+using PrototypeSubMod.Prefabs;
+using PrototypeSubMod.UI.AbilitySelection;
+using PrototypeSubMod.Utility;
+using UnityEngine;
+
+namespace PrototypeSubMod.PhaseGates;
+
+public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
+{
+    [SaveStateReference]
+    private static GameObject _phaseGatePrefab;
+    
+    [SerializeField] private DeployablesStorageTerminal storageTerminal;
+    [SerializeField] private SelectionMenuManager selectionMenuManager;
+    [SerializeField] private Sprite radialIcon;
+    [SerializeField] private Vector3 localGhostOffset;
+
+    private GameObject ghostObject;
+    private int phaseGateItemCount;
+    private readonly List<string> availableLightSlots = new();
+
+    private void Start()
+    {
+        UWE.CoroutineHost.StartCoroutine(GetPhaseGatePrefab());
+        UWE.CoroutineHost.StartCoroutine(SpawnGhostObject());
+    }
+
+    private IEnumerator GetPhaseGatePrefab()
+    {
+        var task = CraftData.GetPrefabForTechTypeAsync(ProtoPhaseGate.PrefabInfo.TechType);
+        yield return task;
+        _phaseGatePrefab = task.result.value;
+    }
+
+    private IEnumerator SpawnGhostObject()
+    {
+        yield return new WaitUntil(() => _phaseGatePrefab);
+
+        ghostObject = UWE.Utils.InstantiateDeactivated(_phaseGatePrefab, transform, localGhostOffset,
+            Quaternion.identity, Vector3.one);
+
+        Destroy(ghostObject.GetComponent<LargeWorldEntity>());
+        Destroy(ghostObject.GetComponent<PrefabIdentifier>());
+
+        var colliders = ghostObject.GetComponentsInChildren<Collider>(true);
+        for (int i = colliders.Length - 1; i >= 0; i--)
+        {
+            Destroy(colliders[i]);
+        }
+        
+        foreach (var renderer in ghostObject.GetComponentsInChildren<Renderer>(true))
+        {
+            var newMaterials = Enumerable.Repeat(MaterialUtils.GhostMaterial, renderer.materials.Length).ToArray();
+            renderer.materials = newMaterials;
+        }
+
+        selectionMenuManager.RefreshIcons();
+    }
+    
+    private void RecalculateDeployableTotals()
+    {
+        phaseGateItemCount = 0;
+        availableLightSlots.Clear();
+
+        foreach (var slot in DeployablesStorageTerminal.LightBeaconSlots)
+        {
+            var item = storageTerminal.equipment.GetItemInSlot(slot);
+
+            if (item != null && item.techType == ProtoPhaseGateItem.PrefabInfo.TechType)
+            {
+                availableLightSlots.Add(slot);
+                phaseGateItemCount++;
+            }
+        }
+    }
+
+    public bool OnActivated()
+    {
+        if (phaseGateItemCount == 0)
+        {
+            ErrorMessage.AddMessage("No phase gates loaded in launch bay");
+            return false;
+        }
+
+        Instantiate(_phaseGatePrefab, ghostObject.transform.position, ghostObject.transform.rotation);
+        ghostObject.SetActive(false);
+        storageTerminal.equipment.RemoveItem(availableLightSlots[0], false, false);
+        
+        return true;
+    }
+
+    public void OnSelectedChanged(bool changed)
+    {
+        RecalculateDeployableTotals();
+        if (phaseGateItemCount > 0)
+        {
+            ghostObject.SetActive(changed);
+        }
+    }
+
+    public bool GetActive()
+    {
+        return false;
+    }
+
+    public bool GetCanActivate() => true;
+
+    public bool GetShouldShow() => _phaseGatePrefab;
+
+    public Sprite GetSprite() => radialIcon;
+    public TechType GetTechType() => TechType.None;
+}
