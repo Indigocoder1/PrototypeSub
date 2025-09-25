@@ -34,7 +34,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         UWE.CoroutineHost.StartCoroutine(GetPhaseGatePrefab());
         UWE.CoroutineHost.StartCoroutine(SpawnGhostObject());
 
-        checkLayerMask = (1 << LayerID.TerrainCollider) | (1 << LayerID.BaseClipProxy) | (1 << LayerID.Vehicle);
+        checkLayerMask = (1 << LayerID.TerrainCollider) | (1 << LayerID.BaseClipProxy) | (1 << LayerID.Vehicle) | (1 << LayerID.Useable);
         storageTerminal.equipment.onEquip += (slot, item) =>
         {
             if (item.techType == ProtoPhaseGateItem.PrefabInfo.TechType)

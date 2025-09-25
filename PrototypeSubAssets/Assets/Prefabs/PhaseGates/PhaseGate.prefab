@@ -1975,6 +1975,7 @@ GameObject:
   - component: {fileID: 2787409612874087258}
   - component: {fileID: 2787409612874087259}
   - component: {fileID: 7278650157672794036}
+  - component: {fileID: 1975006264353907111}
   m_Layer: 0
   m_Name: PhaseGate
   m_TagString: Untagged
@@ -2109,6 +2110,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleporter: {fileID: 4734307473616998318}
   prefabIdentifier: {fileID: 2787409612874087260}
+--- !u!114 &1975006264353907111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787409612874087256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -775140904, guid: d3aa744e2b032f543b53a6ee1315398f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerName: 1
+  layerSetMode: 2
 --- !u!1 &2967540355680065358
 GameObject:
   m_ObjectHideFlags: 0
