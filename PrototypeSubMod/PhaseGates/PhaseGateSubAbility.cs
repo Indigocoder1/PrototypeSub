@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Nautilus.Utility;
@@ -12,6 +13,8 @@ namespace PrototypeSubMod.PhaseGates;
 
 public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 {
+    internal static event Action onPhaseGateCreated; 
+    
     [SaveStateReference]
     private static GameObject _phaseGatePrefab;
     
@@ -94,22 +97,40 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     {
         if (phaseGateItemCount == 0)
         {
-            ErrorMessage.AddMessage("No phase gates loaded in launch bay");
+            ErrorMessage.AddError("No phase gates loaded in launch bay!");
+            return false;
+        }
+
+        if (Plugin.GlobalSaveData.phaseGateLocations.Count >= 2)
+        {
+            ErrorMessage.AddError("Two gates already constructed!");
             return false;
         }
 
         bool hitObject = Physics.CheckBox(checkBounds.transform.position, checkBounds.transform.localScale / 2, checkBounds.transform.rotation, checkLayerMask);
         if (hitObject)
         {
-            ErrorMessage.AddError($"Not enough room for deployment!");
+            ErrorMessage.AddError("Not enough room for deployment!");
             return false;
         }
         
-        Instantiate(_phaseGatePrefab, ghostObject.transform.position, ghostObject.transform.rotation);
+        var gateInstance = Instantiate(_phaseGatePrefab, ghostObject.transform.position, ghostObject.transform.rotation);
         ghostObject.SetActive(false);
         storageTerminal.equipment.RemoveItem(availableLightSlots[0], false, false);
         RecalculateDeployableTotals();
+
+        Plugin.GlobalSaveData.phaseGateLocations.Add(new PhaseGateLocation(ghostObject.transform.position, -ghostObject.transform.forward));
+
+        var gateIndices = Plugin.GlobalSaveData.phaseGateIndices;
+        int lastIndex = -1;
+        if (gateIndices.Count > 0)
+        {
+            lastIndex = gateIndices.ElementAt(Plugin.GlobalSaveData.phaseGateIndices.Count - 1).Value;
+        }
+        Plugin.Logger.LogInfo($"Gate count = {gateIndices.Count} | Last index = {lastIndex}");
+        gateInstance.GetComponent<ProtoPhaseGateManager>().SetGateIndex((lastIndex + 1) % 2);
         
+        onPhaseGateCreated?.Invoke();
         return true;
     }
 
