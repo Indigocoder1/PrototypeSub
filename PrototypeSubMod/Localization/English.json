@@ -146,6 +146,10 @@
   "PrototypeCam3": "Camera ┫ - ┗▚▖┗",
 
   "BuildTerminal_Occupied": "Moonpool occupied!",
+  
+  // Factors
+  "BlinkFactor": "Blink Factor",
+  "Tooltip_BlinkFactor": "Temporary Blink Description.",
 
   // Power System
   "PrototypePowerLabel": "Prototype Power System",
@@ -346,6 +350,7 @@
   "ProtoPrecursorFabricator_Tab_Keys": "Keys",
   "ProtoPrecursorFabricator_Tab_PowerSources": "Power sources",
   "ProtoPrecursorFabricator_Tab_Utilities": "Utilities",
+  "ProtoPrecursorFabricator_Tab_Factors": "Factors",
 
   // Credits
   "ProtoCreditsText": "<size=90>THE PROTOTYPE</size>\n\n<b><size=60>Developers:</size></b>\n\n<b>Christian “Octorion” Howlings</b>\n- Prototech director\n- 3D assets\n- Gameplay design & coordination\n- Narrative design\n- Voice acting (Or-Ion)\n\n<b>GamingForFun (IndigoCoder)</b>\n- Programming & technical lead\n- Design & implementation\n- Sub Library creation\n\n<b>Mika “Deamoz” Kontenak</b>\n- Sound design & OST\n\n<b>Aksel “ClubEar” Sisk</b>\n- 2D Assets\n- Concept art\n- Level design\n\n<b>Lyonic</b>\n- Additional programming\n- Material database creation\n\n<b><size=60>Collaborators:</size></b>\n\n<b>SteveKong</b>\n- Video & trailer creation\n\n<b>N8Crafter</b>\n- Precursor tiles & 3D art consultant\n- Return of the Ancients integration consultant\n\n<b>Lilly23 (Snom/NoContextLilly)</b>\n- The Red Plague integration\n\n<b>Dr.Dyers</b>\n- Prototech team logo\n\n<b><size=60>Playtesters:</size></b>\n\n<b>Rip_Angel, IanZeArtist, Dragoncat, Bucketato, Sebazavrik, Al-An, Erik990, Dreamanchik, KooKoo, CRLD, Deltenic</b>\n\n<b><size=60>Special Thanks:</size></b>\n\n<b>RedDev</b>\n<b>Artyom (MildBlobFish)</b>\n<b>FoulHawk</b>\n<b>Lee23</b>\n<b>Metious</b>\n<b>MonikaCinnyRoll</b>\n<b>Obraxis</b>\n<b>KooKoo</b>\n<b>Sebazavrik</b>\n<b>TheLastBacon</b>\n<b>The amazing Subnautica Modding community</b>\n\n<b>...And you!</b>"

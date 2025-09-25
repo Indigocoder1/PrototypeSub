@@ -3,6 +3,7 @@ using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
 using PrototypeSubMod.Prefabs.FacilityProps;
 using PrototypeSubMod.Prefabs.FacilityProps.Hull;
+using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.Prefabs.PhaseGates;
 using PrototypeSubMod.Prefabs.WormSpawns;
 using UnityEngine;
@@ -18,6 +19,7 @@ internal static class PrefabRegisterer
         
         WarperRemnant.Register();
         AlienBuildingBlock.Register();
+        BlinkFactor.Register();
         PrecursorIngot_Craftable.Register();
         IonPrism_Craftable.Register();
 

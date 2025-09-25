@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Utility;
+using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.Utility;
 using UnityEngine;
 using UWE;
@@ -47,7 +48,10 @@ internal class PrecursorFabricator
             .AddCraftNode(PrecursorIngot_Craftable.prefabInfo.TechType, "Utilities")
             .AddCraftNode(DeployableLight_Craftable.prefabInfo.TechType, "Utilities")
             .AddCraftNode(TechType.PrecursorIonBattery, "Utilities")
-            .AddCraftNode(TechType.PrecursorIonPowerCell, "Utilities");
+            .AddCraftNode(TechType.PrecursorIonPowerCell, "Utilities")
+            
+            .AddTabNode("Factors", Language.main.Get("ProtoPrecursorFabricator_Tab_Factors"), SpriteManager.Get(TechType.ComputerChip))
+            .AddCraftNode(BlinkFactor.prefabInfo.TechType, "Factors");
         precursorFabricatorType = fabType;
         
         prefab.SetGameObject(GetPrefab);
