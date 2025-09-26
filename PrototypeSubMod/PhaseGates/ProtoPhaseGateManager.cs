@@ -33,6 +33,18 @@ public class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         Plugin.GlobalSaveData.phaseGateIndices[prefabIdentifier.Id] = gateIndex;
         UpdateConnectedGate();
     }
+
+    public void ActivateGate()
+    {
+        teleporter.ToggleDoor(true);
+    }
+    
+    public void DeactivateGate()
+    {
+        teleporter.ToggleDoor(false);
+        teleporter.activeLoopSound.Stop();
+        TeleporterManager.main.activeTeleporters.Remove(teleporter.teleporterIdentifier);
+    }
     
     private void OnEnable()
     {

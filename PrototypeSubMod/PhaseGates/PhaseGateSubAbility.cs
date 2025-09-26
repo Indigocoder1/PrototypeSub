@@ -115,9 +115,13 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         }
         
         var gateInstance = Instantiate(_phaseGatePrefab, ghostObject.transform.position, ghostObject.transform.rotation);
-        ghostObject.SetActive(false);
         storageTerminal.equipment.RemoveItem(availableLightSlots[0], false, false);
         RecalculateDeployableTotals();
+
+        if (phaseGateItemCount <= 0)
+        {
+            ghostObject.SetActive(false);
+        }
 
         Plugin.GlobalSaveData.phaseGateLocations.Add(new PhaseGateLocation(ghostObject.transform.position, -ghostObject.transform.forward));
 
@@ -127,11 +131,25 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         {
             lastIndex = gateIndices.ElementAt(Plugin.GlobalSaveData.phaseGateIndices.Count - 1).Value;
         }
-        Plugin.Logger.LogInfo($"Gate count = {gateIndices.Count} | Last index = {lastIndex}");
-        gateInstance.GetComponent<ProtoPhaseGateManager>().SetGateIndex((lastIndex + 1) % 2);
+
+        int newIndex = lastIndex + 1;
+        var gateManager = gateInstance.GetComponent<ProtoPhaseGateManager>();
+        gateManager.SetGateIndex(newIndex % 2);
+        if (newIndex % 2 == 1)
+        {
+            StartCoroutine(ActivateGateDelayed(gateManager));
+        }
+        
         
         onPhaseGateCreated?.Invoke();
         return true;
+    }
+
+    private IEnumerator ActivateGateDelayed(ProtoPhaseGateManager gateManager)
+    {
+        yield return new WaitForSeconds(1);
+        
+        gateManager.ActivateGate();
     }
 
     public void OnSelectedChanged(bool changed)
