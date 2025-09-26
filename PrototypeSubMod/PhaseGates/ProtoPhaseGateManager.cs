@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using Nautilus.Json;
+using PrototypeSubMod.Upgrades;
 using UnityEngine;
 
 namespace PrototypeSubMod.PhaseGates;
 
-public class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
+internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
 {
     [SerializeField] private PrecursorTeleporter teleporter;
     [SerializeField] private PrefabIdentifier prefabIdentifier;
@@ -37,6 +39,83 @@ public class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     public void ActivateGate()
     {
         teleporter.ToggleDoor(true);
+    }
+
+    // Called via SendMessageUpwards in PrecursorTeleporterCollider
+    public void BeginTeleportPrototype(ProtoUpgradeManager upgradeManager)
+    {
+        if (upgradeManager == null)
+        {
+            return;
+        }
+        if (PrecursorTeleporter.activeTeleporter != null)
+        {
+            return;
+        }
+        if (!TeleporterManager.GetTeleporterActive(teleporter.teleporterIdentifier))
+        {
+            return;
+        }
+        
+        Plugin.Logger.LogInfo($"Upgrade manager = {upgradeManager}");
+        if (!upgradeManager) return;
+
+        StartCoroutine(TeleportPrototype(upgradeManager.gameObject));
+    }
+
+    private IEnumerator TeleportPrototype(GameObject prototypeObj)
+    {
+        PrecursorTeleporter.activeTeleporter = teleporter;
+        
+        var player = Player.main;
+        player.AddUsedTool(TechType.PrecursorTeleporter);
+
+        player.cinematicModeActive = true;
+        player.playerController.inputEnabled = false;
+        Inventory.main.quickSlots.SetIgnoreHotkeyInput(true);
+        player.GetPDA().Close();
+        player.GetPDA().SetIgnorePDAInput(true);
+        player.teleportingLoopSound.Play();
+        player.GetComponent<Collider>().enabled = false;
+        var subRigidbody = prototypeObj.GetComponent<Rigidbody>();
+        var pilotingChair = prototypeObj.GetComponentInChildren<PilotingChair>();
+        
+        player.onTeleportationComplete += () => OnTeleportationComplete(subRigidbody, pilotingChair);
+        
+        Camera.main.GetComponent<TeleportScreenFXController>().StartTeleport();
+        subRigidbody.isKinematic = true;
+        subRigidbody.velocity = Vector3.zero;
+
+        Player.main.mode = Player.Mode.LockedPiloting;
+
+        yield return new WaitForSeconds(1f);
+
+        var rotation = Quaternion.Euler(0, teleporter.warpToAngle, 0);
+
+        prototypeObj.transform.position = teleporter.warpToPos;
+        prototypeObj.transform.rotation = rotation;
+
+        Player.main.WaitForTeleportation();
+    }
+    
+    private void OnTeleportationComplete(Rigidbody subRigidbody, PilotingChair pilotingChair)
+    {
+        subRigidbody.isKinematic = false;
+        Player.main.GetComponent<Collider>().enabled = true;
+
+        if (PrecursorTeleporter.activeTeleporter == teleporter)
+        {
+            PrecursorTeleporter.activeTeleporter = null;
+        }
+
+        StartCoroutine(ReEnterPilotingModeDelayed(pilotingChair));
+    }
+    
+    private IEnumerator ReEnterPilotingModeDelayed(PilotingChair pilotingChair)
+    {
+        yield return new WaitForEndOfFrame();
+        
+        Player.main.EnterPilotingMode(pilotingChair);
     }
     
     public void DeactivateGate()

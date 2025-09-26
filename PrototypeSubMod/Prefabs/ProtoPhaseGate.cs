@@ -27,6 +27,11 @@ public static class ProtoPhaseGate
         var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("PhaseGate");
         var instance = GameObject.Instantiate(prefab);
 
+        foreach (var collider in instance.GetComponentsInChildren<Collider>(true))
+        {
+            collider.gameObject.layer = LayerID.Useable;
+        }
+        
         yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
         
         MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(6));

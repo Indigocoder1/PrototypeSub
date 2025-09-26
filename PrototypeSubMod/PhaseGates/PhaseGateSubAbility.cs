@@ -50,7 +50,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         yield return task;
         _phaseGatePrefab = task.result.value;
     }
-
+    
     private IEnumerator SpawnGhostObject()
     {
         yield return new WaitUntil(() => _phaseGatePrefab);
