@@ -12,10 +12,10 @@ public class PrecursorTeleporterCollider_Patches
     {
         if (col.isTrigger) return;
         
-        var upgradeManager = col.GetComponentInParent<ProtoUpgradeManager>();
-        if (upgradeManager)
+        var subRoot = col.GetComponentInParent<SubRoot>();
+        if (subRoot)
         {
-            __instance.SendMessageUpwards("BeginTeleportPrototype", upgradeManager,
+            __instance.SendMessageUpwards("BeginTeleportSubRoot", subRoot,
                 SendMessageOptions.DontRequireReceiver);
         }
     }

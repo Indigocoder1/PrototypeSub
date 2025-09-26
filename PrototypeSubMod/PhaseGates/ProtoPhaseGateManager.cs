@@ -13,6 +13,7 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     [SerializeField] private PrefabIdentifier prefabIdentifier;
     
     private int gateIndex;
+    private bool playerWasPiloting;
     private PhaseGateLocation connectedGateLocation;
 
     private void UpdateConnectedGate()
@@ -42,9 +43,9 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     }
 
     // Called via SendMessageUpwards in PrecursorTeleporterCollider
-    public void BeginTeleportPrototype(ProtoUpgradeManager upgradeManager)
+    public void BeginTeleportSubRoot(SubRoot subRoot)
     {
-        if (upgradeManager == null)
+        if (subRoot == null)
         {
             return;
         }
@@ -56,52 +57,56 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         {
             return;
         }
-        
-        Plugin.Logger.LogInfo($"Upgrade manager = {upgradeManager}");
-        if (!upgradeManager) return;
 
-        StartCoroutine(TeleportPrototype(upgradeManager.gameObject));
+        StartCoroutine(TeleportSubRoot(subRoot.gameObject));
     }
 
-    private IEnumerator TeleportPrototype(GameObject prototypeObj)
+    private IEnumerator TeleportSubRoot(GameObject subRoot)
     {
         PrecursorTeleporter.activeTeleporter = teleporter;
-        
-        var player = Player.main;
-        player.AddUsedTool(TechType.PrecursorTeleporter);
+        var subRigidbody = subRoot.GetComponent<Rigidbody>();
+        var pilotingChair = subRoot.GetComponentInChildren<PilotingChair>();
 
-        player.cinematicModeActive = true;
-        player.playerController.inputEnabled = false;
-        Inventory.main.quickSlots.SetIgnoreHotkeyInput(true);
-        player.GetPDA().Close();
-        player.GetPDA().SetIgnorePDAInput(true);
-        player.teleportingLoopSound.Play();
-        player.GetComponent<Collider>().enabled = false;
-        var subRigidbody = prototypeObj.GetComponent<Rigidbody>();
-        var pilotingChair = prototypeObj.GetComponentInChildren<PilotingChair>();
+        playerWasPiloting = Player.main.currChair == pilotingChair;
+        if (playerWasPiloting)
+        {
+            var player = Player.main;
+            player.AddUsedTool(TechType.PrecursorTeleporter);
+
+            player.cinematicModeActive = true;
+            player.playerController.inputEnabled = false;
+            Inventory.main.quickSlots.SetIgnoreHotkeyInput(true);
+            player.GetPDA().Close();
+            player.GetPDA().SetIgnorePDAInput(true);
+            player.teleportingLoopSound.Play();
+            Player.mainCollider.enabled = false;
         
-        player.onTeleportationComplete += () => OnTeleportationComplete(subRigidbody, pilotingChair);
+            player.onTeleportationComplete += () => OnTeleportationComplete(subRigidbody, pilotingChair);
+            Camera.main.GetComponent<TeleportScreenFXController>().StartTeleport();
+        }
+
+        if (playerWasPiloting)
+        {
+            subRigidbody.isKinematic = true;
+        }
         
-        Camera.main.GetComponent<TeleportScreenFXController>().StartTeleport();
-        subRigidbody.isKinematic = true;
         subRigidbody.velocity = Vector3.zero;
 
-        Player.main.mode = Player.Mode.LockedPiloting;
-
         yield return new WaitForSeconds(1f);
+        
+        subRoot.transform.position = teleporter.warpToPos;
+        subRoot.transform.rotation = Quaternion.Euler(0, teleporter.warpToAngle, 0);
 
-        var rotation = Quaternion.Euler(0, teleporter.warpToAngle, 0);
-
-        prototypeObj.transform.position = teleporter.warpToPos;
-        prototypeObj.transform.rotation = rotation;
-
-        Player.main.WaitForTeleportation();
+        if (playerWasPiloting)
+        {
+            Player.main.WaitForTeleportation();
+        }
     }
     
     private void OnTeleportationComplete(Rigidbody subRigidbody, PilotingChair pilotingChair)
     {
         subRigidbody.isKinematic = false;
-        Player.main.GetComponent<Collider>().enabled = true;
+        Player.mainCollider.enabled = true;
 
         if (PrecursorTeleporter.activeTeleporter == teleporter)
         {
@@ -109,6 +114,7 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         }
 
         StartCoroutine(ReEnterPilotingModeDelayed(pilotingChair));
+        playerWasPiloting = false;
     }
     
     private IEnumerator ReEnterPilotingModeDelayed(PilotingChair pilotingChair)
