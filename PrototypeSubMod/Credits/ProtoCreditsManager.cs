@@ -10,6 +10,7 @@ internal class ProtoCreditsManager : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform creditsTextRect;
     [SerializeField] private TextMeshProUGUI creditsText;
+    [SerializeField] private RectTransform titleImage;
     [SerializeField] private float creditsLength;
     
     private float creditsSpeed;
@@ -28,10 +29,11 @@ internal class ProtoCreditsManager : MonoBehaviour
         
         maskYHeight = canvas.GetComponent<RectTransform>().rect.height;
         textYHeight = creditsTextRect.rect.height;
-        yOffset = -(maskYHeight / 2) - (textYHeight / 2);
+        var imageHeight = titleImage.rect.height;
+        yOffset = -(maskYHeight / 2) - (textYHeight / 2) - (imageHeight / 2);
         creditsTextRect.localPosition = new Vector3(0, yOffset, 0);
         
-        creditsSpeed = (textYHeight + maskYHeight) / creditsLength;
+        creditsSpeed = (textYHeight + maskYHeight + imageHeight) / creditsLength;
         
         initialized = true;
     }
