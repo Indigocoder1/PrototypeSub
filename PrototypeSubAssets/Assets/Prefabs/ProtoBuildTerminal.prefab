@@ -2390,6 +2390,7 @@ MonoBehaviour:
   m_Script: {fileID: 988076807, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacklistedMaterials: []
 --- !u!114 &7883496501526043195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7722,6 +7723,7 @@ MonoBehaviour:
   m_Script: {fileID: 988076807, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacklistedMaterials: []
 --- !u!114 &1718344308016095102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11489,6 +11491,7 @@ MonoBehaviour:
   m_Script: {fileID: 988076807, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacklistedMaterials: []
 --- !u!1 &4141266685239871516
 GameObject:
   m_ObjectHideFlags: 0
@@ -13858,7 +13861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.36078432, g: 0.9764706, b: 0.42352942, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
