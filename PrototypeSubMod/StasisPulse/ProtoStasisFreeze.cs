@@ -7,14 +7,6 @@ internal class ProtoStasisFreeze : MonoBehaviour
 {
     private const float MAX_MASS_VALUE = 200f;
 
-    public bool isFrozen
-    {
-        get
-        {
-            return rigidbody.isKinematic;
-        }
-    }
-
     private Rigidbody rigidbody;
     private GameObject unfreezeFX;
 
@@ -25,7 +17,11 @@ internal class ProtoStasisFreeze : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         UWE.Utils.SetIsKinematicAndUpdateInterpolation(rigidbody, true);
         rigidbody.SendMessage("OnFreezeByStasisSphere", SendMessageOptions.DontRequireReceiver);
-        UWE.CoroutineHost.StartCoroutine(TakeDamageOverTime(GetComponent<LiveMixin>(), 10, 10));
+        var mixin = GetComponent<LiveMixin>();
+        if (mixin.maxHealth > 500)
+        {
+            UWE.CoroutineHost.StartCoroutine(TakeDamageOverTime(mixin, 3, 10));
+        }
     }
 
     private void Update()
