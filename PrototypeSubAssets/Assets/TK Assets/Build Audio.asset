@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StageAssetBundles
   m_EditorClassIdentifier: 
   Active: 1
-  AssetBundleBuildOptions: 256
+  AssetBundleBuildOptions: 0
   buildTarget: 5
   recurseDirectories: 0
   simulate: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d65cc226c348d45aa1c6dddf3600a6, type: 3}
   m_Name: Delete
   m_EditorClassIdentifier: 
-  Active: 1
+  Active: 0
   PerManifest: 0
   ListType: 0
   Manifests: []
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d65cc226c348d45aa1c6dddf3600a6, type: 3}
   m_Name: Delete
   m_EditorClassIdentifier: 
-  Active: 1
+  Active: 0
   PerManifest: 0
   ListType: 0
   Manifests: []
