@@ -43371,6 +43371,7 @@ MonoBehaviour:
   radialIcon: {fileID: 21300000, guid: b38f33abde95b3a4eb3cb2fea4bb635a, type: 3}
   localGhostOffset: {x: 0, y: -1.34, z: 74.4}
   checkBounds: {fileID: 4300624069746968167}
+  timeToConstruct: 60
 --- !u!1 &3278051748304640986
 GameObject:
   m_ObjectHideFlags: 0

@@ -192,7 +192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7575748664481323527
 Transform:
   m_ObjectHideFlags: 0
@@ -1148,7 +1148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1712965728563170681
 Transform:
   m_ObjectHideFlags: 0
@@ -1193,7 +1193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5323337671288029230
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,6 +1975,10 @@ GameObject:
   - component: {fileID: 2787409612874087258}
   - component: {fileID: 2787409612874087259}
   - component: {fileID: 7278650157672794036}
+  - component: {fileID: 2824093097595848721}
+  - component: {fileID: 8782855599218335989}
+  - component: {fileID: 17941165710412389}
+  - component: {fileID: 1429642336488857059}
   m_Layer: 0
   m_Name: PhaseGate
   m_TagString: Untagged
@@ -2109,6 +2113,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleporter: {fileID: 4734307473616998318}
   prefabIdentifier: {fileID: 2787409612874087260}
+--- !u!114 &2824093097595848721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787409612874087256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 180063717, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8782855599218335989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787409612874087256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2045563027, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 2
+  isDone: 0
+  informGameObject: {fileID: 0}
+  ghostMaterial: {fileID: 0}
+  alphaTexture: {fileID: 0}
+  alphaDetailTexture: {fileID: 0}
+  wireColor: {r: 0.07399793, g: 0.8679245, b: 0, a: 1}
+  blurOffset: 0.03
+  alphaScale: 0.06
+  cutOff: 0.88
+  alphaEnd: 50
+  lineWidth: 48
+  transparentShaders: []
+  disableBehaviours: []
+  surfaceSplashFX: {fileID: 0}
+  surfaceSplashSound: {fileID: 0}
+  surfaceSplashVelocity: 0.1
+  heightOffset: 0
+  localRotation: {x: 0, y: 0, z: 0}
+  constructSound: {fileID: 0}
+  onConstructionStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onConstructionFinished:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &17941165710412389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787409612874087256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1355215262, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1429642336488857059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787409612874087256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 288098073, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxConstructing: {fileID: 8782855599218335989}
+  ghostMatColor: {r: 0.14901961, g: 0.6509804, b: 0.2, a: 1}
 --- !u!1 &2967540355680065358
 GameObject:
   m_ObjectHideFlags: 0
@@ -3765,7 +3845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6669763490459069447
 Transform:
   m_ObjectHideFlags: 0

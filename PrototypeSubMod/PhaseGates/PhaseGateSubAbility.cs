@@ -23,6 +23,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private Sprite radialIcon;
     [SerializeField] private Vector3 localGhostOffset;
     [SerializeField] private BoxCollider checkBounds;
+    [SerializeField] private float timeToConstruct;
 
     private GameObject ghostObject;
     private Material ghostMaterial;
@@ -130,21 +131,22 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         int newIndex = lastIndex + 1;
         var gateManager = gateInstance.GetComponent<ProtoPhaseGateManager>();
         gateManager.SetGateIndex(newIndex % 2);
-        if (newIndex % 2 == 1)
-        {
-            StartCoroutine(ActivateGateDelayed(gateManager));
-        }
-        
+
+        var vfxConstructing = gateInstance.GetComponent<VFXConstructing>();
+        vfxConstructing.ghostMaterial = MaterialUtils.GhostMaterial;
+        vfxConstructing.timeToConstruct = timeToConstruct;
+        vfxConstructing.StartConstruction();
+        vfxConstructing.informGameObject = gameObject;
         
         onPhaseGateCreated?.Invoke();
         return true;
     }
 
-    private IEnumerator ActivateGateDelayed(ProtoPhaseGateManager gateManager)
+    public void OnConstructionDone(GameObject sender)
     {
-        yield return new WaitForSeconds(1);
-        
-        gateManager.ActivateGate();
+        if (Plugin.GlobalSaveData.phaseGateIndices.Count % 2 != 0) return;
+
+        sender.GetComponent<ProtoPhaseGateManager>().ActivateGate();
     }
 
     private bool HasRoomForDeployment()
