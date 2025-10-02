@@ -150,6 +150,18 @@
   // Factors
   "BlinkFactor": "Blink Factor",
   "Tooltip_BlinkFactor": "Temporary Blink Description.",
+  
+  // Phase Gates
+  "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
+  "Tooltip_ProtoPhaseGateStabilizer": "A dark matter stabilizer for a precursor phase gate.",
+  "ProtoPhaseGateDeterrent": "Sonic Deterrent",
+  "Tooltip_ProtoPhaseGateDeterrent": "A sonic deterrent for a precursor phase gate.",
+  "ProtoPhaseGateStructure": "Structural Core",
+  "Tooltip_ProtoPhaseGateStructure": "A structural core for a precursor phase gate.",
+  "ProtoPhaseGateTransmitter": "Particle Transmitter",
+  "Tooltip_ProtoPhaseGateTransmitter": "A particle transmitter for a precursor phase gate.",
+  "ProtoPhaseGateItem": "Phase Gate Kit",
+  "Tooltip_ProtoPhaseGateItem": "A compacted precursor phase gate ready for deployment.",
 
   // Power System
   "PrototypePowerLabel": "Prototype Power System",

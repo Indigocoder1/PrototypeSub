@@ -5,21 +5,20 @@ using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs;
 
-public class ProtoPhaseGateItem
+public class ProtoPhaseGateDeterrent
 {
     public static PrefabInfo PrefabInfo { get; private set; }
 
     public static void Register()
     {
-        PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateItem", null, null)
+        PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateDeterrent", null, null)
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("exosuitgrapplingarmmodule_Upgraded"));
 
         var prefab = new CustomPrefab(PrefabInfo);
         
-        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ProtoPhaseGateItem.json"))
+        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ProtoPhaseGateDeterrent.json"))
             .WithCraftingTime(10f);
         prefab.SetGameObject(GetGameObject);
-        prefab.SetEquipment(Plugin.PhaseGateEquipmentType);
 
         prefab.Register();
     }

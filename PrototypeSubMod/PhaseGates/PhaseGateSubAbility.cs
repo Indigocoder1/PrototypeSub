@@ -37,7 +37,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         checkLayerMask = (1 << LayerID.TerrainCollider) | (1 << LayerID.BaseClipProxy) | (1 << LayerID.Vehicle) | (1 << LayerID.Useable);
         storageTerminal.equipment.onEquip += (slot, item) =>
         {
-            if (item.techType == ProtoPhaseGateItem.PrefabInfo.TechType)
+            if (item.techType == ProtoPhaseGateStabilizer.PrefabInfo.TechType)
             {
                 selectionMenuManager.RefreshIcons();
             }
@@ -85,7 +85,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         {
             var item = storageTerminal.equipment.GetItemInSlot(slot);
 
-            if (item != null && item.techType == ProtoPhaseGateItem.PrefabInfo.TechType)
+            if (item != null && item.techType == ProtoPhaseGateStabilizer.PrefabInfo.TechType)
             {
                 availableLightSlots.Add(slot);
                 phaseGateItemCount++;

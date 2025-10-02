@@ -50,6 +50,10 @@ internal static class PrefabRegisterer
         DefenseFacilityKey.Register();
         EngineFacilityKey.Register();
         ProtoPhaseGate.Register();
+        ProtoPhaseGateStabilizer.Register();
+        ProtoPhaseGateDeterrent.Register();
+        ProtoPhaseGateStructure.Register();
+        ProtoPhaseGateTransmitter.Register();
         ProtoPhaseGateItem.Register();
         
         yield return new WaitForEndOfFrame();
