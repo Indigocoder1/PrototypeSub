@@ -51,7 +51,14 @@ internal class PrecursorFabricator
             .AddCraftNode(TechType.PrecursorIonPowerCell, "Utilities")
             
             .AddTabNode("Factors", Language.main.Get("ProtoPrecursorFabricator_Tab_Factors"), SpriteManager.Get(TechType.ComputerChip))
-            .AddCraftNode(BlinkFactor.prefabInfo.TechType, "Factors");
+            .AddCraftNode(BlinkFactor.prefabInfo.TechType, "Factors")
+        
+            .AddTabNode("PhaseGate", Language.main.Get("ProtoPrecursorFabricator_Tab_PhaseGate"), SpriteManager.Get(TechType.WiringKit))
+            .AddCraftNode(ProtoPhaseGateDeterrent.PrefabInfo.TechType, "PhaseGate")
+            .AddCraftNode(ProtoPhaseGateStabilizer.PrefabInfo.TechType, "PhaseGate")
+            .AddCraftNode(ProtoPhaseGateStructure.PrefabInfo.TechType, "PhaseGate")
+            .AddCraftNode(ProtoPhaseGateTransmitter.PrefabInfo.TechType, "PhaseGate")
+            .AddCraftNode(ProtoPhaseGateItem.PrefabInfo.TechType, "PhaseGate");
         precursorFabricatorType = fabType;
         
         prefab.SetGameObject(GetPrefab);

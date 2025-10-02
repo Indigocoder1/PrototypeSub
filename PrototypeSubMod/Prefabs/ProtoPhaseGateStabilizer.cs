@@ -19,6 +19,7 @@ public class ProtoPhaseGateStabilizer
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ProtoPhaseGateStabilizer.json"))
             .WithCraftingTime(10f);
         prefab.SetGameObject(GetGameObject);
+        prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
 
         prefab.Register();
     }

@@ -19,6 +19,7 @@ public class ProtoPhaseGateTransmitter
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ProtoPhaseGateTransmitter.json"))
             .WithCraftingTime(10f);
         prefab.SetGameObject(GetGameObject);
+        prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
 
         prefab.Register();
     }

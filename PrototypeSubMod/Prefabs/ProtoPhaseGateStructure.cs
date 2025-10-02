@@ -19,6 +19,7 @@ public class ProtoPhaseGateStructure
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ProtoPhaseGateStructure.json"))
             .WithCraftingTime(10f);
         prefab.SetGameObject(GetGameObject);
+        prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
 
         prefab.Register();
     }
