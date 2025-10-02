@@ -25,9 +25,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private BoxCollider checkBounds;
 
     private GameObject ghostObject;
-    private int phaseGateItemCount;
     private int checkLayerMask;
-    private readonly List<string> availableLightSlots = new();
 
     private void Start()
     {
@@ -76,26 +74,14 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         selectionMenuManager.RefreshIcons();
     }
     
-    private void RecalculateDeployableTotals()
+    private bool HasPhaseGate()
     {
-        phaseGateItemCount = 0;
-        availableLightSlots.Clear();
-
-        foreach (var slot in DeployablesStorageTerminal.LightBeaconSlots)
-        {
-            var item = storageTerminal.equipment.GetItemInSlot(slot);
-
-            if (item != null && item.techType == ProtoPhaseGateStabilizer.PrefabInfo.TechType)
-            {
-                availableLightSlots.Add(slot);
-                phaseGateItemCount++;
-            }
-        }
+        return storageTerminal.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT) != null;
     }
 
     public bool OnActivated()
     {
-        if (phaseGateItemCount == 0)
+        if (!HasPhaseGate())
         {
             ErrorMessage.AddError("No phase gates loaded in launch bay!");
             return false;
@@ -115,13 +101,9 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         }
         
         var gateInstance = Instantiate(_phaseGatePrefab, ghostObject.transform.position, ghostObject.transform.rotation);
-        storageTerminal.equipment.RemoveItem(availableLightSlots[0], false, false);
-        RecalculateDeployableTotals();
+        storageTerminal.equipment.RemoveItem(DeployablesStorageTerminal.PHASE_GATE_SLOT, false, false);
 
-        if (phaseGateItemCount <= 0)
-        {
-            ghostObject.SetActive(false);
-        }
+        ghostObject.SetActive(false);
 
         Plugin.GlobalSaveData.phaseGateLocations.Add(new PhaseGateLocation(ghostObject.transform.position, -ghostObject.transform.forward));
 
@@ -154,8 +136,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     public void OnSelectedChanged(bool changed)
     {
-        RecalculateDeployableTotals();
-        if (phaseGateItemCount > 0)
+        if (HasPhaseGate() || !changed)
         {
             ghostObject.SetActive(changed);
         }
