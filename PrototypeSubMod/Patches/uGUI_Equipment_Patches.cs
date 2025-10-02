@@ -23,8 +23,10 @@ internal class uGUI_Equipment_Patches
     {
         CloneSlots(__instance, PrototypePowerSystem.SLOT_NAMES);
 
-        var slot0 = CloneSlots(__instance, DeployablesStorageTerminal.SLOT_NAMES, "BatteryCharger", null, DeployablesStorageTerminal.SLOT_POSITIONS);
-
+        var slot0 = CloneSlots(__instance, DeployablesStorageTerminal.LightBeaconSlots, "BatteryCharger", null, DeployablesStorageTerminal.SLOT_POSITIONS);
+        CloneSlots(__instance, new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT } , "BatteryCharger", null,
+            new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT_POS }, slot0.transform);
+        
         GameObject go = new();
         go.transform.SetParent(slot0.transform);
         go.name = "DecoyStorageBackground";
@@ -43,11 +45,11 @@ internal class uGUI_Equipment_Patches
     }
 
 #nullable enable
-    private static uGUI_EquipmentSlot? CloneSlots(uGUI_Equipment equipment, string[] slots, string copyTarget = "SeamothModule", string? imageTarget = "Seamoth", Vector3[]? slotPositions = null)
+    private static uGUI_EquipmentSlot? CloneSlots(uGUI_Equipment equipment, string[] slots, string copyTarget = "SeamothModule", string? imageTarget = "Seamoth", Vector3[]? slotPositions = null, Transform parent = null)
     {
         if (slots.Length == 0) return null;
 
-        uGUI_EquipmentSlot slot = CloneSlot(equipment, $"{copyTarget}1", slots[0]);
+        uGUI_EquipmentSlot slot = CloneSlot(equipment, $"{copyTarget}1", slots[0], parent);
         if (imageTarget != null)
         {
             GameObject.Destroy(slot.transform.Find(imageTarget).GetComponent<Image>());
@@ -117,9 +119,9 @@ internal class uGUI_Equipment_Patches
         __instance.GetComponentInChildren<ProtoVehicleAccessManager>(true).gameObject.SetActive(isAccessButton);
     }
 
-    private static uGUI_EquipmentSlot CloneSlot(uGUI_Equipment equipmentMenu, string childName, string newSlotName)
+    private static uGUI_EquipmentSlot CloneSlot(uGUI_Equipment equipmentMenu, string childName, string newSlotName, Transform parent = null)
     {
-        Transform newSlot = GameObject.Instantiate(equipmentMenu.transform.Find(childName), equipmentMenu.transform);
+        Transform newSlot = GameObject.Instantiate(equipmentMenu.transform.Find(childName), parent ?? equipmentMenu.transform);
         newSlot.name = newSlotName;
         uGUI_EquipmentSlot equipmentSlot = newSlot.GetComponent<uGUI_EquipmentSlot>();
         equipmentSlot.slot = newSlotName;

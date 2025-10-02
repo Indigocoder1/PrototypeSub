@@ -8,21 +8,16 @@ namespace PrototypeSubMod.DeployablesTerminal;
 
 internal class DeployablesStorageTerminal : MonoBehaviour, ISaveDataListener, ILateSaveDataListener
 {
-    public static string[] SLOT_NAMES { get; } = new[]
-    {
-        "DeployableStorageSlot1",
-        "DeployableStorageSlot2",
-        "DeployableStorageSlot3",
-        "DeployableStorageSlot4"
+    public const string PHASE_GATE_SLOT = "PhaseGateSlot1";
+
+    public static Vector3[] SLOT_POSITIONS { get; } = {
+        new(-166, -98, 0),
+        new(28, 130, 0),
+        new(-56, -212, 0),
+        new(138.5f, 17.5f, 0),
     };
 
-    public static Vector3[] SLOT_POSITIONS { get; } = new[]
-    {
-        new Vector3(-166, -98, 0),
-        new Vector3(28, 130, 0),
-        new Vector3(-56, -212, 0),
-        new Vector3(138.5f, 17.5f, 0),
-    };
+    public static Vector3 PHASE_GATE_SLOT_POS { get; } = new(0, 200, 0);
 
     public static string[] LightBeaconSlots { get; } = new[]
     {
@@ -78,11 +73,15 @@ internal class DeployablesStorageTerminal : MonoBehaviour, ISaveDataListener, IL
         equipment.onEquip += OnEquip;
         equipment.onUnequip += OnUnequip;
 
-        equipment.AddSlots(SLOT_NAMES);
+        var slots = new List<string>();
+        slots.AddRange(LightBeaconSlots);
+        slots.Add(PHASE_GATE_SLOT);
+        equipment.AddSlots(slots);
 
-        equipment.typeToSlots = new Dictionary<EquipmentType, List<string>>()
+        equipment.typeToSlots = new Dictionary<EquipmentType, List<string>>
         {
-            { Plugin.LightBeaconEquipmentType, LightBeaconSlots.ToList() }
+            { Plugin.LightBeaconEquipmentType, LightBeaconSlots.ToList() },
+            { Plugin.PhaseGateEquipmentType, new List<string> { PHASE_GATE_SLOT } }
         };
     }
 
@@ -94,6 +93,8 @@ internal class DeployablesStorageTerminal : MonoBehaviour, ISaveDataListener, IL
         {
             Equipment.slotMapping.Add(slot, Plugin.LightBeaconEquipmentType);
         }
+
+        Equipment.slotMapping.Add(PHASE_GATE_SLOT, Plugin.PhaseGateEquipmentType);
 
         SlotmappingInitialized = true;
     }
