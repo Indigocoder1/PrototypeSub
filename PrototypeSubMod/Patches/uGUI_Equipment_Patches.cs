@@ -25,7 +25,7 @@ internal class uGUI_Equipment_Patches
 
         var slot0 = CloneSlots(__instance, DeployablesStorageTerminal.LightBeaconSlots, "BatteryCharger", null, DeployablesStorageTerminal.SLOT_POSITIONS);
         CloneSlots(__instance, new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT } , "BatteryCharger", null,
-            new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT_POS }, slot0.transform);
+            new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT_POS });
         
         GameObject go = new();
         go.transform.SetParent(slot0.transform);

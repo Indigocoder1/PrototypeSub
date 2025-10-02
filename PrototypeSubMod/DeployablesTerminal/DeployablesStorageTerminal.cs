@@ -72,17 +72,17 @@ internal class DeployablesStorageTerminal : MonoBehaviour, ISaveDataListener, IL
         equipment.SetLabel("ProtoDeployableEquipmentLabel");
         equipment.onEquip += OnEquip;
         equipment.onUnequip += OnUnequip;
-
-        var slots = new List<string>();
-        slots.AddRange(LightBeaconSlots);
-        slots.Add(PHASE_GATE_SLOT);
-        equipment.AddSlots(slots);
-
+ 
         equipment.typeToSlots = new Dictionary<EquipmentType, List<string>>
         {
             { Plugin.LightBeaconEquipmentType, LightBeaconSlots.ToList() },
             { Plugin.PhaseGateEquipmentType, new List<string> { PHASE_GATE_SLOT } }
         };
+        
+        var slots = new List<string>();
+        slots.AddRange(LightBeaconSlots);
+        slots.Add(PHASE_GATE_SLOT);
+        equipment.AddSlots(slots);
     }
 
     private void InitializeSlotMapping()

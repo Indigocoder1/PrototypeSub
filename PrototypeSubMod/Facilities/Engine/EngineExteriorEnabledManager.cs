@@ -36,5 +36,6 @@ public class EngineExteriorEnabledManager : MonoBehaviour
     private void OnDestroy()
     {
         Plugin.GlobalSaveData.OnStartedSaving -= SaveStatus;
+        FreecamController_Patches.onExitFreecam -= OnExitFreecam;
     }
 }
