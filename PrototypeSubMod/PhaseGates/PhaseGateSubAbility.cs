@@ -25,7 +25,9 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private BoxCollider checkBounds;
 
     private GameObject ghostObject;
+    private Material ghostMaterial;
     private int checkLayerMask;
+    private bool selected;
 
     private void Start()
     {
@@ -64,10 +66,13 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         {
             Destroy(colliders[i]);
         }
-        
+
+        ghostMaterial = new Material(MaterialUtils.GhostMaterial);
+        ghostMaterial.color = new Color(0.476f, 1f, 0.381f);
+        ghostMaterial.SetColor(ShaderPropertyID._BorderColor, new Color(0.476f, 1f, 0.381f));
         foreach (var renderer in ghostObject.GetComponentsInChildren<Renderer>(true))
         {
-            var newMaterials = Enumerable.Repeat(MaterialUtils.GhostMaterial, renderer.materials.Length).ToArray();
+            var newMaterials = Enumerable.Repeat(ghostMaterial, renderer.materials.Length).ToArray();
             renderer.materials = newMaterials;
         }
 
@@ -77,6 +82,15 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     private bool HasPhaseGate()
     {
         return storageTerminal.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT) != null;
+    }
+
+    private void Update()
+    {
+        if (!selected || !HasPhaseGate()) return;
+
+        var color = HasRoomForDeployment() ? new Color(0.476f, 1f, 0.381f) : new Color(1, 0.6835f, 0.0157f);
+        ghostMaterial.color = color;
+        ghostMaterial.SetColor(ShaderPropertyID._BorderColor, color);
     }
 
     public bool OnActivated()
@@ -92,9 +106,8 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             ErrorMessage.AddError("Two gates already constructed!");
             return false;
         }
-
-        bool hitObject = Physics.CheckBox(checkBounds.transform.position, checkBounds.transform.localScale / 2, checkBounds.transform.rotation, checkLayerMask);
-        if (hitObject)
+        
+        if (!HasRoomForDeployment())
         {
             ErrorMessage.AddError("Not enough room for deployment!");
             return false;
@@ -134,12 +147,24 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         gateManager.ActivateGate();
     }
 
+    private bool HasRoomForDeployment()
+    {
+        return !Physics.CheckBox(checkBounds.transform.position, checkBounds.transform.localScale / 2, checkBounds.transform.rotation, checkLayerMask);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(ghostMaterial);
+    }
+
     public void OnSelectedChanged(bool changed)
     {
         if (HasPhaseGate() || !changed)
         {
             ghostObject.SetActive(changed);
         }
+
+        selected = changed;
     }
 
     public bool GetActive()
