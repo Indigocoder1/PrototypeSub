@@ -9,6 +9,8 @@ namespace PrototypeSubMod.PhaseGates;
 
 internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
 {
+    public static event Action OnPhaseGateDeactivated;
+    
     [SerializeField] private PrecursorTeleporter teleporter;
     [SerializeField] private PrefabIdentifier prefabIdentifier;
     
@@ -21,7 +23,7 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         if (Plugin.GlobalSaveData.phaseGateLocations.Count % 2 == 1) return;
         
         int offset = -(gateIndex % 2 * 2 - 1);
-        connectedGateLocation = Plugin.GlobalSaveData.phaseGateLocations[gateIndex + offset];
+        connectedGateLocation = Plugin.GlobalSaveData.phaseGateLocations.Values.ElementAt(gateIndex + offset);
 
         teleporter.warpToPos = connectedGateLocation.Position + connectedGateLocation.TeleporterForward * 50;
         var forward = connectedGateLocation.TeleporterForward;
@@ -126,21 +128,36 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     
     public void DeactivateGate()
     {
+        TeleporterManager.main.activeTeleporters.Remove(teleporter.teleporterIdentifier);
+        OnPhaseGateDeactivated?.Invoke();
+    }
+
+    private void OnGateDeactivated()
+    {
+        if (TeleporterManager.main.activeTeleporters.Contains(teleporter.teleporterIdentifier)) return;
+        
         teleporter.ToggleDoor(false);
         teleporter.activeLoopSound.Stop();
-        TeleporterManager.main.activeTeleporters.Remove(teleporter.teleporterIdentifier);
     }
     
     private void OnEnable()
     {
         Plugin.GlobalSaveData.OnStartedSaving += OnStartedSaving;
         PhaseGateSubAbility.onPhaseGateCreated += UpdateConnectedGate;
+        OnPhaseGateDeactivated += OnGateDeactivated;
     }
 
     private void OnDisable()
     {
         Plugin.GlobalSaveData.OnStartedSaving -= OnStartedSaving;
         PhaseGateSubAbility.onPhaseGateCreated -= UpdateConnectedGate;
+        OnPhaseGateDeactivated -= OnGateDeactivated;
+    }
+
+    private void OnDestroy()
+    {
+        Plugin.GlobalSaveData.phaseGateIndices.Remove(prefabIdentifier.Id);
+        Plugin.GlobalSaveData.phaseGateLocations.Remove(prefabIdentifier.Id);
     }
 
     private void OnStartedSaving(object sender, JsonFileEventArgs args)

@@ -18,9 +18,9 @@ internal class ProtoGlobalSaveData : SaveDataCache
 
     public Dictionary<string, float> deployableLightLifetimes = new();
     public Dictionary<string, int> phaseGateIndices = new();
+    public Dictionary<string, PhaseGateLocation> phaseGateLocations = new();
     public List<string> unlockedCategoriesLastCheck = new();
     public List<string> repairedEngineFacilityPoints = new();
-    public List<PhaseGateLocation> phaseGateLocations = new();
     
     public bool prototypePresent;
     public bool prototypeDestroyed;

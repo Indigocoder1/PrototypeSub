@@ -2159,7 +2159,18 @@ MonoBehaviour:
   constructSound: {fileID: 0}
   onConstructionStarted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1429642336488857059}
+        m_MethodName: OnConstructionStarted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onConstructionFinished:
     m_PersistentCalls:
       m_Calls: []

@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Nautilus.Utility;
 using PrototypeSubMod.DeployablesTerminal;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.UI.AbilitySelection;
 using PrototypeSubMod.Utility;
+using Unity.Collections;
 using UnityEngine;
 
 namespace PrototypeSubMod.PhaseGates;
@@ -18,17 +20,24 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     [SaveStateReference]
     private static GameObject _phaseGatePrefab;
     
+    [SaveStateReference]
+    private static GameObject _phaseGateItemPrefab;
+    
     [SerializeField] private DeployablesStorageTerminal storageTerminal;
     [SerializeField] private SelectionMenuManager selectionMenuManager;
     [SerializeField] private Sprite radialIcon;
     [SerializeField] private Vector3 localGhostOffset;
     [SerializeField] private BoxCollider checkBounds;
     [SerializeField] private float timeToConstruct;
+    [SerializeField] private float timeToDeconstruct = 30;
 
     private GameObject ghostObject;
     private Material ghostMaterial;
     private int checkLayerMask;
     private bool selected;
+    private bool constructing;
+    private bool deconstructing;
+    private bool deconstructRequested;
 
     private void Start()
     {
@@ -50,6 +59,10 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         var task = CraftData.GetPrefabForTechTypeAsync(ProtoPhaseGate.PrefabInfo.TechType);
         yield return task;
         _phaseGatePrefab = task.result.value;
+
+        var itemTask = CraftData.GetPrefabForTechTypeAsync(ProtoPhaseGateItem.PrefabInfo.TechType);
+        yield return itemTask;
+        _phaseGateItemPrefab = itemTask.result.value;
     }
     
     private IEnumerator SpawnGhostObject()
@@ -96,15 +109,31 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     public bool OnActivated()
     {
-        if (!HasPhaseGate())
+        if (deconstructing)
         {
-            ErrorMessage.AddError("No phase gates loaded in launch bay!");
+            ErrorMessage.AddError($"Currently deconstructing!");
+            return false;
+        }
+        
+        if (constructing)
+        {
+            ErrorMessage.AddError($"Currently constructing!");
             return false;
         }
 
-        if (Plugin.GlobalSaveData.phaseGateLocations.Count >= 2)
+        if (Plugin.GlobalSaveData.phaseGateLocations.Count < 2)
         {
-            ErrorMessage.AddError("Two gates already constructed!");
+            return HandleNewPhaseGates();
+        }
+        
+        return HandleGateDeconstruction();
+    }
+
+    private bool HandleNewPhaseGates()
+    {
+        if (!HasPhaseGate())
+        {
+            ErrorMessage.AddError("No phase gates loaded in launch bay!");
             return false;
         }
         
@@ -119,7 +148,9 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
         ghostObject.SetActive(false);
 
-        Plugin.GlobalSaveData.phaseGateLocations.Add(new PhaseGateLocation(ghostObject.transform.position, -ghostObject.transform.forward));
+        var gateLocation = new PhaseGateLocation(ghostObject.transform.position, -ghostObject.transform.forward);
+        var identifier = gateInstance.GetComponent<PrefabIdentifier>();
+        Plugin.GlobalSaveData.phaseGateLocations.Add(identifier.Id, gateLocation);
 
         var gateIndices = Plugin.GlobalSaveData.phaseGateIndices;
         int lastIndex = -1;
@@ -135,11 +166,125 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         var vfxConstructing = gateInstance.GetComponent<VFXConstructing>();
         vfxConstructing.ghostMaterial = MaterialUtils.GhostMaterial;
         vfxConstructing.timeToConstruct = timeToConstruct;
-        vfxConstructing.StartConstruction();
         vfxConstructing.informGameObject = gameObject;
+        vfxConstructing.StartConstruction();
+ 
+        gateInstance.GetComponent<LargeWorldEntity>().enabled = true;
         
         onPhaseGateCreated?.Invoke();
         return true;
+    }
+
+    private bool HandleGateDeconstruction()
+    {
+        if (constructing) return false;
+        
+        if (!deconstructRequested)
+        {
+            ErrorMessage.AddError("Activate again to confirm phase gate deconstruction");
+            CancelInvoke(nameof(ResetDeconstructRequest));
+            Invoke(nameof(ResetDeconstructRequest), 1f);
+            deconstructRequested = true;
+            return false;
+        }
+        
+        if (HasPhaseGate())
+        {
+            ErrorMessage.AddError("Phase gate storage full! Can't deconstruct");
+            return false;
+        }
+        
+        var colliders = Physics.OverlapBox(checkBounds.transform.position, checkBounds.transform.localScale / 2, 
+            checkBounds.transform.rotation, 1 << LayerID.Useable);
+
+        ProtoPhaseGateManager phaseGateManager = null;
+        foreach (var col in colliders)
+        {
+            phaseGateManager = col.GetComponentInParent<ProtoPhaseGateManager>();
+            if (phaseGateManager)
+            {
+                break;
+            }
+        }
+
+        if (phaseGateManager == null)
+        {
+            ErrorMessage.AddError("No phase gate in range to deconstruct");
+            return false;
+        }
+        
+        StartCoroutine(DeconstructGate(phaseGateManager));
+        deconstructRequested = false;
+        return true;
+    }
+
+    private void ResetDeconstructRequest()
+    {
+        deconstructRequested = false;
+    }
+
+    private IEnumerator DeconstructGate(ProtoPhaseGateManager gateManager)
+    {
+        deconstructing = true;
+        storageTerminal.gameObject.SetActive(false);
+        gateManager.DeactivateGate();
+
+        yield return new WaitForSeconds(0.75f);
+        
+        var vfxConstructing = gateManager.GetComponent<VFXConstructing>();
+        vfxConstructing.ghostOverlay = vfxConstructing.gameObject.EnsureComponent<VFXOverlayMaterial>();
+        vfxConstructing.ghostMaterial = new Material(MaterialUtils.GhostMaterial);
+        vfxConstructing.ghostMaterial.color = gateManager.GetComponent<GhostMaterialSetter>().GetGhostColor();
+        vfxConstructing.ghostOverlay.ApplyOverlay(vfxConstructing.ghostMaterial, "VFXDeconstructing", false);
+        foreach (var renderer in gateManager.GetComponentsInChildren<Renderer>())
+        {
+            foreach (var material in renderer.materials)
+            {
+                material.EnableKeyword("FX_BUILDING");
+                material.SetTexture(ShaderPropertyID._EmissiveTex, vfxConstructing.alphaDetailTexture);
+                material.SetColor(ShaderPropertyID._BorderColor, vfxConstructing.wireColor);
+                material.SetFloat(ShaderPropertyID._Built, 0f);
+                material.SetFloat(ShaderPropertyID._Cutoff, 0.42f);
+                material.SetVector(ShaderPropertyID._BuildParams, new Vector4(0.035f, 0.07f, 0.08f, -0.12f));
+                material.SetFloat(ShaderPropertyID._NoiseStr, 1.9f);
+                material.SetFloat(ShaderPropertyID._NoiseThickness, 0.52f);
+                material.SetFloat(ShaderPropertyID._BuildLinear, 0f);
+                material.SetFloat(ShaderPropertyID._MyCullVariable, 0f);
+            }
+        }
+
+        Shader.SetGlobalFloat(ShaderPropertyID._SubConstructProgress, 1);
+
+        yield return new WaitForSeconds(0.1f);
+
+        float timer = timeToDeconstruct;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            Shader.SetGlobalFloat(ShaderPropertyID._SubConstructProgress, timer / timeToDeconstruct);
+            yield return null;
+        }
+
+        var returnedItem = Instantiate(_phaseGateItemPrefab);
+        var pickupable = returnedItem.GetComponent<Pickupable>();
+        pickupable.Initialize();
+        pickupable.Deactivate();
+        pickupable.inventoryItem = new InventoryItem(pickupable);
+        
+        storageTerminal.equipment.AddItem(DeployablesStorageTerminal.PHASE_GATE_SLOT,
+            pickupable.inventoryItem);
+        uGUI_IconNotifier.main.Play(ProtoPhaseGateItem.PrefabInfo.TechType, uGUI_IconNotifier.AnimationType.From);
+        
+        if (selected)
+        {
+            ghostObject.SetActive(true);
+        }
+
+        Destroy(gateManager.gameObject);
+        Destroy(vfxConstructing.ghostMaterial);
+        storageTerminal.gameObject.SetActive(true);
+
+        deconstructing = false;
     }
 
     public void OnConstructionDone(GameObject sender)
@@ -161,7 +306,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     public void OnSelectedChanged(bool changed)
     {
-        if (HasPhaseGate() || !changed)
+        if ((HasPhaseGate() || !changed) && !deconstructing)
         {
             ghostObject.SetActive(changed);
         }
