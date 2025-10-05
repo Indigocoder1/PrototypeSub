@@ -27,7 +27,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private SelectionMenuManager selectionMenuManager;
     [SerializeField] private Sprite radialIcon;
     [SerializeField] private Vector3 localGhostOffset;
-    [SerializeField] private BoxCollider checkBounds;
+    [SerializeField] private BoxCollider[] checkBounds;
     [SerializeField] private float timeToConstruct;
     [SerializeField] private float timeToDeconstruct = 30;
 
@@ -192,9 +192,9 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             return false;
         }
         
-        var colliders = Physics.OverlapBox(checkBounds.transform.position, checkBounds.transform.localScale / 2, 
-            checkBounds.transform.rotation, 1 << LayerID.Useable);
-
+        var colliders = Physics.OverlapBox(checkBounds[0].transform.position, checkBounds[0].transform.localScale / 2, 
+            checkBounds[0].transform.rotation, 1 << LayerID.Useable);
+        
         ProtoPhaseGateManager phaseGateManager = null;
         foreach (var col in colliders)
         {
@@ -294,7 +294,14 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     private bool HasRoomForDeployment()
     {
-        return !Physics.CheckBox(checkBounds.transform.position, checkBounds.transform.localScale / 2, checkBounds.transform.rotation, checkLayerMask);
+        foreach (var col in checkBounds)
+        {
+            var hit = Physics.CheckBox(col.transform.position, col.transform.localScale / 2, 
+                col.transform.rotation, checkLayerMask);
+            if (hit) return false;
+        }
+
+        return true;
     }
 
     private void OnDestroy()
