@@ -147,6 +147,11 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         storageTerminal.equipment.RemoveItem(DeployablesStorageTerminal.PHASE_GATE_SLOT, false, false);
 
         ghostObject.SetActive(false);
+        var fxSpawner = gateInstance.transform.Find("Gate/Teleporter/FXSpawnPos");
+        for (int i = fxSpawner.childCount - 1; i >= 0; i--)
+        {
+            Destroy(fxSpawner.GetChild(i).gameObject);
+        }
 
         var gateLocation = new PhaseGateLocation(ghostObject.transform.position, -ghostObject.transform.forward);
         var identifier = gateInstance.GetComponent<PrefabIdentifier>();

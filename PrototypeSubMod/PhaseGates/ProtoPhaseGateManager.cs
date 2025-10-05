@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Linq;
 using Nautilus.Json;
-using PrototypeSubMod.Upgrades;
 using UnityEngine;
 
 namespace PrototypeSubMod.PhaseGates;
@@ -13,10 +12,21 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     
     [SerializeField] private PrecursorTeleporter teleporter;
     [SerializeField] private PrefabIdentifier prefabIdentifier;
+    [SerializeField] private LightingController lightingController;
     
     private int gateIndex;
     private bool playerWasPiloting;
     private PhaseGateLocation connectedGateLocation;
+
+    private IEnumerator Start()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        if (TeleporterManager.main.activeTeleporters.Contains(teleporter.teleporterIdentifier))
+        {
+            lightingController.SnapToState(1);
+        }
+    }
 
     private void UpdateConnectedGate()
     {
@@ -42,6 +52,14 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     public void ActivateGate()
     {
         teleporter.ToggleDoor(true);
+        lightingController.LerpToState(1);
+    }
+    
+    public void DeactivateGate()
+    {
+        TeleporterManager.main.activeTeleporters.Remove(teleporter.teleporterIdentifier);
+        OnPhaseGateDeactivated?.Invoke();
+        lightingController.LerpToState(0);
     }
 
     // Called via SendMessageUpwards in PrecursorTeleporterCollider
@@ -126,12 +144,6 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         Player.main.EnterPilotingMode(pilotingChair);
     }
     
-    public void DeactivateGate()
-    {
-        TeleporterManager.main.activeTeleporters.Remove(teleporter.teleporterIdentifier);
-        OnPhaseGateDeactivated?.Invoke();
-    }
-
     private void OnGateDeactivated()
     {
         if (TeleporterManager.main.activeTeleporters.Contains(teleporter.teleporterIdentifier)) return;

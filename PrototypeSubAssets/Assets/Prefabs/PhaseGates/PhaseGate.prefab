@@ -1979,6 +1979,8 @@ GameObject:
   - component: {fileID: 8782855599218335989}
   - component: {fileID: 17941165710412389}
   - component: {fileID: 1429642336488857059}
+  - component: {fileID: 2746175507675242184}
+  - component: {fileID: 6944466613518868118}
   m_Layer: 0
   m_Name: PhaseGate
   m_TagString: Untagged
@@ -2113,6 +2115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleporter: {fileID: 4734307473616998318}
   prefabIdentifier: {fileID: 2787409612874087260}
+  lightingController: {fileID: 2746175507675242184}
 --- !u!114 &2824093097595848721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,6 +2203,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfxConstructing: {fileID: 8782855599218335989}
   ghostMatColor: {r: 0.14901961, g: 0.6509804, b: 0.2, a: 1}
+--- !u!114 &2746175507675242184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787409612874087256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1164896107, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  fadeDuration: 1
+  skies:
+  - sky: {fileID: 0}
+    masterIntensities:
+    - 1
+    - 1
+    - 1
+    diffIntensities:
+    - 1
+    - 1
+    - 1
+    specIntensities:
+    - 1
+    - 1
+    - 1
+  lights: []
+  emissiveController:
+    intensities:
+    - 0
+    - 1
+--- !u!114 &6944466613518868118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787409612874087256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -247076990, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightingController: {fileID: 2746175507675242184}
+  skyApplier: {fileID: 2787409612874087259}
+  defaultState: 0
 --- !u!1 &2967540355680065358
 GameObject:
   m_ObjectHideFlags: 0
