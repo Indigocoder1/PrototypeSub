@@ -43370,7 +43370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storageTerminal: {fileID: 2874070112182103862}
   selectionMenuManager: {fileID: 2803608410014716689}
-  radialIcon: {fileID: 21300000, guid: b38f33abde95b3a4eb3cb2fea4bb635a, type: 3}
+  constructIcon: {fileID: 21300000, guid: d53ce388196e20844bfebea17536fb9f, type: 3}
+  deconstructIcon: {fileID: 21300000, guid: 041681d894fc1b84a8092b2008b3a323, type: 3}
   localGhostOffset: {x: 0, y: -1.34, z: 74.4}
   checkBounds:
   - {fileID: 4300624069746968167}

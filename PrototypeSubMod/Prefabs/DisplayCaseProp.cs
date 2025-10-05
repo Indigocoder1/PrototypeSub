@@ -74,7 +74,7 @@ internal class DisplayCaseProp
         instance.AddComponent<MarkAsEntityRoot>();
     }
 
-    private static readonly List<Type> whitelistedComponents = new()
+    public static readonly List<Type> whitelistedComponents = new()
     {
         typeof(Transform),
         typeof(Renderer),

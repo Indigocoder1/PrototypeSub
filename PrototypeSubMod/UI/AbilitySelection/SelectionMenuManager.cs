@@ -92,16 +92,35 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
     public void RefreshIcons()
     {
         RetrieveIconsToShow();
-        distributor.RegenerateIcons(iconsToShow);
-        
-        var selectedIcon = tetherManager.GetSelectedIcon();
-        if (selectedIcon && !selectedIcon.GetAbility().GetShouldShow())
+        var icon = tetherManager.GetSelectedIcon();
+        int index = 0;
+        IAbilityIcon selectedAbility = null;
+        if (icon)
         {
-            selectedIcon.GetAbility().OnSelectedChanged(false);
-            tetherManager.SelectIcon(distributor.GetIconAtIndex(defaultAbilityIndex).GetComponent<RadialIcon>(), true);
+            selectedAbility = icon.GetAbility();
+            index = tetherManager.GetSelectedIcon().transform.GetSiblingIndex();
         }
         
+        distributor.RegenerateIcons(iconsToShow);
+
+        StartCoroutine(SelectDelayed(selectedAbility, index));
+        
         tetherManager.RegenerateHighlightArc();
+    }
+
+    private IEnumerator SelectDelayed(IAbilityIcon selectedAbility, int index)
+    {
+        yield return new WaitForEndOfFrame();
+        
+        if (selectedAbility != null && !selectedAbility.GetShouldShow())
+        {
+            selectedAbility.OnSelectedChanged(false);
+            tetherManager.SelectIcon(distributor.GetIconAtIndex(defaultAbilityIndex).GetComponent<RadialIcon>(), true);
+        }
+        else if (selectedAbility != null)
+        {
+            tetherManager.SelectIcon(distributor.GetIconAtIndex(index).GetComponent<RadialIcon>(), playSFX: false);
+        }
     }
 
     private void AssignIcons()

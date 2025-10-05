@@ -165,6 +165,8 @@ public class TetherManager : MonoBehaviour, IUIElement
     private void HandleActivation()
     {
         if (menuOpen) return;
+
+        if (IngameMenu.main.gameObject.activeSelf) return;
         
         if (!MainCameraControl.main.enabled) return;
 

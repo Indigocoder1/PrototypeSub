@@ -25,7 +25,8 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     
     [SerializeField] private DeployablesStorageTerminal storageTerminal;
     [SerializeField] private SelectionMenuManager selectionMenuManager;
-    [SerializeField] private Sprite radialIcon;
+    [SerializeField] private Sprite constructIcon;
+    [SerializeField] private Sprite deconstructIcon;
     [SerializeField] private Vector3 localGhostOffset;
     [SerializeField] private BoxCollider[] checkBounds;
     [SerializeField] private float timeToConstruct;
@@ -38,6 +39,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     private bool constructing;
     private bool deconstructing;
     private bool deconstructRequested;
+    private bool hadRoomForDeployment;
 
     private void Start()
     {
@@ -50,6 +52,15 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             if (item.techType == ProtoPhaseGateStabilizer.PrefabInfo.TechType)
             {
                 selectionMenuManager.RefreshIcons();
+            }
+        };
+        
+        storageTerminal.equipment.onUnequip += (_, _) =>
+        {
+            selectionMenuManager.RefreshIcons();
+            if (!HasPhaseGate())
+            {
+                ghostObject.SetActive(false);
             }
         };
     }
@@ -72,8 +83,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         ghostObject = UWE.Utils.InstantiateDeactivated(_phaseGatePrefab, transform, localGhostOffset,
             Quaternion.identity, Vector3.one);
 
-        Destroy(ghostObject.GetComponent<LargeWorldEntity>());
-        Destroy(ghostObject.GetComponent<PrefabIdentifier>());
+        DisplayCaseProp.TrimComponents(ghostObject, DisplayCaseProp.whitelistedComponents);
 
         var colliders = ghostObject.GetComponentsInChildren<Collider>(true);
         for (int i = colliders.Length - 1; i >= 0; i--)
@@ -100,6 +110,14 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     private void Update()
     {
+        bool hasRoom = HasRoomForDeployment();
+        if (hadRoomForDeployment != hasRoom)
+        {
+            selectionMenuManager.RefreshIcons();
+        }
+        
+        hadRoomForDeployment = hasRoom;
+        
         if (!selected || !HasPhaseGate()) return;
 
         var color = HasRoomForDeployment() ? new Color(0.476f, 1f, 0.381f) : new Color(1, 0.6835f, 0.0157f);
@@ -114,14 +132,14 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             ErrorMessage.AddError($"Currently deconstructing!");
             return false;
         }
-        
+
         if (constructing)
         {
             ErrorMessage.AddError($"Currently constructing!");
             return false;
         }
 
-        if (Plugin.GlobalSaveData.phaseGateLocations.Count < 2)
+        if (Plugin.GlobalSaveData.phaseGateLocations.Count < 2 && HasPhaseGate())
         {
             return HandleNewPhaseGates();
         }
@@ -167,6 +185,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         int newIndex = lastIndex + 1;
         var gateManager = gateInstance.GetComponent<ProtoPhaseGateManager>();
         gateManager.SetGateIndex(newIndex % 2);
+        gateManager.OnConstructed();
 
         var vfxConstructing = gateInstance.GetComponent<VFXConstructing>();
         vfxConstructing.ghostMaterial = MaterialUtils.GhostMaterial;
@@ -177,6 +196,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         gateInstance.GetComponent<LargeWorldEntity>().enabled = true;
         
         onPhaseGateCreated?.Invoke();
+        constructing = true;
         return true;
     }
 
@@ -277,11 +297,6 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         storageTerminal.equipment.AddItem(DeployablesStorageTerminal.PHASE_GATE_SLOT,
             pickupable.inventoryItem);
         uGUI_IconNotifier.main.Play(ProtoPhaseGateItem.PrefabInfo.TechType, uGUI_IconNotifier.AnimationType.From);
-        
-        if (selected)
-        {
-            ghostObject.SetActive(true);
-        }
 
         Destroy(gateManager.gameObject);
         Destroy(vfxConstructing.ghostMaterial);
@@ -292,6 +307,8 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     public void OnConstructionDone(GameObject sender)
     {
+        constructing = false;
+        
         if (Plugin.GlobalSaveData.phaseGateIndices.Count % 2 != 0) return;
 
         sender.GetComponent<ProtoPhaseGateManager>().ActivateGate();
@@ -324,15 +341,25 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         selected = changed;
     }
 
-    public bool GetActive()
-    {
-        return false;
-    }
-
+    public bool GetActive() => false;
     public bool GetCanActivate() => true;
 
-    public bool GetShouldShow() => _phaseGatePrefab;
+    public bool GetShouldShow()
+    {
+        if (!_phaseGatePrefab) return false;
 
-    public Sprite GetSprite() => radialIcon;
+        return Plugin.GlobalSaveData.phaseGateLocations.Count >= 1 || HasPhaseGate();
+    }
+
+    public Sprite GetSprite()
+    {
+        if (Plugin.GlobalSaveData.phaseGateLocations.Count < 2 && HasPhaseGate())
+        {
+            return constructIcon;
+        }
+
+        return deconstructIcon;
+    }
+    
     public TechType GetTechType() => TechType.None;
 }

@@ -49,10 +49,21 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         UpdateConnectedGate();
     }
 
+    public void OnConstructed()
+    {
+        StartCoroutine(EnableLightsDelayed());
+    }
+
+    private IEnumerator EnableLightsDelayed()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        lightingController.LerpToState(1);
+    }
+
     public void ActivateGate()
     {
         teleporter.ToggleDoor(true);
-        lightingController.LerpToState(1);
     }
     
     public void DeactivateGate()
