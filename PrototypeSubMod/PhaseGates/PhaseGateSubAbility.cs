@@ -177,7 +177,11 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     private bool HandleGateDeconstruction()
     {
-        if (constructing) return false;
+        if (HasPhaseGate())
+        {
+            ErrorMessage.AddError("Phase gate storage full! Can't deconstruct");
+            return false;
+        }
         
         if (!deconstructRequested)
         {
@@ -185,12 +189,6 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             CancelInvoke(nameof(ResetDeconstructRequest));
             Invoke(nameof(ResetDeconstructRequest), 1f);
             deconstructRequested = true;
-            return false;
-        }
-        
-        if (HasPhaseGate())
-        {
-            ErrorMessage.AddError("Phase gate storage full! Can't deconstruct");
             return false;
         }
         
