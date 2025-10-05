@@ -154,8 +154,6 @@
   // Phase Gates
   "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
   "Tooltip_ProtoPhaseGateStabilizer": "A dark matter stabilizer for a precursor phase gate.",
-  "ProtoPhaseGateDeterrent": "Sonic Deterrent",
-  "Tooltip_ProtoPhaseGateDeterrent": "A sonic deterrent for a precursor phase gate.",
   "ProtoPhaseGateStructure": "Structural Core",
   "Tooltip_ProtoPhaseGateStructure": "A structural core for a precursor phase gate.",
   "ProtoPhaseGateTransmitter": "Particle Transmitter",

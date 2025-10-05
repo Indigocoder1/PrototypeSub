@@ -51,7 +51,6 @@ internal static class PrefabRegisterer
         EngineFacilityKey.Register();
         ProtoPhaseGate.Register();
         ProtoPhaseGateStabilizer.Register();
-        ProtoPhaseGateDeterrent.Register();
         ProtoPhaseGateStructure.Register();
         ProtoPhaseGateTransmitter.Register();
         ProtoPhaseGateItem.Register();

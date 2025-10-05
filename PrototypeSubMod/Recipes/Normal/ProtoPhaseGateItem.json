@@ -2,10 +2,6 @@
     "craftAmount": 1,
     "Ingredients": [
       {
-        "techType": "ProtoPhaseGateDeterrent",
-        "amount": 1
-      },
-      {
         "techType": "ProtoPhaseGateStabilizer",
         "amount": 1
       },
