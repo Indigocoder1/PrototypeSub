@@ -36,8 +36,8 @@
     <Reference Include="SubLibrary">
       <HintPath>$(ModFolder)\SubLibrary\SubLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Alembic">
-      <HintPath>$(ModFolder)\PrototypeSubMod\3rdParty\AlembicBuild.dll</HintPath>
+    <Reference Include="SuitLib">
+      <HintPath>$(ModFolder)\SuitLib\SuitLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.json">
       <HintPath>$(GameDir)\Subnautica_Data\Managed\Newtonsoft.json.dll</HintPath>
