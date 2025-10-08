@@ -325,7 +325,7 @@
   "Proto_ApproachTerminal": "{0}: Animate entropy vessel detected. Confirmed cognition profile.<duration=5105>\nRunning predictive NSP diagnostics.<delay=5633><duration=4155>",
   "Proto_FirstInteract": "{0}: Path confirmed. Uploading schematics.",
   "Proto_ConstructionStart": "{0}: Neural cluster transfer initialized.",
-  "Proto_ConstructionFinish": "{0}: Transfer completed. Broadcasting clearance key schematics<duration=4314>",
+  "Proto_ConstructionFinish": "{0}: Prototype construction completed. Upgrades available at construction terminal.<duration=5910>\nDetecting unstable energy readings from Prototype Ion Reactor Facility.<delay=6011><duration=5398>",
   
   "ProtoOrionUnknown": "Unknown",
   "ProtoOrionNoData": "ORION",
