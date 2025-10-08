@@ -32,12 +32,15 @@ internal class PrecursorTeleporter_Patches
         return matcher.InstructionEnumeration();
     }
 
-    [HarmonyPatch(nameof(PrecursorTeleporter.OnEndTeleportPlayer)), HarmonyPostfix]
-    private static void OnEndTeleportPlayer_Postfix(PrecursorTeleporter __instance)
+    [HarmonyPatch(nameof(PrecursorTeleporter.TeleportRoutine)), HarmonyPostfix]
+    private static void TeleportRoutine_Postfix(PrecursorTeleporter __instance)
     {
+        if (!__instance.enabled || __instance == null) return;
+        
         lastTeleporterID = __instance.teleporterIdentifier;
         lastTeleporterWasProtoSub = __instance.TryGetComponent(out ProtoTeleporterManager positionSetter);
 
+        Plugin.Logger.LogInfo($"Teleport routine postfix from {__instance} | Was proto sub = {lastTeleporterWasProtoSub}");
         if (lastTeleporterWasProtoSub)
         {
             lastTeleporterID = positionSetter.GetTeleporterIDNoIndicator();
@@ -47,6 +50,8 @@ internal class PrecursorTeleporter_Patches
     [HarmonyPatch(nameof(PrecursorTeleporter.TeleportationComplete)), HarmonyPostfix]
     private static void TeleportationComplete_Postfix(PrecursorTeleporter __instance)
     {
+        Plugin.Logger.LogInfo($"last teleporter ID = {lastTeleporterID}");
+        
         if (!lastTeleporterWasProtoSub) return;
 
         if (TeleporterPositionHandler.OutOfWaterTeleporters.Contains(lastTeleporterID))
@@ -57,14 +62,6 @@ internal class PrecursorTeleporter_Patches
         {
             Player.main.SetPrecursorOutOfWater(false);
         }
-    }
-
-    [HarmonyPatch(nameof(PrecursorTeleporter.Start)), HarmonyPostfix]
-    private static void Start_Postfix(PrecursorTeleporter __instance)
-    {
-        if (__instance.TryGetComponent(out ProtoTeleporterManager _)) return;
-
-        var tpOverride = __instance.gameObject.EnsureComponent<TeleporterOverride>();
     }
 
     public static bool HasValuesInitialized(PrecursorTeleporter instance)
