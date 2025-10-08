@@ -39,8 +39,7 @@ internal class PrecursorTeleporter_Patches
         
         lastTeleporterID = __instance.teleporterIdentifier;
         lastTeleporterWasProtoSub = __instance.TryGetComponent(out ProtoTeleporterManager positionSetter);
-
-        Plugin.Logger.LogInfo($"Teleport routine postfix from {__instance} | Was proto sub = {lastTeleporterWasProtoSub}");
+        
         if (lastTeleporterWasProtoSub)
         {
             lastTeleporterID = positionSetter.GetTeleporterIDNoIndicator();
@@ -50,8 +49,6 @@ internal class PrecursorTeleporter_Patches
     [HarmonyPatch(nameof(PrecursorTeleporter.TeleportationComplete)), HarmonyPostfix]
     private static void TeleportationComplete_Postfix(PrecursorTeleporter __instance)
     {
-        Plugin.Logger.LogInfo($"last teleporter ID = {lastTeleporterID}");
-        
         if (!lastTeleporterWasProtoSub) return;
 
         if (TeleporterPositionHandler.OutOfWaterTeleporters.Contains(lastTeleporterID))
