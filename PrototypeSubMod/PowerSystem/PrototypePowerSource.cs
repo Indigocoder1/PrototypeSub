@@ -8,6 +8,8 @@ namespace PrototypeSubMod.PowerSystem;
 
 public class PrototypePowerSource : MonoBehaviour, IPowerInterface, ISaveDataListener
 {
+    public float Charge01 => Charge / Capacity;
+
     public float Charge
     {
         get
