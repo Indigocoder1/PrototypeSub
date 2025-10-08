@@ -10,6 +10,7 @@ namespace PrototypeSubMod.UI.PowerDisplay;
 public class ProtoChargeDisplay : MonoBehaviour, IUIElement
 {
     [SerializeField] private FMODAsset destroyChargeSFX;
+    [SerializeField] private FMODAsset regainChargeSFX;
     [SerializeField] private VoiceNotification lowPowerNotification;
     [SerializeField] private VoiceNotification criticalPowerNotification;
     [SerializeField] private PrototypePowerSystem powerSystem;
@@ -88,10 +89,8 @@ public class ProtoChargeDisplay : MonoBehaviour, IUIElement
 
         if (chargesLastCheck != remainingCharges)
         {
-            if (remainingCharges < chargesLastCheck)
-            {
-                FMODUWE.PlayOneShot(destroyChargeSFX, Player.main.transform.position, 0.5f);
-            }
+            var sfx = remainingCharges < chargesLastCheck ? destroyChargeSFX : regainChargeSFX;
+            FMODUWE.PlayOneShot(sfx, Player.main.transform.position, 0.5f);
 
             HandleLowPowerLines(remainingCharges);
             RegenerateCharges();

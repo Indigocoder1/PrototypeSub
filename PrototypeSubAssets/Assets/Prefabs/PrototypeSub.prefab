@@ -76228,6 +76228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyChargeSFX: {fileID: 11400000, guid: 738724ac571755d4e88f9a3e55ab8ca3, type: 2}
+  regainChargeSFX: {fileID: 11400000, guid: 7fe886a471aa4d74690a71caacfe5a7c, type: 2}
   lowPowerNotification: {fileID: 2533473034402666554}
   criticalPowerNotification: {fileID: 5752537746619263874}
   powerSystem: {fileID: 7912620590259993429}
