@@ -35,7 +35,7 @@ public static class BlinkFactor
                 new(TechType.Titanium, 1)
             }
         }).WithCraftingTime(3f);
-        prefab.SetEquipment(EquipmentType.Chip);
+        prefab.SetEquipment(Plugin.FactorEquipmentType);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetGameObject(cloneTemplate);
         prefab.Register();

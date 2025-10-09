@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PrototypeSubMod.Prefabs;
 using UnityEngine;
 
@@ -14,22 +15,47 @@ public class FactorEquipmentManager : MonoBehaviour
         "ProtoFactorSlot4"
     };
 
-    private List<GameObject> factorSlots = new();
+    private List<uGUI_EquipmentSlot> factorSlots = new();
+    private uGUI_Equipment uGUIEquipment;
+    private bool wasShowingSlots;
 
     private void Start()
     {
         for (int i = 1; i <= 4; i++)
         {
-            factorSlots.Add(transform.Find($"Equipment/ProtoFactorSlot{i}").gameObject);
+            factorSlots.Add(transform.Find($"Equipment/ProtoFactorSlot{i}").GetComponent<uGUI_EquipmentSlot>());
         }
+
+        uGUIEquipment = GetComponentInChildren<uGUI_Equipment>(true);
     }
 
     private void RefreshFactorSlots()
     {
+        if (!uGUIEquipment.gameObject.activeSelf) return;
+        
         var hasSuit = Inventory.main.equipment.GetTechTypeInSlot("Body") == PrecursorSuit.PrefabInfo.TechType;
-        foreach (var slot in factorSlots)
+        bool showSlots = hasSuit && Inventory.main.usedStorage.Count == 0;
+
+        if (showSlots != wasShowingSlots)
         {
-            slot.SetActive(hasSuit && Inventory.main.usedStorage.Count == 0);
+            if (showSlots)
+            {
+                uGUIEquipment.equipment.AddSlots(FactorSlots);
+            }
+            else
+            {
+                foreach (var slot in FactorSlots)
+                {
+                    uGUIEquipment.equipment.equipment.Remove(slot);
+                }
+            }
+            
+            foreach (var slot in factorSlots)
+            {
+                slot.SetActive(showSlots);
+            }
         }
+
+        wasShowingSlots = showSlots;
     }
 }

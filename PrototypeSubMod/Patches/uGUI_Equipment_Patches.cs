@@ -135,12 +135,35 @@ internal class uGUI_Equipment_Patches
     {
         bool isAccessButton = equipment._label == ProtoVehicleAccessTerminal.EQUIPMENT_LABEL;
         __instance.GetComponentInChildren<ProtoVehicleAccessManager>(true).gameObject.SetActive(isAccessButton);
+        __instance.SendMessageUpwards("RefreshFactorSlots");
     }
 
-    [HarmonyPatch(nameof(uGUI_Equipment.OnEquip)), HarmonyPostfix]
-    private static void OnEquip_Postfix(uGUI_Equipment __instance)
+    [HarmonyPatch(nameof(uGUI_Equipment.OnEquip)), HarmonyPrefix]
+    private static void OnEquip_Prefix(uGUI_Equipment __instance)
     {
         __instance.SendMessageUpwards("RefreshFactorSlots");
+    }
+
+    [HarmonyPatch(nameof(uGUI_Equipment.OnPointerClick)), HarmonyPrefix]
+    private static bool OnPointerClick_Prefix(uGUI_EquipmentSlot instance)
+    {
+        Plugin.Logger.LogInfo($"Button down on {instance.slot}");
+        if (instance.slot != "Body") return true;
+
+        bool hasFactor = false;
+        foreach (var slot in FactorEquipmentManager.FactorSlots)
+        {
+            if (Inventory.main.equipment.GetItemInSlot(slot) != null)
+            {
+                hasFactor = true;
+                break;
+            }
+        }
+
+        if (!hasFactor) return true;
+
+        ErrorMessage.AddError(Language.main.Get("ProtoSuitUnequipWarning"));
+        return false;
     }
 
     private static uGUI_EquipmentSlot CloneSlot(uGUI_Equipment equipmentMenu, string childName, string newSlotName, float scale)

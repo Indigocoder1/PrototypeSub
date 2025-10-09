@@ -13,8 +13,8 @@ public class uGUI_PDA_Patches
         __instance.GetComponentInChildren<uGUI_InventoryTab>(true).gameObject.EnsureComponent<FactorEquipmentManager>();
     }
     
-    [HarmonyPatch(nameof(uGUI_PDA.OpenTab)), HarmonyPostfix]
-    private static void OpenTab_Postfix(uGUI_PDA __instance)
+    [HarmonyPatch(nameof(uGUI_PDA.OpenTab)), HarmonyPrefix]
+    private static void OpenTab_Prefix(uGUI_PDA __instance)
     {
         __instance.gameObject.BroadcastMessage("RefreshFactorSlots", SendMessageOptions.RequireReceiver);
     }
