@@ -47,12 +47,9 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         UWE.CoroutineHost.StartCoroutine(SpawnGhostObject());
 
         checkLayerMask = (1 << LayerID.TerrainCollider) | (1 << LayerID.BaseClipProxy) | (1 << LayerID.Vehicle) | (1 << LayerID.Useable);
-        storageTerminal.equipment.onEquip += (slot, item) =>
+        storageTerminal.equipment.onEquip += (_, _) =>
         {
-            if (item.techType == ProtoPhaseGateStabilizer.PrefabInfo.TechType)
-            {
-                selectionMenuManager.RefreshIcons();
-            }
+            selectionMenuManager.RefreshIcons();
         };
         
         storageTerminal.equipment.onUnequip += (_, _) =>
