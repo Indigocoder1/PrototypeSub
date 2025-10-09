@@ -12,7 +12,8 @@
         "PrototypeSubMod.dll",
         "SubLibrary.dll",
         "Assembly-CSharp.dll",
-        "Assembly-CSharp-firstpass.dll"
+        "Assembly-CSharp-firstpass.dll",
+        "SuitLib.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

@@ -1,0 +1,12 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIonCrystal",
+        "amount": 1
+      }
+    ],
+    "LinkedItems": [
+      "PrecursorSuitGloves"
+    ]
+  }

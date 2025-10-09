@@ -52,6 +52,7 @@ internal class PrecursorFabricator
             
             .AddTabNode("Factors", Language.main.Get("ProtoPrecursorFabricator_Tab_Factors"), SpriteManager.Get(TechType.ComputerChip))
             .AddCraftNode(BlinkFactor.prefabInfo.TechType, "Factors")
+            .AddCraftNode(PrecursorSuit.PrefabInfo.TechType, "Factors")
         
             .AddTabNode("PhaseGate", Language.main.Get("ProtoPrecursorFabricator_Tab_PhaseGate"), SpriteManager.Get(TechType.WiringKit))
             .AddCraftNode(ProtoPhaseGateStabilizer.PrefabInfo.TechType, "PhaseGate")
