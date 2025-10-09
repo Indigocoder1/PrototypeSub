@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using PrototypeSubMod.Factors;
 using PrototypeSubMod.Utility;
 using PrototypeSubMod.VehicleAccess;
 using UnityEngine;
@@ -22,9 +23,14 @@ internal class uGUI_Equipment_Patches
     private static void Awake_Prefix(uGUI_Equipment __instance)
     {
         CloneSlots(__instance, PrototypePowerSystem.SLOT_NAMES);
+        SetupDeployableSlots(__instance);
+        SetupFactorSlots(__instance);
+    }
 
-        var slot0 = CloneSlots(__instance, DeployablesStorageTerminal.LightBeaconSlots, "BatteryCharger", null, DeployablesStorageTerminal.SLOT_POSITIONS);
-        CloneSlots(__instance, new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT } , "BatteryCharger", null,
+    private static void SetupDeployableSlots(uGUI_Equipment instance)
+    {
+        var slot0 = CloneSlots(instance, DeployablesStorageTerminal.LightBeaconSlots, "BatteryCharger", null, DeployablesStorageTerminal.SLOT_POSITIONS);
+        CloneSlots(instance, new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT } , "BatteryCharger", null,
             new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT_POS });
         
         GameObject go = new();
@@ -40,16 +46,28 @@ internal class uGUI_Equipment_Patches
         img.sprite = Plugin.AssetBundle.LoadAsset<Sprite>("Proto_DeployablesBG");
         img.raycastTarget = false;
         
-        GameObject storageAccess = GameObject.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("VehicleStorageAccess"), __instance.transform);
+        GameObject storageAccess = GameObject.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("VehicleStorageAccess"), instance.transform);
         storageAccess.SetActive(false);
     }
 
+    private static void SetupFactorSlots(uGUI_Equipment instance)
+    {
+        Vector3[] slotPositions = {
+            new(-220, 170),
+            new(-120, 250),
+            new(120, 250),
+            new(220, 170)
+        };
+        
+        CloneSlots(instance, FactorEquipmentManager.FactorSlots , "BatteryCharger", null, slotPositions, 0.8f);
+    }
+
 #nullable enable
-    private static uGUI_EquipmentSlot? CloneSlots(uGUI_Equipment equipment, string[] slots, string copyTarget = "SeamothModule", string? imageTarget = "Seamoth", Vector3[]? slotPositions = null, Transform parent = null)
+    private static uGUI_EquipmentSlot? CloneSlots(uGUI_Equipment equipment, string[] slots, string copyTarget = "SeamothModule", string? imageTarget = "Seamoth", Vector3[]? slotPositions = null, float scale = 1)
     {
         if (slots.Length == 0) return null;
 
-        uGUI_EquipmentSlot slot = CloneSlot(equipment, $"{copyTarget}1", slots[0], parent);
+        uGUI_EquipmentSlot slot = CloneSlot(equipment, $"{copyTarget}1", slots[0], scale);
         if (imageTarget != null)
         {
             GameObject.Destroy(slot.transform.Find(imageTarget).GetComponent<Image>());
@@ -62,7 +80,7 @@ internal class uGUI_Equipment_Patches
 
         for (int i = 1; i < slots.Length; i++)
         {
-            var clonedSlot = CloneSlot(equipment, $"{copyTarget}{Mathf.Min(4, i + 1)}", slots[i]);
+            var clonedSlot = CloneSlot(equipment, $"{copyTarget}{Mathf.Min(4, i + 1)}", slots[i], scale);
             if (slotPositions != null)
             {
                 clonedSlot.transform.localPosition = slotPositions[i];
@@ -119,9 +137,16 @@ internal class uGUI_Equipment_Patches
         __instance.GetComponentInChildren<ProtoVehicleAccessManager>(true).gameObject.SetActive(isAccessButton);
     }
 
-    private static uGUI_EquipmentSlot CloneSlot(uGUI_Equipment equipmentMenu, string childName, string newSlotName, Transform parent = null)
+    [HarmonyPatch(nameof(uGUI_Equipment.OnEquip)), HarmonyPostfix]
+    private static void OnEquip_Postfix(uGUI_Equipment __instance)
     {
-        Transform newSlot = GameObject.Instantiate(equipmentMenu.transform.Find(childName), parent ?? equipmentMenu.transform);
+        __instance.SendMessageUpwards("RefreshFactorSlots");
+    }
+
+    private static uGUI_EquipmentSlot CloneSlot(uGUI_Equipment equipmentMenu, string childName, string newSlotName, float scale)
+    {
+        Transform newSlot = GameObject.Instantiate(equipmentMenu.transform.Find(childName), equipmentMenu.transform);
+        newSlot.transform.localScale = Vector3.one * scale;
         newSlot.name = newSlotName;
         uGUI_EquipmentSlot equipmentSlot = newSlot.GetComponent<uGUI_EquipmentSlot>();
         equipmentSlot.slot = newSlotName;

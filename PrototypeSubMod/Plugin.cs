@@ -21,6 +21,7 @@ using Nautilus.Handlers.LoadingScreen;
 using Nautilus.Handlers.TitleScreen;
 using Nautilus.Utility;
 using Nautilus.Utility.ModMessages;
+using PrototypeSubMod.Factors;
 using PrototypeSubMod.MiscMonobehaviors;
 using PrototypeSubMod.Pathfinding.SaveSystem;
 using PrototypeSubMod.Prefabs;
@@ -94,6 +95,7 @@ namespace PrototypeSubMod
         public static EquipmentType LightBeaconEquipmentType { get; } = EnumHandler.AddEntry<EquipmentType>("LightBeaconType");
         public static EquipmentType PhaseGateEquipmentType { get; } = EnumHandler.AddEntry<EquipmentType>("PhaseGateType");
         public static EquipmentType DummyPowerType { get; } = EnumHandler.AddEntry<EquipmentType>("ProtoDummyPowerType");
+        public static EquipmentType FactorEquipmentType { get; } = EnumHandler.AddEntry<EquipmentType>("FactorEquipmentType");
 
         public static TechGroup PrototypeGroup { get; } = EnumHandler.AddEntry<TechGroup>("PrototypeSub").WithPdaInfo(null);
         public static TechCategory PrototypeCategory { get; } = EnumHandler.AddEntry<TechCategory>("PrototypeSub").RegisterToTechGroup(PrototypeGroup)
@@ -434,6 +436,11 @@ namespace PrototypeSubMod
             foreach (string name in PrototypePowerSystem.SLOT_NAMES)
             {
                 Equipment.slotMapping.Add(name, PrototypePowerType);
+            }
+
+            foreach (var slot in FactorEquipmentManager.FactorSlots)
+            {
+                Equipment.slotMapping.Add(slot, FactorEquipmentType);
             }
 
             Equipment.slotMapping.Add(ProtoVehicleAccessTerminal.SLOT_NAME, EquipmentType.NuclearReactor);

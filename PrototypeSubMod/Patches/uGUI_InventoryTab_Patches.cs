@@ -114,4 +114,10 @@ internal class uGUI_InventoryTab_Patches
 
         return dot / delta.sqrMagnitude;
     }
+
+    [HarmonyPatch(nameof(uGUI_InventoryTab.OnPointerClick)), HarmonyPostfix]
+    private static void OnPointerClick_Postfix(uGUI_InventoryTab __instance)
+    {
+        __instance.SendMessage("RefreshFactorSlots");
+    }
 }
