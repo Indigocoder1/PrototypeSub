@@ -37,7 +37,7 @@ public static class PrecursorSuitGloves
         };
 
         var gloves = new ModdedGloves(armTextures, ModdedSuitsManager.VanillaModel.Reinforced,
-            PrefabInfo.TechType);
+            PrefabInfo.TechType, ModdedSuitsManager.Modifications.Reinforced);
         ModdedSuitsManager.AddModdedGloves(gloves);
     }
 }

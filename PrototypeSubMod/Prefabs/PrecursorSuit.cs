@@ -53,7 +53,7 @@ public static class PrecursorSuit
         };
 
         var suit = new ModdedSuit(suitTextures, armTextures, ModdedSuitsManager.VanillaModel.WaterFiltration,
-            PrefabInfo.TechType);
+            PrefabInfo.TechType, ModdedSuitsManager.Modifications.Reinforced);
         ModdedSuitsManager.AddModdedSuit(suit);
     }
 }
