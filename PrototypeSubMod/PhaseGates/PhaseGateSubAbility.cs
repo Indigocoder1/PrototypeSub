@@ -230,7 +230,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         {
             voiceNotificationManager.PlayVoiceNotification(confirmDeconstruction);
             CancelInvoke(nameof(ResetDeconstructRequest));
-            Invoke(nameof(ResetDeconstructRequest), 1f);
+            Invoke(nameof(ResetDeconstructRequest), 2f);
             deconstructRequested = true;
             return false;
         }
@@ -319,7 +319,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         Destroy(gateManager.gameObject);
         Destroy(vfxConstructing.ghostMaterial);
         storageTerminal.gameObject.SetActive(true);
-        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 1 ? betaLoaded : alphaLoaded);
+        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? betaLoaded : alphaLoaded);
 
         deconstructing = false;
     }
@@ -328,7 +328,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     {
         constructing = false;
         
-        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? alphaOnline : betaOnline);
+        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? betaOnline : alphaDeployed);
         if (Plugin.GlobalSaveData.phaseGateIndices.Count % 2 != 0) return;
 
         sender.GetComponent<ProtoPhaseGateManager>().ActivateGate();
