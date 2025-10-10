@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
-  m_Name: Proto_BetaDeployed
+  m_Name: Proto_AlphaConstructing
   m_EditorClassIdentifier: 
-  path: Proto_BetaDeployed
+  path: Proto_AlphaConstructing
   id: 
-  audioClip: {fileID: 8300000, guid: b8d199cffd410804991e4bd66d6f23fa, type: 3}
+  audioClip: {fileID: 8300000, guid: 8da8eee738e23554b80d037d041b0a10, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0

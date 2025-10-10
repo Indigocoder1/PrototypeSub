@@ -32,8 +32,8 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     
     [Header("Voicelines")]
     [SerializeField] private VoiceNotificationManager voiceNotificationManager;
-    [SerializeField] private VoiceNotification alphaDeployed;
-    [SerializeField] private VoiceNotification betaDeployed;
+    [SerializeField] private VoiceNotification alphaConstructing;
+    [SerializeField] private VoiceNotification betaConstructing;
     [SerializeField] private VoiceNotification alphaOnline;
     [SerializeField] private VoiceNotification betaOnline;
     [SerializeField] private VoiceNotification alphaOffline;
@@ -207,7 +207,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         
         onPhaseGateCreated?.Invoke();
         constructing = true;
-        voiceNotificationManager.PlayVoiceNotification(newIndex % 2 == 0 ? alphaDeployed : betaDeployed);
+        voiceNotificationManager.PlayVoiceNotification(newIndex % 2 == 0 ? alphaConstructing : betaConstructing);
         return true;
     }
 
@@ -230,7 +230,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         {
             voiceNotificationManager.PlayVoiceNotification(confirmDeconstruction);
             CancelInvoke(nameof(ResetDeconstructRequest));
-            Invoke(nameof(ResetDeconstructRequest), 2f);
+            Invoke(nameof(ResetDeconstructRequest), 8f);
             deconstructRequested = true;
             return false;
         }
@@ -328,7 +328,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     {
         constructing = false;
         
-        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? betaOnline : alphaDeployed);
+        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? betaOnline : alphaOnline);
         if (Plugin.GlobalSaveData.phaseGateIndices.Count % 2 != 0) return;
 
         sender.GetComponent<ProtoPhaseGateManager>().ActivateGate();
