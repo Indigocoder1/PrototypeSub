@@ -316,6 +316,20 @@
   "Proto_LowPower": "{0}: Warning: Ion reserves low",
   "Proto_CriticalPower": "{0}: Warning: Ion reserves critical",
   
+  // Phase Gate Voicelines
+  "Proto_AlphaDeployed": "{0}: Beginning construction of phase gate Alpha.",
+  "Proto_BetaDeployed": "{0}: Beginning construction of phase gate Beta.",
+  "Proto_AlphaOnline": "{0}: Phase gate Alpha deployed.",
+  "Proto_BetaOnline": "{0}: Phase gate Beta deployed.",
+  "Proto_AlphaOffline": "{0}: Phase gate Alpha offline.",
+  "Proto_BetaOffline": "{0}: Phase gate Beta offline.",
+  "Proto_AlphaLoaded": "{0}: Phase gate Alpha ready for deployment.",
+  "Proto_BetaLoaded": "{0}: Phase gate Beta ready for deployment.",
+  "Proto_ConfirmDeconstruction": "{0}: Confirm phase gate deconstruction.",
+  "Proto_NoGateDetected": "{0}: Error: No phase gate detected.",
+  "Proto_MaxGatesPlaced": "{0}: Error: Maximum phase gate limit reached.",
+  "Proto_NoDeploymentSpace": "{0}: Error: Inadequate space for phase gate deployment.",
+  
   // Terminal Voicelines
   "Proto_DevResumed": "{0}: Orion neural cluster reinitialized. Neural scans of user indicate disconnection from collective.<duration=7640>\nNetwork unavailable. Enabling black box protocol.<delay=7777><duration=4658>\nPrototype development resumed.<delay=12726><duration=2580>",
   "Proto_StoryEndPingVoiceline": "{0}: Prototype schematic database restored. Primary directive updated.<duration=5296>\nDeadzone mapping initiative online. Awaiting manual direction to ecological dead zone.<delay=5362><duration=5470>",
