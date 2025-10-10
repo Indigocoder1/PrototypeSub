@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Nautilus.Utility;
 using PrototypeSubMod.DeployablesTerminal;
@@ -8,7 +7,6 @@ using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.UI.AbilitySelection;
 using PrototypeSubMod.Utility;
-using Unity.Collections;
 using UnityEngine;
 
 namespace PrototypeSubMod.PhaseGates;
@@ -31,7 +29,22 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private BoxCollider[] checkBounds;
     [SerializeField] private float timeToConstruct;
     [SerializeField] private float timeToDeconstruct = 30;
-
+    
+    [Header("Voicelines")]
+    [SerializeField] private VoiceNotificationManager voiceNotificationManager;
+    [SerializeField] private VoiceNotification alphaDeployed;
+    [SerializeField] private VoiceNotification betaDeployed;
+    [SerializeField] private VoiceNotification alphaOnline;
+    [SerializeField] private VoiceNotification betaOnline;
+    [SerializeField] private VoiceNotification alphaOffline;
+    [SerializeField] private VoiceNotification betaOffline;
+    [SerializeField] private VoiceNotification alphaLoaded;
+    [SerializeField] private VoiceNotification betaLoaded;
+    [SerializeField] private VoiceNotification confirmDeconstruction;
+    [SerializeField] private VoiceNotification noGateDetected;
+    [SerializeField] private VoiceNotification maxGatesPlaced;
+    [SerializeField] private VoiceNotification noDeploymentSpace;
+    
     private GameObject ghostObject;
     private Material ghostMaterial;
     private int checkLayerMask;
@@ -136,7 +149,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             return false;
         }
 
-        if (Plugin.GlobalSaveData.phaseGateLocations.Count < 2 && HasPhaseGate())
+        if (HasPhaseGate())
         {
             return HandleNewPhaseGates();
         }
@@ -146,15 +159,15 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     private bool HandleNewPhaseGates()
     {
-        if (!HasPhaseGate())
+        if (Plugin.GlobalSaveData.phaseGateLocations.Count >= 2)
         {
-            ErrorMessage.AddError("No phase gates loaded in launch bay!");
+            voiceNotificationManager.PlayVoiceNotification(maxGatesPlaced);
             return false;
         }
         
         if (!HasRoomForDeployment())
         {
-            ErrorMessage.AddError("Not enough room for deployment!");
+            voiceNotificationManager.PlayVoiceNotification(noDeploymentSpace);
             return false;
         }
         
@@ -194,11 +207,19 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         
         onPhaseGateCreated?.Invoke();
         constructing = true;
+        voiceNotificationManager.PlayVoiceNotification(newIndex % 2 == 0 ? alphaDeployed : betaDeployed);
         return true;
     }
 
     private bool HandleGateDeconstruction()
     {
+        var gateManager = GetGateManagerInRange();
+        if (!gateManager)
+        {
+            voiceNotificationManager.PlayVoiceNotification(noGateDetected);
+            return false;
+        }
+        
         if (HasPhaseGate())
         {
             ErrorMessage.AddError("Phase gate storage full! Can't deconstruct");
@@ -207,13 +228,21 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         
         if (!deconstructRequested)
         {
-            ErrorMessage.AddError("Activate again to confirm phase gate deconstruction");
+            voiceNotificationManager.PlayVoiceNotification(confirmDeconstruction);
             CancelInvoke(nameof(ResetDeconstructRequest));
             Invoke(nameof(ResetDeconstructRequest), 1f);
             deconstructRequested = true;
             return false;
         }
         
+        StartCoroutine(DeconstructGate(gateManager));
+        deconstructRequested = false;
+        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? betaOffline : alphaOffline);
+        return true;
+    }
+
+    private ProtoPhaseGateManager GetGateManagerInRange()
+    {
         var colliders = Physics.OverlapBox(checkBounds[0].transform.position, checkBounds[0].transform.localScale / 2, 
             checkBounds[0].transform.rotation, 1 << LayerID.Useable);
         
@@ -227,15 +256,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
             }
         }
 
-        if (phaseGateManager == null)
-        {
-            ErrorMessage.AddError("No phase gate in range to deconstruct");
-            return false;
-        }
-        
-        StartCoroutine(DeconstructGate(phaseGateManager));
-        deconstructRequested = false;
-        return true;
+        return phaseGateManager;
     }
 
     private void ResetDeconstructRequest()
@@ -298,6 +319,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         Destroy(gateManager.gameObject);
         Destroy(vfxConstructing.ghostMaterial);
         storageTerminal.gameObject.SetActive(true);
+        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 1 ? betaLoaded : alphaLoaded);
 
         deconstructing = false;
     }
@@ -306,6 +328,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     {
         constructing = false;
         
+        voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? alphaOnline : betaOnline);
         if (Plugin.GlobalSaveData.phaseGateIndices.Count % 2 != 0) return;
 
         sender.GetComponent<ProtoPhaseGateManager>().ActivateGate();
@@ -350,12 +373,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     public Sprite GetSprite()
     {
-        if (Plugin.GlobalSaveData.phaseGateLocations.Count < 2 && HasPhaseGate())
-        {
-            return constructIcon;
-        }
-
-        return deconstructIcon;
+        return HasPhaseGate() ? constructIcon : deconstructIcon;
     }
     
     public TechType GetTechType() => TechType.None;
