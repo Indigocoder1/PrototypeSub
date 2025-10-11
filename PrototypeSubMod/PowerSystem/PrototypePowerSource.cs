@@ -228,4 +228,6 @@ public class PrototypePowerSource : MonoBehaviour, IPowerInterface, ISaveDataLis
         float mod = Charge % PrototypePowerSystem.CHARGE_POWER_AMOUNT;
         return mod == 0 ? 1 : mod / PrototypePowerSystem.CHARGE_POWER_AMOUNT;
     }
+
+    public bool HasBattery() => battery != null;
 }
