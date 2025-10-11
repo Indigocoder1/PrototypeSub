@@ -158,6 +158,8 @@ internal class ProtoOverclockModule : ProtoUpgrade
 
     public override void SetUpgradeEnabled(bool enabled)
     {
+        if (!subRoot.powerRelay.ConsumeEnergy(0.01f, out _)) return;
+        
         base.SetUpgradeEnabled(enabled);
 
         pdaCameraControl.enabled = !enabled;
