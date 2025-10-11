@@ -308,7 +308,7 @@
   "Proto_NoPowerForWarp": "{0}: Additional power required for emergency warp.",
   "Proto_IonGeneratorActivate": "{0}: Rerouting power to ion generator",
   "Proto_PowerSourceMax": "{0}: Invalid operation. Power source at max capacity.",
-  "Proto_PowerSourceReplenished": "{0}: Power source replenished. Ion generator deactivating.",
+  "Proto_PowerSourceReplenished": "{0}: Power source replenished. Ion generator deactivated.",
   "Proto_InterceptorLocked": "{0}: Primary system control directed to Orion neural cluster.<duration=4434>\nArchway interceptor offline. Directive priority: MAXIMAL.<delay=4556><duration=4900>",
   "Proto_ReactorLocked": "{0}: Primary system control directed to Orion neural cluster.<duration=3971>\nManual reactor control offline. Directive priority: MAXIMAL.<delay=4539><duration=5260>",
   "Proto_InvalidOperation": "{0}: Warning: Invalid operation",
