@@ -40,7 +40,7 @@ public static class PrecursorPropulsionGloves
         };
 
         var gloves = new ModdedGloves(armTextures, ModdedSuitsManager.VanillaModel.Reinforced,
-            PrefabInfo.TechType, ModdedSuitsManager.Modifications.Reinforced);
+            PrefabInfo.TechType, ModdedSuitsManager.Modifications.Reinforced, tempValue: 12);
         ModdedSuitsManager.AddModdedGloves(gloves);
     }
 }
