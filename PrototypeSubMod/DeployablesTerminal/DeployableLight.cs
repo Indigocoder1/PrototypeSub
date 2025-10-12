@@ -171,9 +171,8 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
     public void OnHandHover(HandTargetEventData data)
     {
         HandReticle main = HandReticle.main;
-        main.SetText(HandReticle.TextType.Hand,"DestroyDeployableLight", true);
-        main.SetText(HandReticle.TextType.HandSubscript, string.Empty, false);
-        main.SetIcon(HandReticle.IconType.Interact);
+        var useText = Language.main.GetFormat("DestroyDeployableLight", GameInput.FormatButton(GameInput.Button.LeftHand));
+        main.SetTextRaw(HandReticle.TextType.Hand, useText);
     }
 
     public void OnHandUse(HandTargetEventData data)
