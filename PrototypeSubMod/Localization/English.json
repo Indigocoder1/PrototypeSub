@@ -15,7 +15,7 @@
 
   "DeployableLight": "Photon beacon",
   "Tooltip_DeployableLight": "A device for exploring in dark areas and distracting aggressive fauna. Has a lifetime of 5 minutes. Deployed by hand or via Prototype; cannot be reclaimed once deployed",
-  "DestroyDeployableLight": "Deactivate beacon",
+  "DestroyDeployableLight": "Deactivate beacon {0}",
   
   "ProtoDogPoster": "Dog(?) poster",
   "Tooltip_ProtoDogPoster": "A poster with a dog(?) in it.",
@@ -361,9 +361,8 @@
   "ProtoPrecursorFabricator": "Alien Fabricator",
   "UsePrecursorFabricator": "Use alien fabricator",
   "ProtoPrecursorFabricator_Tab_Keys": "Keys",
-  "ProtoPrecursorFabricator_Tab_PowerSources": "Power sources",
-  "ProtoPrecursorFabricator_Tab_Utilities": "Utilities",
-  "ProtoPrecursorFabricator_Tab_Factors": "Factors",
+  "ProtoPrecursorFabricator_Tab_Resources": "Resources",
+  "ProtoPrecursorFabricator_Tab_Devices": "Devices",
   "ProtoPrecursorFabricator_Tab_PhaseGate": "Phase gates",
 
   // Phase Gates
