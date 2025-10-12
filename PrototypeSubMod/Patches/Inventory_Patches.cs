@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using PrototypeSubMod.PrecursorGloves;
 
 namespace PrototypeSubMod.Patches;
 
@@ -80,5 +81,14 @@ internal class Inventory_Patches
         }
 
         return originalType;
+    }
+
+    [HarmonyPatch(nameof(Inventory.Awake)), HarmonyPostfix]
+    private static void Awake_Postfix(Inventory __instance)
+    {
+        var glovesManager = __instance.gameObject.EnsureComponent<PropulsionGlovesManager>();
+        __instance.quickSlots.onSelect += _ => glovesManager.UpdateToolActive();
+        __instance.equipment.onEquip += (_, _) => glovesManager.UpdateToolActive();
+        __instance.equipment.onUnequip += (_, _) => glovesManager.UpdateToolActive();
     }
 }

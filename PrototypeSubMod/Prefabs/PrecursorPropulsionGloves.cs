@@ -3,18 +3,19 @@ using System.Linq;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
+using PrototypeSubMod.Compatibility;
 using SuitLib;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs;
 
-public static class PrecursorSuitGloves
+public static class PrecursorPropulsionGloves
 {
     public static PrefabInfo PrefabInfo { get; private set; }
 
     public static void Register()
     {
-        PrefabInfo = PrefabInfo.WithTechType("PrecursorSuitGloves", null, null, "English");
+        PrefabInfo = PrefabInfo.WithTechType("PrecursorPropulsionGloves", null, null, "English");
 
         var prefab = new CustomPrefab(PrefabInfo);
 
@@ -27,6 +28,7 @@ public static class PrecursorSuitGloves
             material.SetTexture("_SpecTex", glovesTex);
         };
         prefab.SetGameObject(template);
+        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{PrefabInfo.ClassID}.json"));
         prefab.SetEquipment(EquipmentType.Gloves);
 
         prefab.Register();

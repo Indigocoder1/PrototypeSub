@@ -62,7 +62,7 @@ internal static class PrefabRegisterer
         PrototypeSpawner.Register();
         CrystalMatrix_Craftable.Register();
         IonCrystal_Craftable.Register();
-        PrecursorSuitGloves.Register();
+        PrecursorPropulsionGloves.Register();
         PrecursorSuit.Register();
         ProtoFacilitySpawner.Register("ProtoHullFacilitySpawner", "HullFacilitySpawner");
         ProtoFacilitySpawner.Register("ProtoEngineFacilitySpawner", "EngineFacilitySpawner");
