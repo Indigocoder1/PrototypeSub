@@ -97,7 +97,7 @@ public class PropulsionGlovesManager : MonoBehaviour
             return;
         }
             
-        if (!Player.main.IsFreeToInteract() || Player.main.IsInSub()) return;
+        if (!Player.main.IsFreeToInteract() || Player.main.IsInSub() || Player.main.precursorOutOfWater) return;
         if (!toolActive || !propulsionCannon) return;
         
         HandleTooltips();
