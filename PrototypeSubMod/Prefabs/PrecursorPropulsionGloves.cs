@@ -29,6 +29,7 @@ public static class PrecursorPropulsionGloves
         };
         prefab.SetGameObject(template);
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{PrefabInfo.ClassID}.json"));
+        prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetEquipment(EquipmentType.Gloves);
 
         prefab.Register();
