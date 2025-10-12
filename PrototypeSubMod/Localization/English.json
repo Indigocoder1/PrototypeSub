@@ -150,6 +150,8 @@
   // Factors
   "BlinkFactor": "Blink Factor",
   "Tooltip_BlinkFactor": "Temporary Blink Description.",
+  "ProtoSuitUnequipWarning": "Uninstall factors before taking off the suit!",
+  "PropulsionGlovesRelease": "Release item {0}",
   
   // Phase Gates
   "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
@@ -363,9 +365,6 @@
   "ProtoPrecursorFabricator_Tab_Utilities": "Utilities",
   "ProtoPrecursorFabricator_Tab_Factors": "Factors",
   "ProtoPrecursorFabricator_Tab_PhaseGate": "Phase gates",
-  
-  // Factors
-  "ProtoSuitUnequipWarning": "Uninstall factors before taking off the suit!",
 
   // Phase Gates
   "Proto_AlphaLoaded": "{0}: Phase Gate: Alpha ready for deployment.",

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using PrototypeSubMod.Prefabs;
 using UnityEngine;
 
@@ -99,9 +100,7 @@ public class PropulsionGlovesManager : MonoBehaviour
         if (!Player.main.IsFreeToInteract() || Player.main.IsInSub()) return;
         if (!toolActive || !propulsionCannon) return;
         
-        var useText = LanguageCache.GetButtonFormat("PropulsionCannonToGrab", GameInput.Button.RightHand);
-        HandReticle.main.SetTextRaw(HandReticle.TextType.Use, useText);
-
+        HandleTooltips();
         propulsionCannon.UpdateActive();
         
         if (GameInput.GetButtonDown(GameInput.Button.RightHand))
@@ -127,6 +126,24 @@ public class PropulsionGlovesManager : MonoBehaviour
 
         propulsionCannon.muzzle.position = Player.main.armsController.rightHand.position;
         wasGrabbingObject = isGrabbingObject;
+    }
+
+    private void HandleTooltips()
+    {
+        var text1 = string.Empty;
+        var text2 = string.Empty;
+        if (propulsionCannon.IsGrabbingObject())
+        {
+            text1 = LanguageCache.GetButtonFormat("PropulsionCannonToShoot", GameInput.Button.RightHand);
+            text2 = Language.main.GetFormat("PropulsionGlovesRelease", GameInput.FormatButton(GameInput.Button.AltTool));
+        }
+        else
+        {
+            text1 = LanguageCache.GetButtonFormat("PropulsionCannonToGrab", GameInput.Button.RightHand);
+        }
+
+        var useText = text2 == string.Empty ? text1 : $"{text1}, {text2}"; 
+        HandReticle.main.SetTextRaw(HandReticle.TextType.Use, useText);
     }
 
     private void UpdateAnimationState(bool isGrabbingObject)
