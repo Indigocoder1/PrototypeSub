@@ -16,7 +16,7 @@ MonoBehaviour:
   id: 
   audioClip: {fileID: 8300000, guid: d57d9f0085ec5ac47a0317171d9a29c0, type: 3}
   doNotAutoRegister: 0
-  mode: 2113556
+  mode: 4210708
   maxDistance3D: 150
   minDistance3D: 0
   fadeOutTime: 2
