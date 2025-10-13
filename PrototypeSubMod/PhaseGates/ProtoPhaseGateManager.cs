@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Linq;
 using Nautilus.Json;
+using Nautilus.Utility;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 
 namespace PrototypeSubMod.PhaseGates;
@@ -14,6 +16,12 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     [SerializeField] private PrefabIdentifier prefabIdentifier;
     [SerializeField] private LightingController lightingController;
     
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomLoopingEmitter ambienceSfx;
+    [SerializeField] private FMOD_CustomEmitter constructSfx;
+    [SerializeField] private FMOD_CustomEmitter impulseConnected;
+    [SerializeField] private FMOD_CustomEmitter impulseNotConnected;
+    
     private int gateIndex;
     private bool playerWasPiloting;
     private PhaseGateLocation connectedGateLocation;
@@ -25,6 +33,7 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         if (TeleporterManager.main.activeTeleporters.Contains(teleporter.teleporterIdentifier))
         {
             lightingController.SnapToState(1);
+            ambienceSfx.Play();
         }
     }
 
@@ -49,9 +58,30 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         UpdateConnectedGate();
     }
 
-    public void OnConstructed()
+    public void OnConstructionStarted()
     {
         StartCoroutine(EnableLightsDelayed());
+        constructSfx.Play();
+    }
+
+    public void OnConstructionFinished()
+    {
+        constructSfx.Stop();
+        StartCoroutine(PlayImpulseDelayed());
+    }
+
+    private IEnumerator PlayImpulseDelayed()
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (teleporter.isOpen)
+        {
+            impulseConnected.Play();
+        }
+        else
+        {
+            impulseNotConnected.Play();
+        }
     }
 
     private IEnumerator EnableLightsDelayed()
@@ -64,6 +94,48 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     public void ActivateGate()
     {
         teleporter.ToggleDoor(true);
+        ambienceSfx.Play();
+    }
+
+    public IEnumerator DeconstructGate(float timeToDeconstruct)
+    {
+        constructSfx.Play();
+        
+        var vfxConstructing = GetComponent<VFXConstructing>();
+        vfxConstructing.ghostOverlay = vfxConstructing.gameObject.EnsureComponent<VFXOverlayMaterial>();
+        vfxConstructing.ghostMaterial = new Material(MaterialUtils.GhostMaterial);
+        vfxConstructing.ghostMaterial.color = GetComponent<GhostMaterialSetter>().GetGhostColor();
+        vfxConstructing.ghostOverlay.ApplyOverlay(vfxConstructing.ghostMaterial, "VFXDeconstructing", false);
+        foreach (var renderer in GetComponentsInChildren<Renderer>())
+        {
+            foreach (var material in renderer.materials)
+            {
+                material.EnableKeyword("FX_BUILDING");
+                material.SetTexture(ShaderPropertyID._EmissiveTex, vfxConstructing.alphaDetailTexture);
+                material.SetColor(ShaderPropertyID._BorderColor, vfxConstructing.wireColor);
+                material.SetFloat(ShaderPropertyID._Built, 0f);
+                material.SetFloat(ShaderPropertyID._Cutoff, 0.42f);
+                material.SetVector(ShaderPropertyID._BuildParams, new Vector4(0.035f, 0.07f, 0.08f, -0.12f));
+                material.SetFloat(ShaderPropertyID._NoiseStr, 1.9f);
+                material.SetFloat(ShaderPropertyID._NoiseThickness, 0.52f);
+                material.SetFloat(ShaderPropertyID._BuildLinear, 0f);
+                material.SetFloat(ShaderPropertyID._MyCullVariable, 0f);
+            }
+        }
+
+        Shader.SetGlobalFloat(ShaderPropertyID._SubConstructProgress, 1);
+
+        yield return new WaitForSeconds(0.1f);
+
+        float timer = timeToDeconstruct;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            Shader.SetGlobalFloat(ShaderPropertyID._SubConstructProgress, timer / timeToDeconstruct);
+            yield return null;
+        }
+
+        constructSfx.Stop();
     }
     
     public void DeactivateGate()
@@ -71,6 +143,7 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         TeleporterManager.main.activeTeleporters.Remove(teleporter.teleporterIdentifier);
         OnPhaseGateDeactivated?.Invoke();
         lightingController.LerpToState(0);
+        ambienceSfx.Stop();
     }
 
     // Called via SendMessageUpwards in PrecursorTeleporterCollider
@@ -161,6 +234,7 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         
         teleporter.ToggleDoor(false);
         teleporter.activeLoopSound.Stop();
+        ambienceSfx.Stop();
     }
     
     private void OnEnable()

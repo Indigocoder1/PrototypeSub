@@ -195,7 +195,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         int newIndex = lastIndex + 1;
         var gateManager = gateInstance.GetComponent<ProtoPhaseGateManager>();
         gateManager.SetGateIndex(newIndex % 2);
-        gateManager.OnConstructed();
+        gateManager.OnConstructionStarted();
 
         var vfxConstructing = gateInstance.GetComponent<VFXConstructing>();
         vfxConstructing.ghostMaterial = MaterialUtils.GhostMaterial;
@@ -271,40 +271,8 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         gateManager.DeactivateGate();
 
         yield return new WaitForSeconds(0.75f);
-        
-        var vfxConstructing = gateManager.GetComponent<VFXConstructing>();
-        vfxConstructing.ghostOverlay = vfxConstructing.gameObject.EnsureComponent<VFXOverlayMaterial>();
-        vfxConstructing.ghostMaterial = new Material(MaterialUtils.GhostMaterial);
-        vfxConstructing.ghostMaterial.color = gateManager.GetComponent<GhostMaterialSetter>().GetGhostColor();
-        vfxConstructing.ghostOverlay.ApplyOverlay(vfxConstructing.ghostMaterial, "VFXDeconstructing", false);
-        foreach (var renderer in gateManager.GetComponentsInChildren<Renderer>())
-        {
-            foreach (var material in renderer.materials)
-            {
-                material.EnableKeyword("FX_BUILDING");
-                material.SetTexture(ShaderPropertyID._EmissiveTex, vfxConstructing.alphaDetailTexture);
-                material.SetColor(ShaderPropertyID._BorderColor, vfxConstructing.wireColor);
-                material.SetFloat(ShaderPropertyID._Built, 0f);
-                material.SetFloat(ShaderPropertyID._Cutoff, 0.42f);
-                material.SetVector(ShaderPropertyID._BuildParams, new Vector4(0.035f, 0.07f, 0.08f, -0.12f));
-                material.SetFloat(ShaderPropertyID._NoiseStr, 1.9f);
-                material.SetFloat(ShaderPropertyID._NoiseThickness, 0.52f);
-                material.SetFloat(ShaderPropertyID._BuildLinear, 0f);
-                material.SetFloat(ShaderPropertyID._MyCullVariable, 0f);
-            }
-        }
 
-        Shader.SetGlobalFloat(ShaderPropertyID._SubConstructProgress, 1);
-
-        yield return new WaitForSeconds(0.1f);
-
-        float timer = timeToDeconstruct;
-        while (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            Shader.SetGlobalFloat(ShaderPropertyID._SubConstructProgress, timer / timeToDeconstruct);
-            yield return null;
-        }
+        yield return gateManager.DeconstructGate(timeToDeconstruct);
 
         var returnedItem = Instantiate(_phaseGateItemPrefab);
         var pickupable = returnedItem.GetComponent<Pickupable>();
@@ -317,7 +285,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         uGUI_IconNotifier.main.Play(ProtoPhaseGateItem.PrefabInfo.TechType, uGUI_IconNotifier.AnimationType.From);
 
         Destroy(gateManager.gameObject);
-        Destroy(vfxConstructing.ghostMaterial);
+        Destroy(gateManager.GetComponent<VFXConstructing>().ghostMaterial);
         storageTerminal.gameObject.SetActive(true);
         voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? betaLoaded : alphaLoaded);
 
@@ -326,12 +294,14 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
 
     public void OnConstructionDone(GameObject sender)
     {
+        var gateManager = sender.GetComponent<ProtoPhaseGateManager>();
         constructing = false;
+        gateManager.OnConstructionFinished();
         
         voiceNotificationManager.PlayVoiceNotification(Plugin.GlobalSaveData.phaseGateIndices.Count % 2 == 0 ? betaOnline : alphaOnline);
         if (Plugin.GlobalSaveData.phaseGateIndices.Count % 2 != 0) return;
 
-        sender.GetComponent<ProtoPhaseGateManager>().ActivateGate();
+        gateManager.ActivateGate();
     }
 
     private bool HasRoomForDeployment()
