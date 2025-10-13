@@ -9,16 +9,23 @@ namespace PrototypeSubMod.PrecursorWearables;
 public class PropulsionGlovesManager : MonoBehaviour
 {
     private static readonly int HoldingFlare = Animator.StringToHash("holding_flare");
+
+    private float minSuitEmission = 1.5f;
+    private float maxSuitEmission = 2.0f;
+    private float emissionPingPongSpeed = 0.5f;
     
     private bool toolActive;
     private bool wasGrabbingObject;
 
+    private PrecursorSuitManager suitManager;
     private GameObject ikTargetHolder;
     private GameObject ikTarget;
     private PropulsionCannon propulsionCannon;
 
     private IEnumerator Start()
     {
+        suitManager = GetComponent<PrecursorSuitManager>();
+        
         UpdateToolActive();
         var propulsionCannonTask = CraftData.GetPrefabForTechTypeAsync(TechType.PropulsionCannon);
         yield return propulsionCannonTask;
@@ -80,6 +87,7 @@ public class PropulsionGlovesManager : MonoBehaviour
         else
         {
             toolActive = false;
+            suitManager.UnregisterEmissionController(this);
             
             if (!propulsionCannon) return;
             propulsionCannon.ReleaseGrabbedObject();
@@ -117,13 +125,27 @@ public class PropulsionGlovesManager : MonoBehaviour
             UpdateAnimationState(isGrabbingObject);
         }
 
-        if (propulsionCannon.grabbedObject)
+        if (isGrabbingObject)
         {
             ikTargetHolder.transform.LookAt(propulsionCannon.grabbedObject.transform);
+            UpdateSuitEmission();
+        }
+        else
+        {
+            suitManager.UnregisterEmissionController(this);
         }
 
         propulsionCannon.muzzle.position = Player.main.armsController.rightHand.position;
         wasGrabbingObject = isGrabbingObject;
+    }
+
+    private void UpdateSuitEmission()
+    {
+        float glowIntensity =
+            UWE.Utils.Unlerp(Mathf.Sin(2 * Mathf.PI * emissionPingPongSpeed * Time.time), -1, 1) * maxSuitEmission +
+            minSuitEmission;
+        suitManager.RegisterEmissionController(this,
+            new PrecursorSuitManager.EmissionController(Color.green, glowIntensity));
     }
 
     private void HandleTooltips()

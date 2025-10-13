@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using PrototypeSubMod.Prefabs;
 using SuitLib;
 using UnityEngine;
@@ -7,13 +8,16 @@ namespace PrototypeSubMod.PrecursorWearables;
 
 public class PrecursorSuitManager : MonoBehaviour
 {
-    private float suitEmission = 0f;
-    private Color emissionColor = Color.white;
-    
-    private Renderer stillsuitRenderer;
+    private readonly float defaultEmissionIntensity = 0.1f;
+    private readonly Color defaultEmissionColor = Color.white;
     private readonly float[] originalBodyEmissions = new float[2];
     private readonly float[] originalArmsEmission = new float[2];
     private readonly Color[] originalEmissionCols = new Color[2];
+    
+    private Dictionary<Component, EmissionController> emissionControllers = new();
+    private Renderer stillsuitRenderer;
+    private Color emissionColor;
+    private float emissionIntensity;
     private bool wasArmEmissionEnabled;
     private bool wasWearingSuit;
     
@@ -22,6 +26,8 @@ public class PrecursorSuitManager : MonoBehaviour
         ModdedSuitsManager.onSuitEquippedChanged += OnEquippedSuitChanged;
         stillsuitRenderer = transform.Find("body/player_view/male_geo/stillSuit/still_suit_01_body_geo")
             .GetComponent<Renderer>();
+        emissionColor = defaultEmissionColor;
+        emissionIntensity = defaultEmissionIntensity;
     }
 
     private void Update()
@@ -54,13 +60,13 @@ public class PrecursorSuitManager : MonoBehaviour
 
     private void UpdateEmissionValues()
     {
-        stillsuitRenderer.materials[0].SetFloat(ShaderPropertyID._GlowStrength, suitEmission);
-        stillsuitRenderer.materials[0].SetFloat(ShaderPropertyID._GlowStrengthNight, suitEmission);
-        stillsuitRenderer.materials[0].SetColor(ShaderPropertyID._EmissionColor, emissionColor);
+        stillsuitRenderer.materials[0].SetFloat(ShaderPropertyID._GlowStrength, emissionIntensity);
+        stillsuitRenderer.materials[0].SetFloat(ShaderPropertyID._GlowStrengthNight, emissionIntensity);
+        stillsuitRenderer.materials[0].SetColor(ShaderPropertyID._GlowColor, emissionColor);
                 
-        stillsuitRenderer.materials[1].SetFloat(ShaderPropertyID._GlowStrength, suitEmission);
-        stillsuitRenderer.materials[1].SetFloat(ShaderPropertyID._GlowStrengthNight, suitEmission);
-        stillsuitRenderer.materials[1].SetColor(ShaderPropertyID._EmissionColor, emissionColor);
+        stillsuitRenderer.materials[1].SetFloat(ShaderPropertyID._GlowStrength, emissionIntensity);
+        stillsuitRenderer.materials[1].SetFloat(ShaderPropertyID._GlowStrengthNight, emissionIntensity);
+        stillsuitRenderer.materials[1].SetColor(ShaderPropertyID._GlowColor, emissionColor);
     }
 
     private void StoreProperties()
@@ -72,8 +78,8 @@ public class PrecursorSuitManager : MonoBehaviour
         originalArmsEmission[1] = stillsuitRenderer.materials[1].GetFloat(ShaderPropertyID._GlowStrengthNight);
         wasArmEmissionEnabled = stillsuitRenderer.materials[1].IsKeywordEnabled("MARMO_EMISSION");
 
-        originalEmissionCols[0] = stillsuitRenderer.materials[0].GetColor(ShaderPropertyID._EmissionColor);
-        originalEmissionCols[1] = stillsuitRenderer.materials[1].GetColor(ShaderPropertyID._EmissionColor);
+        originalEmissionCols[0] = stillsuitRenderer.materials[0].GetColor(ShaderPropertyID._GlowColor);
+        originalEmissionCols[1] = stillsuitRenderer.materials[1].GetColor(ShaderPropertyID._GlowColor);
     }
 
     private void RestoreProperties()
@@ -84,8 +90,8 @@ public class PrecursorSuitManager : MonoBehaviour
         stillsuitRenderer.materials[1].SetFloat(ShaderPropertyID._GlowStrength, originalArmsEmission[0]);
         stillsuitRenderer.materials[1].SetFloat(ShaderPropertyID._GlowStrengthNight, originalArmsEmission[1]);
         
-        stillsuitRenderer.materials[0].SetColor(ShaderPropertyID._EmissionColor, originalEmissionCols[0]);
-        stillsuitRenderer.materials[1].SetColor(ShaderPropertyID._EmissionColor, originalEmissionCols[1]);
+        stillsuitRenderer.materials[0].SetColor(ShaderPropertyID._GlowColor, originalEmissionCols[0]);
+        stillsuitRenderer.materials[1].SetColor(ShaderPropertyID._GlowColor, originalEmissionCols[1]);
         if (wasArmEmissionEnabled)
         {
             stillsuitRenderer.materials[1].EnableKeyword("MARMO_EMISSION");
@@ -99,5 +105,43 @@ public class PrecursorSuitManager : MonoBehaviour
     private void OnDestroy()
     {
         ModdedSuitsManager.onSuitEquippedChanged -= OnEquippedSuitChanged;
+    }
+
+    public void RegisterEmissionController(Component owner, EmissionController controller)
+    {
+        emissionControllers[owner] = controller;
+        var highestPriorityItem = emissionControllers.OrderByDescending(kvp => kvp.Value.priority).ElementAt(0).Value;
+        emissionIntensity = highestPriorityItem.emissionIntensity;
+        emissionColor = highestPriorityItem.emissionColor;
+    }
+
+    public void UnregisterEmissionController(Component owner)
+    {
+        emissionControllers.Remove(owner);
+        if (emissionControllers.Count == 0)
+        {
+            emissionIntensity = defaultEmissionIntensity;
+            emissionColor = defaultEmissionColor;
+        }
+        else
+        {
+            var highestPriorityItem = emissionControllers.OrderByDescending(kvp => kvp.Value.priority).ElementAt(0).Value;
+            emissionIntensity = highestPriorityItem.emissionIntensity;
+            emissionColor = highestPriorityItem.emissionColor;
+        }
+    }
+    
+    public struct EmissionController
+    {
+        public Color emissionColor;
+        public float emissionIntensity;
+        public int priority;
+
+        public EmissionController(Color emissionColor, float emissionIntensity, int priority = 10)
+        {
+            this.emissionColor = emissionColor;
+            this.emissionIntensity = emissionIntensity;
+            this.priority = priority;
+        }
     }
 }
