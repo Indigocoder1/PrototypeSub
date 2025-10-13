@@ -20,17 +20,20 @@ public static class PrecursorSuit
 
         var template = new CloneTemplate(PrefabInfo, TechType.WaterFiltrationSuit);
         var bodyTex = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitBody");
-        var bodySpec = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitSpec");
         var armsTex = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitArms");
+        var bodyEmission = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitEmission");
+        var armsEmission = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorArmsEmission");
         
         template.ModifyPrefab += gameObject =>
         {
             var renderer = gameObject.GetComponentInChildren<Renderer>();
 
             renderer.materials[0].SetTexture("_MainTex", bodyTex);
-            renderer.materials[0].SetTexture(ShaderPropertyID._SpecTex, bodySpec);
+            renderer.materials[0].SetTexture(ShaderPropertyID._SpecTex, bodyTex);
+            renderer.materials[0].SetTexture(ShaderPropertyID._Illum, bodyEmission);
             renderer.materials[1].SetTexture("_MainTex", armsTex);
             renderer.materials[1].SetTexture(ShaderPropertyID._SpecTex, armsTex);
+            renderer.materials[1].SetTexture(ShaderPropertyID._Illum, armsEmission);
         };
         
         prefab.SetGameObject(template);
@@ -44,12 +47,15 @@ public static class PrecursorSuit
         var suitTextures = new Dictionary<string, Texture2D>
         {
             { "_MainTex", bodyTex },
-            { "_SpecTex", bodySpec }
+            { "_SpecTex", bodyTex },
+            { "_Illum", bodyEmission }
         };
         
         var armTextures = new Dictionary<string, Texture2D>
         {
-            { "_MainTex", armsTex }
+            { "_MainTex", armsTex },
+            { "_SpecTex", armsTex },
+            { "_Illum", armsEmission }
         };
 
         var suit = new ModdedSuit(suitTextures, armTextures, ModdedSuitsManager.VanillaModel.WaterFiltration,

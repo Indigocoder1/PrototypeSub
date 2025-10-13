@@ -36,7 +36,8 @@ public static class PrecursorPropulsionGloves
         
         var armTextures = new Dictionary<string, Texture2D>
         {
-            { "_MainTex", glovesTex }
+            { "_MainTex", glovesTex },
+            { "_SpecTex", glovesTex }
         };
 
         var gloves = new ModdedGloves(armTextures, ModdedSuitsManager.VanillaModel.Reinforced,

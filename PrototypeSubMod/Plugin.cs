@@ -38,7 +38,7 @@ namespace PrototypeSubMod
     [BepInDependency("com.snmodding.nautilus", "1.0.0.43")]
     [BepInDependency("com.indigocoder.sublibrary", "1.7.5")]
     [BepInDependency("Esper89.TerrainPatcher", "1.2.2")]
-    [BepInDependency("Indigocoder.SuitLib")]
+    [BepInDependency("Indigocoder.SuitLib", "1.1.8")]
     [BepInDependency("ArchitectsLibrary", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.lee23.theredplague", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.danithedani.deepercreatures", BepInDependency.DependencyFlags.SoftDependency)]

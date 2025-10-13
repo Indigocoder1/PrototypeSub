@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PrototypeSubMod.PrecursorGloves;
+namespace PrototypeSubMod.PrecursorWearables;
 
 public class NoPropulsionEnergyTag : MonoBehaviour
 {

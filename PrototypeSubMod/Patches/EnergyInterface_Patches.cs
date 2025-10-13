@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using PrototypeSubMod.PrecursorGloves;
+using PrototypeSubMod.PrecursorWearables;
 
 namespace PrototypeSubMod.Patches;
 

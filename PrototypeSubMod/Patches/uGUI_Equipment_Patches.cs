@@ -147,7 +147,6 @@ internal class uGUI_Equipment_Patches
     [HarmonyPatch(nameof(uGUI_Equipment.OnPointerClick)), HarmonyPrefix]
     private static bool OnPointerClick_Prefix(uGUI_EquipmentSlot instance)
     {
-        Plugin.Logger.LogInfo($"Button down on {instance.slot}");
         if (instance.slot != "Body") return true;
 
         bool hasFactor = false;

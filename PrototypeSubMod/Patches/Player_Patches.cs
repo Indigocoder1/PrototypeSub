@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using PrototypeSubMod.MiscMonobehaviors;
+using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Utility;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ internal class Player_Patches
     {
         Player.main.gameObject.AddComponent<FactorManager>();
         Camera.main.gameObject.AddComponent<LightDistortionApplier>();
+        Player.main.gameObject.AddComponent<PrecursorSuitManager>();
         Camera.main.gameObject.AddComponent<ProtoScreenTeleporterFXManager>();
         Camera.main.gameObject.AddComponent<CloakCutoutApplier>();
 

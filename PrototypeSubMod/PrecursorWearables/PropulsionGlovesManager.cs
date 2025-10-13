@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using PrototypeSubMod.Prefabs;
 using UnityEngine;
 
-namespace PrototypeSubMod.PrecursorGloves;
+namespace PrototypeSubMod.PrecursorWearables;
 
 public class PropulsionGlovesManager : MonoBehaviour
 {
