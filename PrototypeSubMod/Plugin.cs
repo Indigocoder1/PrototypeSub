@@ -328,6 +328,7 @@ namespace PrototypeSubMod
             Logger.LogDebug($"Structures registered");
             
             StoryGoalsRegisterer.Register();
+            RadioMessageRegisterer.Register();
             BiomeRegisterer.Register();
             LootRegister.Register();
             CommandRegisterer.Register();

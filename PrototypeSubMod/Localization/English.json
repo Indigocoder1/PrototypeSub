@@ -60,7 +60,7 @@
   "ProtoWaitRegisteringAudio": "Loading audio...",
   "ProtoWaitRegisteringScenes": "Loading scenes...",
   "ProtoWaitLoadingCyclops": "Loading Cyclops assets...",
-
+  
   // Ency entries
   "EncyPath_DownloadedData/Prototype": "Prototype Development",
   "EncyPath_DownloadedData/Prototype/ProtoUpgrades": "Prototype Vessel Upgrades",
@@ -332,6 +332,12 @@
   "ProtoOrionUnknown": "Unknown",
   "ProtoOrionNoData": "ORION",
   "ProtoOrionFullData": "OR-ION",
+  
+  // Radio Messages
+  "ProtoRadioMessage1": "Radio placeholder 1",
+  "ProtoRadioMessage2": "Radio placeholder 2",
+  "ProtoRadioMessage3": "Radio placeholder 3",
+  "ProtoRadioMessage4": "Radio placeholder 4",
 
   // Facilities
   "CloakDisableTerminal": "Control terminal",
