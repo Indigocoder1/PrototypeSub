@@ -17,7 +17,7 @@ internal class DeployablesStorageTerminal : MonoBehaviour, ISaveDataListener, IL
         new(138.5f, 17.5f, 0),
     };
 
-    public static Vector3 PHASE_GATE_SLOT_POS { get; } = new(0, 200, 0);
+    public static Vector3 PHASE_GATE_SLOT_POS { get; } = new(-13, -41, 0);
 
     public static string[] LightBeaconSlots { get; } = new[]
     {

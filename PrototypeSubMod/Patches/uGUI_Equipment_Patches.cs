@@ -29,22 +29,25 @@ internal class uGUI_Equipment_Patches
 
     private static void SetupDeployableSlots(uGUI_Equipment instance)
     {
-        var slot0 = CloneSlots(instance, DeployablesStorageTerminal.LightBeaconSlots, "BatteryCharger", null, DeployablesStorageTerminal.SLOT_POSITIONS);
+        const float deployablesScale = 0.8f;
+        var slot0 = CloneSlots(instance, DeployablesStorageTerminal.LightBeaconSlots, "BatteryCharger", null, DeployablesStorageTerminal.SLOT_POSITIONS, deployablesScale);
         CloneSlots(instance, new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT } , "BatteryCharger", null,
             new [] { DeployablesStorageTerminal.PHASE_GATE_SLOT_POS });
         
         GameObject go = new();
-        go.transform.SetParent(slot0.transform);
+        go.transform.SetParent(slot0.transform.parent);
         go.name = "DecoyStorageBackground";
 
         go.AddComponent<RectTransform>();
-
-        go.transform.localPosition = new Vector3(152, 57, 0);
+        
         go.transform.localScale = new Vector3(8, 10.3f, 1);
         go.AddComponent<CanvasRenderer>();
         var img = go.AddComponent<Image>();
         img.sprite = Plugin.AssetBundle.LoadAsset<Sprite>("Proto_DeployablesBG");
         img.raycastTarget = false;
+        
+        go.transform.SetParent(slot0.transform);
+        go.transform.localPosition = new Vector3(190, 73, 0);
         
         GameObject storageAccess = GameObject.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("VehicleStorageAccess"), instance.transform);
         storageAccess.SetActive(false);
