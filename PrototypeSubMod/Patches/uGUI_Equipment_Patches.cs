@@ -56,10 +56,10 @@ internal class uGUI_Equipment_Patches
     private static void SetupFactorSlots(uGUI_Equipment instance)
     {
         Vector3[] slotPositions = {
-            new(-250, 20),
-            new(-138, 210),
-            new(138, 210),
-            new(250, 20)
+            new(-145, 225),
+            new(-138, -238),
+            new(145, 225),
+            new(138, -238)
         };
         
         var slot0 = CloneSlots(instance, FactorEquipmentManager.FactorSlots , "BatteryCharger", null, slotPositions, 0.8f);
@@ -69,11 +69,11 @@ internal class uGUI_Equipment_Patches
 
         go.AddComponent<RectTransform>();
         
-        go.transform.localScale = new Vector3(11.87f, 11.87f, 1);
-        go.transform.localPosition = new Vector3(312.5f, -12.5f, 0);
+        go.transform.localScale = new Vector3(12.5f, 12.5f, 1);
+        go.transform.localPosition = new Vector3(181.25f, -281.25f, 0);
         go.AddComponent<CanvasRenderer>();
         var img = go.AddComponent<Image>();
-        img.sprite = Plugin.AssetBundle.LoadAsset<Sprite>("Proto_Factor_UI_1.2");
+        img.sprite = Plugin.AssetBundle.LoadAsset<Sprite>("Proto_Factor_2.2");
         img.raycastTarget = false;
         img.color = new Color(0.52f, 0.99f, 0.52f);
     }
