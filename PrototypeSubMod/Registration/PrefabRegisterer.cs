@@ -20,6 +20,7 @@ internal static class PrefabRegisterer
         WarperRemnant.Register();
         AlienBuildingBlock.Register();
         BlinkFactor.Register();
+        SuitColorFactor.Register();
         PrecursorIngot_Craftable.Register();
         IonPrism_Craftable.Register();
 

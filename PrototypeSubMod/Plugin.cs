@@ -501,7 +501,6 @@ namespace PrototypeSubMod
             {
                 var grabType = AccessTools.TypeByName("CallOfTheVoid.Mono.Creatures.Silence.SilenceCyclopsGrab");
                 var originalMethod = AccessTools.Method(grabType, "SpawnPilotWindowLeakFX");
-                Logger.LogInfo($"Type = {grabType}");
                 var prefix = AccessTools.Method(typeof(SilenceCyclopsGrab_Patches), nameof(SilenceCyclopsGrab_Patches.SpawnPilotWindowLeakFX_Prefix));
                 harmony.Patch(originalMethod, prefix: new HarmonyMethod(prefix));
             }

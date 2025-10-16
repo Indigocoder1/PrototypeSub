@@ -50,6 +50,7 @@ internal class PrecursorFabricator
             .AddCraftNode(TechType.PrecursorIonBattery, "Devices")
             .AddCraftNode(TechType.PrecursorIonPowerCell, "Devices")
             .AddCraftNode(BlinkFactor.prefabInfo.TechType, "Devices")
+            .AddCraftNode(SuitColorFactor.prefabInfo.TechType, "Devices")
             .AddCraftNode(PrecursorSuit.PrefabInfo.TechType, "Devices")
             .AddCraftNode(PrecursorPropulsionGloves.PrefabInfo.TechType, "Devices")
         

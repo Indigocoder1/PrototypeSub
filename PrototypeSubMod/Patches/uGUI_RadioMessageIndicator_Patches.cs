@@ -43,7 +43,7 @@ public class uGUI_RadioMessageIndicator_Patches
     [HarmonyPatch(typeof(Player)), HarmonyPatch(nameof(Player.LateUpdate)), HarmonyPostfix]
     private static void LateUpdate_Postfix()
     {
-        if (previousSpriteDatas.Count == 0) return;
+        if (previousSpriteDatas == null || previousSpriteDatas.Count == 0) return;
 
         foreach (var indicator in previousSpriteDatas.Keys)
         {

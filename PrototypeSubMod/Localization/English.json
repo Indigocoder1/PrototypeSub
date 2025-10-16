@@ -152,6 +152,25 @@
   "Tooltip_BlinkFactor": "Temporary Blink Description.",
   "ProtoSuitUnequipWarning": "Uninstall factors before taking off the suit!",
   "PropulsionGlovesRelease": "Release item {0}",
+  "SuitColorFactor": "Suit Color Factor",
+  "Tooltip_SuitColorFactor": "Allows for the customization of power lines on the Precursor Suit",
+  "SuitColorNext": "Next color",
+  "SuitColorPrev": "Previous color",
+  "SuitIntensityNext": "Increase intensity",
+  "SuitIntensityPrev": "Decrease intensity",
+  "SuitToggleEditMode": "Toggle edit mode",
+  "SuitCurrentColor": "Current color: {0}",
+  "SuitCurrentIntensity": "Intensity: {0}",
+  
+  // Suit Colors
+  "SuitColorGreen": "Green",
+  "SuitColorWhite": "White",
+  "SuitColorBlack": "Black",
+  "SuitColorBlue": "Blue",
+  "SuitColorCyan": "Cyan",
+  "SuitColorMagenta": "Magenta",
+  "SuitColorRed": "Red",
+  "SuitColorYellow": "Yellow",
   
   // Phase Gates
   "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",

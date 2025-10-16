@@ -166,7 +166,7 @@ public class TetherManager : MonoBehaviour, IUIElement
     {
         if (menuOpen) return;
 
-        if (IngameMenu.main.gameObject.activeSelf) return;
+        if (IngameMenu.main.selected) return;
         
         if (!MainCameraControl.main.enabled) return;
 
