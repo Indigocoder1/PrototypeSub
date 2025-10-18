@@ -40,6 +40,7 @@ public class FinFoldManager : MonoBehaviour
         }
 
         hitObject |= outOfRange;
+        hitObject |= !LargeWorldStreamer.main.IsWorldSettled();
 
         if (hitObject != hadHitObject)
         {
