@@ -1,4 +1,6 @@
-﻿using Nautilus.Commands;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Nautilus.Commands;
 using PrototypeSubMod.Facilities.Hull;
 using PrototypeSubMod.Upgrades;
 using UnityEngine;
@@ -37,5 +39,41 @@ internal static class PrototypeCommands
     {
         ScreenCapture.CaptureScreenshot(path, superSize);
         return string.Empty;
+    }
+
+    [ConsoleCommand("radialfps")]
+    public static string RadialFPS()
+    {
+        var fpsCounter = GameObject.FindObjectOfType<FPSCounter>();
+        fpsCounter.enabled = true;
+        UWE.CoroutineHost.StartCoroutine(LogFPS(fpsCounter));
+        return string.Empty;
+    }
+
+    private static IEnumerator LogFPS(FPSCounter fpsCounter)
+    {
+        Plugin.Logger.LogInfo("------------------------------------------");
+        var player = Player.main;
+        player.cinematicModeActive = true;
+        player.FreezeStats();
+        player.playerController.SetEnabled(false);
+        var mainCameraTrans = Camera.main.transform;
+        const int rotationIncrements = 8;
+        mainCameraTrans.localEulerAngles = Vector3.zero;
+        for (int j = 0; j < rotationIncrements; j++)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                yield return null;
+            }
+        
+            Plugin.Logger.LogInfo($"{1 / fpsCounter.avgFrameTime} fps at {mainCameraTrans.eulerAngles.y} degrees");
+            mainCameraTrans.eulerAngles += new Vector3(0, 360f / rotationIncrements, 0);
+        }
+
+        player.cinematicModeActive = false;
+        player.UnfreezeStats();
+        player.playerController.SetEnabled(true);
+        fpsCounter.enabled = false;
     }
 }
