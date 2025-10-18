@@ -17,6 +17,8 @@ public class Blink : Factor
     
     public override void Use()
     {
+        if (Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) return;
+        
         var waterMotor = Player.main.GetComponent<UnderwaterMotor>();
         
         motor = waterMotor.enabled ? waterMotor : Player.main.GetComponent<GroundMotor>();
@@ -34,7 +36,8 @@ public class Blink : Factor
         motor.verticalMaxSpeed *= SPEED_MULTIPLIER;
         motor.waterAcceleration *= SPEED_MULTIPLIER * 2;
         motor.groundAcceleration *= SPEED_MULTIPLIER * 2;
-        
+
+        ErrorMessage.AddDebug("Blink factor activated");
         CoroutineHost.StartCoroutine(WaitDuration());
     }
 
