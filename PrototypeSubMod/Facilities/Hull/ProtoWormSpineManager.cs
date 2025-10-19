@@ -18,6 +18,11 @@ public class ProtoWormSpineManager : MonoBehaviour
     
     private void Start()
     {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
         for (int i = 0; i < spineSegmentCount; i++)
         {
             var spine = Instantiate(spineSegmentPrefab, segmentsParent);
@@ -41,4 +46,5 @@ public class ProtoWormSpineManager : MonoBehaviour
     public Vector3 GetInitialLocalPos() => initialLocalPos;
     public Vector3 GetIncrementPerSpine() => incrementPerSpine;
     public int GetSpineSegmentCount() => spineSegmentCount;
+    public Transform GetChild(int index) => segmentsParent.GetChild(index);
 }

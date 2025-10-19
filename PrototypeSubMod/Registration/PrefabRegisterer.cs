@@ -29,6 +29,7 @@ internal static class PrefabRegisterer
         Prototype_Craftable.Register();
         ProtoBuildTerminal_World.Register();
         DeployableLight_Craftable.Register();
+        ProtoAggressiveWyrm.Register();
         
         yield return new WaitForEndOfFrame();
         
