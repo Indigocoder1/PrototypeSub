@@ -28,7 +28,7 @@ public class WormSpawnEvent : MonoBehaviour
     [SaveStateReference]
     private static GameObject _digOutFX;
 
-    [SerializeField] private ProtoWormAnimator wormAnimator;
+    [SerializeField] private PassiveWormAnimator wormAnimator;
     [SerializeField] private GameObject disableObjects;
     [SerializeField] private Transform raycastOrigin;
     
@@ -128,15 +128,15 @@ public class WormSpawnEvent : MonoBehaviour
             return;
         }
         
-        float relativeWormLength = wormAnimator.GetDistanceMoved() / wormAnimator.GetWormLength();
+        float relativeWormLength = wormAnimator.GetDistanceMoved() / wormAnimator.GetRotationDuration();
         if (hitTerrain && Time.time > timeNextParticles && relativeWormLength > 0.2f && !wormAnimator.HeadIsDisabled())
         {
-            const int maxParticleCount = 6;
+            const int maxParticleCount = 3;
             if (particleCount <= maxParticleCount)
             {
                 float normalizedParticleCount = (float)particleCount / maxParticleCount;
-                float particleDuration = Mathf.Lerp(wormAnimator.GetWormLength() / 1.5f,
-                    wormAnimator.GetWormLength(),Mathf.InverseLerp(0.5f, 1f, normalizedParticleCount));
+                float particleDuration = Mathf.Lerp(wormAnimator.GetRotationDuration() / 1.5f,
+                    wormAnimator.GetRotationDuration(),Mathf.InverseLerp(0.5f, 1f, normalizedParticleCount));
                 
                 StartCoroutine(SpawnPrefabRepeating(_digInFX, raycastOrigin.position, particleDuration,
                     0.5f));
@@ -149,7 +149,7 @@ public class WormSpawnEvent : MonoBehaviour
         if (!spawnedDigOutParticles && sqrDistToHead < 400 && !wormAnimator.HeadIsDisabled())
         {
             UWE.CoroutineHost.StartCoroutine(SpawnPrefabRepeating(_digOutFX, raycastOrigin.position,
-                wormAnimator.GetWormLength(), 0.5f));
+                wormAnimator.GetRotationDuration(), 0.5f));
             breachSurfaceSFX.Play();
             swimLoopSFX.Play();
             
@@ -179,7 +179,7 @@ public class WormSpawnEvent : MonoBehaviour
         particleCount++;
         for (int i = 0; i < Mathf.CeilToInt(totalDuration / particleDuration); i++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < 2; j++)
             {
                 var instance = Instantiate(prefab, point + Random.onUnitSphere * 2, Random.rotation);
                 instance.transform.localScale = Vector3.one * 2f;
