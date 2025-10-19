@@ -43,13 +43,12 @@ public class PassiveWormAnimator : ProtoWormAnimator
 
     protected override void UpdateFollowPoints()
     {
-        if (Mathf.FloorToInt(distMoved / spineIncrement) != segmentsNeededLastFrame)
-        {
-            Vector3 spawnPoint = transform.position - transform.forward * absIncrement;
-            followPoints.Add(new FollowPoint(spawnPoint, transform.rotation));
+        if (Mathf.FloorToInt(distMoved / spineIncrement) == segmentsNeededLastFrame) return;
+        
+        Vector3 spawnPoint = transform.position - transform.forward * absIncrement;
+        followPoints.Add(new FollowPoint(spawnPoint, transform.rotation));
             
-            if (followPoints.Count > spineSegmentsParent.childCount + 1) followPoints.RemoveAt(0);
-        }
+        if (followPoints.Count > spineSegmentsParent.childCount + 1) followPoints.RemoveAt(0);
     }
 
     public override float GetDistanceMoved() => distMoved;
