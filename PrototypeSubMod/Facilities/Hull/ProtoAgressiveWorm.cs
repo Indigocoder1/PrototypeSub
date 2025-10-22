@@ -8,15 +8,17 @@ namespace PrototypeSubMod.Facilities.Hull;
 public class ProtoAggressiveWorm : Creature
 {
     [SerializeField] private ProtoWormSpineManager spineManager;
-    [Range(0, 1)]
-    [SerializeField] private float aggressionPercentage;
     [SerializeField] private Color passiveEmissionColor;
     [SerializeField] private Color aggressiveEmissionColor;
     [SerializeField] private GameObject headObject;
+    [SerializeField] private float secondsInVoidForAggression;
 
     private Renderer[] headRenderers;
     private List<Renderer>[] segmentRenderers;
     private VFXElectricArcs[] electricArcs;
+    private float secondsInVoid;
+    private int segmentCount;
+    private int numSegmentsAggressiveLastFrame;
     
     public override void Start()
     {
@@ -26,6 +28,7 @@ public class ProtoAggressiveWorm : Creature
         GetComponent<Rigidbody>().useGravity = false;
         StartCoroutine(RetrieveSegmentRends());
         headRenderers = headObject.GetComponentsInChildren<Renderer>();
+        segmentCount = spineManager.GetSpineSegmentCount();
     }
 
     private IEnumerator RetrieveSegmentRends()
@@ -48,15 +51,36 @@ public class ProtoAggressiveWorm : Creature
 
     private void Update()
     {
-        var segmentCount = spineManager.GetSpineSegmentCount();
-        var amountAggressive = (int)(aggressionPercentage * segmentCount);
+        var biomeString = Player.main.GetBiomeString();
+        bool inVoid = biomeString is "void" or "";
+        if (secondsInVoid < secondsInVoidForAggression && inVoid)
+        {
+            secondsInVoid += Time.deltaTime;
+        }
+        else if (secondsInVoid > 0 && !inVoid)
+        {
+            secondsInVoid -= Time.deltaTime;
+        }
+        
+        var segmentsAggressive = (int)(secondsInVoid / secondsInVoidForAggression * segmentCount);
+
+        if (segmentsAggressive != numSegmentsAggressiveLastFrame)
+        {
+            UpdateSegmentColors(segmentsAggressive);
+        }
+        
+        numSegmentsAggressiveLastFrame = segmentsAggressive;
+    }
+
+    private void UpdateSegmentColors(int segmentsAggressive)
+    {
         for (var i = 0; i < segmentCount; i++)
         {
             if (segmentRenderers == null) break;
             
             if (!spineManager.transform.GetChild(i).gameObject.activeSelf) continue;
             
-            var isAggressive = i >= segmentCount - amountAggressive;
+            var isAggressive = i >= segmentCount - segmentsAggressive;
             foreach (var rend in segmentRenderers[i])
             {
                 UpdateRendererEmissionColor(rend, isAggressive);
@@ -68,7 +92,7 @@ public class ProtoAggressiveWorm : Creature
 
         foreach (var headRenderer in headRenderers)
         {
-            UpdateRendererEmissionColor(headRenderer, aggressionPercentage >= 0.95f);
+            UpdateRendererEmissionColor(headRenderer, segmentsAggressive == segmentCount);
         }
     }
 
