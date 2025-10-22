@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using PrototypeSubMod.Facilities.Hull;
 using PrototypeSubMod.MiscMonobehaviors;
 using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Utility;
@@ -25,8 +26,9 @@ internal class Player_Patches
     private static void Start_Postfix()
     {
         Player.main.gameObject.AddComponent<FactorManager>();
-        Camera.main.gameObject.AddComponent<LightDistortionApplier>();
         Player.main.gameObject.AddComponent<PrecursorSuitManager>();
+        Player.main.gameObject.AddComponent<AggressiveWyrmSpawner>();
+        Camera.main.gameObject.AddComponent<LightDistortionApplier>();
         Camera.main.gameObject.AddComponent<ProtoScreenTeleporterFXManager>();
         Camera.main.gameObject.AddComponent<CloakCutoutApplier>();
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace PrototypeSubMod.Facilities.Hull;
 
 public class ProtoAggressiveWorm : Creature
 {
+    public event Action onDespawn; 
+    
     [SerializeField] private ProtoWormSpineManager spineManager;
     [SerializeField] private Color passiveEmissionColor;
     [SerializeField] private Color aggressiveEmissionColor;
@@ -114,5 +117,10 @@ public class ProtoAggressiveWorm : Creature
         {
             line.line.material.color = color;
         }
+    }
+
+    public override void OnDestroy()
+    {
+        onDespawn?.Invoke();
     }
 }
