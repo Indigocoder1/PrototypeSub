@@ -6104,6 +6104,7 @@ GameObject:
   - component: {fileID: 5351068426189712924}
   - component: {fileID: 28949104760699908}
   - component: {fileID: 7524167765557555877}
+  - component: {fileID: 1395020062463200846}
   m_Layer: 0
   m_Name: ProtoAgressiveWorm
   m_TagString: Untagged
@@ -6336,6 +6337,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+--- !u!114 &1395020062463200846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351068426189712925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -587570496, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorSky: 0
+  customSkyPrefab: {fileID: 0}
+  dynamic: 0
+  emissiveFromPower: 0
+  renderers: []
 --- !u!1 &5358476355074318651
 GameObject:
   m_ObjectHideFlags: 0
@@ -8986,7 +9004,7 @@ MonoBehaviour:
   m_Script: {fileID: 1908645677, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skyApplier: {fileID: 0}
+  skyApplier: {fileID: 1395020062463200846}
   segmentsParent: {fileID: 8262272570642887209}
   spineSegmentPrefab: {fileID: 5212892746868434058, guid: 5b33fa7ba83b0264e8bd720c37900869,
     type: 3}
