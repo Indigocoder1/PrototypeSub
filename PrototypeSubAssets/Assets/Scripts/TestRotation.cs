@@ -44,7 +44,8 @@ public class TestRotation : MonoBehaviour
         var rotationSpeed = GetRotationSpeed(transform.position, transform.right, out var angleToTarget);
         float distToTarget = Vector3.Distance(transform.position, target.position);
         float diameter = distToTarget / (Mathf.Sin(angleToTarget * Mathf.Deg2Rad) * forwardsSpeed);
-        Gizmos.DrawSphere(transform.position + transform.right * diameter * forwardsSpeed / 2, 0.2f);
+        var sign = Mathf.Sign(Vector3.Dot(target.position - transform.position, transform.right));
+        Gizmos.DrawSphere(transform.position + transform.right * diameter * forwardsSpeed / 2 * sign, 0.2f);
         var point = transform.position;
         var direction = transform.forward;
         
