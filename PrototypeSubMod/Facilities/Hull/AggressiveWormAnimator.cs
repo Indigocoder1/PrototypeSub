@@ -4,6 +4,8 @@ namespace PrototypeSubMod.Facilities.Hull;
 
 public class AggressiveWormAnimator : ProtoWormAnimator
 {
+    [SerializeField] private float speed;
+    
     private float distMoved;
     private float spineIncrement;
     private int segmentsNeededLastFrame;
@@ -13,11 +15,12 @@ public class AggressiveWormAnimator : ProtoWormAnimator
         base.Start();
 
         spineIncrement = spineManager.GetIncrementPerSpine().z;
-        distMoved = spineIncrement * spineManager.GetSpineSegmentCount();
     }
     
     protected override void Update()
     {
+        transform.position += transform.forward * (speed * Time.deltaTime);
+        distMoved += speed * Time.deltaTime;
         base.Update();
         
         segmentsNeededLastFrame = Mathf.FloorToInt(distMoved / spineIncrement);

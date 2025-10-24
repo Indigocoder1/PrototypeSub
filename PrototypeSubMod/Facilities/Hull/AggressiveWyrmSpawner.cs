@@ -19,23 +19,35 @@ public class AggressiveWyrmSpawner : MonoBehaviour
 
         if (inVoid != wasInVoid && inVoid && !wyrmSpawned)
         {
-            var hitInfo = FindSpawnPoint();
-            ErrorMessage.AddError($"Entered the void | Spawn point at {hitInfo.point}");
-            Plugin.Logger.LogInfo($"Spawn point at {hitInfo.point}");
-            StartCoroutine(SpawnWyrm(hitInfo));
+            var (hitPoint, info) = FindSpawnPoint();
+            var point = info.point;
+            var normal = info.normal;
+            if (!hitPoint)
+            {
+                var mainCam = Camera.main.transform;
+                var dir = (-mainCam.forward - mainCam.up) / 2;
+                dir.Normalize();
+                point = Player.main.transform.position + dir * 50f;
+                normal = -dir;
+                Plugin.Logger.LogInfo($"Didn't detect any hits. Resorting to fallback spawn location");
+            }
+            
+            ErrorMessage.AddError($"Entered the void | Spawn point at {point}");
+            Plugin.Logger.LogInfo($"Spawn point at {point}");
+            StartCoroutine(SpawnWyrm(point, normal));
         }
 
         wasInVoid = inVoid;
     }
 
-    private IEnumerator SpawnWyrm(RaycastHit hitInfo)
+    private IEnumerator SpawnWyrm(Vector3 point, Vector3 normal)
     {
         wyrmSpawned = true;
         var task = CraftData.GetPrefabForTechTypeAsync(ProtoAggressiveWyrm.prefabInfo.TechType);
         yield return task;
 
         var prefab = task.GetResult();
-        var instance = Instantiate(prefab, hitInfo.point - hitInfo.normal * 10f, Quaternion.LookRotation(hitInfo.normal));
+        var instance = Instantiate(prefab, point - normal * 10f, Quaternion.LookRotation(normal));
         instance.GetComponent<ProtoAggressiveWorm>().onDespawn += OnWyrmDespawned;
     }
 
@@ -44,19 +56,20 @@ public class AggressiveWyrmSpawner : MonoBehaviour
         wyrmSpawned = false;
     }
 
-    private RaycastHit FindSpawnPoint()
+    private (bool hit, RaycastHit info) FindSpawnPoint()
     {
         var testDirections = PointsOnSphere(10);
         RaycastHit raycastHit = default;
+        bool hit = false;
         foreach (var dir in testDirections)
         {
-            bool hit = Physics.Raycast(Player.main.transform.position, dir,
+            hit = Physics.Raycast(Player.main.transform.position, dir,
                 out raycastHit, 100, 1 << LayerID.TerrainCollider);
             if (!hit) continue;
             break;
         }
 
-        return raycastHit;
+        return (hit, raycastHit);
     }
     
     private Vector3[] PointsOnSphere(int num)
