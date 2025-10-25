@@ -19,7 +19,7 @@ public class DraggableNumberSelector : MonoBehaviour
     {
         if (!collider) TryGetComponent(out collider);
     }
-
+    
     private void Start()
     {
         var numberData = draggableNumberSelector.GetClosestNumberValue(transform.localPosition.x);
