@@ -26,14 +26,20 @@ public class TestRotation : MonoBehaviour
             rotationSpeed = -maxRotationSpeed;
             angleTravelledRecalculate = maxRotationSpeed * 2;
         }
+        
+        if (Mathf.Abs(rotationSpeed) < maxRotationSpeed && angleToTarget > 90f)
+        {
+            rotationSpeed = Mathf.Sign(rotationSpeed) * maxRotationSpeed;
+            angleTravelledRecalculate = (angleToTarget - 10) / maxRotationSpeed;
+        }
 
         RecalculateUpVector();
     }
 
     private void Update()
     {
-        transform.position += transform.forward * (forwardsSpeed * gizmoTimestep);
-        float angleDelta = rotationSpeed * gizmoTimestep;
+        transform.position += transform.forward * forwardsSpeed * Time.deltaTime;
+        float angleDelta = rotationSpeed * Time.deltaTime;
             
         transform.forward = Quaternion.AngleAxis(angleDelta, upVector) * transform.forward;
         angleTravelled += Mathf.Abs(angleDelta);
@@ -60,6 +66,12 @@ public class TestRotation : MonoBehaviour
             rotSpeed = -maxRotationSpeed;
             angleRecalculate = maxRotationSpeed * 2;
             dirToTarget += transform.right * 0.001f;
+        }
+        
+        if (angleToTarget > maxRotationSpeed)
+        {
+            rotSpeed = Mathf.Sign(rotSpeed) * maxRotationSpeed;
+            angleRecalculate = angleToTarget;
         }
         
         Gizmos.color = Color.white;

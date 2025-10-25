@@ -6106,6 +6106,7 @@ GameObject:
   - component: {fileID: 7524167765557555877}
   - component: {fileID: 1395020062463200846}
   - component: {fileID: 217774969584853644}
+  - component: {fileID: 1938582289393610112}
   m_Layer: 0
   m_Name: ProtoAgressiveWorm
   m_TagString: Untagged
@@ -6310,9 +6311,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spineManager: {fileID: 3559386083336854524}
   spineSegmentsParent: {fileID: 8262272570642887209}
-  speed: 10
-  rotationSpeed: 60
-  rotationAmplitude: 20
+  forwardsSpeed: 15
+  maxRotationSpeed: 20
 --- !u!114 &28949104760699908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6377,6 +6377,22 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   minActionCheckInterval: -1
+  wormAnimator: {fileID: 5351068426189712924}
+  offsetFromPlayer: 75
+  timeBetweenPointRecalculations: 10
+--- !u!114 &1938582289393610112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351068426189712925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -717502810, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellLevel: 3
 --- !u!1 &5358476355074318651
 GameObject:
   m_ObjectHideFlags: 0

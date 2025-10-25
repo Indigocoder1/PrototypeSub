@@ -1,48 +1,40 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
 public class WyrmFollowPlayer : CreatureAction
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private float rotationAmplitude;
+    [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private float offsetFromPlayer;
+    [SerializeField] private float timeBetweenPointRecalculations = 15f;
 
     private Vector3 targetPoint;
-    private bool active;
+    private float recalculationCountdown;
 
     private void Start()
     {
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x - rotationAmplitude,
-            transform.localEulerAngles.y, transform.localEulerAngles.z);
         RecalculateTargetPoint();
-    }
-
-    public override void StartPerform(Creature creature, float time)
-    {
-        base.StartPerform(creature, time);
-        active = true;
-    }
-    
-    public override void StopPerform(Creature creature, float time)
-    {
-        base.StopPerform(creature, time);
-        active = false;
     }
 
     private void Update()
     {
-        if (!active) return;
-        
-        transform.position += transform.forward * (speed * Time.deltaTime);
-        var angle = Mathf.Sin(Time.time * rotationSpeed * Mathf.Deg2Rad) * rotationAmplitude;
-        transform.Rotate(transform.right, angle * Time.deltaTime, Space.Self);
+        if (recalculationCountdown > 0)
+        {
+            recalculationCountdown -= Time.deltaTime;
+        }
+        else
+        {
+            RecalculateTargetPoint();
+        }
     }
 
     private void RecalculateTargetPoint()
     {
         var dir = Player.main.transform.position - transform.position;
         targetPoint = Player.main.transform.position + dir.normalized * offsetFromPlayer;
+        wormAnimator.SetTravelTarget(targetPoint, RecalculateTargetPoint);
+        recalculationCountdown = timeBetweenPointRecalculations;
+        Plugin.Logger.LogInfo($"Recalculating target point on {gameObject}");
     }
 }
