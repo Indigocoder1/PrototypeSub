@@ -23,7 +23,7 @@ public class NumberPuzzleManager : MonoBehaviour
         }
     }
 
-    public void SelectNumber(int number)
+    public void SelectNumber(int number, bool? isSecondary = null)
     {
         if (secondaryNumber > 0)
         {
@@ -34,19 +34,33 @@ public class NumberPuzzleManager : MonoBehaviour
         {
             selectableNumbers[primaryNumber - 1].EnableSelectedIndicators(0);
         }
-        
-        if (selectedIndex == 0)
+
+        if (isSecondary == null)
         {
-            if (number == primaryNumber)
+            if (selectedIndex == 0)
+            {
+                if (number == primaryNumber)
+                {
+                    secondaryNumber = number;
+                    selectedIndex++;
+                }
+                primaryNumber = number;
+            }
+            else
             {
                 secondaryNumber = number;
-                selectedIndex++;
             }
-            primaryNumber = number;
         }
         else
         {
-            secondaryNumber = number;
+            if (!isSecondary.Value)
+            {
+                primaryNumber = number;
+            }
+            else
+            {
+                secondaryNumber = number;
+            }
         }
         
         if (primaryNumber > 0)

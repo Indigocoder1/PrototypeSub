@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 2378233314650598317}
   - component: {fileID: 2378233314650598316}
   - component: {fileID: 2378233314650598315}
-  - component: {fileID: 2378233314650598318}
   m_Layer: 0
   m_Name: SelectableNumber
   m_TagString: Untagged
@@ -170,68 +169,6 @@ MonoBehaviour:
   - {fileID: 2186815733961215393}
   - {fileID: 2413473161207379459}
   representativeNumber: 1
---- !u!114 &2378233314650598318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2378233314650598313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1509409573, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 0.44313726, g: 1, b: 0.44313726, a: 1}
-    m_HighlightedColor: {r: 0.34082413, g: 0.6509434, b: 0.34082413, a: 1}
-    m_PressedColor: {r: 0.34082413, g: 0.6509434, b: 0.34082413, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 2378233314650598316}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
-  onClickWrapper:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2378233314650598315}
-        m_MethodName: Select
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onEnterFX: {fileID: 0}
-  onExitFX: {fileID: 0}
-  onClickFX: {fileID: 0}
-  volume: 1
-  minDistForSound: 5
 --- !u!1 &6385609176747282110
 GameObject:
   m_ObjectHideFlags: 0

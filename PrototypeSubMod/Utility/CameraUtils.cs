@@ -6,7 +6,12 @@ internal class ProtoCameraUtils
 {
     public static Vector2 CalculateTargetAngleDelta(Transform target, float maxSpeed)
     {
-        var targetAngles = Quaternion.LookRotation(target.position - Camera.main.transform.position);
+        return CalculateTargetAngleDelta(target.position, maxSpeed);
+    }
+    
+    public static Vector2 CalculateTargetAngleDelta(Vector3 point, float maxSpeed)
+    {
+        var targetAngles = Quaternion.LookRotation(point - Camera.main.transform.position);
 
         Vector3 euler1 = targetAngles.eulerAngles;
         Vector3 euler2 = Camera.main.transform.eulerAngles;
