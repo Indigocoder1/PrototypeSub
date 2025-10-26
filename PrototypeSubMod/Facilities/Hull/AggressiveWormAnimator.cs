@@ -8,14 +8,14 @@ public class AggressiveWormAnimator : ProtoWormAnimator
     [SerializeField] private float forwardsSpeed;
     [SerializeField] private float maxRotationSpeed;
     
-    private float distMoved;
-    private float spineIncrement;
-    private int segmentsNeededLastFrame;
     private Action onReachedTarget;
     private Vector3 upVector;
     private Vector3 targetPoint;
+    private bool stasisPulseFrozen;
+    private int segmentsNeededLastFrame;
+    private float distMoved;
+    private float spineIncrement;
     private float rotationSpeed;
-    private float prevAngleToTarget;
     private float angleTravelled;
     private float angleTravelledRecalculate;
     
@@ -30,8 +30,7 @@ public class AggressiveWormAnimator : ProtoWormAnimator
     
     protected override void Update()
     {
-        var dirToTarget = targetPoint - transform.position;
-        var angleToTarget = Vector3.Angle(transform.forward, dirToTarget);
+        if (stasisPulseFrozen) return;
         
         transform.position += transform.forward * (forwardsSpeed * Time.deltaTime);
         
@@ -54,8 +53,6 @@ public class AggressiveWormAnimator : ProtoWormAnimator
         {
             onReachedTarget?.Invoke();
         }
-
-        prevAngleToTarget = angleToTarget;
     }
     
     protected override void UpdateFollowPoints()
@@ -122,6 +119,16 @@ public class AggressiveWormAnimator : ProtoWormAnimator
         this.onReachedTarget = onReachedTarget;
         targetPoint = point;
         UpdateRotationSpeed();
+    }
+
+    public void OnFreezeByStasisPulse()
+    {
+        stasisPulseFrozen = true;
+    }
+
+    public void OnUnfreezeByStasisPulse()
+    {
+        stasisPulseFrozen = false;
     }
 
     private void UpdateRotationSpeed()

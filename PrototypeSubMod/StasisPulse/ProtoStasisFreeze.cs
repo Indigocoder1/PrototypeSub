@@ -17,6 +17,7 @@ internal class ProtoStasisFreeze : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         UWE.Utils.SetIsKinematicAndUpdateInterpolation(rigidbody, true);
         rigidbody.SendMessage("OnFreezeByStasisSphere", SendMessageOptions.DontRequireReceiver);
+        rigidbody.SendMessage("OnFreezeByStasisPulse", SendMessageOptions.DontRequireReceiver);
         var mixin = GetComponent<LiveMixin>();
         if (mixin.maxHealth > 500)
         {
@@ -34,6 +35,7 @@ internal class ProtoStasisFreeze : MonoBehaviour
 
         UWE.Utils.SetIsKinematicAndUpdateInterpolation(rigidbody, false);
         rigidbody.SendMessage("OnUnfreezeByStasisSphere", SendMessageOptions.DontRequireReceiver);
+        rigidbody.SendMessage("OnUnfreezeByStasisPulse", SendMessageOptions.DontRequireReceiver);
         Utils.PlayOneShotPS(unfreezeFX, transform.position, Quaternion.identity);
 
         Destroy(this);
