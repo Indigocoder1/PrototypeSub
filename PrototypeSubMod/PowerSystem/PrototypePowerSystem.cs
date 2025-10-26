@@ -136,6 +136,7 @@ public class PrototypePowerSystem : MonoBehaviour, ISaveDataListener, IProtoTree
 
     public void OnProtoDeserializeObjectTree(ProtobufSerializer serializer)
     {
+        Initialize();
         UWE.CoroutineHost.StartCoroutine(OnDeserialized());
     }
 
@@ -148,6 +149,10 @@ public class PrototypePowerSystem : MonoBehaviour, ISaveDataListener, IProtoTree
         var data = serializationManager.saveData.EnsureAsPrototypeData();
         if (data.serializedPowerEquipment != null)
         {
+            foreach (var kvp in data.serializedPowerEquipment)
+            {
+                Plugin.Logger.LogInfo($"{kvp.Key} | {kvp.Value}");
+            }
             StorageHelper.TransferEquipment(storageRoot.gameObject, data.serializedPowerEquipment, equipment);
         }
 
