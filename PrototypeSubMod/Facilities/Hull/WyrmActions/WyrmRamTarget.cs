@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +16,8 @@ public class WyrmRamTarget : CreatureAction
     
     public override float Evaluate(Creature creature, float time)
     {
-        return performing ? 1 : Random.Range(0.4f, 0.6f);
+        //return performing ? 1 : Random.Range(0.4f, 0.6f);
+        return 0;
     }
 
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -27,7 +27,7 @@ public class WyrmRamTarget : CreatureAction
         base.Perform(creature, time, deltaTime);
         performing = true;
         attackStage = 0;
-        wormAnimator.SetTravelTarget(GetSetupPoints()[attackStage], OnReachedTarget);
+        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
         Plugin.Logger.LogInfo($"Started ram target");
     }
 
@@ -35,10 +35,10 @@ public class WyrmRamTarget : CreatureAction
     {
         if (!performing) return;
         
-        wormAnimator.SetTravelTarget(GetSetupPoints()[attackStage], OnReachedTarget);
+        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
     }
     
-    private Vector3[] GetSetupPoints()
+    private Vector3[] GetAttackPoints()
     {
         const float setupDist = 100;
         
@@ -57,9 +57,8 @@ public class WyrmRamTarget : CreatureAction
         var forwardDir = targetCenter.normalized;
         var rightDir = -Vector3.Cross(forwardDir, Vector3.up);
         // Offset to the right to setup for the swing towards the player
-        points[0] = targetCenter + rightDir * setupDist;
-        // Lower the target point slightly to make the wyrm loop vertically for the final attack
-        points[1] = targetCenter + forwardDir * setupDist - Vector3.up * 2f;
+        points[0] = targetCenter + rightDir * setupDist - Vector3.up * 2f;
+        points[1] = targetCenter + forwardDir * setupDist;
         // Go for the player
         points[2] = targetCenter;
 
@@ -69,7 +68,7 @@ public class WyrmRamTarget : CreatureAction
     private void OnReachedTarget()
     {
         attackStage++;
-        if (attackStage > GetSetupPoints().Length - 1)
+        if (attackStage > GetAttackPoints().Length - 1)
         {
             performing = false;
             var colliders = Physics.OverlapSphere(transform.position, attackRadius);

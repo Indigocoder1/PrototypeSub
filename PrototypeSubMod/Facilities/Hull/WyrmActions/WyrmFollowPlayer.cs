@@ -11,6 +11,7 @@ public class WyrmFollowPlayer : CreatureAction
     [SerializeField] private float maxAngleFromForward;
     
     private Vector3 targetPoint;
+    private bool performing;
     private float timeLastPerformed;
 
     private void Start()
@@ -20,17 +21,25 @@ public class WyrmFollowPlayer : CreatureAction
 
     public override float Evaluate(Creature creature, float time)
     {
-        return ((ProtoAggressiveWorm)creature).IsAggressive() ? 0 : 1;
+        if (!((ProtoAggressiveWorm)creature).IsAggressive())
+        {
+            return 1;
+        }
+        
+        return performing ? 1 : Random.Range(0.4f, 0.6f);
     }
 
     public override void Perform(Creature creature, float time, float deltaTime)
     {
+        if (performing) return;
+        
         base.Perform(creature, time, deltaTime);
 
         if (Time.time < timeLastPerformed + timeBetweenPointRecalculations) return;
         
         RecalculateTargetPoint();
         timeLastPerformed = Time.time;
+        performing = true;
     }
 
     private void RecalculateTargetPoint()
@@ -38,10 +47,15 @@ public class WyrmFollowPlayer : CreatureAction
         var dir = Random.onUnitSphere;
         dir *= Mathf.Sign(Vector3.Dot(dir, dir));
         float angleBetween = Vector3.Angle(dir, dir);
-        dir = Vector3.RotateTowards(dir, dir, angleBetween * (1 - maxAngleFromForward / 90) * Mathf.Deg2Rad, 1);
+        dir = Vector3.RotateTowards(dir, Player.main.transform.position.normalized, angleBetween * (1 - maxAngleFromForward / 90) * Mathf.Deg2Rad, 1);
         
         targetPoint = Player.main.transform.position + dir.normalized * offsetFromPlayer;
-        wormAnimator.SetTravelTarget(targetPoint, RecalculateTargetPoint);
+        wormAnimator.SetTravelTarget(targetPoint, OnReachTarget);
         Plugin.Logger.LogInfo($"Recalculating target point on {gameObject}");
+    }
+
+    private void OnReachTarget()
+    {
+        performing = false;
     }
 }
