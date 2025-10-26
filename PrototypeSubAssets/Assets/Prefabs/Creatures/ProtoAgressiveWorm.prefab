@@ -6376,7 +6376,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  minActionCheckInterval: -1
+  minActionCheckInterval: 10
   wormAnimator: {fileID: 5351068426189712924}
   offsetFromPlayer: 75
   timeBetweenPointRecalculations: 10

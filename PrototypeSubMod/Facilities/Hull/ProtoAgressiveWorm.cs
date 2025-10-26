@@ -119,6 +119,8 @@ public class ProtoAggressiveWorm : Creature
         }
     }
 
+    public bool IsAggressive() => secondsInVoid >= secondsInVoidForAggression;
+
     public override void OnDestroy()
     {
         onDespawn?.Invoke();
