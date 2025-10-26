@@ -13,7 +13,7 @@ public class WyrmRamTarget : CreatureAction
     [SerializeField] private float attackRadius;
 
     private bool performing;
-    private int setupStage;
+    private int attackStage;
     
     public override float Evaluate(Creature creature, float time)
     {
@@ -26,8 +26,8 @@ public class WyrmRamTarget : CreatureAction
         
         base.Perform(creature, time, deltaTime);
         performing = true;
-        setupStage = 0;
-        wormAnimator.SetTravelTarget(GetSetupPoints()[setupStage], OnReachedTarget);
+        attackStage = 0;
+        wormAnimator.SetTravelTarget(GetSetupPoints()[attackStage], OnReachedTarget);
         Plugin.Logger.LogInfo($"Started ram target");
     }
 
@@ -35,7 +35,7 @@ public class WyrmRamTarget : CreatureAction
     {
         if (!performing) return;
         
-        wormAnimator.SetTravelTarget(GetSetupPoints()[setupStage], OnReachedTarget);
+        wormAnimator.SetTravelTarget(GetSetupPoints()[attackStage], OnReachedTarget);
     }
     
     private Vector3[] GetSetupPoints()
@@ -56,8 +56,11 @@ public class WyrmRamTarget : CreatureAction
         
         var forwardDir = targetCenter.normalized;
         var rightDir = -Vector3.Cross(forwardDir, Vector3.up);
+        // Offset to the right to setup for the swing towards the player
         points[0] = targetCenter + rightDir * setupDist;
-        points[1] = targetCenter + forwardDir * setupDist;
+        // Lower the target point slightly to make the wyrm loop vertically for the final attack
+        points[1] = targetCenter + forwardDir * setupDist - Vector3.up * 2f;
+        // Go for the player
         points[2] = targetCenter;
 
         return points;
@@ -65,8 +68,8 @@ public class WyrmRamTarget : CreatureAction
 
     private void OnReachedTarget()
     {
-        setupStage++;
-        if (setupStage > GetSetupPoints().Length - 1)
+        attackStage++;
+        if (attackStage > GetSetupPoints().Length - 1)
         {
             performing = false;
             var colliders = Physics.OverlapSphere(transform.position, attackRadius);
