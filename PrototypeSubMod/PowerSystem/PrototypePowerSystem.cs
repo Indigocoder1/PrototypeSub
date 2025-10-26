@@ -149,14 +149,44 @@ public class PrototypePowerSystem : MonoBehaviour, ISaveDataListener, IProtoTree
         var data = serializationManager.saveData.EnsureAsPrototypeData();
         if (data.serializedPowerEquipment != null)
         {
+            int numValues = 0;
             foreach (var kvp in data.serializedPowerEquipment)
             {
-                Plugin.Logger.LogInfo($"{kvp.Key} | {kvp.Value}");
+                if (!string.IsNullOrEmpty(kvp.Value)) numValues++;
             }
+
+            if (numValues != storageRoot.transform.childCount)
+            {
+                Plugin.Logger.LogWarning($"Mismatch between storage root child count and saved equipment count on {gameObject}! Fixing");
+                FixEquipmentCountMismatch();
+                yield break;
+            }
+            
             StorageHelper.TransferEquipment(storageRoot.gameObject, data.serializedPowerEquipment, equipment);
         }
 
         UpdateRelayStatus();
+    }
+
+    private void FixEquipmentCountMismatch()
+    {
+        var pickupables = storageRoot.GetComponentsInChildren<Pickupable>(true);
+        List<string> checkedIds = new();
+        foreach (var pickupable in pickupables)
+        {
+            var identifier = pickupable.GetComponent<PrefabIdentifier>();
+
+            // If there's somehow a duplicate id, reset the value
+            if (checkedIds.Contains(identifier.Id))
+            {
+                identifier.Id = string.Empty;
+            }
+            
+            checkedIds.Add(identifier.Id);
+
+            pickupable.inventoryItem ??= new InventoryItem(pickupable);
+            equipment.AddItem(SLOT_NAMES[pickupable.transform.GetSiblingIndex()], pickupable.inventoryItem);
+        }
     }
 
     public static void AddPowerSource(TechType techType, PowerConfigData configData)
