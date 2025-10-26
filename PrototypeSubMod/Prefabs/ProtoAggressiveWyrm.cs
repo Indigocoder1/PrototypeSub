@@ -27,8 +27,6 @@ public static class ProtoAggressiveWyrm
         var instance = GameObject.Instantiate(prefab);
         
         yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
-        PrefabUtils.AddBasicComponents(instance, prefabInfo.ClassID, prefabInfo.TechType,
-            LargeWorldEntity.CellLevel.Global);
         
         MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(6));
         prefabOut.Set(instance);

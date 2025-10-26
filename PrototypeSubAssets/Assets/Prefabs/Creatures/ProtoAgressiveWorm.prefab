@@ -6098,6 +6098,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3230497408674094389}
   - component: {fileID: 7419491250608586973}
+  - component: {fileID: 6342449992493872596}
+  - component: {fileID: 1938582289393610112}
   - component: {fileID: 7131750357433951656}
   - component: {fileID: 4983591340796008379}
   - component: {fileID: 4576207438055061206}
@@ -6106,7 +6108,7 @@ GameObject:
   - component: {fileID: 7524167765557555877}
   - component: {fileID: 1395020062463200846}
   - component: {fileID: 217774969584853644}
-  - component: {fileID: 1938582289393610112}
+  - component: {fileID: 1020735297128332148}
   m_Layer: 0
   m_Name: ProtoAgressiveWorm
   m_TagString: Untagged
@@ -6147,6 +6149,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6342449992493872596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351068426189712925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1300030820, guid: a6a460bc9cda68a8c89553f1ec5be757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  classId: 
+--- !u!114 &1938582289393610112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351068426189712925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -717502810, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellLevel: 3
 --- !u!114 &7131750357433951656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6380,7 +6408,8 @@ MonoBehaviour:
   wormAnimator: {fileID: 5351068426189712924}
   offsetFromPlayer: 75
   timeBetweenPointRecalculations: 10
---- !u!114 &1938582289393610112
+  maxAngleFromForward: 30
+--- !u!114 &1020735297128332148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6389,10 +6418,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5351068426189712925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -717502810, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Script: {fileID: -476909515, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellLevel: 3
+  evaluatePriority: 0.4
+  priorityMultiplier:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minActionCheckInterval: -1
+  wormAnimator: {fileID: 5351068426189712924}
+  playerDamage: 50
+  submarineDamage: 200
+  attackRadius: 5
 --- !u!1 &5358476355074318651
 GameObject:
   m_ObjectHideFlags: 0

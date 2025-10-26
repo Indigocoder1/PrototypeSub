@@ -7,6 +7,8 @@ public class WyrmFollowPlayer : CreatureAction
     [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private float offsetFromPlayer;
     [SerializeField] private float timeBetweenPointRecalculations = 15f;
+    [Range(0, 90)]
+    [SerializeField] private float maxAngleFromForward;
     
     private Vector3 targetPoint;
     private float timeLastPerformed;
@@ -33,7 +35,11 @@ public class WyrmFollowPlayer : CreatureAction
 
     private void RecalculateTargetPoint()
     {
-        var dir = Player.main.transform.position - transform.position;
+        var dir = Random.onUnitSphere;
+        dir *= Mathf.Sign(Vector3.Dot(dir, dir));
+        float angleBetween = Vector3.Angle(dir, dir);
+        dir = Vector3.RotateTowards(dir, dir, angleBetween * (1 - maxAngleFromForward / 90) * Mathf.Deg2Rad, 1);
+        
         targetPoint = Player.main.transform.position + dir.normalized * offsetFromPlayer;
         wormAnimator.SetTravelTarget(targetPoint, RecalculateTargetPoint);
         Plugin.Logger.LogInfo($"Recalculating target point on {gameObject}");
