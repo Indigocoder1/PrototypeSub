@@ -20,7 +20,8 @@ public class WyrmShootTarget : CreatureAction
     
     public override float Evaluate(Creature creature, float time)
     {
-        return performing ? 1 : Random.Range(0.4f, 0.6f);
+        Plugin.Logger.LogInfo($"Evaluating ShootTarget | Performing = {performing}");
+        return performing ? 1 : Random.Range(0f, 0.8f);
     }
     
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -86,7 +87,7 @@ public class WyrmShootTarget : CreatureAction
         canShoot = false;
         hasShot = true;
         lineRenderer.enabled = false;
-        GetTargetMixin().TakeDamage(attackDamage, type: DamageType.LaserCutter);
+        GetTargetMixin().TakeDamage(attackDamage, transform.position, DamageType.LaserCutter, gameObject);
         ErrorMessage.AddError("Pew");
     }
 
@@ -102,7 +103,7 @@ public class WyrmShootTarget : CreatureAction
     
     private Vector3[] GetAttackPoints()
     {
-        const float setupDist = 100;
+        const float setupDist = 200;
         
         var points = new Vector3[3];
         var player = Player.main;
@@ -119,11 +120,11 @@ public class WyrmShootTarget : CreatureAction
         var forwardDir = targetCenter.normalized;
         var rightDir = -Vector3.Cross(forwardDir, Vector3.up);
         // Offset to the right to set up for the swing towards the target
-        points[0] = targetCenter + rightDir * setupDist;
+        points[0] = targetCenter + (forwardDir + rightDir) * setupDist;
         // Go off towards the right
         points[1] = targetCenter + (forwardDir + rightDir * rightHandVectorSign) * setupDist;
         // Straight towards target
-        points[2] = targetCenter;
+        points[2] = targetCenter - Vector3.up * 10f;
 
         return points;
     }
@@ -133,4 +134,6 @@ public class WyrmShootTarget : CreatureAction
         var player = Player.main;
         return player.currentSub ? player.currentSub.live : player.liveMixin;
     }
+
+    public override bool NeedsToBeChecked(float time) => true;
 }

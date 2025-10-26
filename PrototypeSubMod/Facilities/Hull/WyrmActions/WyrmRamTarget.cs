@@ -16,8 +16,8 @@ public class WyrmRamTarget : CreatureAction
     
     public override float Evaluate(Creature creature, float time)
     {
-        //return performing ? 1 : Random.Range(0.4f, 0.6f);
-        return 0;
+        Plugin.Logger.LogInfo($"Evaluating RamTarget | Performing = {performing}");
+        return performing ? 1 : Random.Range(0f, 0.8f);
     }
 
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -57,7 +57,7 @@ public class WyrmRamTarget : CreatureAction
         var forwardDir = targetCenter.normalized;
         var rightDir = -Vector3.Cross(forwardDir, Vector3.up);
         // Offset to the right to setup for the swing towards the player
-        points[0] = targetCenter + rightDir * setupDist - Vector3.up * 2f;
+        points[0] = targetCenter + (forwardDir + rightDir) * setupDist - Vector3.up * 2f;
         points[1] = targetCenter + forwardDir * setupDist;
         // Go for the player
         points[2] = targetCenter;
@@ -79,7 +79,7 @@ public class WyrmRamTarget : CreatureAction
                 if (!mixin || damagedMixins.Contains(mixin)) continue;
 
                 float damage = mixin.gameObject.TryGetComponent(out SubRoot _) ? submarineDamage : playerDamage;
-                mixin.TakeDamage(damage, type: DamageType.Drill);
+                mixin.TakeDamage(damage, transform.position, DamageType.Drill, gameObject);
                 damagedMixins.Add(mixin);
             }
         }
@@ -90,4 +90,6 @@ public class WyrmRamTarget : CreatureAction
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
+    
+    public override bool NeedsToBeChecked(float time) => true;
 }

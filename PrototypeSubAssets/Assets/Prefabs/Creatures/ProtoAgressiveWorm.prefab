@@ -6603,7 +6603,7 @@ MonoBehaviour:
   m_Script: {fileID: -1735476465, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evaluatePriority: 0.4
+  evaluatePriority: 2
   priorityMultiplier:
     serializedVersion: 2
     m_Curve: []
@@ -6627,7 +6627,7 @@ MonoBehaviour:
   m_Script: {fileID: -476909515, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evaluatePriority: 0.4
+  evaluatePriority: 2
   priorityMultiplier:
     serializedVersion: 2
     m_Curve: []
@@ -6651,7 +6651,7 @@ MonoBehaviour:
   m_Script: {fileID: -1365406072, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evaluatePriority: 0.4
+  evaluatePriority: 2
   priorityMultiplier:
     serializedVersion: 2
     m_Curve: []
@@ -6662,7 +6662,7 @@ MonoBehaviour:
   wormAnimator: {fileID: 5351068426189712924}
   lineRenderer: {fileID: 5574985794993970521}
   laserOrigin: {fileID: 1275925625256178328}
-  attackDamage: 200
+  attackDamage: 800
   chargeUpTime: 6
 --- !u!1 &5358476355074318651
 GameObject:

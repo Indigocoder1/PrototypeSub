@@ -21,12 +21,14 @@ public class WyrmFollowPlayer : CreatureAction
 
     public override float Evaluate(Creature creature, float time)
     {
-        if (!((ProtoAggressiveWorm)creature).IsAggressive())
+        bool aggressive = ((ProtoAggressiveWorm)creature).IsAggressive();
+        Plugin.Logger.LogInfo($"Evaluating FollowTarget | Aggressive = {aggressive} | Performing = {performing}");
+        if (!aggressive)
         {
             return 1;
         }
         
-        return performing ? 1 : Random.Range(0.4f, 0.6f);
+        return performing ? 1 : Random.Range(0f, 0.8f);
     }
 
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -45,9 +47,10 @@ public class WyrmFollowPlayer : CreatureAction
     private void RecalculateTargetPoint()
     {
         var dir = Random.onUnitSphere;
-        dir *= Mathf.Sign(Vector3.Dot(dir, dir));
-        float angleBetween = Vector3.Angle(dir, dir);
-        dir = Vector3.RotateTowards(dir, Player.main.transform.position.normalized, angleBetween * (1 - maxAngleFromForward / 90) * Mathf.Deg2Rad, 1);
+        var forward = Player.main.transform.position.normalized;
+        dir *= Mathf.Sign(Vector3.Dot(dir, forward));
+        float angleBetween = Vector3.Angle(dir, forward);
+        dir = Vector3.RotateTowards(dir, forward, angleBetween * (1 - maxAngleFromForward / 90) * Mathf.Deg2Rad, 1);
         
         targetPoint = Player.main.transform.position + dir.normalized * offsetFromPlayer;
         wormAnimator.SetTravelTarget(targetPoint, OnReachTarget);
@@ -58,4 +61,6 @@ public class WyrmFollowPlayer : CreatureAction
     {
         performing = false;
     }
+    
+    public override bool NeedsToBeChecked(float time) => true;
 }
