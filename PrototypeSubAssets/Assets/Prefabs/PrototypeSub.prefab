@@ -47806,11 +47806,14 @@ MonoBehaviour:
     type: 4
   - reductionMultiplier: 0.6
     type: 8
+  - reductionMultiplier: 0
+    type: 13
   shieldsUpNotification: {fileID: 6586898058465506349}
   multipliers:
   - 0.1
   - 0.6
-  damageTypes: 0400000008000000
+  - 0
+  damageTypes: 04000000080000000d000000
 --- !u!1 &3529507107011800236
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using PrototypeSubMod.IonGenerator;
 using PrototypeSubMod.Upgrades;
 using System.Linq;
+using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.UI.AbilitySelection;
 using PrototypeSubMod.UI.ActivatedAbilities;
@@ -89,7 +90,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
     {
         DamageReductor reductor = serializedDamageReductors.FirstOrDefault(r => r.type == type);
 
-        float multiplier = damageReductionMultipier <= 0 ? 1 : damageReductionMultipier;
+        float multiplier = damageReductionMultipier < 0 ? 1 : damageReductionMultipier;
 
         if (reductor == null)
         {
@@ -98,7 +99,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
 
         return reductor.reductionMultiplier * multiplier;
     }
-
+  
     public void OnTakeDamage(DamageInfo damageInfo)
     {
         if (!upgradeEnabled || !upgradeInstalled) return;
@@ -107,6 +108,11 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
         {
             chargesRefunded = true;
             powerRelay.AddEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
+        }
+
+        if (damageInfo.dealer && damageInfo.dealer.TryGetComponent(out WyrmShootTarget wyrmShootTarget))
+        {
+            wyrmShootTarget.OnShotParried();
         }
         
         float powerCost = damageInfo.originalDamage * powerPerDamage;

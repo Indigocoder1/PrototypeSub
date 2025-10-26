@@ -9,6 +9,8 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private Transform laserOrigin;
     [SerializeField] private float attackDamage;
     [SerializeField] private float chargeUpTime;
+    [SerializeField] private int parriesToResetAggression = 3;
+    [SerializeField] private float timePassiveAfterParries;
     
     private bool performing;
     private bool canShoot;
@@ -17,6 +19,7 @@ public class WyrmShootTarget : CreatureAction
     private int prevChargeUpTime;
     private int rightHandVectorSign;
     private int attackStage;
+    private int timesParried;
     
     public override float Evaluate(Creature creature, float time)
     {
@@ -73,6 +76,18 @@ public class WyrmShootTarget : CreatureAction
         prevChargeUpTime = (int)currentChargeUpTime;
     }
 
+    public void OnShotParried()
+    {
+        ErrorMessage.AddError("Parried!");
+        timesParried++;
+
+        if (timesParried >= parriesToResetAggression)
+        {
+            ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
+            GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
+        }
+    }
+
     private void OnReachedTarget()
     {
         attackStage++;
@@ -124,7 +139,7 @@ public class WyrmShootTarget : CreatureAction
         // Go off towards the right
         points[1] = targetCenter + (forwardDir + rightDir * rightHandVectorSign) * setupDist;
         // Straight towards target
-        points[2] = targetCenter - Vector3.up * 10f;
+        points[2] = targetCenter - Vector3.up * 30f;
 
         return points;
     }

@@ -119,6 +119,12 @@ public class ProtoAggressiveWorm : Creature
         }
     }
 
+    public void ResetAggression(float timeToBecomeAggressive)
+    {
+        secondsInVoid = 0;
+        secondsInVoidForAggression = timeToBecomeAggressive;
+    }
+
     public bool IsAggressive() => secondsInVoid >= secondsInVoidForAggression;
 
     public override void OnDestroy()
