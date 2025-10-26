@@ -6636,8 +6636,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
-  playerDamage: 50
-  submarineDamage: 200
+  attackDamage: 750
   attackRadius: 5
 --- !u!114 &2563168583705512565
 MonoBehaviour:

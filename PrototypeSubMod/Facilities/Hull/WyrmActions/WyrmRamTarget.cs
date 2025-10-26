@@ -7,11 +7,11 @@ namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 public class WyrmRamTarget : CreatureAction
 {
     [SerializeField] private AggressiveWormAnimator wormAnimator;
-    [SerializeField] private float playerDamage = 50;
-    [SerializeField] private float submarineDamage = 200;
+    [SerializeField] private float attackDamage = 200;
     [SerializeField] private float attackRadius;
 
     private bool performing;
+    private bool hasDamagedTarget;
     private int attackStage;
     
     public override float Evaluate(Creature creature, float time)
@@ -26,6 +26,7 @@ public class WyrmRamTarget : CreatureAction
         
         base.Perform(creature, time, deltaTime);
         performing = true;
+        hasDamagedTarget = false;
         attackStage = 0;
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
         Plugin.Logger.LogInfo($"Started ram target");
@@ -40,9 +41,9 @@ public class WyrmRamTarget : CreatureAction
     
     private Vector3[] GetAttackPoints()
     {
-        const float setupDist = 100;
+        const float setupDist = 150;
         
-        var points = new Vector3[3];
+        var points = new Vector3[2];
         var player = Player.main;
         Vector3 targetCenter;
         if (player.currentSub == null)
@@ -56,11 +57,10 @@ public class WyrmRamTarget : CreatureAction
         
         var forwardDir = targetCenter.normalized;
         var rightDir = -Vector3.Cross(forwardDir, Vector3.up);
-        // Offset to the right to setup for the swing towards the player
+        // Offset to the right to set up for the swing towards the target
         points[0] = targetCenter + (forwardDir + rightDir) * setupDist - Vector3.up * 2f;
-        points[1] = targetCenter + forwardDir * setupDist;
-        // Go for the player
-        points[2] = targetCenter;
+        // Go for the target
+        points[1] = targetCenter + forwardDir * 10f;
 
         return points;
     }
@@ -68,20 +68,22 @@ public class WyrmRamTarget : CreatureAction
     private void OnReachedTarget()
     {
         attackStage++;
-        if (attackStage > GetAttackPoints().Length - 1)
+        
+        if (attackStage <= GetAttackPoints().Length - 1) return;
+        
+        performing = false;
+        if (hasDamagedTarget) return;
+        
+        var colliders = Physics.OverlapSphere(transform.position, attackRadius);
+        foreach (var col in colliders)
         {
-            performing = false;
-            var colliders = Physics.OverlapSphere(transform.position, attackRadius);
-            List<LiveMixin> damagedMixins = new();
-            foreach (var col in colliders)
-            {
-                var mixin = col.GetComponentInParent<LiveMixin>();
-                if (!mixin || damagedMixins.Contains(mixin)) continue;
-
-                float damage = mixin.gameObject.TryGetComponent(out SubRoot _) ? submarineDamage : playerDamage;
-                mixin.TakeDamage(damage, transform.position, DamageType.Drill, gameObject);
-                damagedMixins.Add(mixin);
-            }
+            var subRoot = col.GetComponentInParent<SubRoot>();
+            if (!subRoot) continue;
+            
+            subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
+            Plugin.Logger.LogInfo($"Damaging {subRoot} for {attackDamage}");
+            hasDamagedTarget = true;
+            break;
         }
     }
 
