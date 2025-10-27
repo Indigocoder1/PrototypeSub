@@ -1,10 +1,12 @@
 ﻿using HarmonyLib;
+using PrototypeSubMod.Utility;
 
 namespace PrototypeSubMod.Patches;
 
 [HarmonyPatch(typeof(IngameMenu))]
 internal class IngameMenu_Patches
 {
+    [SaveStateReference(false)]
     private static bool _denySaving = false;
 
     [HarmonyPatch(nameof(IngameMenu.GetAllowSaving)), HarmonyPostfix]

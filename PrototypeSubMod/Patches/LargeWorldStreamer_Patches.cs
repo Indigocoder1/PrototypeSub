@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using PrototypeSubMod.Utility;
 using UnityEngine;
 
 namespace PrototypeSubMod.Patches;
@@ -9,6 +10,7 @@ namespace PrototypeSubMod.Patches;
 [HarmonyPatch(typeof(LargeWorldStreamer))]
 internal class LargeWorldStreamer_Patches
 {
+    [SaveStateReference(false)]
     private static bool _overwrite;
     private static Vector3 _overwriteCamPos;
 

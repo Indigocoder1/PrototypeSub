@@ -20,6 +20,7 @@ namespace PrototypeSubMod.Patches;
 [HarmonyPatch(typeof(Player))]
 internal class Player_Patches
 {
+    [SaveStateReference]
     public static GameObject DummyLDFTarget;
 
     [HarmonyPatch(nameof(Player.Start)), HarmonyPostfix]
@@ -117,6 +118,7 @@ internal class Player_Patches
     private static float TimeWouldHaveDrowned;
     [SaveStateReference(false)]
     private static bool SavedFromDrowning;
+    [SaveStateReference(false)]
     private static bool OverrideOxygen;
     private static float OverrideOxygenAmount;
 
