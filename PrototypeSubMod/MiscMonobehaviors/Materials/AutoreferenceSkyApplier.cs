@@ -6,6 +6,6 @@ internal class AutoreferenceSkyApplier : SkyApplier
 {
     new private void Awake()
     {
-        renderers = GetComponentsInChildren<Renderer>();
+        renderers = GetComponentsInChildren<Renderer>(true);
     }
 }
