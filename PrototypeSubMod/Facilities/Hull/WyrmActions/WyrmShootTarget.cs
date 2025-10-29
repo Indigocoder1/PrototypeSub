@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PrototypeSubMod.LightDistortionField;
+using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
@@ -102,17 +103,37 @@ public class WyrmShootTarget : CreatureAction
         canShoot = false;
         hasShot = true;
         lineRenderer.enabled = false;
-        GetTargetMixin().TakeDamage(attackDamage, transform.position, DamageType.LaserCutter, gameObject);
+        var targetMixin = GetTargetMixin();
+        var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
+        if (effectHandler && effectHandler.GetActive())
+        {
+            ErrorMessage.AddError("Missed!");
+        }
+        else
+        {
+            targetMixin.TakeDamage(attackDamage, transform.position, DamageType.LaserCutter, gameObject);
+        }
+            
         ErrorMessage.AddError("Pew");
     }
 
     private void HandleLaser()
     {
-        var targetPos = GetTargetMixin().transform.position;
+        var targetMixin = GetTargetMixin();
+        var targetPos = targetMixin.transform.position;
         var dirToTarget = (targetPos - laserOrigin.position).normalized;
+        const float targetOffset = 1f;
         var positions = new Vector3[2];
         positions[0] = laserOrigin.position;
-        positions[1] = targetPos - dirToTarget;
+        var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
+        if (effectHandler && effectHandler.GetActive())
+        {
+            positions[1] = effectHandler.GetContinuousPointOnSurface(targetOffset);
+        }
+        else
+        {
+            positions[1] = targetPos - dirToTarget * targetOffset;
+        }
         lineRenderer.SetPositions(positions);
     }
     
@@ -147,7 +168,14 @@ public class WyrmShootTarget : CreatureAction
     private LiveMixin GetTargetMixin()
     {
         var player = Player.main;
-        return player.currentSub ? player.currentSub.live : player.liveMixin;
+        if (player.currentSub) return player.currentSub.live;
+        if (player.lastValidSub &&
+            Vector3.Distance(player.lastValidSub.transform.position, player.transform.position) < 50f)
+        {
+            return player.lastValidSub.live;
+        }
+
+        return player.liveMixin;
     }
 
     public override bool NeedsToBeChecked(float time) => true;
