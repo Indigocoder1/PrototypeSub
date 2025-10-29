@@ -115,7 +115,8 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     
     private bool HasPhaseGate()
     {
-        return storageTerminal.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT) != null;
+        var itemInSlot = storageTerminal.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT);
+        return itemInSlot != null && itemInSlot.techType == ProtoPhaseGateItem.PrefabInfo.TechType;
     }
 
     private void Update()
