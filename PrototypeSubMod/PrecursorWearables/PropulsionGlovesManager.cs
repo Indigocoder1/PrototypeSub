@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Nautilus.Utility;
 using PrototypeSubMod.Prefabs;
 using UnityEngine;
 
@@ -52,6 +53,10 @@ public class PropulsionGlovesManager : MonoBehaviour
         propulsionCannon = propCannon.GetComponent<PropulsionCannon>();
         propulsionCannon.grabbedEffect = newGrabEffect;
 
+        propulsionCannon.shootSound = AudioUtils.GetFmodAsset("ProtoGlovesShoot");
+        propulsionCannon.grabbingSound.assetStart = AudioUtils.GetFmodAsset("ProtoGlovesGrab");
+        propulsionCannon.grabbingSound.asset = AudioUtils.GetFmodAsset("ProtoGlovesLoop");
+        
         var precursorGreen = new Color(0.3277f, 0.9277f, 0.4286f);
         newGrabEffect.GetComponent<Renderer>().material.color = precursorGreen;
 
