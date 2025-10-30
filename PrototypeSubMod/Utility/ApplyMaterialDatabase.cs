@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
+using UnityEngine;
 
 namespace PrototypeSubMod.Utility;
 
-public class ApplyMaterialDatabase : MonoBehaviour
+public class ApplyMaterialDatabase : MonoBehaviour, IMaterialModifier
 {
+    public event Action<GameObject> onEditMaterial;
+    
     [SerializeField] private GameObject applyTo;
 
     private void OnValidate()
@@ -15,6 +19,11 @@ public class ApplyMaterialDatabase : MonoBehaviour
     {
         if (applyTo == null) applyTo = gameObject;
         
-        UWE.CoroutineHost.StartCoroutine(ProtoMatDatabase.ReplaceVanillaMats(applyTo));
+        UWE.CoroutineHost.StartCoroutine(ProtoMatDatabase.ReplaceVanillaMats(applyTo, OnFinishedMaterialReplacement));
+    }
+
+    private void OnFinishedMaterialReplacement()
+    {
+        onEditMaterial?.Invoke(applyTo);
     }
 }

@@ -24,16 +24,14 @@ public static class ProtoTransmissionDevice
         prefab.Register();
     }
     
-    private static IEnumerator GetGameObject(IOut<GameObject> prefabOut)
+    private static GameObject GetGameObject()
     {
         var asset = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoTransmissionDevice");
         asset.gameObject.SetActive(false);
         var instance = GameObject.Instantiate(asset);
 
         MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(6f));
-        
-        yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
 
-        prefabOut.Set(instance);
+        return instance;
     }
 }

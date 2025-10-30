@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,7 @@ public class ProtoMatDatabase : ProtoMatDatabaseBase
         BuildMaterialDatabase();
     }
 
-    public static IEnumerator ReplaceVanillaMats(GameObject customObject)
+    public static IEnumerator ReplaceVanillaMats(GameObject customObject, Action onFinished = null)
     {
         if (customObject == null)
         {
@@ -90,6 +91,8 @@ public class ProtoMatDatabase : ProtoMatDatabaseBase
             
             renderer.materials = newMatList;
         }
+
+        onFinished?.Invoke();
     }
 
     public static IEnumerator TryGetMatFromDatabase(string matName, IOut<Material> materialResult)
