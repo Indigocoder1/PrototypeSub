@@ -11745,7 +11745,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &881370025881527052
 GameObject:
@@ -18295,7 +18295,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &1393225110486893737
 GameObject:
@@ -22215,7 +22215,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &1697686389610271716
 GameObject:
@@ -29505,7 +29505,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &2129824947256624280
 GameObject:
@@ -34429,7 +34429,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &2486429048061422989
 GameObject:
@@ -61453,7 +61453,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &4667820603278798118
 GameObject:
@@ -66306,7 +66306,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &5131610447468323127
 GameObject:
@@ -94734,7 +94734,7 @@ MonoBehaviour:
   sphereRadius: 2.5
   checkDistance: 8
   minMassForFold: 100
-  foldDist: 150
+  foldDist: 100
   gizmoStepLength: 5
 --- !u!1 &7436239136655318344
 GameObject:

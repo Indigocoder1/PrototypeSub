@@ -33,25 +33,24 @@ public class FinFoldManager : MonoBehaviour
         if (!Camera.main) return;
         
         bool outOfRange = (Camera.main.transform.position - transform.position).sqrMagnitude > (foldDist * foldDist);
-        bool hitObject = MoonpoolOccupiedHandler.MoonpoolBounds.Contains(transform.position);
+        bool foldFins = MoonpoolOccupiedHandler.MoonpoolBounds.Contains(transform.position);
         if (!outOfRange)
         {
-            hitObject = HitViaSpereCast();
+            foldFins = HitViaSpereCast();
         }
 
-        hitObject |= outOfRange;
-        hitObject |= !LargeWorldStreamer.main.IsWorldSettled();
+        foldFins |= outOfRange;
 
-        if (hitObject != hadHitObject)
+        if (foldFins != hadHitObject)
         {
-            animator.SetBool("CrampedFold", hitObject);
-            if (!hitObject)
+            animator.SetBool("CrampedFold", foldFins);
+            if (!foldFins)
             {
                 manager.ResetFinAnimations();
             }
         }
         
-        hadHitObject = hitObject;
+        hadHitObject = foldFins;
     }
 
     private bool HitViaSpereCast()
