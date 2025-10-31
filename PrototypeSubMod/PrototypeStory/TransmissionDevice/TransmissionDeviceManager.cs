@@ -17,14 +17,14 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     
     private void Start()
     {
-        if (Plugin.GlobalSaveData.activatedTransmissionDevices.Contains(GetComponent<PrefabIdentifier>().Id))
-        {
-            poweredDownObjects.SetActive(false);
-            poweredUpObjects.SetActive(true);
-            activated = true;
-            deployed = true;
-            animator.SetTrigger("ActivateInstant");
-        }
+        if (!Plugin.GlobalSaveData.activatedTransmissionDevices.Contains(GetComponent<PrefabIdentifier>().Id)) return;
+        
+        poweredDownObjects.SetActive(false);
+        poweredUpObjects.SetActive(true);
+        activated = true;
+        deployed = true;
+        animator.SetTrigger("ActivateInstant");
+        Destroy(GetComponent<Pickupable>());
     }
 
     public void OnHandHover(HandTargetEventData data)
@@ -68,7 +68,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     private void OpenTransmissionCodePanel()
     {
-        
+        Player.main.pda.Open(Plugin.TransmissionEntryTab);
     }
 
     public bool Filter(InventoryItem item)

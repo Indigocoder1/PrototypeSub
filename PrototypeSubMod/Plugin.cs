@@ -108,6 +108,8 @@ namespace PrototypeSubMod
         public static TechCategory ProtoFabricatorCatgeory { get; } = EnumHandler.AddEntry<TechCategory>("ProtoFabricator").RegisterToTechGroup(ProtoFabricatorGroup)
             .WithPdaInfo(null);
         
+        public static PDATab TransmissionEntryTab { get; } = EnumHandler.AddEntry<PDATab>("ProtoTransmissionEntry");
+        
         internal static ProtoGlobalSaveData GlobalSaveData = SaveDataHandler.RegisterSaveDataCache<ProtoGlobalSaveData>();
         internal static GameObject welderPrefab;
         
