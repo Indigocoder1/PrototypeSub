@@ -13,35 +13,62 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     [SerializeField] private float activationDelay;
 
     private bool deployed;
+    private bool activated;
     
     private void Start()
     {
-        var pickupable = GetComponent<Pickupable>();
-        
-        if (!pickupable) deployed = true;
+        if (Plugin.GlobalSaveData.activatedTransmissionDevices.Contains(GetComponent<PrefabIdentifier>().Id))
+        {
+            poweredDownObjects.SetActive(false);
+            poweredUpObjects.SetActive(true);
+            activated = true;
+            deployed = true;
+            animator.SetTrigger("ActivateInstant");
+        }
     }
 
     public void OnHandHover(HandTargetEventData data)
     {
         if (!deployed)
         {
-            HandReticle.main.SetText(HandReticle.TextType.Hand,"Deploy from prototype to use", true);
+            HandReticle.main.SetText(HandReticle.TextType.Hand, "Deploy from prototype to use", true);
             HandReticle.main.SetIcon(HandReticle.IconType.HandDeny);
             return;
         }
+
+        if (!activated)
+        {
+            HandReticle.main.SetText(HandReticle.TextType.Hand, "Insert power source", true,
+                GameInput.Button.LeftHand);
+            HandReticle.main.SetIcon(HandReticle.IconType.Hand);
+            return;
+        }
         
-        HandReticle.main.SetText(HandReticle.TextType.Hand,"Insert cash or select payment type", true, GameInput.Button.LeftHand);
+        HandReticle.main.SetText(HandReticle.TextType.Hand, "Enter transmission code", true,
+            GameInput.Button.LeftHand);
         HandReticle.main.SetIcon(HandReticle.IconType.Hand);
     }
-    
+
     public void OnHandClick(HandTargetEventData data)
     {
         if (!deployed) return;
-        
-        uGUI.main.itemSelector.Initialize(this, SpriteManager.Get(SpriteManager.Group.Item, "nobattery"), new List<IItemsContainer>
+
+        if (!activated)
         {
-            Inventory.main.container
-        });
+            uGUI.main.itemSelector.Initialize(this, SpriteManager.Get(SpriteManager.Group.Item, "nobattery"), 
+                new List<IItemsContainer> {
+                    Inventory.main.container
+                });
+        }
+        else
+        {
+            OpenTransmissionCodePanel();
+        }
+    }
+
+    private void OpenTransmissionCodePanel()
+    {
+        
     }
 
     public bool Filter(InventoryItem item)
@@ -66,12 +93,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     public string GetText(InventoryItem item)
     {
-        if (item == null)
-        {
-            return Language.main.Get("ProtoCancelSelection");
-        }
-        
-        return Language.main.Get(item.item.GetTechName());
+        return Language.main.Get(item == null ? "ProtoCancelSelection" : item.item.GetTechName());
     }
 
     public void Select(InventoryItem item)
@@ -88,11 +110,13 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     private IEnumerator ActivateDevice()
     {
         animator.SetTrigger("Activate");
+        Plugin.GlobalSaveData.activatedTransmissionDevices.Add(GetComponent<PrefabIdentifier>().Id);
         yield return new WaitForSeconds(activationDelay);
         
         ErrorMessage.AddDebug("Powered up transmission device");
         poweredDownObjects.SetActive(false);
         poweredUpObjects.SetActive(true);
+        activated = true;
     }
 
     public void DeployDevice()
