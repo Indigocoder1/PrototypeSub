@@ -84,6 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4924585157616469014}
   - component: {fileID: 4924585157616469015}
+  - component: {fileID: 9174544089887649434}
   - component: {fileID: 4924585157616469012}
   m_Layer: 5
   m_Name: ProtoTransmissionTab
@@ -126,6 +127,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4924585157616469009}
   m_CullTransparentMesh: 0
+--- !u!225 &9174544089887649434
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924585157616469009}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &4924585157616469012
 MonoBehaviour:
   m_ObjectHideFlags: 0
