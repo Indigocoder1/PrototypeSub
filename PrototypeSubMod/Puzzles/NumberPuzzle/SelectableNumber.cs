@@ -7,9 +7,11 @@ namespace PrototypeSubMod.Puzzles.NumberPuzzle;
 public class SelectableNumber : MonoBehaviour
 {
     [SerializeField] private NumberPuzzleManager puzzleManager;
-    [SerializeField] private Image[] selectedIndicators;
     [SerializeField] private int representativeNumber;
-
+    [SerializeField] private Renderer[] selectedIndicators;
+    [SerializeField] private Color selectedEmissionColor;
+    [SerializeField] private Color deselectedEmissionColor;
+    
     private void Start()
     {
         EnableSelectedIndicators(0);
@@ -24,13 +26,21 @@ public class SelectableNumber : MonoBehaviour
     {
         if (amount > selectedIndicators.Length)
         {
-            throw new System.Exception($"Tried to enable more selected indicators than assigned! ({amount})");
+            throw new Exception($"Tried to enable more selected indicators than assigned! ({amount})");
         }
 
         int index = 0;
         foreach (var indicator in selectedIndicators)
         {
-            indicator.gameObject.SetActive(index < amount);
+            bool active = index < amount;
+            var materials = indicator.materials;
+            for (int i = 0; i < materials.Length; i++)
+            {
+                materials[i].SetColor(ShaderPropertyID._EmissionColor,
+                    active ? selectedEmissionColor : deselectedEmissionColor);
+            }
+
+            indicator.materials = materials;
             index++;
         }
     }
