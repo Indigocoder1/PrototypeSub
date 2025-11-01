@@ -7,6 +7,7 @@ public class uGUI_TransmissionTab : uGUI_PDATab
     [SerializeField] private TransmissionDeviceUINumber[] deviceNumbers;
 
     private CanvasGroup canvasGroup;
+    private bool onCorrectSequence;
     
     private void Start()
     {
@@ -22,12 +23,25 @@ public class uGUI_TransmissionTab : uGUI_PDATab
 
     private void OnNumberChanged()
     {
+        onCorrectSequence = false;
+        
         foreach (var deviceNumber in deviceNumbers)
         {
             if (!deviceNumber.OnCorrectNumber()) return;            
         }
 
-        ErrorMessage.AddError("Correct sequence entered!");
+        onCorrectSequence = true;
+    }
+
+    public void OnTransmitClicked()
+    {
+        if (!onCorrectSequence)
+        {
+            ErrorMessage.AddError("Incorrect sequence!");
+            return;
+        }
+        
+        ErrorMessage.AddError("Transmission complete");
     }
 
     public override void OnOpenPDA(PDATab tab, bool explicitly)
