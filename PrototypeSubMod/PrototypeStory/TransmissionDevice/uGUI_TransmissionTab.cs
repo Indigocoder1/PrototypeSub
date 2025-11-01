@@ -17,6 +17,7 @@ public class uGUI_TransmissionTab : uGUI_PDATab
 
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
     }
 
     private void OnNumberChanged()
@@ -35,11 +36,13 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         
         base.OnOpenPDA(tab, explicitly);
         canvasGroup.alpha = 1;
+        canvasGroup.blocksRaycasts = true;
     }
 
     public override void OnClosePDA()
     {
         base.OnClosePDA();
         canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
     }
 }
