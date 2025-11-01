@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
 
 public class uGUI_TransmissionTab : uGUI_PDATab
 {
+    public event Action onTransmissionComplete;
+    
     [SerializeField] private TransmissionDeviceUINumber[] deviceNumbers;
 
     private CanvasGroup canvasGroup;
@@ -42,6 +45,7 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         }
         
         ErrorMessage.AddError("Transmission complete");
+        onTransmissionComplete?.Invoke();
     }
 
     public override void OnOpenPDA(PDATab tab, bool explicitly)

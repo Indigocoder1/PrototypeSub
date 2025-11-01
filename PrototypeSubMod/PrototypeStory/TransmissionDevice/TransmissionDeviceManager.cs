@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using PrototypeSubMod.Patches;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
@@ -15,9 +16,12 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     private bool deployed;
     private bool activated;
+    private bool pdaOpen;
     
     private void Start()
     {
+        uGUI_PDA.main.GetComponentInChildren<uGUI_TransmissionTab>(true).onTransmissionComplete += PlayEndingCinematic;
+        
         if (!Plugin.GlobalSaveData.activatedTransmissionDevices.Contains(GetComponent<PrefabIdentifier>().Id)) return;
         
         poweredDownObjects.SetActive(false);
@@ -26,6 +30,17 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         deployed = true;
         deviceAnimator.SetTrigger("ActivateInstant");
         Destroy(GetComponent<Pickupable>());
+    }
+
+    private void Update()
+    {
+        if (!pdaOpen) return;
+
+        const float maxPdaDistance = 7;
+        if ((transform.position - Player.main.transform.position).sqrMagnitude > maxPdaDistance * maxPdaDistance)
+        {
+            Player.main.pda.Close();
+        }
     }
 
     public void OnHandHover(HandTargetEventData data)
@@ -69,7 +84,8 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     private void OpenTransmissionCodePanel()
     {
-        Player.main.pda.Open(Plugin.TransmissionEntryTab);
+        Player.main.pda.Open(Plugin.TransmissionEntryTab, onCloseCallback: _ => pdaOpen = false);
+        pdaOpen = true;
     }
 
     public bool Filter(InventoryItem item)
@@ -133,7 +149,22 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     public void PlayEndingCinematic()
     {
+        Player.main.pda.Close();
+        HideForScreenshots.Hide(HideForScreenshots.HideType.HUD);
+        Player_Patches.SetOxygenReqOverride(true, 0);
+        IngameMenu_Patches.SetDenySaving(true);
+        Player.main.SetHeadVisible(true);
+        Player.main.playerController.SetEnabled(false);
         cinematicAnimator.SetTrigger("PlayAnim");
         deviceAnimator.SetTrigger("Fire");
+    }
+
+    public void OnCinematicFinished()
+    {
+        Player_Patches.SetOxygenReqOverride(false, 0);
+        HideForScreenshots.Hide(HideForScreenshots.HideType.None);
+        IngameMenu_Patches.SetDenySaving(false);
+        Player.main.SetHeadVisible(false);
+        Player.main.playerController.SetEnabled(true);
     }
 }
