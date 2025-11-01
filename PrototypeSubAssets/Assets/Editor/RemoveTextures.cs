@@ -35,7 +35,7 @@ public class RemoveTextures : PipelineJob
 
         foreach (var asset in asmDefDatum.assetBundles[0].assets)
         {
-            var directoryPath = "Assets\\" + asset.name;
+            var directoryPath = Path.Combine("Assets", asset.name);
             
             if (!Directory.Exists(directoryPath))
                 continue;
@@ -72,8 +72,26 @@ public class RemoveTextures : PipelineJob
                         {
                             renderer.sharedMaterials[i].color = Color.white;
 
+                            var splitSections = renderer.sharedMaterials[i].name.Split('_');
+                            var whitelistedTex = string.Empty;
+                            if (splitSections[splitSections.Length - 1].StartsWith("KEEP"))
+                            {
+                                whitelistedTex = splitSections[splitSections.Length - 1].Replace("KEEP", string.Empty);
+                            }
+
+                            var textureNames = renderer.sharedMaterials[i].GetTexturePropertyNames();
+                            int index = 0;
                             foreach (var textureID in renderer.sharedMaterials[i].GetTexturePropertyNameIDs())
+                            {
+                                if (textureNames[index].EndsWith(whitelistedTex))
+                                {
+                                    index++;
+                                    continue;
+                                }
+                                
                                 renderer.sharedMaterials[i].SetTexture(textureID, null);
+                                index++;
+                            }
 
                             break;
                         }

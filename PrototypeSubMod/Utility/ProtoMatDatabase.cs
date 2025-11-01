@@ -47,29 +47,26 @@ public class ProtoMatDatabase : ProtoMatDatabaseBase
             //repeated FileIO.
             //NOTE: Double check that this new approach does not increase V-RAM usage...ECM not sure. <3
         List<Material> replaceMaterials = new();
-        List<string> skipMaterialNames = new();
         foreach (var renderer in renderers)
         {
             if (renderer == null) continue;
             
             var newMatList = renderer.materials;
+            var originalMaterials = renderer.materials;
             
             for(int i = 0; i < newMatList.Length; i++)
             {
                 var matName = RemoveInstanceFromMatName(newMatList[i].name);
-                
-                bool skipMaterial = skipMaterialNames.Contains(matName);
 
-                if (!skipMaterial)
+                bool skipMaterial = false;
+
+                foreach (var mat in replaceMaterials)
                 {
-                    foreach (var mat in replaceMaterials)
+                    if (mat.name.Equals(matName))
                     {
-                        if (mat.name.Equals(matName))
-                        {
-                            newMatList[i] = mat;
-                            skipMaterial = true;
-                            break;
-                        }
+                        newMatList[i] = mat;
+                        skipMaterial = true;
+                        break;
                     }
                 }
                 
@@ -87,6 +84,21 @@ public class ProtoMatDatabase : ProtoMatDatabaseBase
                 
                 newMatList[i] = foundMaterial;
                 replaceMaterials.Add(foundMaterial);
+            }
+
+            int index = 0;
+            foreach (var mat in originalMaterials)
+            {
+                foreach (var textureID in mat.GetTexturePropertyNameIDs())
+                {
+                    var tex = mat.GetTexture(textureID);
+                    if (tex != null)
+                    {
+                        newMatList[index].SetTexture(textureID, tex);
+                    }
+                }
+
+                index++;
             }
             
             renderer.materials = newMatList;

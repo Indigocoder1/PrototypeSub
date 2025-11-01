@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 [PipelineSupport(typeof(Pipeline))]
 public class ReplaceTextures : PipelineJob
 {
-    private readonly string TEMP_MAT_DIRECTORY = "Assets\\TempMaterials";
+    private readonly string TEMP_MAT_DIRECTORY = Path.Combine("Assets", "TempMaterials");
     
     private readonly string[] materialWhitelist = new[]
     {
@@ -39,7 +39,7 @@ public class ReplaceTextures : PipelineJob
 
         foreach (var asset in asmDefDatum.assetBundles[0].assets)
         {
-            var directoryPath = "Assets\\" + asset.name;
+            var directoryPath = Path.Combine("Assets", asset.name);
 
             if (!Directory.Exists(directoryPath))
                 continue;
