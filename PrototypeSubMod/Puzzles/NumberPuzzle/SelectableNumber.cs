@@ -10,6 +10,7 @@ public class SelectableNumber : MonoBehaviour
     [SerializeField] private int representativeNumber;
     [SerializeField] private Renderer[] selectedIndicators;
     [SerializeField] private Color selectedEmissionColor;
+    [SerializeField] private float emissionIntensity = 1.4f;
     [SerializeField] private Color deselectedEmissionColor;
     
     private void Start()
@@ -32,12 +33,12 @@ public class SelectableNumber : MonoBehaviour
         int index = 0;
         foreach (var indicator in selectedIndicators)
         {
-            bool active = index < amount;
+            bool active = (index < amount);
             var materials = indicator.materials;
             for (int i = 0; i < materials.Length; i++)
             {
-                materials[i].SetColor(ShaderPropertyID._EmissionColor,
-                    active ? selectedEmissionColor : deselectedEmissionColor);
+                materials[i].SetColor(ShaderPropertyID._GlowColor,
+                    active ? selectedEmissionColor * emissionIntensity : deselectedEmissionColor);
             }
 
             indicator.materials = materials;
