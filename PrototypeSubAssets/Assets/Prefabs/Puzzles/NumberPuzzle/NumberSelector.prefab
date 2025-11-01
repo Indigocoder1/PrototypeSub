@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.44313726, g: 1, b: 0.44313726, a: 1}
-    m_HighlightedColor: {r: 0.3255162, g: 0.7264151, b: 0.3255162, a: 1}
-    m_PressedColor: {r: 0.3255162, g: 0.7264151, b: 0.3255162, a: 1}
+    m_HighlightedColor: {r: 0.35866857, g: 0.49056602, b: 0.35866857, a: 1}
+    m_PressedColor: {r: 0.44313726, g: 1, b: 0.44313726, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -189,6 +189,7 @@ MonoBehaviour:
   - {fileID: 1495842215407292460}
   - {fileID: 1495544168429826925}
   selectedEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  emissionIntensity: 1.4
   deselectedEmissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &7381196010272783987
 GameObject:
