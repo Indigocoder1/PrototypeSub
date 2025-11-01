@@ -339,6 +339,12 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     {
         if (!_phaseGatePrefab) return false;
 
+        if (storageTerminal.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT) != null &&
+            !HasPhaseGate())
+        {
+            return false;
+        }
+        
         return Plugin.GlobalSaveData.phaseGateLocations.Count >= 1 || HasPhaseGate();
     }
 

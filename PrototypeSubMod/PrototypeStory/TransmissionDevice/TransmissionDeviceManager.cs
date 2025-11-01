@@ -7,7 +7,8 @@ namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
 
 public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator deviceAnimator;
+    [SerializeField] private Animator cinematicAnimator;
     [SerializeField] private GameObject poweredDownObjects;
     [SerializeField] private GameObject poweredUpObjects;
     [SerializeField] private float activationDelay;
@@ -23,7 +24,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         poweredUpObjects.SetActive(true);
         activated = true;
         deployed = true;
-        animator.SetTrigger("ActivateInstant");
+        deviceAnimator.SetTrigger("ActivateInstant");
         Destroy(GetComponent<Pickupable>());
     }
 
@@ -109,7 +110,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     private IEnumerator ActivateDevice()
     {
-        animator.SetTrigger("Activate");
+        deviceAnimator.SetTrigger("Activate");
         Plugin.GlobalSaveData.activatedTransmissionDevices.Add(GetComponent<PrefabIdentifier>().Id);
         yield return new WaitForSeconds(activationDelay);
         
@@ -128,5 +129,11 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         }
 
         deployed = true;
+    }
+
+    public void PlayEndingCinematic()
+    {
+        cinematicAnimator.SetTrigger("PlayAnim");
+        deviceAnimator.SetTrigger("Fire");
     }
 }
