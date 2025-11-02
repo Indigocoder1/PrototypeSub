@@ -22,7 +22,6 @@ public class WyrmFollowPlayer : CreatureAction
     public override float Evaluate(Creature creature, float time)
     {
         bool aggressive = ((ProtoAggressiveWorm)creature).IsAggressive();
-        Plugin.Logger.LogInfo($"Evaluating FollowTarget | Aggressive = {aggressive} | Performing = {performing}");
         if (!aggressive)
         {
             return 1;

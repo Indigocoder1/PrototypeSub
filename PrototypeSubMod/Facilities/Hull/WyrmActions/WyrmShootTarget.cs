@@ -1,5 +1,7 @@
-﻿using PrototypeSubMod.LightDistortionField;
+﻿using System;
+using PrototypeSubMod.LightDistortionField;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
@@ -21,10 +23,14 @@ public class WyrmShootTarget : CreatureAction
     private int rightHandVectorSign;
     private int attackStage;
     private int timesParried;
-    
+
+    private void Start()
+    {
+        lineRenderer.enabled = false;
+    }
+
     public override float Evaluate(Creature creature, float time)
     {
-        Plugin.Logger.LogInfo($"Evaluating ShootTarget | Performing = {performing}");
         return performing ? 1 : Random.Range(0f, 0.8f);
     }
     

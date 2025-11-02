@@ -18,7 +18,6 @@ public class WyrmRamTarget : CreatureAction
     
     public override float Evaluate(Creature creature, float time)
     {
-        Plugin.Logger.LogInfo($"Evaluating RamTarget | Performing = {performing}");
         return performing ? 1 : Random.Range(0f, 0.8f);
     }
 
