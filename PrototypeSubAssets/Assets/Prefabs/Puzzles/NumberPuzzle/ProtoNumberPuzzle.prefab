@@ -730,7 +730,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7852989111842327575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7852989112974778549}
@@ -1668,6 +1668,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3413640394511220679}
     m_Modifications:
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2277091439667098973, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: puzzleManager
@@ -1681,7 +1696,7 @@ PrefabInstance:
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
@@ -1786,6 +1801,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6810426049733119942, guid: 82f497981ef3d784e92f366bf8747d65,
         type: 3}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2277091439667098973, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: puzzleManager
@@ -1799,7 +1829,7 @@ PrefabInstance:
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
@@ -1963,6 +1993,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NumberPuzzleRoom_Objects_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1157181702937706239, guid: 41eb11eaa57fb1f4aa88ade88d8b7aab,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 125.505
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41eb11eaa57fb1f4aa88ade88d8b7aab, type: 3}
 --- !u!4 &1412719344566791035 stripped
@@ -1984,6 +2019,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -3915044305059292227, guid: 82f497981ef3d784e92f366bf8747d65,
         type: 3}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2277091439667098973, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: puzzleManager
@@ -1997,7 +2047,7 @@ PrefabInstance:
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
@@ -2107,6 +2157,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5704288445566813369, guid: 82f497981ef3d784e92f366bf8747d65,
         type: 3}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277091439667098972, guid: b07256e32f3f64f459e71e57a237dde8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2277091439667098973, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: puzzleManager
@@ -2120,7 +2185,7 @@ PrefabInstance:
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3686171761474563562, guid: b07256e32f3f64f459e71e57a237dde8,
         type: 3}

@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: fae560edaaaa27749920db731d7dfe72
+guid: 38be08b55b7d992468460591e1a480a4
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable:
-  - first:
-      74: 4434244515561723891
-    second: FabricatorArm|FabricatorArm|Fabricator
+  internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
