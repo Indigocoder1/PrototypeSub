@@ -25,13 +25,23 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
 
     public void UpdateUI()
     {
-        int index = Mathf.RoundToInt(subRoot.transform.eulerAngles.y / 360 * cardinalSprites.Length);
-        index %= cardinalSprites.Length;
-        bool onLeft = subRoot.transform.eulerAngles.y is > 180 and < 360;
+        var angle = subRoot.transform.eulerAngles.y;
+        int index;
+        bool onLeft;
+        if (angle < 180)
+        {
+            onLeft = false;
+            index = Mathf.RoundToInt(angle / 180f * 8f);
+        }
+        else
+        {
+            onLeft = true;
+            index = Mathf.RoundToInt((360 - angle) / 180f * 8f);
+        }
 
         compassImage.sprite = cardinalSprites[index];
 
-        bool onNorthSouth = index == 0 || index == Mathf.RoundToInt(cardinalSprites.Length / 2f);
+        bool onNorthSouth = index == 0 || index == cardinalSprites.Length - 1;
         compassImage.transform.SetParent(onLeft ? leftHalfMask : rightHalfMask);
         backgroundBar.transform.SetParent(onLeft ? rightHalfMask : leftHalfMask);
         backgroundBar.gameObject.SetActive(true);
