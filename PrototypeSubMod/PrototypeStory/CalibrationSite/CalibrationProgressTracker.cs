@@ -8,10 +8,17 @@ public class CalibrationProgressTracker : MonoBehaviour, IScheduledUpdateBehavio
     [SerializeField] private CalibrationRunManager runManager;
     [SerializeField] private Transform subIcon;
     [SerializeField] private Transform[] calibrationPoints;
+    [SerializeField] private LineRenderer lineRenderer;
     
     public string GetProfileTag() => "CalibrationRunProgressTracker";
     public int scheduledUpdateIndex { get; set; }
-    
+
+    private void Start()
+    {
+        lineRenderer.enabled = false;
+        runManager.onPointReached += OnPointReached;
+    }
+
     public void ScheduledUpdate()
     {
         int nextIndex = runManager.GetNextPointIndex();
@@ -20,6 +27,22 @@ public class CalibrationProgressTracker : MonoBehaviour, IScheduledUpdateBehavio
         float progress = InverseLerp(pointA, pointB, transform.position);
 
         subIcon.position = Vector3.Lerp(calibrationPoints[nextIndex - 1].position, calibrationPoints[nextIndex].position, progress);
+
+        var points = new Vector3[nextIndex + 1];
+        lineRenderer.positionCount = nextIndex + 1;
+        for (int i = 0; i < nextIndex; i++)
+        {
+            points[i] = calibrationPoints[i].localPosition;
+        }
+
+        points[nextIndex] = subIcon.localPosition;
+
+        lineRenderer.SetPositions(points);
+    }
+
+    private void OnPointReached(int index)
+    {
+        lineRenderer.enabled = true;
     }
     
     private float InverseLerp(Vector3 a, Vector3 b, Vector3 value)
