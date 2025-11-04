@@ -55197,7 +55197,7 @@ MonoBehaviour:
   m_Script: {fileID: 1028079527, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalSpacing: 100
+  globalSpacing: 500
   pointSpacings:
   - 2
   - 1
@@ -55210,7 +55210,8 @@ MonoBehaviour:
   - -60
   - 180
   - -60
-  distToCountAsReached: 10
+  distToCountAsReached: 30
+  maxDistFromLine: 50
 --- !u!114 &978866783042066402
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using Nautilus.Utility;
+﻿using System;
+using Nautilus.Utility;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
@@ -11,7 +12,9 @@ public class CalibrationRunManager : MonoBehaviour
     [SerializeField] private float[] pointSpacings;
     [SerializeField] private float[] relativePointAngles;
     [SerializeField] private float distToCountAsReached = 10;
+    [SerializeField] private float maxDistFromLine;
 
+    private bool reachedEnd;
     private int nextPointIndex = 1;
     private Vector3[] calibrationPoints;
 
@@ -28,6 +31,7 @@ public class CalibrationRunManager : MonoBehaviour
             calibrationPoints[i + 1] = calibrationPoints[i] + offset;
         }
 
+        int index = 0;
         foreach (var point in calibrationPoints)
         {
             var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -35,11 +39,26 @@ public class CalibrationRunManager : MonoBehaviour
             sphere.transform.position = point;
             sphere.transform.localScale = Vector3.one * 10f;
             Destroy(sphere.GetComponent<Collider>());
+            
+            if (index == calibrationPoints.Length - 1) continue;
+            
+            var lr = sphere.AddComponent<LineRenderer>();
+            lr.SetPosition(0, calibrationPoints[index]);
+            lr.SetPosition(1, calibrationPoints[index + 1]);
+            index++;
         }
     }
     
     private void Update()
     {
+        HandleIndexIncrements();
+        HandleDistFromLine();
+    }
+
+    private void HandleIndexIncrements()
+    {
+        if (reachedEnd) return;
+        
         var dist = Vector3.Distance(transform.position, calibrationPoints[nextPointIndex]);
         Plugin.Logger.LogInfo($"Dist = {dist}");
         if (dist > distToCountAsReached) return;
@@ -51,9 +70,35 @@ public class CalibrationRunManager : MonoBehaviour
         {
             ErrorMessage.AddError("Calibration complete");
             nextPointIndex = calibrationPoints.Length - 1;
+            reachedEnd = true;
+        }
+    }
+
+    private void HandleDistFromLine()
+    {
+        if (reachedEnd) return;
+
+        var pointOnLine = ClosestPointOnLine(calibrationPoints[nextPointIndex - 1], calibrationPoints[nextPointIndex],
+            transform.position);
+
+        if (Vector3.Distance(pointOnLine, transform.position) > maxDistFromLine)
+        {
+            ErrorMessage.AddError("Too far from line!");
         }
     }
 
     public int GetNextPointIndex() => nextPointIndex;
     public Vector3 GetCalibrationPoint(int index) => calibrationPoints[index];
+
+    private Vector3 ClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
+    {
+        var heading = lineEnd - lineStart;
+        var maxMagnitude = heading.magnitude;
+        heading.Normalize();
+        
+        var lhs = point - lineStart;
+        var dot = Vector3.Dot(lhs, heading);
+        dot = Mathf.Clamp(dot, 0f, maxMagnitude);
+        return lineStart + heading * dot;
+    }
 }
