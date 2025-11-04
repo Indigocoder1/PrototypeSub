@@ -4,17 +4,19 @@ using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
 
-public class CalibrationRunManager : MonoBehaviour
+public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 {
     private static readonly Vector3 InitialPoint = new(-2220, -390, 420);
 
+    public event Action<int> onPointReached;
+    
     [SerializeField] private float globalSpacing = 100;
     [SerializeField] private float[] pointSpacings;
     [SerializeField] private float[] relativePointAngles;
     [SerializeField] private float distToCountAsReached = 10;
     [SerializeField] private float maxDistFromLine;
 
-    private bool reachedEnd;
+    private bool doingCalibrationRun;
     private int nextPointIndex = 1;
     private Vector3[] calibrationPoints;
 
@@ -51,33 +53,31 @@ public class CalibrationRunManager : MonoBehaviour
     
     private void Update()
     {
+        if (!doingCalibrationRun) return;
+        
         HandleIndexIncrements();
         HandleDistFromLine();
     }
 
     private void HandleIndexIncrements()
     {
-        if (reachedEnd) return;
-        
         var dist = Vector3.Distance(transform.position, calibrationPoints[nextPointIndex]);
-        Plugin.Logger.LogInfo($"Dist = {dist}");
         if (dist > distToCountAsReached) return;
         
         ErrorMessage.AddError($"Reached point {nextPointIndex}");
+        onPointReached?.Invoke(nextPointIndex);
         nextPointIndex++;
 
         if (nextPointIndex >= calibrationPoints.Length)
         {
             ErrorMessage.AddError("Calibration complete");
             nextPointIndex = calibrationPoints.Length - 1;
-            reachedEnd = true;
+            doingCalibrationRun = false;
         }
     }
 
     private void HandleDistFromLine()
     {
-        if (reachedEnd) return;
-
         var pointOnLine = ClosestPointOnLine(calibrationPoints[nextPointIndex - 1], calibrationPoints[nextPointIndex],
             transform.position);
 
@@ -100,5 +100,29 @@ public class CalibrationRunManager : MonoBehaviour
         var dot = Vector3.Dot(lhs, heading);
         dot = Mathf.Clamp(dot, 0f, maxMagnitude);
         return lineStart + heading * dot;
+    }
+    
+    public void ScheduledUpdate()
+    {
+        if (doingCalibrationRun) return;
+        
+        if (!(Vector3.Distance(calibrationPoints[0], transform.position) < distToCountAsReached)) return;
+        
+        doingCalibrationRun = true;
+        ErrorMessage.AddError("Started calibration run");
+        onPointReached?.Invoke(0);
+    }
+
+    public string GetProfileTag() => "CalibrationRunManager";
+    public int scheduledUpdateIndex { get; set; }
+    
+    public virtual void OnEnable()
+    {
+        UpdateSchedulerUtils.Register(this);
+    }
+
+    public virtual void OnDisable()
+    {
+        UpdateSchedulerUtils.Deregister(this);
     }
 }
