@@ -9,7 +9,8 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     private static readonly Vector3 InitialPoint = new(-2220, -390, 420);
 
     public event Action<int> onPointReached;
-    
+
+    [SerializeField] private GameObject calibrationObjects;
     [SerializeField] private float globalSpacing = 100;
     [SerializeField] private float[] pointSpacings;
     [SerializeField] private float[] relativePointAngles;
@@ -49,6 +50,8 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
             lr.SetPosition(1, calibrationPoints[index + 1]);
             index++;
         }
+
+        calibrationObjects.SetActive(false);
     }
     
     private void Update()
@@ -73,6 +76,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
             ErrorMessage.AddError("Calibration complete");
             nextPointIndex = calibrationPoints.Length - 1;
             doingCalibrationRun = false;
+            calibrationObjects.SetActive(false);
         }
     }
 
@@ -111,6 +115,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         doingCalibrationRun = true;
         ErrorMessage.AddError("Started calibration run");
         onPointReached?.Invoke(0);
+        calibrationObjects.SetActive(true);
     }
 
     public string GetProfileTag() => "CalibrationRunManager";
