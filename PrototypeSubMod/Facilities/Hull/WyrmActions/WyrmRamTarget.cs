@@ -32,6 +32,12 @@ public class WyrmRamTarget : CreatureAction
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
         Plugin.Logger.LogInfo($"Started ram target");
     }
+    
+    public override void StopPerform(Creature creature, float time)
+    {
+        base.StopPerform(creature, time);
+        performing = false;
+    }
 
     private void Update()
     {

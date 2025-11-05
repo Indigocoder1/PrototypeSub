@@ -24,7 +24,7 @@ public class WyrmFollowPlayer : CreatureAction
         bool aggressive = ((ProtoAggressiveWorm)creature).IsAggressive();
         if (!aggressive)
         {
-            return 1;
+            return 1f;
         }
         
         return performing ? 1 : Random.Range(0f, 0.8f);
@@ -41,6 +41,12 @@ public class WyrmFollowPlayer : CreatureAction
         RecalculateTargetPoint();
         timeLastPerformed = Time.time;
         performing = true;
+    }
+
+    public override void StopPerform(Creature creature, float time)
+    {
+        base.StopPerform(creature, time);
+        performing = false;
     }
 
     private void RecalculateTargetPoint()

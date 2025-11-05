@@ -2,14 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull;
 
 public class ProtoAggressiveWorm : Creature
 {
-    public event Action onDespawn; 
-    
+    public event Action onDespawn;
+
+    [SerializeField] private WyrmDespawnAction despawnAction;
     [SerializeField] private ProtoWormSpineManager spineManager;
     [SerializeField] private Color passiveEmissionColor;
     [SerializeField] private Color aggressiveEmissionColor;
@@ -32,6 +34,13 @@ public class ProtoAggressiveWorm : Creature
         StartCoroutine(RetrieveSegmentRends());
         headRenderers = headObject.GetComponentsInChildren<Renderer>();
         segmentCount = spineManager.GetSpineSegmentCount();
+    }
+    
+    public override bool TryStartAction(CreatureAction action)
+    {
+        if (despawnAction.IsPerforming()) return false;
+        
+        return base.TryStartAction(action);
     }
 
     private IEnumerator RetrieveSegmentRends()
@@ -63,6 +72,16 @@ public class ProtoAggressiveWorm : Creature
         else if (secondsInVoid > 0 && !inVoid)
         {
             secondsInVoid -= Time.deltaTime;
+        }
+
+        if (secondsInVoid < 0 && !inVoid && !despawnAction.IsPerforming())
+        {
+            foreach (var action in actions)
+            {
+                action.StopPerform(this, Time.time);
+            }
+            
+            despawnAction.Perform(this, Time.time, 0);
         }
         
         var segmentsAggressive = (int)(secondsInVoid / secondsInVoidForAggression * segmentCount);

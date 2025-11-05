@@ -50,6 +50,12 @@ public class WyrmShootTarget : CreatureAction
         Plugin.Logger.LogInfo($"Started shoot target");
     }
     
+    public override void StopPerform(Creature creature, float time)
+    {
+        base.StopPerform(creature, time);
+        performing = false;
+    }
+    
     private void Update()
     {
         if (!performing) return;

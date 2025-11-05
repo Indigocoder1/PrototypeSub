@@ -6314,6 +6314,8 @@ GameObject:
   - component: {fileID: 217774969584853644}
   - component: {fileID: 1020735297128332148}
   - component: {fileID: 2563168583705512565}
+  - component: {fileID: 6753871278772561756}
+  - component: {fileID: 775455774015457791}
   m_Layer: 0
   m_Name: ProtoAgressiveWorm
   m_TagString: Untagged
@@ -6493,6 +6495,7 @@ MonoBehaviour:
   cyclopsSonarDetectable: 1
   debug: 0
   debugActionsString: 
+  despawnAction: {fileID: 6753871278772561756}
   spineManager: {fileID: 3559386083336854524}
   passiveEmissionColor: {r: 0.71193415, g: 1, b: 0.7777778, a: 1}
   aggressiveEmissionColor: {r: 1, g: 0.3443396, b: 0.3443396, a: 1}
@@ -6665,6 +6668,40 @@ MonoBehaviour:
   chargeUpTime: 6
   parriesToResetAggression: 3
   timePassiveAfterParries: 30
+--- !u!114 &6753871278772561756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351068426189712925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1639630105, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evaluatePriority: 500
+  priorityMultiplier:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minActionCheckInterval: -1
+  wormAnimator: {fileID: 5351068426189712924}
+--- !u!114 &775455774015457791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351068426189712925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1106929707, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  immuneToRepulsionCannon: 1
 --- !u!1 &5358476355074318651
 GameObject:
   m_ObjectHideFlags: 0
