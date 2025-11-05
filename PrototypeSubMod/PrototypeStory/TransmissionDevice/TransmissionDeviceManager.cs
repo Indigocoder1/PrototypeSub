@@ -161,6 +161,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     public void OnCinematicFinished()
     {
+        ErrorMessage.AddError("Cinematic finished");
         Player_Patches.SetOxygenReqOverride(false, 0);
         HideForScreenshots.Hide(HideForScreenshots.HideType.None);
         IngameMenu_Patches.SetDenySaving(false);
