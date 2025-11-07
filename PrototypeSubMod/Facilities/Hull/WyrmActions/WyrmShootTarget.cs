@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using PrototypeSubMod.LightDistortionField;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,13 +9,16 @@ namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 public class WyrmShootTarget : CreatureAction
 {
     [SerializeField] private AggressiveWormAnimator wormAnimator;
-    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private LineRenderer targetingLineRenderer;
+    [SerializeField] private LineRenderer laserLineRenderer;
     [SerializeField] private Transform laserOrigin;
     [SerializeField] private float attackDamage;
     [SerializeField] private float chargeUpTime;
+    [SerializeField] private float laserTravelTime;
     [SerializeField] private int parriesToResetAggression = 3;
     [SerializeField] private float timePassiveAfterParries;
-    
+
+    private CloakEffectHandler targetCloakHandler;
     private bool performing;
     private bool canShoot;
     private bool hasShot;
@@ -26,7 +30,8 @@ public class WyrmShootTarget : CreatureAction
 
     private void Start()
     {
-        lineRenderer.enabled = false;
+        targetingLineRenderer.enabled = false;
+        laserLineRenderer.enabled = false;
     }
 
     public override float Evaluate(Creature creature, float time)
@@ -39,10 +44,11 @@ public class WyrmShootTarget : CreatureAction
         if (performing) return;
         
         base.Perform(creature, time, deltaTime);
+        targetCloakHandler = GetTargetMixin().GetComponentInChildren<CloakEffectHandler>(true);
         performing = true;
         canShoot = false;
         hasShot = false;
-        lineRenderer.enabled = false;
+        targetingLineRenderer.enabled = false;
         rightHandVectorSign = (int)Mathf.Sign(Random.Range(-1f, 1f));
         attackStage = 0;
         currentChargeUpTime = 0;
@@ -64,11 +70,11 @@ public class WyrmShootTarget : CreatureAction
         if (currentChargeUpTime > 0)
         {
             currentChargeUpTime -= Time.deltaTime;
-            HandleLaser();
+            HandleTargetingLaser();
         }
         else if (canShoot && !hasShot)
         {
-            Shoot();
+            StartCoroutine(Shoot());
         }
 
         var angle = Mathf.Abs(
@@ -78,7 +84,7 @@ public class WyrmShootTarget : CreatureAction
         {
             currentChargeUpTime = chargeUpTime;
             canShoot = true;
-            lineRenderer.enabled = true;
+            targetingLineRenderer.enabled = true;
         }
 
         if (prevChargeUpTime != (int)currentChargeUpTime)
@@ -89,16 +95,37 @@ public class WyrmShootTarget : CreatureAction
         prevChargeUpTime = (int)currentChargeUpTime;
     }
 
-    public void OnShotParried()
+    public void OnShotParried(Vector3 returnFrom)
     {
         ErrorMessage.AddError("Parried!");
         timesParried++;
 
+        StartCoroutine(ReturnParryProjectile(returnFrom));
+    }
+
+    private IEnumerator ReturnParryProjectile(Vector3 returnFrom)
+    {
+        yield return new WaitForEndOfFrame();
+        laserLineRenderer.enabled = true;
+        var originalPosition = transform.position;
+        
+        laserLineRenderer.SetPosition(0, returnFrom);
+        float travelTime = 0;
+        while (travelTime < laserTravelTime)
+        {
+            var point = Vector3.Lerp(returnFrom, originalPosition, travelTime / laserTravelTime);
+            laserLineRenderer.SetPosition(1, point);
+            travelTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        
         if (timesParried >= parriesToResetAggression)
         {
             ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
             GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
         }
+
+        laserLineRenderer.enabled = false;
     }
 
     private void OnReachedTarget()
@@ -110,43 +137,71 @@ public class WyrmShootTarget : CreatureAction
         }
     }
 
-    private void Shoot()
+    private IEnumerator Shoot()
     {
         canShoot = false;
         hasShot = true;
-        lineRenderer.enabled = false;
+        targetingLineRenderer.enabled = false;
+        laserLineRenderer.enabled = true;
         var targetMixin = GetTargetMixin();
         var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
-        if (effectHandler && effectHandler.GetActive())
+        var targetPos = targetMixin.transform.position;
+        var laserTargetPoint = effectHandler.GetActive()
+            ? effectHandler.GetClosestPointOnSurface(targetPos +
+                                                     (targetMixin.transform.forward + targetMixin.transform.up) * 50f, 5f)
+            : effectHandler.GetClosestPointOnSurface(targetPos + targetMixin.transform.forward * 50f, -4f);
+
+        var originalShootPoint = laserOrigin.position;
+        laserLineRenderer.SetPosition(0, originalShootPoint);
+        ErrorMessage.AddError("Laser fired");
+        float travelTime = 0;
+        while (travelTime < laserTravelTime)
         {
-            ErrorMessage.AddError("Missed!");
+            var point = Vector3.Lerp(originalShootPoint, laserTargetPoint, travelTime / laserTravelTime);
+            laserLineRenderer.SetPosition(1, point);
+            travelTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
-        else
+        
+        ErrorMessage.AddError("Laser reached target");
+
+        var colliders = Physics.OverlapSphere(laserTargetPoint, 25f);
+        bool hitTarget = false;
+        foreach (var collider in colliders)
         {
-            targetMixin.TakeDamage(attackDamage, transform.position, DamageType.LaserCutter, gameObject);
-        }
+            if (collider.attachedRigidbody == null) continue;
             
-        ErrorMessage.AddError("Pew");
+            if (!collider.attachedRigidbody.TryGetComponent(out LiveMixin mixin)) continue;
+
+            mixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.LaserCutter, gameObject);
+            hitTarget = true;
+            break;
+        }
+
+        ErrorMessage.AddError(hitTarget ? "Hit object" : "Missed object");
+        laserLineRenderer.enabled = false;
     }
 
-    private void HandleLaser()
+    private void HandleTargetingLaser()
     {
         var targetMixin = GetTargetMixin();
         var targetPos = targetMixin.transform.position;
-        var dirToTarget = (targetPos - laserOrigin.position).normalized;
-        const float targetOffset = 1f;
         var positions = new Vector3[2];
         positions[0] = laserOrigin.position;
-        var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
-        if (effectHandler && effectHandler.GetActive())
+        if (targetCloakHandler && targetCloakHandler.GetActive())
         {
-            positions[1] = effectHandler.GetContinuousPointOnSurface(targetOffset);
+            positions[1] = targetCloakHandler.GetContinuousPointOnSurface();
+        }
+        else if (targetCloakHandler)
+        {
+            positions[1] = targetCloakHandler.GetClosestPointOnSurface(targetPos + targetMixin.transform.forward * 50f, -4f);
         }
         else
         {
-            positions[1] = targetPos - dirToTarget * targetOffset;
+            positions[1] = targetPos;
         }
-        lineRenderer.SetPositions(positions);
+        
+        targetingLineRenderer.SetPositions(positions);
     }
     
     private Vector3[] GetAttackPoints()

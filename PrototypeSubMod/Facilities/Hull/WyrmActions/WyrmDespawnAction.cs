@@ -26,6 +26,7 @@ public class WyrmDespawnAction : CreatureAction
         var point = Player.main.transform.position + dir * 300;
         wormAnimator.SetTravelTarget(point, OnReachedTarget);
         StartCoroutine(TargetRecheck(point));
+        Plugin.Logger.LogInfo($"Started despawn action");
     }
 
     private IEnumerator TargetRecheck(Vector3 targetPoint)

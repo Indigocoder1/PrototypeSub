@@ -134,21 +134,21 @@ internal class CloakEffectHandler : ProtoUpgrade
         return normalizedPoint.sqrMagnitude < 1;
     }
 
-    public Vector3 GetClosestPointOnSurface(Vector3 point, float scalarOffset = 1)
+    public Vector3 GetClosestPointOnSurface(Vector3 point, float scalarOffset = 0f)
     {
         Vector3 direction = point - ovoid.position;
         var localDir = Quaternion.Inverse(ovoid.rotation) * direction;
+        
+        float magnitude = Divide(localDir, originalScale).magnitude;
+        var pointOnSurf = ovoid.position + direction * ((1 / magnitude));
 
-        float magnitude = Divide(localDir, ovoid.localScale).magnitude;
-        var pointOnSurf = ovoid.position + direction * (1 / magnitude);
-
-        return pointOnSurf * scalarOffset;
+        return pointOnSurf + direction.normalized * scalarOffset;
     }
 
-    public Vector3 GetContinuousPointOnSurface(float scalarOffset = 1)
+    public Vector3 GetContinuousPointOnSurface(float scalarOffset = 0)
     {
         float sin = Mathf.Sin(Time.time * 0.01f);
-        var randVector = new Vector3(sin, sin, sin);
+        var randVector = new Vector3(Mathf.Cos(Time.time * 0.01f), sin, sin);
         return GetClosestPointOnSurface(ovoid.position + randVector, scalarOffset);
     }
 

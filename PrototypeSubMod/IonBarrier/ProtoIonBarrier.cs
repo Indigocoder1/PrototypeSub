@@ -112,7 +112,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
 
         if (damageInfo.dealer && damageInfo.dealer.TryGetComponent(out WyrmShootTarget wyrmShootTarget))
         {
-            wyrmShootTarget.OnShotParried();
+            wyrmShootTarget.OnShotParried(damageInfo.position);
         }
         
         float powerCost = damageInfo.originalDamage * powerPerDamage;
