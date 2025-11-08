@@ -76,4 +76,23 @@ internal static class PrototypeCommands
         player.playerController.SetEnabled(true);
         fpsCounter.enabled = false;
     }
+    
+    [ConsoleCommand("noghost")]
+    public static string NoGhost()
+    {
+        var ghostSpawners = GameObject.FindObjectsOfType<VoidGhostLeviathansSpawner>();
+        var ghosts = GameObject.FindObjectsOfType<GhostLeviatanVoid>();
+
+        for (int i = ghosts.Length - 1; i >= 0; i--)
+        {
+            GameObject.Destroy(ghosts[i].gameObject);
+        }
+        
+        for (int i = ghostSpawners.Length - 1; i >= 0; i--)
+        {
+            GameObject.Destroy(ghostSpawners[i].gameObject);
+        }
+        
+        return string.Empty;
+    }
 }
