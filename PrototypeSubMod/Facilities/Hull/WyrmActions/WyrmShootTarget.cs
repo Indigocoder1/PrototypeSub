@@ -10,8 +10,9 @@ public class WyrmShootTarget : CreatureAction
 {
     [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private LineRenderer targetingLineRenderer;
-    [SerializeField] private LineRenderer laserLineRenderer;
     [SerializeField] private Transform laserOrigin;
+    [SerializeField] private AnimationCurve beamLengthCurve;
+    [SerializeField] private AnimationCurve beamWidthCurve;
     [SerializeField] private float attackDamage;
     [SerializeField] private float chargeUpTime;
     [SerializeField] private float laserTravelTime;
@@ -19,6 +20,8 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private float timePassiveAfterParries;
 
     private CloakEffectHandler targetCloakHandler;
+    private GameObject laserVFX;
+    private GameObject muzzleVFX;
     private bool performing;
     private bool canShoot;
     private bool hasShot;
@@ -31,7 +34,13 @@ public class WyrmShootTarget : CreatureAction
     private void Start()
     {
         targetingLineRenderer.enabled = false;
-        laserLineRenderer.enabled = false;
+        muzzleVFX = Instantiate(VFXSunbeam.main.muzzlePrefab.transform.Find("xBeam").gameObject);
+        laserVFX = Instantiate(VFXSunbeam.main.beamPrefab);
+        muzzleVFX.SetActive(false);
+        laserVFX.SetActive(false);
+
+        muzzleVFX.transform.localScale = Vector3.one * 0.25f;
+        Destroy(muzzleVFX.GetComponent<VFXDestroyAfterSeconds>());
     }
 
     public override float Evaluate(Creature creature, float time)
@@ -98,7 +107,6 @@ public class WyrmShootTarget : CreatureAction
     public void OnShotParried(Vector3 returnFrom)
     {
         ErrorMessage.AddError("Parried!");
-        timesParried++;
 
         StartCoroutine(ReturnParryProjectile(returnFrom));
     }
@@ -106,26 +114,58 @@ public class WyrmShootTarget : CreatureAction
     private IEnumerator ReturnParryProjectile(Vector3 returnFrom)
     {
         yield return new WaitForEndOfFrame();
-        laserLineRenderer.enabled = true;
+        laserVFX.SetActive(true);
+        muzzleVFX.SetActive(true);
         var originalPosition = transform.position;
-        
-        laserLineRenderer.SetPosition(0, returnFrom);
+        var beamMaterials = laserVFX.GetComponent<Renderer>().materials;
+
+        var ps = muzzleVFX.GetComponent<ParticleSystem>();
+        ps.Stop();
+        var main = ps.main;
+        main.startDelay = new ParticleSystem.MinMaxCurve(0);
+        main.startDelayMultiplier = 0;
+        main.duration = laserTravelTime + 1f;
+        ps.Play();
+        laserVFX.transform.position = returnFrom;
+        laserVFX.transform.LookAt(originalPosition);
         float travelTime = 0;
         while (travelTime < laserTravelTime)
         {
-            var point = Vector3.Lerp(returnFrom, originalPosition, travelTime / laserTravelTime);
-            laserLineRenderer.SetPosition(1, point);
+            float normalizedTravelTime = travelTime / laserTravelTime;
+            var point = Vector3.Lerp(returnFrom, originalPosition, normalizedTravelTime);
+            laserVFX.transform.position = point;
+            laserVFX.transform.LookAt(originalPosition);
+            
+            var distance = Vector3.Distance(laserOrigin.position, point);
+            var width = beamWidthCurve.Evaluate(normalizedTravelTime);
+            var scale = new Vector3(width * 2f, width * 2f, distance);
+            laserVFX.transform.localScale = scale;
+            
+            muzzleVFX.transform.position = point;
+            var right = Vector3.Cross(Vector3.up, originalPosition - point);
+            var up = Vector3.Cross(right, originalPosition - point);
+            muzzleVFX.transform.rotation = Quaternion.LookRotation(right, up);
+
+            var texOffset = new Vector2(beamLengthCurve.Evaluate(normalizedTravelTime), 0.5f);
+            beamMaterials[0].SetTextureOffset(ShaderPropertyID._MainTex2, texOffset);
+            
             travelTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        
-        if (timesParried >= parriesToResetAggression)
-        {
-            ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
-            GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
-        }
 
-        laserLineRenderer.enabled = false;
+        IncrementParry();
+        laserVFX.SetActive(false);
+        muzzleVFX.SetActive(false);
+    }
+
+    private void IncrementParry()
+    {
+        timesParried++;
+
+        if (timesParried < parriesToResetAggression) return;
+        
+        ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
+        GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
     }
 
     private void OnReachedTarget()
@@ -142,27 +182,60 @@ public class WyrmShootTarget : CreatureAction
         canShoot = false;
         hasShot = true;
         targetingLineRenderer.enabled = false;
-        laserLineRenderer.enabled = true;
+        laserVFX.SetActive(true);
+        muzzleVFX.SetActive(true);
+        var ps = muzzleVFX.GetComponent<ParticleSystem>();
+        ps.Stop();
+        var main = ps.main;
+        main.startDelay = new ParticleSystem.MinMaxCurve(0);
+        main.startDelayMultiplier = 0;
+        main.duration = laserTravelTime + 1f;
+        ps.Play();
         var targetMixin = GetTargetMixin();
         var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
         var targetPos = targetMixin.transform.position;
         var laserTargetPoint = effectHandler.GetActive()
             ? effectHandler.GetClosestPointOnSurface(targetPos +
                                                      (targetMixin.transform.forward + targetMixin.transform.up) * 50f, 5f)
-            : effectHandler.GetClosestPointOnSurface(targetPos + targetMixin.transform.forward * 50f, -4f);
-
-        var originalShootPoint = laserOrigin.position;
-        laserLineRenderer.SetPosition(0, originalShootPoint);
+            : effectHandler.GetClosestPointOnSurface(targetPos + targetMixin.transform.forward * 50f, -15f);
+        
+        var beamMaterials = laserVFX.GetComponent<Renderer>().materials;
+        var originalPoint = laserOrigin.position;
+        
         ErrorMessage.AddError("Laser fired");
+        
         float travelTime = 0;
         while (travelTime < laserTravelTime)
         {
-            var point = Vector3.Lerp(originalShootPoint, laserTargetPoint, travelTime / laserTravelTime);
-            laserLineRenderer.SetPosition(1, point);
+            float normalizedTravelTime = travelTime / laserTravelTime;
+            var point = Vector3.Lerp(originalPoint, laserTargetPoint, normalizedTravelTime);
+            laserVFX.transform.position = laserOrigin.position;
+            laserVFX.transform.LookAt(laserTargetPoint);
+            
+            var distance = Vector3.Distance(laserOrigin.position, point);
+            var width = beamWidthCurve.Evaluate(normalizedTravelTime);
+            var scale = new Vector3(width * 8f, width * 5f, distance);
+            laserVFX.transform.localScale = scale;
+
+            muzzleVFX.transform.position = point;
+            var right = Vector3.Cross(Vector3.up, originalPoint - point);
+            var up = Vector3.Cross(right, originalPoint - point);
+            muzzleVFX.transform.rotation = Quaternion.LookRotation(-right, up);
+
+            var texOffset = new Vector2(beamLengthCurve.Evaluate(normalizedTravelTime), 0.5f);
+            beamMaterials[0].SetTextureOffset(ShaderPropertyID._MainTex2, texOffset);
+            
             travelTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         
+        DamageTarget(laserTargetPoint);
+        laserVFX.SetActive(false);
+        muzzleVFX.SetActive(false);
+    }
+
+    private void DamageTarget(Vector3 laserTargetPoint)
+    {
         ErrorMessage.AddError("Laser reached target");
 
         var colliders = Physics.OverlapSphere(laserTargetPoint, 25f);
@@ -179,7 +252,6 @@ public class WyrmShootTarget : CreatureAction
         }
 
         ErrorMessage.AddError(hitTarget ? "Hit object" : "Missed object");
-        laserLineRenderer.enabled = false;
     }
 
     private void HandleTargetingLaser()
@@ -227,7 +299,7 @@ public class WyrmShootTarget : CreatureAction
         // Go off towards the right
         points[1] = targetCenter + (forwardDir + rightDir * rightHandVectorSign) * setupDist;
         // Straight towards target
-        points[2] = targetCenter - Vector3.up * 30f;
+        points[2] = targetCenter + Vector3.down * 20f;
 
         return points;
     }

@@ -5154,7 +5154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8003695398512611188
 Transform:
   m_ObjectHideFlags: 0
@@ -6806,8 +6806,73 @@ MonoBehaviour:
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
   targetingLineRenderer: {fileID: 5574985794993970521}
-  laserLineRenderer: {fileID: 3323294978291829407}
   laserOrigin: {fileID: 1275925625256178328}
+  beamLengthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.2
+      outSlope: 0.2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.2
+      inSlope: 0.2
+      outSlope: 0.2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  beamWidthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.03
+      inSlope: 19.8
+      outSlope: 19.8
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15
+      value: 3
+      inSlope: 0.03180225
+      outSlope: 0.03180225
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.29593694
+    - serializedVersion: 3
+      time: 0.9
+      value: 3
+      inSlope: 0.00030917165
+      outSlope: -0.078462385
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.4092261
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -29.999992
+      outSlope: -29.999992
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   attackDamage: 2000
   chargeUpTime: 6
   laserTravelTime: 1.5
