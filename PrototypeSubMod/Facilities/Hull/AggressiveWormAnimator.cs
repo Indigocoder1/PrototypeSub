@@ -131,6 +131,9 @@ public class AggressiveWormAnimator : ProtoWormAnimator
         stasisPulseFrozen = false;
     }
 
+    public float GetForwardsSpeed() => forwardsSpeed;
+    public void SetForwardsSpeed(float speed) => forwardsSpeed = speed;
+
     private void UpdateRotationSpeed()
     {
         rotationSpeed = GetRotationSpeed(transform.position, transform.forward);
