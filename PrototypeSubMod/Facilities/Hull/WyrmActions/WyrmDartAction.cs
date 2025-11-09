@@ -14,6 +14,7 @@ public class WyrmDartAction : CreatureAction
 
     private Transform target;
     private CloakEffectHandler targetCloakHandler;
+    private Vector3[] movementPoints;
     private bool performing;
     private float originalSpeed;
     private int rightHandSign;
@@ -73,36 +74,48 @@ public class WyrmDartAction : CreatureAction
             points.Add(sphere);
         }
     }
+    
+    public void OverrideStopPerform()
+    {
+        performing = false;
+    }
+
 
     private void OnPointReached()
     {
         attackStage++;
-
-        if (attackStage == 3)
-        {
-            wormAnimator.SetForwardsSpeed(increasedSpeed);
-        }
         
         if (attackStage >= GetMovementPoints().Length)
         {
             performing = false;
             wormAnimator.SetForwardsSpeed(originalSpeed);
-            return;
         }
-        
-        wormAnimator.SetTravelTarget(GetMovementPoints()[attackStage], OnPointReached);
     }
 
     private void Update()
     {
         if (!performing) return;
+
+        var tempPoints = GetMovementPoints();
+        if (attackStage < tempPoints.Length - 2)
+        {
+            movementPoints = tempPoints;
+        }
         
         int i = 0;
-        foreach (var point in GetMovementPoints())
+        foreach (var point in movementPoints)
         {
             points[i].transform.position = point;
             i++;
         }
+
+        var angle = Vector3.Angle(transform.forward, movementPoints[attackStage] - transform.position);
+        if (attackStage == 3 && angle < 25)
+        {
+            wormAnimator.SetForwardsSpeed(increasedSpeed);
+        }
+        
+        wormAnimator.SetTravelTarget(movementPoints[attackStage], OnPointReached);
     }
 
     private Vector3[] GetMovementPoints()
@@ -114,7 +127,7 @@ public class WyrmDartAction : CreatureAction
         {
             points[1] = target.position - target.forward * setupOffset;
             points[2] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.right * (rightHandSign * setupOffset), setupOffset / 2f);
-            points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * (rightHandSign * setupOffset));
+            points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * setupOffset);
             points[4] = points[3] - target.right * (rightHandSign * setupOffset * 2f);
         }
         else

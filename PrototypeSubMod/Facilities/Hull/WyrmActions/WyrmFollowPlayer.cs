@@ -27,14 +27,12 @@ public class WyrmFollowPlayer : CreatureAction
             return 1f;
         }
         
-        return performing ? 1 : Random.Range(0f, 0.8f);
+        return performing ? 1 : Random.Range(0f, 0.3f);
     }
 
     public override void Perform(Creature creature, float time, float deltaTime)
     {
         if (performing) return;
-        
-        base.Perform(creature, time, deltaTime);
 
         if (Time.time < timeLastPerformed + timeBetweenPointRecalculations) return;
         
@@ -43,9 +41,8 @@ public class WyrmFollowPlayer : CreatureAction
         performing = true;
     }
 
-    public override void StopPerform(Creature creature, float time)
+    public void OverrideStopPerform()
     {
-        base.StopPerform(creature, time);
         performing = false;
     }
 

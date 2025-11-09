@@ -33,5 +33,9 @@ internal class AutoreferenceSkyApplier : SkyApplier
     private new void OnEnable()
     {
         UWE.CoroutineHost.StartCoroutine(ApplySkyboxDelayed());
+        if (SkyApplierUpdater.main && !SkyApplierUpdater.main.skyAppliers.Contains(this))
+        {
+            SkyApplierUpdater.main.Add(this);
+        }
     }
 }

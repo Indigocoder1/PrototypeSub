@@ -79,6 +79,7 @@ public class ProtoAggressiveWorm : Creature
             foreach (var action in actions)
             {
                 action.StopPerform(this, Time.time);
+                action.SendMessage("OverrideStopPerform");
             }
             
             despawnAction.Perform(this, Time.time, 0);
