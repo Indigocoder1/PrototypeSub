@@ -51,6 +51,10 @@ public abstract class ProtoWormAnimator : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
                 segmentAnimators[child].SetTrigger(StartMoving);
+                if (child.TryGetComponent(out SkyApplier applier))
+                {
+                    applier.ApplySkybox();
+                }
             }
 
             UpdateSpineSegment(child, i, progress);

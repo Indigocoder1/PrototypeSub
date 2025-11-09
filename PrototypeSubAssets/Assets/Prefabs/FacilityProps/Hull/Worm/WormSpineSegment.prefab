@@ -1582,6 +1582,7 @@ GameObject:
   - component: {fileID: 323680610546937016}
   - component: {fileID: 1286967224047516024}
   - component: {fileID: 773742998593132652}
+  - component: {fileID: 2018848262097451039}
   m_Layer: 0
   m_Name: WormSpineSegment
   m_TagString: Untagged
@@ -1651,6 +1652,21 @@ MonoBehaviour:
   dynamic: 1
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 1
+  overrideSkyPos: {x: 510, y: -8, z: -229}
+--- !u!114 &2018848262097451039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212892746868434058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1288744665, guid: a6a460bc9cda68a8c89553f1ec5be757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Override sky to crash zone
 --- !u!1 &5254560367511232884
 GameObject:
   m_ObjectHideFlags: 0

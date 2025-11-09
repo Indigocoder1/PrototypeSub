@@ -6735,9 +6735,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorSky: 0
   customSkyPrefab: {fileID: 0}
-  dynamic: 0
+  dynamic: 1
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 1
+  overrideSkyPos: {x: 510, y: -8, z: -229}
 --- !u!114 &217774969584853644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6900,7 +6902,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
-  increasedSpeed: 30
+  increasedSpeed: 60
 --- !u!114 &6753871278772561756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9585,7 +9587,6 @@ MonoBehaviour:
   m_Script: {fileID: 1908645677, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skyApplier: {fileID: 1395020062463200846}
   segmentsParent: {fileID: 8262272570642887209}
   spineSegmentPrefab: {fileID: 5212892746868434058, guid: 5b33fa7ba83b0264e8bd720c37900869,
     type: 3}
