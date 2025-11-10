@@ -77,6 +77,7 @@ public class RemoveTextures : PipelineJob
                             if (splitSections[splitSections.Length - 1].StartsWith("KEEP"))
                             {
                                 whitelistedTex = splitSections[splitSections.Length - 1].Replace("KEEP", string.Empty);
+                                whitelistedTex = whitelistedTex.Split(' ')[0];
                             }
 
                             var textureNames = renderer.sharedMaterials[i].GetTexturePropertyNames();

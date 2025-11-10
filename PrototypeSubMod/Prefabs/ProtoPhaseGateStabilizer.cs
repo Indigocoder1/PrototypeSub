@@ -26,13 +26,8 @@ public class ProtoPhaseGateStabilizer
 
     private static GameObject GetGameObject()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("AlienFramework");
+        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStabilizer");
         var instance = GameObject.Instantiate(prefab);
-
-        foreach (var rend in instance.GetComponentsInChildren<Renderer>(true))
-        {
-            rend.material.color = Color.cyan;
-        }
         
         return instance;
     }
