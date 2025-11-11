@@ -37,17 +37,18 @@ public class FactorManager : MonoBehaviour
     
     private void Update()
     {
-        if (GameInput.GetButtonDown(GameInput.Button.AltTool) && equippedFactors.Count > 0)
+        if (equippedFactors.Count == 0) return;
+        
+        for (int i = 0; i < equippedFactors.Count; i++)
         {
-            for (int i = 0; i < equippedFactors.Count; i++)
-            {
-                var factor = equippedFactors.ElementAt(i).Value;
+            var factor = equippedFactors.ElementAt(i).Value;
 
-                if (Time.time >= nextUseTime[factor.name])
-                {
-                    nextUseTime[factor.name] = Time.time + factor.cooldown;
-                    factor.Use();
-                }
+            if (!GameInput.GetButtonDown(factor.GetUseButton())) continue;
+            
+            if (Time.time >= nextUseTime[factor.name])
+            {
+                nextUseTime[factor.name] = Time.time + factor.cooldown;
+                factor.Use();
             }
         }
     }

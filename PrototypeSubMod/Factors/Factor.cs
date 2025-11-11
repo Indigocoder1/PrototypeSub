@@ -9,6 +9,7 @@ public abstract class Factor : MonoBehaviour
     public float duration { get; protected set; }
     
     public abstract void Use();
+    public abstract GameInput.Button GetUseButton();
     
     public IEnumerator WaitDuration()
     {
