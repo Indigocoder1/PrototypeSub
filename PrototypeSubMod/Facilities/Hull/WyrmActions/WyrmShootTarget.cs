@@ -318,4 +318,10 @@ public class WyrmShootTarget : CreatureAction
     }
 
     public override bool NeedsToBeChecked(float time) => true;
+
+    private void OnDestroy()
+    {
+        Destroy(laserVFX);
+        Destroy(muzzleVFX);
+    }
 }
