@@ -41,12 +41,15 @@ public class Blink : Factor
 
         base.Use();
         
-        Time.timeScale = TIME_SCALE_SLOW;
         speedData.CopyFromController(controller);
         speedData.Multiply(SPEED_MULTIPLIER / TIME_SCALE_SLOW);
         speedData.AssignToMotor(controller.underWaterController);
-        Player.main.rigidBody.AddForce(GameInput.moveDirection.normalized * startImpulse, ForceMode.Impulse);
+        var moveDir = MainCameraControl.main.transform.right * GameInput.moveDirection.normalized.x +
+            MainCameraControl.main.transform.forward * GameInput.moveDirection.normalized.z +
+            MainCameraControl.main.transform.up * GameInput.moveDirection.normalized.y;
+        Player.main.rigidBody.velocity = moveDir * (controller.swimForwardMaxSpeed * (SPEED_MULTIPLIER / TIME_SCALE_SLOW));
         
+        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(TIME_SCALE_SLOW));
         ErrorMessage.AddDebug("Blink factor activated");
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
     }
@@ -58,10 +61,30 @@ public class Blink : Factor
         // Multiply by the inverse instead of dividing
         speedData.Multiply(TIME_SCALE_SLOW / SPEED_MULTIPLIER);
         speedData.AssignToMotor(controller.underWaterController);
-        UWE.CoroutineHost.StartCoroutine(ResetDrag(controller.underWaterController.swimDrag));
-        UWE.CoroutineHost.StartCoroutine(EaseInTimescale());
-        controller.underWaterController.swimDrag = 7f;
+        UWE.CoroutineHost.StartCoroutine(SetModeDelayed());
+        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(1));
+        Player.main.rigidBody.velocity = Vector3.zero;
         PlayerController_Patches.SetBlockMotorModeAssignment(false);
+    }
+
+    private IEnumerator SetTimescaleDelayed(float timeScale)
+    {
+        // Wait until a FixedUpdate has ocurred to actually update the player velocity
+        var timestepIncrements = (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime);
+        while (timestepIncrements == (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime))
+        {
+            yield return null;
+        }
+
+        Time.timeScale = timeScale;
+    }
+
+    private IEnumerator SetModeDelayed()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (inUse) yield break;
+        
+        controller.SetMotorMode(Player.main.motorMode);
     }
 
     private void RetrieveIndicatorReference()
@@ -113,30 +136,6 @@ public class Blink : Factor
     }
 
     public override GameInput.Button GetUseButton() => GameInput.Button.Sprint;
-
-    private IEnumerator ResetDrag(float originalDrag)
-    {
-        yield return new WaitUntil(() => Player.main.rigidBody.velocity.magnitude < controller.swimForwardMaxSpeed);
-        controller.underWaterController.swimDrag = originalDrag;
-    }
-
-    private IEnumerator EaseInTimescale()
-    {
-        float scale = Time.timeScale;
-        while (scale < 1)
-        {
-            if (IngameMenu.main.gameObject.activeSelf) yield break;
-            
-            if (inUse) yield break;
-            
-            // Multiply by 2 to get done in 1/2 second
-            scale += Time.unscaledDeltaTime * (1 - TIME_SCALE_SLOW) * 2f;
-            Time.timeScale = scale;
-            yield return new WaitForEndOfFrame();
-        }
-
-        Time.timeScale = 1;
-    }
     
     public override void OnEquipped()
     {
