@@ -74,7 +74,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         if (nextPointIndex >= calibrationPoints.Length)
         {
             ErrorMessage.AddError("Calibration complete");
-            nextPointIndex = calibrationPoints.Length - 1;
+            nextPointIndex = 1;
             doingCalibrationRun = false;
             calibrationObjects.SetActive(false);
         }
@@ -82,10 +82,12 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 
     private void HandleDistFromLine()
     {
-        if (GetNormalizedDistFromLine() > 1)
-        {
-            ErrorMessage.AddError("Too far from line!");
-        }
+        if (GetNormalizedDistFromLine() <= 1) return;
+        
+        ErrorMessage.AddError("Too far from line! Failed calibration run");
+        doingCalibrationRun = false;
+        nextPointIndex = 1;
+        calibrationObjects.SetActive(false);
     }
 
     public float GetNormalizedDistFromLine()
