@@ -82,13 +82,18 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 
     private void HandleDistFromLine()
     {
-        var pointOnLine = ClosestPointOnLine(calibrationPoints[nextPointIndex - 1], calibrationPoints[nextPointIndex],
-            transform.position);
-
-        if (Vector3.Distance(pointOnLine, transform.position) > maxDistFromLine)
+        if (GetNormalizedDistFromLine() > 1)
         {
             ErrorMessage.AddError("Too far from line!");
         }
+    }
+
+    public float GetNormalizedDistFromLine()
+    {
+        var pointOnLine = ClosestPointOnLine(calibrationPoints[nextPointIndex - 1], calibrationPoints[nextPointIndex],
+            transform.position);
+
+        return Vector3.Distance(pointOnLine, transform.position) / maxDistFromLine;
     }
 
     public int GetNextPointIndex() => nextPointIndex;
@@ -121,12 +126,12 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     public string GetProfileTag() => "CalibrationRunManager";
     public int scheduledUpdateIndex { get; set; }
     
-    public virtual void OnEnable()
+    public void OnEnable()
     {
         UpdateSchedulerUtils.Register(this);
     }
 
-    public virtual void OnDisable()
+    public void OnDisable()
     {
         UpdateSchedulerUtils.Deregister(this);
     }

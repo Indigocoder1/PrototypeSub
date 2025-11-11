@@ -52,12 +52,12 @@ public class CalibrationProgressTracker : MonoBehaviour, IScheduledUpdateBehavio
         return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
     }
 
-    public virtual void OnEnable()
+    public  void OnEnable()
     {
         UpdateSchedulerUtils.Register(this);
     }
 
-    public virtual void OnDisable()
+    public void OnDisable()
     {
         UpdateSchedulerUtils.Deregister(this);
     }
