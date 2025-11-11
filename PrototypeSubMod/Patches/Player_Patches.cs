@@ -22,7 +22,7 @@ internal class Player_Patches
 {
     [SaveStateReference]
     public static GameObject DummyLDFTarget;
-
+    
     [HarmonyPatch(nameof(Player.Start)), HarmonyPostfix]
     private static void Start_Postfix()
     {

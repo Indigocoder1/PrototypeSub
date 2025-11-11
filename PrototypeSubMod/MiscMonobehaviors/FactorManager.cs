@@ -20,7 +20,8 @@ public class FactorManager : MonoBehaviour
     {
         if (item.item == null || !item.item.TryGetComponent(out Factor factor))
             return;
-        
+
+        factor.OnEquipped();
         equippedFactors.Add(factor.name, factor);
         
         if(!nextUseTime.ContainsKey(factor.name))
@@ -32,6 +33,7 @@ public class FactorManager : MonoBehaviour
         if (item.item == null || !item.item.TryGetComponent(out Factor factor))
             return;
         
+        factor.OnUnequipped();
         equippedFactors.Remove(factor.name);
     }
     
@@ -43,9 +45,15 @@ public class FactorManager : MonoBehaviour
         {
             var factor = equippedFactors.ElementAt(i).Value;
 
-            if (!GameInput.GetButtonDown(factor.GetUseButton())) continue;
+            factor.UpdateFactor();
             
-            if (Time.time >= nextUseTime[factor.name])
+            if (!GameInput.GetButtonHeld(factor.GetUseButton()))
+            {
+                if (factor.InUse()) factor.StopUse();
+                continue;
+            }
+            
+            if (Time.time >= nextUseTime[factor.name] && GameInput.GetButtonDown(factor.GetUseButton()))
             {
                 nextUseTime[factor.name] = Time.time + factor.cooldown;
                 factor.Use();

@@ -1,25 +1,35 @@
+using System.Collections;
+using PrototypeSubMod.Patches;
 using UnityEngine;
-using UWE;
+using UnityEngine.UI;
 
 namespace PrototypeSubMod.Factors;
 
 public class Blink : Factor
 {
-    private const float SPEED_MULTIPLIER = 10f;
-    private const float TIME_SCALE_SLOW = 0.5f;
-
-    private PlayerController controller;
-    private SpeedData originalSpeedData;
+    private const float SPEED_MULTIPLIER = 7.5f;
+    private const float TIME_SCALE_SLOW = 0.25f;
     
-    public Blink()
-    {
-        duration = 1f;
-        cooldown = 3f;
-    }
+    private const float MAX_BLINK_DURATION = 3f;
+    private const float BLINK_RECHARGE_RATE = MAX_BLINK_DURATION / 5f;
+
+    private float startImpulse = 50f;
+
+    private Image chargeIndicator;
+    private PlayerController controller;
+    private SpeedData speedData;
+    private float currentBlinkResource = MAX_BLINK_DURATION;
+    private bool fullyDepleted;
     
     public override void Use()
     {
+        if (fullyDepleted) return;
+        
         if (Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) return;
+        
+        if (Player.main.isPiloting) return;
+        
+        if (Player.main.currentSub != null) return;
         
         controller = Player.main.playerController;
 
@@ -28,23 +38,116 @@ public class Blink : Factor
             Plugin.Logger.LogError("Failed to get Motor from Player for the BlinkFactor!");
             return;
         }
+
+        base.Use();
         
         Time.timeScale = TIME_SCALE_SLOW;
-        originalSpeedData = new SpeedData(controller);
-        (originalSpeedData * (SPEED_MULTIPLIER / TIME_SCALE_SLOW)).AssignToController(controller);
-        controller.SetMotorMode(Player.MotorMode.Dive);
+        speedData.CopyFromController(controller);
+        speedData.Multiply(SPEED_MULTIPLIER / TIME_SCALE_SLOW);
+        speedData.AssignToMotor(controller.underWaterController);
+        Player.main.rigidBody.AddForce(GameInput.moveDirection.normalized * startImpulse, ForceMode.Impulse);
         
         ErrorMessage.AddDebug("Blink factor activated");
-        CoroutineHost.StartCoroutine(WaitDuration());
+        PlayerController_Patches.SetBlockMotorModeAssignment(true);
+    }
+    
+    public override void StopUse()
+    {
+        base.StopUse();
+
+        // Multiply by the inverse instead of dividing
+        speedData.Multiply(TIME_SCALE_SLOW / SPEED_MULTIPLIER);
+        speedData.AssignToMotor(controller.underWaterController);
+        UWE.CoroutineHost.StartCoroutine(ResetDrag(controller.underWaterController.swimDrag));
+        UWE.CoroutineHost.StartCoroutine(EaseInTimescale());
+        controller.underWaterController.swimDrag = 7f;
+        PlayerController_Patches.SetBlockMotorModeAssignment(false);
+    }
+
+    private void RetrieveIndicatorReference()
+    {
+        if (chargeIndicator != null) return;
+        
+        var hudContent = uGUI.main.transform.Find("ScreenCanvas/HUD/Content");
+        if (hudContent.Find("BlinkFactorCharge") == null)
+        {
+            var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("BlinkFactorCharge");
+            var instance = Instantiate(prefab, hudContent);
+            instance.name = "BlinkFactorCharge";
+            instance.transform.localPosition = new Vector3(-650, 400, 0);
+            var hideForScreenshots = instance.EnsureComponent<HideForScreenshots>();
+            hideForScreenshots.recursive = true;
+        }
+        
+        chargeIndicator = hudContent.Find("BlinkFactorCharge/Mask").GetComponent<Image>();
+    }
+    
+    public override void UpdateFactor()
+    {
+        if (inUse && currentBlinkResource > 0)
+        {
+            currentBlinkResource -= Time.unscaledDeltaTime;
+            if (currentBlinkResource <= 0)
+            {
+                fullyDepleted = true;
+            }
+        }
+        else if (currentBlinkResource < MAX_BLINK_DURATION)
+        {
+            currentBlinkResource += Time.deltaTime * BLINK_RECHARGE_RATE;
+        }
+        else if (fullyDepleted)
+        {
+            fullyDepleted = false;
+        }
+
+        if (chargeIndicator != null)
+        {
+            chargeIndicator.fillAmount = currentBlinkResource / MAX_BLINK_DURATION;
+        }
+
+        if (currentBlinkResource <= 0)
+        {
+            StopUse();
+        }
     }
 
     public override GameInput.Button GetUseButton() => GameInput.Button.Sprint;
 
-    public override void Disable()
+    private IEnumerator ResetDrag(float originalDrag)
     {
-        Time.timeScale = 1f;
-        originalSpeedData.AssignToController(controller);
-        controller.SetMotorMode(Player.main.motorMode);
+        yield return new WaitUntil(() => Player.main.rigidBody.velocity.magnitude < controller.swimForwardMaxSpeed);
+        controller.underWaterController.swimDrag = originalDrag;
+    }
+
+    private IEnumerator EaseInTimescale()
+    {
+        float scale = Time.timeScale;
+        while (scale < 1)
+        {
+            if (IngameMenu.main.gameObject.activeSelf) yield break;
+            
+            if (inUse) yield break;
+            
+            // Multiply by 2 to get done in 1/2 second
+            scale += Time.unscaledDeltaTime * (1 - TIME_SCALE_SLOW) * 2f;
+            Time.timeScale = scale;
+            yield return new WaitForEndOfFrame();
+        }
+
+        Time.timeScale = 1;
+    }
+    
+    public override void OnEquipped()
+    {
+        RetrieveIndicatorReference();
+        chargeIndicator.gameObject.SetActive(true);
+        speedData = new SpeedData();
+    }
+    
+    public override void OnUnequipped()
+    {
+        chargeIndicator.gameObject.SetActive(false);
     }
 
     private struct SpeedData
@@ -54,87 +157,32 @@ public class Blink : Factor
         public float strafeSpeed;
         public float verticalSpeed;
         public float waterAcceleration;
+        
+        public void AssignToMotor(PlayerMotor motor)
+        {
+            motor.forwardMaxSpeed = forwardsSpeed;
+            motor.backwardMaxSpeed = backwardsSpeed;
+            motor.strafeMaxSpeed = strafeSpeed;
+            motor.verticalMaxSpeed = verticalSpeed;
+            motor.waterAcceleration = waterAcceleration;
+        }
 
-        public float seaglideForwardsSpeed;
-        public float seaglideBackwardsSpeed;
-        public float seaglideStrafeSpeed;
-        public float seaglideVerticalSpeed;
-        public float seaglideWaterAcceleration;
-
-        public SpeedData(PlayerController playerController)
+        public void CopyFromController(PlayerController playerController)
         {
             forwardsSpeed = playerController.swimForwardMaxSpeed;
             backwardsSpeed = playerController.swimBackwardMaxSpeed;
             strafeSpeed = playerController.swimStrafeMaxSpeed;
             verticalSpeed = playerController.swimVerticalMaxSpeed;
             waterAcceleration = playerController.swimWaterAcceleration;
-            
-            seaglideForwardsSpeed = playerController.seaglideForwardMaxSpeed;
-            seaglideBackwardsSpeed = playerController.seaglideBackwardMaxSpeed;
-            seaglideStrafeSpeed = playerController.seaglideStrafeMaxSpeed;
-            seaglideVerticalSpeed = playerController.seaglideVerticalMaxSpeed;
-            seaglideWaterAcceleration = playerController.seaglideWaterAcceleration;
         }
 
-        public SpeedData(float forwardsSpeed, float backwardsSpeed, float strafeSpeed, float verticalSpeed, float waterAcceleration, float seaglideForwardsSpeed, float seaglideBackwardsSpeed, float seaglideStrafeSpeed, float seaglideVerticalSpeed, float seaglideWaterAcceleration)
+        public void Multiply(float factor)
         {
-            this.forwardsSpeed = forwardsSpeed;
-            this.backwardsSpeed = backwardsSpeed;
-            this.strafeSpeed = strafeSpeed;
-            this.verticalSpeed = verticalSpeed;
-            this.waterAcceleration = waterAcceleration;
-            this.seaglideForwardsSpeed = seaglideForwardsSpeed;
-            this.seaglideBackwardsSpeed = seaglideBackwardsSpeed;
-            this.seaglideStrafeSpeed = seaglideStrafeSpeed;
-            this.seaglideVerticalSpeed = seaglideVerticalSpeed;
-            this.seaglideWaterAcceleration = seaglideWaterAcceleration;
-        }
-
-        public SpeedData(SpeedData copyFrom)
-        {
-            forwardsSpeed = copyFrom.forwardsSpeed;
-            backwardsSpeed = copyFrom.backwardsSpeed;
-            strafeSpeed = copyFrom.strafeSpeed;
-            verticalSpeed = copyFrom.verticalSpeed;
-            waterAcceleration = copyFrom.waterAcceleration;
-            seaglideForwardsSpeed = copyFrom.seaglideForwardsSpeed;
-            seaglideBackwardsSpeed = copyFrom.seaglideBackwardsSpeed;
-            seaglideStrafeSpeed = copyFrom.seaglideStrafeSpeed;
-            seaglideVerticalSpeed = copyFrom.seaglideVerticalSpeed;
-            seaglideWaterAcceleration = copyFrom.seaglideWaterAcceleration;
-        }
-
-        public void AssignToController(PlayerController playerController)
-        {
-            playerController.swimForwardMaxSpeed = forwardsSpeed;
-            playerController.swimBackwardMaxSpeed = backwardsSpeed;
-            playerController.swimStrafeMaxSpeed = strafeSpeed;
-            playerController.swimVerticalMaxSpeed = verticalSpeed;
-            playerController.swimWaterAcceleration = waterAcceleration;
-
-            playerController.seaglideForwardMaxSpeed = seaglideForwardsSpeed;
-            playerController.seaglideBackwardMaxSpeed = seaglideBackwardsSpeed;
-            playerController.seaglideStrafeMaxSpeed = seaglideStrafeSpeed;
-            playerController.seaglideVerticalMaxSpeed = seaglideVerticalSpeed;
-            playerController.seaglideWaterAcceleration = seaglideWaterAcceleration;
-        }
-
-        public static SpeedData operator *(SpeedData data, float value)
-        {
-            return new SpeedData(data.forwardsSpeed * value, data.backwardsSpeed * value, data.strafeSpeed * value,
-                data.verticalSpeed * value, data.waterAcceleration * value, 
-                data.seaglideForwardsSpeed * value,
-                data.seaglideBackwardsSpeed * value, data.seaglideStrafeSpeed * value,
-                data.seaglideVerticalSpeed * value, data.seaglideWaterAcceleration * value);
-        }
-        
-        public static SpeedData operator /(SpeedData data, float value)
-        {
-            return new SpeedData(data.forwardsSpeed / value, data.backwardsSpeed / value, data.strafeSpeed / value,
-                data.verticalSpeed / value, data.waterAcceleration / value, 
-                data.seaglideForwardsSpeed / value,
-                data.seaglideBackwardsSpeed / value, data.seaglideStrafeSpeed / value,
-                data.seaglideVerticalSpeed / value, data.seaglideWaterAcceleration / value);
+            forwardsSpeed *= factor;
+            backwardsSpeed *= factor;
+            strafeSpeed *= factor;
+            verticalSpeed *= factor;
+            waterAcceleration *= factor;
         }
     }
 }
