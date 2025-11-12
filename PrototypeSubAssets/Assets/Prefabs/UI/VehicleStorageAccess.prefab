@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 389085253491890601}
   rect: {fileID: 1911663400751013709}
-  dummySslot: {fileID: 0}
+  overrideGraphic: {fileID: 0}
 --- !u!1 &8680940107605670216
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -466,4 +466,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 5119841980499956829}
   rect: {fileID: 1334157014432642746}
-  dummySslot: {fileID: 0}
+  overrideGraphic: {fileID: 0}
