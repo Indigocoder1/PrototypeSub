@@ -83,6 +83,14 @@ public class TransmissionDeviceUINumber : MonoBehaviour
         return currentNumberIndex + 1 == correctNumber;
     }
 
+    public int GetCorrectNumber() => correctNumber;
+
+    public int GetCurrentNumber()
+    {
+        var currentNumberIndex = mixedNumberSprites.ElementAt(index).Value;
+        return currentNumberIndex + 1;
+    }
+    
     private void UpdateImage()
     {
         numberImage.sprite = mixedNumberSprites.ElementAt(index).Key;

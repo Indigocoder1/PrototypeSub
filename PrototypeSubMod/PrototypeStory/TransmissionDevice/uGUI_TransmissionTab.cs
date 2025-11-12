@@ -6,6 +6,8 @@ namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
 public class uGUI_TransmissionTab : uGUI_PDATab
 {
     public event Action onTransmissionComplete;
+    public event Action onTabOpened;
+    public event Action onTabClosed;
     
     [SerializeField] private TransmissionDeviceUINumber[] deviceNumbers;
 
@@ -48,6 +50,8 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         onTransmissionComplete?.Invoke();
     }
 
+    public TransmissionDeviceUINumber[] GetNumbers() => deviceNumbers;
+
     public override void OnOpenPDA(PDATab tab, bool explicitly)
     {
         if (tab != Plugin.TransmissionEntryTab) return;
@@ -55,6 +59,7 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         base.OnOpenPDA(tab, explicitly);
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
+        onTabOpened?.Invoke();
     }
 
     public override void OnClosePDA()
@@ -62,5 +67,6 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         base.OnClosePDA();
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
+        onTabClosed?.Invoke();
     }
 }
