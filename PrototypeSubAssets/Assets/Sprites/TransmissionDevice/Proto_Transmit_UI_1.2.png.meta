@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 60f2cb7f917d1114995c2e5c0f2cb59c
+guid: 482c0a550214dea4aae5e39cf0553fdb
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 4008403487740898737
+    second: Proto_Transmit_UI_1.2_0
+  - first:
+      213: 8880410451608802877
+    second: Proto_Transmit_UI_1.2_1
+  - first:
+      213: 2416945799782405015
+    second: Proto_Transmit_UI_1.2_2
+  - first:
+      213: -899064893748162386
+    second: Proto_Transmit_UI_1.2_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -97,7 +109,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Proto_Transmit_UI_1.2_0
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 1457
+        width: 584
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bdab331cb5b0a730800000000000000
+      internalID: 4008403487740898737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Proto_Transmit_UI_1.2_1
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 1161
+        width: 584
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d361fcb514e8d3b70800000000000000
+      internalID: 8880410451608802877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Proto_Transmit_UI_1.2_2
+      rect:
+        serializedVersion: 2
+        x: 2780
+        y: 1183
+        width: 94
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 793176d3667ba8120800000000000000
+      internalID: 2416945799782405015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Proto_Transmit_UI_1.2_3
+      rect:
+        serializedVersion: 2
+        x: 2930
+        y: 1183
+        width: 94
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea0dd1a1e31e583f0800000000000000
+      internalID: -899064893748162386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

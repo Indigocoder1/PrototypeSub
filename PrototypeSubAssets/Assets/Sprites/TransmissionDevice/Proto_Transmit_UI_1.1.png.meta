@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 592760a9b1b1ae746bf49a672eaae384
+guid: 145aece983bb7464e986d49bcaad0cb6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6968346946448987073
-    second: TransmissionDeviceBG_2
-  - first:
-      213: 7350333115920314756
-    second: TransmissionDeviceBG_4
-  - first:
-      213: 286390300829317255
-    second: TransmissionDeviceBG_6
+      213: 3099974659636156202
+    second: Proto_Transmit_UI_1.1_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -108,7 +102,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TransmissionDeviceBG_2
+      name: Proto_Transmit_UI_1.1_0
       rect:
         serializedVersion: 2
         x: 280
@@ -116,56 +110,14 @@ TextureImporter:
         width: 1090
         height: 977
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3cea314f557b4f90800000000000000
-      internalID: -6968346946448987073
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TransmissionDeviceBG_4
-      rect:
-        serializedVersion: 2
-        x: 1465
-        y: 592
-        width: 46
-        height: 91
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 48178337601a10660800000000000000
-      internalID: 7350333115920314756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TransmissionDeviceBG_6
-      rect:
-        serializedVersion: 2
-        x: 1390
-        y: 592
-        width: 46
-        height: 91
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7887c04167679f300800000000000000
-      internalID: 286390300829317255
+      spriteID: a2753505782550b20800000000000000
+      internalID: 3099974659636156202
       vertices: []
       indices: 
       edges: []
