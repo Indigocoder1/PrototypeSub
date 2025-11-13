@@ -6,6 +6,7 @@ using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
 using SubLibrary.Handlers;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 using UnityEngine.UI;
 
 namespace PrototypeSubMod.Factors;
@@ -22,6 +23,13 @@ public class Blink : Factor
     private float ghostDeletionDelay = 2f;
     private float timeBetweenGhostDeletions = 0.5f;
 
+    private float chromaticAbberationVal = 3f;
+    private float depthOfFieldVal = 0.1f;
+    private float fovMultiplier = 1.2f;
+
+    private ChromaticAberrationModel.Settings originalChromaticSettings;
+    private DepthOfFieldModel.Settings originalDepthOfFieldSettings;
+    private bool wasChromaticActive;
     private List<GameObject> ghostFrames = new();
     private Material ghostMaterial;
     private Image chargeIndicator;
@@ -72,7 +80,22 @@ public class Blink : Factor
         UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(timeScaleSlow));
         ErrorMessage.AddDebug("Blink factor activated");
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
-
+        
+        SNCameraRoot.main.SetFov(MiscSettings.fieldOfView * fovMultiplier);
+        var postProcessing = SNCameraRoot.main.mainCam.GetComponent<PostProcessingBehaviour>();
+        originalChromaticSettings = postProcessing.profile.chromaticAberration.settings;
+        originalDepthOfFieldSettings = postProcessing.profile.depthOfField.settings;
+        wasChromaticActive = postProcessing.profile.chromaticAberration.enabled;
+        
+        postProcessing.profile.chromaticAberration.enabled = true;
+        var chromaticSettings = postProcessing.profile.chromaticAberration.settings;
+        chromaticSettings.intensity = chromaticAbberationVal;
+        postProcessing.profile.chromaticAberration.settings = chromaticSettings;
+        
+        var depthSettings = postProcessing.profile.depthOfField.settings;
+        depthSettings.focusDistance = depthOfFieldVal;
+        postProcessing.profile.depthOfField.settings = depthSettings;
+        
         timeNextDeleteGhost = Time.time + ghostDeletionDelay;
     }
     
@@ -87,6 +110,12 @@ public class Blink : Factor
         UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(1));
         Player.main.rigidBody.velocity = Vector3.zero;
         PlayerController_Patches.SetBlockMotorModeAssignment(false);
+        
+        SNCameraRoot.main.SetFov(MiscSettings.fieldOfView * fovMultiplier);
+        var postProcessing = SNCameraRoot.main.mainCam.GetComponent<PostProcessingBehaviour>();
+        postProcessing.profile.chromaticAberration.enabled = wasChromaticActive;
+        postProcessing.profile.chromaticAberration.settings = originalChromaticSettings;
+        postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
     }
 
     private IEnumerator SetTimescaleDelayed(float timeScale)
