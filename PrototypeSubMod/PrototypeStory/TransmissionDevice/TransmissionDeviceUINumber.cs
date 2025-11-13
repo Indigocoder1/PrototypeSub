@@ -15,7 +15,7 @@ public class TransmissionDeviceUINumber : MonoBehaviour
     [SerializeField] private Sprite[] numberSprites;
     [SerializeField] private int correctNumber;
 
-    private Dictionary<Sprite, int> mixedNumberSprites = new();
+    private Dictionary<Sprite, int> mixedNumberSprites;
     
     private int index;
     
@@ -39,7 +39,8 @@ public class TransmissionDeviceUINumber : MonoBehaviour
             indices[i] = availableNumbers[j];
             availableNumbers.RemoveAt(j);
         }
-        
+
+        mixedNumberSprites = new();
         foreach (var index in indices)
         {
             mixedNumberSprites.Add(numberSprites[index], index);
@@ -79,6 +80,8 @@ public class TransmissionDeviceUINumber : MonoBehaviour
 
     public bool OnCorrectNumber()
     {
+        if (mixedNumberSprites == null) return false;
+        
         var currentNumberIndex = mixedNumberSprites.ElementAt(index).Value;
         return currentNumberIndex + 1 == correctNumber;
     }
@@ -87,6 +90,8 @@ public class TransmissionDeviceUINumber : MonoBehaviour
 
     public int GetCurrentNumber()
     {
+        if (mixedNumberSprites == null) return -1;
+        
         var currentNumberIndex = mixedNumberSprites.ElementAt(index).Value;
         return currentNumberIndex + 1;
     }

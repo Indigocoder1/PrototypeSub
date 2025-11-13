@@ -1,5 +1,10 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using PrototypeSubMod.Patches;
+using PrototypeSubMod.Prefabs;
+using SubLibrary.Handlers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,20 +12,35 @@ namespace PrototypeSubMod.Factors;
 
 public class Blink : Factor
 {
-    private const float SPEED_MULTIPLIER = 7.5f;
-    private const float TIME_SCALE_SLOW = 0.25f;
+    private float speedMultiplier = 7.5f;
+    private float timeScaleSlow = 0.25f;
     
-    private const float MAX_BLINK_DURATION = 3f;
-    private const float BLINK_RECHARGE_RATE = MAX_BLINK_DURATION / 5f;
+    private float maxBlinkDuration = 3f;
+    private float blinkRechargeRate = 3 / 5f;
 
-    private float startImpulse = 50f;
+    private float timeBetweenGhostFrames = 0.25f;
+    private float ghostDeletionDelay = 2f;
+    private float timeBetweenGhostDeletions = 0.5f;
 
+    private List<GameObject> ghostFrames = new();
+    private Material ghostMaterial;
     private Image chargeIndicator;
     private PlayerController controller;
     private SpeedData speedData;
-    private float currentBlinkResource = MAX_BLINK_DURATION;
+    private float currentBlinkResource;
+    private float timeNextGhostFrame;
+    private float timeNextDeleteGhost;
     private bool fullyDepleted;
-    
+
+    private void Awake()
+    {
+        var ghostBorder =
+            CyclopsReferenceHandler.CyclopsReference.transform.Find(
+                "HolographicDisplay/HolographicDisplayVisuals/CyclopsMini_Mid/border");
+        ghostMaterial = new(ghostBorder.GetComponent<Renderer>().material);
+        ghostMaterial.color = new Color(0.443f, 1, 0.443f);
+    }
+
     public override void Use()
     {
         if (fullyDepleted) return;
@@ -42,16 +62,18 @@ public class Blink : Factor
         base.Use();
         
         speedData.CopyFromController(controller);
-        speedData.Multiply(SPEED_MULTIPLIER / TIME_SCALE_SLOW);
+        speedData.Multiply(speedMultiplier / timeScaleSlow);
         speedData.AssignToMotor(controller.underWaterController);
         var moveDir = MainCameraControl.main.transform.right * GameInput.moveDirection.normalized.x +
             MainCameraControl.main.transform.forward * GameInput.moveDirection.normalized.z +
             MainCameraControl.main.transform.up * GameInput.moveDirection.normalized.y;
-        Player.main.rigidBody.velocity = moveDir * (controller.swimForwardMaxSpeed * (SPEED_MULTIPLIER / TIME_SCALE_SLOW));
+        Player.main.rigidBody.velocity = moveDir * (controller.swimForwardMaxSpeed * (speedMultiplier / timeScaleSlow));
         
-        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(TIME_SCALE_SLOW));
+        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(timeScaleSlow));
         ErrorMessage.AddDebug("Blink factor activated");
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
+
+        timeNextDeleteGhost = Time.time + ghostDeletionDelay;
     }
     
     public override void StopUse()
@@ -59,7 +81,7 @@ public class Blink : Factor
         base.StopUse();
 
         // Multiply by the inverse instead of dividing
-        speedData.Multiply(TIME_SCALE_SLOW / SPEED_MULTIPLIER);
+        speedData.Multiply(timeScaleSlow / speedMultiplier);
         speedData.AssignToMotor(controller.underWaterController);
         UWE.CoroutineHost.StartCoroutine(SetModeDelayed());
         UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(1));
@@ -115,9 +137,9 @@ public class Blink : Factor
                 fullyDepleted = true;
             }
         }
-        else if (currentBlinkResource < MAX_BLINK_DURATION)
+        else if (currentBlinkResource < maxBlinkDuration)
         {
-            currentBlinkResource += Time.deltaTime * BLINK_RECHARGE_RATE;
+            currentBlinkResource += Time.deltaTime * blinkRechargeRate;
         }
         else if (fullyDepleted)
         {
@@ -126,12 +148,79 @@ public class Blink : Factor
 
         if (chargeIndicator != null)
         {
-            chargeIndicator.fillAmount = currentBlinkResource / MAX_BLINK_DURATION;
+            chargeIndicator.fillAmount = currentBlinkResource / maxBlinkDuration;
+        }
+
+        if (Time.time > timeNextGhostFrame && inUse)
+        {
+            timeNextGhostFrame = Time.time + timeBetweenGhostFrames * timeScaleSlow;
+            SpawnGhostFrame();
+        }
+        
+        if (Time.time > timeNextDeleteGhost && ghostFrames.Count > 0)
+        {
+            timeNextDeleteGhost = Time.time + timeBetweenGhostDeletions * timeScaleSlow;
+            Destroy(ghostFrames[0]);
+            ghostFrames.RemoveAt(0);
         }
 
         if (currentBlinkResource <= 0)
         {
             StopUse();
+        }
+    }
+
+    private static readonly List<Type> WhitelistedTypes = new()
+    {
+        typeof(Transform),
+        typeof(Renderer),
+        typeof(MeshFilter),
+        typeof(Animator)
+    };
+    
+    private void SpawnGhostFrame()
+    {
+        var playerView = Player.main.transform.Find("body/player_view").gameObject;
+        var newPlayerView = Instantiate(playerView, playerView.transform.position, playerView.transform.rotation);
+        newPlayerView.name = "BlinkFactorGhost";
+        ghostFrames.Add(newPlayerView.gameObject);
+        DisplayCaseProp.TrimComponents(newPlayerView, WhitelistedTypes);
+        var newAnim = newPlayerView.GetComponent<Animator>();
+        var playerAnim = Player.main.playerAnimator;
+        var handAttach =
+            newPlayerView.transform.Find(
+                "export_skeleton/head_rig/neck/chest/clav_R/clav_R_aim/shoulder_R/elbow_R/hand_R/attach1");
+
+        foreach (Transform child in handAttach)
+        {
+            if (!child.name.StartsWith("attach1"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        
+        foreach (var parameter in playerAnim.parameters)
+        {
+            switch (parameter.type)
+            {
+                case AnimatorControllerParameterType.Bool:
+                    newAnim.SetBool(parameter.name, playerAnim.GetBool(parameter.name));
+                    break;
+                case AnimatorControllerParameterType.Float:
+                    newAnim.SetFloat(parameter.name, playerAnim.GetFloat(parameter.name));
+                    break;
+                case AnimatorControllerParameterType.Int:
+                    newAnim.SetInteger(parameter.name, playerAnim.GetInteger(parameter.name));
+                    break;
+            }
+        }
+
+        newAnim.Update(0);
+        newAnim.enabled = false;
+
+        foreach (var rend in newPlayerView.GetComponentsInChildren<Renderer>())
+        {
+            rend.materials = Enumerable.Repeat(ghostMaterial, rend.materials.Length).ToArray();
         }
     }
 
@@ -142,11 +231,17 @@ public class Blink : Factor
         RetrieveIndicatorReference();
         chargeIndicator.gameObject.SetActive(true);
         speedData = new SpeedData();
+        currentBlinkResource = maxBlinkDuration;
     }
     
     public override void OnUnequipped()
     {
         chargeIndicator.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(ghostMaterial);
     }
 
     private struct SpeedData
