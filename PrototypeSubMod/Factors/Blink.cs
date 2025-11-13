@@ -20,8 +20,6 @@ public class Blink : Factor
     private float blinkRechargeRate = 3 / 5f;
 
     private float timeBetweenGhostFrames = 0.25f;
-    private float ghostDeletionDelay = 2f;
-    private float timeBetweenGhostDeletions = 0.5f;
 
     private float chromaticAbberationVal = 3f;
     private float depthOfFieldVal = 0.1f;
@@ -37,7 +35,6 @@ public class Blink : Factor
     private SpeedData speedData;
     private float currentBlinkResource;
     private float timeNextGhostFrame;
-    private float timeNextDeleteGhost;
     private bool fullyDepleted;
 
     private void Awake()
@@ -95,8 +92,6 @@ public class Blink : Factor
         var depthSettings = postProcessing.profile.depthOfField.settings;
         depthSettings.focusDistance = depthOfFieldVal;
         postProcessing.profile.depthOfField.settings = depthSettings;
-        
-        timeNextDeleteGhost = Time.time + ghostDeletionDelay;
     }
     
     public override void StopUse()
@@ -116,6 +111,13 @@ public class Blink : Factor
         postProcessing.profile.chromaticAberration.enabled = wasChromaticActive;
         postProcessing.profile.chromaticAberration.settings = originalChromaticSettings;
         postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
+
+        foreach (var ghost in ghostFrames)
+        {
+            Destroy(ghost);
+        }
+
+        ghostFrames.Clear();
     }
 
     private IEnumerator SetTimescaleDelayed(float timeScale)
@@ -184,13 +186,6 @@ public class Blink : Factor
         {
             timeNextGhostFrame = Time.time + timeBetweenGhostFrames * timeScaleSlow;
             SpawnGhostFrame();
-        }
-        
-        if (Time.time > timeNextDeleteGhost && ghostFrames.Count > 0)
-        {
-            timeNextDeleteGhost = Time.time + timeBetweenGhostDeletions * timeScaleSlow;
-            Destroy(ghostFrames[0]);
-            ghostFrames.RemoveAt(0);
         }
 
         if (currentBlinkResource <= 0)
