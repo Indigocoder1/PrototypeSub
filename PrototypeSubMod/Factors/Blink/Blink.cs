@@ -23,11 +23,11 @@ public class Blink : Factor
     private float maxBlinkDuration = 3f;
     private float blinkRechargeRate = 3 / 5f;
 
-    private float timeBetweenGhostFrames = 0.25f;
+    private float timeBetweenGhostFrames = 0.1f;
 
     private float chromaticAbberationVal = 3f;
     private float depthOfFieldVal = 0.1f;
-    private float fovMultiplier = 1.2f;
+    private float fovMultiplier = 1.5f;
 
     private float resourceRegenDelay = 2f;
     public float resourceBarFadeDelay = 1f;
@@ -84,7 +84,7 @@ public class Blink : Factor
         UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(timeScaleSlow));
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
         
-        SNCameraRoot.main.SetFov(MiscSettings.fieldOfView * fovMultiplier);
+        SNCameraRoot.main.SetFov(Mathf.Min(MiscSettings.fieldOfView * fovMultiplier, 100));
         var postProcessing = SNCameraRoot.main.mainCam.GetComponent<PostProcessingBehaviour>();
         originalChromaticSettings = postProcessing.profile.chromaticAberration.settings;
         originalDepthOfFieldSettings = postProcessing.profile.depthOfField.settings;
