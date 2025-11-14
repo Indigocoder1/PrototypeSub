@@ -3,7 +3,7 @@ using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
-using PrototypeSubMod.Factors;
+using PrototypeSubMod.Factors.Blink;
 
 namespace PrototypeSubMod.Prefabs.Factors;
 

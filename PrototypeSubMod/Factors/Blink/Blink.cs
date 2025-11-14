@@ -7,12 +7,16 @@ using PrototypeSubMod.Prefabs;
 using SubLibrary.Handlers;
 using UnityEngine;
 using UnityEngine.PostProcessing;
-using UnityEngine.UI;
 
-namespace PrototypeSubMod.Factors;
+namespace PrototypeSubMod.Factors.Blink;
 
 public class Blink : Factor
 {
+    public Blink()
+    {
+        cooldown = 1f;
+    }
+    
     private float speedMultiplier = 7.5f;
     private float timeScaleSlow = 0.25f;
     
@@ -25,17 +29,22 @@ public class Blink : Factor
     private float depthOfFieldVal = 0.1f;
     private float fovMultiplier = 1.2f;
 
+    private float resourceRegenDelay = 2f;
+    public float resourceBarFadeDelay = 1f;
+    public float resourceFadeInTime = 0.2f;
+    public float resourceFadeOutTime = 0.5f;
+
     private ChromaticAberrationModel.Settings originalChromaticSettings;
     private DepthOfFieldModel.Settings originalDepthOfFieldSettings;
-    private bool wasChromaticActive;
-    private List<GameObject> ghostFrames = new();
-    private Material ghostMaterial;
-    private Image chargeIndicator;
+    private readonly List<GameObject> ghostFrames = new();
     private PlayerController controller;
+    private BlinkResourceUI resourceUi;
     private SpeedData speedData;
+    private Material ghostMaterial;
+    private float timeStartResourceRegen;
     private float currentBlinkResource;
     private float timeNextGhostFrame;
-    private bool fullyDepleted;
+    private bool wasChromaticActive;
 
     private void Awake()
     {
@@ -48,8 +57,6 @@ public class Blink : Factor
 
     public override void Use()
     {
-        if (fullyDepleted) return;
-        
         if (Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) return;
         
         if (Player.main.isPiloting) return;
@@ -75,7 +82,6 @@ public class Blink : Factor
         Player.main.rigidBody.velocity = moveDir * (controller.swimForwardMaxSpeed * (speedMultiplier / timeScaleSlow));
         
         UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(timeScaleSlow));
-        ErrorMessage.AddDebug("Blink factor activated");
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
         
         SNCameraRoot.main.SetFov(MiscSettings.fieldOfView * fovMultiplier);
@@ -92,6 +98,8 @@ public class Blink : Factor
         var depthSettings = postProcessing.profile.depthOfField.settings;
         depthSettings.focusDistance = depthOfFieldVal;
         postProcessing.profile.depthOfField.settings = depthSettings;
+        
+        resourceUi.OpenUI(this);
     }
     
     public override void StopUse()
@@ -118,6 +126,7 @@ public class Blink : Factor
         }
 
         ghostFrames.Clear();
+        timeStartResourceRegen = Time.time + resourceRegenDelay;
     }
 
     private IEnumerator SetTimescaleDelayed(float timeScale)
@@ -142,7 +151,7 @@ public class Blink : Factor
 
     private void RetrieveIndicatorReference()
     {
-        if (chargeIndicator != null) return;
+        if (resourceUi != null) return;
         
         var hudContent = uGUI.main.transform.Find("ScreenCanvas/HUD/Content");
         if (hudContent.Find("BlinkFactorCharge") == null)
@@ -155,7 +164,7 @@ public class Blink : Factor
             hideForScreenshots.recursive = true;
         }
         
-        chargeIndicator = hudContent.Find("BlinkFactorCharge/Mask").GetComponent<Image>();
+        resourceUi = hudContent.Find("BlinkFactorCharge").GetComponent<BlinkResourceUI>();
     }
     
     public override void UpdateFactor()
@@ -165,32 +174,28 @@ public class Blink : Factor
             currentBlinkResource -= Time.unscaledDeltaTime;
             if (currentBlinkResource <= 0)
             {
-                fullyDepleted = true;
+                StopUse();
             }
         }
-        else if (currentBlinkResource < maxBlinkDuration)
+        else if (currentBlinkResource < maxBlinkDuration && Time.time > timeStartResourceRegen)
         {
             currentBlinkResource += Time.deltaTime * blinkRechargeRate;
         }
-        else if (fullyDepleted)
+
+        if (currentBlinkResource >= maxBlinkDuration && resourceUi.GetUIOpen())
         {
-            fullyDepleted = false;
+            resourceUi.CloseUI(this);
         }
 
-        if (chargeIndicator != null)
+        if (resourceUi != null)
         {
-            chargeIndicator.fillAmount = currentBlinkResource / maxBlinkDuration;
+            resourceUi.SetFillAmount(currentBlinkResource / maxBlinkDuration);
         }
 
         if (Time.time > timeNextGhostFrame && inUse)
         {
             timeNextGhostFrame = Time.time + timeBetweenGhostFrames * timeScaleSlow;
             SpawnGhostFrame();
-        }
-
-        if (currentBlinkResource <= 0)
-        {
-            StopUse();
         }
     }
 
@@ -253,14 +258,8 @@ public class Blink : Factor
     public override void OnEquipped()
     {
         RetrieveIndicatorReference();
-        chargeIndicator.gameObject.SetActive(true);
         speedData = new SpeedData();
         currentBlinkResource = maxBlinkDuration;
-    }
-    
-    public override void OnUnequipped()
-    {
-        chargeIndicator.gameObject.SetActive(false);
     }
 
     private void OnDestroy()

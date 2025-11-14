@@ -98,6 +98,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2018764121269027296}
+  - component: {fileID: 6635347799984738336}
+  - component: {fileID: 6486278385099056254}
   m_Layer: 5
   m_Name: BlinkFactorCharge
   m_TagString: Untagged
@@ -127,6 +129,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 368.99023, y: 40.61386}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &6635347799984738336
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018764121269027297}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &6486278385099056254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018764121269027297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2091789623, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 6635347799984738336}
+  resourceBar: {fileID: 2018764120293575908}
 --- !u!1 &2018764122227000713
 GameObject:
   m_ObjectHideFlags: 0
