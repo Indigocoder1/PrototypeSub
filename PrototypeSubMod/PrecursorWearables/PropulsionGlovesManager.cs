@@ -56,7 +56,7 @@ public class PropulsionGlovesManager : MonoBehaviour
         propulsionCannon.shootSound = AudioUtils.GetFmodAsset("ProtoGlovesShoot");
         propulsionCannon.grabbingSound.assetStart = AudioUtils.GetFmodAsset("ProtoGlovesGrab");
         propulsionCannon.grabbingSound.asset = AudioUtils.GetFmodAsset("ProtoGlovesLoop");
-        propulsionCannon.localObjectOffset = new Vector3(0, 0, -0.5f);
+        propulsionCannon.localObjectOffset = new Vector3(0, 0, -0.75f);
         
         var precursorGreen = new Color(0.3277f, 0.9277f, 0.4286f);
         newGrabEffect.GetComponent<Renderer>().material.color = precursorGreen;
