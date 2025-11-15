@@ -33,6 +33,7 @@ public class Blink : Factor
     private float chromaticAbberationVal = 3f;
     private float depthOfFieldVal = 0.1f;
     private float fovMultiplier = 1.5f;
+    private float fovTransitionTime = 0.1f;
 
     private float resourceRegenDelay = 2f;
     public float resourceBarFadeDelay = 1f;
@@ -67,7 +68,7 @@ public class Blink : Factor
     {
         if (Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) return;
         
-        if (Player.main.isPiloting) return;
+        if (Player.main.isPiloting || Player.main.pda.isOpen) return;
         
         if (Player.main.currentSub != null) return;
         
@@ -91,8 +92,9 @@ public class Blink : Factor
         
         UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(timeScaleSlow));
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
-        
-        SNCameraRoot.main.SetFov(Mathf.Min(MiscSettings.fieldOfView * fovMultiplier, 100));
+
+        float targetFOV = Mathf.Min(MiscSettings.fieldOfView * fovMultiplier, 100);
+        UWE.CoroutineHost.StartCoroutine(LerpFOV(targetFOV, fovTransitionTime));
         var postProcessing = SNCameraRoot.main.mainCam.GetComponent<PostProcessingBehaviour>();
         originalChromaticSettings = postProcessing.profile.chromaticAberration.settings;
         originalDepthOfFieldSettings = postProcessing.profile.depthOfField.settings;
@@ -131,17 +133,18 @@ public class Blink : Factor
 
     private void ResetEffects()
     {
-        SNCameraRoot.main.SetFov(MiscSettings.fieldOfView);
-            
+        UWE.CoroutineHost.StartCoroutine(LerpFOV(MiscSettings.fieldOfView, fovTransitionTime, () =>
+        {
+            pdaCameraControl.enabled = true;
+        }));
+        
         var postProcessing = SNCameraRoot.main.mainCam.GetComponent<PostProcessingBehaviour>();
         postProcessing.profile.chromaticAberration.enabled = wasChromaticActive;
         postProcessing.profile.chromaticAberration.settings = originalChromaticSettings;
         postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
-        
-        pdaCameraControl.enabled = true;
     }
 
-    private IEnumerator SetTimescaleDelayed(float timeScale, Action onComplete = null)
+    private IEnumerator SetTimescaleDelayed(float timeScale)
     {
         // Wait until a FixedUpdate has ocurred to actually update the player velocity
         var timestepIncrements = (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime);
@@ -151,7 +154,27 @@ public class Blink : Factor
         }
 
         Time.timeScale = timeScale;
+    }
+
+    private IEnumerator LerpFOV(float targetFOV, float time, Action onComplete = null)
+    {
+        float currentTime = 0;
+        float initialFOV = SNCameraRoot.main.CurrentFieldOfView;
+        while (currentTime < time)
+        {
+            SNCameraRoot.main.SetFov(CubicOut(initialFOV, targetFOV, currentTime / time));
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        SNCameraRoot.main.SetFov(targetFOV);
+
         onComplete?.Invoke();
+    }
+
+    private float CubicOut(float start, float end, float time)
+    {
+        return start + (end - start) * (1 - Mathf.Pow(1 - time, 4));
     }
 
     private IEnumerator SetModeDelayed()
@@ -193,6 +216,11 @@ public class Blink : Factor
         else if (currentBlinkResource < maxBlinkDuration && Time.time > timeStartResourceRegen)
         {
             currentBlinkResource += Time.deltaTime * blinkRechargeRate;
+        }
+
+        if (Player.main.pda.isOpen && inUse)
+        {
+            StopUse();
         }
 
         if (currentBlinkResource >= maxBlinkDuration && resourceUi.GetUIOpen())
