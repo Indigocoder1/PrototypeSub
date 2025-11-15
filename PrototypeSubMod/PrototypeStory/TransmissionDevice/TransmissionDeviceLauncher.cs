@@ -33,5 +33,6 @@ public class TransmissionDeviceLauncher : MonoBehaviour
         deviceItem.item.gameObject.SetActive(true);
         deviceItem.item.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * launchForce, ForceMode.Impulse);
         deviceItem.item.GetComponent<TransmissionDeviceManager>().DeployDevice();
+        deviceItem.item.transform.SetParent(null);
     }
 }
