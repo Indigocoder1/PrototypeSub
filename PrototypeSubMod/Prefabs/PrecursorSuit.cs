@@ -35,7 +35,7 @@ public static class PrecursorSuit
             renderer.materials[1].SetTexture(ShaderPropertyID._SpecTex, armsTex);
             renderer.materials[1].SetTexture(ShaderPropertyID._Illum, armsEmission);
 
-            GameObject.Destroy(gameObject.GetComponent<Stillsuit>());
+            GameObject.DestroyImmediate(gameObject.GetComponent<Stillsuit>());
         };
         
         prefab.SetGameObject(template);
