@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
 using SubLibrary.Handlers;
@@ -24,6 +25,10 @@ public class Blink : Factor
     private float blinkRechargeRate = 3 / 5f;
 
     private float timeBetweenGhostFrames = 0.1f;
+    private float ghostDeletionDelay = 2f;
+    private float timeBetweenGhostDeletions = 0.1f;
+    private float ghostFadeTime = 0.1f;
+    private float timeNextDeleteGhost;
 
     private float chromaticAbberationVal = 3f;
     private float depthOfFieldVal = 0.1f;
@@ -100,6 +105,8 @@ public class Blink : Factor
         postProcessing.profile.depthOfField.settings = depthSettings;
         
         resourceUi.OpenUI(this);
+        
+        timeNextDeleteGhost = Time.time + ghostDeletionDelay;
     }
     
     public override void StopUse()
@@ -119,13 +126,7 @@ public class Blink : Factor
         postProcessing.profile.chromaticAberration.enabled = wasChromaticActive;
         postProcessing.profile.chromaticAberration.settings = originalChromaticSettings;
         postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
-
-        foreach (var ghost in ghostFrames)
-        {
-            Destroy(ghost);
-        }
-
-        ghostFrames.Clear();
+        
         timeStartResourceRegen = Time.time + resourceRegenDelay;
     }
 
@@ -197,6 +198,35 @@ public class Blink : Factor
             timeNextGhostFrame = Time.time + timeBetweenGhostFrames * timeScaleSlow;
             SpawnGhostFrame();
         }
+        
+        if (Time.time > timeNextDeleteGhost && ghostFrames.Count > 0)
+        {
+            timeNextDeleteGhost = Time.time + timeBetweenGhostDeletions * timeScaleSlow;
+            UWE.CoroutineHost.StartCoroutine(FadeOutGhost(ghostFrames[0]));
+            ghostFrames.RemoveAt(0);
+        }
+    }
+
+    private IEnumerator FadeOutGhost(GameObject ghost)
+    {
+        var newMaterial = new Material(ghostMaterial);
+        foreach (var rend in ghost.GetComponentsInChildren<Renderer>())
+        {
+            rend.materials = Enumerable.Repeat(newMaterial, rend.materials.Length).ToArray();
+        }
+
+        float fadeTime = 0;
+        while (fadeTime < ghostFadeTime)
+        {
+            var col = newMaterial.color;
+            col.a = 1 - (fadeTime / ghostFadeTime);
+            newMaterial.color = col;
+            fadeTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(ghost);
+        Destroy(newMaterial);
     }
 
     private static readonly List<Type> WhitelistedTypes = new()
@@ -246,7 +276,7 @@ public class Blink : Factor
 
         newAnim.Update(0);
         newAnim.enabled = false;
-
+        
         foreach (var rend in newPlayerView.GetComponentsInChildren<Renderer>())
         {
             rend.materials = Enumerable.Repeat(ghostMaterial, rend.materials.Length).ToArray();
