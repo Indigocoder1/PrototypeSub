@@ -43,6 +43,7 @@ public class Blink : Factor
     private DepthOfFieldModel.Settings originalDepthOfFieldSettings;
     private readonly List<GameObject> ghostFrames = new();
     private PlayerController controller;
+    private PDACameraFOVControl pdaCameraControl;
     private BlinkResourceUI resourceUi;
     private SpeedData speedData;
     private Material ghostMaterial;
@@ -58,6 +59,8 @@ public class Blink : Factor
                 "HolographicDisplay/HolographicDisplayVisuals/CyclopsMini_Mid/border");
         ghostMaterial = new(ghostBorder.GetComponent<Renderer>().material);
         ghostMaterial.color = new Color(0.443f, 1, 0.443f);
+        
+        pdaCameraControl = Player.main.GetComponent<PDACameraFOVControl>();
     }
 
     public override void Use()
@@ -105,6 +108,7 @@ public class Blink : Factor
         postProcessing.profile.depthOfField.settings = depthSettings;
         
         resourceUi.OpenUI(this);
+        pdaCameraControl.enabled = false;
         
         timeNextDeleteGhost = Time.time + ghostDeletionDelay;
     }
@@ -116,21 +120,28 @@ public class Blink : Factor
         // Multiply by the inverse instead of dividing
         speedData.Multiply(timeScaleSlow / speedMultiplier);
         speedData.AssignToMotor(controller.underWaterController);
-        UWE.CoroutineHost.StartCoroutine(SetModeDelayed());
-        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(1));
         Player.main.rigidBody.velocity = Vector3.zero;
         PlayerController_Patches.SetBlockMotorModeAssignment(false);
-        
-        SNCameraRoot.main.SetFov(MiscSettings.fieldOfView * fovMultiplier);
+        UWE.CoroutineHost.StartCoroutine(SetModeDelayed());
+        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(1));
+
+        ResetEffects();
+        timeStartResourceRegen = Time.time + resourceRegenDelay;
+    }
+
+    private void ResetEffects()
+    {
+        SNCameraRoot.main.SetFov(MiscSettings.fieldOfView);
+            
         var postProcessing = SNCameraRoot.main.mainCam.GetComponent<PostProcessingBehaviour>();
         postProcessing.profile.chromaticAberration.enabled = wasChromaticActive;
         postProcessing.profile.chromaticAberration.settings = originalChromaticSettings;
         postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
         
-        timeStartResourceRegen = Time.time + resourceRegenDelay;
+        pdaCameraControl.enabled = true;
     }
 
-    private IEnumerator SetTimescaleDelayed(float timeScale)
+    private IEnumerator SetTimescaleDelayed(float timeScale, Action onComplete = null)
     {
         // Wait until a FixedUpdate has ocurred to actually update the player velocity
         var timestepIncrements = (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime);
@@ -140,6 +151,7 @@ public class Blink : Factor
         }
 
         Time.timeScale = timeScale;
+        onComplete?.Invoke();
     }
 
     private IEnumerator SetModeDelayed()
