@@ -186,8 +186,8 @@ MonoBehaviour:
   puzzleManager: {fileID: 0}
   representativeNumber: 1
   selectedIndicators:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8443529417374989508}
+  - {fileID: 2805679538647129805}
   selectedEmissionColor: {r: 1, g: 1, b: 1, a: 1}
   emissionIntensity: 1.4
   deselectedEmissionColor: {r: 0, g: 0, b: 0, a: 1}
@@ -362,6 +362,18 @@ PrefabInstance:
 --- !u!4 &1810357852548708670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38be08b55b7d992468460591e1a480a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2203693557678366421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8443529417374989508 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1461304994638716399, guid: 38be08b55b7d992468460591e1a480a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2203693557678366421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2805679538647129805 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4069795224578719768, guid: 38be08b55b7d992468460591e1a480a4,
     type: 3}
   m_PrefabInstance: {fileID: 2203693557678366421}
   m_PrefabAsset: {fileID: 0}

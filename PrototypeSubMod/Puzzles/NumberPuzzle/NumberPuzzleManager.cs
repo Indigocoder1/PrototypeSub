@@ -1,15 +1,21 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Puzzles.NumberPuzzle;
 
 public class NumberPuzzleManager : MonoBehaviour
 {
-    [SerializeField] private Image[] displayNumbers;
+    [SerializeField] private NumberPuzzleAnswer[] puzzleAnswers;
+    [SerializeField] private Sprite[] numberSprites;
     [SerializeField] private SelectableNumber[] selectableNumbers;
     [SerializeField] private Color deselectedColor;
     [SerializeField] private Color selectedColor;
 
+    private NumberPuzzleAnswer[] puzzleAnswersOrder;
+    private NumberPuzzleAnswer prevSelectedAnswer;
+    
     private int selectedIndex;
     private int primaryNumber = -1;
     private int secondaryNumber = -1;
@@ -17,10 +23,54 @@ public class NumberPuzzleManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var number in displayNumbers)
+        int index = 0;
+        List<int> indices = new();
+        puzzleAnswersOrder = new NumberPuzzleAnswer[puzzleAnswers.Length];
+        foreach (var answer in puzzleAnswers)
         {
-            number.color = deselectedColor;
+            answer.GetImage().color = deselectedColor;
+            answer.SetSprite(numberSprites[index]);
+            answer.onClicked += OnClickedAnswer;
+            indices.Add(index);
+            puzzleAnswersOrder[index] = answer;
+            index++;
         }
+        
+        for (int i = 0; i < puzzleAnswersOrder.Length; i++)
+        {
+            int newIndex = indices[Random.Range(0, indices.Count - 1)];
+            for (int j = 0; j < 5; j++)
+            { 
+                // Make sure the selected number is not the same as the current one
+                // 5 iteration limit
+                if (newIndex != i) break;
+                newIndex = indices[Random.Range(0, indices.Count - 1)];
+            }
+            indices.Remove(newIndex);
+            var item1 = puzzleAnswersOrder[i];
+            var item2 = puzzleAnswersOrder[newIndex];
+            puzzleAnswersOrder[i] = item2;
+            puzzleAnswersOrder[newIndex] = item1;
+            puzzleAnswersOrder[newIndex].SwapPosition(puzzleAnswersOrder[i]);
+        }
+    }
+
+    private void OnClickedAnswer(NumberPuzzleAnswer answer)
+    {
+        if (prevSelectedAnswer == null)
+        {
+            prevSelectedAnswer = answer;
+            return;
+        }
+        
+        if (prevSelectedAnswer == answer) return;
+        
+        int index1 = Array.IndexOf(puzzleAnswersOrder, answer);
+        int index2 = Array.IndexOf(puzzleAnswersOrder, prevSelectedAnswer);
+        puzzleAnswersOrder[index1] = prevSelectedAnswer;
+        puzzleAnswersOrder[index2] = answer;
+        answer.SwapPosition(prevSelectedAnswer);
+        prevSelectedAnswer = null;
     }
 
     public void SelectNumber(int number, bool? isSecondary = null)
@@ -88,11 +138,35 @@ public class NumberPuzzleManager : MonoBehaviour
     {
         if (previousSum != -1)
         {
-            displayNumbers[previousSum - 1].color = deselectedColor;
+            puzzleAnswers[previousSum].GetImage().color = deselectedColor;
         }
 
         int sum = primaryNumber + secondaryNumber;
-        displayNumbers[sum - 1].color = selectedColor;
+        puzzleAnswers[sum].GetImage().color = selectedColor;
         previousSum = sum;
+    }
+
+    public void OnConfirmationClicked()
+    {
+        if (!HasCorrectSequence())
+        {
+            ErrorMessage.AddError("Incorrect sequence");
+            return;
+        }
+        
+        ErrorMessage.AddError("Correct sequence entered!");
+        
+    }
+
+    private bool HasCorrectSequence()
+    {
+        int prevNumber = -1;
+        foreach (var answer in puzzleAnswersOrder)
+        {
+            if (answer.GetNumber() != prevNumber + 1) return false;
+            prevNumber++;
+        }
+
+        return true;
     }
 }
