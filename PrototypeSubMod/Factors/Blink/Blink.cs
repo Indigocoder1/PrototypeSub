@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
 using SubLibrary.Handlers;
@@ -34,7 +33,7 @@ public class Blink : Factor
     private float depthOfFieldVal = 0.1f;
     private float fovMultiplier = 1.5f;
     private float fovTransitionTime = 0.1f;
-
+    
     private float resourceRegenDelay = 2f;
     public float resourceBarFadeDelay = 1f;
     public float resourceFadeInTime = 0.2f;
@@ -45,6 +44,7 @@ public class Blink : Factor
     private readonly List<GameObject> ghostFrames = new();
     private PlayerController controller;
     private PDACameraFOVControl pdaCameraControl;
+    private Coroutine timescaleCoroutine;
     private BlinkResourceUI resourceUi;
     private SpeedData speedData;
     private Material ghostMaterial;
@@ -66,6 +66,8 @@ public class Blink : Factor
 
     public override void Use()
     {
+        if (currentBlinkResource <= 0) return;
+        
         if (Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) return;
         
         if (Player.main.isPiloting || Player.main.pda.isOpen) return;
@@ -89,8 +91,13 @@ public class Blink : Factor
             MainCameraControl.main.transform.forward * GameInput.moveDirection.normalized.z +
             MainCameraControl.main.transform.up * GameInput.moveDirection.normalized.y;
         Player.main.rigidBody.velocity = moveDir * (controller.swimForwardMaxSpeed * (speedMultiplier / timeScaleSlow));
+
+        if (timescaleCoroutine != null)
+        {
+            UWE.CoroutineHost.StopCoroutine(timescaleCoroutine);
+        }
         
-        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(timeScaleSlow));
+        timescaleCoroutine = UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(timeScaleSlow));
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
 
         float targetFOV = Mathf.Min(MiscSettings.fieldOfView * fovMultiplier, 100);
@@ -122,11 +129,15 @@ public class Blink : Factor
         // Multiply by the inverse instead of dividing
         speedData.Multiply(timeScaleSlow / speedMultiplier);
         speedData.AssignToMotor(controller.underWaterController);
-        Player.main.rigidBody.velocity = Vector3.zero;
         PlayerController_Patches.SetBlockMotorModeAssignment(false);
-        UWE.CoroutineHost.StartCoroutine(SetModeDelayed());
-        UWE.CoroutineHost.StartCoroutine(SetTimescaleDelayed(1));
-
+        Time.timeScale = 1;
+        Player.main.rigidBody.velocity = Player.main.rigidBody.velocity.normalized * GetCurrentMaxSpeed();
+        Plugin.Logger.LogInfo($"V1 = {Player.main.rigidBody.velocity}");
+        Player.main.playerController.UpdateController();
+        Plugin.Logger.LogInfo($"V2 = {Player.main.rigidBody.velocity}");
+        UWE.CoroutineHost.StartCoroutine(KeepPositionForFrame(Player.main.transform.position));
+        
+        SpawnGhostFrame();
         ResetEffects();
         timeStartResourceRegen = Time.time + resourceRegenDelay;
     }
@@ -144,6 +155,12 @@ public class Blink : Factor
         postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
     }
 
+    private IEnumerator KeepPositionForFrame(Vector3 position)
+    {
+        yield return null;
+        Player.main.transform.position = position;
+    }
+
     private IEnumerator SetTimescaleDelayed(float timeScale)
     {
         // Wait until a FixedUpdate has ocurred to actually update the player velocity
@@ -152,6 +169,8 @@ public class Blink : Factor
         {
             yield return null;
         }
+
+        if (!inUse) yield break;
 
         Time.timeScale = timeScale;
     }
@@ -177,14 +196,6 @@ public class Blink : Factor
         return start + (end - start) * (1 - Mathf.Pow(1 - time, 4));
     }
 
-    private IEnumerator SetModeDelayed()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (inUse) yield break;
-        
-        controller.SetMotorMode(Player.main.motorMode);
-    }
-
     private void RetrieveIndicatorReference()
     {
         if (resourceUi != null) return;
@@ -208,10 +219,6 @@ public class Blink : Factor
         if (inUse && currentBlinkResource > 0)
         {
             currentBlinkResource -= Time.unscaledDeltaTime;
-            if (currentBlinkResource <= 0)
-            {
-                StopUse();
-            }
         }
         else if (currentBlinkResource < maxBlinkDuration && Time.time > timeStartResourceRegen)
         {
@@ -219,6 +226,11 @@ public class Blink : Factor
         }
 
         if (Player.main.pda.isOpen && inUse)
+        {
+            StopUse();
+        }
+        
+        if (currentBlinkResource <= 0 && inUse)
         {
             StopUse();
         }
@@ -321,6 +333,33 @@ public class Blink : Factor
         {
             rend.materials = Enumerable.Repeat(ghostMaterial, rend.materials.Length).ToArray();
         }
+    }
+
+    private float GetCurrentMaxSpeed()
+    {
+        var moveDir = GameInput.moveDirection;
+        moveDir.y = 0f;
+        moveDir.Normalize();
+        float num2 = 0f;
+        var motor = (UnderwaterMotor)Player.main.playerController.underWaterController;
+        if (moveDir.z > 0f)
+        {
+            num2 = motor.forwardMaxSpeed;
+        }
+        else if (moveDir.z < 0f)
+        {
+            num2 = motor.backwardMaxSpeed;
+        }
+        if (moveDir.x != 0f)
+        {
+            num2 = Mathf.Max(num2, motor.strafeMaxSpeed);
+        }
+        num2 = Mathf.Max(num2, motor.verticalMaxSpeed);
+        float num3 = num2;
+        num2 = motor.AlterMaxSpeed(num3);
+        num2 *= motor.playerController.player.mesmerizedSpeedMultiplier;
+        num2 *= motor.debugSpeedMult;
+        return num2;
     }
 
     public override GameInput.Button GetUseButton() => GameInput.Button.Sprint;

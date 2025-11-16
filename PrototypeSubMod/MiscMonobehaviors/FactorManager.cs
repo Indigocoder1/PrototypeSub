@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PrototypeSubMod.Factors;
@@ -21,6 +22,8 @@ public class FactorManager : MonoBehaviour
         if (item.item == null || !item.item.TryGetComponent(out Factor factor))
             return;
 
+        if (equippedFactors.ContainsValue(factor)) return;
+        
         factor.OnEquipped();
         equippedFactors.Add(factor.name, factor);
         
@@ -37,7 +40,7 @@ public class FactorManager : MonoBehaviour
         equippedFactors.Remove(factor.name);
     }
     
-    private void Update()
+    public void Update()
     {
         if (equippedFactors.Count == 0) return;
         
