@@ -18,11 +18,11 @@ public class Blink : Factor
         cooldown = 1f;
     }
     
-    private float speedMultiplier = 7.5f;
+    private float speedMultiplier = 3.5f;
     private float timeScaleSlow = 0.25f;
     
-    private float maxBlinkDuration = 3f;
-    private float blinkRechargeRate = 3 / 5f;
+    private float maxBlinkDuration = 2f;
+    private float blinkRechargeRate = 0.3f;
 
     private float timeBetweenGhostFrames = 0.1f;
     private float ghostDeletionDelay = 2f;
