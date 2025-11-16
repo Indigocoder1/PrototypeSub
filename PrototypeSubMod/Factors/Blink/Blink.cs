@@ -233,6 +233,11 @@ public class Blink : Factor
             StopUse();
         }
 
+        if ((Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) && inUse)
+        {
+            StopUse();
+        }
+
         if (currentBlinkResource >= maxBlinkDuration && resourceUi.GetUIOpen())
         {
             resourceUi.CloseUI(this);
