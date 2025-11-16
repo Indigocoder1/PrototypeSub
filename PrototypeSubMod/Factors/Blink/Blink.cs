@@ -132,9 +132,7 @@ public class Blink : Factor
         PlayerController_Patches.SetBlockMotorModeAssignment(false);
         Time.timeScale = 1;
         Player.main.rigidBody.velocity = Player.main.rigidBody.velocity.normalized * GetCurrentMaxSpeed();
-        Plugin.Logger.LogInfo($"V1 = {Player.main.rigidBody.velocity}");
         Player.main.playerController.UpdateController();
-        Plugin.Logger.LogInfo($"V2 = {Player.main.rigidBody.velocity}");
         UWE.CoroutineHost.StartCoroutine(KeepPositionForFrame(Player.main.transform.position));
         
         SpawnGhostFrame();
