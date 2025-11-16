@@ -7,6 +7,8 @@ namespace PrototypeSubMod.Puzzles.NumberPuzzle;
 
 public class NumberPuzzleManager : MonoBehaviour
 {
+    public event Action onPuzzleCompleted;
+    
     [SerializeField] private NumberPuzzleAnswer[] puzzleAnswers;
     [SerializeField] private Sprite[] numberSprites;
     [SerializeField] private SelectableNumber[] selectableNumbers;
@@ -155,7 +157,7 @@ public class NumberPuzzleManager : MonoBehaviour
         }
         
         ErrorMessage.AddError("Correct sequence entered!");
-        
+        onPuzzleCompleted?.Invoke();
     }
 
     private bool HasCorrectSequence()
