@@ -19,7 +19,8 @@ public static class BlinkFactor
 
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("BlinkFactor", unlockAtStart: true).WithIcon(SpriteManager.Get(TechType.ComputerChip));
+        prefabInfo = PrefabInfo.WithTechType("BlinkFactor", unlockAtStart: true)
+            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         prefab = new CustomPrefab(prefabInfo);
 
