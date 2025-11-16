@@ -14,6 +14,14 @@ public class CyclingBearingIndicator : MonoBehaviour
     private void Start()
     {
         currentIndex = Random.Range(0, availableReferenceSymbols.Length - 1);
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (GetCurrentSymbol() != correctSymbol) break;
+            
+            currentIndex = Random.Range(0, availableReferenceSymbols.Length - 1);
+        }
+        
         image.sprite = GetCurrentSymbol().GetSprite();
     }
 
