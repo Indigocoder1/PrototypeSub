@@ -147,6 +147,10 @@
 
   "BuildTerminal_Occupied": "Moonpool occupied!",
   
+  // Puzzles
+  "MeasurePuzzleInputBeacon": "Input beacon {0}",
+  "MeasurePuzzleNoBeacon": "No beacon in inventory",
+  
   // Factors
   "BlinkFactor": "Blink Factor",
   "Tooltip_BlinkFactor": "Temporary Blink Description.",

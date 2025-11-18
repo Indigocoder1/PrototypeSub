@@ -18,7 +18,7 @@ public class PowerDepositManager : MonoBehaviour, IItemSelectorManager
     private static readonly int HatchOpen = Animator.StringToHash("HatchOpen");
     private static readonly int AcceptSource = Animator.StringToHash("AcceptSource");
     private static readonly int PowerFull = Animator.StringToHash("PowerFull");
-    [SerializeField] private SubRoot subRoot;
+    
     [SerializeField] private PrototypePowerSystem powerSystem;
     [SerializeField] private PlayerCinematicController controller;
     [SerializeField] private Animator reactorAnimator;

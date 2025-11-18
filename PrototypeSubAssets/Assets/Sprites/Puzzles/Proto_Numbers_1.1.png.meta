@@ -259,7 +259,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 530
-        y: 558
+        y: 559
         width: 450
         height: 450
       alignment: 0
@@ -279,7 +279,7 @@ TextureImporter:
       name: Proto_Numbers_1.1_7
       rect:
         serializedVersion: 2
-        x: 1059
+        x: 1060
         y: 559
         width: 450
         height: 450
@@ -301,7 +301,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1559
-        y: 558
+        y: 559
         width: 450
         height: 450
       alignment: 0
@@ -321,7 +321,7 @@ TextureImporter:
       name: Proto_Numbers_1.1_9
       rect:
         serializedVersion: 2
-        x: 803
+        x: 799
         y: 65
         width: 450
         height: 450
