@@ -12,7 +12,7 @@ public class ProtoPhaseGateTransmitter
     public static void Register()
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateTransmitter", null, null)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("exosuitgrapplingarmmodule_Upgraded"));
+            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGateTransmitter_Icon"));
 
         var prefab = new CustomPrefab(PrefabInfo);
         
