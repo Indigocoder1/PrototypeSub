@@ -148,6 +148,8 @@
   "BuildTerminal_Occupied": "Moonpool occupied!",
   
   // Puzzles
+  "ProtoPuzzleIncorrectSequence": "Incorrect sequence",
+  "ProtoPuzzleCorrectSequence": "Correct sequence!",
   "MeasurePuzzleInputBeacon": "Input beacon {0}",
   "MeasurePuzzleNoBeacon": "No beacon in inventory",
   

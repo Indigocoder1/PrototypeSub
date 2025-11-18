@@ -10,11 +10,11 @@ public class BearingRoomManager : MonoBehaviour
     {
         if (HasCorrectSequence())
         {
-            ErrorMessage.AddError("Correct sequence entered!");
+            ErrorMessage.AddError(Language.main.Get("ProtoPuzzleCorrectSequence"));
         }
         else
         {
-            ErrorMessage.AddError("Incorrect sequence");
+            ErrorMessage.AddError(Language.main.Get("ProtoPuzzleIncorrectSequence"));
         }
     }
 
