@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
+  m_Name: ProtoWyrmAggroOff
+  m_EditorClassIdentifier: 
+  path: ProtoWyrmAggroOff
+  id: 
+  audioClip: {fileID: 8300000, guid: 1f648c7e9e6edb640b4ac175579e1fc8, type: 3}
+  doNotAutoRegister: 0
+  mode: 2113552
+  maxDistance3D: 400
+  minDistance3D: 0
+  fadeOutTime: 2
+  bus: 4
+  customBusPath: 
