@@ -104,15 +104,15 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
     {
         if (!upgradeEnabled || !upgradeInstalled) return;
 
+        if (damageInfo.dealer && damageInfo.dealer.TryGetComponent(out WyrmShootTarget wyrmShootTarget))
+        {
+            wyrmShootTarget.OnShotParried(damageInfo.position);
+        }
+        
         if (!chargesRefunded)
         {
             chargesRefunded = true;
             powerRelay.AddEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
-        }
-
-        if (damageInfo.dealer && damageInfo.dealer.TryGetComponent(out WyrmShootTarget wyrmShootTarget))
-        {
-            wyrmShootTarget.OnShotParried(damageInfo.position);
         }
         
         float powerCost = damageInfo.originalDamage * powerPerDamage;
@@ -124,13 +124,12 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
 
             rend.material.SetVector(ShaderPropertyID._ImpactPosition, damageInfo.position);
             currentImpactIntensity = 1;
-
-            if (damageInfo.dealer != null && damageInfo.dealer.GetComponent<LiveMixin>())
-            {
-                UWE.CoroutineHost.StartCoroutine(DealDamageOverTime(damageInfo.dealer.GetComponent<LiveMixin>(), 20, 5,
-                    DamageType.Electrical));
-
-            }
+        }
+        
+        if (damageInfo.dealer != null && damageInfo.dealer.GetComponent<LiveMixin>())
+        {
+            UWE.CoroutineHost.StartCoroutine(DealDamageOverTime(damageInfo.dealer.GetComponent<LiveMixin>(), 20, 5,
+                DamageType.Electrical));
         }
     }
 

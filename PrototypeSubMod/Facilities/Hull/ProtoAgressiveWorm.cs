@@ -17,11 +17,16 @@ public class ProtoAggressiveWorm : Creature
     [SerializeField] private Color aggressiveEmissionColor;
     [SerializeField] private GameObject headObject;
     [SerializeField] private float secondsInVoidForAggression;
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter aggroOnSfx;
+    [SerializeField] private FMOD_CustomEmitter aggroOffSfx;
 
     private Renderer[] headRenderers;
     private List<Renderer>[] segmentRenderers;
     private VFXElectricArcs[] electricArcs;
     private float secondsInVoid;
+    private bool wasAggressive;
     private int segmentCount;
     private int numSegmentsAggressiveLastFrame;
     
@@ -84,8 +89,20 @@ public class ProtoAggressiveWorm : Creature
             
             despawnAction.Perform(this, Time.time, 0);
         }
+
+        if (IsAggressive() != wasAggressive)
+        {
+            if (IsAggressive())
+            {
+                aggroOnSfx.Play();
+            }
+            else
+            {
+                aggroOffSfx.Play();
+            }
+        }
         
-        var segmentsAggressive = (int)(secondsInVoid / secondsInVoidForAggression * segmentCount);
+        var segmentsAggressive = Mathf.Clamp((int)(secondsInVoid / secondsInVoidForAggression * segmentCount), 0, segmentCount);
 
         if (segmentsAggressive != numSegmentsAggressiveLastFrame)
         {
@@ -93,6 +110,7 @@ public class ProtoAggressiveWorm : Creature
         }
         
         numSegmentsAggressiveLastFrame = segmentsAggressive;
+        wasAggressive = IsAggressive();
     }
 
     private void UpdateSegmentColors(int segmentsAggressive)

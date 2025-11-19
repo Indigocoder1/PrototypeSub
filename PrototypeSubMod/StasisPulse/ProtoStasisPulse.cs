@@ -126,6 +126,8 @@ internal class ProtoStasisPulse : ProtoUpgrade
 
     public void OnHitObject(Collider collider)
     {
+        if (Plugin.GlobalSaveData.prototypeDestroyed) return;
+        
         TryFreeze(collider);
     }
     

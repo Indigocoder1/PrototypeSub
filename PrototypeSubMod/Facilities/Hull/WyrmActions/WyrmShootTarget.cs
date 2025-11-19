@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using PrototypeSubMod.LightDistortionField;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -18,7 +17,14 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private float laserTravelTime;
     [SerializeField] private int parriesToResetAggression = 3;
     [SerializeField] private float timePassiveAfterParries;
-
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter shotChargeSfx;
+    [SerializeField] private FMOD_CustomEmitter shotTravelSfx;
+    [SerializeField] private FMOD_CustomEmitter shotHitSfx;
+    [SerializeField] private FMOD_CustomEmitter shotReflectSfx;
+    [SerializeField] private FMOD_CustomEmitter reflectShutdownSfx;
+    
     private CloakEffectHandler targetCloakHandler;
     private GameObject laserVFX;
     private GameObject muzzleVFX;
@@ -92,6 +98,7 @@ public class WyrmShootTarget : CreatureAction
         if (attackStage == 2 && angle < angleToChargeLaser && !canShoot && !hasShot)
         {
             currentChargeUpTime = chargeUpTime;
+            FMODUWE.PlayOneShot(shotChargeSfx.asset, transform.position);
             canShoot = true;
             targetingLineRenderer.enabled = true;
         }
@@ -114,6 +121,8 @@ public class WyrmShootTarget : CreatureAction
     private IEnumerator ReturnParryProjectile(Vector3 returnFrom)
     {
         yield return new WaitForEndOfFrame();
+        shotReflectSfx.Play();
+        
         laserVFX.SetActive(true);
         muzzleVFX.SetActive(true);
         var originalPosition = transform.position;
@@ -166,6 +175,7 @@ public class WyrmShootTarget : CreatureAction
         
         ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
         GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
+        reflectShutdownSfx.Play();
     }
 
     private void OnReachedTarget()
@@ -201,6 +211,8 @@ public class WyrmShootTarget : CreatureAction
         
         var beamMaterials = laserVFX.GetComponent<Renderer>().materials;
         var originalPoint = laserOrigin.position;
+        shotTravelSfx.Play();
+        shotChargeSfx.Stop();
         
         ErrorMessage.AddError("Laser fired");
         
@@ -228,30 +240,38 @@ public class WyrmShootTarget : CreatureAction
             travelTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        
-        DamageTarget(laserTargetPoint);
+
+        var mixin = GetAttackMixin(laserTargetPoint);
+        ErrorMessage.AddError(mixin != null ? "Hit object" : "Missed object");
+        var originalHealth = mixin.health;
+        DamageTarget(laserTargetPoint, mixin);
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);
+
+        if (mixin.health < originalHealth)
+        {
+            shotHitSfx.Play();
+        }
     }
 
-    private void DamageTarget(Vector3 laserTargetPoint)
+    private LiveMixin GetAttackMixin(Vector3 laserTargetPoint)
     {
-        ErrorMessage.AddError("Laser reached target");
-
         var colliders = Physics.OverlapSphere(laserTargetPoint, 25f);
-        bool hitTarget = false;
+        LiveMixin mixin = null;
         foreach (var collider in colliders)
         {
             if (collider.attachedRigidbody == null) continue;
             
-            if (!collider.attachedRigidbody.TryGetComponent(out LiveMixin mixin)) continue;
-
-            mixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.LaserCutter, gameObject);
-            hitTarget = true;
-            break;
+            if (collider.attachedRigidbody.TryGetComponent(out mixin)) break;
         }
 
-        ErrorMessage.AddError(hitTarget ? "Hit object" : "Missed object");
+        return mixin;
+    }
+
+    private void DamageTarget(Vector3 laserTargetPoint, LiveMixin hitMixin)
+    {
+        ErrorMessage.AddError("Laser reached target");
+        hitMixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.LaserCutter, gameObject);
     }
 
     private void HandleTargetingLaser()

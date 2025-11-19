@@ -20,5 +20,5 @@ MonoBehaviour:
   maxDistance3D: 400
   minDistance3D: 0
   fadeOutTime: 2
-  bus: 4
+  bus: 0
   customBusPath: 

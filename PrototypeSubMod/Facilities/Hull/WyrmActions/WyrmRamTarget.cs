@@ -11,7 +11,10 @@ public class WyrmRamTarget : CreatureAction
     [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private float attackDamage = 200;
     [SerializeField] private float attackRadius;
-
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter chargeImpactSfx;
+    
     private bool performing;
     private bool hasDamagedTarget;
     private int attackStage;
@@ -101,6 +104,7 @@ public class WyrmRamTarget : CreatureAction
             subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
             Plugin.Logger.LogInfo($"Damaging {subRoot} for {attackDamage}");
             hasDamagedTarget = true;
+            chargeImpactSfx.Play();
             break;
         }
     }
