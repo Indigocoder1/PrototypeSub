@@ -17,7 +17,7 @@ internal class Equipment_Patches
     {
         if (pickupable != null && pickupable.TryGetComponent(out Factor factor))
         {
-            __result = !Player.main.GetComponent<FactorManager>().ContainsFactor(factor.name);
+            __result = !Player.main.GetComponent<FactorManager>().ContainsFactor(factor);
             return;
         }
         

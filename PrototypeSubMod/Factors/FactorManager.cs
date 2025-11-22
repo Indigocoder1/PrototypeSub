@@ -6,8 +6,8 @@ namespace PrototypeSubMod.Factors;
 
 public class FactorManager : MonoBehaviour
 {
-    private readonly Dictionary<string, Factor> equippedFactors = new();
-    private readonly Dictionary<string, float> nextUseTime = new();
+    private readonly List<Factor> equippedFactors = new();
+    private readonly Dictionary<Factor, float> nextUseTime = new();
     
     private void Start()
     {
@@ -30,13 +30,13 @@ public class FactorManager : MonoBehaviour
 
     private void TryRegisterFactor(Factor factor)
     {
-        if (equippedFactors.ContainsValue(factor)) return;
+        if (equippedFactors.Contains(factor)) return;
         
         factor.OnEquipped();
-        equippedFactors.Add(factor.name, factor);
+        equippedFactors.Add(factor);
         
-        if(!nextUseTime.ContainsKey(factor.name))
-            nextUseTime.Add(factor.name, Time.time);
+        if(!nextUseTime.ContainsKey(factor))
+            nextUseTime.Add(factor, Time.time);
     }
 
     private void RegisterUnequipped(string slot, InventoryItem item)
@@ -55,7 +55,7 @@ public class FactorManager : MonoBehaviour
     private void DeregisterFactor(Factor factor)
     {
         factor.OnUnequipped();
-        equippedFactors.Remove(factor.name);
+        equippedFactors.Remove(factor);
     }
     
     public void Update()
@@ -64,7 +64,7 @@ public class FactorManager : MonoBehaviour
         
         for (int i = 0; i < equippedFactors.Count; i++)
         {
-            var factor = equippedFactors.ElementAt(i).Value;
+            var factor = equippedFactors[i];
 
             factor.UpdateFactor();
             
@@ -74,16 +74,16 @@ public class FactorManager : MonoBehaviour
                 continue;
             }
             
-            if (Time.time >= nextUseTime[factor.name] && GameInput.GetButtonDown(factor.GetUseButton()))
+            if (Time.time >= nextUseTime[factor] && GameInput.GetButtonDown(factor.GetUseButton()))
             {
-                nextUseTime[factor.name] = Time.time + factor.cooldown;
+                nextUseTime[factor] = Time.time + factor.cooldown;
                 factor.Use();
             }
         }
     }
     
-    public bool ContainsFactor(string factorName)
+    public bool ContainsFactor(Factor factor)
     {
-        return equippedFactors.ContainsKey(factorName);
+        return equippedFactors.Contains(factor);
     }
 }

@@ -172,8 +172,8 @@
   
   // Keybinds
   "PrototypeInputCategory": "The Prototype Sub",
-  "ProtoTetherSubButton": "Tether Factor to Sub",
-  "ProtoTetherMarkerButton": "Tether Factor to Marker",
+  "OptionProtoTetherSubButton": "Tether to Sub",
+  "OptionProtoTetherMarkerButton": "Tether to Marker",
   
   // Suit Colors
   "SuitColorGreen": "Green",
