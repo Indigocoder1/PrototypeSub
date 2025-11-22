@@ -2,13 +2,13 @@
 
 namespace PrototypeSubMod.Factors.Tether;
 
-public class TetherMarkerFactor : Factor
+public class MarkerTetherLogic : Factor
 {
     public override GameInput.Button GetUseButton() => InputRegisterer.TetherMarkerButton;
 
-    public override void Use()
+    public override void StartUse()
     {
-        base.Use();
+        base.StartUse();
         ErrorMessage.AddError("Used marker tether");
     }
 }

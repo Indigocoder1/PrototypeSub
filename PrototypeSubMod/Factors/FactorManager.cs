@@ -77,7 +77,7 @@ public class FactorManager : MonoBehaviour
             if (Time.time >= nextUseTime[factor] && GameInput.GetButtonDown(factor.GetUseButton()))
             {
                 nextUseTime[factor] = Time.time + factor.cooldown;
-                factor.Use();
+                factor.StartUse();
             }
         }
     }

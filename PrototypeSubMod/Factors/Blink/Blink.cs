@@ -64,7 +64,7 @@ public class Blink : Factor
         pdaCameraControl = Player.main.GetComponent<PDACameraFOVControl>();
     }
 
-    public override void Use()
+    public override void StartUse()
     {
         if (currentBlinkResource <= 0) return;
         
@@ -82,7 +82,7 @@ public class Blink : Factor
             return;
         }
 
-        base.Use();
+        base.StartUse();
         
         speedData.CopyFromController(controller);
         speedData.Multiply(speedMultiplier / timeScaleSlow);

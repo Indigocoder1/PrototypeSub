@@ -9,7 +9,7 @@ public abstract class Factor : MonoBehaviour
 
     protected bool inUse { get; private set; }
     
-    public virtual void Use()
+    public virtual void StartUse()
     {
         inUse = true;
     }

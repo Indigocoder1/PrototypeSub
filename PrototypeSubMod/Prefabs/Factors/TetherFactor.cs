@@ -49,8 +49,8 @@ public static class TetherFactor
         yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
         
         instance.name = "TetherFactor";
-        instance.AddComponent<TetherMarkerFactor>();
-        instance.AddComponent<TetherSubFactor>();
+        instance.AddComponent<MarkerTetherLogic>();
+        instance.AddComponent<SubTetherLogic>();
         
         prefabOut.Set(instance);
     }

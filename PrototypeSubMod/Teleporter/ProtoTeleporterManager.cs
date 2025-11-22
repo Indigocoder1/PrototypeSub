@@ -4,6 +4,7 @@ using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Upgrades;
 using PrototypeSubMod.Facilities.Interceptor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace PrototypeSubMod.Teleporter;
 
@@ -125,6 +126,7 @@ internal class ProtoTeleporterManager : ProtoUpgrade
 
     public Transform GetTeleportPosition() => teleportPosition;
     public string GetTeleporterID() => teleporterID;
+    public AssetReferenceGameObject GetEndCinematicController() => teleporter.cinematicEndControllerPrefabReference;
 
     /// <summary>
     /// Returns the teleporter ID without the M/S indicator

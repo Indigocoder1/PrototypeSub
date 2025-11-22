@@ -12,7 +12,7 @@ internal class TeleporterOverride : MonoBehaviour
     public static string FullOverrideTeleporterID { get; private set; }
     public static float OverrideTime { get; private set; }
     public static bool QueuedResetOverrideTime { get; private set; }
-    public static bool QueuedTeleportedBackToSub { get; private set; }
+    public static bool QueuedTeleportedBackToSub { get; set; }
     private static float TimeWhenPortalUnloaded;
     private static float TimeLeftWhenUnloaded;
     private static bool OverrideRequested;
