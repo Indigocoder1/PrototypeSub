@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using PrototypeSubMod.Factors;
 using UnityEngine;
 
-namespace PrototypeSubMod.MiscMonobehaviors;
+namespace PrototypeSubMod.Factors;
 
 public class FactorManager : MonoBehaviour
 {
-    private Dictionary<string, Factor> equippedFactors = new();
-    private Dictionary<string, float> nextUseTime = new();
+    private readonly Dictionary<string, Factor> equippedFactors = new();
+    private readonly Dictionary<string, float> nextUseTime = new();
     
     private void Start()
     {
@@ -19,9 +17,19 @@ public class FactorManager : MonoBehaviour
 
     private void RegisterEquipped(string slot, InventoryItem item)
     {
-        if (item.item == null || !item.item.TryGetComponent(out Factor factor))
-            return;
+        if (item.item == null) return;
+        
+        var factorComponents = item.item.GetComponents(typeof(Factor));
+        if (factorComponents.Length == 0) return;
 
+        foreach (var factor in factorComponents)
+        {
+            TryRegisterFactor(factor as Factor);
+        }
+    }
+
+    private void TryRegisterFactor(Factor factor)
+    {
         if (equippedFactors.ContainsValue(factor)) return;
         
         factor.OnEquipped();
@@ -33,9 +41,19 @@ public class FactorManager : MonoBehaviour
 
     private void RegisterUnequipped(string slot, InventoryItem item)
     {
-        if (item.item == null || !item.item.TryGetComponent(out Factor factor))
-            return;
+        if (item.item == null) return;
         
+        var factorComponents = item.item.GetComponents(typeof(Factor));
+        if (factorComponents.Length == 0) return;
+
+        foreach (var factor in factorComponents)
+        {
+            DeregisterFactor(factor as Factor);
+        }
+    }
+
+    private void DeregisterFactor(Factor factor)
+    {
         factor.OnUnequipped();
         equippedFactors.Remove(factor.name);
     }

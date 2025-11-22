@@ -29,6 +29,7 @@ public class FactorEquipmentManager : MonoBehaviour
         uGUIEquipment = GetComponentInChildren<uGUI_Equipment>(true);
     }
 
+    // Called via SendMessage
     private void RefreshFactorSlots()
     {
         if (!uGUIEquipment.gameObject.activeSelf) return;

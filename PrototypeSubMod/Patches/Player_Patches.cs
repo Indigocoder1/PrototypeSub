@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using PrototypeSubMod.Facilities.Hull;
+using PrototypeSubMod.Factors;
 using PrototypeSubMod.MiscMonobehaviors;
 using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Utility;

@@ -18,11 +18,14 @@
 
   <ItemGroup>
     <!--> <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" /> <-->
-    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
-    <PackageReference Include="UnityEngine.Modules" Version="2019.4.36" IncludeAssets="compile" />
-    <PackageReference Include="Subnautica.GameLibs" Version="82304.0.0-r.0" />
-    <PackageReference Include="PolySharp" Version="1.13.1" />
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
+    <PackageReference Include="BepInEx.Core" Version="5.4.21"/>
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0"/>
+    <PackageReference Include="UnityEngine.Modules" Version="2019.4.36" IncludeAssets="compile"/>
+    <PackageReference Include="Unity.InputSystem" Version="1.4.1" IncludeAssets="compile"/>
+    <PackageReference Include="Subnautica.GameLibs" Version="82304.0.0-r.0"/>
+    <PackageReference Include="PolySharp" Version="1.15.0"/>
+    <PackageReference Include="Subnautica.Nautilus" Version="1.*-*" PrivateAssets="all"/>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -30,9 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Nautilus">
-      <HintPath>$(ModFolder)\Nautilus\Nautilus.dll</HintPath>
-    </Reference>
     <Reference Include="SubLibrary">
       <HintPath>$(ModFolder)\SubLibrary\SubLibrary.dll</HintPath>
     </Reference>

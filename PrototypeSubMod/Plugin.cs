@@ -150,6 +150,7 @@ namespace PrototypeSubMod
             Logger.LogInfo($"Material database registered in {databaseSW.ElapsedMilliseconds}ms");
             
             LanguageHandler.RegisterLocalizationFolder();
+            InputRegisterer.Register();
             
             var voicelineSW = new System.Diagnostics.Stopwatch();
             voicelineSW.Start();

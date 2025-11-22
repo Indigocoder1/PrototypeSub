@@ -36,7 +36,7 @@
   "Tooltip_EngineFacilityKey": "Ancient tablet with a green symbol. Pulses with ionic energy.",
 
   "DefenseFacilityKey": "Prototype defense tablet",
-  "Tooltip_DefenseFacilityKey": "Ancient tablet with a red symbol. Hot to the touch",
+  "Tooltip_DefenseFacilityKey": "Ancient tablet with a red symbol. Hot to the touch.",
   
   "WarperRemnant": "Warper remnant",
   "Tooltip_WarperRemnant": "Foundational alien resource awaiting activation.",
@@ -155,7 +155,9 @@
   
   // Factors
   "BlinkFactor": "Blink Factor",
-  "Tooltip_BlinkFactor": "Temporary Blink Description.",
+  "Tooltip_BlinkFactor": "Temporary blink description.",
+  "TetherFactor": "Tether factor",
+  "Tooltip_TetherFactor": "Temporary Tether description.",
   "ProtoSuitUnequipWarning": "Uninstall factors before taking off the suit!",
   "PropulsionGlovesRelease": "Release item {0}",
   "SuitColorFactor": "Suit Color Factor",
@@ -167,6 +169,11 @@
   "SuitToggleEditMode": "Toggle edit mode",
   "SuitCurrentColor": "Current color: {0}",
   "SuitCurrentIntensity": "Intensity: {0}",
+  
+  // Keybinds
+  "PrototypeInputCategory": "The Prototype Sub",
+  "ProtoTetherSubButton": "Tether Factor to Sub",
+  "ProtoTetherMarkerButton": "Tether Factor to Marker",
   
   // Suit Colors
   "SuitColorGreen": "Green",
