@@ -10,6 +10,8 @@ namespace PrototypeSubMod.Factors.Tether;
 public class MarkerTetherLogic : Factor
 {
     [SerializeField] private InterfloorTeleporter interfloorTeleporter;
+
+    private float maxDistFromTether = 1000; 
     
     public static event Action onClearTetherMarker;
     
@@ -23,6 +25,13 @@ public class MarkerTetherLogic : Factor
             Plugin.GlobalSaveData.tetherFactorMarkerLocation = Player.main.transform.position;
             UWE.CoroutineHost.StartCoroutine(SpawnMarker(Player.main.transform.position));
             ErrorMessage.AddError("Tether marker placed. Use again to teleport to marker");
+            return;
+        }
+
+        if (Vector3.Distance(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value, Player.main.transform.position) >
+            maxDistFromTether)
+        {
+            ErrorMessage.AddError("Too far from tether!");
             return;
         }
         
