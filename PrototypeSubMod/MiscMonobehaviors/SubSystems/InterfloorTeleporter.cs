@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using PrototypeSubMod.Utility;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ internal class InterfloorTeleporter : MonoBehaviour
     private Color originalMiddleCol;
     private Color originalOuterCol;
 
-    private void Start()
+    private void Awake()
     {
         warpController = MainCamera.camera.GetComponent<WarpScreenFXController>();
         originalInnerCol = warpController.fx.mat.GetColor("_ColorCenter");
@@ -56,7 +57,7 @@ internal class InterfloorTeleporter : MonoBehaviour
     public void StartTeleportPlayer(Vector3 position, Vector3 lookDir)
     {
         teleporting = true;
-        collider.enabled = false;
+        if (collider) collider.enabled = false;
         Player.main.liveMixin.invincible = true;
 
         FMODUWE.PlayOneShot(soundEffect, position, 0.25f);
@@ -69,18 +70,17 @@ internal class InterfloorTeleporter : MonoBehaviour
         warpController.fx.mat.SetColor("_ColorOuter", outerCol);
 
         warpController.StartWarp();
-
-        Invoke(nameof(ResetDuration), FADE_IN_DURATION + VFX_DURATION + FADE_OUT_DURATION + 1f);
-
+        
         allowedToTeleport = false;
-        Invoke(nameof(ResetAllowedToTeleport), teleporterCooldown);
-
+        UWE.CoroutineHost.StartCoroutine(InvokeDelayed(ResetDuration, FADE_IN_DURATION + VFX_DURATION + FADE_OUT_DURATION + 1f));
+        UWE.CoroutineHost.StartCoroutine(InvokeDelayed(ResetAllowedToTeleport, teleporterCooldown));
         UWE.CoroutineHost.StartCoroutine(ActuallyTeleport(position, lookDir));
     }
 
-    public void SetCollider(Collider col)
+    private IEnumerator InvokeDelayed(Action action, float delay)
     {
-        collider = col;
+        yield return new WaitForSeconds(delay);
+        action();
     }
 
     private IEnumerator ActuallyTeleport(Vector3 position, Vector3 lookDir)
@@ -91,7 +91,7 @@ internal class InterfloorTeleporter : MonoBehaviour
         Player.main.rigidBody.velocity = Vector3.zero;
         MainCameraControl.main.LookAt(Camera.main.transform.position + lookDir);
 
-        collider.enabled = true;
+        if(collider) collider.enabled = true;
     }
 
     private void ResetDuration()

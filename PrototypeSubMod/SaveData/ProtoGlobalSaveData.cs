@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using PrototypeSubMod.Facilities.Engine;
 using PrototypeSubMod.PhaseGates;
+using UnityEngine;
+
 // ReSharper disable FieldCanBeMadeReadOnly.Global
 
 namespace PrototypeSubMod.SaveData;
@@ -22,6 +24,8 @@ internal class ProtoGlobalSaveData : SaveDataCache
     public List<string> unlockedCategoriesLastCheck = new();
     public List<string> repairedEngineFacilityPoints = new();
     public List<string> activatedTransmissionDevices = new();
+
+    public Vector3? tetherFactorMarkerLocation = null;
     
     public bool prototypePresent;
     public bool prototypeDestroyed;

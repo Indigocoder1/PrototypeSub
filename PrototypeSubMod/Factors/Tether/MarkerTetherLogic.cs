@@ -1,14 +1,63 @@
-﻿using PrototypeSubMod.Registration;
+﻿using System;
+using System.Collections;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+using PrototypeSubMod.Prefabs.Factors;
+using PrototypeSubMod.Registration;
+using UnityEngine;
 
 namespace PrototypeSubMod.Factors.Tether;
 
 public class MarkerTetherLogic : Factor
 {
+    [SerializeField] private InterfloorTeleporter interfloorTeleporter;
+    
+    public static event Action onClearTetherMarker;
+    
     public override GameInput.Button GetUseButton() => InputRegisterer.TetherMarkerButton;
 
     public override void StartUse()
     {
         base.StartUse();
-        ErrorMessage.AddError("Used marker tether");
+        if (Plugin.GlobalSaveData.tetherFactorMarkerLocation == null)
+        {
+            Plugin.GlobalSaveData.tetherFactorMarkerLocation = Player.main.transform.position;
+            UWE.CoroutineHost.StartCoroutine(SpawnMarker(Player.main.transform.position));
+            ErrorMessage.AddError("Tether marker placed. Use again to teleport to marker");
+            return;
+        }
+        
+        UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
+        Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
+        onClearTetherMarker?.Invoke();
+    }
+
+    private IEnumerator TeleportPlayer(Vector3 position)
+    {
+        var isLoaded = IsAreaLoaded(position, LargeWorldEntity.CellLevel.Medium);
+        Plugin.Logger.LogInfo($"{position} is loaded = {isLoaded}");
+
+        if (isLoaded)
+        {
+            interfloorTeleporter.StartTeleportPlayer(position, Camera.main.transform.forward);
+            yield break;
+        }
+        
+        var subTetherLogic = GetComponent<SubTetherLogic>();
+        UWE.CoroutineHost.StartCoroutine(
+            subTetherLogic.TeleportToLocation(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value, 0));
+    }
+
+    private bool IsAreaLoaded(Vector3 position, LargeWorldEntity.CellLevel cellLevel)
+    {
+        return LargeWorldStreamer.main.cellManager.AreCellsLoaded(new Bounds(position,Vector3.one * 0.1f), cellLevel);
+    }
+
+    private IEnumerator SpawnMarker(Vector3 position)
+    {
+        var prefabTask = CraftData.GetPrefabForTechTypeAsync(TetherFactorMarker.prefabInfo.TechType);
+        yield return prefabTask;
+        var prefab = prefabTask.GetResult();
+        var instance = Instantiate(prefab);
+        instance.transform.position = position;
     }
 }

@@ -37,7 +37,7 @@ public static class TetherFactor
     
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("GenericFactorModel");
+        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoTetherFactor");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);
@@ -47,10 +47,6 @@ public static class TetherFactor
         MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(3, 0));
 
         yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
-        
-        instance.name = "TetherFactor";
-        instance.AddComponent<MarkerTetherLogic>();
-        instance.AddComponent<SubTetherLogic>();
         
         prefabOut.Set(instance);
     }

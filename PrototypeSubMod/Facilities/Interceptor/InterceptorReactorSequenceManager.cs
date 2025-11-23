@@ -54,11 +54,8 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         {
             var teleporterHolder = new GameObject("IslandTeleporterHolder");
             teleporterHolder.transform.position = new Vector3(0, 50, 0);
-
-            var col = teleporterHolder.AddComponent<SphereCollider>();
-            col.radius = 0.1f;
+            
             Teleporter = teleporterHolder.AddComponent<InterfloorTeleporter>().CopyComponent(teleporter);
-            Teleporter.SetCollider(col);
         }
     }
 

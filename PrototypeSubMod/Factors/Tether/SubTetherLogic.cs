@@ -6,6 +6,7 @@ using PrototypeSubMod.LightDistortionField;
 using PrototypeSubMod.Registration;
 using PrototypeSubMod.Teleporter;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace PrototypeSubMod.Factors.Tether;
 
@@ -33,14 +34,16 @@ public class SubTetherLogic : Factor
             return;
         }
         
-        UWE.CoroutineHost.StartCoroutine(TeleportPlayer());
-    }
-
-    private IEnumerator TeleportPlayer()
-    {
         var subRoot = CloakEffectHandler.EffectHandlers[0].GetComponentInParent<SubRoot>();
         var teleporterManager = subRoot.GetComponentInChildren<ProtoTeleporterManager>();
+        var teleportPos = teleporterManager.GetTeleportPosition();
+        
+        UWE.CoroutineHost.StartCoroutine(TeleportToLocation(teleportPos.position, teleportPos.eulerAngles.y, teleporterManager.GetEndCinematicController()));
+        TeleporterOverride.QueuedTeleportedBackToSub = true;
+    }
 
+    public IEnumerator TeleportToLocation(Vector3 position, float yAngle, AssetReferenceGameObject endCinematic = null)
+    {
         var player = Player.main;
         
         player.AddUsedTool(TechType.PrecursorTeleporter);
@@ -51,25 +54,26 @@ public class SubTetherLogic : Factor
         player.teleportingLoopSound.Play();
         
         Inventory.main.quickSlots.SetIgnoreHotkeyInput(true);
-
-        var teleportPos = teleporterManager.GetTeleportPosition();
-        var rotation = Quaternion.Euler(0f, teleportPos.eulerAngles.y, 0f);
-        var task = AddressablesUtility.InstantiateAsync(teleporterManager.GetEndCinematicController().RuntimeKey as string, null, teleportPos.position, rotation, true);
-        yield return task;
-        if (task.GetResult() == null)
+        
+        var rotation = Quaternion.Euler(0f, yAngle, 0f);
+        if (endCinematic != null)
         {
-            Plugin.Logger.LogError("SubTetherLogic.TeleportPlayer failed: " + gameObject.name);
-            Player.main.CompleteTeleportation();
-            yield break;
+            var task = AddressablesUtility.InstantiateAsync(endCinematic.RuntimeKey as string, null, position, rotation);
+            yield return task;
+            if (task.GetResult() == null)
+            {
+                Plugin.Logger.LogError("SubTetherLogic.TeleportPlayer failed: " + gameObject.name);
+                Player.main.CompleteTeleportation();
+                yield break;
+            }
         }
 
         Camera.main.GetComponent<TeleportScreenFXController>().StartTeleport();
         yield return new WaitForSeconds(1f);
         
-        player.transform.position = teleportPos.position;
+        player.transform.position = position;
         player.transform.rotation = rotation;
         player.WaitForTeleportation();
         Player.main.SetPrecursorOutOfWater(false);
-        TeleporterOverride.QueuedTeleportedBackToSub = true;
     }
 }
