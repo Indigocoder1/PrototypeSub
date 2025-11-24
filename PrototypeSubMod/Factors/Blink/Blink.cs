@@ -69,10 +69,9 @@ public class Blink : Factor
         if (currentBlinkResource <= 0) return;
         
         if (Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) return;
-        
         if (Player.main.isPiloting || Player.main.pda.isOpen) return;
-        
         if (Player.main.currentSub != null) return;
+        if (Player.main.cinematicModeActive) return;
         
         controller = Player.main.playerController;
 
@@ -138,6 +137,7 @@ public class Blink : Factor
         SpawnGhostFrame();
         ResetEffects();
         timeStartResourceRegen = Time.time + resourceRegenDelay;
+        Player.main.SetMotorMode(Player.main.motorMode);
     }
 
     private void ResetEffects()

@@ -19,6 +19,13 @@ public class MarkerTetherLogic : Factor
 
     public override void StartUse()
     {
+        if (Player.main.isPiloting) return;
+        if (Player.main.precursorOutOfWater) return;
+        if (Player.main.cinematicModeActive) return;
+        if (Player.main.pda.isOpen) return;
+        if (Player.main.currentSub != null) return;
+        if (DevConsole.instance.state) return;
+        
         base.StartUse();
         if (Plugin.GlobalSaveData.tetherFactorMarkerLocation == null)
         {
