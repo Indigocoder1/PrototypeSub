@@ -39,6 +39,7 @@ internal class ProtoStasisPulse : ProtoUpgrade
     private float currentSphereGrowTimeTime;
     private bool deployingLastFrame;
     private bool activating;
+    private bool initialized;
     private Material[] materials;
     
     private void OnEnable()
@@ -84,6 +85,7 @@ internal class ProtoStasisPulse : ProtoUpgrade
         sphereVisual.enabled = true;
         currentSphereGrowTimeTime = sphereGrowTime;
         sphereVisual.gameObject.SetActive(false);
+        initialized = true;
     }
 
     private void LateUpdate()
@@ -138,6 +140,8 @@ internal class ProtoStasisPulse : ProtoUpgrade
     
     private void TryFreeze(Collider collider)
     {
+        if (!initialized) return;
+        
         if (Player.mainCollider == collider) return;
         
         Rigidbody rigidbody = collider.GetComponentInParent<Rigidbody>();
