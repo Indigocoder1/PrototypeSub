@@ -132,12 +132,11 @@ public class Blink : Factor
         Time.timeScale = 1;
         Player.main.rigidBody.velocity = Player.main.rigidBody.velocity.normalized * GetCurrentMaxSpeed();
         Player.main.playerController.UpdateController();
-        UWE.CoroutineHost.StartCoroutine(KeepPositionForFrame(Player.main.transform.position));
+        UWE.CoroutineHost.StartCoroutine(KeepPosAndUpdateMotorDelayed(Player.main.transform.position));
         
         SpawnGhostFrame();
         ResetEffects();
         timeStartResourceRegen = Time.time + resourceRegenDelay;
-        Player.main.SetMotorMode(Player.main.motorMode);
     }
 
     private void ResetEffects()
@@ -153,10 +152,11 @@ public class Blink : Factor
         postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
     }
 
-    private IEnumerator KeepPositionForFrame(Vector3 position)
+    private IEnumerator KeepPosAndUpdateMotorDelayed(Vector3 position)
     {
         yield return null;
         Player.main.transform.position = position;
+        Player.main.playerController.SetMotorMode(Player.main.motorMode);
     }
 
     private IEnumerator SetTimescaleDelayed(float timeScale)
