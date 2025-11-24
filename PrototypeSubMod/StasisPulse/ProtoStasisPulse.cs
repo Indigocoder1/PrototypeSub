@@ -46,6 +46,11 @@ internal class ProtoStasisPulse : ProtoUpgrade
         UWE.CoroutineHost.StartCoroutine(Initialize());
     }
 
+    private void Awake()
+    {
+        sphereVisual.gameObject.SetActive(false);
+    }
+
     private IEnumerator Initialize()
     {
         subRoot = GetComponentInParent<SubRoot>();

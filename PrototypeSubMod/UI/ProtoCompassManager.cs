@@ -8,19 +8,21 @@ namespace PrototypeSubMod.UI;
 public class ProtoCompassManager : MonoBehaviour, IUIElement
 {
     [SerializeField] private SubRoot subRoot;
-    [SerializeField] private Image compassImage;
-    [SerializeField] private Image backgroundBar;
     [SerializeField] private Transform noMaskParent;
-    [SerializeField] private Transform leftHalfMask;
-    [SerializeField] private Transform rightHalfMask;
+    [SerializeField] private Image compassImage;
+    [SerializeField] private Image bearingMask;
+    [SerializeField] private Image columnMask;
+    [SerializeField] private Sprite rightMaskSprite;
+    [SerializeField] private Sprite leftMaskSprite;
+    [SerializeField] private Sprite fullMaskSprite;
     [SerializeField] private Sprite[] cardinalSprites;
 
     private void Start()
     {
         bool onLeft = subRoot.transform.eulerAngles.y > 180;
-        compassImage.transform.SetParent(onLeft ? leftHalfMask : rightHalfMask);
-        backgroundBar.transform.SetParent(onLeft ? rightHalfMask : leftHalfMask);
-        backgroundBar.gameObject.SetActive(true);
+        bearingMask.sprite = onLeft ? leftMaskSprite : rightMaskSprite;
+        columnMask.sprite = onLeft ? rightMaskSprite : leftMaskSprite;
+        columnMask.gameObject.SetActive(true);
     }
 
     public void UpdateUI()
@@ -42,14 +44,14 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
         compassImage.sprite = cardinalSprites[index];
 
         bool onNorthSouth = index == 0 || index == cardinalSprites.Length - 1;
-        compassImage.transform.SetParent(onLeft ? leftHalfMask : rightHalfMask);
-        backgroundBar.transform.SetParent(onLeft ? rightHalfMask : leftHalfMask);
-        backgroundBar.gameObject.SetActive(true);
+        bearingMask.sprite = onLeft ? leftMaskSprite : rightMaskSprite;
+        columnMask.sprite = onLeft ? rightMaskSprite : leftMaskSprite;
+        columnMask.gameObject.SetActive(true);
         
         if (onNorthSouth && compassImage.transform.parent != noMaskParent)
         {
-            compassImage.transform.SetParent(noMaskParent);
-            backgroundBar.gameObject.SetActive(false);
+            bearingMask.sprite = fullMaskSprite;
+            columnMask.gameObject.SetActive(false);
         }
     }
 
