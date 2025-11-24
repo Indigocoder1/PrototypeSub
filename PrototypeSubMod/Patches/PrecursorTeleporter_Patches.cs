@@ -12,6 +12,14 @@ internal class PrecursorTeleporter_Patches
     private static string lastTeleporterID;
     private static bool lastTeleporterWasProtoSub;
 
+    [HarmonyPatch(nameof(PrecursorTeleporter.Start)), HarmonyPostfix]
+    private static void Start_Postfix(PrecursorTeleporter  __instance)
+    {
+        if (__instance.GetComponent<ProtoTeleporterManager>()) return;
+        
+        __instance.gameObject.EnsureComponent<TeleporterOverride>();
+    }
+    
     [HarmonyPatch(nameof(PrecursorTeleporter.Start)), HarmonyTranspiler]
     private static IEnumerable<CodeInstruction> Start_Transpiler(IEnumerable<CodeInstruction> instructions)
     {

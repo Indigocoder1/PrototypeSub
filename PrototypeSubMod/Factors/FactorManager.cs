@@ -62,6 +62,8 @@ public class FactorManager : MonoBehaviour
     {
         if (equippedFactors.Count == 0) return;
         
+        if (IngameMenu.main.gameObject.activeSelf) return;
+        
         for (int i = 0; i < equippedFactors.Count; i++)
         {
             var factor = equippedFactors[i];
