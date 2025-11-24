@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using PrototypeSubMod.Utility;
 using Story;
@@ -12,39 +13,55 @@ public class uGUI_RadioMessageIndicator_Patches
 {
     [SaveStateReference]
     private static Dictionary<uGUI_RadioMessageIndicator, SpriteData> previousSpriteDatas;
-
-    private static Dictionary<string, Sprite> radioMessageSprites = new();
+    
+    [SaveStateReference]
+    private static SpriteData defaultSpriteData;
     
     [HarmonyPatch(nameof(uGUI_RadioMessageIndicator.NewRadioMessage)), HarmonyPostfix]
     private static void NewRadioMessage_Postfix(uGUI_RadioMessageIndicator __instance, bool newMessages)
     {
+        if (!StoryGoalManager.main || !StoryGoalManager.main.IsGoalComplete("OnPlayRadioBounceBack")) return;
+        
         previousSpriteDatas ??= new Dictionary<uGUI_RadioMessageIndicator, SpriteData>();
         
         if (!newMessages) return;
 
-        var mostRecentMessage = StoryGoalManager.main.pendingRadioMessages[^1];
-        if (!mostRecentMessage.ToLower().Contains("proto")) return;
-
+        var nextMessage = StoryGoalManager.main.pendingRadioMessages[0];
+        bool isProtoMessage = nextMessage.ToLower().Contains("proto");
+        
+        Sprite sprite = defaultSpriteData.sprite;
+        Color color = defaultSpriteData.color;
+        if (isProtoMessage)
+        {
+            sprite = Plugin.AssetBundle.LoadAsset<Sprite>(nextMessage);
+            color = Color.white;
+        }
+        else if (previousSpriteDatas.TryGetValue(__instance, out var spriteData))
+        {
+            sprite = spriteData.sprite;
+            color = spriteData.color;
+        }
+        
         previousSpriteDatas[__instance] = new SpriteData(__instance.sprite.sprite, __instance.sprite.color);
-        Sprite sprite;
-        if (!radioMessageSprites.TryGetValue(mostRecentMessage, out var messageSprite))
-        {
-            sprite = Plugin.AssetBundle.LoadAsset<Sprite>(mostRecentMessage);
-        }
-        else
-        {
-            sprite = messageSprite;
-        }
 
         __instance.sprite.sprite = sprite;
-        __instance.sprite.color = Color.white;
+        __instance.sprite.color = color;
     }
-
+    
+    [HarmonyPatch(typeof(Player)), HarmonyPatch(nameof(Player.Awake)), HarmonyPrefix]
+    private static void Awake_Prefix()
+    {
+        var messageIndicator = GameObject.FindObjectOfType<uGUI_RadioMessageIndicator>();
+        defaultSpriteData = new SpriteData(messageIndicator.sprite.sprite, messageIndicator.sprite.color);
+    }
+    
     [HarmonyPatch(typeof(Player)), HarmonyPatch(nameof(Player.LateUpdate)), HarmonyPostfix]
     private static void LateUpdate_Postfix()
     {
         if (previousSpriteDatas == null || previousSpriteDatas.Count == 0) return;
 
+        if (previousSpriteDatas.Values.ElementAt(0).sprite == defaultSpriteData.sprite) return;
+        
         foreach (var indicator in previousSpriteDatas.Keys)
         {
             indicator.sprite.color = Color.white;
@@ -66,7 +83,6 @@ public class uGUI_RadioMessageIndicator_Patches
         
         __instance.sprite.sprite = spriteData.sprite;
         __instance.sprite.color = spriteData.color;
-        previousSpriteDatas.Remove(__instance);
     }
 
     private struct SpriteData
