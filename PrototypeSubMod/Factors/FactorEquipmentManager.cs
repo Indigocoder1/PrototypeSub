@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using PrototypeSubMod.Prefabs;
@@ -32,7 +33,15 @@ public class FactorEquipmentManager : MonoBehaviour
     // Called via SendMessage
     private void RefreshFactorSlots()
     {
-        if (!uGUIEquipment.gameObject.activeSelf) return;
+        UWE.CoroutineHost.StartCoroutine(RefreshSlotsDelayed());
+    }
+
+    // Delayed to not cause issues for things like hotswapping suits
+    private IEnumerator RefreshSlotsDelayed()
+    {
+        yield return null;
+        
+        if (!uGUIEquipment.gameObject.activeSelf) yield break;
         
         var hasSuit = Inventory.main.equipment.GetTechTypeInSlot("Body") == PrecursorSuit.PrefabInfo.TechType;
         bool showSlots = hasSuit && Inventory.main.usedStorage.Count == 0;

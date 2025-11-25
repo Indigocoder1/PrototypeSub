@@ -59,13 +59,20 @@ public class Blink : Factor
 
     private void Awake()
     {
+        UWE.CoroutineHost.StartCoroutine(GetGhostMaterial());
+        pdaCameraControl = Player.main.GetComponent<PDACameraFOVControl>();
+        Inventory.main.equipment.onEquip += RefreshIonManager;
+    }
+
+    private IEnumerator GetGhostMaterial()
+    {
+        yield return CyclopsReferenceHandler.EnsureCyclopsReference();
+        
         var ghostBorder =
             CyclopsReferenceHandler.CyclopsReference.transform.Find(
                 "HolographicDisplay/HolographicDisplayVisuals/CyclopsMini_Mid/border");
         ghostMaterial = new(ghostBorder.GetComponent<Renderer>().material);
         ghostMaterial.color = new Color(0.443f, 1, 0.443f);
-        
-        pdaCameraControl = Player.main.GetComponent<PDACameraFOVControl>();
     }
 
     public override void StartUse()
@@ -86,8 +93,8 @@ public class Blink : Factor
         }
 
         base.StartUse();
-        
-        ionManager = Inventory.main.equipment.GetItemInSlot("Body").item.GetComponent<FactorIonManager>();
+
+        RefreshIonManager(null, null);
         speedData.CopyFromController(controller);
         speedData.Multiply(speedMultiplier / timeScaleSlow);
         speedData.AssignToMotor(controller.underWaterController);
@@ -155,6 +162,14 @@ public class Blink : Factor
         postProcessing.profile.chromaticAberration.enabled = wasChromaticActive;
         postProcessing.profile.chromaticAberration.settings = originalChromaticSettings;
         postProcessing.profile.depthOfField.settings = originalDepthOfFieldSettings;
+    }
+
+    private void RefreshIonManager(string _, InventoryItem __)
+    {
+        var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
+        if (itemInSlot == null) return;
+        
+        ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
     }
 
     private IEnumerator KeepPosAndUpdateMotorDelayed(Vector3 position)
@@ -385,6 +400,7 @@ public class Blink : Factor
     private void OnDestroy()
     {
         Destroy(ghostMaterial);
+        Inventory.main.equipment.onEquip -= RefreshIonManager;
     }
 
     private struct SpeedData

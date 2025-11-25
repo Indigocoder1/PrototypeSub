@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using PrototypeSubMod.Factors;
 using PrototypeSubMod.Factors.Biomechanics;
 using UnityEngine;
@@ -10,6 +9,7 @@ public class BiomechanicsEatable : MonoBehaviour
 {
     [SerializeField] private float foodValue = 25f;
     [SerializeField] private float waterValue = 25f;
+    [SerializeField] private float ionValue = 20f;
 
     private FactorActivationManager factorActivationManager;
 
@@ -20,6 +20,7 @@ public class BiomechanicsEatable : MonoBehaviour
         
         factorActivationManager = Player.main.GetComponent<FactorActivationManager>();
         OnEquippedFactor(null);
+        OnUnequippedFactor(null);
     }
     
     private void OnEquippedFactor(Factor factor)
@@ -43,6 +44,7 @@ public class BiomechanicsEatable : MonoBehaviour
     public void OnEat()
     {
         UWE.CoroutineHost.StartCoroutine(RefundWarperRemnant());
+        Inventory.main.equipment.GetItemInSlot("Body").item.GetComponent<FactorIonManager>().AddEnergy(ionValue);
     }
 
     private IEnumerator RefundWarperRemnant()
