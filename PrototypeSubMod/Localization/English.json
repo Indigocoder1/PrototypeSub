@@ -154,7 +154,8 @@
   "MeasurePuzzleNoBeacon": "No beacon in inventory",
   
   // Factors
-  "FactorIonCharge": "Ion charge: {0}%",
+  "FactorIonCharge": "CHARGE {0} % ({1}/{2})",
+  "AlienBuildingBlockCharge": "CHARGE: {0}{1}",
   "BlinkFactor": "Blink Factor",
   "Tooltip_BlinkFactor": "Temporary blink description.",
   "TetherFactor": "Tether factor",

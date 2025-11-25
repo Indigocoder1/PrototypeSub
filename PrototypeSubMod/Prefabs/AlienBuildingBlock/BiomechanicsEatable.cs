@@ -12,6 +12,7 @@ public class BiomechanicsEatable : MonoBehaviour
     [SerializeField] private float ionValue = 20f;
 
     private FactorActivationManager factorActivationManager;
+    private bool eatableActive;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class BiomechanicsEatable : MonoBehaviour
         var eatable = gameObject.EnsureComponent<Eatable>();
         eatable.foodValue = foodValue;
         eatable.waterValue = waterValue;
+        eatableActive = true;
     }
     
     private void OnUnequippedFactor(Factor factor)
@@ -39,6 +41,7 @@ public class BiomechanicsEatable : MonoBehaviour
         if (!TryGetComponent(out Eatable eatable)) return;
 
         Destroy(eatable);
+        eatableActive = false;
     }
 
     public void OnEat()
@@ -46,6 +49,9 @@ public class BiomechanicsEatable : MonoBehaviour
         UWE.CoroutineHost.StartCoroutine(RefundWarperRemnant());
         Inventory.main.equipment.GetItemInSlot("Body").item.GetComponent<FactorIonManager>().AddEnergy(ionValue);
     }
+
+    public bool EatableActive() => eatableActive;
+    public float GetIonCharge() => ionValue;
 
     private IEnumerator RefundWarperRemnant()
     {

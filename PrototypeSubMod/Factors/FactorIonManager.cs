@@ -26,10 +26,11 @@ public class FactorIonManager : MonoBehaviour, IProtoEventListener
     
     public void AddEnergy(float energy)
     {
-        currentIonEnergy = Mathf.Min(maxIonEnergy, currentIonEnergy - energy);
+        currentIonEnergy = Mathf.Min(maxIonEnergy, currentIonEnergy + energy);
     }
 
     public float GetCurrentEnergy() => currentIonEnergy;
+    public float GetMaxEnergy() => maxIonEnergy;
     public float GetNormalizedCharge() => currentIonEnergy / maxIonEnergy;
 
     private void OnBeforeSave(object sender, JsonFileEventArgs args)
