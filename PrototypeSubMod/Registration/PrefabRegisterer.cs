@@ -22,6 +22,7 @@ internal static class PrefabRegisterer
         BlinkFactor.Register();
         TetherFactor.Register();
         TetherFactorMarker.Register();
+        BiomechanicsFactor.Register();
         SuitColorFactor.Register();
         PrecursorIngot_Craftable.Register();
         IonPrism_Craftable.Register();

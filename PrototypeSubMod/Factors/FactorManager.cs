@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,9 @@ namespace PrototypeSubMod.Factors;
 
 public class FactorManager : MonoBehaviour
 {
+    public static event Action<Factor> onEquippedFactor;
+    public static event Action<Factor> onUnequippedFactor;
+    
     private readonly List<Factor> equippedFactors = new();
     private readonly Dictionary<Factor, float> nextUseTime = new();
     
@@ -37,6 +41,8 @@ public class FactorManager : MonoBehaviour
         
         if(!nextUseTime.ContainsKey(factor))
             nextUseTime.Add(factor, Time.time);
+
+        onEquippedFactor?.Invoke(factor);
     }
 
     private void RegisterUnequipped(string slot, InventoryItem item)
@@ -56,6 +62,7 @@ public class FactorManager : MonoBehaviour
     {
         factor.OnUnequipped();
         equippedFactors.Remove(factor);
+        onUnequippedFactor?.Invoke(factor);
     }
     
     public void Update()
@@ -87,5 +94,10 @@ public class FactorManager : MonoBehaviour
     public bool ContainsFactor(Factor factor)
     {
         return equippedFactors.Contains(factor);
+    }
+    
+    public bool ContainsFactor(Type factorType)
+    {
+        return equippedFactors.Any(f => f.GetType() == factorType);
     }
 }

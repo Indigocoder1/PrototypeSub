@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2835098730025763551}
   - component: {fileID: 3278639641582510627}
   - component: {fileID: 6089130587218463899}
+  - component: {fileID: 6389962828546009442}
   m_Layer: 0
   m_Name: AlienBuildingBlock
   m_TagString: Untagged
@@ -195,6 +196,20 @@ MonoBehaviour:
   warperBlock: 0
   glowStrengthChangeRate: 0.005
   maxGlowStrength: 13
+--- !u!114 &6389962828546009442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278639641582510624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2077271259, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodValue: 25
+  waterValue: 25
 --- !u!1 &7133210369838654328
 GameObject:
   m_ObjectHideFlags: 0

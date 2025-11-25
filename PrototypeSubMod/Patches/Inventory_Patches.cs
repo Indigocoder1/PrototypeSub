@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using PrototypeSubMod.PrecursorWearables;
+using PrototypeSubMod.Prefabs.AlienBuildingBlock;
+using PrototypeSubMod.Prefabs.Factors;
 
 namespace PrototypeSubMod.Patches;
 
@@ -90,5 +92,14 @@ internal class Inventory_Patches
         __instance.quickSlots.onSelect += _ => glovesManager.UpdateToolActive();
         __instance.equipment.onEquip += (_, _) => glovesManager.UpdateToolActive();
         __instance.equipment.onUnequip += (_, _) => glovesManager.UpdateToolActive();
+    }
+
+    [HarmonyPatch(nameof(Inventory.ExecuteItemAction)), HarmonyPrefix]
+    [HarmonyPatch(new [] { typeof(ItemAction), typeof(InventoryItem) })]
+    private static void ExecuteItemAction_Prefix(ItemAction action, InventoryItem item)
+    {
+        if (action != ItemAction.Eat || !item.item.TryGetComponent(out BiomechanicsEatable eatable)) return;
+
+        eatable.OnEat();
     }
 }
