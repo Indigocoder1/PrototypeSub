@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using PrototypeSubMod.PrecursorWearables;
+using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
 using PrototypeSubMod.Prefabs.Factors;
 
@@ -15,7 +16,7 @@ namespace PrototypeSubMod.Patches;
 internal class Inventory_Patches
 {
     [HarmonyPatch(nameof(Inventory.AddOrSwap)), HarmonyTranspiler]
-    [HarmonyPatch(new Type[] { typeof(InventoryItem), typeof(Equipment), typeof(string) })]
+    [HarmonyPatch(new [] { typeof(InventoryItem), typeof(Equipment), typeof(string) })]
     private static IEnumerable<CodeInstruction> AddOrSwap_Equipment_Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         CodeMatch match = new CodeMatch(i => i.opcode == OpCodes.Call && ((MethodInfo)i.operand).Name == "GetEquipmentType");
@@ -83,6 +84,32 @@ internal class Inventory_Patches
         }
 
         return originalType;
+    }
+    
+    [HarmonyPatch(nameof(Inventory.AddOrSwap)), HarmonyPrefix]
+    [HarmonyPatch(new [] { typeof(InventoryItem), typeof(Equipment), typeof(string) })]
+    private static bool AddOrSwap_Equipment_Prefix(InventoryItem itemA, Equipment equipmentB, string slotB, ref bool __result)
+    {
+        if (string.IsNullOrEmpty(slotB))
+        {
+            var equipmentType = TechData.GetEquipmentType(itemA.item.GetTechType());
+            equipmentB.GetCompatibleSlot(equipmentType, out slotB);
+        }
+
+        if (string.IsNullOrEmpty(slotB)) return true;
+        
+        var itemB = equipmentB.GetItemInSlot(slotB);
+        var tt = itemB?.techType ?? TechType.None;
+        if (itemB == null) return true;
+
+        if (itemB.techType == PrecursorSuit.PrefabInfo.TechType && itemA.techType != PrecursorSuit.PrefabInfo.TechType)
+        {
+            ErrorMessage.AddError(Language.main.Get("ProtoSuitUnequipWarning"));
+            __result = false;
+            return false;
+        }
+
+        return true;
     }
 
     [HarmonyPatch(nameof(Inventory.Awake)), HarmonyPostfix]
