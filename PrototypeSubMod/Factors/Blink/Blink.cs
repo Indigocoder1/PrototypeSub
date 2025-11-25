@@ -22,6 +22,7 @@ public class Blink : Factor
     
     private float maxBlinkDuration = 2f;
     private float blinkRechargeRate = 0.3f;
+    private float ionEnergyPerResource = 7f;
 
     private float timeBetweenGhostFrames = 0.1f;
     private float ghostDeletionDelay = 2f;
@@ -39,17 +40,20 @@ public class Blink : Factor
     public float resourceFadeInTime = 0.2f;
     public float resourceFadeOutTime = 0.5f;
 
+    private readonly List<GameObject> ghostFrames = new();
+    
     private ChromaticAberrationModel.Settings originalChromaticSettings;
     private DepthOfFieldModel.Settings originalDepthOfFieldSettings;
-    private readonly List<GameObject> ghostFrames = new();
     private PlayerController controller;
     private PDACameraFOVControl pdaCameraControl;
     private Coroutine timescaleCoroutine;
     private BlinkResourceUI resourceUi;
+    private FactorIonManager ionManager;
     private SpeedData speedData;
     private Material ghostMaterial;
     private float timeStartResourceRegen;
     private float currentBlinkResource;
+    private float blinkResourceLastFrame;
     private float timeNextGhostFrame;
     private bool wasChromaticActive;
 
@@ -83,6 +87,7 @@ public class Blink : Factor
 
         base.StartUse();
         
+        ionManager = Inventory.main.equipment.GetItemInSlot("Body").item.GetComponent<FactorIonManager>();
         speedData.CopyFromController(controller);
         speedData.Multiply(speedMultiplier / timeScaleSlow);
         speedData.AssignToMotor(controller.underWaterController);
@@ -218,9 +223,10 @@ public class Blink : Factor
         {
             currentBlinkResource -= Time.unscaledDeltaTime;
         }
-        else if (currentBlinkResource < maxBlinkDuration && Time.time > timeStartResourceRegen)
+        else if (currentBlinkResource < maxBlinkDuration && Time.time > timeStartResourceRegen && ionManager.GetCurrentEnergy() > 0)
         {
             currentBlinkResource += Time.deltaTime * blinkRechargeRate;
+            ionManager.ConsumeEnergy(ionEnergyPerResource * Time.deltaTime);
         }
 
         if (Player.main.pda.isOpen && inUse)
@@ -238,7 +244,7 @@ public class Blink : Factor
             StopUse();
         }
 
-        if (currentBlinkResource >= maxBlinkDuration && resourceUi.GetUIOpen())
+        if (Mathf.Approximately(blinkResourceLastFrame, currentBlinkResource) && resourceUi.GetUIOpen() && Time.time > timeStartResourceRegen)
         {
             resourceUi.CloseUI(this);
         }
@@ -260,6 +266,8 @@ public class Blink : Factor
             UWE.CoroutineHost.StartCoroutine(FadeOutGhost(ghostFrames[0]));
             ghostFrames.RemoveAt(0);
         }
+
+        blinkResourceLastFrame = currentBlinkResource;
     }
 
     private IEnumerator FadeOutGhost(GameObject ghost)

@@ -11,20 +11,20 @@ public class BiomechanicsEatable : MonoBehaviour
     [SerializeField] private float foodValue = 25f;
     [SerializeField] private float waterValue = 25f;
 
-    private FactorManager factorManager;
+    private FactorActivationManager factorActivationManager;
 
     private void Awake()
     {
-        FactorManager.onEquippedFactor += OnEquippedFactor;
-        FactorManager.onUnequippedFactor += OnUnequippedFactor;
+        FactorActivationManager.onEquippedFactor += OnEquippedFactor;
+        FactorActivationManager.onUnequippedFactor += OnUnequippedFactor;
         
-        factorManager = Player.main.GetComponent<FactorManager>();
+        factorActivationManager = Player.main.GetComponent<FactorActivationManager>();
         OnEquippedFactor(null);
     }
     
     private void OnEquippedFactor(Factor factor)
     {
-        if (!factorManager.ContainsFactor(typeof(BiomechanicsFactorLogic))) return;
+        if (!factorActivationManager.ContainsFactor(typeof(BiomechanicsFactorLogic))) return;
 
         var eatable = gameObject.EnsureComponent<Eatable>();
         eatable.foodValue = foodValue;
@@ -33,7 +33,7 @@ public class BiomechanicsEatable : MonoBehaviour
     
     private void OnUnequippedFactor(Factor factor)
     {
-        if (factorManager.ContainsFactor(typeof(BiomechanicsFactorLogic))) return;
+        if (factorActivationManager.ContainsFactor(typeof(BiomechanicsFactorLogic))) return;
         
         if (!TryGetComponent(out Eatable eatable)) return;
 
@@ -57,7 +57,7 @@ public class BiomechanicsEatable : MonoBehaviour
 
     private void OnDestroy()
     {
-        FactorManager.onEquippedFactor -= OnEquippedFactor;
-        FactorManager.onUnequippedFactor -= OnUnequippedFactor;
+        FactorActivationManager.onEquippedFactor -= OnEquippedFactor;
+        FactorActivationManager.onUnequippedFactor -= OnUnequippedFactor;
     }
 }

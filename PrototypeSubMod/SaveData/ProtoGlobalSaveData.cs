@@ -19,12 +19,13 @@ internal class ProtoGlobalSaveData : SaveDataCache
     public Dictionary<string, float> normalizedBatteryCharges = new();
 
     public Dictionary<string, float> deployableLightLifetimes = new();
+    public Dictionary<string, float> suitIonEnergies = new();
     public Dictionary<string, int> phaseGateIndices = new();
     public Dictionary<string, PhaseGateLocation> phaseGateLocations = new();
     public List<string> unlockedCategoriesLastCheck = new();
     public List<string> repairedEngineFacilityPoints = new();
     public List<string> activatedTransmissionDevices = new();
-
+    
     public Vector3? tetherFactorMarkerLocation = null;
     
     public bool prototypePresent;

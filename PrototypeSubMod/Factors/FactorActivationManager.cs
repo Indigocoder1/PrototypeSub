@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PrototypeSubMod.Factors;
 
-public class FactorManager : MonoBehaviour
+public class FactorActivationManager : MonoBehaviour
 {
     public static event Action<Factor> onEquippedFactor;
     public static event Action<Factor> onUnequippedFactor;

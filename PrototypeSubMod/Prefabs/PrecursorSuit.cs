@@ -3,6 +3,7 @@ using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using PrototypeSubMod.Compatibility;
+using PrototypeSubMod.Factors;
 using SuitLib;
 using UnityEngine;
 
@@ -34,6 +35,8 @@ public static class PrecursorSuit
             renderer.materials[1].SetTexture("_MainTex", armsTex);
             renderer.materials[1].SetTexture(ShaderPropertyID._SpecTex, armsTex);
             renderer.materials[1].SetTexture(ShaderPropertyID._Illum, armsEmission);
+
+            gameObject.AddComponent<FactorIonManager>();
 
             GameObject.DestroyImmediate(gameObject.GetComponent<Stillsuit>());
         };

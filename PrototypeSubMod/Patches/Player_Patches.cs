@@ -27,7 +27,7 @@ internal class Player_Patches
     [HarmonyPatch(nameof(Player.Start)), HarmonyPostfix]
     private static void Start_Postfix()
     {
-        Player.main.gameObject.AddComponent<FactorManager>();
+        Player.main.gameObject.AddComponent<FactorActivationManager>();
         Player.main.gameObject.AddComponent<PrecursorSuitManager>();
         Player.main.gameObject.AddComponent<AggressiveWyrmSpawner>();
         Camera.main.gameObject.AddComponent<LightDistortionApplier>();
