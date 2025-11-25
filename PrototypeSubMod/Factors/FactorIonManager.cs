@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PrototypeSubMod.Factors;
 
-public class FactorIonManager : MonoBehaviour
+public class FactorIonManager : MonoBehaviour, IProtoEventListener
 {
     private float maxIonEnergy = 100;
 
@@ -14,15 +14,6 @@ public class FactorIonManager : MonoBehaviour
     private void Awake()
     {
         prefabIdentifier = GetComponent<PrefabIdentifier>();
-        
-        if (Plugin.GlobalSaveData.suitIonEnergies.TryGetValue(prefabIdentifier.Id, out var charge))
-        {
-            currentIonEnergy = charge;
-        }
-        else
-        {
-            currentIonEnergy = maxIonEnergy;
-        }
 
         Plugin.GlobalSaveData.OnStartedSaving += OnBeforeSave;
     }
@@ -49,5 +40,19 @@ public class FactorIonManager : MonoBehaviour
     private void OnDestroy()
     {
         Plugin.GlobalSaveData.OnStartedSaving -= OnBeforeSave;
+    }
+
+    public void OnProtoSerialize(ProtobufSerializer serializer) { }
+
+    public void OnProtoDeserialize(ProtobufSerializer serializer)
+    {
+        if (Plugin.GlobalSaveData.suitIonEnergies.TryGetValue(prefabIdentifier.Id, out var charge))
+        {
+            currentIonEnergy = charge;
+        }
+        else
+        {
+            currentIonEnergy = maxIonEnergy;
+        }
     }
 }
