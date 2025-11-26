@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Crafting;
+using Nautilus.Handlers;
 using PrototypeSubMod.Compatibility;
 using UnityEngine;
 
@@ -24,7 +25,8 @@ internal class AlienBuildingBlock : RelicBlock
         prefab.SetGameObject(GetPrefab);
         
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("AlienBuildingBlock.json")).WithCraftingTime(3f);
-        
+
+        CraftDataHandler.SetEatingSound(prefabInfo.TechType, "event:/player/use_first_aid");
         prefab.Register();
     }
     
