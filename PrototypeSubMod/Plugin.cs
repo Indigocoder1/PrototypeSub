@@ -386,17 +386,24 @@ namespace PrototypeSubMod
             #region Title Screen
             GameObject SpawnObject()
             {
-                var worldObject = Instantiate(TitleAssetBundle.LoadAsset<GameObject>("ProtoPlaque"));
-                worldObject.transform.position = new Vector3(-27, 2.5f, 38);
-                worldObject.transform.rotation = Quaternion.Euler(270, 325.7f, 0);
-                DestroyImmediate(worldObject.GetComponent<LargeWorldEntity>());
-                DestroyImmediate(worldObject.GetComponent<PrefabIdentifier>());
-                DestroyImmediate(worldObject.GetComponent<TechTag>());
-                MaterialUtils.ApplySNShaders(worldObject);
-
-                StartCoroutine(ProtoMatDatabase.ReplaceVanillaMats(worldObject));
+                var holder = new GameObject("ProtoTitleAssets");
                 
-                return worldObject;
+                var plaqueObject = Instantiate(TitleAssetBundle.LoadAsset<GameObject>("ProtoPlaque"), holder.transform);
+                plaqueObject.transform.position = new Vector3(-27, 2.5f, 38);
+                plaqueObject.transform.rotation = Quaternion.Euler(270, 325.7f, 0);
+                DestroyImmediate(plaqueObject.GetComponent<LargeWorldEntity>());
+                DestroyImmediate(plaqueObject.GetComponent<PrefabIdentifier>());
+                DestroyImmediate(plaqueObject.GetComponent<TechTag>());
+                MaterialUtils.ApplySNShaders(plaqueObject);
+                StartCoroutine(ProtoMatDatabase.ReplaceVanillaMats(plaqueObject));
+                
+                var phaseGatesObject = Instantiate(TitleAssetBundle.LoadAsset<GameObject>("TitlePhaseGate"), holder.transform);
+                phaseGatesObject.transform.position = new Vector3(0, 6, 50);
+                phaseGatesObject.transform.localScale = Vector3.one * 0.6f;
+                MaterialUtils.ApplySNShaders(phaseGatesObject);
+                StartCoroutine(ProtoMatDatabase.ReplaceVanillaMats(phaseGatesObject));
+                
+                return holder;
             }
             
             var objectAddon = new WorldObjectTitleAddon(SpawnObject);
