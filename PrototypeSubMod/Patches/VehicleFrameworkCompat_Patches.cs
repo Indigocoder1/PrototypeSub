@@ -113,18 +113,6 @@ public class VehicleFrameworkCompat_Patches
             cinematic.StartCinematicMode(player);
         }
     }
-
-    public static IEnumerable<CodeInstruction> OnVehicleDocked_Transpiler(IEnumerable<CodeInstruction> instructions)
-    {
-        var match = new CodeMatch(i => i.opcode == OpCodes.Brfalse);
-
-        var matcher = new CodeMatcher(instructions)
-            .MatchForward(false, match)
-            .InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0))
-            .InsertAndAdvance(Transpilers.EmitDelegate(AllowPlayerDockedCall));
-        
-        return matcher.InstructionEnumeration();
-    }
     
     public static IEnumerable<CodeInstruction> UpdateDockedPosition_Transpiler(IEnumerable<CodeInstruction> instructions)
     {
@@ -137,14 +125,6 @@ public class VehicleFrameworkCompat_Patches
             .RemoveInstruction();
         
         return matcher.InstructionEnumeration();
-    }
-
-    public static bool AllowPlayerDockedCall(bool original, object instance)
-    {
-        var vehicle = (instance as Vehicle);
-        if (vehicle.transform.parent?.name != "ProtoVehicleHolder") return original;
-
-        return false;
     }
 
     private static bool BoundsFit(Vector3 checkFor, Vector3 checkAgainst)
