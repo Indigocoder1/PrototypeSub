@@ -47,9 +47,12 @@ internal class ProtoOverclockModule : ProtoUpgrade
     {
         if (!upgradeInstalled || ionGenerator.GetUpgradeEnabled())
         {
-            motorHandler.RemoveSpeedBonus(this);
-            motorHandler.RemoveTurningTorqueMultiplier(this);
-            SetUpgradeEnabled(false);
+            if (upgradeEnabled)
+            {
+                motorHandler.RemoveSpeedBonus(this);
+                motorHandler.RemoveTurningTorqueMultiplier(this);
+                SetUpgradeEnabled(false);
+            }
             return;
         }
 
@@ -158,7 +161,7 @@ internal class ProtoOverclockModule : ProtoUpgrade
 
     public override void SetUpgradeEnabled(bool enabled)
     {
-        if (!subRoot.powerRelay.ConsumeEnergy(0.01f, out _)) return;
+        if (enabled && !subRoot.powerRelay.ConsumeEnergy(0.01f, out _)) return;
         
         base.SetUpgradeEnabled(enabled);
 
