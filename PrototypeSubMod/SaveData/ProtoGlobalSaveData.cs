@@ -27,6 +27,7 @@ internal class ProtoGlobalSaveData : SaveDataCache
     public List<string> activatedTransmissionDevices = new();
     
     public Vector3? tetherFactorMarkerLocation = null;
+    public bool tetherMarkerOutOfWater;
     
     public bool prototypePresent;
     public bool prototypeDestroyed;

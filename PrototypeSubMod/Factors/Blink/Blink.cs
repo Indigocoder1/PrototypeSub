@@ -22,7 +22,7 @@ public class Blink : Factor
     
     private float maxBlinkDuration = 2f;
     private float blinkRechargeRate = 0.3f;
-    private float ionEnergyPerResource = 7f;
+    private float ionEnergyPerResource = 1f;
 
     private float timeBetweenGhostFrames = 0.1f;
     private float ghostDeletionDelay = 2f;

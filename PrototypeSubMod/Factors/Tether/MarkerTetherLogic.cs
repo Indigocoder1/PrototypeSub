@@ -20,16 +20,17 @@ public class MarkerTetherLogic : Factor
     public override void StartUse()
     {
         if (Player.main.isPiloting) return;
-        if (Player.main.precursorOutOfWater) return;
+        if (Player.main.precursorOutOfWater && Plugin.GlobalSaveData.tetherFactorMarkerLocation == null) return;
         if (Player.main.cinematicModeActive) return;
         if (Player.main.pda.isOpen) return;
         if (Player.main.currentSub != null) return;
         if (DevConsole.instance.state) return;
-        
+         
         base.StartUse();
         if (Plugin.GlobalSaveData.tetherFactorMarkerLocation == null)
         {
             Plugin.GlobalSaveData.tetherFactorMarkerLocation = Player.main.transform.position;
+            Plugin.GlobalSaveData.tetherMarkerOutOfWater = Player.main.precursorOutOfWater;
             UWE.CoroutineHost.StartCoroutine(SpawnMarker(Player.main.transform.position));
             ErrorMessage.AddError("Tether marker placed. Use again to teleport to marker");
             return;
@@ -50,17 +51,25 @@ public class MarkerTetherLogic : Factor
     private IEnumerator TeleportPlayer(Vector3 position)
     {
         var isLoaded = IsAreaLoaded(position, LargeWorldEntity.CellLevel.Medium);
-        Plugin.Logger.LogInfo($"{position} is loaded = {isLoaded}");
+        foreach (var moonpoolTrigger in FindObjectsOfType<PrecursorMoonPoolTrigger>())
+        {
+            moonpoolTrigger.OnTriggerExit(Player.mainCollider);
+        }
+        Player.main.SetPrecursorOutOfWater(Plugin.GlobalSaveData.tetherMarkerOutOfWater);
 
         if (isLoaded)
         {
             interfloorTeleporter.StartTeleportPlayer(position, Camera.main.transform.forward);
+            yield return new WaitForSeconds(0.5f);
+            Player.main.SetDisplaySurfaceWater(true);
             yield break;
         }
         
         var subTetherLogic = GetComponent<SubTetherLogic>();
         UWE.CoroutineHost.StartCoroutine(
             subTetherLogic.TeleportToLocation(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value, 0));
+        yield return new WaitForSeconds(0.5f);
+        Player.main.SetDisplaySurfaceWater(true);
     }
 
     private bool IsAreaLoaded(Vector3 position, LargeWorldEntity.CellLevel cellLevel)
