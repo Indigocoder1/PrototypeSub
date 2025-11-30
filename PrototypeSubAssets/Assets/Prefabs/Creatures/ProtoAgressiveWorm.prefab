@@ -180,6 +180,60 @@ Transform:
   m_Father: {fileID: 1563852477254856907}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: -90, y: 45.00005, z: 0}
+--- !u!1 &155358733146907065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7655615008638621198}
+  - component: {fileID: 4186103995304431028}
+  m_Layer: 0
+  m_Name: AmbientDrill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7655615008638621198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155358733146907065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4699808734583788080}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4186103995304431028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155358733146907065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -133377629, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: bd385b7c466dde84096e20e47886944c, type: 2}
+  playOnAwake: 1
+  stopImmediatelyOnDisable: 0
+  followParent: 1
+  restartOnPlay: 0
+  debug: 0
+  subtitlesKey: 
+  playSubtitlesWithUnscaledTime: 1
+  assetStart: {fileID: 0}
+  assetStop: {fileID: 0}
+  stopSoundInterval: 0
 --- !u!1 &172913310084253672
 GameObject:
   m_ObjectHideFlags: 0
@@ -6879,6 +6933,7 @@ MonoBehaviour:
   secondsInVoidForAggression: 30
   aggroOnSfx: {fileID: 8370760665603014420}
   aggroOffSfx: {fileID: 5207917267241166288}
+  roarManager: {fileID: 121548284677876063}
 --- !u!114 &4983591340796008379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7021,6 +7076,7 @@ MonoBehaviour:
   wormAnimator: {fileID: 5351068426189712924}
   attackDamage: 750
   attackRadius: 5
+  roarManager: {fileID: 121548284677876063}
   chargeImpactSfx: {fileID: 3899844511224395324}
 --- !u!114 &2563168583705512565
 MonoBehaviour:
@@ -7116,6 +7172,7 @@ MonoBehaviour:
   laserTravelTime: 1.5
   parriesToResetAggression: 3
   timePassiveAfterParries: 30
+  roarManager: {fileID: 121548284677876063}
   shotChargeSfx: {fileID: 783688339255574968}
   shotTravelSfx: {fileID: 8438192860530699916}
   shotHitSfx: {fileID: 2855742536239814733}
@@ -7142,6 +7199,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
+  roarManager: {fileID: 121548284677876063}
   increasedSpeed: 60
 --- !u!114 &6753871278772561756
 MonoBehaviour:
@@ -9036,6 +9094,7 @@ Transform:
   - {fileID: 1097015572061052419}
   - {fileID: 9101629733253183224}
   - {fileID: 31821911743031727}
+  - {fileID: 7655615008638621198}
   m_Father: {fileID: 3230497408674094389}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

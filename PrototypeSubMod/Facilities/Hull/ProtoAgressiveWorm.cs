@@ -21,6 +21,7 @@ public class ProtoAggressiveWorm : Creature
     [Header("SFX")]
     [SerializeField] private FMOD_CustomEmitter aggroOnSfx;
     [SerializeField] private FMOD_CustomEmitter aggroOffSfx;
+    [SerializeField] private WyrmRoarManager roarManager;
 
     private Renderer[] headRenderers;
     private List<Renderer>[] segmentRenderers;
@@ -34,6 +35,7 @@ public class ProtoAggressiveWorm : Creature
     {
         base.Start();
 
+        roarManager.PlayRoar(Player.main.transform.position);
         liveMixin.invincible = true;
         GetComponent<Rigidbody>().useGravity = false;
         StartCoroutine(RetrieveSegmentRends());

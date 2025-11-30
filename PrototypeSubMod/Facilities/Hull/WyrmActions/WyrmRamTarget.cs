@@ -13,6 +13,7 @@ public class WyrmRamTarget : CreatureAction
     [SerializeField] private float attackRadius;
     
     [Header("SFX")]
+    [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private FMOD_CustomEmitter chargeImpactSfx;
     
     private bool performing;
@@ -87,8 +88,14 @@ public class WyrmRamTarget : CreatureAction
     private void OnReachedTarget()
     {
         attackStage++;
+
+        var pointsLength = GetAttackPoints().Length;
+        if (attackStage == 1)
+        {
+            roarManager.PlayRoar(Player.main.transform.position);
+        }
         
-        if (attackStage <= GetAttackPoints().Length - 1) return;
+        if (attackStage <= pointsLength - 1) return;
         
         performing = false;
         if (hasDamagedTarget) return;
@@ -102,7 +109,6 @@ public class WyrmRamTarget : CreatureAction
             if (subRoot.GetComponentInChildren<CloakEffectHandler>().GetActive()) continue;
             
             subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
-            Plugin.Logger.LogInfo($"Damaging {subRoot} for {attackDamage}");
             hasDamagedTarget = true;
             chargeImpactSfx.Play();
             break;

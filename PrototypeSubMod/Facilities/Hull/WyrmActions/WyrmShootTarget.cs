@@ -19,6 +19,7 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private float timePassiveAfterParries;
     
     [Header("SFX")]
+    [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private FMOD_CustomEmitter shotChargeSfx;
     [SerializeField] private FMOD_CustomEmitter shotTravelSfx;
     [SerializeField] private FMOD_CustomEmitter shotHitSfx;
@@ -170,6 +171,7 @@ public class WyrmShootTarget : CreatureAction
     private void IncrementParry()
     {
         timesParried++;
+        roarManager.PlayRoar(Player.main.transform.position);
 
         if (timesParried < parriesToResetAggression) return;
         
@@ -243,6 +245,8 @@ public class WyrmShootTarget : CreatureAction
 
         var mixin = GetAttackMixin(laserTargetPoint);
         ErrorMessage.AddError(mixin != null ? "Hit object" : "Missed object");
+        if (mixin == null) yield break;
+        
         var originalHealth = mixin.health;
         DamageTarget(laserTargetPoint, mixin);
         laserVFX.SetActive(false);
@@ -251,6 +255,7 @@ public class WyrmShootTarget : CreatureAction
         if (mixin.health < originalHealth)
         {
             shotHitSfx.Play();
+            roarManager.PlayRoar(Player.main.transform.position);
         }
     }
 

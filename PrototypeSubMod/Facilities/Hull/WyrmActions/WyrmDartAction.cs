@@ -10,12 +10,14 @@ namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 public class WyrmDartAction : CreatureAction
 {
     [SerializeField] private AggressiveWormAnimator wormAnimator;
+    [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private float increasedSpeed;
 
     private Transform target;
     private CloakEffectHandler targetCloakHandler;
     private Vector3[] movementPoints;
     private bool performing;
+    private bool speedIncreased;
     private float originalSpeed;
     private int rightHandSign;
     private int attackStage;
@@ -35,6 +37,7 @@ public class WyrmDartAction : CreatureAction
         
         base.Perform(creature, time, deltaTime);
         performing = true;
+        speedIncreased = false;
         attackStage = 0;
         rightHandSign = (int)Mathf.Sign(Random.Range(-1f, 1f));
         
@@ -110,9 +113,11 @@ public class WyrmDartAction : CreatureAction
         }
 
         var angle = Vector3.Angle(transform.forward, movementPoints[attackStage] - transform.position);
-        if (attackStage == 3 && angle < 25)
+        if (attackStage == 3 && angle < 25 && !speedIncreased)
         {
             wormAnimator.SetForwardsSpeed(increasedSpeed);
+            roarManager.PlayRoar(Player.main.transform.position);
+            speedIncreased = true;
         }
         
         wormAnimator.SetTravelTarget(movementPoints[attackStage], OnPointReached);
