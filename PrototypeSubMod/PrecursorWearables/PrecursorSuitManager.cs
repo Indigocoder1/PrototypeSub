@@ -115,7 +115,7 @@ public class PrecursorSuitManager : MonoBehaviour
         emissionColor = highestPriorityItem.emissionColor;
     }
 
-    public void UnregisterEmissionController(Component owner)
+    public void DeregisterEmissionController(Component owner)
     {
         emissionControllers.Remove(owner);
         if (emissionControllers.Count == 0)

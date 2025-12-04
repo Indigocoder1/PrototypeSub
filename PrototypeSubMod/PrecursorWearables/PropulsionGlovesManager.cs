@@ -93,7 +93,7 @@ public class PropulsionGlovesManager : MonoBehaviour
         else
         {
             toolActive = false;
-            suitManager.UnregisterEmissionController(this);
+            suitManager.DeregisterEmissionController(this);
             
             if (!propulsionCannon) return;
             propulsionCannon.ReleaseGrabbedObject();
@@ -138,7 +138,7 @@ public class PropulsionGlovesManager : MonoBehaviour
         }
         else
         {
-            suitManager.UnregisterEmissionController(this);
+            suitManager.DeregisterEmissionController(this);
         }
 
         propulsionCannon.muzzle.position = Player.main.armsController.rightHand.position;

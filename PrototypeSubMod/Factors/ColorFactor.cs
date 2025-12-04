@@ -49,7 +49,7 @@ public class ColorFactor : MonoBehaviour
         if (pickupable.inventoryItem != item) return;
 
         equipped = false;
-        suitManager.UnregisterEmissionController(this);
+        suitManager.DeregisterEmissionController(this);
     }
 
     public Color GetCurrentColor()

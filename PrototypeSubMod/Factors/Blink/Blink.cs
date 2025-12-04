@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Nautilus.Handlers;
 using PrototypeSubMod.Patches;
+using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Prefabs;
 using SubLibrary.Handlers;
 using UnityEngine;
@@ -52,6 +53,7 @@ public class Blink : Factor
 
     private readonly List<GameObject> ghostFrames = new();
     
+    private PrecursorSuitManager suitManager;
     private ChromaticAberrationModel.Settings originalChromaticSettings;
     private DepthOfFieldModel.Settings originalDepthOfFieldSettings;
     private PlayerController controller;
@@ -72,6 +74,7 @@ public class Blink : Factor
     {
         UWE.CoroutineHost.StartCoroutine(GetGhostMaterial());
         pdaCameraControl = Player.main.GetComponent<PDACameraFOVControl>();
+        suitManager = Player.main.GetComponent<PrecursorSuitManager>();
         Inventory.main.equipment.onEquip += RefreshIonManager;
     }
 
@@ -107,6 +110,7 @@ public class Blink : Factor
 
         startSfx.Play();
         loopingSfx.Play();
+        suitManager.RegisterEmissionController(this, new PrecursorSuitManager.EmissionController(Color.green, 1));
         
         RefreshIonManager(null, null);
         speedData.CopyFromController(controller);
@@ -159,7 +163,8 @@ public class Blink : Factor
         Player.main.rigidBody.velocity = Player.main.rigidBody.velocity.normalized * GetCurrentMaxSpeed();
         Player.main.playerController.UpdateController();
         UWE.CoroutineHost.StartCoroutine(KeepPosAndUpdateMotorDelayed(Player.main.transform.position));
-        
+
+        suitManager.DeregisterEmissionController(this);
         SpawnGhostFrame();
         ResetEffects();
         timeStartResourceRegen = Time.time + resourceRegenDelay;
