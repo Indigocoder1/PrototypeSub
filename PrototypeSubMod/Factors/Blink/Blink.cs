@@ -25,6 +25,7 @@ public class Blink : Factor
     [SerializeField] private FMOD_CustomEmitter rechargeLoopSfx;
     [SerializeField] private FMOD_CustomEmitter rechargeFinishedSfx;
     [SerializeField] private AnimationCurve frequencyOverCharge;
+    [SerializeField] private AnimationCurve rechargeVolumeOverTime;
     
     private float speedMultiplier = 3.5f;
     private float timeScaleSlow = 0.25f;
@@ -324,6 +325,7 @@ public class Blink : Factor
         if (!CustomSoundHandler.TryGetCustomSoundChannel(rechargeLoopSfx.GetInstanceID(), out var loopingChannel)) return;
 
         loopingChannel.setFrequency(frequencyOverCharge.Evaluate(currentBlinkResource / maxBlinkDuration));
+        loopingChannel.setVolume(rechargeVolumeOverTime.Evaluate(Mathf.Clamp01(Time.time - timeStartResourceRegen)));
     }
 
     private IEnumerator FadeOutGhost(GameObject ghost)
