@@ -40,7 +40,7 @@ public static class BlinkFactor
     
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("GenericFactorModel");
+        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoBlinkFactor");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);
@@ -50,9 +50,6 @@ public static class BlinkFactor
         MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(3, 0));
 
         yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
-        
-        instance.name = "BlinkFactor";
-        instance.AddComponent<Blink>();
         
         prefabOut.Set(instance);
     }

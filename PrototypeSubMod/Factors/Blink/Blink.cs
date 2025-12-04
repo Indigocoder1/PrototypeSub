@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Nautilus.Handlers;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
 using SubLibrary.Handlers;
@@ -16,6 +17,14 @@ public class Blink : Factor
     {
         cooldown = 1f;
     }
+
+    [SerializeField] private FMOD_CustomEmitter startSfx;
+    [SerializeField] private FMOD_CustomEmitter stopSfx;
+    [SerializeField] private FMOD_CustomLoopingEmitter loopingSfx;
+    [SerializeField] private FMOD_CustomEmitter stopDueToChargeSfx;
+    [SerializeField] private FMOD_CustomEmitter rechargeLoopSfx;
+    [SerializeField] private FMOD_CustomEmitter rechargeFinishedSfx;
+    [SerializeField] private AnimationCurve frequencyOverCharge;
     
     private float speedMultiplier = 3.5f;
     private float timeScaleSlow = 0.25f;
@@ -36,9 +45,9 @@ public class Blink : Factor
     private float fovTransitionTime = 0.1f;
     
     private float resourceRegenDelay = 2f;
-    public float resourceBarFadeDelay = 1f;
-    public float resourceFadeInTime = 0.2f;
-    public float resourceFadeOutTime = 0.5f;
+    [HideInInspector] public float resourceBarFadeDelay = 1f;
+    [HideInInspector] public float resourceFadeInTime = 0.2f;
+    [HideInInspector] public float resourceFadeOutTime = 0.5f;
 
     private readonly List<GameObject> ghostFrames = new();
     
@@ -56,6 +65,7 @@ public class Blink : Factor
     private float blinkResourceLastFrame;
     private float timeNextGhostFrame;
     private bool wasChromaticActive;
+    private bool stoppedDueToCharge;
 
     private void Awake()
     {
@@ -94,6 +104,9 @@ public class Blink : Factor
 
         base.StartUse();
 
+        startSfx.Play();
+        loopingSfx.Play();
+        
         RefreshIonManager(null, null);
         speedData.CopyFromController(controller);
         speedData.Multiply(speedMultiplier / timeScaleSlow);
@@ -149,6 +162,18 @@ public class Blink : Factor
         SpawnGhostFrame();
         ResetEffects();
         timeStartResourceRegen = Time.time + resourceRegenDelay;
+
+        loopingSfx.Stop();
+        if (stoppedDueToCharge)
+        {
+            stopDueToChargeSfx.Play();
+        }
+        else
+        {
+            stopSfx.Play();
+        }
+
+        stoppedDueToCharge = false;
     }
 
     private void ResetEffects()
@@ -242,6 +267,12 @@ public class Blink : Factor
         {
             currentBlinkResource += Time.deltaTime * blinkRechargeRate;
             ionManager.ConsumeEnergy(ionEnergyPerResource * Time.deltaTime);
+            HandleRechargeSfx();
+        }
+        else if (rechargeLoopSfx.playing)
+        {
+            rechargeFinishedSfx.Play();
+            rechargeLoopSfx.Stop();
         }
 
         if (Player.main.pda.isOpen && inUse)
@@ -251,6 +282,7 @@ public class Blink : Factor
         
         if (currentBlinkResource <= 0 && inUse)
         {
+            stoppedDueToCharge = true;
             StopUse();
         }
 
@@ -283,6 +315,15 @@ public class Blink : Factor
         }
 
         blinkResourceLastFrame = currentBlinkResource;
+    }
+
+    private void HandleRechargeSfx()
+    {
+        rechargeLoopSfx.Play();
+        
+        if (!CustomSoundHandler.TryGetCustomSoundChannel(rechargeLoopSfx.GetInstanceID(), out var loopingChannel)) return;
+
+        loopingChannel.setFrequency(frequencyOverCharge.Evaluate(currentBlinkResource / maxBlinkDuration));
     }
 
     private IEnumerator FadeOutGhost(GameObject ghost)
