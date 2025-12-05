@@ -4,6 +4,7 @@ using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Factors;
+using PrototypeSubMod.PrecursorWearables;
 using SuitLib;
 using UnityEngine;
 
@@ -29,14 +30,15 @@ public static class PrecursorSuit
         {
             var renderer = gameObject.GetComponentInChildren<Renderer>();
 
-            renderer.materials[0].SetTexture("_MainTex", bodyTex);
+            renderer.materials[0].SetTexture(ShaderPropertyID._MainTex, bodyTex);
             renderer.materials[0].SetTexture(ShaderPropertyID._SpecTex, bodyTex);
             renderer.materials[0].SetTexture(ShaderPropertyID._Illum, bodyEmission);
-            renderer.materials[1].SetTexture("_MainTex", armsTex);
+            renderer.materials[1].SetTexture(ShaderPropertyID._MainTex, armsTex);
             renderer.materials[1].SetTexture(ShaderPropertyID._SpecTex, armsTex);
             renderer.materials[1].SetTexture(ShaderPropertyID._Illum, armsEmission);
 
             gameObject.AddComponent<FactorIonManager>();
+            gameObject.AddComponent<PrecursorSuitEnergyDisplay>();
 
             GameObject.DestroyImmediate(gameObject.GetComponent<Stillsuit>());
         };

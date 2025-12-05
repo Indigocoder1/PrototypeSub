@@ -19,11 +19,6 @@ public class TooltipFactory_Patches
             HandleColorFactorTooltips(sb, obj);
         }
 
-        if (techType == PrecursorSuit.PrefabInfo.TechType)
-        {
-            HandlePrecursorSuitTooltips(sb, obj);
-        }
-
         if (techType == AlienBuildingBlock.prefabInfo.TechType)
         {
             HandleAlienBuildingBlockTooltips(sb, obj);
@@ -40,17 +35,7 @@ public class TooltipFactory_Patches
         
         colorFactor.UpdateFromUI();
     }
-
-    private static void HandlePrecursorSuitTooltips(StringBuilder sb, GameObject obj)
-    {
-        var ionManager = obj.GetComponent<FactorIonManager>();
-        var normalizedCharge = (ionManager.GetNormalizedCharge() * 100).ToString("F0");
-        var currentEnergy = ionManager.GetCurrentEnergy().ToString("F0");
-        var maxEnergy = ionManager.GetMaxEnergy().ToString("F0");
-        var text = Language.main.GetFormat("FactorIonCharge", normalizedCharge, currentEnergy, maxEnergy);
-        TooltipFactory.WriteDescription(sb, text);
-    }
-
+    
     private static void HandleAlienBuildingBlockTooltips(StringBuilder sb, GameObject obj)
     {
         var eatable = obj.GetComponent<BiomechanicsEatable>();
