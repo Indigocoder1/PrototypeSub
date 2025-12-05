@@ -112,6 +112,7 @@ public class Blink : Factor
 
         startSfx.Play();
         loopingSfx.Play();
+        rechargeLoopSfx.Stop();
         suitManager.RegisterEmissionController(this, new PrecursorSuitManager.EmissionController(Color.green, 1));
         
         RefreshIonManager(null, null);
@@ -152,6 +153,11 @@ public class Blink : Factor
         
         timeNextDeleteGhost = Time.time + ghostDeletionDelay;
         timeStartedBlink = Time.unscaledTime;
+
+        if (CustomSoundHandler.TryGetCustomSoundChannel(loopingSfx.GetInstanceID(), out var loopingChannel))
+        {
+            loopingChannel.setVolume(0);
+        }
     }
     
     public override void StopUse()
@@ -173,6 +179,7 @@ public class Blink : Factor
         timeStartResourceRegen = Time.time + resourceRegenDelay;
 
         loopingSfx.Stop();
+        /*
         if (stoppedDueToCharge)
         {
             stopDueToChargeSfx.Play();
@@ -181,6 +188,7 @@ public class Blink : Factor
         {
             stopSfx.Play();
         }
+        */
 
         stoppedDueToCharge = false;
     }
