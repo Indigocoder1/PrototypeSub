@@ -27,6 +27,7 @@ public class Blink : Factor
     [SerializeField] private FMOD_CustomEmitter rechargeFinishedSfx;
     [SerializeField] private AnimationCurve frequencyOverCharge;
     [SerializeField] private AnimationCurve rechargeVolumeOverTime;
+    [SerializeField] private AnimationCurve loopVolumeOverTime;
     
     private float speedMultiplier = 3.5f;
     private float timeScaleSlow = 0.25f;
@@ -64,6 +65,7 @@ public class Blink : Factor
     private SpeedData speedData;
     private Material ghostMaterial;
     private float timeStartResourceRegen;
+    private float timeStartedBlink;
     private float currentBlinkResource;
     private float blinkResourceLastFrame;
     private float timeNextGhostFrame;
@@ -149,6 +151,7 @@ public class Blink : Factor
         pdaCameraControl.enabled = false;
         
         timeNextDeleteGhost = Time.time + ghostDeletionDelay;
+        timeStartedBlink = Time.unscaledTime;
     }
     
     public override void StopUse()
@@ -268,6 +271,7 @@ public class Blink : Factor
         if (inUse && currentBlinkResource > 0)
         {
             currentBlinkResource -= Time.unscaledDeltaTime;
+            HandleLoopSfx();
         }
         else if (currentBlinkResource < maxBlinkDuration && Time.time > timeStartResourceRegen && ionManager.GetCurrentEnergy() > 0)
         {
@@ -331,6 +335,13 @@ public class Blink : Factor
 
         loopingChannel.setFrequency(frequencyOverCharge.Evaluate(currentBlinkResource / maxBlinkDuration));
         loopingChannel.setVolume(rechargeVolumeOverTime.Evaluate(Mathf.Clamp01(Time.time - timeStartResourceRegen)));
+    }
+
+    private void HandleLoopSfx()
+    {
+        if (!CustomSoundHandler.TryGetCustomSoundChannel(loopingSfx.GetInstanceID(), out var loopingChannel)) return;
+        
+        loopingChannel.setVolume(loopVolumeOverTime.Evaluate(Mathf.Clamp01(Time.unscaledTime - timeStartedBlink)));
     }
 
     private IEnumerator FadeOutGhost(GameObject ghost)
