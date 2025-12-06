@@ -30,6 +30,10 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_RevisitLater", "ProtoRevisitInterceptorFacility"));
         PDALog_Patches.entries.Add(("PDA_FacilityLocations", "ProtoFacilityLocationsHint"));
         
+        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBlinkFactorUnlock"));
+        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBiomechanicsFactorUnlock"));
+        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoSuitColorFactorUnlock"));
+        
         PDALog_Patches.orionEntries.Add(("Proto_StoryEndPingVoiceline", "Proto_StoryEndPingVoiceline"));
         PDALog_Patches.orionEntries.Add(("Proto_AdminFacilityOnline", "Proto_AdminFacilityOnline"));
         PDALog_Patches.orionEntries.Add(("Proto_ApproachTerminal", "Proto_ApproachTerminal"));

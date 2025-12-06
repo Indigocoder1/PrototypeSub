@@ -238,6 +238,10 @@
   "ProtoRevisitInterceptorFacility": "Detecting an alien facility in the region. The facility appears to be inaccessible at this time.<duration=5743>\nRevisiting at a later time is recommended.<delay=5720><duration=2844>",
   "ProtoFacilityLocationsHint": "This vessel's construction has prompted a broadcast from a nearby alien source. Downloading summary to databank.",
   
+  "ProtoBlinkFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
+  "ProtoBiomechanicsFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
+  "ProtoSuitColorFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
+  
   // Upgrade tech types
   "ProtoEmergencyWarp": "Emergency Warp",
   "Tooltip_ProtoEmergencyWarp": "Allows the Prototype to warp back to the Quarantine Enforcement Platform",
