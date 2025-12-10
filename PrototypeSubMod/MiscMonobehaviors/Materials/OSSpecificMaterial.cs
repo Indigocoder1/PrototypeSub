@@ -8,6 +8,11 @@ public class OSSpecificMaterial : MonoBehaviour
     [SerializeField] private Renderer renderer;
     [SerializeField] private int materialIndex = -1;
 
+    private void OnValidate()
+    {
+        if (!renderer) TryGetComponent(out renderer);
+    }
+
     private void Awake()
     {
         var mats = renderer.materials;
