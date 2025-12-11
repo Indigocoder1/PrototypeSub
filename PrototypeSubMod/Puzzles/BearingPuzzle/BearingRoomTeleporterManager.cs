@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using PrototypeSubMod.MiscMonobehaviors;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 namespace PrototypeSubMod.Puzzles.BearingPuzzle;
 
@@ -9,6 +11,8 @@ public class BearingRoomTeleporterManager : MonoBehaviour
     [SerializeField] private Camera previewCamera;
     [SerializeField] private LinkedTeleporter[] linkedTeleporters;
 
+    private RenderTexture cameraRenderTexture;
+    
     [SerializeField, HideInInspector]
     public BearingTeleporterDoor[] doorsA;
     [SerializeField, HideInInspector]
@@ -28,8 +32,20 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        previewCamera.gameObject.EnsureComponent<CameraPostProcessApplier>();
+    }
+
     private void Start()
     {
+        if (cameraRenderTexture == null)
+        {
+            cameraRenderTexture = new RenderTexture(1024, 1024, 0, GraphicsFormat.R8G8B8A8_UNorm);
+            cameraRenderTexture.Create();
+            previewCamera.targetTexture = cameraRenderTexture;
+        }
+        
         for (int i = 0; i < doorsA.Length; i++)
         {
             var doorA = doorsA[i];
@@ -51,14 +67,30 @@ public class BearingRoomTeleporterManager : MonoBehaviour
 
     private void SetPreviewImage(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
     {
+        var playerRends = Player.main.GetComponentsInChildren<Renderer>();
+        Dictionary<Renderer, bool> rendererStates = new();
+        foreach (var rend in playerRends)
+        {
+            rendererStates.Add(rend, rend.enabled);
+            rend.enabled = false;
+        }
+
+        doorFrom.SetRenderersActive(false);
+        doorTo.SetRenderersActive(false);
+        
         var cameraPos = doorTo.GetTeleportPreviewPos();
         previewCamera.transform.position = cameraPos;
-        previewCamera.transform.LookAt(doorTo.GetTeleportPreviewPos() - doorTo.GetTeleportPreviewLookPos());
-        //previewCamera.projectionMatrix =
-            //doorFrom.GetPreviewProjectionMatrix(cameraPos, previewCamera.nearClipPlane, previewCamera.farClipPlane, out var newNearClipPlane);
+        previewCamera.transform.LookAt(doorTo.GetTeleportPreviewLookPos());
         
         previewCamera.Render();
         doorFrom.SetTeleporterPreview(previewCamera.targetTexture);
+        doorFrom.SetRenderersActive(true);
+        doorTo.SetRenderersActive(true);
+        
+        foreach (var rend in playerRends)
+        {
+            rend.enabled = rendererStates[rend];
+        }
     }
 
     private void OnTryTeleport(BearingTeleporterDoor doorFrom)
@@ -70,7 +102,7 @@ public class BearingRoomTeleporterManager : MonoBehaviour
 
         var teleportToPosition = doorTo.GetTeleportInPosition();
         var teleportFromPosition = doorFrom.GetTeleportInPosition();
-        var positionDelta = teleportToPosition.position - Player.main.transform.position;
+        var positionDelta = teleportToPosition.position - teleportFromPosition.position;
         var localPlayerDir = teleportFromPosition.InverseTransformDirection(Player.main.transform.eulerAngles);
         var rotationDelta = teleportFromPosition.TransformDirection(-localPlayerDir) - localPlayerDir;
 
@@ -83,6 +115,14 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         underwaterMotor.vel = newVelocity;
         underwaterMotor.previousVelocity = newVelocity;
         Player.main.SetPosition(Player.main.transform.position + positionDelta);
+    }
+
+    private void OnDestroy()
+    {
+        if (cameraRenderTexture == null) return;
+        
+        cameraRenderTexture.Release();
+        Destroy(cameraRenderTexture);
     }
 }
 

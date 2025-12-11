@@ -9,62 +9,51 @@ public class BearingTeleporterDoor : MonoBehaviour
     
     [SerializeField] private Transform teleportInPosition;
     [SerializeField] private Renderer teleporterPreview;
-    [SerializeField] private Transform nearPlaneA;
-    [SerializeField] private Transform nearPlaneB;
-    [SerializeField] private Transform nearPlaneC;
 
-    private Renderer[] renderers;
-
-    private void Start()
+    private Renderer[] childRenderers;
+    
+    private RenderTexture previewTexture;
+    
+    private void Awake()
     {
-        renderers = GetComponentsInChildren<Renderer>();
         teleporterPreview.gameObject.SetActive(false);
+        previewTexture = new RenderTexture(1024, 1024, 0);
+        childRenderers = GetComponentsInChildren<Renderer>();
     }
 
     public void TeleportPlayer()
     {
-        ErrorMessage.AddError("Teleporting player");
         onTryTeleport?.Invoke(this);
     }
 
     public void SetTeleporterPreview(Texture texture)
     {
-        teleporterPreview.material.SetTexture("_MainTex", texture);
+        teleporterPreview.material.EnableKeyword("MARMO_EMISSION");
+        
         teleporterPreview.gameObject.SetActive(true);
+        Graphics.Blit(texture, previewTexture);
+        teleporterPreview.material.SetTexture(ShaderPropertyID._MainTex, previewTexture);
+        teleporterPreview.material.SetTexture(ShaderPropertyID._SpecTex, previewTexture);
+        teleporterPreview.material.SetTexture(ShaderPropertyID._Illum, previewTexture);
+        teleporterPreview.material.SetFloat("_GlowStrength", 0.5f);
+        teleporterPreview.material.SetFloat("_GlowStrengthNight", 0.5f);
     }
 
     public void SetRenderersActive(bool active)
     {
-        foreach (var rend in renderers)
+        foreach (var rend in childRenderers)
         {
             rend.enabled = active;
         }
     }
 
-    public Matrix4x4 GetPreviewProjectionMatrix(Vector3 cameraPos, float nearPlaneDist, float farPlaneDist, out float nearClipPlane)
+    private void OnDestroy()
     {
-        var rightVector = (nearPlaneB.position - nearPlaneA.position).normalized;
-        var upVector = (nearPlaneC.position - nearPlaneA.position).normalized;
-        var normalVector = Vector3.Cross(upVector, rightVector).normalized;
-
-        var va = nearPlaneA.position - cameraPos;
-        var vb = nearPlaneB.position - cameraPos;
-        var vc = nearPlaneC.position - cameraPos;
-
-        var distance = -Vector3.Dot(va, normalVector);
-
-        var nd = nearPlaneDist / distance;
-        var l = Vector3.Dot(rightVector, va) * nd;
-        var r = Vector3.Dot(rightVector, vb) * nd;
-        var b = Vector3.Dot(upVector, va) * nd;
-        var t = Vector3.Dot(upVector, vc) * nd;
-
-        nearClipPlane = distance;
-        var projectionMatrix = Matrix4x4.Frustum(l, r, b, t, nd, farPlaneDist);
-        return projectionMatrix;
+        previewTexture.Release();
+        Destroy(previewTexture);
     }
 
     public Transform GetTeleportInPosition() => teleportInPosition;
-    public Vector3 GetTeleportPreviewPos() => teleporterPreview.transform.position + teleporterPreview.transform.up * 2;
-    public Vector3 GetTeleportPreviewLookPos() => teleporterPreview.transform.position;
+    public Vector3 GetTeleportPreviewPos() => teleportInPosition.transform.position - Vector3.up;
+    public Vector3 GetTeleportPreviewLookPos() => teleportInPosition.transform.position + teleportInPosition.transform.forward - Vector3.up;
 }

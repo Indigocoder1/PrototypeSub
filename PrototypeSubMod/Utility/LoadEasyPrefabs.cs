@@ -6,6 +6,7 @@ using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using System.IO;
 using System.Threading;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 
 namespace PrototypeSubMod.Utility;
@@ -111,7 +112,7 @@ internal static class LoadEasyPrefabs
             }
             else
             {
-                MaterialUtils.ApplySNShaders(easyPrefab.prefab);
+                MaterialUtils.ApplySNShaders(easyPrefab.prefab, modifiers: new DefaultMaterialModifier());
             }
         }
 
