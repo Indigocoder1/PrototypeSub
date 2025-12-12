@@ -153,17 +153,20 @@
   "MeasurePuzzleInputBeacon": "Input beacon {0}",
   "MeasurePuzzleNoBeacon": "No beacon in inventory",
   
-  // Factors
+  // Ion Dive Suit
+  "PrecursorSuit": "Ion Dive Suit",
+  "PrecursorPropulsionGloves": "Ion Propulsion Gloves",
+  "Tooltip_PrecursorPropulsionGloves": "Alien gloves adapted for human use. Used to manipulate objects at a distance.",
   "FactorIonCharge": "ION CHARGE {0} % ({1}/{2})",
   "AlienBuildingBlockCharge": "ION CHARGE: {0}{1}",
   "BlinkFactor": "Blink Factor",
-  "Tooltip_BlinkFactor": "Temporary blink description.",
-  "TetherFactor": "Tether factor",
-  "Tooltip_TetherFactor": "Temporary Tether description.",
-  "ProtoSuitUnequipWarning": "Uninstall factors before taking off the suit!",
+  "Tooltip_BlinkFactor": "An alien implement used for bursts of short-range traversal.",
+  "TetherFactor": "Tether Factor",
+  "Tooltip_TetherFactor": "An alien implement used for localized teleportation.",
+  "ProtoSuitUnequipWarning": "Cannot remove suit while Factors are installed!",
   "PropulsionGlovesRelease": "Release item {0}",
-  "SuitColorFactor": "Suit Color Factor",
-  "Tooltip_SuitColorFactor": "Allows for the customization of power lines on the Precursor Suit",
+  "SuitColorFactor": "Color Factor",
+  "Tooltip_SuitColorFactor": "An alien implement used to customize light colours of the ion dive suit.",
   "SuitColorNext": "Next color",
   "SuitColorPrev": "Previous color",
   "SuitIntensityNext": "Increase intensity",
@@ -189,13 +192,13 @@
   
   // Phase Gates
   "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
-  "Tooltip_ProtoPhaseGateStabilizer": "A dark matter stabilizer for a precursor phase gate.",
+  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark matter in alien technology.",
   "ProtoPhaseGateStructure": "Structural Core",
-  "Tooltip_ProtoPhaseGateStructure": "A structural core for a precursor phase gate.",
+  "Tooltip_ProtoPhaseGateStructure": "A strong core used in deployable alien architecture.",
   "ProtoPhaseGateTransmitter": "Particle Transmitter",
-  "Tooltip_ProtoPhaseGateTransmitter": "A particle transmitter for a precursor phase gate.",
-  "ProtoPhaseGateItem": "Phase Gate Kit",
-  "Tooltip_ProtoPhaseGateItem": "A compacted precursor phase gate ready for deployment.",
+  "Tooltip_ProtoPhaseGateTransmitter": "An alien device used to transmit matter across vast distances.",
+  "ProtoPhaseGateItem": "Phase Gate Constructor",
+  "Tooltip_ProtoPhaseGateItem": "An alien device used to construct phase gates. Can be deployed by the Prototype.",
 
   // Power System
   "PrototypePowerLabel": "Prototype Power System",
@@ -210,7 +213,7 @@
   "ProtoNoVehicleDocked": "No vehicle docked",
   "ProtoDockNotUnlocked": "Can't dock; not enough fins",
   "VehicleAccessEquipment": "Vehicle Access",
-  "VehicleFrameworkNoStorage": "No storage in vehicle!",
+  "VehicleFrameworkNoStorage": "No storage in vehicle",
   "ProtoUndockVehicleHint": "Undock vehicles in the cockpit radial menu",
   
   // Deployables terminal
