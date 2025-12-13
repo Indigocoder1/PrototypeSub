@@ -436,7 +436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754379188295182034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.85, z: -15.804}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7988347289916148472}
@@ -1222,8 +1222,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4652015790151701118}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: -15.804, y: 3.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6960724421127058818}
@@ -2686,7 +2686,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6960724420896986605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.85, z: -15.804}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6960724420660476588}
@@ -3181,12 +3181,12 @@ MonoBehaviour:
   previewCamera: {fileID: 685279801365527285}
   linkedTeleporters:
   - name: Left<->Right
-    doorA: {fileID: 2878248874565126242}
-    doorB: {fileID: 5288448492764729708}
-  doorsA:
-  - {fileID: 2878248874565126242}
-  doorsB:
-  - {fileID: 5288448492764729708}
+    doorFrom: {fileID: 0}
+    doorTo: {fileID: 0}
+  doorsFrom:
+  - {fileID: 0}
+  doorsTo:
+  - {fileID: 0}
 --- !u!1 &6960724421141987111
 GameObject:
   m_ObjectHideFlags: 0
@@ -4260,7 +4260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7497223512477795483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.85, z: -15.804}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3328763186343935164}
@@ -5691,6 +5691,11 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c820075f537c3ac49ad66ad45391c052,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7114631154587268062, guid: c820075f537c3ac49ad66ad45391c052,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c820075f537c3ac49ad66ad45391c052,

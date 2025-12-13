@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using PrototypeSubMod.MiscMonobehaviors;
 using UnityEngine;
@@ -14,21 +15,21 @@ public class BearingRoomTeleporterManager : MonoBehaviour
     private RenderTexture cameraRenderTexture;
     
     [SerializeField, HideInInspector]
-    public BearingTeleporterDoor[] doorsA;
+    public BearingTeleporterDoor[] doorsFrom;
     [SerializeField, HideInInspector]
-    public BearingTeleporterDoor[] doorsB;
+    public BearingTeleporterDoor[] doorsTo;
 
     private Dictionary<BearingTeleporterDoor, BearingTeleporterDoor> bearingTeleporterDoors = new();
     
     private void OnValidate()
     {
-        doorsA = new BearingTeleporterDoor[linkedTeleporters.Length];
-        doorsB = new BearingTeleporterDoor[linkedTeleporters.Length];
+        doorsFrom = new BearingTeleporterDoor[linkedTeleporters.Length];
+        doorsTo = new BearingTeleporterDoor[linkedTeleporters.Length];
 
         for (int i = 0; i < linkedTeleporters.Length; i++)
         {
-            doorsA[i] = linkedTeleporters[i].doorA;
-            doorsB[i] = linkedTeleporters[i].doorB;
+            doorsFrom[i] = linkedTeleporters[i].doorFrom;
+            doorsTo[i] = linkedTeleporters[i].doorTo;
         }
     }
 
@@ -46,23 +47,31 @@ public class BearingRoomTeleporterManager : MonoBehaviour
             previewCamera.targetTexture = cameraRenderTexture;
         }
         
-        for (int i = 0; i < doorsA.Length; i++)
+        for (int i = 0; i < doorsFrom.Length; i++)
         {
-            var doorA = doorsA[i];
-            var doorB = doorsB[i];
-
-            SetPreviewImage(doorA, doorB);
-            SetPreviewImage(doorB, doorA);
+            var doorFrom = doorsFrom[i];
+            var doorTo = doorsTo[i];
             
-            bearingTeleporterDoors.Add(doorA, doorB);
-            bearingTeleporterDoors.Add(doorB, doorA);
-            doorA.onTryTeleport += OnTryTeleport;
-            doorB.onTryTeleport += OnTryTeleport;
+            bearingTeleporterDoors.Add(doorFrom, doorTo);
+            doorFrom.onTryTeleport += OnTryTeleport;
         }
 
         // Clear for memory
-        doorsA = null;
-        doorsB = null;
+        doorsFrom = null;
+        doorsTo = null;
+
+        StartCoroutine(GeneratePreviewsDelayed());
+    }
+
+    private IEnumerator GeneratePreviewsDelayed()
+    {
+        var lwe = GetComponentInParent<LargeWorldEntity>();
+        yield return new WaitUntil(() => lwe.fadeTime > 0.5f);
+        
+        foreach (var item in bearingTeleporterDoors)
+        {
+            SetPreviewImage(item.Key, item.Value);
+        }
     }
 
     private void SetPreviewImage(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
@@ -102,15 +111,17 @@ public class BearingRoomTeleporterManager : MonoBehaviour
 
         var teleportToPosition = doorTo.GetTeleportInPosition();
         var teleportFromPosition = doorFrom.GetTeleportInPosition();
-        var positionDelta = teleportToPosition.position - teleportFromPosition.position;
-        var localPlayerDir = teleportFromPosition.InverseTransformDirection(Player.main.transform.eulerAngles);
-        var rotationDelta = teleportFromPosition.TransformDirection(-localPlayerDir) - localPlayerDir;
-
-        var localVelocity = teleportFromPosition.InverseTransformVector(Player.main.rigidBody.velocity);
-        var newVelocity = teleportToPosition.TransformVector(-localVelocity);
+        var positionDelta = teleportToPosition.position - teleportFromPosition.position + teleportToPosition.forward * 2f;
+        var rotationDelta = teleportToPosition.eulerAngles - (teleportFromPosition.eulerAngles - new Vector3(0, 180, 0));
+        var camera = MainCameraControl.main.transform;
+        
+        var localVelocity = teleportFromPosition.InverseTransformVector(-Player.main.rigidBody.velocity);
+        var newVelocity = teleportToPosition.TransformVector(localVelocity);
         var underwaterMotor = Player.main.playerController.underWaterController as UnderwaterMotor;
         
-        Player.main.transform.eulerAngles += rotationDelta;
+        var newAngles = camera.eulerAngles + rotationDelta;
+        MainCameraControl.main.rotationX += rotationDelta.y;
+        camera.eulerAngles = newAngles;
         Player.main.rigidBody.velocity = newVelocity;
         underwaterMotor.vel = newVelocity;
         underwaterMotor.previousVelocity = newVelocity;
@@ -130,6 +141,6 @@ public class BearingRoomTeleporterManager : MonoBehaviour
 public class LinkedTeleporter
 {
     public string name;
-    public BearingTeleporterDoor doorA;
-    public BearingTeleporterDoor doorB;
+    public BearingTeleporterDoor doorFrom;
+    public BearingTeleporterDoor doorTo;
 }
