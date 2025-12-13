@@ -259,18 +259,19 @@ public class Blink : Factor
     {
         if (resourceUi != null) return;
         
-        var hudContent = uGUI.main.transform.Find("ScreenCanvas/HUD/Content");
-        if (hudContent.Find("BlinkFactorCharge") == null)
+        var oxygenBar = uGUI.main.transform.Find("ScreenCanvas/HUD/Content/BarsPanel/OxygenBar");
+        if (oxygenBar.Find("BlinkFactorCharge") == null)
         {
             var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("BlinkFactorCharge");
-            var instance = Instantiate(prefab, hudContent);
+            var instance = Instantiate(prefab, oxygenBar);
             instance.name = "BlinkFactorCharge";
-            instance.transform.localPosition = new Vector3(-650, 400, 0);
+            instance.transform.localPosition = new Vector3(0, 0, 0);
+            instance.transform.localScale = Vector3.one * 0.8f;
             var hideForScreenshots = instance.EnsureComponent<HideForScreenshots>();
             hideForScreenshots.recursive = true;
         }
         
-        resourceUi = hudContent.Find("BlinkFactorCharge").GetComponent<BlinkResourceUI>();
+        resourceUi = oxygenBar.Find("BlinkFactorCharge").GetComponent<BlinkResourceUI>();
     }
     
     public override void UpdateFactor()

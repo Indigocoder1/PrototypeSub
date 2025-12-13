@@ -14,8 +14,13 @@ public class PrecursorSuitChargeUI : MonoBehaviour
 
     private FactorIonManager factorIonManager;
     
-    private void Start()
+    private void Awake()
     {
+        if (canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
+        
         UpdateUIVisibility();
         Inventory.main.equipment.onAddItem += OnAddItem;
         Inventory.main.equipment.onRemoveItem += OnRemoveItem;
@@ -37,7 +42,9 @@ public class PrecursorSuitChargeUI : MonoBehaviour
         bool hasSuit = itemInSlot?.techType == PrecursorSuit.PrefabInfo.TechType;
         canvasGroup.alpha = hasSuit ? 1 : 0;
 
-        factorIonManager = itemInSlot?.item?.GetComponent<FactorIonManager>();
+        if (itemInSlot == null) return;
+        
+        factorIonManager = itemInSlot.item.GetComponent<FactorIonManager>();
     }
 
     private void Update()

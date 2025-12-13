@@ -16,6 +16,22 @@ public class FactorIonManager : MonoBehaviour, IProtoEventListener
         prefabIdentifier = GetComponent<PrefabIdentifier>();
 
         Plugin.GlobalSaveData.OnStartedSaving += OnBeforeSave;
+        TrySpawnResourceUI();
+    }
+    
+    private void TrySpawnResourceUI()
+    {
+        var oxygenBar = uGUI.main.transform.Find("ScreenCanvas/HUD/Content/BarsPanel/OxygenBar");
+        if (oxygenBar.Find("PrecursorSuitCharge") == null)
+        {
+            var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("PrecursorSuitCharge");
+            var instance = Instantiate(prefab, oxygenBar);
+            instance.name = "PrecursorSuitCharge";
+            instance.transform.localPosition = new Vector3(0, 0, 0);
+            instance.transform.localScale = Vector3.one * 0.7f;
+            var hideForScreenshots = instance.EnsureComponent<HideForScreenshots>();
+            hideForScreenshots.recursive = true;
+        }
     }
 
     public bool ConsumeEnergy(float energy)

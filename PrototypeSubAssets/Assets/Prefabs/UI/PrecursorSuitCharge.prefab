@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: -289792877, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 6635347799984738336}
   chargeBar: {fileID: 1674778086577724281}
   fillAmountMin: 0.042
   fillAmountMax: 0.703
