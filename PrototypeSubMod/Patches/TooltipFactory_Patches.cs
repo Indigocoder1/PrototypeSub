@@ -39,7 +39,6 @@ public class TooltipFactory_Patches
     private static void HandleAlienBuildingBlockTooltips(StringBuilder sb, GameObject obj)
     {
         var eatable = obj.GetComponent<BiomechanicsEatable>();
-        if (!eatable.EatableActive()) return;
 
         var charge = eatable.GetIonCharge();
         var sign = Mathf.Sign(charge) < 0 ? "-" : "+";

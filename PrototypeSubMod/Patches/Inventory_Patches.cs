@@ -129,4 +129,12 @@ internal class Inventory_Patches
 
         eatable.OnEat();
     }
+    
+    [HarmonyPatch(nameof(Inventory.GetAllItemActions)), HarmonyPostfix]
+    private static void GetAllItemActions_Postfix(InventoryItem item, ref ItemAction __result)
+    {
+        if (item.techType != AlienBuildingBlock.prefabInfo.TechType) return;
+
+        __result |= ItemAction.Eat;
+    }
 }
