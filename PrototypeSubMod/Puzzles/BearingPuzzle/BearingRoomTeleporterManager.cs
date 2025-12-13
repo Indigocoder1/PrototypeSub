@@ -67,10 +67,22 @@ public class BearingRoomTeleporterManager : MonoBehaviour
     {
         var lwe = GetComponentInParent<LargeWorldEntity>();
         yield return new WaitUntil(() => lwe.fadeTime > 0.5f);
+
+        foreach (var item in bearingTeleporterDoors)
+        {
+            item.Key.SetRenderersActive(false);
+            item.Value.SetRenderersActive(false);
+        }
         
         foreach (var item in bearingTeleporterDoors)
         {
             SetPreviewImage(item.Key, item.Value);
+        }
+        
+        foreach (var item in bearingTeleporterDoors)
+        {
+            item.Key.SetRenderersActive(true);
+            item.Value.SetRenderersActive(true);
         }
     }
 
@@ -83,9 +95,6 @@ public class BearingRoomTeleporterManager : MonoBehaviour
             rendererStates.Add(rend, rend.enabled);
             rend.enabled = false;
         }
-
-        doorFrom.SetRenderersActive(false);
-        doorTo.SetRenderersActive(false);
         
         var cameraPos = doorTo.GetTeleportPreviewPos();
         previewCamera.transform.position = cameraPos;
@@ -93,8 +102,6 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         
         previewCamera.Render();
         doorFrom.SetTeleporterPreview(previewCamera.targetTexture);
-        doorFrom.SetRenderersActive(true);
-        doorTo.SetRenderersActive(true);
         
         foreach (var rend in playerRends)
         {
@@ -111,7 +118,7 @@ public class BearingRoomTeleporterManager : MonoBehaviour
 
         var teleportToPosition = doorTo.GetTeleportInPosition();
         var teleportFromPosition = doorFrom.GetTeleportInPosition();
-        var positionDelta = teleportToPosition.position - teleportFromPosition.position + teleportToPosition.forward * 2f;
+        var positionDelta = teleportToPosition.position - teleportFromPosition.position;
         var rotationDelta = teleportToPosition.eulerAngles - (teleportFromPosition.eulerAngles - new Vector3(0, 180, 0));
         var camera = MainCameraControl.main.transform;
         

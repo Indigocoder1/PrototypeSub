@@ -4273,27 +4273,27 @@ PrefabInstance:
         type: 3}
       propertyPath: doorsFrom.Array.data[0]
       value: 
-      objectReference: {fileID: 4764591858161159932}
+      objectReference: {fileID: 8077095716292056787}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: doorsFrom.Array.data[1]
       value: 
-      objectReference: {fileID: 3209647020155623410}
+      objectReference: {fileID: 5772810421813945335}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: doorsFrom.Array.data[2]
       value: 
-      objectReference: {fileID: 8476848816046720867}
+      objectReference: {fileID: 4807150708447798096}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: doorsFrom.Array.data[3]
       value: 
-      objectReference: {fileID: 1831691357360836767}
+      objectReference: {fileID: 703458062455431197}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: doorsFrom.Array.data[4]
       value: 
-      objectReference: {fileID: 2700075526103963864}
+      objectReference: {fileID: 8357540669680686263}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: linkedTeleporters.Array.size
@@ -4328,27 +4328,27 @@ PrefabInstance:
         type: 3}
       propertyPath: linkedTeleporters.Array.data[0].doorFrom
       value: 
-      objectReference: {fileID: 4764591858161159932}
+      objectReference: {fileID: 8077095716292056787}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[1].doorFrom
       value: 
-      objectReference: {fileID: 3209647020155623410}
+      objectReference: {fileID: 5772810421813945335}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[2].doorFrom
       value: 
-      objectReference: {fileID: 8476848816046720867}
+      objectReference: {fileID: 4807150708447798096}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[3].doorFrom
       value: 
-      objectReference: {fileID: 1831691357360836767}
+      objectReference: {fileID: 703458062455431197}
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[4].doorFrom
       value: 
-      objectReference: {fileID: 2700075526103963864}
+      objectReference: {fileID: 8357540669680686263}
     - target: {fileID: 6960724421127058818, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
       propertyPath: m_RootOrder
@@ -4415,9 +4415,9 @@ PrefabInstance:
     - {fileID: 1831447195171783631, guid: f17d5624b3844844cbd032924ed0317e, type: 3}
     - {fileID: 3951062962192237764, guid: f17d5624b3844844cbd032924ed0317e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f17d5624b3844844cbd032924ed0317e, type: 3}
---- !u!114 &8476848816046720867 stripped
+--- !u!114 &4807150708447798096 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1174720434584846845, guid: f17d5624b3844844cbd032924ed0317e,
+  m_CorrespondingSourceObject: {fileID: 2835241427795518926, guid: f17d5624b3844844cbd032924ed0317e,
     type: 3}
   m_PrefabInstance: {fileID: 7344987361919714974}
   m_PrefabAsset: {fileID: 0}
@@ -4427,9 +4427,9 @@ MonoBehaviour:
   m_Script: {fileID: -125743007, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3209647020155623410 stripped
+--- !u!114 &5772810421813945335 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5288448492764729708, guid: f17d5624b3844844cbd032924ed0317e,
+  m_CorrespondingSourceObject: {fileID: 3887599789081224553, guid: f17d5624b3844844cbd032924ed0317e,
     type: 3}
   m_PrefabInstance: {fileID: 7344987361919714974}
   m_PrefabAsset: {fileID: 0}
@@ -4439,9 +4439,9 @@ MonoBehaviour:
   m_Script: {fileID: -125743007, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4764591858161159932 stripped
+--- !u!114 &8077095716292056787 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2878248874565126242, guid: f17d5624b3844844cbd032924ed0317e,
+  m_CorrespondingSourceObject: {fileID: 1583359233097699405, guid: f17d5624b3844844cbd032924ed0317e,
     type: 3}
   m_PrefabInstance: {fileID: 7344987361919714974}
   m_PrefabAsset: {fileID: 0}
@@ -4457,9 +4457,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7344987361919714974}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2700075526103963864 stripped
+--- !u!114 &8357540669680686263 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4653972641631329862, guid: f17d5624b3844844cbd032924ed0317e,
+  m_CorrespondingSourceObject: {fileID: 1591268076174168617, guid: f17d5624b3844844cbd032924ed0317e,
     type: 3}
   m_PrefabInstance: {fileID: 7344987361919714974}
   m_PrefabAsset: {fileID: 0}
@@ -4469,9 +4469,9 @@ MonoBehaviour:
   m_Script: {fileID: -125743007, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1831691357360836767 stripped
+--- !u!114 &703458062455431197 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8972818087427446273, guid: f17d5624b3844844cbd032924ed0317e,
+  m_CorrespondingSourceObject: {fileID: 7795040970327664259, guid: f17d5624b3844844cbd032924ed0317e,
     type: 3}
   m_PrefabInstance: {fileID: 7344987361919714974}
   m_PrefabAsset: {fileID: 0}
