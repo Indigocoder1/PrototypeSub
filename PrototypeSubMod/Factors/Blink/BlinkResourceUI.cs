@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace PrototypeSubMod.Factors.Blink;
@@ -9,48 +7,44 @@ public class BlinkResourceUI : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image resourceBar;
+    [SerializeField] private float fillAmountMin;
+    [SerializeField] private float fillAmountMax;
 
-    private bool uiOpen;
-
+    private FactorActivationManager factorActivationManager;
+    
     private void Start()
     {
-        canvasGroup.alpha = 0;
+        factorActivationManager = Player.main.GetComponent<FactorActivationManager>();
+        
+        UpdateUIVisibility();
+        Inventory.main.equipment.onAddItem += OnAddItem;
+        Inventory.main.equipment.onRemoveItem += OnRemoveItem;
     }
 
-    public void OpenUI(Blink owner)
+    private void OnAddItem(InventoryItem item)
     {
-        StopAllCoroutines();
-        StartCoroutine(FadeToAlpha(1, owner.resourceFadeInTime));
-        uiOpen = true;
+        UpdateUIVisibility();
     }
     
-    public void CloseUI(Blink owner)
+    private void OnRemoveItem(InventoryItem item)
     {
-        StopAllCoroutines();
-        StartCoroutine(FadeToAlpha(0, owner.resourceFadeOutTime, owner.resourceBarFadeDelay));
-        uiOpen = false;
+        UpdateUIVisibility();
     }
 
-    public bool GetUIOpen() => uiOpen;
-
-    private IEnumerator FadeToAlpha(float alpha, float time, float delay = 0)
+    private void UpdateUIVisibility()
     {
-        yield return new WaitForSeconds(delay);
-        
-        float currentTime = 0;
-        float startAlpha = canvasGroup.alpha;
-        while (currentTime < time)
-        {
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, alpha, currentTime / time);
-            currentTime += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        canvasGroup.alpha = alpha;
+        bool hasBlink = factorActivationManager.ContainsFactor(typeof(Blink));
+        canvasGroup.alpha = hasBlink ? 1 : 0;
     }
 
     public void SetFillAmount(float amount)
     {
-        resourceBar.fillAmount = amount;
+        resourceBar.fillAmount = Mathf.Lerp(fillAmountMin, fillAmountMax, amount);
+    }
+    
+    private void OnDestroy()
+    {
+        Inventory.main.equipment.onAddItem -= OnAddItem;
+        Inventory.main.equipment.onRemoveItem -= OnRemoveItem;
     }
 }

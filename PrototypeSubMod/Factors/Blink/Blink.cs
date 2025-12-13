@@ -148,7 +148,6 @@ public class Blink : Factor
         depthSettings.focusDistance = depthOfFieldVal;
         postProcessing.profile.depthOfField.settings = depthSettings;
         
-        resourceUi.OpenUI(this);
         pdaCameraControl.enabled = false;
         
         timeNextDeleteGhost = Time.time + ghostDeletionDelay;
@@ -307,11 +306,6 @@ public class Blink : Factor
         if ((Player.main.precursorOutOfWater || Player.main.transform.position.y > 0) && inUse)
         {
             StopUse();
-        }
-
-        if (Mathf.Approximately(blinkResourceLastFrame, currentBlinkResource) && resourceUi.GetUIOpen() && Time.time > timeStartResourceRegen)
-        {
-            resourceUi.CloseUI(this);
         }
 
         if (resourceUi != null)
