@@ -9,6 +9,7 @@ public class BiomechanicsEatable : MonoBehaviour
 {
     [SerializeField] private float foodValue = 25f;
     [SerializeField] private float waterValue = 25f;
+    [SerializeField] private float healthValue = 25f;
     [SerializeField] private float ionValue = 20f;
 
     private FactorActivationManager factorActivationManager;
@@ -48,10 +49,15 @@ public class BiomechanicsEatable : MonoBehaviour
     {
         UWE.CoroutineHost.StartCoroutine(RefundWarperRemnant());
         Inventory.main.equipment.GetItemInSlot("Body").item.GetComponent<FactorIonManager>().AddEnergy(ionValue);
+        if (eatableActive)
+        {
+            Player.main.liveMixin.AddHealth(healthValue);
+        }
     }
 
     public bool EatableActive() => eatableActive;
     public float GetIonCharge() => ionValue;
+    public float GetHealthValue() => healthValue;
 
     private IEnumerator RefundWarperRemnant()
     {

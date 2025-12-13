@@ -40,6 +40,11 @@ public class TooltipFactory_Patches
     {
         var eatable = obj.GetComponent<BiomechanicsEatable>();
 
+        if (eatable.EatableActive())
+        {
+            TooltipFactory.WriteDescription(sb, Language.main.GetFormat("HealthFormat", eatable.GetHealthValue()));
+        }
+        
         var charge = eatable.GetIonCharge();
         var sign = Mathf.Sign(charge) < 0 ? "-" : "+";
         var text = Language.main.GetFormat("AlienBuildingBlockCharge", sign, charge.ToString("F0"));
