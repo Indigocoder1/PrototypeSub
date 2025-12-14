@@ -11,7 +11,7 @@ public class BearingUpdaterEditor : Editor
         base.OnInspectorGUI();
         if (GUILayout.Button("Refresh sprites"))
         {
-            var symbolIndicators = updater.GetComponentsInChildren<BearingSymbolIndicator>(true);
+            var symbolIndicators = updater.GetComponentsInChildren<BearingSymbol>(true);
             Undo.RecordObjects(symbolIndicators, "SymbolIndicators");
             foreach (var indicator in symbolIndicators)
             {

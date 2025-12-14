@@ -63,6 +63,11 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         StartCoroutine(GeneratePreviewsDelayed());
     }
 
+    public void LinkTeleporters(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
+    {
+        bearingTeleporterDoors[doorFrom] = doorTo;
+    }
+
     private IEnumerator GeneratePreviewsDelayed()
     {
         var lwe = GetComponentInParent<LargeWorldEntity>();

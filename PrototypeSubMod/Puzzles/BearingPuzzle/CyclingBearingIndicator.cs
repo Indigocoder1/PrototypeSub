@@ -6,8 +6,7 @@ namespace PrototypeSubMod.Puzzles.BearingPuzzle;
 public class CyclingBearingIndicator : MonoBehaviour
 {
     [SerializeField] private BearingReferenceSymbol[] availableReferenceSymbols;
-    [SerializeField] private BearingReferenceSymbol correctSymbol;
-    [SerializeField] private Image image;
+    [SerializeField] private BearingSymbol correctSymbol;
     
     private int currentIndex;
 
@@ -17,19 +16,30 @@ public class CyclingBearingIndicator : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            if (GetCurrentSymbol() != correctSymbol) break;
+            if (GetCurrentSymbol() != correctSymbol.GetReferenceSymbol()) break;
             
             currentIndex = Random.Range(0, availableReferenceSymbols.Length - 1);
         }
-        
-        image.sprite = GetCurrentSymbol().GetSprite();
+
+        RefreshSprite();
     }
 
     public void CycleIndicator()
     {
         currentIndex++;
         currentIndex %= availableReferenceSymbols.Length;
-        image.sprite = GetCurrentSymbol().GetSprite();
+        RefreshSprite();
+    }
+
+    private void RefreshSprite()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(transform.GetChild(i).gameObject);
+        }
+
+        var symbol = GetCurrentSymbol().CreateSymbolObject();
+        symbol.transform.SetParent(transform, false);
     }
 
     private BearingReferenceSymbol GetCurrentSymbol()
