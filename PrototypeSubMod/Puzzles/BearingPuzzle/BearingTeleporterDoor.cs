@@ -36,6 +36,8 @@ public class BearingTeleporterDoor : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(0f, 1f));
         SpawnParticles(Vector3.zero);
+        yield return new WaitForSeconds(Random.Range(0f, 0.5f));
+        SpawnParticles(new Vector3(0, 4, 0));
     }
 
     private void SpawnParticles(Vector3 offset)
