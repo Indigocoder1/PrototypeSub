@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using PrototypeSubMod.MiscMonobehaviors.PrefabRetrievers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Puzzles.BearingPuzzle;
 
@@ -25,6 +29,24 @@ public class BearingTeleporterDoor : MonoBehaviour
         previewTexture = new RenderTexture(1024, 1024, 0);
         childRenderers = GetComponentsInChildren<Renderer>();
         radiationController = Camera.main.GetComponent<RadiationsScreenFXController>();
+        UWE.CoroutineHost.StartCoroutine(SpawnParticles());
+    }
+
+    private IEnumerator SpawnParticles()
+    {
+        yield return new WaitForSeconds(Random.Range(0f, 1f));
+        SpawnParticles(Vector3.zero);
+    }
+
+    private void SpawnParticles(Vector3 offset)
+    {
+        var particles = new GameObject("Particles");
+        particles.transform.SetParent(teleporterPreview.transform);
+        particles.transform.localPosition = new Vector3(0, 1.5f, 10f) + offset;
+        particles.transform.localScale = new Vector3(5, 4, 0.5f);
+        particles.transform.localEulerAngles = new Vector3(90, 180, 0);
+        var fxSpawner = particles.AddComponent<SpawnTerminalFX>();
+        fxSpawner.SetRemoveFXPaths("x_Precursor_ComputerTerminal_SmallSymbol", "x_Precursor_ComputerTerminal_Symbol", "Light_Under", "x_Precursor_ComputerTerminal_Halo");
     }
 
     public void TeleportPlayer()

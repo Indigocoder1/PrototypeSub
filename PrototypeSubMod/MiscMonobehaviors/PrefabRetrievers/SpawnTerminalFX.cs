@@ -42,7 +42,7 @@ internal class SpawnTerminalFX : MonoBehaviour
         }
     }
 
-    public void SetRemoveFXPaths(string[] paths)
+    public void SetRemoveFXPaths(params string[] paths)
     {
         removeFXPaths = paths;
     }
