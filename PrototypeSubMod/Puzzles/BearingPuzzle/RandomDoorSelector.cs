@@ -5,7 +5,8 @@ namespace PrototypeSubMod.Puzzles.BearingPuzzle;
 
 public class RandomDoorSelector : MonoBehaviour
 {
-    [SerializeField] private BearingRoomTeleporterManager teleporterManager;
+    [SerializeField] private BearingRoomTeleporterManager originRoomManager;
+    [SerializeField] private BearingRoomTeleporterManager targetRoomManager;
     [SerializeField] private BearingSymbolIndicator bearingIndicator;
     [SerializeField] private BearingReferenceSymbol[] possibleBearings;
     [SerializeField] private BearingTeleporterDoor[] possibleDoors;
@@ -13,8 +14,12 @@ public class RandomDoorSelector : MonoBehaviour
 
     private void Start()
     {
-        var index = Random.Range(0, possibleBearings.Length - 1);
+        var index = Mathf.RoundToInt(Random.Range(0, (possibleBearings.Length - 1) * 10f) / 10f);
+
+        var doorFrom = possibleDoors[index];
         bearingIndicator.SetReferenceSymbol(possibleBearings[index]);
-        teleporterManager.LinkTeleporters(possibleDoors[index], teleportToDoor);
+        originRoomManager.LinkTeleporters(doorFrom, teleportToDoor);
+        originRoomManager.GeneratePreviewImage(doorFrom, teleportToDoor);
+        targetRoomManager.GeneratePreviewImage(teleportToDoor, doorFrom);
     }
 }

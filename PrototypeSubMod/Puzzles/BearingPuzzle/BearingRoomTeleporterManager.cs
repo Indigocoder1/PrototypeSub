@@ -81,7 +81,7 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         
         foreach (var item in bearingTeleporterDoors)
         {
-            SetPreviewImage(item.Key, item.Value);
+            GeneratePreviewImage(item.Key, item.Value);
         }
         
         foreach (var item in bearingTeleporterDoors)
@@ -91,7 +91,7 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         }
     }
 
-    private void SetPreviewImage(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
+    public void GeneratePreviewImage(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
     {
         var playerRends = Player.main.GetComponentsInChildren<Renderer>();
         Dictionary<Renderer, bool> rendererStates = new();

@@ -7,7 +7,9 @@ public class CyclingBearingIndicator : MonoBehaviour
 {
     [SerializeField] private BearingReferenceSymbol[] availableReferenceSymbols;
     [SerializeField] private BearingSymbol correctSymbol;
-    
+    [SerializeField] private Button button;
+
+    private GameObject symbolObject;
     private int currentIndex;
 
     private void Start()
@@ -33,13 +35,15 @@ public class CyclingBearingIndicator : MonoBehaviour
 
     private void RefreshSprite()
     {
-        for (int i = transform.childCount - 1; i >= 0; i--)
+        if (symbolObject != null)
         {
-            DestroyImmediate(transform.GetChild(i).gameObject);
+            Destroy(symbolObject);
         }
 
-        var symbol = GetCurrentSymbol().CreateSymbolObject();
-        symbol.transform.SetParent(transform, false);
+        symbolObject = GetCurrentSymbol().CreateSymbolObject();
+        symbolObject.transform.SetParent(transform, false);
+        var symbolImage = symbolObject.transform.Find("Image").GetComponent<Image>();
+        button.targetGraphic = symbolImage;
     }
 
     private BearingReferenceSymbol GetCurrentSymbol()
@@ -49,6 +53,6 @@ public class CyclingBearingIndicator : MonoBehaviour
 
     public bool OnCorrectSymbol()
     {
-        return GetCurrentSymbol() == correctSymbol;
+        return GetCurrentSymbol() == correctSymbol.GetReferenceSymbol();
     }
 }
