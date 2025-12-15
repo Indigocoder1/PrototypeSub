@@ -9,6 +9,9 @@ public class PrecursorSuitChargeUI : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image chargeBar;
+    [SerializeField] private Image backgroundShadow;
+    [SerializeField] private Sprite survivalShadow;
+    [SerializeField] private Sprite freedomShadow;
     [SerializeField] private float fillAmountMin;
     [SerializeField] private float fillAmountMax;
 
@@ -24,6 +27,8 @@ public class PrecursorSuitChargeUI : MonoBehaviour
         UpdateUIVisibility();
         Inventory.main.equipment.onAddItem += OnAddItem;
         Inventory.main.equipment.onRemoveItem += OnRemoveItem;
+        GameModeUtils.onGameModeChanged.AddHandler(this, OnGameModeChanged);
+        OnGameModeChanged(GameModeUtils.currentGameMode);
     }
 
     private void OnAddItem(InventoryItem item)
@@ -34,6 +39,18 @@ public class PrecursorSuitChargeUI : MonoBehaviour
     private void OnRemoveItem(InventoryItem item)
     {
         UpdateUIVisibility();
+    }
+
+    private void OnGameModeChanged(GameModeOption option)
+    {
+        if ((option & GameModeOption.Freedom) != 0 || (option & GameModeOption.Creative) == GameModeOption.Creative)
+        {
+            backgroundShadow.sprite = freedomShadow;
+        }
+        else
+        {
+            backgroundShadow.sprite = survivalShadow;
+        }
     }
 
     private void UpdateUIVisibility()

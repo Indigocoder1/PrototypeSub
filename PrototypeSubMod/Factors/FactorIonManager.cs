@@ -36,6 +36,11 @@ public class FactorIonManager : MonoBehaviour, IProtoEventListener
 
     public bool ConsumeEnergy(float energy)
     {
+        if (GameModeUtils.IsCheatActive(GameModeOption.NoEnergy))
+        {
+            return true;
+        }
+        
         currentIonEnergy = Mathf.Max(0, currentIonEnergy - energy);
         return currentIonEnergy > 0;
     }

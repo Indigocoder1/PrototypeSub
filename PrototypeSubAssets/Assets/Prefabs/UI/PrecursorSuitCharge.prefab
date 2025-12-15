@@ -229,6 +229,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 6635347799984738336}
   chargeBar: {fileID: 1674778086577724281}
+  backgroundShadow: {fileID: 4869109674821535450}
+  survivalShadow: {fileID: 21300000, guid: dac675860fc752e4388978c787475390, type: 3}
+  freedomShadow: {fileID: 21300000, guid: b3aa3d1fdf0df634d9882123eeede097, type: 3}
   fillAmountMin: 0.042
   fillAmountMax: 0.703
 --- !u!1 &2110373307227413658
@@ -295,7 +298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a4f122a88bc8154f82e651a25973f1e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dac675860fc752e4388978c787475390, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
