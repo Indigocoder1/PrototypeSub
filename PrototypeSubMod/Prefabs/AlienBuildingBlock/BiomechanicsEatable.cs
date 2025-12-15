@@ -53,6 +53,12 @@ public class BiomechanicsEatable : MonoBehaviour
         {
             Player.main.liveMixin.AddHealth(healthValue);
         }
+        else
+        {
+            // This is normally called by the eatable when being eaten, but since this can be eaten without that component I'm
+            // manually calling it here
+            Destroy(gameObject);
+        }
     }
 
     public bool EatableActive() => eatableActive;
