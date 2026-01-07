@@ -30,7 +30,7 @@ internal static class PrefabRegisterer
         yield return new WaitForEndOfFrame();
         
         Prototype_Craftable.Register();
-        ProtoBuildTerminal_World.Register();
+        //ProtoBuildTerminal_World.Register();
         DeployableLight_Craftable.Register();
         ProtoAggressiveWyrm.Register();
         ProtoTransmissionDevice.Register();
@@ -73,6 +73,7 @@ internal static class PrefabRegisterer
         ProtoFacilitySpawner.Register("ProtoHullFacilitySpawner", "HullFacilitySpawner");
         ProtoFacilitySpawner.Register("ProtoEngineFacilitySpawner", "EngineFacilitySpawner");
         ProtoFacilitySpawner.Register("ProtoDefenseFacilitySpawner", "DefenseFacilitySpawner");
+        ProtoFacilitySpawner.Register("ProtoBuildTerminalSpawner", "BuildTerminalSpawner");
         
         yield return new WaitForEndOfFrame();
         

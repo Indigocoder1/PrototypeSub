@@ -314,14 +314,15 @@ internal static class EncyEntryRegisterer
         
         PDAHandler.AddEncyclopediaEntry("ProtoBuildTerminalEncy", "DownloadedData/Prototype/Scanned", terminalTitle, 
             terminalBody, unlockSound: PDAHandler.UnlockBasic);
+        var buildTerminalType = (TechType)Enum.Parse(typeof(TechType), "ProtoBuildTerminal");
         var terminalEntry = new PDAScanner.EntryData()
         {
-            key = ProtoBuildTerminal_World.prefabInfo.TechType,
+            key = buildTerminalType,
             destroyAfterScan = false,
             encyclopedia = "ProtoBuildTerminalEncy",
             scanTime = 8f,
             isFragment = false,
-            blueprint = ProtoBuildTerminal_World.prefabInfo.TechType
+            blueprint = buildTerminalType
         };
         PDAHandler.AddCustomScannerEntry(terminalEntry);
         #endregion
