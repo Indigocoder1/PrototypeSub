@@ -1,10 +1,14 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PrototypeSubMod.Factors.Tether;
 
 public class TetherMarkerManager : MonoBehaviour
 {
+    [SerializeField] private Image image;
+    [SerializeField] private AnimationCurve opacityOverDistance;
+    
     private void Start()
     {
         if (Plugin.GlobalSaveData.tetherFactorMarkerLocation == null)
@@ -22,6 +26,9 @@ public class TetherMarkerManager : MonoBehaviour
     private void LateUpdate()
     {
         transform.LookAt(Player.main.transform.position);
+        var color = image.color;
+        color.a = opacityOverDistance.Evaluate(Vector3.Distance(transform.position, Player.main.transform.position));
+        image.color = color;
     }
 
     private void OnEnable()
