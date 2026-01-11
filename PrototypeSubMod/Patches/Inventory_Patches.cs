@@ -135,6 +135,9 @@ internal class Inventory_Patches
     {
         if (item.techType != AlienBuildingBlock.prefabInfo.TechType) return;
 
+        var itemInBody = Inventory.main.equipment.GetItemInSlot("Body");
+        if (itemInBody == null || itemInBody.techType != PrecursorSuit.PrefabInfo.TechType) return;
+        
         __result |= ItemAction.Eat;
     }
 }
