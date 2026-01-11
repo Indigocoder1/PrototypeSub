@@ -3,6 +3,7 @@ using System.Collections;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.Registration;
+using SubLibrary.Audio;
 using UnityEngine;
 
 namespace PrototypeSubMod.Factors.Tether;
@@ -10,6 +11,7 @@ namespace PrototypeSubMod.Factors.Tether;
 public class MarkerTetherLogic : Factor
 {
     [SerializeField] private InterfloorTeleporter interfloorTeleporter;
+    [SerializeField] private FMOD_CustomEmitter tetherPlaceSFX;
 
     private float maxDistFromTether = 1000; 
     
@@ -33,6 +35,7 @@ public class MarkerTetherLogic : Factor
             Plugin.GlobalSaveData.tetherMarkerOutOfWater = Player.main.precursorOutOfWater;
             UWE.CoroutineHost.StartCoroutine(SpawnMarker(Player.main.transform.position));
             ErrorMessage.AddError("Tether marker placed. Use again to teleport to marker");
+            tetherPlaceSFX.Play();
             return;
         }
 
