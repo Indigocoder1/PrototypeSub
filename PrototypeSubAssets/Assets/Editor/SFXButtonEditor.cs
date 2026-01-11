@@ -1,5 +1,6 @@
 ﻿using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -110,7 +111,6 @@ public class SFXButtonEditor : Editor
 
         EditorGUILayout.Space(10);
         EditorGUILayout.PropertyField(onClick);
-        serializedObject.ApplyModifiedProperties();
 
         button.onEnterFX = (FMODAsset)EditorGUILayout.ObjectField("On Enter SFX", button.onEnterFX, typeof(FMODAsset), false);
         button.onExitFX = (FMODAsset)EditorGUILayout.ObjectField("On Exit SFX", button.onExitFX, typeof(FMODAsset), false);
@@ -118,6 +118,10 @@ public class SFXButtonEditor : Editor
         button.volume = EditorGUILayout.FloatField("Volume", button.volume);
         button.minDistForSound = EditorGUILayout.FloatField("Min Dist For Sound", button.minDistForSound);
 
-        EditorGUI.EndChangeCheck();
+        if (!serializedObject.hasModifiedProperties) return;
+        
+        serializedObject.ApplyModifiedProperties();
+        EditorUtility.SetDirty(button);
+        EditorSceneManager.MarkSceneDirty(button.gameObject.scene);
     }
 }
