@@ -17,6 +17,8 @@ public class FactorIonManager : MonoBehaviour, IProtoEventListener
 
         Plugin.GlobalSaveData.OnStartedSaving += OnBeforeSave;
         TrySpawnResourceUI();
+
+        currentIonEnergy = maxIonEnergy;
     }
     
     private void TrySpawnResourceUI()
