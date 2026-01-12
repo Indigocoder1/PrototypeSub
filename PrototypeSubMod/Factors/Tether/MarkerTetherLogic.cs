@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections;
-using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+﻿using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.Registration;
 using SubLibrary.Audio;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace PrototypeSubMod.Factors.Tether;
@@ -13,10 +14,11 @@ public class MarkerTetherLogic : Factor
     [SerializeField] private InterfloorTeleporter interfloorTeleporter;
     [SerializeField] private FMOD_CustomEmitter tetherPlaceSFX;
 
-    private float maxDistFromTether = 1000; 
-    
+    private float maxDistFromTether = 1000;
+    private PrecursorSuitManager suitManager;
+
     public static event Action onClearTetherMarker;
-    
+
     public override GameInput.Button GetUseButton() => InputRegisterer.TetherMarkerButton;
 
     public override void StartUse()
@@ -49,6 +51,12 @@ public class MarkerTetherLogic : Factor
         UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
         Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
         onClearTetherMarker?.Invoke();
+
+        var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
+        FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
+
+        ionManager.ConsumeEnergy(10f);
+
     }
 
     private IEnumerator TeleportPlayer(Vector3 position)
@@ -88,4 +96,5 @@ public class MarkerTetherLogic : Factor
         var instance = Instantiate(prefab);
         instance.transform.position = position;
     }
+
 }
