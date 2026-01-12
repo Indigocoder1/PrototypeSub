@@ -13,9 +13,10 @@ public class MarkerTetherLogic : Factor
 {
     [SerializeField] private InterfloorTeleporter interfloorTeleporter;
     [SerializeField] private FMOD_CustomEmitter tetherPlaceSFX;
+    [SerializeField] private FMOD_CustomEmitter noPowerSFX;
+    [SerializeField] private float powerConsumption;
 
     private float maxDistFromTether = 1000;
-    private PrecursorSuitManager suitManager;
 
     public static event Action onClearTetherMarker;
 
@@ -41,13 +42,6 @@ public class MarkerTetherLogic : Factor
             return;
         }
 
-        if (Vector3.Distance(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value, Player.main.transform.position) >
-            maxDistFromTether)
-        {
-            ErrorMessage.AddError("Too far from tether!");
-            return;
-        }
-        
         UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
         Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
         onClearTetherMarker?.Invoke();
@@ -55,8 +49,21 @@ public class MarkerTetherLogic : Factor
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
         FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
 
-        ionManager.ConsumeEnergy(10f);
+        if (ionManager.GetCurrentEnergy() > powerConsumption)
+        {
+            ErrorMessage.AddError("Not enough power!");
+            noPowerSFX.Play();
+            return;
+        }
 
+        if (Vector3.Distance(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value, Player.main.transform.position) >
+            maxDistFromTether)
+        {
+            ErrorMessage.AddError("Too far from tether!");
+            return;
+        }
+        
+        ionManager.ConsumeEnergy(powerConsumption);
     }
 
     private IEnumerator TeleportPlayer(Vector3 position)

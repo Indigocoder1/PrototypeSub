@@ -98,6 +98,57 @@ MonoBehaviour:
   teleportPosition: {fileID: 0}
   teleporterCooldown: 0
   collider: {fileID: 0}
+--- !u!1 &6398630580594370025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7203958684282182536}
+  - component: {fileID: 7876366196839817534}
+  m_Layer: 0
+  m_Name: NoPowerSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7203958684282182536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6398630580594370025}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.09084779, z: 0.00032244623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7295972055697126269}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7876366196839817534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6398630580594370025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: c25a231a6eeca1744af5feed056059d3, type: 2}
+  playOnAwake: 0
+  stopImmediatelyOnDisable: 0
+  followParent: 0
+  restartOnPlay: 1
+  debug: 0
+  subtitlesKey: 
+  playSubtitlesWithUnscaledTime: 1
 --- !u!1 &7295972054984182164
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +233,7 @@ Transform:
   - {fileID: 7295972054984182171}
   - {fileID: 7002250671674391764}
   - {fileID: 4840866909294528727}
+  - {fileID: 7203958684282182536}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -323,6 +375,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interfloorTeleporter: {fileID: 4085519771220482235}
   tetherPlaceSFX: {fileID: 46483389059153701}
+  noPowerSFX: {fileID: 7876366196839817534}
+  powerConsumption: 10
 --- !u!1001 &7295972055608533444
 PrefabInstance:
   m_ObjectHideFlags: 0
