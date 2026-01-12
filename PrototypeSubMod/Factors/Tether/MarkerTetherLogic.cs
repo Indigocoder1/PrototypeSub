@@ -14,9 +14,9 @@ public class MarkerTetherLogic : Factor
     [SerializeField] private InterfloorTeleporter interfloorTeleporter;
     [SerializeField] private FMOD_CustomEmitter tetherPlaceSFX;
     [SerializeField] private FMOD_CustomEmitter noPowerSFX;
-    [SerializeField] private float powerConsumption;
+    [SerializeField] private float powerConsumption = 10f;
+    [SerializeField] private float maxDistFromTether = 1000;
 
-    private float maxDistFromTether = 1000;
 
     public static event Action onClearTetherMarker;
 
@@ -42,14 +42,10 @@ public class MarkerTetherLogic : Factor
             return;
         }
 
-        UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
-        Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
-        onClearTetherMarker?.Invoke();
-
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
         FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
 
-        if (ionManager.GetCurrentEnergy() > powerConsumption)
+        if (ionManager.GetCurrentEnergy() < powerConsumption)
         {
             ErrorMessage.AddError("Not enough power!");
             noPowerSFX.Play();
@@ -64,6 +60,11 @@ public class MarkerTetherLogic : Factor
         }
         
         ionManager.ConsumeEnergy(powerConsumption);
+
+        UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
+        Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
+        onClearTetherMarker?.Invoke();
+
     }
 
     private IEnumerator TeleportPlayer(Vector3 position)
