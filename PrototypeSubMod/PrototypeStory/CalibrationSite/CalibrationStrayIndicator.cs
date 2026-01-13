@@ -4,7 +4,7 @@ namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
 
 public class CalibrationStrayIndicator : MonoBehaviour
 {
-    private static readonly int StrayingFromLine = Animator.StringToHash("StrayingFromLine");
+    private static readonly int TooFarFromDistance = Animator.StringToHash("StrayingFromLine");
     private static readonly int NormalizedDistFromLine = Animator.StringToHash("NormalizedDistFromLine");
 
     [SerializeField] private CalibrationRunManager runManager;
@@ -14,10 +14,10 @@ public class CalibrationStrayIndicator : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var distFromLine = runManager.GetNormalizedDistFromLine();
-        bool straying = distFromLine > indicatorActivationThreshold;
-        strayIndicator.SetBool(StrayingFromLine, straying);
-        float strayAmount = Mathf.Clamp01((Mathf.Clamp01(distFromLine) - indicatorActivationThreshold) / (1  - indicatorActivationThreshold));
+        var distFromCenter = runManager.GetNormalizedDistFromCenter();
+        var straying = distFromCenter > indicatorActivationThreshold;
+        strayIndicator.SetBool(TooFarFromDistance, straying);
+        var strayAmount = Mathf.Clamp01((Mathf.Clamp01(distFromCenter) - indicatorActivationThreshold) / (1  - indicatorActivationThreshold));
         strayIndicator.SetFloat(NormalizedDistFromLine, strayAmount);
     }
 }
