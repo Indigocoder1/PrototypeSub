@@ -17591,7 +17591,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288115087590364223}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00003244498}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4266831508223996433}
@@ -17599,7 +17599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43.599957, y: -79.4}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6536329297683568472
@@ -55630,7 +55630,7 @@ MonoBehaviour:
   - 180
   - -60
   distToCountAsReached: 30
-  maxDistFromLine: 50
+  maxDistanceFromCenter: 500
 --- !u!114 &978866783042066402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55643,16 +55643,10 @@ MonoBehaviour:
   m_Script: {fileID: 95305821, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subRoot: {fileID: 6246764057006774658}
   runManager: {fileID: 202629470656575697}
   subIcon: {fileID: 7530803300936494781}
-  calibrationPoints:
-  - {fileID: 3504681257343685084}
-  - {fileID: 4774656335000824646}
-  - {fileID: 1826921230400835483}
-  - {fileID: 7220852081346793535}
-  - {fileID: 9062835482349948533}
-  - {fileID: 740704403797786720}
-  lineRenderer: {fileID: 7357647876640830177}
+  positionScalar: 6
 --- !u!114 &2512780545025838463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55707,7 +55701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runManager: {fileID: 202629470656575697}
   strayIndicator: {fileID: 5966602873712071720}
-  indicatorActivationThreshold: 0.5
+  indicatorActivationThreshold: 0.9
 --- !u!1 &4094646726909234665
 GameObject:
   m_ObjectHideFlags: 0

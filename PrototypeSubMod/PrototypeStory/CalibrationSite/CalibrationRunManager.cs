@@ -15,24 +15,29 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     [SerializeField] private float[] pointSpacings;
     [SerializeField] private float[] relativePointAngles;
     [SerializeField] private float distToCountAsReached = 10;
-    [SerializeField] private float maxDistFromLine;
+    [SerializeField] private float maxDistanceFromCenter;
 
     private bool doingCalibrationRun;
     private int nextPointIndex = 1;
     private Vector3[] calibrationPoints;
+    private Vector3 pointsCenter;
 
     private void Start()
     {
         // Add one to account for initial point
         calibrationPoints = new Vector3[relativePointAngles.Length + 1];
         calibrationPoints[0] = InitialPoint;
+        pointsCenter = InitialPoint;
         for (int i = 0; i < relativePointAngles.Length; i++)
         {
             var xComponent = Mathf.Cos(relativePointAngles[i] * Mathf.Deg2Rad);
             var yComponent = Mathf.Sin(relativePointAngles[i] * Mathf.Deg2Rad);
             var offset = new Vector3(xComponent, 0, yComponent) * pointSpacings[i] * globalSpacing;
             calibrationPoints[i + 1] = calibrationPoints[i] + offset;
+            pointsCenter += calibrationPoints[i + 1];
         }
+
+        pointsCenter /= relativePointAngles.Length + 1; 
 
         int index = 0;
         foreach (var point in calibrationPoints)
@@ -59,7 +64,17 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         if (!doingCalibrationRun) return;
         
         HandleIndexIncrements();
-        HandleDistFromLine();
+        HandleDistanceFromCenter();
+    }
+
+    private void HandleDistanceFromCenter()
+    {
+        if (GetNormalizedDistFromCenter() < 1) return;
+        
+        ErrorMessage.AddError("Too far from line! Failed calibration run");
+        doingCalibrationRun = false;
+        nextPointIndex = 1;
+        calibrationObjects.SetActive(false);
     }
 
     private void HandleIndexIncrements()
@@ -80,38 +95,14 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         }
     }
 
-    private void HandleDistFromLine()
+    public float GetNormalizedDistFromCenter()
     {
-        if (GetNormalizedDistFromLine() <= 1) return;
-        
-        ErrorMessage.AddError("Too far from line! Failed calibration run");
-        doingCalibrationRun = false;
-        nextPointIndex = 1;
-        calibrationObjects.SetActive(false);
-    }
-
-    public float GetNormalizedDistFromLine()
-    {
-        var pointOnLine = ClosestPointOnLine(calibrationPoints[nextPointIndex - 1], calibrationPoints[nextPointIndex],
-            transform.position);
-
-        return Vector3.Distance(pointOnLine, transform.position) / maxDistFromLine;
+        return Vector3.Distance(transform.position, pointsCenter) / maxDistanceFromCenter;
     }
 
     public int GetNextPointIndex() => nextPointIndex;
     public Vector3 GetCalibrationPoint(int index) => calibrationPoints[index];
-
-    private Vector3 ClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
-    {
-        var heading = lineEnd - lineStart;
-        var maxMagnitude = heading.magnitude;
-        heading.Normalize();
-        
-        var lhs = point - lineStart;
-        var dot = Vector3.Dot(lhs, heading);
-        dot = Mathf.Clamp(dot, 0f, maxMagnitude);
-        return lineStart + heading * dot;
-    }
+    public Vector3 GetSiteCenter() => pointsCenter;
     
     public void ScheduledUpdate()
     {
