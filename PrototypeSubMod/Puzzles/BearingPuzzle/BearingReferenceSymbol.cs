@@ -33,6 +33,7 @@ public class BearingReferenceSymbol : ScriptableObject
 
         spriteRect.sizeDelta = new Vector2(100, 100);
         spriteObject.transform.SetParent(mask.transform);
+        mask.transform.localPosition = Vector3.zero;
         return mask;
     }
 }
