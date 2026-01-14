@@ -1,16 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace PrototypeSubMod.Puzzles.BearingPuzzle;
 
 public class BearingRoomManager : MonoBehaviour
 {
     [SerializeField] private CyclingBearingIndicator[] cyclingIndicators;
+    [SerializeField] private UnityEvent onRoomComplete;
 
     public void OnConfirmationClicked()
     {
         if (HasCorrectSequence())
         {
             ErrorMessage.AddError(Language.main.Get("ProtoPuzzleCorrectSequence"));
+            onRoomComplete?.Invoke();
         }
         else
         {
