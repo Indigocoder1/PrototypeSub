@@ -21,6 +21,7 @@ public class ProtoPhaseGateItem
         prefab.SetGameObject(GetGameObject);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetEquipment(Plugin.PhaseGateEquipmentType);
+        prefab.SetUnlock(ProtoPhaseGate.PrefabInfo.TechType);
 
         prefab.Register();
     }

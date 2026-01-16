@@ -20,6 +20,7 @@ public class ProtoPhaseGateStabilizer
             .WithCraftingTime(10f);
         prefab.SetGameObject(GetGameObject);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
+        prefab.SetUnlock(ProtoPhaseGate.PrefabInfo.TechType);
 
         prefab.Register();
     }

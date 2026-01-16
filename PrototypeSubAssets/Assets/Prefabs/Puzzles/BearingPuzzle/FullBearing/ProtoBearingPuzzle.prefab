@@ -13780,6 +13780,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1874935096404701536}
     m_Modifications:
+    - target: {fileID: 6502985823561158261, guid: 2173bc797f4c5754e81a61bd17a7e72c,
+        type: 3}
+      propertyPath: unlockTechType
+      value: 
+      objectReference: {fileID: 11400000, guid: c91ed28fad3c1b14290e704210210f1b,
+        type: 2}
     - target: {fileID: 6502985823561158268, guid: 2173bc797f4c5754e81a61bd17a7e72c,
         type: 3}
       propertyPath: m_Name
