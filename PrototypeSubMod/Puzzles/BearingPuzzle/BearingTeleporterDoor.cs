@@ -13,6 +13,7 @@ public class BearingTeleporterDoor : MonoBehaviour
     
     [SerializeField] private Transform teleportInPosition;
     [SerializeField] private Renderer teleporterPreview;
+    [SerializeField] private bool blurOnApproach = true;
 
     private float blurThreshold = 4f;
     private float maxBlur = 2f;
@@ -58,6 +59,8 @@ public class BearingTeleporterDoor : MonoBehaviour
 
     private void Update()
     {
+        if (!blurOnApproach) return;
+        
         HandleBlurVFX(out var doingBlur);
 
         if (doingBlur && !wasHandlingBlur)

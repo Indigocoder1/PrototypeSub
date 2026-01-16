@@ -2,6 +2,7 @@
 using PrototypeSubMod.Facilities;
 using PrototypeSubMod.Utility;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PrototypeSubMod.Factors;
 
@@ -10,6 +11,7 @@ public class FactorUnlockTerminal : MonoBehaviour
     [SerializeField] private MultipurposeAlienTerminal unlockTerminal;
     [SerializeField] private Animator animator;
     [SerializeField] private DummyTechType unlockTechType;
+    [SerializeField] private UnityEvent onInteracted;
 
     private void Start()
     {
@@ -26,6 +28,7 @@ public class FactorUnlockTerminal : MonoBehaviour
     private void OnInteracted()
     {
         animator.SetBool("Activated", true);
+        onInteracted?.Invoke();
     }
 
     public void OnActivationFinished()
