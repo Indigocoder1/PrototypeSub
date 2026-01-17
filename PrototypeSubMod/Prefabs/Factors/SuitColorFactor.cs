@@ -1,9 +1,10 @@
-using System.Collections.Generic;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
 using PrototypeSubMod.Factors;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs.Factors;
 
@@ -13,7 +14,8 @@ public static class SuitColorFactor
 
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("SuitColorFactor", unlockAtStart: true).WithIcon(SpriteManager.Get(TechType.ComputerChip));
+        prefabInfo = PrefabInfo.WithTechType("SuitColorFactor", unlockAtStart: true)
+            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
