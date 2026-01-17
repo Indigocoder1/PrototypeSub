@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIonCrystalMatrix",
+        "amount": 2
+      },
+      {
+        "techType": "Kyanite",
+        "amount": 1
+      },
+      {
+        "techType": "Sapphire",
+        "amount": 3
+      }
+    ]
+  }

@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "IonPrism",
+        "amount": 1
+      },
+      {
+        "techType": "AdvancedWiringKit",
+        "amount": 1
+      },
+      {
+        "techType": "CopperWire",
+        "amount": 3
+      }
+    ]
+  }

@@ -1,0 +1,13 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIonCrystalMatrix",
+        "amount": 1
+      },
+      {
+        "techType": "Titanium",
+        "amount": 1
+      }
+    ]
+  }

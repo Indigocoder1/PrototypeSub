@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "UltraGlideFins",
+        "amount": 2
+      },
+      {
+        "techType": "Lithium",
+        "amount": 3
+      },
+      {
+        "techType": "WiringKit",
+        "amount": 1
+      }
+    ]
+  }

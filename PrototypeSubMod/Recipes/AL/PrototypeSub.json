@@ -1,0 +1,29 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "Proto_PrecursorIngot",
+        "amount": 5
+      },
+      {
+        "techType": "AlienWiringKit",
+        "amount": 3
+      },
+      {
+        "techType": "ReinforcedGlass",
+        "amount": 4
+      },
+      {
+        "techType": "IonPrism",
+        "amount": 1
+      },
+      {
+        "techType": "OpticFiber",
+        "amount": 2
+      },
+      {
+        "techType": "Electricube",
+        "amount": 1
+      }
+    ]
+  }

@@ -1,0 +1,21 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIngot",
+        "amount": 3
+      },
+      {
+        "techType": "AlienWiringKit",
+        "amount": 3
+      },
+      {
+        "techType": "Lubricant",
+        "amount": 3
+      },
+      {
+        "techType": "Welder",
+        "amount": 3
+      }
+    ]
+  }

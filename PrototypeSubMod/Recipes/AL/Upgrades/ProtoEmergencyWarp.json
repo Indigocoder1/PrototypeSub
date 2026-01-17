@@ -1,0 +1,21 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "Kyanite",
+        "amount": 5
+      },
+      {
+        "techType": "AlienWiringKit",
+        "amount": 1
+      },
+      {
+        "techType": "RedIonCube",
+        "amount": 1
+      },
+      {
+        "techType": "OpticFiber",
+        "amount": 3
+      }
+    ]
+  }

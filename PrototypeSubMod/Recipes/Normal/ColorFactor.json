@@ -1,0 +1,21 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "RedBushSeed",
+        "amount": 1
+      },
+      {
+        "techType": "BluePalmSeed",
+        "amount": 1
+      },
+      {
+        "techType": "CreepvinePiece",
+        "amount": 1
+      },
+      {
+        "techType": "AlienBuildingBlock",
+        "amount": 1
+      }
+    ]
+  }

@@ -1,0 +1,21 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "StasisRifle",
+        "amount": 1
+      },
+      {
+        "techType": "SeamothElectricalDefense",
+        "amount": 1
+      },
+      {
+        "techType": "PrecursorIonBattery",
+        "amount": 2
+      },
+      {
+        "techType": "AlienWiringKit",
+        "amount": 1
+      }
+    ]
+  }

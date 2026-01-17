@@ -1,0 +1,10 @@
+{
+  // The deployable manager isn't actually built anywhere, so a recipe isn't needed
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "Titanium",
+        "amount": 2
+      }
+    ]
+  }

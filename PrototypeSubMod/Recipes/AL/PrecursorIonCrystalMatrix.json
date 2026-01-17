@@ -1,0 +1,9 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIonCrystal",
+        "amount": 5
+      }
+    ]
+  }

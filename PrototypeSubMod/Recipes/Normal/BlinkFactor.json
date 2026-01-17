@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "Polyaniline",
+        "amount": 1
+      },
+      {
+        "techType": "Magnetite",
+        "amount": 2
+      },
+      {
+        "techType": "ProtoPhaseGateTransmitter",
+        "amount": 1
+      }
+    ]
+  }

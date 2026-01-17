@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIonPowerCell",
+        "amount": 2
+      },
+      {
+        "techType": "AlienWiringKit",
+        "amount": 1
+      },
+      {
+        "techType": "CrashPowder",
+        "amount": 5
+      }
+    ]
+  }

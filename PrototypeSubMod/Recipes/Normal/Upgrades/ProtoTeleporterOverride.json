@@ -1,0 +1,21 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIonBattery",
+        "amount": 2
+      },
+      {
+        "techType": "ComputerChip",
+        "amount": 1
+      },
+      {
+        "techType": "WiringKit",
+        "amount": 1
+      },
+      {
+        "techType": "RedGreenTentacleSeed",
+        "amount": 1
+      }
+    ]
+  }

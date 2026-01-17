@@ -1,0 +1,13 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "Proto_PrecursorIngot",
+        "amount": 1
+      },
+      {
+        "techType": "EnameledGlass",
+        "amount": 2
+      }
+    ]
+  }

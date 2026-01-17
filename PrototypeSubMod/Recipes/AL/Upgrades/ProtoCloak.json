@@ -1,0 +1,25 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "ReinforcedGlass",
+        "amount": 5
+      },
+      {
+        "techType": "AlienWiringKit",
+        "amount": 1
+      },
+      {
+        "techType": "Aerogel",
+        "amount": 3
+      },
+      {
+        "techType": "OpticFiber",
+        "amount": 1
+      },
+      {
+        "techType": "PinkFlowerSeed",
+        "amount": 3
+      }
+    ]
+  }

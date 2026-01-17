@@ -1,0 +1,10 @@
+{
+  // This recipe is not used when AL is installed
+    "craftAmount": 2,
+    "Ingredients": [
+      {
+        "techType": "Titanium",
+        "amount": 2
+      }
+    ]
+  }

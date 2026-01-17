@@ -1,0 +1,21 @@
+{
+    "craftAmount": 2,
+    "Ingredients": [
+      {
+        "techType": "Glass",
+        "amount": 1
+      },
+      {
+        "techType": "Cobalt",
+        "amount": 1
+      },
+      {
+        "techType": "FiberMesh",
+        "amount": 1
+      },
+      {
+        "techType": "HangingFruit",
+        "amount": 1
+      }
+    ]
+  }

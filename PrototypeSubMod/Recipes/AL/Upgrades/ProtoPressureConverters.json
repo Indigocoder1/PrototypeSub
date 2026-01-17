@@ -1,0 +1,21 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIngot",
+        "amount": 2
+      },
+      {
+        "techType": "ComputerChip",
+        "amount": 1
+      },
+      {
+        "techType": "WhiteMushroom",
+        "amount": 8
+      },
+      {
+        "techType": "RedBeryl",
+        "amount": 2
+      }
+    ]
+  }

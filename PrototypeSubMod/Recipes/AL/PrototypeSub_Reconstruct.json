@@ -1,0 +1,13 @@
+{
+  "craftAmount": 1,
+  "Ingredients": [
+    {
+      "techType": "AdvancedWiringKit",
+      "amount": 1
+    },
+    {
+      "techType": "PrecursorIonCrystalMatrix",
+      "amount": 1
+    }
+  ]
+}

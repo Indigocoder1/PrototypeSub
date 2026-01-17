@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "WarperRemnant",
+        "amount": 1
+      },
+      {
+        "techType": "Lubricant",
+        "amount": 1
+      },
+      {
+        "techType": "Benzene",
+        "amount": 1
+      }
+    ]
+  }

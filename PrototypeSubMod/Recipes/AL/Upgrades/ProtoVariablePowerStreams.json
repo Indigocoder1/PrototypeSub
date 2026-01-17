@@ -1,0 +1,21 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "PrecursorIonCrystal",
+        "amount": 1
+      },
+      {
+        "techType": "Electricube",
+        "amount": 1
+      },
+      {
+        "techType": "RedIonCube",
+        "amount": 1
+      },
+      {
+        "techType": "OpticFiber",
+        "amount": 3
+      }
+    ]
+  }

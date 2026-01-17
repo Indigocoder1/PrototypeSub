@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "ProtoPhaseGateStabilizer",
+        "amount": 1
+      },
+      {
+        "techType": "Beacon",
+        "amount": 1
+      },
+      {
+        "techType": "AlienBuildingBlock",
+        "amount": 1
+      }
+    ]
+  }

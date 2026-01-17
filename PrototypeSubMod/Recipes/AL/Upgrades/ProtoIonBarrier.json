@@ -1,0 +1,25 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "RedIonCube",
+        "amount": 1
+      },
+      {
+        "techType": "CobaltIngot",
+        "amount": 1
+      },
+      {
+        "techType": "OpticFiber",
+        "amount": 3
+      },
+      {
+        "techType": "CyclopsShieldModule",
+        "amount": 1
+      },
+      {
+        "techType": "RedBasketPlantSeed",
+        "amount": 1
+      }
+    ]
+  }
