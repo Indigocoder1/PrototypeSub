@@ -71,6 +71,8 @@ public class uGUI_RadioMessageIndicator_Patches
     [HarmonyPatch(nameof(uGUI_RadioMessageIndicator.DisableSprite)), HarmonyPostfix]
     private static void DisableSprite_Postfix(uGUI_RadioMessageIndicator __instance)
     {
+        if (previousSpriteDatas == null) return;
+        
         if (!previousSpriteDatas.TryGetValue(__instance, out var spriteData)) return;
 
         UWE.CoroutineHost.StartCoroutine(ResetSpriteDelayed(__instance, spriteData));
