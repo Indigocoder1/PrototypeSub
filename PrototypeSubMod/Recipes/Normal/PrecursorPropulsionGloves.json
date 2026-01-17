@@ -2,8 +2,16 @@
     "craftAmount": 1,
     "Ingredients": [
       {
-        "techType": "PrecursorIonCrystal",
+        "techType": "Propulsioncannon",
         "amount": 1
+      },
+      {
+        "techType": "AlienBuildingBlock",
+        "amount": 1
+      },
+      {
+        "techType": "Magnetite",
+        "amount": 2
       }
     ]
   }
