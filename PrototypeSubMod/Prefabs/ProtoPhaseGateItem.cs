@@ -12,7 +12,7 @@ public class ProtoPhaseGateItem
     public static void Register()
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateItem", null, null)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("exosuitgrapplingarmmodule_Upgraded"));
+            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGate_Icon.png"));
 
         var prefab = new CustomPrefab(PrefabInfo);
         
