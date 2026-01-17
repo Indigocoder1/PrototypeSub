@@ -2,6 +2,7 @@ using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
+using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Factors;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,14 +28,8 @@ public static class SuitColorFactor
             gameObject.AddComponent<ColorFactor>();
         };
 
-        prefab.SetRecipe(new RecipeData
-        {
-            craftAmount = 1,
-            Ingredients = new List<Ingredient>
-            {
-                new(TechType.Titanium, 1)
-            }
-        }).WithCraftingTime(3f);
+        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ColorFactor.json"))
+            .WithCraftingTime(3f);
         prefab.SetEquipment(Plugin.FactorEquipmentType);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetGameObject(cloneTemplate);
