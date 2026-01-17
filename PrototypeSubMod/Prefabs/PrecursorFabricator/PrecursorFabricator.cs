@@ -52,7 +52,7 @@ internal class PrecursorFabricator
             .AddCraftNode(BlinkFactor.prefabInfo.TechType, "Devices")
             .AddCraftNode(TetherFactor.prefabInfo.TechType, "Devices")
             .AddCraftNode(SuitColorFactor.prefabInfo.TechType, "Devices")
-            .AddCraftNode(PrecursorSuit.PrefabInfo.TechType, "Devices")
+            .AddCraftNode(PrecursorSuit.prefabInfo.TechType, "Devices")
             .AddCraftNode(PrecursorPropulsionGloves.PrefabInfo.TechType, "Devices")
         
             .AddTabNode("PhaseGate", Language.main.Get("ProtoPrecursorFabricator_Tab_PhaseGate"), SpriteManager.Get(TechType.WiringKit))

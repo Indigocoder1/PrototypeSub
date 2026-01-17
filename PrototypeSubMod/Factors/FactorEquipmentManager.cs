@@ -43,7 +43,7 @@ public class FactorEquipmentManager : MonoBehaviour
         
         if (!uGUIEquipment.gameObject.activeSelf) yield break;
         
-        var hasSuit = Inventory.main.equipment.GetTechTypeInSlot("Body") == PrecursorSuit.PrefabInfo.TechType;
+        var hasSuit = Inventory.main.equipment.GetTechTypeInSlot("Body") == PrecursorSuit.prefabInfo.TechType;
         bool showSlots = hasSuit && Inventory.main.usedStorage.Count == 0;
 
         if (showSlots != wasShowingSlots)

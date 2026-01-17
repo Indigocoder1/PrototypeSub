@@ -12,15 +12,15 @@ namespace PrototypeSubMod.Prefabs;
 
 public static class PrecursorSuit
 {
-    public static PrefabInfo PrefabInfo { get; private set; }
+    public static PrefabInfo prefabInfo { get; private set; }
 
     public static void Register()
     {
-        PrefabInfo = PrefabInfo.WithTechType("PrecursorSuit", null, null, "English");
+        prefabInfo = PrefabInfo.WithTechType("PrecursorSuit", null, null, "English", unlockAtStart: true);
 
-        var prefab = new CustomPrefab(PrefabInfo);
+        var prefab = new CustomPrefab(prefabInfo);
 
-        var template = new CloneTemplate(PrefabInfo, TechType.WaterFiltrationSuit);
+        var template = new CloneTemplate(prefabInfo, TechType.WaterFiltrationSuit);
         var bodyTex = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitBody");
         var armsTex = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitArms");
         var bodyEmission = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitEmission");
@@ -45,7 +45,7 @@ public static class PrecursorSuit
         
         prefab.SetGameObject(template);
         
-        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{PrefabInfo.ClassID}.json"));
+        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{prefabInfo.ClassID}.json"));
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetEquipment(EquipmentType.Body);
 
@@ -66,7 +66,7 @@ public static class PrecursorSuit
         };
 
         var suit = new ModdedSuit(suitTextures, armTextures, ModdedSuitsManager.VanillaModel.WaterFiltration,
-            PrefabInfo.TechType, ModdedSuitsManager.Modifications.Reinforced, tempValue: 25f);
+            prefabInfo.TechType, ModdedSuitsManager.Modifications.Reinforced, tempValue: 25f);
         ModdedSuitsManager.AddModdedSuit(suit);
     }
 }

@@ -102,7 +102,7 @@ internal class Inventory_Patches
         var tt = itemB?.techType ?? TechType.None;
         if (itemB == null) return true;
 
-        if (itemB.techType == PrecursorSuit.PrefabInfo.TechType && itemA.techType != PrecursorSuit.PrefabInfo.TechType)
+        if (itemB.techType == PrecursorSuit.prefabInfo.TechType && itemA.techType != PrecursorSuit.prefabInfo.TechType)
         {
             ErrorMessage.AddError(Language.main.Get("ProtoSuitUnequipWarning"));
             __result = false;
@@ -136,7 +136,7 @@ internal class Inventory_Patches
         if (item.techType != AlienBuildingBlock.prefabInfo.TechType) return;
 
         var itemInBody = Inventory.main.equipment.GetItemInSlot("Body");
-        if (itemInBody == null || itemInBody.techType != PrecursorSuit.PrefabInfo.TechType) return;
+        if (itemInBody == null || itemInBody.techType != PrecursorSuit.prefabInfo.TechType) return;
         
         __result |= ItemAction.Eat;
     }

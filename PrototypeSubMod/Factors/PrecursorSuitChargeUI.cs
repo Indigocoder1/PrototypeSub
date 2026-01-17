@@ -56,7 +56,7 @@ public class PrecursorSuitChargeUI : MonoBehaviour
     private void UpdateUIVisibility()
     {
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
-        bool hasSuit = itemInSlot?.techType == PrecursorSuit.PrefabInfo.TechType;
+        bool hasSuit = itemInSlot?.techType == PrecursorSuit.prefabInfo.TechType;
         canvasGroup.alpha = hasSuit ? 1 : 0;
 
         if (itemInSlot == null) return;

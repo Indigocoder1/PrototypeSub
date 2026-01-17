@@ -40,7 +40,7 @@ public class PrecursorSuitManager : MonoBehaviour
     private void OnEquippedSuitChanged(TechType suitChanged)
     {
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
-        bool wearingSuit = itemInSlot != null && itemInSlot.techType == PrecursorSuit.PrefabInfo.TechType;
+        bool wearingSuit = itemInSlot != null && itemInSlot.techType == PrecursorSuit.prefabInfo.TechType;
         if (wearingSuit != wasWearingSuit)
         {
             if (!wasWearingSuit)
