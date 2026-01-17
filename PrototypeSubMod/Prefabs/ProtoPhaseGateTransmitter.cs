@@ -12,6 +12,7 @@ public class ProtoPhaseGateTransmitter
     public static void Register()
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateTransmitter", null, null)
+            .WithSizeInInventory(new Vector2int(2, 2))
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGateTransmitter_Icon"));
 
         var prefab = new CustomPrefab(PrefabInfo);

@@ -16,6 +16,7 @@ public static class PrecursorPropulsionGloves
     public static void Register()
     {
         PrefabInfo = PrefabInfo.WithTechType("PrecursorPropulsionGloves", null, null, "English")
+            .WithSizeInInventory(new Vector2int(2, 2))
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("AlienBuildingBlockIcon.png"));
 
         var prefab = new CustomPrefab(PrefabInfo);

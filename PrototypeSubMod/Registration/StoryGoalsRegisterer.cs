@@ -3,6 +3,7 @@ using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Facilities.Hull;
 using PrototypeSubMod.Prefabs;
+using PrototypeSubMod.Prefabs.FacilityProps;
 using PrototypeSubMod.PrototypeStory;
 using UnityEngine;
 
