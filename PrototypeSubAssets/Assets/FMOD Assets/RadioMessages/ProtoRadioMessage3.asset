@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: ProtoRadioMessage3
   id: 
-  audioClip: {fileID: 8300000, guid: 8f898e714e953b04c8a135e4a89e111e, type: 3}
+  audioClip: {fileID: 8300000, guid: b3f1309f8ce7347448e1f5857c2cc808, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0

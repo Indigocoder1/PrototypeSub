@@ -381,10 +381,9 @@
   "ProtoOrionFullData": "OR-ION",
   
   // Radio Messages
-  "ProtoRadioMessage1": "Radio placeholder 1",
-  "ProtoRadioMessage2": "Radio placeholder 2",
-  "ProtoRadioMessage3": "Radio placeholder 3",
-  "ProtoRadioMessage4": "Radio placeholder 4",
+  "ProtoRadioMessage1": "Radio placeholder 1<duration=20000>",
+  "ProtoRadioMessage2": "Radio placeholder 2<duration=13000",
+  "ProtoRadioMessage3": "Radio placeholder 3<duration=1300>",
 
   // Facilities
   "CloakDisableTerminal": "Control terminal",
