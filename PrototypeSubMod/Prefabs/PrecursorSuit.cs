@@ -18,7 +18,7 @@ public static class PrecursorSuit
     {
         prefabInfo = PrefabInfo.WithTechType("PrecursorSuit", null, null, "English", unlockAtStart: true)
             .WithSizeInInventory(new Vector2int(2, 2))
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("AlienBuildingBlockIcon.png"));
+            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorSuitIcon.png"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
