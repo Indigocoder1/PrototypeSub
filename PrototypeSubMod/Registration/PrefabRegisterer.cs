@@ -17,6 +17,12 @@ internal static class PrefabRegisterer
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
         
+        ProtoPhaseGate.Register();
+        ProtoPhaseGateStabilizer.Register();
+        ProtoPhaseGateStructure.Register();
+        ProtoPhaseGateTransmitter.Register();
+        ProtoPhaseGateItem.Register();
+        
         WarperRemnant.Register();
         AlienBuildingBlock.Register();
         BlinkFactor.Register();
@@ -55,11 +61,6 @@ internal static class PrefabRegisterer
         HullFacilityKey.Register();
         DefenseFacilityKey.Register();
         EngineFacilityKey.Register();
-        ProtoPhaseGate.Register();
-        ProtoPhaseGateStabilizer.Register();
-        ProtoPhaseGateStructure.Register();
-        ProtoPhaseGateTransmitter.Register();
-        ProtoPhaseGateItem.Register();
         
         yield return new WaitForEndOfFrame();
         
