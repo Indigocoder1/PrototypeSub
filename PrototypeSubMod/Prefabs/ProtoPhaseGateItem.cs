@@ -13,7 +13,7 @@ public class ProtoPhaseGateItem
     public static void Register()
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateItem", null, null)
-            .WithSizeInInventory(new Vector2int(3, 3))
+            .WithSizeInInventory(new Vector2int(4, 3))
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGate_Icon.png"));
 
         var prefab = new CustomPrefab(PrefabInfo);
