@@ -12,6 +12,7 @@ public class ProtoPhaseGateStabilizer
     public static void Register()
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateStabilizer", null, null)
+            .WithSizeInInventory(new Vector2int(2, 2))
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGateStabilizer_Icon"));
 
         var prefab = new CustomPrefab(PrefabInfo);
