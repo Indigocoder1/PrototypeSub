@@ -16,7 +16,7 @@ public static class TetherFactor
 
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("TetherFactor", unlockAtStart: true)
+        prefabInfo = PrefabInfo.WithTechType("TetherFactor", unlockAtStart: false)
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
