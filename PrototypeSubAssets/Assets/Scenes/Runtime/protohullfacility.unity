@@ -4772,6 +4772,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!114 &552874894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7390,6 +7392,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1071812719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8393,6 +8397,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222509262}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1226267867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226267868}
+  - component: {fileID: 1226267869}
+  m_Layer: 0
+  m_Name: Structures
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226267868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226267867}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 31.516113, y: 0, z: 23.89943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 222372061}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1226267869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226267867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -869328186, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structures:
+  - {fileID: 4900000, guid: 1df42f8bfdcece2469d5c977cf6a8822, type: 3}
+  parent: {fileID: 1226267868}
+  removeLWEs: 1
 --- !u!114 &1227050916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8444,6 +8495,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1227050918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10617,6 +10670,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1503127245
 GameObject:
   m_ObjectHideFlags: 0
@@ -91427,6 +91482,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!4 &2159848023282763406
 Transform:
   m_ObjectHideFlags: 0
