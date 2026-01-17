@@ -155,6 +155,7 @@
   
   // Ion Dive Suit
   "PrecursorSuit": "Ion Dive Suit",
+  "Tooltip_PrecursorSuit": "Advanced alien dive suit adapted for human use. Compatible with modular alien upgrades."
   "PrecursorPropulsionGloves": "Ion Propulsion Gloves",
   "Tooltip_PrecursorPropulsionGloves": "Alien gloves adapted for human use. Used to manipulate objects at a distance.",
   "FactorIonCharge": "ION CHARGE {0} % ({1}/{2})",
