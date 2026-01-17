@@ -1,5 +1,6 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
+using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using UnityEngine;
 
@@ -30,6 +31,8 @@ public class ProtoPhaseGateTransmitter
     {
         var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoPhaseGateTransmitter");
         var instance = GameObject.Instantiate(prefab);
+        
+        MaterialUtils.ApplySNShaders(instance);
         
         return instance;
     }

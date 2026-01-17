@@ -1,5 +1,6 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
+using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using UnityEngine;
 
@@ -30,6 +31,8 @@ public class ProtoPhaseGateStructure
     {
         var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStructure");
         var instance = GameObject.Instantiate(prefab);
+
+        MaterialUtils.ApplySNShaders(instance);
         
         return instance;
     }
