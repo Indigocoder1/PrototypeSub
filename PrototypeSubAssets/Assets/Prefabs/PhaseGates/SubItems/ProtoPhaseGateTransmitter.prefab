@@ -243,7 +243,7 @@ MonoBehaviour:
   localMaxY: 0.12
   posOffset: {x: 0, y: 0, z: 0}
   eulerOffset: {x: 0, y: 90, z: 90}
-  scaleFactor: 4
+  scaleFactor: 0.25
   allowOnAnyComponent: 0
 --- !u!1001 &3166757954691973247
 PrefabInstance:
