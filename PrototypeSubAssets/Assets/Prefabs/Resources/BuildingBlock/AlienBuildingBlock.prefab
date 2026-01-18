@@ -210,6 +210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodValue: 25
   waterValue: 25
+  healthValue: 25
+  ionValue: 50
 --- !u!1 &7133210369838654328
 GameObject:
   m_ObjectHideFlags: 0
