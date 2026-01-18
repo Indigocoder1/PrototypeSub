@@ -381,9 +381,9 @@
   "ProtoOrionFullData": "OR-ION",
   
   // Radio Messages
-  "ProtoRadioMessage1": "Radio placeholder 1<duration=20000>",
-  "ProtoRadioMessage2": "Radio placeholder 2<duration=13000",
-  "ProtoRadioMessage3": "Radio placeholder 3<duration=1300>",
+  "ProtoRadioMessage1": "┣▝▚▛▞┣┃▚┛┛ ▜┗▖━┓▖▘▚┗┣▚┛┣ ▞┛▖━┫▄┣▞┛┣▖▜▚<duration=20000>",
+  "ProtoRadioMessage2": "▖┗▚┏▗▞▘▘▖┓▖▘▞┣┅┣▚┛┣┣▝▖┣┓┗┏▜┗▚┛┛▞╋▚▄<duration=13000>",
+  "ProtoRadioMessage3": "▜▚┣┛━┏┗▚▙▞▛▛▞▘┫▄┣▖┛▞┣▘┏┃┣▞┃┫▚┛<duration=1300>",
 
   // Facilities
   "CloakDisableTerminal": "Control terminal",
@@ -394,6 +394,7 @@
   // Ping Types
   "ProtoDefenseFacilityPing": "▙▚▛▚┃┛▚",
   "StoryEndPingType": "Dead zone mapping site",
+  "NumberPuzzlePing": "▙▚▛▚┃┛▚",
 
   // Build terminal
   "UpgradeScreenHeader": "┫┓▜┗▖▙▚┛",
