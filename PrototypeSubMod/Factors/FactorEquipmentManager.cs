@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Nautilus.Utility;
 using PrototypeSubMod.Prefabs;
 using UnityEngine;
 
@@ -28,6 +29,8 @@ public class FactorEquipmentManager : MonoBehaviour
         }
 
         uGUIEquipment = GetComponentInChildren<uGUI_Equipment>(true);
+        Inventory.main.equipment.onEquip += OnEquip;
+        Inventory.main.equipment.onUnequip += OnUnequip;
     }
 
     // Called via SendMessage
@@ -68,4 +71,21 @@ public class FactorEquipmentManager : MonoBehaviour
 
         wasShowingSlots = showSlots;
     }
+
+    private void OnEquip(string slot, InventoryItem item)
+    {
+        if (Array.IndexOf(FactorSlots, slot) < 0)
+        {
+            return;
+        }
+
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("FactorEquip"), Player.main.transform.position);
+
+    }
+
+    private void OnDestroy()
+    {
+        Inventory.main.equipment.onEquip -= OnEquip;
+    }
+
 }
