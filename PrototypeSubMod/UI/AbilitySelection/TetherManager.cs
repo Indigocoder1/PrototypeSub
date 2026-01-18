@@ -15,7 +15,7 @@ namespace PrototypeSubMod.UI.AbilitySelection;
 public class TetherManager : MonoBehaviour, IUIElement
 {
     public Action<IAbilityIcon> onAbilityActivatedChanged;
-    public Action onAbilitySelected;
+    public Action onNewAbilitySelected;
 
     [SerializeField] private ActivatedAbilitiesManager activatedAbilitiesManager;
     [SerializeField] private VoiceNotificationManager notificationManager;
@@ -146,12 +146,16 @@ public class TetherManager : MonoBehaviour, IUIElement
         SelectIcon(lastIcon);
     }
 
-    public void SelectIcon(RadialIcon icon, bool forceColSwap = false, bool playSFX = true)
+    public void SelectIcon(RadialIcon icon, bool forceColSwap = false, bool closeIfSameAbility = true, bool playSFX = true)
     {
         icon.Select();
+        if (selectedIcon != null && (selectedIcon.GetAbility() != icon.GetAbility() || closeIfSameAbility))
+        {
+            onNewAbilitySelected?.Invoke();
+        }
+        
         selectedIcon = icon;
         selectionPreview.sprite = icon.GetAbility().GetSprite();
-        onAbilitySelected?.Invoke();
         onAbilityActivatedChanged?.Invoke(selectedIcon.GetAbility());
 
         if (forceColSwap)

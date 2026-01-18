@@ -4,6 +4,7 @@ using PrototypeSubMod.Upgrades;
 using PrototypeSubMod.Utility;
 using SubLibrary.UI;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace PrototypeSubMod.UI.AbilitySelection;
@@ -52,7 +53,7 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
         AssignIcons();
         RefreshIcons();
         upgradeManager.onInstalledUpgradesChanged += RefreshIcons;
-        tetherManager.onAbilitySelected += () => SetMenuEnabled(false);
+        tetherManager.onNewAbilitySelected += () => SetMenuEnabled(false);
         
         yield return new WaitForEndOfFrame();
         
@@ -63,7 +64,7 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
     public void SelectDefaultIcon()
     {
         var defaultIcon = distributor.GetIconAtIndex(defaultAbilityIndex).GetComponent<RadialIcon>();
-        tetherManager.SelectIcon(defaultIcon, true, false);
+        tetherManager.SelectIcon(defaultIcon, true, true, false);
         tetherManager.onAbilityActivatedChanged?.Invoke(defaultIcon.GetAbility());
     }
 
@@ -115,11 +116,11 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
         if (selectedAbility != null && !selectedAbility.GetShouldShow())
         {
             selectedAbility.OnSelectedChanged(false);
-            tetherManager.SelectIcon(distributor.GetIconAtIndex(defaultAbilityIndex).GetComponent<RadialIcon>(), true);
+            tetherManager.SelectIcon(distributor.GetIconAtIndex(defaultAbilityIndex).GetComponent<RadialIcon>(), true, playSFX: false);
         }
         else if (selectedAbility != null)
         {
-            tetherManager.SelectIcon(distributor.GetIconAtIndex(index).GetComponent<RadialIcon>(), playSFX: false);
+            tetherManager.SelectIcon(distributor.GetIconAtIndex(index).GetComponent<RadialIcon>(), playSFX: false, closeIfSameAbility: false);
         }
     }
 
