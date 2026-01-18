@@ -243,6 +243,7 @@
   "ProtoRevisitDefenseFacility": "Detecting an alien facility in the region. The facility appears to be inaccessible at this time.<duration=5743>\nRevisiting at a later time is recommended.<delay=5720><duration=2844>",
   "ProtoRevisitInterceptorFacility": "Detecting an alien facility in the region. The facility appears to be inaccessible at this time.<duration=5743>\nRevisiting at a later time is recommended.<delay=5720><duration=2844>",
   "ProtoFacilityLocationsHint": "This vessel's construction has prompted a broadcast from a nearby alien source. Downloading summary to databank.",
+  "OnPrecursorSuitPickup": "When operating equipment infused with alien technology, please carefully document any unwanted side effects <duration=7043>\nsuch as poor blood circulation, confusion, feelings of invincibility and death to a wellbeing journal for later analysis.<delay=7043><duration=8193>",
   
   "ProtoBlinkFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
   "ProtoBiomechanicsFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",

@@ -29,7 +29,8 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_RevisitLater", "ProtoRevisitDefenseFacility"));
         PDALog_Patches.entries.Add(("PDA_RevisitLater", "ProtoRevisitInterceptorFacility"));
         PDALog_Patches.entries.Add(("PDA_FacilityLocations", "ProtoFacilityLocationsHint"));
-        
+        PDALog_Patches.entries.Add(("PDA_OnPrecursorSuitPickup", "OnPrecursorSuitPickup"));
+
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBlinkFactorUnlock"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBiomechanicsFactorUnlock"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoSuitColorFactorUnlock"));

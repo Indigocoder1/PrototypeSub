@@ -179,7 +179,12 @@ internal static class StoryGoalsRegisterer
             }
         });
         #endregion
-        
+
+        #region Precursor Suit
+        StoryGoalHandler.RegisterItemGoal("OnPrecursorSuitPickup", Story.GoalType.PDA, PrecursorSuit.prefabInfo.TechType);
+
+        #endregion
+
         StoryGoalHandler.RegisterCustomEvent("HullFacilityMainLights", null);
         StoryGoalHandler.RegisterCustomEvent("HullFacilityWyrmLights", null);
         
