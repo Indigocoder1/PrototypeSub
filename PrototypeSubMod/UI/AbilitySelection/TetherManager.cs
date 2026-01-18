@@ -155,6 +155,7 @@ public class TetherManager : MonoBehaviour, IUIElement
         }
         
         selectedIcon = icon;
+        lastIcon = GetIconClosestToPointer();
         selectionPreview.sprite = icon.GetAbility().GetSprite();
         onAbilityActivatedChanged?.Invoke(selectedIcon.GetAbility());
 
