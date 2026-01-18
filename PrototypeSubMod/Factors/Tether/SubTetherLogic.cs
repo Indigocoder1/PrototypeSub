@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using HarmonyLib;
+﻿using HarmonyLib;
+using Nautilus.Utility;
 using PrototypeSubMod.LightDistortionField;
 using PrototypeSubMod.Registration;
 using PrototypeSubMod.Teleporter;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -14,12 +15,17 @@ public class SubTetherLogic : Factor
 {
     public override GameInput.Button GetUseButton() => InputRegisterer.TetherSubButton;
 
-    private float confirmationWaitPeriod = 1f;
+    private float confirmationWaitPeriod = 3f;
+    private float resourceCost = 30;
 
     private float timeAskedToConfirm;
     
     public override void StartUse()
     {
+
+        var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
+        FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
+
         base.StartUse();
         if (!Plugin.GlobalSaveData.prototypePresent || Plugin.GlobalSaveData.prototypeDestroyed)
         {
@@ -33,12 +39,23 @@ public class SubTetherLogic : Factor
             ErrorMessage.AddError("Press again to confirm teleportation");
             return;
         }
+
+        if (ionManager.GetCurrentEnergy() < resourceCost)
+        {
+            ErrorMessage.AddError("Not enough power!");
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
+            return;
+        }
         
         var subRoot = CloakEffectHandler.EffectHandlers[0].GetComponentInParent<SubRoot>();
         var teleporterManager = subRoot.GetComponentInChildren<ProtoTeleporterManager>();
         var teleportPos = teleporterManager.GetTeleportPosition();
         
         UWE.CoroutineHost.StartCoroutine(TeleportToLocation(teleportPos.position, teleportPos.eulerAngles.y, teleporterManager.GetEndCinematicController()));
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("SubTether"), Player.main.transform.position);
+
+        ionManager.ConsumeEnergy(resourceCost);
+
         TeleporterOverride.QueuedTeleportedBackToSub = true;
     }
 
