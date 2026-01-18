@@ -30,7 +30,6 @@ public class FactorEquipmentManager : MonoBehaviour
 
         uGUIEquipment = GetComponentInChildren<uGUI_Equipment>(true);
         Inventory.main.equipment.onEquip += OnEquip;
-        Inventory.main.equipment.onUnequip += OnUnequip;
     }
 
     // Called via SendMessage
