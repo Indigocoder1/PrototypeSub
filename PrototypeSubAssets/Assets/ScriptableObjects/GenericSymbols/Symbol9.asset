@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 484425720, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: SquareStrikethrough
+  m_Name: Symbol9
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: ea58922b8f493154a89c284f210c0f0d, type: 3}
+  sprite: {fileID: 21300000, guid: f780b0d8f97b6b740a8cc3300dbc044b, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maskSide: 0

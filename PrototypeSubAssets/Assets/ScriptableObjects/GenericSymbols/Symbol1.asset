@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 484425720, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: Pentagon
+  m_Name: Symbol1
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 4041b2f692a35654e97e477504ec9f6b, type: 3}
+  sprite: {fileID: 21300000, guid: 8aa99a70a88e3ca4cadf124e64d91a86, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maskSide: 0

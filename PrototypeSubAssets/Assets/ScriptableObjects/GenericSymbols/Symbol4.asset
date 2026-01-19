@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 484425720, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: Octagon
+  m_Name: Symbol4
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: e7240d50a020eab4f90d32a98e979833, type: 3}
+  sprite: {fileID: 21300000, guid: d3e8014981c626b44a191aee508aa939, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maskSide: 0

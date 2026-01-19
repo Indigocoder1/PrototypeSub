@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 484425720, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: Cube
+  m_Name: Symbol8
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 41160159e0a84ef469d387ba1d8db2a3, type: 3}
+  sprite: {fileID: 21300000, guid: 5f05802215724074d8b489e94bb849e6, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maskSide: 0
