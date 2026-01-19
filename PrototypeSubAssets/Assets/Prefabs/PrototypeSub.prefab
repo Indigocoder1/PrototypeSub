@@ -55440,6 +55440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionIndicator: {fileID: 2512780545025838463}
+  finalBearingSymbol: {fileID: 11400000, guid: 24a799e997210034fb9c566f50211a40, type: 2}
   calibrationObjects: {fileID: 1461169492174364785}
   calibrationPointPrefab: {fileID: 7944695153003803199, guid: 4cbfe8f7bc8653040a37f0d738b8d300,
     type: 3}
