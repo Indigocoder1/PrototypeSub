@@ -55458,7 +55458,7 @@ MonoBehaviour:
   - 180
   - -60
   distToCountAsReached: 30
-  maxDistanceFromCenter: 500
+  maxDistanceFromCenter: 600
 --- !u!114 &978866783042066402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55490,10 +55490,10 @@ MonoBehaviour:
   spriteParent: {fileID: 6389425025578405546}
   runManager: {fileID: 202629470656575697}
   bearingReferenceSymbols:
-  - {fileID: 11400000, guid: 0afc1dd5b4b258f49a4610d1c299ac3a, type: 2}
-  - {fileID: 11400000, guid: d206902782f8a6247afae8d5bde3823d, type: 2}
-  - {fileID: 11400000, guid: 8b686054315433141a6159ea51c6b7c9, type: 2}
+  - {fileID: 11400000, guid: 2c44bac37e0ff9945ae07b6934832702, type: 2}
   - {fileID: 11400000, guid: 99a3b394990d97842b1b2685c3d5eb45, type: 2}
+  - {fileID: 11400000, guid: 6359904f2850cf14cb8ff0f6c586ae29, type: 2}
+  - {fileID: 11400000, guid: d206902782f8a6247afae8d5bde3823d, type: 2}
   - {fileID: 11400000, guid: 8b686054315433141a6159ea51c6b7c9, type: 2}
 --- !u!114 &1676909630829277318
 MonoBehaviour:

@@ -16,6 +16,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour
         
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";
+        inVoid |= biomeString.EndsWith("protovoid");
 
         if (inVoid != wasInVoid && inVoid && !wyrmSpawned)
         {

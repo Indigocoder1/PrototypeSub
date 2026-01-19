@@ -4,6 +4,7 @@ using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+using PrototypeSubMod.PrototypeStory.CalibrationSite;
 using UnityEngine;
 
 namespace PrototypeSubMod.Registration;
@@ -83,6 +84,27 @@ internal static class BiomeRegisterer
 
         var voidSpawnInfo = new SpawnInfo(voidVolumePrefabInfo.ClassID, Plugin.STORY_END_POS, Quaternion.identity, Vector3.one * 2400);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(voidSpawnInfo);
+
+        #endregion
+
+        #region Calibration Site
+
+        var calibrationPrefabInfo = PrefabInfo.WithTechType("CalibrationSiteVoidBiome");
+        var calibrationVolumePrefab = new CustomPrefab(calibrationPrefabInfo);
+        var calibrationTemplate = new AtmosphereVolumeTemplate(calibrationPrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
+            "protovoid", 11, LargeWorldEntity.CellLevel.Global);
+        calibrationTemplate.ModifyPrefab = prefab =>
+        {
+            var volum = prefab.GetComponent<AtmosphereVolume>();
+            prefab.AddComponent<AtmospherePriorityEnsurer>().priority = volum.priority;
+        };
+
+        calibrationVolumePrefab.SetGameObject(calibrationTemplate);
+        calibrationVolumePrefab.Register();
+
+        var calibrationSpawnInfo = new SpawnInfo(calibrationPrefabInfo.ClassID, CalibrationRunManager.InitialPoint, 
+            Quaternion.identity, Vector3.one * 1500);
+        CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(calibrationSpawnInfo);
 
         #endregion
 
