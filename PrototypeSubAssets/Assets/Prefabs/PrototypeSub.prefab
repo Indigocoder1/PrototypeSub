@@ -55439,7 +55439,10 @@ MonoBehaviour:
   m_Script: {fileID: 1028079527, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directionIndicator: {fileID: 2512780545025838463}
   calibrationObjects: {fileID: 1461169492174364785}
+  calibrationPointPrefab: {fileID: 7944695153003803199, guid: 4cbfe8f7bc8653040a37f0d738b8d300,
+    type: 3}
   globalSpacing: 500
   pointSpacings:
   - 2

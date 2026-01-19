@@ -1,5 +1,6 @@
 ﻿using System;
 using Nautilus.Utility;
+using PrototypeSubMod.Puzzles.BearingPuzzle;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
@@ -10,7 +11,10 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 
     public event Action<int> onPointReached;
 
+    [SerializeField] private CalibrationDirectionIndicator directionIndicator;
+    [SerializeField] private BearingReferenceSymbol finalBearingSymbol;
     [SerializeField] private GameObject calibrationObjects;
+    [SerializeField] private GameObject calibrationPointPrefab;
     [SerializeField] private float globalSpacing = 100;
     [SerializeField] private float[] pointSpacings;
     [SerializeField] private float[] relativePointAngles;
@@ -40,19 +44,20 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         pointsCenter /= relativePointAngles.Length + 1; 
 
         int index = 0;
+        var bearingReferences = directionIndicator.GetBearingReferenceSymbols();
         foreach (var point in calibrationPoints)
         {
-            var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            MaterialUtils.ApplySNShaders(sphere);
-            sphere.transform.position = point;
-            sphere.transform.localScale = Vector3.one * 10f;
-            Destroy(sphere.GetComponent<Collider>());
+            var calibrationPointObject = Instantiate(calibrationPointPrefab, point, Quaternion.identity);
+            var calibrationPoint = calibrationPointObject.GetComponent<CalibrationPoint>();
+            if (index < calibrationPoints.Length - 1)
+            {
+                calibrationPoint.SetBearingReference(bearingReferences[index]);
+            }
+            else if (finalBearingSymbol != null)
+            {
+                calibrationPoint.SetBearingReference(finalBearingSymbol);
+            }
             
-            if (index == calibrationPoints.Length - 1) continue;
-            
-            var lr = sphere.AddComponent<LineRenderer>();
-            lr.SetPosition(0, calibrationPoints[index]);
-            lr.SetPosition(1, calibrationPoints[index + 1]);
             index++;
         }
 
