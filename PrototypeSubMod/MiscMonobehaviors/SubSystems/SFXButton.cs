@@ -125,6 +125,8 @@ public class SFXButton : Button
     {
         while (gameObject.activeInHierarchy)
         {
+            if (Player.main == null) yield break;
+            
             yield return new WaitForSeconds(1);
             bool outOfRange = (Player.main.transform.position - transform.position).sqrMagnitude >
                               minDistForSound * minDistForSound;
