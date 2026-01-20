@@ -22,6 +22,8 @@ public class ProtoAggressiveWorm : Creature
     [SerializeField] private FMOD_CustomEmitter aggroOnSfx;
     [SerializeField] private FMOD_CustomEmitter aggroOffSfx;
     [SerializeField] private WyrmRoarManager roarManager;
+    [SerializeField] private float minRoarInterval = 15f;
+    [SerializeField] private float maxRoarInterval = 30f;
 
     private Renderer[] headRenderers;
     private List<Renderer>[] segmentRenderers;
@@ -41,6 +43,26 @@ public class ProtoAggressiveWorm : Creature
         StartCoroutine(RetrieveSegmentRends());
         headRenderers = headObject.GetComponentsInChildren<Renderer>();
         segmentCount = spineManager.GetSpineSegmentCount();
+
+        StartCoroutine(RandomRoar());
+    }
+
+    private IEnumerator RandomRoar()
+    {
+        var secondsUntilRoar = UnityEngine.Random.Range(minRoarInterval, maxRoarInterval);
+
+        ErrorMessage.AddError("Waiting for " + secondsUntilRoar + " seconds until roaring.");
+        yield return new WaitForSeconds(secondsUntilRoar);
+
+        roarManager.PlayRoar(Player.main.transform.position);
+        ErrorMessage.AddError("Rawr!");
+
+        if (despawnAction.IsPerforming())
+        {
+            ErrorMessage.AddError("Stopping roar.");
+            yield break;
+        }
+        StartCoroutine(RandomRoar());
     }
     
     public override bool TryStartAction(CreatureAction action)
