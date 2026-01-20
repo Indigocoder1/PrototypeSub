@@ -106,7 +106,7 @@ public class WyrmShootTarget : CreatureAction
 
         if (prevChargeUpTime != (int)currentChargeUpTime)
         {
-            ErrorMessage.AddError($"Shooting in {(int)currentChargeUpTime + 1}");
+            // ErrorMessage.AddError($"Shooting in {(int)currentChargeUpTime + 1}");
         }
 
         prevChargeUpTime = (int)currentChargeUpTime;
@@ -114,7 +114,7 @@ public class WyrmShootTarget : CreatureAction
 
     public void OnShotParried(Vector3 returnFrom)
     {
-        ErrorMessage.AddError("Parried!");
+        // ErrorMessage.AddError("Parried!");
 
         StartCoroutine(ReturnParryProjectile(returnFrom));
     }
@@ -175,7 +175,7 @@ public class WyrmShootTarget : CreatureAction
 
         if (timesParried < parriesToResetAggression) return;
         
-        ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
+        // ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
         GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
         reflectShutdownSfx.Play();
     }
@@ -216,7 +216,7 @@ public class WyrmShootTarget : CreatureAction
         shotTravelSfx.Play();
         shotChargeSfx.Stop();
         
-        ErrorMessage.AddError("Laser fired");
+        // ErrorMessage.AddError("Laser fired");
         
         float travelTime = 0;
         while (travelTime < laserTravelTime)
@@ -244,7 +244,7 @@ public class WyrmShootTarget : CreatureAction
         }
 
         var mixin = GetAttackMixin(laserTargetPoint);
-        ErrorMessage.AddError(mixin != null ? "Hit object" : "Missed object");
+        // ErrorMessage.AddError(mixin != null ? "Hit object" : "Missed object");
         if (mixin == null) yield break;
         
         var originalHealth = mixin.health;
@@ -275,7 +275,7 @@ public class WyrmShootTarget : CreatureAction
 
     private void DamageTarget(Vector3 laserTargetPoint, LiveMixin hitMixin)
     {
-        ErrorMessage.AddError("Laser reached target");
+        // ErrorMessage.AddError("Laser reached target");
         hitMixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.LaserCutter, gameObject);
     }
 

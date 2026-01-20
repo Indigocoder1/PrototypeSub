@@ -51,15 +51,15 @@ public class ProtoAggressiveWorm : Creature
     {
         var secondsUntilRoar = UnityEngine.Random.Range(minRoarInterval, maxRoarInterval);
 
-        ErrorMessage.AddError("Waiting for " + secondsUntilRoar + " seconds until roaring.");
+        // ErrorMessage.AddError("Waiting for " + secondsUntilRoar + " seconds until roaring.");
         yield return new WaitForSeconds(secondsUntilRoar);
 
         roarManager.PlayRoar(Player.main.transform.position);
-        ErrorMessage.AddError("Rawr!");
+        // ErrorMessage.AddError("Rawr!");
 
         if (despawnAction.IsPerforming())
         {
-            ErrorMessage.AddError("Stopping roar.");
+            // ErrorMessage.AddError("Stopping roar.");
             yield break;
         }
         StartCoroutine(RandomRoar());
