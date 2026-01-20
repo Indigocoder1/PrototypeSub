@@ -111,6 +111,8 @@ public class WyrmRamTarget : CreatureAction
             subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
             hasDamagedTarget = true;
             chargeImpactSfx.Play();
+            MainCameraControl.main.ShakeCamera(5, -1, MainCameraControl.ShakeMode.Linear, 1);
+
             break;
         }
     }

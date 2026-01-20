@@ -210,14 +210,14 @@ public class WyrmShootTarget : CreatureAction
             ? effectHandler.GetClosestPointOnSurface(targetPos +
                                                      (targetMixin.transform.forward + targetMixin.transform.up) * 50f, 5f)
             : effectHandler.GetClosestPointOnSurface(targetPos + targetMixin.transform.forward * 50f, -15f);
-        
+
         var beamMaterials = laserVFX.GetComponent<Renderer>().materials;
         var originalPoint = laserOrigin.position;
         shotTravelSfx.Play();
         shotChargeSfx.Stop();
-        
+
         // ErrorMessage.AddError("Laser fired");
-        
+
         float travelTime = 0;
         while (travelTime < laserTravelTime)
         {
@@ -225,7 +225,7 @@ public class WyrmShootTarget : CreatureAction
             var point = Vector3.Lerp(originalPoint, laserTargetPoint, normalizedTravelTime);
             laserVFX.transform.position = laserOrigin.position;
             laserVFX.transform.LookAt(laserTargetPoint);
-            
+
             var distance = Vector3.Distance(laserOrigin.position, point);
             var width = beamWidthCurve.Evaluate(normalizedTravelTime);
             var scale = new Vector3(width * 8f, width * 5f, distance);
@@ -238,7 +238,7 @@ public class WyrmShootTarget : CreatureAction
 
             var texOffset = new Vector2(beamLengthCurve.Evaluate(normalizedTravelTime), 0.5f);
             beamMaterials[0].SetTextureOffset(ShaderPropertyID._MainTex2, texOffset);
-            
+
             travelTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -246,17 +246,15 @@ public class WyrmShootTarget : CreatureAction
         var mixin = GetAttackMixin(laserTargetPoint);
         // ErrorMessage.AddError(mixin != null ? "Hit object" : "Missed object");
         if (mixin == null) yield break;
-        
+
         var originalHealth = mixin.health;
         DamageTarget(laserTargetPoint, mixin);
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);
 
-        if (mixin.health < originalHealth)
-        {
-            shotHitSfx.Play();
-            roarManager.PlayRoar(Player.main.transform.position);
-        }
+        shotHitSfx.Play();
+        roarManager.PlayRoar(Player.main.transform.position);
+        MainCameraControl.main.ShakeCamera(5, -1, MainCameraControl.ShakeMode.Linear, 1);
     }
 
     private LiveMixin GetAttackMixin(Vector3 laserTargetPoint)
