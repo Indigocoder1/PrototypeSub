@@ -1,6 +1,7 @@
 ﻿using System;
 using Nautilus.Utility;
 using PrototypeSubMod.Puzzles.BearingPuzzle;
+using Story;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
@@ -91,13 +92,13 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         onPointReached?.Invoke(nextPointIndex);
         nextPointIndex++;
 
-        if (nextPointIndex >= calibrationPoints.Length)
-        {
-            ErrorMessage.AddError("Calibration complete");
-            nextPointIndex = 1;
-            doingCalibrationRun = false;
-            calibrationObjects.SetActive(false);
-        }
+        if (nextPointIndex < calibrationPoints.Length) return;
+        
+        ErrorMessage.AddError("Calibration complete");
+        nextPointIndex = 1;
+        doingCalibrationRun = false;
+        calibrationObjects.SetActive(false);
+        StoryGoalManager.main.OnGoalComplete("OnCalibrationRunCompleted");
     }
 
     public float GetNormalizedDistFromCenter()

@@ -15,6 +15,9 @@ public static class RadioMessageRegisterer
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage2", Story.GoalType.Radio, 3600, "ProtoRadioMessage1");
         RegisterMessage("ProtoRadioMessage3", "ProtoRadioMessage3");
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage3", Story.GoalType.Radio, 3600, "ProtoRadioMessage2");
+        
+        RegisterMessage("ProtoRadioMessage4", "ProtoRadioMessage3");
+        StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage4", Story.GoalType.Radio, 120, "OnCalibrationRunCompleted");
         #endregion
     }
 
