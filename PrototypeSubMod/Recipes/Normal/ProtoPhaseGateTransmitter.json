@@ -2,8 +2,16 @@
     "craftAmount": 1,
     "Ingredients": [
       {
-        "techType": "Titanium",
+        "techType": "EngineFacilityKey",
+        "amount": 1
+      },
+      {
+        "techType": "Gold",
         "amount": 2
+      },
+      {
+        "techType": "Pipe",
+        "amount": 5
       }
     ]
   }

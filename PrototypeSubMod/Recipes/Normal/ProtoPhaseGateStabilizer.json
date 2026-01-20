@@ -2,7 +2,15 @@
     "craftAmount": 1,
     "Ingredients": [
       {
-        "techType": "Titanium",
+        "techType": "InterceptorFacilityKey",
+        "amount": 1
+      },
+      {
+        "techType": "Magnetite",
+        "amount": 3
+      },
+      {
+        "techType": "Lead",
         "amount": 2
       }
     ]

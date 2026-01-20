@@ -12,6 +12,10 @@
       {
         "techType": "ProtoPhaseGateTransmitter",
         "amount": 1
+      },
+      {
+        "techType": "IonPrism",
+        "amount": 1
       }
     ]
   }
