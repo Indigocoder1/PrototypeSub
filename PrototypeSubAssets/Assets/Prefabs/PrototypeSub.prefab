@@ -48563,7 +48563,7 @@ MonoBehaviour:
   sfxEmitter: {fileID: 5224799950623294782}
   chargeUseCount: 3
   powerPerDamage: 0.67
-  useDuration: 5
+  useDuration: 10
   cooldownDuration: 1
   maxShieldIntensity: 1
   defaultReduction: 0.25
