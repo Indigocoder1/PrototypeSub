@@ -1,7 +1,9 @@
-﻿using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+﻿using PrototypeSubMod.IonGenerator;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.Registration;
+using RootMotion;
 using SubLibrary.Audio;
 using System;
 using System.Collections;
@@ -20,7 +22,19 @@ public class MarkerTetherLogic : Factor
 
     public static event Action onClearTetherMarker;
 
+    private GameObject warpInFx;
+
     public override GameInput.Button GetUseButton() => InputRegisterer.TetherMarkerButton;
+
+    private IEnumerator Initialize()
+    {
+        var task = CraftData.GetPrefabForTechTypeAsync(TechType.Warper);
+        yield return task;
+
+        var result = task.GetResult();
+        var warper = result.GetComponent<Warper>();
+        warpInFx = warper.warpInEffectPrefab;
+    }
 
     public override void StartUse()
     {
@@ -30,7 +44,9 @@ public class MarkerTetherLogic : Factor
         if (Player.main.pda.isOpen) return;
         if (Player.main.currentSub != null) return;
         if (DevConsole.instance.state) return;
-         
+
+        UWE.CoroutineHost.StartCoroutine(Initialize());
+
         base.StartUse();
         if (Plugin.GlobalSaveData.tetherFactorMarkerLocation == null)
         {
@@ -61,10 +77,12 @@ public class MarkerTetherLogic : Factor
         
         ionManager.ConsumeEnergy(powerConsumption);
 
+        var fx = Instantiate(warpInFx, Player.main.transform.position, Player.main.transform.rotation);
+
         UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
         Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
-        onClearTetherMarker?.Invoke();
 
+        onClearTetherMarker?.Invoke();
     }
 
     private IEnumerator TeleportPlayer(Vector3 position)
