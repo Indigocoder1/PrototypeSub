@@ -72,6 +72,8 @@ public class ProtoAggressiveWorm : Creature
     {
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";
+        inVoid |= biomeString.EndsWith("protovoid");
+        
         if (secondsInVoid < secondsInVoidForAggression && inVoid)
         {
             secondsInVoid += Time.deltaTime;
