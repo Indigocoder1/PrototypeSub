@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿using Nautilus.Utility;
 using PrototypeSubMod.LightDistortionField;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,6 +38,7 @@ public class WyrmShootTarget : CreatureAction
     private int rightHandVectorSign;
     private int attackStage;
     private int timesParried;
+    private bool aimStarted;
 
     private void Start()
     {
@@ -85,12 +87,18 @@ public class WyrmShootTarget : CreatureAction
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
         if (currentChargeUpTime > 0)
         {
+            if (!aimStarted)
+            {
+                FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Searching"), Player.main.transform.position);
+                aimStarted = true;
+            }
             currentChargeUpTime -= Time.deltaTime;
             HandleTargetingLaser();
         }
         else if (canShoot && !hasShot)
         {
             StartCoroutine(Shoot());
+            aimStarted = false;
         }
 
         var angle = Mathf.Abs(
