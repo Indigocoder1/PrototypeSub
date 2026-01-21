@@ -64,18 +64,7 @@ internal class WarperRemnant : RelicBlock
 
         if (!inRenderDistance)
             yield break;
-        
-        var existingBlocks = Object.FindObjectsOfType<BuildingBlockManager>();
-
-        int existingBlocksInBiome = 0;
-        foreach (var block in existingBlocks)
-        {
-            if(block.spawnBiome.Equals(biome) && block.warperBlock)
-                existingBlocksInBiome++;
-        }
-
-        if (existingBlocksInBiome >= 5)
-            yield break;
+       
         
         var task = CraftData.GetPrefabForTechTypeAsync(prefabInfo.TechType);
         yield return task;
