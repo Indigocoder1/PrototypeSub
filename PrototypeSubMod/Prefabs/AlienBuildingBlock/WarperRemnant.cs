@@ -74,7 +74,7 @@ internal class WarperRemnant : RelicBlock
                 existingBlocksInBiome++;
         }
 
-        if (existingBlocksInBiome >= 5)
+        if (existingBlocksInBiome >= 30)
             yield break;
         
         var task = CraftData.GetPrefabForTechTypeAsync(prefabInfo.TechType);
