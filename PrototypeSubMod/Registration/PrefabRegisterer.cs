@@ -17,16 +17,8 @@ internal static class PrefabRegisterer
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
         
-        ProtoPhaseGate.Register();
-        ProtoPhaseGateStabilizer.Register();
-        ProtoPhaseGateStructure.Register();
-        ProtoPhaseGateTransmitter.Register();
-        ProtoPhaseGateItem.Register();
-        
         WarperRemnant.Register();
         AlienBuildingBlock.Register();
-        BlinkFactor.Register();
-        TetherFactor.Register();
         TetherFactorMarker.Register();
         BiomechanicsFactor.Register();
         SuitColorFactor.Register();
@@ -53,6 +45,8 @@ internal static class PrefabRegisterer
         yield return new WaitForEndOfFrame();
         
         InterceptorFacilityKey.Register();
+        ProtoPhaseGateStabilizer.Register();
+        TetherFactor.Register();
         DefenseStoryGoalTrigger_World.Register();
         DecorativeForceFieldArchway.Register();
         NonfunctionalKeyTerminal.Register();
@@ -65,6 +59,8 @@ internal static class PrefabRegisterer
         yield return new WaitForEndOfFrame();
         
         HullOutpostTeleporter.Register();
+        ProtoPhaseGateTransmitter.Register();
+        BlinkFactor.Register();
         ObstructionRockLoadFar.Register();
         PrototypeSpawner.Register();
         CrystalMatrix_Craftable.Register();
@@ -79,7 +75,6 @@ internal static class PrefabRegisterer
         yield return new WaitForEndOfFrame();
         
         PrecursorFabricator.Register();
-        PrecursorPhaseGate.Register();
 
         StoryGoalTerminal.CreateTerminal("AlienBuildingBlockTerminal", "AlienBuildingBlockEncy");
         StoryGoalTerminal.CreateTerminal("HullFacilityLogsTerminal", "HullFacilityLogsEncy");
@@ -97,7 +92,7 @@ internal static class PrefabRegisterer
         DamagedProtoLogo_World.Register();
         TeleporterTerminal_World.Register();
         SmashedDisplayCase_World.Register();
-        
+
         yield return new WaitForEndOfFrame();
         
         NonScannableProp.Register("11e731e7-bc82-4f94-90be-5db7b58b449b", "EmptyDisplayCase");
@@ -122,7 +117,11 @@ internal static class PrefabRegisterer
         PrecursorCube1Prop.Register();
         PrecursorGunProp.Register();
         ProtoTerminalVFX.Register();
-        
+        PrecursorPhaseGate.Register();
+        ProtoPhaseGateStructure.Register();
+        ProtoPhaseGate.Register();
+        ProtoPhaseGateItem.Register();
+
         DisplayCaseProp.Register(IonPrism_Craftable.prefabInfo.ClassID, "IonPrism_DisplayCase",
             IonPrism_Craftable.prefabInfo.TechType, new Vector3(0, 1.3f, 0), Vector3.one * 10f);
         DisplayCaseProp.Register(DeployableLight_Craftable.prefabInfo.ClassID, "DeployableLight_DisplayCase",
