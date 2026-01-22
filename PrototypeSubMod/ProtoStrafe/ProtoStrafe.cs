@@ -9,6 +9,8 @@ internal class ProtoStrafe : ProtoUpgrade
     [SerializeField] private float sidewaysAccel;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private SubControl subControl;
+    [SerializeField] private FMOD_CustomEmitter strafeOnSfx;
+    [SerializeField] private FMOD_CustomEmitter strafeOffSfx;
 
     private PilotingChair chair;
 
@@ -37,6 +39,14 @@ internal class ProtoStrafe : ProtoUpgrade
     public override bool OnActivated()
     {
         SetUpgradeEnabled(!upgradeEnabled);
+        if (upgradeEnabled)
+        {
+            strafeOnSfx.Play();
+        }
+        else
+        {
+            strafeOffSfx.Play();
+        }
         return true;
     }
 
