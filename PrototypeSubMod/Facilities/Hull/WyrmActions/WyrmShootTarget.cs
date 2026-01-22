@@ -26,7 +26,8 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private FMOD_CustomEmitter shotHitSfx;
     [SerializeField] private FMOD_CustomEmitter shotReflectSfx;
     [SerializeField] private FMOD_CustomEmitter reflectShutdownSfx;
-    
+    [SerializeField] private FMOD_CustomEmitter shotChargeStartSfx;
+
     private CloakEffectHandler targetCloakHandler;
     private GameObject laserVFX;
     private GameObject muzzleVFX;
@@ -89,7 +90,8 @@ public class WyrmShootTarget : CreatureAction
         {
             if (!aimStarted)
             {
-                FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Searching"), Player.main.transform.position);
+                shotChargeSfx.Play();
+                shotChargeStartSfx.Play();
                 aimStarted = true;
             }
             currentChargeUpTime -= Time.deltaTime;
@@ -223,24 +225,15 @@ public class WyrmShootTarget : CreatureAction
         var player = Player.main;
 
         var laserTargetPoint = targetPos;
+        var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
 
-        if (player.currentSub != null && targetMixin == player.currentSub.live)
+        if (effectHandler != null)
         {
-            var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
-
-            if (effectHandler != null)
-            {
-                laserTargetPoint = effectHandler.GetActive()
-                    ? effectHandler.GetClosestPointOnSurface(
-                        targetPos + (targetMixin.transform.forward + targetMixin.transform.up) * 50f, 5f)
-                    : effectHandler.GetClosestPointOnSurface(
-                        targetPos + targetMixin.transform.forward * 50f, -15f);
-                ErrorMessage.AddError("Prototype targeted, target offsetted...");
-            }
-        }
-        else
-        {
-            ErrorMessage.AddError("Player targeted directly.");
+            laserTargetPoint = effectHandler.GetActive()
+                ? effectHandler.GetClosestPointOnSurface(
+                    targetPos + (targetMixin.transform.forward + targetMixin.transform.up) * 50f, 5f)
+                : effectHandler.GetClosestPointOnSurface(
+                    targetPos + targetMixin.transform.forward * 50f, -15f);
         }
 
 

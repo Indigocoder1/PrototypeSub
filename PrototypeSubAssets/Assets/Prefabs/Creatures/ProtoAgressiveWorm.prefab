@@ -1054,6 +1054,57 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.027277656, y: -0.110163614, z: 0.027277661}
     m_Extent: {x: 0.012410767, y: 0.010405138, z: 0.01241078}
   m_DirtyAABB: 0
+--- !u!1 &845885082970972296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7057328499789640693}
+  - component: {fileID: 8641488922426855222}
+  m_Layer: 0
+  m_Name: ShotChargeStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7057328499789640693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845885082970972296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4699808734583788080}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8641488922426855222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845885082970972296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: 75daab94940cda34d8e785dc0783920b, type: 2}
+  playOnAwake: 0
+  stopImmediatelyOnDisable: 0
+  followParent: 1
+  restartOnPlay: 1
+  debug: 0
+  subtitlesKey: 
+  playSubtitlesWithUnscaledTime: 1
 --- !u!1 &864890044475908286
 GameObject:
   m_ObjectHideFlags: 0
@@ -7180,6 +7231,7 @@ MonoBehaviour:
   shotHitSfx: {fileID: 2855742536239814733}
   shotReflectSfx: {fileID: 4519176224539796307}
   reflectShutdownSfx: {fileID: 1179468046105338022}
+  shotChargeStartSfx: {fileID: 8641488922426855222}
 --- !u!114 &4846019268480220019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9099,6 +9151,7 @@ Transform:
   - {fileID: 31821911743031727}
   - {fileID: 7655615008638621198}
   - {fileID: 6539416988617014044}
+  - {fileID: 7057328499789640693}
   m_Father: {fileID: 3230497408674094389}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
