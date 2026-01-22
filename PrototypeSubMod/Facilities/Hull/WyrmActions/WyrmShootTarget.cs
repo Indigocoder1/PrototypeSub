@@ -281,6 +281,7 @@ public class WyrmShootTarget : CreatureAction
         if (mixin == null) yield break;
 
         var originalHealth = mixin.health;
+
         DamageTarget(laserTargetPoint, mixin);
         ErrorMessage.AddError("Damaged " + mixin.name);
         laserVFX.SetActive(false);
@@ -321,27 +322,23 @@ public class WyrmShootTarget : CreatureAction
         var positions = new Vector3[2];
         positions[0] = laserOrigin.position;
 
-        // only use cloak logic if targeting a sub
-        if (Player.main.currentSub != null && targetMixin == Player.main.currentSub.live)
-        {
-            var cloak = targetMixin.GetComponentInChildren<CloakEffectHandler>();
+        var cloak = targetMixin.GetComponentInChildren<CloakEffectHandler>();
 
-            if (cloak != null && cloak.GetActive())
-            {
-                // Aim at cloaked sub
-                positions[1] = cloak.GetContinuousPointOnSurface();
-            }
-            else if (cloak != null)
-            {
-                // Aim at sub with offset when cloak isn't active
-                positions[1] = cloak.GetClosestPointOnSurface(
-                    targetPos + targetMixin.transform.forward * 50f, -4f);
-            }
+        if (cloak != null && cloak.GetActive())
+        {
+            // Aim at cloaked sub
+            positions[1] = cloak.GetContinuousPointOnSurface();
+        }
+        else if (cloak != null)
+        {
+            // Aim at sub with offset when cloak isn't active
+            positions[1] = cloak.GetClosestPointOnSurface(
+                targetPos + targetMixin.transform.forward * 50f, -4f);
         }
         else
         {
-            // aim at player
-            positions[1] = targetPos;
+            // aim at player with slight downward offset to avoid particle camera clipping
+            positions[1] = targetPos + new Vector3(0, -3, 0);
         }
 
         targetingLineRenderer.SetPositions(positions);
