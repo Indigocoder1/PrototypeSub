@@ -212,19 +212,44 @@ public class WyrmShootTarget : CreatureAction
         main.duration = laserTravelTime + 1f;
         ps.Play();
         var targetMixin = GetTargetMixin();
-        var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
+
+        if (targetMixin == null)
+        {
+            ErrorMessage.AddError("Target is null. Something went wrong!");
+            yield break;
+        }
+
         var targetPos = targetMixin.transform.position;
-        var laserTargetPoint = effectHandler.GetActive()
-            ? effectHandler.GetClosestPointOnSurface(targetPos +
-                                                     (targetMixin.transform.forward + targetMixin.transform.up) * 50f, 5f)
-            : effectHandler.GetClosestPointOnSurface(targetPos + targetMixin.transform.forward * 50f, -15f);
+        var player = Player.main;
+
+        var laserTargetPoint = targetPos;
+
+        if (player.currentSub != null && targetMixin == player.currentSub.live)
+        {
+            var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
+
+            if (effectHandler != null)
+            {
+                laserTargetPoint = effectHandler.GetActive()
+                    ? effectHandler.GetClosestPointOnSurface(
+                        targetPos + (targetMixin.transform.forward + targetMixin.transform.up) * 50f, 5f)
+                    : effectHandler.GetClosestPointOnSurface(
+                        targetPos + targetMixin.transform.forward * 50f, -15f);
+                ErrorMessage.AddError("Prototype targeted, target offsetted...");
+            }
+        }
+        else
+        {
+            ErrorMessage.AddError("Player targeted directly.");
+        }
+
 
         var beamMaterials = laserVFX.GetComponent<Renderer>().materials;
         var originalPoint = laserOrigin.position;
         shotTravelSfx.Play();
         shotChargeSfx.Stop();
 
-        // ErrorMessage.AddError("Laser fired");
+        ErrorMessage.AddError("Laser fired at " + targetMixin.name);
 
         float travelTime = 0;
         while (travelTime < laserTravelTime)
@@ -252,11 +277,12 @@ public class WyrmShootTarget : CreatureAction
         }
 
         var mixin = GetAttackMixin(laserTargetPoint);
-        // ErrorMessage.AddError(mixin != null ? "Hit object" : "Missed object");
+        ErrorMessage.AddError(mixin != null ? "Hit object " + mixin.name : "Missed object " + mixin.name);
         if (mixin == null) yield break;
 
         var originalHealth = mixin.health;
         DamageTarget(laserTargetPoint, mixin);
+        ErrorMessage.AddError("Damaged " + mixin.name);
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);
 
@@ -288,25 +314,40 @@ public class WyrmShootTarget : CreatureAction
     private void HandleTargetingLaser()
     {
         var targetMixin = GetTargetMixin();
+        if (targetMixin == null) return;
+
         var targetPos = targetMixin.transform.position;
+
         var positions = new Vector3[2];
         positions[0] = laserOrigin.position;
-        if (targetCloakHandler && targetCloakHandler.GetActive())
+
+        // only use cloak logic if targeting a sub
+        if (Player.main.currentSub != null && targetMixin == Player.main.currentSub.live)
         {
-            positions[1] = targetCloakHandler.GetContinuousPointOnSurface();
-        }
-        else if (targetCloakHandler)
-        {
-            positions[1] = targetCloakHandler.GetClosestPointOnSurface(targetPos + targetMixin.transform.forward * 50f, -4f);
+            var cloak = targetMixin.GetComponentInChildren<CloakEffectHandler>();
+
+            if (cloak != null && cloak.GetActive())
+            {
+                // Aim at cloaked sub
+                positions[1] = cloak.GetContinuousPointOnSurface();
+            }
+            else if (cloak != null)
+            {
+                // Aim at sub with offset when cloak isn't active
+                positions[1] = cloak.GetClosestPointOnSurface(
+                    targetPos + targetMixin.transform.forward * 50f, -4f);
+            }
         }
         else
         {
+            // aim at player
             positions[1] = targetPos;
         }
-        
+
         targetingLineRenderer.SetPositions(positions);
     }
-    
+
+
     private Vector3[] GetAttackPoints()
     {
         const float setupDist = 200;
@@ -340,7 +381,7 @@ public class WyrmShootTarget : CreatureAction
         var player = Player.main;
         if (player.currentSub) return player.currentSub.live;
         if (player.lastValidSub &&
-            Vector3.Distance(player.lastValidSub.transform.position, player.transform.position) < 50f)
+            Vector3.Distance(player.lastValidSub.transform.position, player.transform.position) < 20f)
         {
             return player.lastValidSub.live;
         }
