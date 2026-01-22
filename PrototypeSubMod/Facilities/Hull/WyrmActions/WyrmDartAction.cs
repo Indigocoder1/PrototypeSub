@@ -12,6 +12,7 @@ public class WyrmDartAction : CreatureAction
     [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private float increasedSpeed;
+    [SerializeField] private FMOD_CustomEmitter dartSpecialSFX;
 
     private Transform target;
     private CloakEffectHandler targetCloakHandler;
@@ -87,6 +88,7 @@ public class WyrmDartAction : CreatureAction
     private void OnPointReached()
     {
         attackStage++;
+        dartSpecialSFX.Stop();
         
         if (attackStage >= GetMovementPoints().Length)
         {
@@ -118,6 +120,13 @@ public class WyrmDartAction : CreatureAction
             wormAnimator.SetForwardsSpeed(increasedSpeed);
             roarManager.PlayRoar(Player.main.transform.position);
             speedIncreased = true;
+
+            var random = Random.Range(0f, 100f);
+            if (random < 1)
+            {
+                dartSpecialSFX.Play();
+            }
+
         }
         
         wormAnimator.SetTravelTarget(movementPoints[attackStage], OnPointReached);

@@ -7203,6 +7203,7 @@ MonoBehaviour:
   wormAnimator: {fileID: 5351068426189712924}
   roarManager: {fileID: 121548284677876063}
   increasedSpeed: 60
+  dartSpecialSFX: {fileID: 5271690660070952517}
 --- !u!114 &6753871278772561756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9097,6 +9098,7 @@ Transform:
   - {fileID: 9101629733253183224}
   - {fileID: 31821911743031727}
   - {fileID: 7655615008638621198}
+  - {fileID: 6539416988617014044}
   m_Father: {fileID: 3230497408674094389}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12233,6 +12235,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asset: {fileID: 11400000, guid: 8532bec7ba3eb5c4cbb0e4125a196301, type: 2}
+  playOnAwake: 0
+  stopImmediatelyOnDisable: 0
+  followParent: 1
+  restartOnPlay: 1
+  debug: 0
+  subtitlesKey: 
+  playSubtitlesWithUnscaledTime: 1
+--- !u!1 &8994868548084820400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6539416988617014044}
+  - component: {fileID: 5271690660070952517}
+  m_Layer: 0
+  m_Name: DashSpecial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6539416988617014044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994868548084820400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4699808734583788080}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5271690660070952517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994868548084820400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: 276f492719559ca4fbec7245a5e97359, type: 2}
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
   followParent: 1
