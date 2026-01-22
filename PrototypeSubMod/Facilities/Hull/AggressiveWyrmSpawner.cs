@@ -28,12 +28,12 @@ public class AggressiveWyrmSpawner : MonoBehaviour
                 var playerPos = Player.main.transform.position;
                 var dir = (-playerPos.normalized - Vector3.up) / 2;
                 dir.Normalize();
-                point = playerPos + dir * 50f;
+                point = playerPos + dir * 200f;
                 normal = -dir;
                 Plugin.Logger.LogInfo($"Didn't detect any hits. Resorting to fallback spawn location");
             }
             
-            ErrorMessage.AddError($"Entered the void | Spawn point at {point}");
+            // ErrorMessage.AddError($"Entered the void | Spawn point at {point}");
             Plugin.Logger.LogInfo($"Spawn point at {point}");
             StartCoroutine(SpawnWyrm(point, normal));
         }
@@ -65,7 +65,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour
         foreach (var dir in testDirections)
         {
             hit = Physics.Raycast(Player.main.transform.position, dir,
-                out raycastHit, 100, 1 << LayerID.TerrainCollider);
+                out raycastHit, 500, 1 << LayerID.TerrainCollider);
             if (!hit) continue;
             break;
         }
