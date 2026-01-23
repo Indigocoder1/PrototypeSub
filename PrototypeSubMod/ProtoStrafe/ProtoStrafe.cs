@@ -26,6 +26,14 @@ internal class ProtoStrafe : ProtoUpgrade
         if (GameInput.GetButtonDown(GameInput.Button.Deconstruct))
         {
             SetUpgradeEnabled(!upgradeEnabled);
+            if (upgradeEnabled)
+            {
+                strafeOnSfx.Play();
+            }
+            else
+            {
+                strafeOffSfx.Play();
+            }
         }
     }
 
@@ -39,14 +47,6 @@ internal class ProtoStrafe : ProtoUpgrade
     public override bool OnActivated()
     {
         SetUpgradeEnabled(!upgradeEnabled);
-        if (upgradeEnabled)
-        {
-            strafeOnSfx.Play();
-        }
-        else
-        {
-            strafeOffSfx.Play();
-        }
         return true;
     }
 
