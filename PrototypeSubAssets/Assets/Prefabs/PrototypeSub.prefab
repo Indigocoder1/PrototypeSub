@@ -3625,7 +3625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83422408293627856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.14, z: 18.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8041321529513965087}
@@ -28260,7 +28260,7 @@ MonoBehaviour:
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
   followParent: 0
-  restartOnPlay: 0
+  restartOnPlay: 1
   debug: 0
   subtitlesKey: 
   playSubtitlesWithUnscaledTime: 1
@@ -116525,7 +116525,7 @@ MonoBehaviour:
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
   followParent: 0
-  restartOnPlay: 0
+  restartOnPlay: 1
   debug: 0
   subtitlesKey: 
   playSubtitlesWithUnscaledTime: 1
