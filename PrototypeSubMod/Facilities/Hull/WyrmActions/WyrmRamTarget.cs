@@ -108,15 +108,15 @@ public class WyrmRamTarget : CreatureAction
         foreach (var col in colliders)
         {
             var subRoot = col.GetComponentInParent<SubRoot>();
-            if (!subRoot) continue;
+            var player = Player.main;
 
+            if (!subRoot) continue;
             if (subRoot.GetComponentInChildren<CloakEffectHandler>().GetActive()) continue;
-            
+
             subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
             hasDamagedTarget = true;
             chargeImpactSfx.Play();
             MainCameraControl.main.ShakeCamera(5, -1, MainCameraControl.ShakeMode.Linear, 1);
-
             break;
         }
     }
