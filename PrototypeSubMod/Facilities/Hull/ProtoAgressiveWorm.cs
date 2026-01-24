@@ -1,8 +1,9 @@
-﻿using System;
+﻿using PrototypeSubMod.Facilities.Hull.WyrmActions;
+using PrototypeSubMod.LightDistortionField;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull;
@@ -17,10 +18,13 @@ public class ProtoAggressiveWorm : Creature
     [SerializeField] private Color aggressiveEmissionColor;
     [SerializeField] private GameObject headObject;
     [SerializeField] private float secondsInVoidForAggression;
-    
+    [SerializeField] private float attackRadius = 5f;
+    [SerializeField] private float attackDamage = 200f;
+
     [Header("SFX")]
     [SerializeField] private FMOD_CustomEmitter aggroOnSfx;
     [SerializeField] private FMOD_CustomEmitter aggroOffSfx;
+    [SerializeField] private FMOD_CustomEmitter consumePlayerSfx;
     [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private float minRoarInterval = 15f;
     [SerializeField] private float maxRoarInterval = 30f;
@@ -32,7 +36,9 @@ public class ProtoAggressiveWorm : Creature
     private bool wasAggressive;
     private int segmentCount;
     private int numSegmentsAggressiveLastFrame;
-    
+    private bool hasDamagedTarget;
+    private float damagetimer;
+
     public override void Start()
     {
         base.Start();
@@ -51,11 +57,9 @@ public class ProtoAggressiveWorm : Creature
     {
         var secondsUntilRoar = UnityEngine.Random.Range(minRoarInterval, maxRoarInterval);
 
-        // ErrorMessage.AddError("Waiting for " + secondsUntilRoar + " seconds until roaring.");
         yield return new WaitForSeconds(secondsUntilRoar);
 
         roarManager.PlayRoar(Player.main.transform.position);
-        // ErrorMessage.AddError("Rawr!");
 
         if (despawnAction.IsPerforming())
         {
@@ -95,7 +99,43 @@ public class ProtoAggressiveWorm : Creature
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";
         inVoid |= biomeString.EndsWith("protovoid");
-        
+
+        var colliders = Physics.OverlapSphere(transform.position, attackRadius);
+        foreach (var col in colliders)
+        {
+            var mixin = col.GetComponentInParent<LiveMixin>();
+            var player = Player.main;
+
+            if (mixin != null && !hasDamagedTarget)
+            {
+                if (mixin.GetComponentInChildren<SubRoot>()) continue;
+                if (mixin.GetComponentInParent<ProtoAggressiveWorm>() != null) continue;
+
+                if (mixin == player.liveMixin)
+                {
+                    if (!player.currentSub)
+                    {
+                        StartCoroutine(OnPlayerConsumed(mixin));
+                    }
+                    else continue;
+                }
+                else
+                {
+                    mixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
+                }
+                hasDamagedTarget = true;
+                ErrorMessage.AddError($"Wyrm did a bonk on {col.name}");
+                damagetimer = 2f;
+                break;
+            }
+        }
+
+        damagetimer -= Time.deltaTime;
+        if (damagetimer <= 0f)
+        {
+            hasDamagedTarget = false;
+        }
+
         if (secondsInVoid < secondsInVoidForAggression && inVoid)
         {
             secondsInVoid += Time.deltaTime;
@@ -137,6 +177,17 @@ public class ProtoAggressiveWorm : Creature
         
         numSegmentsAggressiveLastFrame = segmentsAggressive;
         wasAggressive = IsAggressive();
+    }
+
+    private IEnumerator OnPlayerConsumed(LiveMixin playerMixin)
+    {
+        consumePlayerSfx.Play();
+
+        // Half second offset to let animation and sound play before killing
+        yield return new WaitForSeconds(consumePlayerSfx.length - 0.5f);
+
+        playerMixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
+        ErrorMessage.AddError("Player nommed!");
     }
 
     private void UpdateSegmentColors(int segmentsAggressive)
