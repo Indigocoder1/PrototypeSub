@@ -15,7 +15,6 @@ internal static class CommandRegisterer
         ConsoleCommandsHandler.AddGotoTeleportPosition("hullfacility", new Vector3(-1182, -443, -1146));
         ConsoleCommandsHandler.AddGotoTeleportPosition("hulloutpost", new Vector3(-162, -69, -226));
         ConsoleCommandsHandler.AddGotoTeleportPosition("ppt", new Vector3(449, -92, 1169));
-        ConsoleCommandsHandler.RegisterConsoleCommand("enableworm)", typeof(Commands.PrototypeCommands), nameof(Commands.PrototypeCommands.EnableWorm), null);
 
         sw.Stop();
         Plugin.Logger.LogInfo($"Console commands registered in {sw.ElapsedMilliseconds}ms");

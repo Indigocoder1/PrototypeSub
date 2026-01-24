@@ -14,7 +14,7 @@ public class VoidGhostLeviathanSpawnerPatch
     public static bool CheckWormActivationGoal()
     {
         StoryGoalManager storyGoalManager = StoryGoalManager.main;
-        if (storyGoalManager.IsGoalComplete("HullFacilityActivateWorm"))
+        if (storyGoalManager.IsGoalComplete("HullFacilityWormTerminalEncy"))
         {
             return false;
         }
