@@ -269,6 +269,9 @@ public class WyrmShootTarget : CreatureAction
             yield return new WaitForEndOfFrame();
         }
 
+        laserVFX.SetActive(false);
+        muzzleVFX.SetActive(false);
+
         var mixin = GetAttackMixin(laserTargetPoint);
         ErrorMessage.AddError(mixin != null ? "Hit object " + mixin.name : "Missed object " + mixin.name);
         if (mixin == null) yield break;
@@ -277,8 +280,6 @@ public class WyrmShootTarget : CreatureAction
 
         DamageTarget(laserTargetPoint, mixin);
         ErrorMessage.AddError("Damaged " + mixin.name);
-        laserVFX.SetActive(false);
-        muzzleVFX.SetActive(false);
 
         shotHitSfx.Play();
         roarManager.PlayRoar(Player.main.transform.position);
