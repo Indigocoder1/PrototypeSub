@@ -38,6 +38,7 @@ public class ProtoAggressiveWorm : Creature
     private int numSegmentsAggressiveLastFrame;
     private bool hasDamagedTarget;
     private float damagetimer;
+    private bool playerBeingEaten;
 
     public override void Start()
     {
@@ -116,15 +117,14 @@ public class ProtoAggressiveWorm : Creature
                     if (!player.currentSub)
                     {
                         StartCoroutine(OnPlayerConsumed(mixin));
+                        break;
                     }
-                    else continue;
                 }
                 else
                 {
                     mixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
                 }
                 hasDamagedTarget = true;
-                ErrorMessage.AddError($"Wyrm did a bonk on {col.name}");
                 damagetimer = 2f;
                 break;
             }
@@ -181,10 +181,12 @@ public class ProtoAggressiveWorm : Creature
 
     private IEnumerator OnPlayerConsumed(LiveMixin playerMixin)
     {
+        if (playerBeingEaten) yield break;
+        playerBeingEaten = true;
         consumePlayerSfx.Play();
 
         // Half second offset to let animation and sound play before killing
-        yield return new WaitForSeconds(consumePlayerSfx.length - 0.5f);
+        yield return new WaitForSeconds(5f);
 
         playerMixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
         ErrorMessage.AddError("Player nommed!");

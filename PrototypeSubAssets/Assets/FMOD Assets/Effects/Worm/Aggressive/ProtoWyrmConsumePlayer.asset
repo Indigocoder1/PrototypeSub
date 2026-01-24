@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: ProtoWyrmConsumePlayer
   id: 
-  audioClip: {fileID: 8300000, guid: 3cd4f0fbee3dcd040981234f4f5a2f59, type: 3}
+  audioClip: {fileID: 8300000, guid: aeb72c327a698bb46b6013b48087ad89, type: 3}
   doNotAutoRegister: 0
   mode: 2113552
   maxDistance3D: 400
   minDistance3D: 0
   fadeOutTime: 2
-  bus: 0
+  bus: 2
   customBusPath: 
