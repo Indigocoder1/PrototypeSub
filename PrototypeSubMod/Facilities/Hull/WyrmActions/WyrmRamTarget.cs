@@ -77,12 +77,16 @@ public class WyrmRamTarget : CreatureAction
         {
             points[1] = effectHandler.GetContinuousPointOnSurface(15f);
         }
-        else
+        else if (player.currentSub != null)
         {
             points[1] = targetCenter + forwardDir * 10f;
         }
+        else
+        {
+            points[1] = targetCenter;
+        }
 
-        return points;
+            return points;
     }
 
     private void OnReachedTarget()
