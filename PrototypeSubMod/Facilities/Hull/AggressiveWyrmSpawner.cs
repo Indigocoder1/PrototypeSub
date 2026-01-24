@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using PrototypeSubMod.Prefabs;
+using Story;
+using System.Collections;
 using System.Collections.Generic;
-using PrototypeSubMod.Prefabs;
 using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull;
@@ -13,7 +14,10 @@ public class AggressiveWyrmSpawner : MonoBehaviour
     private void Update()
     {
         if (WaitScreen.IsWaiting) return;
-        
+
+        // Comment this line to speed up debugging
+        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityActivateWorm")) return;
+
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";
         inVoid |= biomeString.EndsWith("protovoid");
