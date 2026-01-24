@@ -6982,8 +6982,11 @@ MonoBehaviour:
   aggressiveEmissionColor: {r: 1, g: 0.3443396, b: 0.3443396, a: 1}
   headObject: {fileID: 9037800562166126203}
   secondsInVoidForAggression: 30
+  attackRadius: 5
+  attackDamage: 200
   aggroOnSfx: {fileID: 8370760665603014420}
   aggroOffSfx: {fileID: 5207917267241166288}
+  consumePlayerSfx: {fileID: 6017198227269601848}
   roarManager: {fileID: 121548284677876063}
   minRoarInterval: 5
   maxRoarInterval: 15
@@ -9152,6 +9155,7 @@ Transform:
   - {fileID: 7655615008638621198}
   - {fileID: 6539416988617014044}
   - {fileID: 7057328499789640693}
+  - {fileID: 3741048167658874239}
   m_Father: {fileID: 3230497408674094389}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12244,6 +12248,57 @@ Transform:
   m_Father: {fileID: 4440659051249751855}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8862858084307019775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3741048167658874239}
+  - component: {fileID: 6017198227269601848}
+  m_Layer: 0
+  m_Name: ConsumePlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3741048167658874239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862858084307019775}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4699808734583788080}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6017198227269601848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862858084307019775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: 7d43e680ac492564db0511338a762e31, type: 2}
+  playOnAwake: 0
+  stopImmediatelyOnDisable: 0
+  followParent: 1
+  restartOnPlay: 1
+  debug: 0
+  subtitlesKey: 
+  playSubtitlesWithUnscaledTime: 1
 --- !u!1 &8942496819464351025
 GameObject:
   m_ObjectHideFlags: 0
