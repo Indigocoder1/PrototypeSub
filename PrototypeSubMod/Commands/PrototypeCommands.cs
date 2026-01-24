@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Nautilus.Commands;
+using Nautilus.Handlers;
 using PrototypeSubMod.Facilities.Hull;
 using PrototypeSubMod.Upgrades;
 using UnityEngine;
@@ -33,6 +34,16 @@ internal static class PrototypeCommands
         WormSpawnEvent.ResetSpawnTimer();
         return string.Empty;
     }
+
+    [ConsoleCommand("enableworm")]
+        public static string EnableWorm()
+    {
+        Story.StoryGoalManager.main.OnGoalComplete("HullFacilityWormTerminalEncy");
+        Plugin.Logger.LogInfo("Hull Facility Wyrm Enabled");
+        ErrorMessage.AddError("Hull Facility Wyrm Enabled");
+        return string.Empty;
+    }
+    
 
     [ConsoleCommand("protoscreenshot")]
     public static string Screenshot(string path, int superSize)
