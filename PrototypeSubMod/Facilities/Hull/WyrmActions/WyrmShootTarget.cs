@@ -287,7 +287,7 @@ public class WyrmShootTarget : CreatureAction
 
     private LiveMixin GetAttackMixin(Vector3 laserTargetPoint)
     {
-        var colliders = Physics.OverlapSphere(laserTargetPoint, 5f);
+        var colliders = Physics.OverlapSphere(laserTargetPoint, 10f);
         LiveMixin mixin = null;
         foreach (var collider in colliders)
         {
@@ -302,7 +302,7 @@ public class WyrmShootTarget : CreatureAction
     private void DamageTarget(Vector3 laserTargetPoint, LiveMixin hitMixin)
     {
         // ErrorMessage.AddError("Laser reached target");
-        hitMixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.LaserCutter, gameObject);
+        hitMixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.Electrical, gameObject);
     }
 
     private void HandleTargetingLaser()
