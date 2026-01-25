@@ -73,7 +73,7 @@ public class WyrmDartAction : CreatureAction
         {
             var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             sphere.transform.position = point;
-            sphere.transform.localScale = Vector3.one * 5f;
+            sphere.transform.localScale = Vector3.one * 0f;
             MaterialUtils.ApplySNShaders(sphere);
             points.Add(sphere);
         }
