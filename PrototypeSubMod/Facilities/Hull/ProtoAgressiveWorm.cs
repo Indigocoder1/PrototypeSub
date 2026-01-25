@@ -167,7 +167,7 @@ public class ProtoAggressiveWorm : Creature
                 aggroOffSfx.Play();
             }
         }
-        
+
         var segmentsAggressive = Mathf.Clamp((int)(secondsInVoid / secondsInVoidForAggression * segmentCount), 0, segmentCount);
 
         if (segmentsAggressive != numSegmentsAggressiveLastFrame)
@@ -184,12 +184,14 @@ public class ProtoAggressiveWorm : Creature
         if (playerBeingEaten) yield break;
         playerBeingEaten = true;
         consumePlayerSfx.Play();
+        ErrorMessage.AddError("Pretend a really sick eating animation is playing right now...");
 
         // Half second offset to let animation and sound play before killing
         yield return new WaitForSeconds(5f);
 
         playerMixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
-        ErrorMessage.AddError("Player nommed!");
+        ErrorMessage.AddError("...And then you get eaten. Great job.");
+        playerBeingEaten = false;
     }
 
     private void UpdateSegmentColors(int segmentsAggressive)
