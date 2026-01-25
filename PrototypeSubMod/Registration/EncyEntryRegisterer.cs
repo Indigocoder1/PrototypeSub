@@ -244,7 +244,28 @@ internal static class EncyEntryRegisterer
         };
         PDAHandler.AddCustomScannerEntry(normalWormEntryData);
         #endregion
+
+        #region Aggressive Wyrm
+        TechType aggressiveWyrmType = (TechType)Enum.Parse(typeof(TechType), "ProtoAggressiveWyrm");
+        string aggressiveWyrmTitle = Language.main.Get("ProtoAggressiveWyrmEncy_Title");
+        string aggressiveWyrmDescription = Language.main.Get("ProtoAggressiveWyrmEncy_Body");
+        Texture2D aggressiveWyrmBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("ProtoWyrmEncy");
+        var aggressiveWyrmPopup = Plugin.AssetBundle.LoadAsset<Sprite>("Wyrm_EncyPopup");
         
+        PDAHandler.AddEncyclopediaEntry("ProtoAggressiveWyrmEncy", "DownloadedData/Prototype/Scanned", aggressiveWyrmTitle,
+            aggressiveWyrmDescription, aggressiveWyrmBackground, aggressiveWyrmPopup, PDAHandler.UnlockBasic);
+        var normalWyrmEntryData = new PDAScanner.EntryData()
+        {
+            key = aggressiveWyrmType,
+            destroyAfterScan = false,
+            encyclopedia = "ProtoAggressiveWyrmEncy",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = aggressiveWyrmType
+        };
+        PDAHandler.AddCustomScannerEntry(normalWyrmEntryData);
+        #endregion
+
         #region Warp Core
         var image = Plugin.AssetBundle.LoadAsset<Texture2D>("WarpReactorEncy");
         var warpPopup = Plugin.AssetBundle.LoadAsset<Sprite>("WarpReactor_EncyPopup");
@@ -346,6 +367,8 @@ internal static class EncyEntryRegisterer
         };
         PDAHandler.AddCustomScannerEntry(wallEntry);
         #endregion
+
+
 
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()
         {
