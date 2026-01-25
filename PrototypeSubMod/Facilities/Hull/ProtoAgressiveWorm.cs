@@ -37,7 +37,7 @@ public class ProtoAggressiveWorm : Creature
     private int segmentCount;
     private int numSegmentsAggressiveLastFrame;
     private bool hasDamagedTarget;
-    private float damagetimer;
+    private float damageTimer;
     private bool playerBeingEaten;
 
     public override void Start()
@@ -107,31 +107,27 @@ public class ProtoAggressiveWorm : Creature
             var mixin = col.GetComponentInParent<LiveMixin>();
             var player = Player.main;
 
-            if (mixin != null && !hasDamagedTarget)
-            {
-                if (mixin.GetComponentInChildren<SubRoot>()) continue;
-                if (mixin.GetComponentInParent<ProtoAggressiveWorm>() != null) continue;
+            if (mixin == null || hasDamagedTarget) continue;
+            if (mixin.GetComponentInChildren<SubRoot>()) continue;
+            if (mixin.GetComponentInParent<ProtoAggressiveWorm>() != null) continue;
 
-                if (mixin == player.liveMixin)
-                {
-                    if (!player.currentSub)
-                    {
-                        StartCoroutine(OnPlayerConsumed(mixin));
-                        break;
-                    }
-                }
-                else
-                {
-                    mixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
-                }
+            if (mixin == player.liveMixin && !player.currentSub)
+            {
+                StartCoroutine(OnPlayerConsumed(mixin));
                 hasDamagedTarget = true;
-                damagetimer = 2f;
                 break;
             }
+            else
+            {
+                mixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
+            }
+            hasDamagedTarget = true;
+            damageTimer = 2f;
+            break;
         }
 
-        damagetimer -= Time.deltaTime;
-        if (damagetimer <= 0f)
+        damageTimer -= Time.deltaTime;
+        if (damageTimer <= 0f)
         {
             hasDamagedTarget = false;
         }
