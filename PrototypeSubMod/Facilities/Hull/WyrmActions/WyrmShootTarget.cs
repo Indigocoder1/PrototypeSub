@@ -217,7 +217,6 @@ public class WyrmShootTarget : CreatureAction
 
         if (targetMixin == null)
         {
-            ErrorMessage.AddError("Target is null. Something went wrong!");
             yield break;
         }
 
@@ -242,7 +241,7 @@ public class WyrmShootTarget : CreatureAction
         shotTravelSfx.Play();
         shotChargeSfx.Stop();
 
-        ErrorMessage.AddError("Laser fired at " + targetMixin.name);
+        // ErrorMessage.AddError("Laser fired at " + targetMixin.name);
 
         float travelTime = 0;
         while (travelTime < laserTravelTime)
@@ -273,7 +272,7 @@ public class WyrmShootTarget : CreatureAction
         muzzleVFX.SetActive(false);
 
         var mixin = GetAttackMixin(laserTargetPoint);
-        ErrorMessage.AddError(mixin != null ? "Hit object " + mixin.name : "Missed object " + mixin.name);
+        // ErrorMessage.AddError(mixin != null ? "Hit object " + mixin.name : "Missed object " + mixin.name);
         if (mixin == null) yield break;
 
         var originalHealth = mixin.health;
@@ -288,7 +287,7 @@ public class WyrmShootTarget : CreatureAction
 
     private LiveMixin GetAttackMixin(Vector3 laserTargetPoint)
     {
-        var colliders = Physics.OverlapSphere(laserTargetPoint, 25f);
+        var colliders = Physics.OverlapSphere(laserTargetPoint, 5f);
         LiveMixin mixin = null;
         foreach (var collider in colliders)
         {
