@@ -384,6 +384,14 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddEncyclopediaEntry("PrecursorSuitTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", precursorSuitTerminalTitle, precursorSuitTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: precursorSuitPopup);
         #endregion
 
+        #region Precursor Suit Terminal
+        string biomechanicsFactorTerminalTitle = Language.main.Get("BiomechanicsFactorTerminalEncy_Title");
+        string biomechanicsFactorTerminalDescription = Language.main.Get("BiomechanicsFactorTerminalEncy_Body");
+        var biomechanicsFactorPopup = Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon");
+
+        PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: biomechanicsFactorPopup);
+        #endregion
+
 
 
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()

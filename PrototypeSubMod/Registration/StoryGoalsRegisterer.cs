@@ -4,6 +4,7 @@ using Nautilus.Utility;
 using PrototypeSubMod.Facilities.Hull;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.FacilityProps;
+using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.PrototypeStory;
 using UnityEngine;
 
@@ -193,6 +194,14 @@ internal static class StoryGoalsRegisterer
         {
             KnownTech.Add(PrecursorSuit.prefabInfo.TechType);
             PDAEncyclopedia.Add("PrecursorSuitTerminalEncy", true);
+        });
+        #endregion
+
+        #region Biomechanics Factor Unlock
+        StoryGoalHandler.RegisterCustomEvent("BiomechanicsFactorTerminal", () =>
+        {
+            KnownTech.Add(BiomechanicsFactor.prefabInfo.TechType);
+            PDAEncyclopedia.Add("BiomechanicsFactorTerminalEncy", true);
         });
         #endregion
 
