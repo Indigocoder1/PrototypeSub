@@ -376,6 +376,14 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: transmissionDevicePopup);
         #endregion
 
+        #region Precursor Suit Terminal
+        string precursorSuitTerminalTitle = Language.main.Get("PrecursorSuitTerminalEncy_Title");
+        string precursorSuitTerminalDescription = Language.main.Get("PrecursorSuitTerminalEncy_Body");
+        var precursorSuitPopup = Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorSuitIcon");
+
+        PDAHandler.AddEncyclopediaEntry("PrecursorSuitTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", precursorSuitTerminalTitle, precursorSuitTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: precursorSuitPopup);
+        #endregion
+
 
 
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()

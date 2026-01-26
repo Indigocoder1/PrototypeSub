@@ -188,7 +188,15 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
-        #region Precursor Suit
+        #region Precursor Suit Unlock
+        StoryGoalHandler.RegisterCustomEvent("PrecursorSuitTerminal", () =>
+        {
+            KnownTech.Add(PrecursorSuit.prefabInfo.TechType);
+            PDAEncyclopedia.Add("PrecursorSuitTerminalEncy", true);
+        });
+        #endregion
+
+        #region Precursor Suit Pickup
         StoryGoalHandler.RegisterItemGoal("OnPrecursorSuitPickup", Story.GoalType.PDA, PrecursorSuit.prefabInfo.TechType);
 
         #endregion
