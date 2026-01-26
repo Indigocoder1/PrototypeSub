@@ -180,6 +180,14 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Transmission Device Unlock
+        StoryGoalHandler.RegisterCustomEvent("TransmissionDeviceUnlock", () =>
+        {
+            KnownTech.Add(ProtoTransmissionDevice.prefabInfo.TechType);
+            PDAEncyclopedia.Add("TransmissionTerminalEncy", true);
+        });
+        #endregion
+
         #region Precursor Suit
         StoryGoalHandler.RegisterItemGoal("OnPrecursorSuitPickup", Story.GoalType.PDA, PrecursorSuit.prefabInfo.TechType);
 

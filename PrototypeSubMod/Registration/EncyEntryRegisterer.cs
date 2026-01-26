@@ -368,6 +368,14 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddCustomScannerEntry(wallEntry);
         #endregion
 
+        #region Transmission Device Terminal
+        string transmissionTerminalTitle = Language.main.Get("TransmissionTerminalEncy_Title");
+        string transmissionTerminalDescription = Language.main.Get("TransmissionTerminalEncy_Body");
+        var transmissionDevicePopup = Plugin.AssetBundle.LoadAsset<Sprite>("TransmissionDevice_Icon");
+
+        PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: transmissionDevicePopup);
+        #endregion
+
 
 
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()
