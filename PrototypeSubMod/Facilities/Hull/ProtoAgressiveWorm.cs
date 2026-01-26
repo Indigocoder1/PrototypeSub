@@ -1,4 +1,5 @@
-﻿using PrototypeSubMod.Facilities.Hull.WyrmActions;
+﻿using Newtonsoft.Json.Linq;
+using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using PrototypeSubMod.LightDistortionField;
 using System;
 using System.Collections;
@@ -20,6 +21,7 @@ public class ProtoAggressiveWorm : Creature
     [SerializeField] private float secondsInVoidForAggression;
     [SerializeField] private float attackRadius = 5f;
     [SerializeField] private float attackDamage = 200f;
+    [SerializeField] private PlayerCinematicController cinematicController;
 
     [Header("SFX")]
     [SerializeField] private FMOD_CustomEmitter aggroOnSfx;
@@ -111,9 +113,9 @@ public class ProtoAggressiveWorm : Creature
             if (mixin.GetComponentInChildren<SubRoot>()) continue;
             if (mixin.GetComponentInParent<ProtoAggressiveWorm>() != null) continue;
 
-            if (mixin == player.liveMixin && !player.currentSub)
+            if (mixin == player.liveMixin && !player.currentSub && !playerBeingEaten)
             {
-                StartCoroutine(OnPlayerConsumed(mixin));
+                StartCoroutine(EatPlayer());
                 hasDamagedTarget = true;
                 break;
             }
@@ -175,21 +177,6 @@ public class ProtoAggressiveWorm : Creature
         wasAggressive = IsAggressive();
     }
 
-    private IEnumerator OnPlayerConsumed(LiveMixin playerMixin)
-    {
-        if (playerBeingEaten) yield break;
-        playerBeingEaten = true;
-        consumePlayerSfx.Play();
-        ErrorMessage.AddError("Pretend a really sick eating animation is playing right now...");
-
-        // Half second offset to let animation and sound play before killing
-        yield return new WaitForSeconds(5f);
-
-        playerMixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
-        ErrorMessage.AddError("...And then you get eaten. Great job.");
-        playerBeingEaten = false;
-    }
-
     private void UpdateSegmentColors(int segmentsAggressive)
     {
         for (var i = 0; i < segmentCount; i++)
@@ -245,5 +232,20 @@ public class ProtoAggressiveWorm : Creature
     public override void OnDestroy()
     {
         onDespawn?.Invoke();
+    }
+
+    private IEnumerator EatPlayer()
+    {
+        playerBeingEaten = true;
+        consumePlayerSfx.Play();
+        Player.main.playerAnimator.SetTrigger("player_death_explosion");
+        cinematicController.StartCinematicMode(Player.main);
+        yield return new WaitForSeconds(1f);
+
+        Player.main.liveMixin.Kill(DamageType.Electrical);
+        cinematicController.EndCinematicMode();
+        yield return new WaitForSeconds(5f);
+
+        playerBeingEaten = false;
     }
 }

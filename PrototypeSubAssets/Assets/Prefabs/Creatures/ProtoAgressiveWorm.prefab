@@ -3658,6 +3658,70 @@ Transform:
   m_Father: {fileID: 8310142666530367799}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3238160225209187241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4896556848661707955}
+  - component: {fileID: 4245532708370257002}
+  m_Layer: 0
+  m_Name: PlayerCinematicController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4896556848661707955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238160225209187241}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6026413685038941644}
+  m_Father: {fileID: 3230497408674094389}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4245532708370257002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238160225209187241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -458587425, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedTransform: {fileID: 6026413685038941644}
+  informGameObject: {fileID: 0}
+  endTransform: {fileID: 0}
+  onlyUseEndTransformInVr: 0
+  playInVr: 0
+  interruptAutoMove: 1
+  playerViewAnimationName: 
+  playerViewInterpolateAnimParam: 
+  animParam: cinematicMode
+  interpolateAnimParam: 
+  interpolationTime: 0.5
+  interpolationTimeOut: 0.25
+  receiversAnimParam: 
+  animParamReceivers:
+  - {fileID: 5351068426189712925}
+  interpolateDuringAnimation: 1
+  debug: 0
+  animator: {fileID: 1390740446532775043}
+  sound: {fileID: 0}
+  enforceCinematicModeEnd: 1
 --- !u!1 &3306471557602397471
 GameObject:
   m_ObjectHideFlags: 0
@@ -6819,6 +6883,7 @@ Transform:
   - {fileID: 8262272570642887209}
   - {fileID: 4699808734583788080}
   - {fileID: 6225381943400952255}
+  - {fileID: 4896556848661707955}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6984,6 +7049,7 @@ MonoBehaviour:
   secondsInVoidForAggression: 30
   attackRadius: 5
   attackDamage: 200
+  cinematicController: {fileID: 4245532708370257002}
   aggroOnSfx: {fileID: 8370760665603014420}
   aggroOffSfx: {fileID: 5207917267241166288}
   consumePlayerSfx: {fileID: 6017198227269601848}
@@ -11980,6 +12046,56 @@ Transform:
   m_Father: {fileID: 2078249462714600460}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8611731524188454869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6026413685038941644}
+  - component: {fileID: 1390740446532775043}
+  m_Layer: 0
+  m_Name: PlayerTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6026413685038941644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611731524188454869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896556848661707955}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1390740446532775043
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611731524188454869}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 554709cbd0b3f5e4788e05b76643165f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8619622168214806614
 GameObject:
   m_ObjectHideFlags: 0
