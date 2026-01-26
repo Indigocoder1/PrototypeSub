@@ -16,7 +16,7 @@ public static class PrecursorSuit
 
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("PrecursorSuit", null, null, "English", unlockAtStart: true)
+        prefabInfo = PrefabInfo.WithTechType("PrecursorSuit", null, null, "English")
             .WithSizeInInventory(new Vector2int(2, 2))
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorSuitIcon.png"));
 
