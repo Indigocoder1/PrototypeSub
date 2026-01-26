@@ -17,7 +17,7 @@ public static class BiomechanicsFactor
 
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("BiomechanicsFactor", unlockAtStart: true)
+        prefabInfo = PrefabInfo.WithTechType("BiomechanicsFactor")
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
