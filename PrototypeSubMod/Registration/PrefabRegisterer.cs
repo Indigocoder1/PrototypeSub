@@ -60,6 +60,7 @@ internal static class PrefabRegisterer
         
         HullOutpostTeleporter.Register();
         ProtoPhaseGateTransmitter.Register();
+        ProtoPhaseGateStructure.Register();
         BlinkFactor.Register();
         ObstructionRockLoadFar.Register();
         PrototypeSpawner.Register();
@@ -73,6 +74,10 @@ internal static class PrefabRegisterer
         ProtoFacilitySpawner.Register("ProtoBuildTerminalSpawner", "BuildTerminalSpawner");
         
         yield return new WaitForEndOfFrame();
+        
+        PrecursorPhaseGate.Register();
+        ProtoPhaseGate.Register();
+        ProtoPhaseGateItem.Register();
         
         PrecursorFabricator.Register();
 
@@ -117,10 +122,6 @@ internal static class PrefabRegisterer
         PrecursorCube1Prop.Register();
         PrecursorGunProp.Register();
         ProtoTerminalVFX.Register();
-        PrecursorPhaseGate.Register();
-        ProtoPhaseGateStructure.Register();
-        ProtoPhaseGate.Register();
-        ProtoPhaseGateItem.Register();
 
         DisplayCaseProp.Register(IonPrism_Craftable.prefabInfo.ClassID, "IonPrism_DisplayCase",
             IonPrism_Craftable.prefabInfo.TechType, new Vector3(0, 1.3f, 0), Vector3.one * 10f);
