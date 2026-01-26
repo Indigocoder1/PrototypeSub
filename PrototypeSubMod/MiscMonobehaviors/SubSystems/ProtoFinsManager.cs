@@ -27,7 +27,7 @@ public class ProtoFinsManager : MonoBehaviour, ISaveDataListener
     [SerializeField] private ProtoEngineLever engineLever;
     [SerializeField] private CrushDamage crushDamage;
     [SerializeField] private float[] noiseValues;
-    [SerializeField] private float multiplierIncreasePerFin;
+    [SerializeField] private float multiplierIncreasePerFin = 0.5f;
     [SerializeField] private float defaultSpeed;
     [SerializeField] private float depthIncreasePerFin;
 

@@ -46881,7 +46881,7 @@ MonoBehaviour:
   - 65
   - 70
   - 75
-  multiplierIncreasePerFin: 0.343
+  multiplierIncreasePerFin: 0.5
   defaultSpeed: 5.93
   depthIncreasePerFin: 400
 --- !u!114 &7654623725129476755
