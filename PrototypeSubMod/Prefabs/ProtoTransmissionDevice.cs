@@ -14,14 +14,16 @@ public static class ProtoTransmissionDevice
 
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("ProtoTransmissionDevice",null, null, unlockAtStart: true);
+        prefabInfo = PrefabInfo.WithTechType("ProtoTransmissionDevice",null, null)
+            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("TransmissionDevice_Icon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
         prefab.SetGameObject(GetGameObject);
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ProtoTransmissionDevice.json"));
         prefab.SetEquipment(Plugin.PhaseGateEquipmentType);
-        
+        prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
+
         prefab.Register();
     }
     
