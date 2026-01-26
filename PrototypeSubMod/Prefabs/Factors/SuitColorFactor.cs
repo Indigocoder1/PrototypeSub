@@ -15,7 +15,7 @@ public static class SuitColorFactor
 
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("SuitColorFactor", unlockAtStart: true)
+        prefabInfo = PrefabInfo.WithTechType("SuitColorFactor")
             .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
