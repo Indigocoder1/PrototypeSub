@@ -31,7 +31,6 @@ internal static class PrefabRegisterer
         //ProtoBuildTerminal_World.Register();
         DeployableLight_Craftable.Register();
         ProtoAggressiveWyrm.Register();
-        ProtoTransmissionDevice.Register();
         
         yield return new WaitForEndOfFrame();
         
@@ -78,7 +77,7 @@ internal static class PrefabRegisterer
         PrecursorPhaseGate.Register();
         ProtoPhaseGate.Register();
         ProtoPhaseGateItem.Register();
-        
+        ProtoTransmissionDevice.Register();
         PrecursorFabricator.Register();
 
         StoryGoalTerminal.CreateTerminal("AlienBuildingBlockTerminal", "AlienBuildingBlockEncy");
