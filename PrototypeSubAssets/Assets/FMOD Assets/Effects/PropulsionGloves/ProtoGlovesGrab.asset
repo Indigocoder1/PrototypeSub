@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: ProtoGlovesGrab
   id: 
-  audioClip: {fileID: 8300000, guid: 2549f77584e4b464ba9fa17b18b256d0, type: 3}
+  audioClip: {fileID: 8300000, guid: 540070c2e4d05934c9a436a8dbdb3488, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0
