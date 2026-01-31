@@ -210,6 +210,14 @@ internal static class StoryGoalsRegisterer
 
         #endregion
 
+        #region Hoverfish Plush Unlock
+        StoryGoalHandler.RegisterCustomEvent("OnHoverfishPlushUnlocked", () =>
+        {
+            KnownTech.Add(HoverfishPlush.prefabInfo.TechType);
+            PDALog.Add("OnHoverfishPlushUnlocked");
+        });
+        #endregion
+
         StoryGoalHandler.RegisterCustomEvent("HullFacilityMainLights", null);
         StoryGoalHandler.RegisterCustomEvent("HullFacilityWyrmLights", null);
         
