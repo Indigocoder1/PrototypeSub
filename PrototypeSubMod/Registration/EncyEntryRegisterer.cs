@@ -392,7 +392,15 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: biomechanicsFactorPopup);
         #endregion
 
+        #region Transmission Site Hint
 
+        var transmissionSiteTitle = Language.main.Get("ProtoTransmissionSiteEncy_Title");
+        var transmissionSiteBody = Language.main.Get("ProtoTransmissionSiteEncy_Body");
+
+        PDAHandler.AddEncyclopediaEntry("ProtoTransmissionSiteEncy", "DownloadedData/Prototype", transmissionSiteTitle,
+            transmissionSiteBody, unlockSound: PDAHandler.UnlockBasic);
+
+        #endregion
 
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()
         {
