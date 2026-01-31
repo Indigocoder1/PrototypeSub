@@ -379,15 +379,15 @@ internal static class EncyEntryRegisterer
         #region Precursor Suit Terminal
         string precursorSuitTerminalTitle = Language.main.Get("PrecursorSuitTerminalEncy_Title");
         string precursorSuitTerminalDescription = Language.main.Get("PrecursorSuitTerminalEncy_Body");
-        var precursorSuitPopup = Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorSuitIcon");
+        var precursorSuitPopup = Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorSuit_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("PrecursorSuitTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", precursorSuitTerminalTitle, precursorSuitTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: precursorSuitPopup);
         #endregion
 
-        #region Precursor Suit Terminal
+        #region Biomechanics Factor Terminal
         string biomechanicsFactorTerminalTitle = Language.main.Get("BiomechanicsFactorTerminalEncy_Title");
         string biomechanicsFactorTerminalDescription = Language.main.Get("BiomechanicsFactorTerminalEncy_Body");
-        var biomechanicsFactorPopup = Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon");
+        var biomechanicsFactorPopup = Plugin.AssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: biomechanicsFactorPopup);
         #endregion
