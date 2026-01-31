@@ -46,6 +46,9 @@
 
   "ProtoTransmissionDevice": "Transmission Device",
   "Tooltip_ProtoTransmissionDevice": "Unique device used to transmit signals. Deployed via the Prototype and requires a calibration pattern.",
+
+  "HoverfishPlush": "Hoverfish Plushy",
+  "Tooltip_HoverfishPlush": "For your Daily Dose of Hoverfish",
   
   "ProtoOrionFragmentor": "Alien surgical structure",
   "ProtoDecorativeWorm": "Alien wyrm",
