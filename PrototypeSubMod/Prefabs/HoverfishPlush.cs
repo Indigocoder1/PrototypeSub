@@ -15,7 +15,7 @@ internal class HoverfishPlush
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("HoverfishPlush", null, null, "English")
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("CrucifixIcon"));
+            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("HoverfishPlushIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
