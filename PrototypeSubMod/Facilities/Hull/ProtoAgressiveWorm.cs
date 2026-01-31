@@ -119,10 +119,8 @@ public class ProtoAggressiveWorm : Creature
                 hasDamagedTarget = true;
                 break;
             }
-            else
-            {
-                mixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
-            }
+
+            mixin.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
             hasDamagedTarget = true;
             damageTimer = 2f;
             break;
@@ -236,6 +234,8 @@ public class ProtoAggressiveWorm : Creature
 
     private IEnumerator EatPlayer()
     {
+        if (!Player.main.IsAlive()) yield break;
+        
         playerBeingEaten = true;
         consumePlayerSfx.Play();
         Player.main.playerAnimator.SetTrigger("player_death_explosion");
