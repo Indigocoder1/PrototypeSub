@@ -102,8 +102,9 @@ internal static class BiomeRegisterer
         calibrationVolumePrefab.SetGameObject(calibrationTemplate);
         calibrationVolumePrefab.Register();
 
-        var calibrationSpawnInfo = new SpawnInfo(calibrationPrefabInfo.ClassID, CalibrationRunManager.InitialPoint, 
-            Quaternion.identity, Vector3.one * 2000);
+        var calibrationCenter = new Vector3(-2470, -390, 853);
+        var calibrationSpawnInfo = new SpawnInfo(calibrationPrefabInfo.ClassID, calibrationCenter, 
+            Quaternion.identity, Vector3.one * 1150);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(calibrationSpawnInfo);
 
         #endregion
