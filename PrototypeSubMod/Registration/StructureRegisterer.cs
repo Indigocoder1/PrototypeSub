@@ -33,6 +33,7 @@ internal static class StructureRegisterer
         yield return Structure.RegisterFromBundle("DefenseFacilityTeleporterRoomInteriorObjects");
         yield return Structure.RegisterFromBundle("QEPRemnantSpawns");
         yield return Structure.RegisterFromBundle("EngineFacilityRemnant");
+        yield return Structure.RegisterFromBundle("ProtoNumberPuzzleCave");
 
         if (TRPCompatManager.TRPInstalled)
         {
