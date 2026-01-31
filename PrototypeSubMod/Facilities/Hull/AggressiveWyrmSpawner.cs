@@ -15,6 +15,8 @@ public class AggressiveWyrmSpawner : MonoBehaviour
     {
         if (WaitScreen.IsWaiting) return;
 
+        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy")) return;
+        
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";
         inVoid |= biomeString.EndsWith("protovoid");
@@ -26,12 +28,13 @@ public class AggressiveWyrmSpawner : MonoBehaviour
             var normal = info.normal;
             if (!hitPoint)
             {
+                const float spawnOffset = 250;
                 var playerPos = Player.main.transform.position;
                 var dir = (-playerPos.normalized - Vector3.up) / 2;
                 dir.Normalize();
-                point = playerPos + dir * 200f;
+                point = playerPos + dir * spawnOffset;
                 normal = -dir;
-                Plugin.Logger.LogInfo($"Didn't detect any hits. Resorting to fallback spawn location");
+                Plugin.Logger.LogInfo($"Wyrm spawner didn't detect any hits. Resorting to fallback spawn location");
             }
             
             Plugin.Logger.LogInfo($"Entered the void | Spawn point at {point}");
@@ -43,7 +46,6 @@ public class AggressiveWyrmSpawner : MonoBehaviour
 
     private IEnumerator SpawnWyrm(Vector3 point, Vector3 normal)
     {
-        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy")) yield break;
         wyrmSpawned = true;
         var task = CraftData.GetPrefabForTechTypeAsync(ProtoAggressiveWyrm.prefabInfo.TechType);
         yield return task;
