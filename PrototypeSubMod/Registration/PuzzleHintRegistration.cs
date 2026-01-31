@@ -35,6 +35,18 @@ public static class PuzzleHintRegistration
             UWE.CoroutineHost.StartCoroutine(SpawnPrefab(calibrationPingTechType, CalibrationRunManager.InitialPoint));
         });
         #endregion
+
+        #region Transmission Site Hint
+
+        StoryGoalHandler.RegisterCompoundGoal("ProtoTransmissionSiteHint", Story.GoalType.Story, 20,
+            "OnPlayProtoRadioMessage4");
+        StoryGoalHandler.RegisterCustomEvent("ProtoTransmissionSiteHint", () =>
+        {
+            PDALog.Add("ProtoTransmissionSiteHint");
+            PDAEncyclopedia.Add("ProtoTransmissionSiteEncy", true);
+        });
+
+        #endregion
     }
 
     private static IEnumerator SpawnPrefab(TechType techType, Vector3 position)

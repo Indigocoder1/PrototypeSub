@@ -31,6 +31,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_FacilityLocations", "ProtoFacilityLocationsHint"));
         PDALog_Patches.entries.Add(("PDA_OnPrecursorSuitPickup", "OnPrecursorSuitPickup"));
         PDALog_Patches.entries.Add(("PDA_OnHoverfishPlushUnlocked", "OnHoverfishPlushUnlocked"));
+        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoTransmissionSiteHint"));
 
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBlinkFactorUnlock"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBiomechanicsFactorUnlock"));
