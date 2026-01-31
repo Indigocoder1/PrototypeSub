@@ -23,8 +23,6 @@ public class WyrmDartAction : CreatureAction
     private int rightHandSign;
     private int attackStage;
 
-    private List<GameObject> points = new();
-
     public override float Evaluate(Creature creature, float time)
     {
         return performing ? 1 : Random.Range(0f, 0.8f);
@@ -61,22 +59,6 @@ public class WyrmDartAction : CreatureAction
 
         originalSpeed = wormAnimator.GetForwardsSpeed();
         wormAnimator.SetTravelTarget(GetMovementPoints()[attackStage], OnPointReached);
-
-        foreach (var p in points)
-        {
-            Destroy(p);
-        }
-
-        points.Clear();
-        
-        foreach (var point in GetMovementPoints())
-        {
-            var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            sphere.transform.position = point;
-            sphere.transform.localScale = Vector3.one * 0f;
-            MaterialUtils.ApplySNShaders(sphere);
-            points.Add(sphere);
-        }
     }
     
     public void OverrideStopPerform()
@@ -105,13 +87,6 @@ public class WyrmDartAction : CreatureAction
         if (attackStage < tempPoints.Length - 2)
         {
             movementPoints = tempPoints;
-        }
-        
-        int i = 0;
-        foreach (var point in movementPoints)
-        {
-            points[i].transform.position = point;
-            i++;
         }
 
         var angle = Vector3.Angle(transform.forward, movementPoints[attackStage] - transform.position);
