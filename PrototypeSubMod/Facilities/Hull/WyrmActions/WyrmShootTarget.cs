@@ -278,7 +278,7 @@ public class WyrmShootTarget : CreatureAction
         var originalHealth = mixin.health;
 
         DamageTarget(laserTargetPoint, mixin);
-        ErrorMessage.AddError("Damaged " + mixin.name);
+        // ErrorMessage.AddError("Damaged " + mixin.name);
 
         shotHitSfx.Play();
         roarManager.PlayRoar(Player.main.transform.position);
