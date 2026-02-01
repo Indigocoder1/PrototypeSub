@@ -14,6 +14,7 @@ public class NumberPuzzleManager : MonoBehaviour
     [SerializeField] private SelectableNumber[] selectableNumbers;
     [SerializeField] private Color deselectedColor;
     [SerializeField] private Color selectedColor;
+    [SerializeField] private FMOD_CustomEmitter onSwapSfx;
 
     private NumberPuzzleAnswer[] puzzleAnswersOrder;
     private NumberPuzzleAnswer prevSelectedAnswer;
@@ -73,6 +74,7 @@ public class NumberPuzzleManager : MonoBehaviour
         puzzleAnswersOrder[index2] = answer;
         answer.SwapPosition(prevSelectedAnswer);
         prevSelectedAnswer = null;
+        onSwapSfx.Play();
     }
 
     public void SelectNumber(int number, bool? isSecondary = null)

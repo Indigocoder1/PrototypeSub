@@ -135,8 +135,8 @@ MonoBehaviour:
         m_CallState: 2
   onEnterFX: {fileID: 0}
   onExitFX: {fileID: 0}
-  onClickFX: {fileID: 0}
-  volume: 1
+  onClickFX: {fileID: 11400000, guid: 25405428728b3b44ebd2b1c5dfa572d0, type: 2}
+  volume: 0.25
   minDistForSound: 15
 --- !u!1 &5914901589878244931
 GameObject:
