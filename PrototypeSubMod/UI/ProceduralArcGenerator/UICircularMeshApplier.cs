@@ -15,6 +15,9 @@ public class UICircularMeshApplier : CircularMeshApplier
 
     private void Awake()
     {
+        // To avoid issues in the Unity Editor
+        if (Player.main == null) return;
+        
         var shader = Plugin.ShadersAssetBundle.LoadAsset<Shader>(material.shader.name.Split('/')[^1]);
         material.shader = shader;
     }
