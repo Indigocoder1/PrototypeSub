@@ -14,7 +14,7 @@ public static class RadioMessageRegisterer
         RegisterMessage("ProtoRadioMessage2", "ProtoRadioMessage2");
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage2", Story.GoalType.Radio, 3600, "ProtoRadioMessage1");
         RegisterMessage("ProtoRadioMessage3", "ProtoRadioMessage3");
-        StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage3", Story.GoalType.Radio, 3600, "ProtoRadioMessage2");
+        StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage3", Story.GoalType.Radio, 300, "ProtoRadioMessage2", "HullFacilityWormTerminalEncy");
         
         RegisterMessage("ProtoRadioMessage4", "ProtoRadioMessage3");
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage4", Story.GoalType.Radio, 120, "OnCalibrationRunCompleted");
