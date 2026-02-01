@@ -1,5 +1,4 @@
 ﻿using System;
-using Nautilus.Utility;
 using PrototypeSubMod.Puzzles.BearingPuzzle;
 using Story;
 using UnityEngine;
@@ -11,11 +10,10 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     public static readonly Vector3 InitialPoint = new(-2220, -390, 420);
 
     public event Action<int> onPointReached;
-
-    [SerializeField] private CalibrationDirectionIndicator directionIndicator;
-    [SerializeField] private BearingReferenceSymbol finalBearingSymbol;
+    
     [SerializeField] private GameObject calibrationObjects;
     [SerializeField] private GameObject calibrationPointPrefab;
+    [SerializeField] private BearingReferenceSymbol[] pointNumbers;
     [SerializeField] private float globalSpacing = 100;
     [SerializeField] private float[] pointSpacings;
     [SerializeField] private float[] relativePointAngles;
@@ -45,19 +43,11 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         pointsCenter /= relativePointAngles.Length + 1; 
 
         int index = 0;
-        var bearingReferences = directionIndicator.GetBearingReferenceSymbols();
         foreach (var point in calibrationPoints)
         {
             var calibrationPointObject = Instantiate(calibrationPointPrefab, point, Quaternion.identity);
             var calibrationPoint = calibrationPointObject.GetComponent<CalibrationPoint>();
-            if (index < calibrationPoints.Length - 1)
-            {
-                calibrationPoint.SetBearingReference(bearingReferences[index]);
-            }
-            else if (finalBearingSymbol != null)
-            {
-                calibrationPoint.SetBearingReference(finalBearingSymbol);
-            }
+            calibrationPoint.SetBearingReference(pointNumbers[index]);
             
             index++;
         }

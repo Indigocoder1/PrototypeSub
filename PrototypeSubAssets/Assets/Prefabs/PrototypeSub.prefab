@@ -55394,11 +55394,16 @@ MonoBehaviour:
   m_Script: {fileID: 1028079527, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionIndicator: {fileID: 2512780545025838463}
-  finalBearingSymbol: {fileID: 11400000, guid: 24a799e997210034fb9c566f50211a40, type: 2}
   calibrationObjects: {fileID: 1461169492174364785}
   calibrationPointPrefab: {fileID: 7944695153003803199, guid: 4cbfe8f7bc8653040a37f0d738b8d300,
     type: 3}
+  pointNumbers:
+  - {fileID: 11400000, guid: df807e1433007a34dbd3ced93d52637b, type: 2}
+  - {fileID: 11400000, guid: 6aca8988c0c65114db6f044b9ae36e81, type: 2}
+  - {fileID: 11400000, guid: 7c1a8d577b269964b87b8e7444168eb2, type: 2}
+  - {fileID: 11400000, guid: 16dafb705c1e61545b368d23e43968d2, type: 2}
+  - {fileID: 11400000, guid: 458d01d232c5ab24ba96e9c1a2bec074, type: 2}
+  - {fileID: 11400000, guid: a54ebc4c83ecaae42bcbb0c70d6cbcd1, type: 2}
   globalSpacing: 500
   pointSpacings:
   - 2
