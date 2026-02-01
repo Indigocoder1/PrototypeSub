@@ -20,11 +20,13 @@ public class SFXButton : Button
     private bool wasOutOfRange;
     private bool mouseOnObject;
     private bool onPDA;
+
+    private RaycastHit[] hitInfos = new RaycastHit[4];
     
     private void Awake()
     {
         layerMask = int.MaxValue;
-        layerMask &= ~(1 << LayerID.Trigger);
+        layerMask |= ~(1 << LayerID.Trigger);
         onClick.AddListener(() =>
         {
             if ((Player.main.transform.position - transform.position).sqrMagnitude >
@@ -114,11 +116,20 @@ public class SFXButton : Button
         
         if (onPDA) return false;
         
-        var dir = Player.main.transform.position - transform.position;
-        bool hitObj = Physics.Raycast(transform.position + dir.normalized * 0.2f, dir, out var raycastHit, minDistForSound + 1, layerMask);
-        if (!hitObj) return false;
+        var dir = Camera.main.transform.position - transform.position;
+        var count = Physics.RaycastNonAlloc(transform.position + dir.normalized * 0.1f, dir, hitInfos, dir.magnitude, layerMask);
+        if (count == 0) return false;
+
+        for (int i = 0; i < count; i++)
+        {
+            if (hitInfos[i].collider.isTrigger) continue;
+            
+            if (hitInfos[i].collider.gameObject == Player.main.gameObject) continue;
+
+            return true;
+        }
         
-        return raycastHit.collider.gameObject != Player.main.gameObject;
+        return false;
     }
     
     private IEnumerator UpdateHoverDistance()
