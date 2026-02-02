@@ -6,6 +6,7 @@ public static class InputRegisterer
 {
     public static GameInput.Button TetherSubButton;
     public static GameInput.Button TetherMarkerButton;
+    public static GameInput.Button LocatorButton;
     
     public static void Register()
     {
@@ -20,5 +21,12 @@ public static class InputRegisterer
             .WithBinding(GameInput.Device.Keyboard, GameInputHandler.Paths.Keyboard.X)
             .WithBinding(GameInput.Device.Controller, GameInputHandler.Paths.Gamepad.DpadUp)
             .WithCategory("PrototypeInputCategory");
+        
+        LocatorButton = EnumHandler.AddEntry<GameInput.Button>("ProtoLocatorPingButton")
+            .CreateInput()
+            .WithBinding(GameInput.Device.Keyboard, GameInputHandler.Paths.Keyboard.P)
+            .WithBinding(GameInput.Device.Controller, GameInputHandler.Paths.Gamepad.DpadLeft)
+            .WithCategory("PrototypeInputCategory");
+    
     }
 }

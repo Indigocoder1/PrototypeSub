@@ -31,6 +31,7 @@ using SubLibrary.Handlers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UWE;
+using System.Collections.Generic;
 
 namespace PrototypeSubMod
 {
@@ -120,6 +121,21 @@ namespace PrototypeSubMod
         internal const string ENGINE_FACILITY_BIOME_NAME = "protoenginefacility";
         internal static readonly Vector3 STORY_END_POS = new Vector3(858, -800, 3116);
         internal static readonly Vector3 DEFENSE_PING_POS = new Vector3(700, -489, -1456);
+        internal static readonly Dictionary<string, Vector3> FACILITY_POSITIONS = new()
+        {
+            { "InterceptorFacility", new Vector3(547, -709, 955) },
+            { "DefenseFacility", new Vector3(689, -483, -1404f) },
+            { "DefenseMoonpool", new Vector3(782, -460, -1046) },
+            { "EngineFacility", new Vector3(-558, -463, 1497f) },
+            { "HullFacility", new Vector3(-1182, -443, -1146) },
+            { "HullOutpost", new Vector3(-162, -69, -226) },
+            { "NumberPuzzle",  new Vector3(-242, -72, 296) },
+            { "PPT", new Vector3(449, -92, 1169) },
+            { "Worm1", new Vector3(-898, -386, -1284) },
+            { "Worm2", new Vector3(-1006, -293, -1148) },
+            { "Worm3", new Vector3(-1205, -312, -707) },
+            { "Worm4", new Vector3(-1224, -217, -697) }
+        };
         internal static TechType StoryEndPingTechType;
         internal static GridSaveData pathfindingGridSaveData;
         internal static event Action<GridSaveData> onLoadGridSaveData;

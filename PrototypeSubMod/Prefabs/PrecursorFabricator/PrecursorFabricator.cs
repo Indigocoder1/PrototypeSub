@@ -51,6 +51,7 @@ internal class PrecursorFabricator
             .AddCraftNode(TechType.PrecursorIonPowerCell, "Devices")
             .AddCraftNode(BlinkFactor.prefabInfo.TechType, "Devices")
             .AddCraftNode(TetherFactor.prefabInfo.TechType, "Devices")
+            .AddCraftNode(LocatorFactor.prefabInfo.TechType, "Devices")
             .AddCraftNode(SuitColorFactor.prefabInfo.TechType, "Devices")
             .AddCraftNode(PrecursorSuit.prefabInfo.TechType, "Devices")
             .AddCraftNode(PrecursorPropulsionGloves.PrefabInfo.TechType, "Devices")

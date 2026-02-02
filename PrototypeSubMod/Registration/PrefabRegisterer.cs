@@ -21,6 +21,8 @@ internal static class PrefabRegisterer
         AlienBuildingBlock.Register();
         TetherFactorMarker.Register();
         BiomechanicsFactor.Register();
+        LocatorFactor.Register();
+        LocatorFactorSource.Register();
         SuitColorFactor.Register();
         PrecursorIngot_Craftable.Register();
         IonPrism_Craftable.Register();
