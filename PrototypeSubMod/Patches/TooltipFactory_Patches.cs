@@ -54,6 +54,11 @@ public class TooltipFactory_Patches
     [HarmonyPatch(nameof(TooltipFactory.ItemActions)), HarmonyPostfix]
     private static void ItemActions_Postfix(StringBuilder sb, InventoryItem item)
     {
+        HandleColorFactorActions(sb, item);
+    }
+
+    private static void HandleColorFactorActions(StringBuilder sb, InventoryItem item)
+    {
         if (item.techType != SuitColorFactor.prefabInfo.TechType) return;
         
         var colorFactor = item.item.GetComponent<ColorFactor>();
