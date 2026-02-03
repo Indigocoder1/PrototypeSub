@@ -24,7 +24,7 @@ public class Locator : Factor
     public Locator()
     {
         cooldown = 1f;
-        duration = 10f; // keep synced with actual length of `FacilityDetectionPing.wav`
+        duration = 10.7188f; // keep synced with actual length of `FacilityDetectionPing.wav` in seconds
     }
 
     private GameObject locatorSource;

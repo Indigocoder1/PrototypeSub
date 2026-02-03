@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using HarmonyLib;
+using PriorityQueueInternal;
 using PrototypeSubMod.Factors;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
@@ -55,6 +56,7 @@ public class TooltipFactory_Patches
     private static void ItemActions_Postfix(StringBuilder sb, InventoryItem item)
     {
         HandleColorFactorActions(sb, item);
+        HandleLocatorFactorTooltips(sb, item);
     }
 
     private static void HandleColorFactorActions(StringBuilder sb, InventoryItem item)
@@ -70,5 +72,15 @@ public class TooltipFactory_Patches
             Language.main.Get($"Suit{editKey}Prev"));
         TooltipFactory.WriteAction(sb, GameInput.FormatButton(GameInput.Button.AltTool),
             Language.main.Get("SuitToggleEditMode"));
+    }
+
+    
+    private static void HandleLocatorFactorTooltips(StringBuilder sb, InventoryItem item)
+    {
+        if (item.techType != LocatorFactor.prefabInfo.TechType) return;
+
+        var locatorFactor = item.item.GetComponent<Factors.Locator.Locator>();
+        TooltipFactory.WriteAction(sb, GameInput.FormatButton(locatorFactor.GetUseButton()),
+            Language.main.Get("LocatorPing"));
     }
 }

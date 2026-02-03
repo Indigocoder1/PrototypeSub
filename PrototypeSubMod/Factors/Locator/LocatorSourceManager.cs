@@ -49,11 +49,10 @@ public class LocatorSourceManager : MonoBehaviour
     {
         if (inUse)
         {
-            if (Time.time - timePingStart <= actualDuration)// || Time.time - timeLoopStart <= locatorFactor.duration / relPitch) //&& !stopping)
+            // continue to at least `actualDuration` and don't cut off mid-loop
+            if (Time.time - timePingStart <= actualDuration || Time.time - timeLoopStart <= locatorFactor.duration / relPitch) 
             {
-                Debug.Log($"Locator pinging {nearestFacility.name} at normalized distance {nearestFacility.normDist:F2}");
                 HandlePingEffect();
-                // HandleSourceMotion();
                 if (Time.time - timeLoopStart >= locatorFactor.duration / relPitch)
                 {
                     if (stopping) 
@@ -64,7 +63,6 @@ public class LocatorSourceManager : MonoBehaviour
                     timeLoopStart = Time.time;
                     pingSfx.Play();
                 }
-                // if (!pingSfx.playing) pingSfx.Play();
             }
             else
                 Stop();

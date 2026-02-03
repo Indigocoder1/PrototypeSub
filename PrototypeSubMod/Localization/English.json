@@ -184,6 +184,7 @@
   "Tooltip_BiomechanicsFactor": "Alien implement used to convert ion energy to bodily nourishment.",
   "LocatorFactor": "Locator Factor",
   "Tooltip_LocatorFactor": "Alien implement originally used to orient by nearby facilities.",
+  "LocatorPing": "Ping locator",
   "ProtoSuitUnequipWarning": "Cannot remove suit while Factors are installed!",
   "PropulsionGlovesRelease": "Release item {0}",
   "SuitColorFactor": "Color Factor",
