@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: BlinkRechargeLoop
   id: 
-  audioClip: {fileID: 8300000, guid: 5641346fe0289cc4897b364203ba1bd4, type: 3}
+  audioClip: {fileID: 8300000, guid: 7ae2d01d3c923bc42a709e3771946b31, type: 3}
   doNotAutoRegister: 0
   mode: 4210698
   maxDistance3D: 0

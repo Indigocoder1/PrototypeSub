@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: BlinkCrash
   id: 
-  audioClip: {fileID: 8300000, guid: ea41293f71e05234eacaab4275aab5a2, type: 3}
+  audioClip: {fileID: 8300000, guid: 7d1b7cb6c179b1d4786a834f1c68ac30, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0
