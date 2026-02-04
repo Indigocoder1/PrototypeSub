@@ -138,6 +138,8 @@ internal class Inventory_Patches
         var itemInBody = Inventory.main.equipment.GetItemInSlot("Body");
         if (itemInBody == null || itemInBody.techType != PrecursorSuit.prefabInfo.TechType) return;
         
+        if ((__result & ItemAction.Switch) > 0) return;
+        
         __result |= ItemAction.Eat;
     }
 }
