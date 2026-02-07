@@ -59,6 +59,17 @@ public static class CompatPatchRegisterer
             harmony.Patch(dockedPositionMethod, transpiler: new HarmonyMethod(dockedPositionTranspiler));
         }
 
+        if (Chainloader.PluginInfos.ContainsKey("com.digaoness.CyclopsModules"))
+        {
+            var moduleComponentStartMethod =
+                AccessTools.Method(CyclopsModulesCompat_Patches.CyclopsModulesComponentType, "Start");
+
+            var patchMethod = AccessTools.Method(typeof(CyclopsModulesCompat_Patches),
+                nameof(CyclopsModulesCompat_Patches.CyclopsModulesComponentStart_Postfix));
+
+            harmony.Patch(moduleComponentStartMethod, postfix: new HarmonyMethod(patchMethod));
+        }
+
         sw.Stop();
         Plugin.Logger.LogInfo($"Dependant patches registered in {sw.ElapsedMilliseconds}ms");
     }

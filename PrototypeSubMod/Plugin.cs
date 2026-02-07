@@ -46,6 +46,7 @@ namespace PrototypeSubMod
     [BepInDependency("com.lee23.epicweather", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.aci.thesilence", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.mikjaw.subnautica.vehicleframework.mod", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.digaoness.CyclopsModules", BepInDependency.DependencyFlags.SoftDependency)]
     public class Plugin : BaseUnityPlugin
     {
         private const string GUID = "com.prototech.prototypesub";
