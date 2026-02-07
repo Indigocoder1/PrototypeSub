@@ -19808,17 +19808,17 @@ PrefabInstance:
         type: 3}
       propertyPath: doorsTo.Array.data[0]
       value: 
-      objectReference: {fileID: 3209647020345996587}
+      objectReference: {fileID: 8077095716292056787}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsTo.Array.data[1]
       value: 
-      objectReference: {fileID: 394019801769877228}
+      objectReference: {fileID: 703458062455431197}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsTo.Array.data[2]
       value: 
-      objectReference: {fileID: 4764591858501512229}
+      objectReference: {fileID: 8357540669680686263}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsFrom.Array.data[0]
@@ -19858,17 +19858,17 @@ PrefabInstance:
         type: 3}
       propertyPath: linkedTeleporters.Array.data[0].doorTo
       value: 
-      objectReference: {fileID: 3209647020345996587}
+      objectReference: {fileID: 8077095716292056787}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[1].doorTo
       value: 
-      objectReference: {fileID: 394019801769877228}
+      objectReference: {fileID: 703458062455431197}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[2].doorTo
       value: 
-      objectReference: {fileID: 4764591858501512229}
+      objectReference: {fileID: 8357540669680686263}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[0].doorFrom
@@ -21177,17 +21177,17 @@ PrefabInstance:
         type: 3}
       propertyPath: doorsTo.Array.data[0]
       value: 
-      objectReference: {fileID: 3209647021790532222}
+      objectReference: {fileID: 8077095716292056787}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsTo.Array.data[1]
       value: 
-      objectReference: {fileID: 4764591859741313904}
+      objectReference: {fileID: 5772810421813945335}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsTo.Array.data[2]
       value: 
-      objectReference: {fileID: 394019802942585273}
+      objectReference: {fileID: 703458062455431197}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsFrom.Array.data[0]
@@ -21227,17 +21227,17 @@ PrefabInstance:
         type: 3}
       propertyPath: linkedTeleporters.Array.data[0].doorTo
       value: 
-      objectReference: {fileID: 3209647021790532222}
+      objectReference: {fileID: 8077095716292056787}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[1].doorTo
       value: 
-      objectReference: {fileID: 4764591859741313904}
+      objectReference: {fileID: 5772810421813945335}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[2].doorTo
       value: 
-      objectReference: {fileID: 394019802942585273}
+      objectReference: {fileID: 703458062455431197}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: linkedTeleporters.Array.data[0].doorFrom
