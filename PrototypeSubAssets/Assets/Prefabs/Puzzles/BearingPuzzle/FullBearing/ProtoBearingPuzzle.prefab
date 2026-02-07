@@ -9364,6 +9364,7 @@ MonoBehaviour:
   - name: 
     doorFrom: {fileID: 3626298912732424355}
     doorTo: {fileID: 6693525436086255155}
+  teleportSfx: {fileID: 0}
   doorsFrom:
   - {fileID: 6693525436086255155}
   - {fileID: 3626298912732424355}
@@ -19367,6 +19368,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
         type: 3}
+      propertyPath: teleportSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: ea47a150fd85f3f49bd7d106c916ad6d,
+        type: 2}
+    - target: {fileID: 6960724421127058817, guid: f17d5624b3844844cbd032924ed0317e,
+        type: 3}
       propertyPath: doorsTo.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -19781,6 +19788,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7344987362867162414}
     m_Modifications:
+    - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
+        type: 3}
+      propertyPath: teleportSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: ea47a150fd85f3f49bd7d106c916ad6d,
+        type: 2}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsTo.Array.size
@@ -21144,6 +21157,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7344987362867162414}
     m_Modifications:
+    - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
+        type: 3}
+      propertyPath: teleportSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: ea47a150fd85f3f49bd7d106c916ad6d,
+        type: 2}
     - target: {fileID: 6960724421127058817, guid: 102d36c6dec57504b9ec1218698a0cf4,
         type: 3}
       propertyPath: doorsTo.Array.size
