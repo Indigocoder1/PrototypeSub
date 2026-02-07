@@ -15,30 +15,31 @@ internal static class LoadEasyPrefabs
 {
     public static event Action<float> OnProgressChanged;
     
+    private static float _progress;
+    private static float _bundleProgress;
+    
     public static IEnumerator LoadPrefabs(AssetBundle assetBundle, params Action[] onCompleted)
     {
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
         
-        float progress = 0;
-        float bundleProgress;
         var assetsRequest = assetBundle.LoadAllAssetsAsync(typeof(EasyPrefab));
         while (!assetsRequest.isDone)
         {
-            bundleProgress = assetsRequest.progress;
-            OnProgressChanged?.Invoke((bundleProgress + progress) / 2);
-            yield return null;
+            _bundleProgress = assetsRequest.progress;
+            OnProgressChanged?.Invoke(GetLoadProgress());
+            yield return assetsRequest;
         }
 
-        bundleProgress = 1;
+        _bundleProgress = 1;
 
         int completedPrefabs = 0;
         foreach (var easyPrefab in assetsRequest.allAssets)
         {
             yield return RegisterEasyPrefab((EasyPrefab)easyPrefab, onCompleted);
             completedPrefabs++;
-            progress = (float)completedPrefabs / assetsRequest.allAssets.Length;
-            OnProgressChanged?.Invoke((bundleProgress + progress) / 2);
+            _progress = (float)completedPrefabs / assetsRequest.allAssets.Length;
+            OnProgressChanged?.Invoke((_bundleProgress + _progress) / 2);
         }
         
         foreach (var action in onCompleted)
@@ -74,6 +75,11 @@ internal static class LoadEasyPrefabs
 
             prefab.Register();
         }
+    }
+
+    public static float GetLoadProgress()
+    {
+        return (_bundleProgress + _progress) / 2;
     }
 
     private static void SetupMiscellaneousValues(EasyPrefab easyPrefab, CustomPrefab prefab)

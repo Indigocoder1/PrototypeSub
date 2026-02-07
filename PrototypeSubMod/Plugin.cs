@@ -263,7 +263,8 @@ namespace PrototypeSubMod
 
         private IEnumerator LoadPrefabsTask(WaitScreenHandler.WaitScreenTask waitTask)
         {
-            waitTask.Status = Language.main.GetFormat("ProtoWaitRegisteringPrefabs", 0);
+            waitTask.Status = Language.main.GetFormat("ProtoWaitRegisteringPrefabs", 
+                (LoadEasyPrefabs.GetLoadProgress() * 100).ToString("F0"));
             LoadEasyPrefabs.ClearProgressEvents();
             LoadEasyPrefabs.OnProgressChanged += progress =>
             {
