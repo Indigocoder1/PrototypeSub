@@ -3983,50 +3983,6 @@
       "priority": 0
     },
     {
-      "classId": "IonCrystalMatrix",
-      "id": "7fa25f1c-7e55-421f-8c86-08d16f8ae4ba",
-      "position": {
-        "x": -120.001724,
-        "y": -78.01321,
-        "z": -171.796783
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 1.0
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "cellLevel": 1,
-      "priority": 0
-    },
-    {
-      "classId": "IonCrystalMatrix",
-      "id": "9987ba53-6263-4c07-b736-bcaaa88a172d",
-      "position": {
-        "x": -123.1526,
-        "y": -78.02656,
-        "z": -172.469711
-      },
-      "rotation": {
-        "x": 0.03947375,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.9992206
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "cellLevel": 1,
-      "priority": 0
-    },
-    {
       "classId": "Proto_PrecursorIngot",
       "id": "81bf19ec-195d-4f26-8012-0a6491d5255e",
       "position": {

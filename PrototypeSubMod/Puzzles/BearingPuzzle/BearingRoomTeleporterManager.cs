@@ -11,6 +11,7 @@ public class BearingRoomTeleporterManager : MonoBehaviour
 {
     [SerializeField] private Camera previewCamera;
     [SerializeField] private LinkedTeleporter[] linkedTeleporters;
+    [SerializeField] private FMODAsset teleportSfx;
 
     private RenderTexture cameraRenderTexture;
     
@@ -138,6 +139,8 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         underwaterMotor.vel = newVelocity;
         underwaterMotor.previousVelocity = newVelocity;
         Player.main.SetPosition(Player.main.transform.position + positionDelta);
+
+        FMODUWE.PlayOneShot(teleportSfx, Player.main.transform.position, 0.5f);
     }
 
     private void OnDestroy()
