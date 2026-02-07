@@ -12,6 +12,8 @@
 /[Aa]ssets/[Tt]hunder[Kk]it[Ss]ettings/
 /[Bb]uilds
 /ThunderKit/AssetBundleStaging/
+/[Aa]ssets/[Tt]emp[Mm]aterials/*
+/[Aa]ssets/[Tt]emp[Mm]aterials.meta
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
