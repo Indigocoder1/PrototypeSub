@@ -10,6 +10,7 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
     [SerializeField] private SubRoot subRoot;
     [SerializeField] private Transform noMaskParent;
     [SerializeField] private Image compassImage;
+    [SerializeField] private Image backgroundColumn;
     [SerializeField] private Image bearingMask;
     [SerializeField] private Image columnMask;
     [SerializeField] private Sprite rightMaskSprite;
@@ -17,12 +18,20 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
     [SerializeField] private Sprite fullMaskSprite;
     [SerializeField] private Sprite[] cardinalSprites;
 
+    private Color _initialColor;
+
+    private bool _isHighlightingAngle;
+    private bool _updatedImageColors;
+    private float _highlightedAngle;
+    private Color _highlightedColor;
+    
     private void Start()
     {
         bool onLeft = subRoot.transform.eulerAngles.y > 180;
         bearingMask.sprite = onLeft ? leftMaskSprite : rightMaskSprite;
         columnMask.sprite = onLeft ? rightMaskSprite : leftMaskSprite;
         columnMask.gameObject.SetActive(true);
+        _initialColor = compassImage.color;
     }
 
     public void UpdateUI()
@@ -53,6 +62,35 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
             bearingMask.sprite = fullMaskSprite;
             columnMask.gameObject.SetActive(false);
         }
+
+        int highlightIndex = _highlightedAngle > 180
+            ? Mathf.RoundToInt(_highlightedAngle / 180f * 8f)
+            : Mathf.RoundToInt((360 - _highlightedAngle) / 180f * 8f);
+        if (_isHighlightingAngle && index == highlightIndex && !_updatedImageColors)
+        {
+            compassImage.color = _highlightedColor;
+            backgroundColumn.color = _highlightedColor;
+            _updatedImageColors = true;
+        }
+        else if (index != highlightIndex)
+        {
+            _updatedImageColors = false;
+        }
+    }
+
+    public void SetHighlightedAngle(float angle, Color highlightColor)
+    {
+        _isHighlightingAngle = true;
+        _updatedImageColors = false;
+        _highlightedAngle = angle;
+        _highlightedColor = highlightColor;
+    }
+
+    public void ClearHighlightedAngle()
+    {
+        _isHighlightingAngle = false;
+        compassImage.color = _initialColor;
+        backgroundColumn.color = _initialColor;
     }
 
     public void OnSubDestroyed() { }

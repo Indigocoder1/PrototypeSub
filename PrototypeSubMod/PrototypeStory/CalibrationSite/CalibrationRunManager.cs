@@ -10,6 +10,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     public static readonly Vector3 InitialPoint = new(-2220, -390, 420);
 
     public event Action<int> onPointReached;
+    public event Action onCalibrationFailed;
     
     [SerializeField] private GameObject calibrationObjects;
     [SerializeField] private GameObject calibrationPointPrefab;
@@ -71,6 +72,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         doingCalibrationRun = false;
         nextPointIndex = 1;
         calibrationObjects.SetActive(false);
+        onCalibrationFailed?.Invoke();
     }
 
     private void HandleIndexIncrements()
@@ -95,10 +97,9 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     {
         return Vector3.Distance(transform.position, pointsCenter) / maxDistanceFromCenter;
     }
-
-    public int GetNextPointIndex() => nextPointIndex;
-    public Vector3 GetCalibrationPoint(int index) => calibrationPoints[index];
+    
     public Vector3 GetSiteCenter() => pointsCenter;
+    public float[] GetRelativeAngles() => relativePointAngles;
     
     public void ScheduledUpdate()
     {

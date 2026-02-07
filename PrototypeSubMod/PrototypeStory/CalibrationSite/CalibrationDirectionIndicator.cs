@@ -1,31 +1,30 @@
 ﻿using PrototypeSubMod.Puzzles.BearingPuzzle;
+using PrototypeSubMod.UI;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
 
 public class CalibrationDirectionIndicator : MonoBehaviour
 {
-    [SerializeField] private Transform spriteParent;
     [SerializeField] private CalibrationRunManager runManager;
-    [SerializeField] private BearingReferenceSymbol[] bearingReferenceSymbols;
+    [SerializeField] private ProtoCompassManager compassManager;
+    [SerializeField] private Color highlightedColor;
 
     private void Start()
     {
         runManager.onPointReached += OnPointReached;
+        runManager.onCalibrationFailed += compassManager.ClearHighlightedAngle;
     }
 
     private void OnPointReached(int index)
     {
-        if (index < 0 || index > bearingReferenceSymbols.Length - 1) return;
-
-        foreach (Transform child in spriteParent)
+        var relativeAngles = runManager.GetRelativeAngles();
+        if (index > relativeAngles.Length - 1)
         {
-            Destroy(child.gameObject);
+            compassManager.ClearHighlightedAngle();
+            return;
         }
 
-        var symbolObject = bearingReferenceSymbols[index].CreateSymbolObject();
-        symbolObject.transform.SetParent(spriteParent, false);
+        compassManager.SetHighlightedAngle(relativeAngles[index - 1], highlightedColor);
     }
-
-    public BearingReferenceSymbol[] GetBearingReferenceSymbols() => bearingReferenceSymbols;
 }
