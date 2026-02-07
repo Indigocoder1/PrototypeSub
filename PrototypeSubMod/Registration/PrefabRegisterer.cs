@@ -158,7 +158,9 @@ internal static class PrefabRegisterer
         new CustomPoster("HamCheesePoster1", null, null, AssetBundle.LoadAsset<Texture2D>("HamAndCheesePoster1_Small"), regular1Ico);
         Texture2D regular2Ico = AssetBundle.LoadAsset<Texture2D>("RegularIcon2");
         new CustomPoster("HamCheesePoster2", null, null, AssetBundle.LoadAsset<Texture2D>("RegularPoster2"), regular2Ico, TechType.PosterExoSuit1);
-        
+        Texture2D cinemaIco = AssetBundle.LoadAsset<Texture2D>("AbsoluteCinemaIcon");
+        new CustomPoster("AbsoluteCinemaPoster", null, null, AssetBundle.LoadAsset<Texture2D>("AbsoluteCinema 1"), cinemaIco);
+
         sw.Stop();
         Plugin.Logger.LogInfo($"Normal prefabs loaded in {sw.ElapsedMilliseconds}ms");
     }
