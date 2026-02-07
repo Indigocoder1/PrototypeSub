@@ -9769,28 +9769,6 @@
       "priority": 0
     },
     {
-      "classId": "ProtoIslandTeleporterKey",
-      "id": "78226f94-f95f-46ff-8717-c448bf3de60e",
-      "position": {
-        "x": -1040.189,
-        "y": -435.18692,
-        "z": -1271.73853
-      },
-      "rotation": {
-        "x": 0.549636245,
-        "y": -0.153126657,
-        "z": 0.0793392,
-        "w": 0.817409039
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "cellLevel": 1,
-      "priority": 0
-    },
-    {
       "classId": null,
       "id": null,
       "position": {
