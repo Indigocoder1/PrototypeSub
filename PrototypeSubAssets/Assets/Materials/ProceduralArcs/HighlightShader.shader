@@ -29,6 +29,7 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float4 vertexColor : COLOR;
             };
 
             struct v2f
@@ -36,6 +37,7 @@
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 vertexColor : COLOR;
             };
 
             fixed4 _OuterColor;
@@ -50,6 +52,7 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
+                o.vertexColor = v.vertexColor;
                 return o;
             }
 
@@ -59,7 +62,7 @@
                 float colorY  = saturate(i.uv.y + _ColorBias);
                 fixed4 col = lerp(_InnerColor, _OuterColor, colorY);
                 float a = 1 - alphaY;
-                return fixed4(col.rgb * _Intensity, a * col.a);
+                return fixed4(col.rgb * _Intensity, a * col.a * i.vertexColor.a);
             }
             ENDCG
         }

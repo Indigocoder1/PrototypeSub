@@ -27,6 +27,7 @@
             struct appdata
             {
                 float4 vertex : POSITION;
+                float4 vertexColor : COLOR;
                 float2 uv : TEXCOORD0;
             };
 
@@ -35,6 +36,7 @@
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 vertexColor : COLOR;
             };
 
             fixed4 _Color;
@@ -53,6 +55,7 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
+                o.vertexColor = v.vertexColor;
                 return o;
             }
 
@@ -62,7 +65,8 @@
                 float stepMin = smoothstep(0, 1, invLerp(0, _TargetCenter - (0.5 - _Falloff), i.uv.y));
                 float smoothStep = min(stepMax, stepMin);
 
-                return _Color * _Intensity * smoothStep;
+                float4 smoothedColor = _Color * _Intensity * smoothStep;
+                return float4(smoothedColor.rgb, smoothedColor.a * i.vertexColor.a);
             }
             ENDCG
         }
