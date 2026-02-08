@@ -14,15 +14,17 @@ public class CalibrationPoint : MonoBehaviour
     
     private void LateUpdate()
     {
+        var mainCamera = Camera.main;
+        if (mainCamera == null) return;
         if (bearingImage == null) return;
         
-        var distToCamera = Vector3.Distance(Camera.main.transform.position, transform.position);
+        var distToCamera = Vector3.Distance(mainCamera.transform.position, transform.position);
         
         if (distToCamera > maxUpdateDistance) return;
 
         UpdateAlpha(distToCamera);
 
-        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position, Vector3.up);
+        transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position, Vector3.up);
     }
 
     private void UpdateAlpha(float distToPlayer)
