@@ -63,7 +63,7 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
             columnMask.gameObject.SetActive(false);
         }
 
-        int highlightIndex = _highlightedAngle > 180
+        int highlightIndex = _highlightedAngle < 180
             ? Mathf.RoundToInt(_highlightedAngle / 180f * 8f)
             : Mathf.RoundToInt((360 - _highlightedAngle) / 180f * 8f);
         if (_isHighlightingAngle && index == highlightIndex && !_updatedImageColors)
@@ -72,9 +72,11 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
             backgroundColumn.color = _highlightedColor;
             _updatedImageColors = true;
         }
-        else if (index != highlightIndex)
+        else if (index != highlightIndex && _updatedImageColors)
         {
             _updatedImageColors = false;
+            compassImage.color = _initialColor;
+            backgroundColumn.color = _initialColor;
         }
     }
 
