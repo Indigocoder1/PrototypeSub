@@ -12,6 +12,7 @@ internal class LargeWorldStreamer_Patches
 {
     [SaveStateReference(false)]
     private static bool _overwrite;
+    [SaveStateReference]
     private static Vector3 _overwriteCamPos;
 
     [HarmonyPatch(nameof(LargeWorldStreamer.Start)), HarmonyPatch(MethodType.Enumerator), HarmonyTranspiler]
@@ -19,7 +20,7 @@ internal class LargeWorldStreamer_Patches
     {
         var getPosCall = typeof(Transform).GetProperty("position", BindingFlags.Public | BindingFlags.Instance).GetGetMethod();
 
-        var matches = new CodeMatch[]
+        var matches = new[]
         {
             new CodeMatch(i => i.opcode == OpCodes.Ldloc_1),
             new CodeMatch(i => i.opcode == OpCodes.Ldloc_S),

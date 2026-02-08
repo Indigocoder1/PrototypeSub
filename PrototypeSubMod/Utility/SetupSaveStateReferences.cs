@@ -39,7 +39,8 @@ internal static class SetupSaveStateReferences
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != "MenuEnvironment") return;
+        if (scene.name != "Main") return;
+        Plugin.Logger.LogInfo($"Resetting save state references");
 
         foreach (var info in SaveStateReferences.Keys)
         {
