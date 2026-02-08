@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Puzzles.NumberPuzzle;
@@ -12,8 +13,9 @@ public class NumberPuzzleManager : MonoBehaviour
     [SerializeField] private NumberPuzzleAnswer[] puzzleAnswers;
     [SerializeField] private Sprite[] numberSprites;
     [SerializeField] private SelectableNumber[] selectableNumbers;
-    [SerializeField] private Color deselectedColor;
-    [SerializeField] private Color selectedColor;
+    [SerializeField] private Color defaultColor;
+    [SerializeField] private Color hintColor;
+    [SerializeField] private Color swapColor;
     [SerializeField] private FMOD_CustomEmitter onSwapSfx;
 
     private NumberPuzzleAnswer[] puzzleAnswersOrder;
@@ -31,7 +33,7 @@ public class NumberPuzzleManager : MonoBehaviour
         puzzleAnswersOrder = new NumberPuzzleAnswer[puzzleAnswers.Length];
         foreach (var answer in puzzleAnswers)
         {
-            answer.GetImage().color = deselectedColor;
+            answer.GetImage().color = defaultColor;
             answer.SetSprite(numberSprites[index]);
             answer.onClicked += OnClickedAnswer;
             indices.Add(index);
@@ -63,10 +65,15 @@ public class NumberPuzzleManager : MonoBehaviour
         if (prevSelectedAnswer == null)
         {
             prevSelectedAnswer = answer;
+            prevSelectedAnswer.SetColor(swapColor);
             return;
         }
         
         if (prevSelectedAnswer == answer) return;
+        
+        var hintNumber = puzzleAnswers[previousSum];
+        var color = hintNumber == prevSelectedAnswer ? hintColor : defaultColor;
+        prevSelectedAnswer.SetColor(color);
         
         int index1 = Array.IndexOf(puzzleAnswersOrder, answer);
         int index2 = Array.IndexOf(puzzleAnswersOrder, prevSelectedAnswer);
@@ -142,11 +149,14 @@ public class NumberPuzzleManager : MonoBehaviour
     {
         if (previousSum != -1)
         {
-            puzzleAnswers[previousSum].GetImage().color = deselectedColor;
+            puzzleAnswers[previousSum].GetImage().color = defaultColor;
         }
 
         int sum = primaryNumber + secondaryNumber;
-        puzzleAnswers[sum].GetImage().color = selectedColor;
+        if (puzzleAnswers[sum] != prevSelectedAnswer)
+        {
+            puzzleAnswers[sum].SetColor(hintColor);
+        }
         previousSum = sum;
     }
 

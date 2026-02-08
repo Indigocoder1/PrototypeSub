@@ -24,6 +24,11 @@ public class NumberPuzzleAnswer : MonoBehaviour
         image.sprite = sprite;
     }
 
+    public void SetColor(Color color)
+    {
+        image.color = color;
+    }
+
     public void OnClicked()
     {
         onClicked?.Invoke(this);

@@ -7951,8 +7951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5374271941968765467, guid: 82f497981ef3d784e92f366bf8747d65,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8aa99a70a88e3ca4cadf124e64d91a86, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9556,8 +9555,9 @@ MonoBehaviour:
   - {fileID: 4969162032165295194}
   - {fileID: 8846321350261794851}
   - {fileID: 1747417419951828187}
-  deselectedColor: {r: 0.35866857, g: 0.49056602, b: 0.35866857, a: 1}
-  selectedColor: {r: 0.44313726, g: 1, b: 0.44313726, a: 1}
+  defaultColor: {r: 0.44313726, g: 1, b: 0.44313726, a: 1}
+  hintColor: {r: 0.4431373, g: 0.97097075, b: 1, a: 1}
+  swapColor: {r: 0.8409238, g: 0.9056604, b: 0.252047, a: 1}
   onSwapSfx: {fileID: 4533872075594093329}
 --- !u!114 &3232444261927870104
 MonoBehaviour:
