@@ -99,7 +99,10 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     }
     
     public Vector3 GetSiteCenter() => pointsCenter;
+    public Vector3[] GetCalibrationPoints() => calibrationPoints;
     public float[] GetRelativeAngles() => relativePointAngles;
+    public int GetNextIndex() => nextPointIndex;
+    public BearingReferenceSymbol[] GetPointNumbers() => pointNumbers;
     
     public void ScheduledUpdate()
     {

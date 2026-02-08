@@ -82,8 +82,9 @@ public class ProtoCompassManager : MonoBehaviour, IUIElement
 
     public void SetHighlightedAngle(float angle, Color highlightColor)
     {
+        ClearHighlightedAngle();
         _isHighlightingAngle = true;
-        _updatedImageColors = false;
+        _updatedImageColors = true;
         _highlightedAngle = angle;
         _highlightedColor = highlightColor;
     }

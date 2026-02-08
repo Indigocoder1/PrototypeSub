@@ -25,6 +25,6 @@ public class CalibrationDirectionIndicator : MonoBehaviour
             return;
         }
 
-        compassManager.SetHighlightedAngle(relativeAngles[index - 1], highlightedColor);
+        compassManager.SetHighlightedAngle((360 + 90 - relativeAngles[index]) % 360, highlightedColor);
     }
 }
