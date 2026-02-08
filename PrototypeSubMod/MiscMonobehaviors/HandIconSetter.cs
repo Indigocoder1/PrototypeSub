@@ -5,6 +5,11 @@ namespace PrototypeSubMod.MiscMonobehaviors;
 
 public class HandIconSetter : MonoBehaviour
 {
+    [SerializeField] private HandReticle.IconType iconType = HandReticle.IconType.Hand;
+    [SerializeField] private string handTextKey;
+    [SerializeField] private string handSubscriptTextKey;
+    [SerializeField] private float maxDistance = -1;
+    
     private bool mouseHovered;
     
     public void MouseEnter()
@@ -21,8 +26,10 @@ public class HandIconSetter : MonoBehaviour
     {
         if (!mouseHovered) return;
         
-        HandReticle.main.SetIcon(HandReticle.IconType.Hand);
-        HandReticle.main.SetText(HandReticle.TextType.Hand, string.Empty, false);
-        HandReticle.main.SetText(HandReticle.TextType.HandSubscript, string.Empty, false);
+        if (maxDistance > 0 && Vector3.Distance(Camera.main.transform.position, transform.position) > maxDistance) return;
+        
+        HandReticle.main.SetIcon(iconType);
+        HandReticle.main.SetText(HandReticle.TextType.Hand, handTextKey, false);
+        HandReticle.main.SetText(HandReticle.TextType.HandSubscript, handSubscriptTextKey, false);
     }
 }
