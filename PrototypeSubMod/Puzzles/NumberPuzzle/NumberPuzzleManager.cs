@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Story;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -17,7 +18,12 @@ public class NumberPuzzleManager : MonoBehaviour
     [SerializeField] private Color hintColor;
     [SerializeField] private Color swapColor;
     [SerializeField] private FMOD_CustomEmitter onSwapSfx;
-
+    
+    [Header("Voicelines")]
+    [SerializeField] private VoiceNotificationManager notificationManager;
+    [SerializeField] private VoiceNotification puzzleSolvedVoiceline;
+    [SerializeField] private VoiceNotification puzzleIncorrectVoiceline;
+    
     private NumberPuzzleAnswer[] puzzleAnswersOrder;
     private NumberPuzzleAnswer prevSelectedAnswer;
     
@@ -164,12 +170,13 @@ public class NumberPuzzleManager : MonoBehaviour
     {
         if (!HasCorrectSequence())
         {
-            ErrorMessage.AddError("Incorrect sequence");
+            notificationManager.PlayVoiceNotification(puzzleIncorrectVoiceline, false);
             return;
         }
         
-        ErrorMessage.AddError("Correct sequence entered!");
+        notificationManager.PlayVoiceNotification(puzzleSolvedVoiceline, false);
         onPuzzleCompleted?.Invoke();
+        StoryGoalManager.main.OnGoalComplete("ProtoNumberPuzzleComplete");
     }
 
     private bool HasCorrectSequence()

@@ -274,6 +274,8 @@
   
   // Puzzle facility voicelines
   "BearingPuzzleComplete": "FACILITY: Spacial navigation cognitive trial complete.<duration=3246>\nFACILITY: Uploading results to quarantine enforcement platform.<delay=3360><duration=3540>",
+  "NumberPuzzleComplete": "FACILITY: Cognitive test passed. Opening security door.",
+  "NumberPuzzleIncorrect": "FACILITY: Incorrect sequence detected.",
   
   // Upgrade tech types
   "ProtoEmergencyWarp": "Emergency Warp",

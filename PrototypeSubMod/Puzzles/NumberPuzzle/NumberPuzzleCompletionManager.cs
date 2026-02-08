@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Story;
+using UnityEngine;
 
 namespace PrototypeSubMod.Puzzles.NumberPuzzle;
 
@@ -10,6 +11,10 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
     private void Start()
     {
         puzzleManager.onPuzzleCompleted += OnPuzzleCompleted;
+        if (StoryGoalManager.main.IsGoalComplete("ProtoNumberPuzzleComplete"))
+        {
+            OnPuzzleCompleted();
+        }
     }
 
     private void OnPuzzleCompleted()
