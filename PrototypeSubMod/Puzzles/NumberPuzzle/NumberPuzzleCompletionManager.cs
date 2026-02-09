@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using PrototypeSubMod.MiscMonobehaviors;
 using Story;
 using UnityEngine;
 
@@ -8,16 +9,18 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
 {
     [SerializeField] private NumberPuzzleManager puzzleManager;
     [SerializeField] private LightingController lightingController;
+    [SerializeField] private SequencedLightEnabler sequencedLightEnabler;
     [SerializeField] private Animator doorAnimator;
 
     private void Start()
     {
         puzzleManager.onPuzzleCompleted += OnPuzzleCompleted;
-        if (StoryGoalManager.main.IsGoalComplete("ProtoNumberPuzzleComplete"))
-        {
-            OnPuzzleCompleted();
-            lightingController.SnapToState(2);
-        }
+        
+        if (!StoryGoalManager.main.IsGoalComplete("ProtoNumberPuzzleComplete")) return;
+        
+        OnPuzzleCompleted();
+        lightingController.SnapToState(2);
+        sequencedLightEnabler.ActivateLightsSequentially();
     }
 
     private void OnPuzzleCompleted()
@@ -34,5 +37,6 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
     {
         yield return new WaitForSeconds(6.6f);
         lightingController.LerpToState(2);
+        sequencedLightEnabler.ActivateLightsSequentially();
     }
 }
