@@ -1,4 +1,5 @@
-﻿using Story;
+﻿using System.Collections;
+using Story;
 using UnityEngine;
 
 namespace PrototypeSubMod.Puzzles.NumberPuzzle;
@@ -15,7 +16,7 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
         if (StoryGoalManager.main.IsGoalComplete("ProtoNumberPuzzleComplete"))
         {
             OnPuzzleCompleted();
-            lightingController.SnapToState(1);
+            lightingController.SnapToState(2);
         }
     }
 
@@ -26,6 +27,12 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
 
     public void OnFactorDownloaded()
     {
-        lightingController.LerpToState(1);
+        StartCoroutine(DisableLightsDelayed());
+    }
+
+    private IEnumerator DisableLightsDelayed()
+    {
+        yield return new WaitForSeconds(6.6f);
+        lightingController.LerpToState(2);
     }
 }
