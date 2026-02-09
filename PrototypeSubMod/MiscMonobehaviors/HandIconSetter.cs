@@ -29,7 +29,7 @@ public class HandIconSetter : MonoBehaviour
         if (maxDistance > 0 && Vector3.Distance(Camera.main.transform.position, transform.position) > maxDistance) return;
         
         HandReticle.main.SetIcon(iconType);
-        HandReticle.main.SetText(HandReticle.TextType.Hand, handTextKey, false);
-        HandReticle.main.SetText(HandReticle.TextType.HandSubscript, handSubscriptTextKey, false);
+        HandReticle.main.SetText(HandReticle.TextType.Hand, handTextKey, true);
+        HandReticle.main.SetText(HandReticle.TextType.HandSubscript, handSubscriptTextKey, true);
     }
 }

@@ -198,7 +198,7 @@ MonoBehaviour:
   iconType: 2
   handTextKey: 
   handSubscriptTextKey: 
-  maxDistance: -1
+  maxDistance: 15
 --- !u!1 &5914901589878244931
 GameObject:
   m_ObjectHideFlags: 0

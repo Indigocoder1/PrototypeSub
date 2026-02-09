@@ -139,7 +139,7 @@ MonoBehaviour:
   onExitFX: {fileID: 0}
   onClickFX: {fileID: 11400000, guid: 25405428728b3b44ebd2b1c5dfa572d0, type: 2}
   volume: 0.25
-  minDistForSound: 35
+  minDistForSound: 20
 --- !u!114 &8852864035454598331
 MonoBehaviour:
   m_ObjectHideFlags: 0
