@@ -174,7 +174,7 @@ public class NumberPuzzleManager : MonoBehaviour
             return;
         }
         
-        notificationManager.PlayVoiceNotification(puzzleSolvedVoiceline, false);
+        notificationManager.PlayVoiceNotification(puzzleSolvedVoiceline, false, true);
         onPuzzleCompleted?.Invoke();
         StoryGoalManager.main.OnGoalComplete("ProtoNumberPuzzleComplete");
     }
