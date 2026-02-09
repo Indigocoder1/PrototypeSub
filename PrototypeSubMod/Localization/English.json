@@ -168,7 +168,7 @@
   "ProtoPuzzleCorrectSequence": "Correct sequence!",
   "MeasurePuzzleInputBeacon": "Input beacon {0}",
   "MeasurePuzzleNoBeacon": "No beacon in inventory",
-  "NumberPuzzleSwapHint": "Swap with symbol",
+  "NumberPuzzleSwapHint": "Swap symbol",
   
   // Ion Dive Suit
   "PrecursorSuit": "Ion Dive Suit",
