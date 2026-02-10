@@ -1,9 +1,10 @@
-﻿using System;
-using Nautilus.Handlers;
-using PrototypeSubMod.Prefabs;
-using System.Collections.Generic;
+﻿using Nautilus.Handlers;
+using Nautilus.Utility;
 using PrototypeSubMod.Patches;
+using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.FacilityProps.Hull;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PrototypeSubMod.Registration;
@@ -399,6 +400,16 @@ internal static class EncyEntryRegisterer
 
         PDAHandler.AddEncyclopediaEntry("ProtoTransmissionSiteEncy", "DownloadedData/Prototype", transmissionSiteTitle,
             transmissionSiteBody, unlockSound: PDAHandler.UnlockBasic);
+
+        #endregion
+
+        #region Number Puzzle PDA
+
+        var numberPuzzlePDATitle = Language.main.Get("NumberPuzzlePDAEncy_Title");
+        var numberPuzzlePDABody = Language.main.Get("NumberPuzzlePDAEncy_Body");
+
+        PDAHandler.AddEncyclopediaEntry("NumberPuzzlePDAEncy", "DownloadedData/Prototype", numberPuzzlePDATitle,
+            numberPuzzlePDABody, unlockSound: PDAHandler.UnlockBasic, voiceLog: AudioUtils.GetFmodAsset("HullFacilityOrionTone"));
 
         #endregion
 

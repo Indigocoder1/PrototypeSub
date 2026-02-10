@@ -218,6 +218,13 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Number Puzzle PDA
+        StoryGoalHandler.RegisterCustomEvent("NumberPuzzlePDA", () =>
+        {
+            PDAEncyclopedia.Add("NumberPuzzlePDAEncy", true);
+        });
+        #endregion
+
         StoryGoalHandler.RegisterCustomEvent("HullFacilityMainLights", null);
         StoryGoalHandler.RegisterCustomEvent("HullFacilityWyrmLights", null);
         
