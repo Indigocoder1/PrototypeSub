@@ -44970,7 +44970,7 @@ MonoBehaviour:
   fireChanceWhenEngineOverheat: 0.17
   thresholdForEngineOverheatCritical: 5
   fireChanceWhenEngineOverheatCritical: 0.25
-  fireChanceWhenTakingDamage: 0.3
+  fireChanceWhenTakingDamage: 0.1
   fireChanceWhenTakingDamageFromFire: 0.1
   fireChanceOverHealth:
     serializedVersion: 2
