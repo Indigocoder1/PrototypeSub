@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
   m_Name: PDA_NumberPuzzleSurvivor
   m_EditorClassIdentifier: 
-  path: PDA_ApproachDefense
+  path: PDA_NumberPuzzleSurvivor
   id: 
-  audioClip: {fileID: 8300000, guid: 610f9edf87f0dee44bdce46875033e0d, type: 3}
+  audioClip: {fileID: 8300000, guid: 12aaf69472c46644c870f88ddd791a75, type: 3}
   doNotAutoRegister: 0
   mode: 4210832
   maxDistance3D: 0
