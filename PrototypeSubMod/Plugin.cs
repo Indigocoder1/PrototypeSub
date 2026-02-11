@@ -240,6 +240,15 @@ namespace PrototypeSubMod
 
             ghostPrefab.EnsureComponent<GhostLeviathanFacilityManager>();
 
+            var lifepod3PDATask = PrefabDatabase.GetPrefabAsync("c6f6fe72-e16e-4b00-8df2-6b4e1a3533f4");
+            yield return lifepod3PDATask;
+
+            if (!lifepod3PDATask.TryGetPrefab(out var lifepod3PDAPrefab)) throw new Exception("Error loading lifepod 3 PDA prefab");
+
+            var sht = lifepod3PDAPrefab.GetComponent<StoryHandTarget>();
+
+            sht.goal.key = "Lifepod3PDA";
+
             if (Chainloader.PluginInfos.ContainsKey("com.aotu.returnoftheancients"))
             {
                 var guardianTask = PrefabDatabase.GetPrefabAsync("GuardianConstruction_QEP");
@@ -315,7 +324,8 @@ namespace PrototypeSubMod
             Logger.LogDebug($"Asset bundle loaded");
             
             LoadPathfindingGrid();
-            
+
+
             PrototypePingType = EnumHandler.AddEntry<PingType>("PrototypeSub")
                 .WithIcon(AssetBundle.LoadAsset<Sprite>("Proto_HUD_Marker"));
             
