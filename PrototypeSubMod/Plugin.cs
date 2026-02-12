@@ -245,9 +245,9 @@ namespace PrototypeSubMod
 
             if (!lifepod3PDATask.TryGetPrefab(out var lifepod3PDAPrefab)) throw new Exception("Error loading lifepod 3 PDA prefab");
 
-            var sht = lifepod3PDAPrefab.GetComponent<StoryHandTarget>();
+            var storyHandTarget = lifepod3PDAPrefab.GetComponent<StoryHandTarget>();
 
-            sht.goal.key = "Lifepod3PDA";
+            storyHandTarget.goal.key = "ProtoLifepod3PDA";
 
             if (Chainloader.PluginInfos.ContainsKey("com.aotu.returnoftheancients"))
             {

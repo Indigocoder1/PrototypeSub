@@ -219,7 +219,7 @@ internal static class StoryGoalsRegisterer
         #endregion
 
         #region Number Puzzle PDA
-        StoryGoalHandler.RegisterCustomEvent("NumberPuzzlePDA", () =>
+        StoryGoalHandler.RegisterCustomEvent("ProtoLifepod3PDA", () =>
         {
             PDAEncyclopedia.Add("NumberPuzzlePDAEncy", true);
         });

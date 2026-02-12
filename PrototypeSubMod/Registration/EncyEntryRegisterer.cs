@@ -408,8 +408,8 @@ internal static class EncyEntryRegisterer
         var numberPuzzlePDATitle = Language.main.Get("NumberPuzzlePDAEncy_Title");
         var numberPuzzlePDABody = Language.main.Get("NumberPuzzlePDAEncy_Body");
 
-        PDAHandler.AddEncyclopediaEntry("NumberPuzzlePDAEncy", "DownloadedData/Prototype", numberPuzzlePDATitle,
-            numberPuzzlePDABody, unlockSound: PDAHandler.UnlockBasic, voiceLog: AudioUtils.GetFmodAsset("HullFacilityOrionTone"));
+        PDAHandler.AddEncyclopediaEntry("NumberPuzzlePDAEncy", "DownloadedData/AuroraSurvivors", numberPuzzlePDATitle,
+            numberPuzzlePDABody, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("PDA_NumberPuzzleSurvivor"));
         #endregion
         
         #region Puzzle Numbers
