@@ -1,7 +1,9 @@
 ﻿using Nautilus.Utility;
 using PrototypeSubMod.LightDistortionField;
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
@@ -31,6 +33,7 @@ public class WyrmShootTarget : CreatureAction
     private CloakEffectHandler targetCloakHandler;
     private GameObject laserVFX;
     private GameObject muzzleVFX;
+    private GameObject impactVFX;
     private bool performing;
     private bool canShoot;
     private bool hasShot;
@@ -46,11 +49,27 @@ public class WyrmShootTarget : CreatureAction
         targetingLineRenderer.enabled = false;
         muzzleVFX = Instantiate(VFXSunbeam.main.muzzlePrefab.transform.Find("xBeam").gameObject);
         laserVFX = Instantiate(VFXSunbeam.main.beamPrefab);
+
+        StartCoroutine(SetImpactVFX());
+
         muzzleVFX.SetActive(false);
         laserVFX.SetActive(false);
 
         muzzleVFX.transform.localScale = Vector3.one * 0.25f;
         Destroy(muzzleVFX.GetComponent<VFXDestroyAfterSeconds>());
+    }
+
+    private IEnumerator SetImpactVFX()
+    {
+        var task = CraftData.GetPrefabForTechTypeAsync(TechType.PrecursorDroid);
+        yield return task;
+        var droid = task.GetResult();
+        var livemixin = droid.GetComponent<LiveMixin>();
+        impactVFX = Instantiate(livemixin.deathEffect);
+
+        impactVFX.SetActive(false);
+
+        ErrorMessage.AddError($"Got impact VFX: {impactVFX.name}");
     }
 
     public override float Evaluate(Creature creature, float time)
@@ -283,6 +302,29 @@ public class WyrmShootTarget : CreatureAction
         shotHitSfx.Play();
         roarManager.PlayRoar(Player.main.transform.position);
         MainCameraControl.main.ShakeCamera(5, -1, MainCameraControl.ShakeMode.Linear, 1);
+
+        // Do impact VFX if hitting a sub
+        if (mixin.GetComponent<SubRoot>() != null) StartCoroutine(DoImpactVFX(laserTargetPoint));
+    }
+
+    private IEnumerator DoImpactVFX(Vector3 position)
+    {
+        var task = CraftData.GetPrefabForTechTypeAsync(TechType.PrecursorDroid);
+        yield return task;
+        var droid = task.GetResult();
+        var livemixin = droid.GetComponent<LiveMixin>();
+        var impactVFXInstance = Instantiate(livemixin.deathEffect);
+
+        impactVFXInstance.transform.localScale = Vector3.one * 15f;
+        var offsetScale = 10f;
+        var randomOffset = new Vector3(Random.Range(-offsetScale, offsetScale), Random.Range(-offsetScale, offsetScale), Random.Range(-offsetScale, offsetScale));
+        impactVFXInstance.transform.position = position + randomOffset;
+        impactVFXInstance.SetActive(true);
+
+        foreach (var particleSystem in impactVFXInstance.GetComponentsInChildren<ParticleSystem>())
+        {
+            particleSystem.scalingMode = ParticleSystemScalingMode.Hierarchy;
+        }
     }
 
     private LiveMixin GetAttackMixin(Vector3 laserTargetPoint)
