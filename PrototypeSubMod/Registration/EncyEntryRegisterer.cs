@@ -402,15 +402,24 @@ internal static class EncyEntryRegisterer
             transmissionSiteBody, unlockSound: PDAHandler.UnlockBasic);
 
         #endregion
-
+        
         #region Number Puzzle PDA
 
         var numberPuzzlePDATitle = Language.main.Get("NumberPuzzlePDAEncy_Title");
         var numberPuzzlePDABody = Language.main.Get("NumberPuzzlePDAEncy_Body");
 
-        PDAHandler.AddEncyclopediaEntry("NumberPuzzlePDAEncy", "DownloadedData/Prototype", numberPuzzlePDATitle,
-            numberPuzzlePDABody, unlockSound: PDAHandler.UnlockBasic, voiceLog: AudioUtils.GetFmodAsset("HullFacilityOrionTone"));
-
+        PDAHandler.AddEncyclopediaEntry("NumberPuzzlePDAEncy", "DownloadedData/AuroraSurvivors", numberPuzzlePDATitle,
+            numberPuzzlePDABody, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("PDA_NumberPuzzleSurvivor"));
+        #endregion
+        
+        #region Puzzle Numbers
+        
+        string protoNumbersTitle = Language.main.Get("ProtoNumbersEncy_Title");
+        string protoNumbersDescription = Language.main.Get("ProtoNumbersEncy_Body");
+        Texture2D protoNumbersBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("ProtoNumbersEncy");
+        
+        PDAHandler.AddEncyclopediaEntry("ProtoNumbersEncy", "DownloadedData/Prototype/ProtoTerminal", protoNumbersTitle,
+            protoNumbersDescription, protoNumbersBackground, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()

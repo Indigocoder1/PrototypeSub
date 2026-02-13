@@ -26,6 +26,7 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
     private void OnPuzzleCompleted()
     {
         doorAnimator.SetBool("DoorOpen", true);
+        PDAEncyclopedia.Add("ProtoNumbersEncy", true);
     }
 
     public void OnFactorDownloaded()
