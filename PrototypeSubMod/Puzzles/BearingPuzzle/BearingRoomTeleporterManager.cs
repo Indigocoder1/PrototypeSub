@@ -73,7 +73,10 @@ public class BearingRoomTeleporterManager : MonoBehaviour
     private IEnumerator GeneratePreviewsDelayed()
     {
         var lwe = GetComponentInParent<LargeWorldEntity>();
-        yield return new WaitUntil(() => lwe.fadeTime > 0.5f);
+        if (lwe != null)
+        {
+            yield return new WaitUntil(() => lwe.fadeTime > 0.5f);
+        }
 
         foreach (var item in bearingTeleporterDoors)
         {

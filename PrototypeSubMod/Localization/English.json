@@ -62,7 +62,7 @@
   // Wait screen
   "ProtoWaitLoadingBundle": "Loading asset bundle...",
   "ProtoWaitRegisteringPrefabs": "Registering general prefabs...",
-  "ProtoWaitRegisteringEasyPrefabs": "Registering easy prefabs {0}",
+  "ProtoWaitRegisteringEasyPrefabs": "Registering easy prefabs {0}%",
   "ProtoWaitRegisteringStructures": "Registering structures...",
   "ProtoWaitRegisteringMiscellaneous": "Registering miscellaneous items...",
   "ProtoWaitRegisteringAudio": "Loading audio...",

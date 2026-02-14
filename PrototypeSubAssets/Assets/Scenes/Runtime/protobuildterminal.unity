@@ -3063,7 +3063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   techTag: {fileID: 1492747960}
-  techType: {fileID: 11400000, guid: 493bfe5f1a4da13429256a2b4e90aaf0, type: 2}
+  techType: {fileID: 11400000, guid: 7ec6a34272ee11146b28e544e7771c27, type: 2}
 --- !u!114 &1492747965 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4875480482048869649, guid: 4c2a78a925a3af64e981a2e6143ec245,
