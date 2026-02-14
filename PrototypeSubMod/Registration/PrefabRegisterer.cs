@@ -97,7 +97,6 @@ internal static class PrefabRegisterer
         WatergateBlock.Register();
         ProtoPlaque_World.Register();
         ProtoLogo_World.Register();
-        DamagedProtoLogo_World.Register();
         TeleporterTerminal_World.Register();
         SmashedDisplayCase_World.Register();
 
