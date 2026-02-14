@@ -51,7 +51,7 @@ public class SequencedLightEnabler : MonoBehaviour
         {
             foreach (var light in group.lightsInGroup)
             {
-                light.intensity = 0;
+                light.intensity = intensityOverDuration.Evaluate(0);
             }
         }
     }
