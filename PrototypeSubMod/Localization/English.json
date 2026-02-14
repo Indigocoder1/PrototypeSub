@@ -234,6 +234,7 @@
   "Tooltip_ProtoPhaseGateTransmitter": "An alien device used to transmit matter across vast distances.",
   "ProtoPhaseGateItem": "Phase Gate Constructor",
   "Tooltip_ProtoPhaseGateItem": "An alien device used to construct phase gates. Can be deployed by the Prototype.",
+  "ProtoPhaseGate": "Phase Gate Constructor",
 
   // Power System
   "PrototypePowerLabel": "Prototype Power System",
