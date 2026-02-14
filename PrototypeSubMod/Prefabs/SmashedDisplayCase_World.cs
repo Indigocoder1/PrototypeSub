@@ -22,7 +22,7 @@ internal static class SmashedDisplayCase_World
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("SmashedDisplayCase");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("SmashedDisplayCase");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

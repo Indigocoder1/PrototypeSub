@@ -18,7 +18,7 @@ public static class TetherFactor
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("TetherFactor", unlockAtStart: false)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -32,7 +32,7 @@ public static class TetherFactor
     
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoTetherFactor");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoTetherFactor");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

@@ -31,7 +31,7 @@ internal class ProtoBuildTerminal_World
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        GameObject model = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoBuildTerminal");
+        GameObject model = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoBuildTerminal");
         model.SetActive(false);
 
         var instantiatedPrefab = GameObject.Instantiate(model);

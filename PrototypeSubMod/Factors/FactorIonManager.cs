@@ -26,7 +26,7 @@ public class FactorIonManager : MonoBehaviour, IProtoEventListener
         var oxygenBar = uGUI.main.transform.Find("ScreenCanvas/HUD/Content/BarsPanel/OxygenBar");
         if (oxygenBar.Find("PrecursorSuitCharge") == null)
         {
-            var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("PrecursorSuitCharge");
+            var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PrecursorSuitCharge");
             var instance = Instantiate(prefab, oxygenBar);
             instance.name = "PrecursorSuitCharge";
             instance.transform.localPosition = new Vector3(0, 0, 0);

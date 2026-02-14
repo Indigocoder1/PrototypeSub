@@ -20,7 +20,7 @@ public static class TetherFactorMarker
     
     private static GameObject GetPrefab()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("TetherFactorMarker");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("TetherFactorMarker");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

@@ -23,7 +23,7 @@ internal class PrecursorPhaseGate
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefab)
     {
-        var returnPrefab = Plugin.AssetBundle.LoadAsset<GameObject>("PhaseGate.prefab");
+        var returnPrefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PhaseGate.prefab");
         
         if(returnPrefab == null)
             Plugin.Logger.LogError("Failed to load the PrecursorPhaseGate prefab.");

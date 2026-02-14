@@ -21,7 +21,7 @@ internal class Prototype_Craftable
     public static void Register()
     {
         PrefabInfo prefabInfo = PrefabInfo.WithTechType("PrototypeSub", null, null, "English")
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("PrototypeIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrototypeIcon"));
 
         SubInfo = prefabInfo;
 
@@ -41,7 +41,7 @@ internal class Prototype_Craftable
 
     private static IEnumerator GetSubPrefab(IOut<GameObject> prefabOut)
     {
-        GameObject model = Plugin.AssetBundle.LoadAsset<GameObject>("PrototypeSub");
+        GameObject model = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PrototypeSub");
 
         model.SetActive(false);
         GameObject prototype = GameObject.Instantiate(model);

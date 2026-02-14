@@ -15,7 +15,7 @@ internal class HoverfishPlush
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("HoverfishPlush", null, null, "English")
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("HoverfishPlushIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("HoverfishPlushIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -29,7 +29,7 @@ internal class HoverfishPlush
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("HoverfishPlush");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("HoverfishPlush");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

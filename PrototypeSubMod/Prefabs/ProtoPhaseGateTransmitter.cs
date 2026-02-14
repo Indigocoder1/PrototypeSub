@@ -14,7 +14,7 @@ public class ProtoPhaseGateTransmitter
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateTransmitter", null, null)
             .WithSizeInInventory(new Vector2int(2, 2))
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGateTransmitter_Icon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoPhaseGateTransmitter_Icon"));
 
         var prefab = new CustomPrefab(PrefabInfo);
         
@@ -29,7 +29,7 @@ public class ProtoPhaseGateTransmitter
 
     private static GameObject GetGameObject()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoPhaseGateTransmitter");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoPhaseGateTransmitter");
         var instance = GameObject.Instantiate(prefab);
         
         MaterialUtils.ApplySNShaders(instance);

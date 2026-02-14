@@ -21,7 +21,7 @@ public static class BlinkFactor
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("BlinkFactor", unlockAtStart: false)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         prefab = new CustomPrefab(prefabInfo);
 
@@ -35,7 +35,7 @@ public static class BlinkFactor
     
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoBlinkFactor");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoBlinkFactor");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

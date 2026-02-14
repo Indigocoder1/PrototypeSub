@@ -14,7 +14,7 @@ public class ProtoPhaseGateItem
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateItem", null, null)
             .WithSizeInInventory(new Vector2int(4, 3))
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGate_Icon.png"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoPhaseGate_Icon.png"));
 
         var prefab = new CustomPrefab(PrefabInfo);
         
@@ -30,7 +30,7 @@ public class ProtoPhaseGateItem
 
     private static GameObject GetGameObject()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("AlienFramework");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("AlienFramework");
         var instance = GameObject.Instantiate(prefab);
 
         MaterialUtils.ApplySNShaders(instance);

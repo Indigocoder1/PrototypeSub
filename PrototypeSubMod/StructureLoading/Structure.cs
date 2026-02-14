@@ -26,12 +26,12 @@ public class Structure
     
     public static Structure LoadFromBundle(string fileName)
     {
-        return JsonConvert.DeserializeObject<Structure>(Plugin.AssetBundle.LoadAsset<TextAsset>(fileName).text);
+        return JsonConvert.DeserializeObject<Structure>(Plugin.GeneralAssetBundle.LoadAsset<TextAsset>(fileName).text);
     }
 
     public static IEnumerator RegisterFromBundle(string fileName)
     {
-        var assetOp = Plugin.AssetBundle.LoadAsset<TextAsset>(fileName);
+        var assetOp = Plugin.GeneralAssetBundle.LoadAsset<TextAsset>(fileName);
         var structure = JsonConvert.DeserializeObject<Structure>(assetOp.text);
 
         yield return structure.RegisterStructure(20);

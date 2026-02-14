@@ -71,7 +71,7 @@ internal class PrecursorFabricator
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefab)
     {
-        var returnPrefab = Plugin.AssetBundle.LoadAsset<GameObject>("PrecursorFabricator.prefab");
+        var returnPrefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PrecursorFabricator.prefab");
         
         if(returnPrefab == null)
             Plugin.Logger.LogError("Failed to load the PrecursorFabricator prefab.");

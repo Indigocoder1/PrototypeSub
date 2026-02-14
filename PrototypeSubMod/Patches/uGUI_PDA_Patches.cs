@@ -11,7 +11,7 @@ public class uGUI_PDA_Patches
     [HarmonyPatch(nameof(uGUI_PDA.Initialize)), HarmonyPostfix]
     private static void Initialize_Postfix(uGUI_PDA __instance)
     {
-        var transmissionTab = GameObject.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("ProtoTransmissionTab"),
+        var transmissionTab = GameObject.Instantiate(Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoTransmissionTab"),
             __instance.transform.Find("Content"));
         transmissionTab.name = "ProtoTransmissionTab";
         __instance.tabs.Add(Plugin.TransmissionEntryTab, transmissionTab.GetComponent<uGUI_TransmissionTab>());

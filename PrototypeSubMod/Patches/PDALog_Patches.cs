@@ -19,10 +19,10 @@ internal class PDALog_Patches
         Plugin.Logger.LogInfo($"Pda log item 0 = {pdaData.log[0]}");
         var pdaIcon = pdaData.log[0].icon;
         Plugin.Logger.LogInfo($"Pda Icon = {pdaIcon}");
-        Plugin.Logger.LogInfo($"Asset bundle = {Plugin.AssetBundle}");
-        Plugin.Logger.LogInfo($"Orion sprite = {Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPDALogo")}");
+        Plugin.Logger.LogInfo($"Asset bundle = {Plugin.GeneralAssetBundle}");
+        Plugin.Logger.LogInfo($"Orion sprite = {Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoPDALogo")}");
         AddEntries(entries, pdaIcon);
-        AddEntries(orionEntries, Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPDALogo"));
+        AddEntries(orionEntries, Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoPDALogo"));
     }
 
     private static void AddEntries(List<(string assetName, string key)> entriesToRegister, Sprite sprite)

@@ -22,7 +22,7 @@ internal class DefenseStoryGoalTrigger_World
 
     private static GameObject GetPrefab()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("DefenseStoryGoalTrigger");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("DefenseStoryGoalTrigger");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

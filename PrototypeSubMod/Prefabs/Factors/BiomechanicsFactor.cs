@@ -18,7 +18,7 @@ public static class BiomechanicsFactor
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("BiomechanicsFactor")
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -32,7 +32,7 @@ public static class BiomechanicsFactor
     
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("GenericFactorModel");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("GenericFactorModel");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

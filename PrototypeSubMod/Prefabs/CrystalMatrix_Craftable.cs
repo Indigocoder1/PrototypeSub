@@ -62,7 +62,7 @@ internal class CrystalMatrix_Craftable
             .WithStepsToFabricatorTab("PowerSources"));
     patch.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
 
-        Sprite matrixSprite = Plugin.AssetBundle.LoadAsset<Sprite>("matrixSprite");
+        Sprite matrixSprite = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("matrixSprite");
         SpriteHandler.RegisterSprite(TechType.PrecursorIonCrystalMatrix, matrixSprite);
 
 

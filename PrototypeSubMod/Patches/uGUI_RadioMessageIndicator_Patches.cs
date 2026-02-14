@@ -33,7 +33,7 @@ public class uGUI_RadioMessageIndicator_Patches
         Color color = defaultSpriteData.color;
         if (isProtoMessage)
         {
-            sprite = Plugin.AssetBundle.LoadAsset<Sprite>(nextMessage);
+            sprite = Plugin.GeneralAssetBundle.LoadAsset<Sprite>(nextMessage);
             color = Color.white;
         }
         else if (previousSpriteDatas.TryGetValue(__instance, out var spriteData))

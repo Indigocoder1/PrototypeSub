@@ -22,7 +22,7 @@ internal class ProtoLogo_World
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoLogo");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoLogo");
         prefab.SetActive(false);
 
         var gameObject = GameObject.Instantiate(prefab, new Vector3(0, 500f, 0), Quaternion.identity);

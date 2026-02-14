@@ -16,7 +16,7 @@ internal class IonPrism_Craftable
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("IonPrism", null, null)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("IonPrism_Icon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("IonPrism_Icon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -35,7 +35,7 @@ internal class IonPrism_Craftable
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var assetPrefab = Plugin.AssetBundle.LoadAsset<GameObject>("IonPrism_Prefab");
+        var assetPrefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("IonPrism_Prefab");
 
         var prefab = UWE.Utils.InstantiateDeactivated(assetPrefab);
         MaterialUtils.ApplySNShaders(prefab, modifiers: new ProtoMaterialModifier(3));

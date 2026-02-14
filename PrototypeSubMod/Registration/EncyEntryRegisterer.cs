@@ -18,10 +18,10 @@ internal static class EncyEntryRegisterer
         
         #region Prototype
 
-        var protoPopup = Plugin.AssetBundle.LoadAsset<Sprite>("PrototypeSub_EncyPopup");
+        var protoPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrototypeSub_EncyPopup");
         string protoTitle = Language.main.Get("ProtoDatabankEncy_Title");
         string protoBody = Language.main.Get("ProtoDatabankEncy_Body");
-        Texture2D prototypeBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("PrototypeSubEncy");
+        Texture2D prototypeBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrototypeSubEncy");
 
         PDAHandler.AddEncyclopediaEntry("ProtoDatabankEncy", "DownloadedData/Prototype/ProtoTerminal", protoTitle, protoBody,
             prototypeBackground, protoPopup, PDAHandler.UnlockImportant);
@@ -30,7 +30,7 @@ internal static class EncyEntryRegisterer
         #region Precursor Ingot
         string ingotTitle = Language.main.Get("ProtoPrecursorIngotEncy_Title");
         string ingotDescription = Language.main.Get("ProtoPrecursorIngotEncy_Body");
-        var ingotPopup = Plugin.AssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
+        var ingotPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoPrecursorIngot", "DownloadedData/Prototype/Scanned", ingotTitle,
             ingotDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: ingotPopup);
@@ -49,8 +49,8 @@ internal static class EncyEntryRegisterer
         #region Deployable Light
         string lightTitle = Language.main.Get("ProtoDeployableLightEncy_Title");
         string lightDescription = Language.main.Get("ProtoDeployableLightEncy_Body");
-        var lightPopup = Plugin.AssetBundle.LoadAsset<Sprite>("DeployableLight_EncyPopup");
-        Texture2D lightBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("PhotonBeaconEncy");
+        var lightPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("DeployableLight_EncyPopup");
+        Texture2D lightBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PhotonBeaconEncy");
         
         PDAHandler.AddEncyclopediaEntry("ProtoDeployableLightEncy", "DownloadedData/Prototype/Scanned", lightTitle, lightDescription, image: lightBackground, unlockSound: PDAHandler.UnlockBasic, popupImage: lightPopup);
         var deployableLightEntryData = new PDAScanner.EntryData()
@@ -68,7 +68,7 @@ internal static class EncyEntryRegisterer
         #region Ion Prism
         string prismTitle = Language.main.Get("ProtoIonPrismEncy_Title");
         string prismDescription = Language.main.Get("ProtoIonPrismEncy_Body");
-        var prismPopup = Plugin.AssetBundle.LoadAsset<Sprite>("IonPrism_EncyPopup");
+        var prismPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("IonPrism_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoIonPrismEncy", "DownloadedData/Prototype/Scanned", prismTitle,
             prismDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: prismPopup);
@@ -154,7 +154,7 @@ internal static class EncyEntryRegisterer
         #region Hull Facility Tablet
         string hullTabletTitle = Language.main.Get("HullFacilityTabletEncy_Title");
         string hullTabletDescription = Language.main.Get("HullFacilityTabletEncy_Body");
-        var hullTabletPopup = Plugin.AssetBundle.LoadAsset<Sprite>("HullFacilityTablet_EncyPopup");
+        var hullTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("HullFacilityTablet_EncyPopup");
         
         PDAHandler.AddEncyclopediaEntry("HullFacilityTabletEncy", "DownloadedData/Prototype/Scanned", hullTabletTitle, hullTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: hullTabletPopup);
         #endregion
@@ -162,7 +162,7 @@ internal static class EncyEntryRegisterer
         #region Engine Facility Tablet
         string engineTabletTitle = Language.main.Get("EngineFacilityTabletEncy_Title");
         string engineTabletDescription = Language.main.Get("EngineFacilityTabletEncy_Body");
-        var engineTabletPopup = Plugin.AssetBundle.LoadAsset<Sprite>("EngineFacilityTablet_EncyPopup");
+        var engineTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("EngineFacilityTablet_EncyPopup");
         
         PDAHandler.AddEncyclopediaEntry("EngineFacilityTabletEncy", "DownloadedData/Prototype/Scanned", engineTabletTitle, engineTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: engineTabletPopup);
         #endregion
@@ -170,7 +170,7 @@ internal static class EncyEntryRegisterer
         #region Interceptor Facility Tablet
         string interceptorTabletTitle = Language.main.Get("InterceptorFacilityTabletEncy_Title");
         string interceptorTabletDescription = Language.main.Get("InterceptorFacilityTabletEncy_Body");
-        var interceptorTabletPopup = Plugin.AssetBundle.LoadAsset<Sprite>("InterceptorFacilityTablet_EncyPopup");
+        var interceptorTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("InterceptorFacilityTablet_EncyPopup");
         
         PDAHandler.AddEncyclopediaEntry("InterceptorFacilityTabletEncy", "DownloadedData/Prototype/Scanned", interceptorTabletTitle, interceptorTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: interceptorTabletPopup);
         #endregion
@@ -178,7 +178,7 @@ internal static class EncyEntryRegisterer
         #region Defense Facility Tablet
         string defenseTabletTitle = Language.main.Get("DefenseFacilityTabletEncy_Title");
         string defenseTabletDescription = Language.main.Get("DefenseFacilityTabletEncy_Body");
-        var defenseTabletPopup = Plugin.AssetBundle.LoadAsset<Sprite>("DefenseFacilityTablet_EncyPopup");
+        var defenseTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("DefenseFacilityTablet_EncyPopup");
         
         PDAHandler.AddEncyclopediaEntry("DefenseFacilityTabletEncy", "DownloadedData/Prototype/Scanned", defenseTabletTitle, defenseTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: defenseTabletPopup);
         #endregion
@@ -229,8 +229,8 @@ internal static class EncyEntryRegisterer
         TechType normalWormType = (TechType)Enum.Parse(typeof(TechType), "ProtoWorm");
         string normalWormTitle = Language.main.Get("ProtoWormEncy_Title");
         string normalWormDescription = Language.main.Get("ProtoWormEncy_Body");
-        Texture2D normalWormBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("ProtoWormEncy");
-        var wormPopup = Plugin.AssetBundle.LoadAsset<Sprite>("Wyrm_EncyPopup");
+        Texture2D normalWormBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoWormEncy");
+        var wormPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Wyrm_EncyPopup");
         
         PDAHandler.AddEncyclopediaEntry("ProtoWormEncy", "DownloadedData/Prototype/Scanned", normalWormTitle, 
             normalWormDescription, normalWormBackground, wormPopup, PDAHandler.UnlockBasic);
@@ -250,8 +250,8 @@ internal static class EncyEntryRegisterer
         TechType aggressiveWyrmType = (TechType)Enum.Parse(typeof(TechType), "ProtoAggressiveWyrm");
         string aggressiveWyrmTitle = Language.main.Get("ProtoAggressiveWyrmEncy_Title");
         string aggressiveWyrmDescription = Language.main.Get("ProtoAggressiveWyrmEncy_Body");
-        Texture2D aggressiveWyrmBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("ProtoWyrmEncy");
-        var aggressiveWyrmPopup = Plugin.AssetBundle.LoadAsset<Sprite>("Wyrm_EncyPopup");
+        Texture2D aggressiveWyrmBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoWyrmEncy");
+        var aggressiveWyrmPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Wyrm_EncyPopup");
         
         PDAHandler.AddEncyclopediaEntry("ProtoAggressiveWyrmEncy", "DownloadedData/Prototype/Scanned", aggressiveWyrmTitle,
             aggressiveWyrmDescription, aggressiveWyrmBackground, aggressiveWyrmPopup, PDAHandler.UnlockBasic);
@@ -268,8 +268,8 @@ internal static class EncyEntryRegisterer
         #endregion
 
         #region Warp Core
-        var image = Plugin.AssetBundle.LoadAsset<Texture2D>("WarpReactorEncy");
-        var warpPopup = Plugin.AssetBundle.LoadAsset<Sprite>("WarpReactor_EncyPopup");
+        var image = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("WarpReactorEncy");
+        var warpPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("WarpReactor_EncyPopup");
         TechType warpCoreType = (TechType)Enum.Parse(typeof(TechType), "WarpReactor");
         string warpReactorTitle = Language.main.Get("ProtoWarpReactorEncy_Title");
         string warpReactorBody = Language.main.Get("ProtoWarpReactorEncy_Body");
@@ -310,11 +310,11 @@ internal static class EncyEntryRegisterer
         #endregion
 
         #region Prototype Fins
-        Texture2D finsBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("ProtoFinsEncy");
+        Texture2D finsBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoFinsEncy");
         TechType finsType = (TechType)Enum.Parse(typeof(TechType), "ProtoScannableFins");
         string finsTitle = Language.main.Get("ProtoFins_Title");
         string finsBody = Language.main.Get("ProtoFins_Body");
-        var finsPopup = Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFins_EncyPopup");
+        var finsPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoFins_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoFinsEncy", "DownloadedData/Prototype/Scanned", finsTitle, 
             finsBody, image: finsBackground, unlockSound: PDAHandler.UnlockBasic, popupImage: finsPopup);
@@ -372,7 +372,7 @@ internal static class EncyEntryRegisterer
         #region Transmission Device Terminal
         string transmissionTerminalTitle = Language.main.Get("TransmissionTerminalEncy_Title");
         string transmissionTerminalDescription = Language.main.Get("TransmissionTerminalEncy_Body");
-        var transmissionDevicePopup = Plugin.AssetBundle.LoadAsset<Sprite>("TransmissionDevice_Icon");
+        var transmissionDevicePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("TransmissionDevice_Icon");
 
         PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: transmissionDevicePopup);
         #endregion
@@ -380,7 +380,7 @@ internal static class EncyEntryRegisterer
         #region Precursor Suit Terminal
         string precursorSuitTerminalTitle = Language.main.Get("PrecursorSuitTerminalEncy_Title");
         string precursorSuitTerminalDescription = Language.main.Get("PrecursorSuitTerminalEncy_Body");
-        var precursorSuitPopup = Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorSuit_EncyPopup");
+        var precursorSuitPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrecursorSuit_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("PrecursorSuitTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", precursorSuitTerminalTitle, precursorSuitTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: precursorSuitPopup);
         #endregion
@@ -388,7 +388,7 @@ internal static class EncyEntryRegisterer
         #region Biomechanics Factor Terminal
         string biomechanicsFactorTerminalTitle = Language.main.Get("BiomechanicsFactorTerminalEncy_Title");
         string biomechanicsFactorTerminalDescription = Language.main.Get("BiomechanicsFactorTerminalEncy_Body");
-        var biomechanicsFactorPopup = Plugin.AssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
+        var biomechanicsFactorPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: biomechanicsFactorPopup);
         #endregion
@@ -416,7 +416,7 @@ internal static class EncyEntryRegisterer
         
         string protoNumbersTitle = Language.main.Get("ProtoNumbersEncy_Title");
         string protoNumbersDescription = Language.main.Get("ProtoNumbersEncy_Body");
-        Texture2D protoNumbersBackground = Plugin.AssetBundle.LoadAsset<Texture2D>("ProtoNumbersEncy");
+        Texture2D protoNumbersBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoNumbersEncy");
         
         PDAHandler.AddEncyclopediaEntry("ProtoNumbersEncy", "DownloadedData/Prototype/ProtoTerminal", protoNumbersTitle,
             protoNumbersDescription, protoNumbersBackground, unlockSound: PDAHandler.UnlockBasic);

@@ -13,13 +13,13 @@ internal class EngineFacilityKey
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("EngineFacilityKey", null, null)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("EngineTabletIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("EngineTabletIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
         var cloneTemplate = new CloneTemplate(prefabInfo, TechType.PrecursorKey_Purple);
         cloneTemplate.ModifyPrefab += gameObject =>
         {
-            Texture2D replacementGlyph = Plugin.AssetBundle.LoadAsset<Texture2D>("EngineGlyph");
+            Texture2D replacementGlyph = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("EngineGlyph");
             var rend1 = gameObject.transform.Find("Model/Rig_J/precursor_key_C_02_symbol_05").GetComponent<Renderer>();
             var rend2 = gameObject.transform.Find("ViewModel/Rig_J/precursor_key_C_02_symbol_05").GetComponent<Renderer>();
 

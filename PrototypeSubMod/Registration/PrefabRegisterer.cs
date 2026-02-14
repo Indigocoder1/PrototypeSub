@@ -135,7 +135,7 @@ internal static class PrefabRegisterer
             TechType.PrecursorIonCrystalMatrix, new Vector3(0, 1.3f, 0), Vector3.one);
 
         ProtoWormSpawnEvent.RegisterEvent("WormSpawnEventVertical",
-            Plugin.AssetBundle.LoadAsset<GameObject>("WormSpawnEventVertical"),
+            Plugin.GeneralAssetBundle.LoadAsset<GameObject>("WormSpawnEventVertical"),
             new LootDistributionData.BiomeData[]
             {
                 new() { biome = BiomeType.Dunes_SandDune, probability = 0.02f, count = 1 },
@@ -151,7 +151,7 @@ internal static class PrefabRegisterer
         
         Plugin.StoryEndPingTechType = CustomPing.CreatePing("StoryEndPingType", PingType.Signal);
         
-        var AssetBundle = Plugin.AssetBundle;
+        var AssetBundle = Plugin.GeneralAssetBundle;
         Texture2D dogIco = AssetBundle.LoadAsset<Texture2D>("dogPosterIcon");
         new CustomPoster("ProtoDogPoster", null, null, AssetBundle.LoadAsset<Texture2D>("DogPoster"), dogIco);
         Texture2D regular1Ico = AssetBundle.LoadAsset<Texture2D>("RegularIcon1");

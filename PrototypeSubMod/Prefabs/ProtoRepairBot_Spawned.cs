@@ -22,7 +22,7 @@ internal class ProtoRepairBot_Spawned
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        GameObject model = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoRepairBot");
+        GameObject model = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoRepairBot");
 
         model.SetActive(false);
         GameObject prefab = GameObject.Instantiate(model);

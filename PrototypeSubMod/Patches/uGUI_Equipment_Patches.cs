@@ -43,13 +43,13 @@ internal class uGUI_Equipment_Patches
         go.transform.localScale = new Vector3(8, 10.3f, 1);
         go.AddComponent<CanvasRenderer>();
         var img = go.AddComponent<Image>();
-        img.sprite = Plugin.AssetBundle.LoadAsset<Sprite>("Proto_DeployablesBG");
+        img.sprite = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Proto_DeployablesBG");
         img.raycastTarget = false;
         
         go.transform.SetParent(slot0.transform);
         go.transform.localPosition = new Vector3(190, 73, 0);
         
-        GameObject storageAccess = GameObject.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("VehicleStorageAccess"), instance.transform);
+        GameObject storageAccess = GameObject.Instantiate(Plugin.GeneralAssetBundle.LoadAsset<GameObject>("VehicleStorageAccess"), instance.transform);
         storageAccess.SetActive(false);
     }
 
@@ -73,7 +73,7 @@ internal class uGUI_Equipment_Patches
         go.transform.localPosition = new Vector3(181.25f, -281.25f, 0);
         go.AddComponent<CanvasRenderer>();
         var img = go.AddComponent<Image>();
-        img.sprite = Plugin.AssetBundle.LoadAsset<Sprite>("Proto_Factor_2.2");
+        img.sprite = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Proto_Factor_2.2");
         img.raycastTarget = false;
         img.color = new Color(0.52f, 0.99f, 0.52f);
     }

@@ -13,13 +13,13 @@ internal class HullFacilityKey
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("HullFacilityKey", null, null)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("HullTabletIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("HullTabletIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
         var cloneTemplate = new CloneTemplate(prefabInfo, TechType.PrecursorKey_Purple);
         cloneTemplate.ModifyPrefab += gameObject =>
         {
-            Texture2D replacementGlyph = Plugin.AssetBundle.LoadAsset<Texture2D>("HullGlyph");
+            Texture2D replacementGlyph = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("HullGlyph");
             var rend1 = gameObject.transform.Find("Model/Rig_J/precursor_key_C_02_symbol_05").GetComponent<Renderer>();
             var rend2 = gameObject.transform.Find("ViewModel/Rig_J/precursor_key_C_02_symbol_05").GetComponent<Renderer>();
 

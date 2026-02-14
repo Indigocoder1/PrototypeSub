@@ -22,7 +22,7 @@ public class PrototypeSpawner
 
     private static GameObject GetGameObject()
     {
-        var asset = Plugin.AssetBundle.LoadAsset<GameObject>("PrototypeSpawner");
+        var asset = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PrototypeSpawner");
         asset.gameObject.SetActive(false);
         return GameObject.Instantiate(asset);
     }

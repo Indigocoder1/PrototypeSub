@@ -20,7 +20,7 @@ public static class LocatorFactor
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("LocatorFactor", unlockAtStart: false)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoFactorIcon"));
 
         prefab = new CustomPrefab(prefabInfo);
 
@@ -40,7 +40,7 @@ public static class LocatorFactor
     
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoLocatorFactor");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoLocatorFactor");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

@@ -13,7 +13,7 @@ internal class WarperRemnant : RelicBlock
     
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("WarperRemnant").WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("WarperRemnantIcon.png"));
+        prefabInfo = PrefabInfo.WithTechType("WarperRemnant").WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("WarperRemnantIcon.png"));
         prefab = new CustomPrefab(prefabInfo);
         
         prefab.SetGameObject(GetPrefab);
@@ -34,7 +34,7 @@ internal class WarperRemnant : RelicBlock
             yield break;
         }
         
-        var returnPrefab = Plugin.AssetBundle.LoadAsset<GameObject>("WarperRemnant");
+        var returnPrefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("WarperRemnant");
         
         if(returnPrefab == null)
             Plugin.Logger.LogError("Failed to load the WarperRemnant prefab.");

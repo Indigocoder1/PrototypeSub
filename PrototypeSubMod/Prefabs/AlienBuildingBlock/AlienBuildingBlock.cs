@@ -18,7 +18,7 @@ internal class AlienBuildingBlock : RelicBlock
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("AlienBuildingBlock", null, null, unlockAtStart: true)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("AlienBuildingBlockIcon.png"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienBuildingBlockIcon.png"));
         
         prefab = new CustomPrefab(prefabInfo);
         
@@ -32,7 +32,7 @@ internal class AlienBuildingBlock : RelicBlock
     
     private static IEnumerator GetPrefab(IOut<GameObject> prefab)
     {
-        var returnPrefab = Plugin.AssetBundle.LoadAsset<GameObject>("AlienBuildingBlock.prefab");
+        var returnPrefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("AlienBuildingBlock.prefab");
         
         if(returnPrefab == null)
             Plugin.Logger.LogError("Failed to load the AlienBuildingBlock prefab.");

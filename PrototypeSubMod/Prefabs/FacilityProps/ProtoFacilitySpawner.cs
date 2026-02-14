@@ -21,7 +21,7 @@ public static class ProtoFacilitySpawner
 
     private static GameObject GetGameObject(string prefabName)
     {
-        var asset = Plugin.AssetBundle.LoadAsset<GameObject>(prefabName);
+        var asset = Plugin.GeneralAssetBundle.LoadAsset<GameObject>(prefabName);
         asset.gameObject.SetActive(false);
         return asset;
     }

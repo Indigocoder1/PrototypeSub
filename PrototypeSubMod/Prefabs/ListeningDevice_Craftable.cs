@@ -18,7 +18,7 @@ internal class ListeningDevice_Craftable
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("ListeningDevice", null, null, unlockAtStart: true)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ListeningDeviceIcon.png"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ListeningDeviceIcon.png"));
 
         prefab = new CustomPrefab(prefabInfo);
         

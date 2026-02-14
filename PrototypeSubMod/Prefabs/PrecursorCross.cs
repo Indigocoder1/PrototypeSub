@@ -14,7 +14,7 @@ internal class PrecursorCross
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("PrecursorCross", null, null, "English")
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("CrucifixIcon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("CrucifixIcon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -26,7 +26,7 @@ internal class PrecursorCross
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("PrecursorCross");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PrecursorCross");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

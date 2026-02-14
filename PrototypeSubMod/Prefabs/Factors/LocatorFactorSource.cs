@@ -20,7 +20,7 @@ public static class LocatorFactorSource
     
     private static GameObject GetPrefab()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("LocatorFactorSource");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("LocatorFactorSource");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

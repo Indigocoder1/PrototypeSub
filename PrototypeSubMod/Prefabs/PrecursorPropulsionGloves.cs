@@ -17,12 +17,12 @@ public static class PrecursorPropulsionGloves
     {
         PrefabInfo = PrefabInfo.WithTechType("PrecursorPropulsionGloves", null, null, "English")
             .WithSizeInInventory(new Vector2int(2, 2))
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorPropulsionGlovesIcon.png"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrecursorPropulsionGlovesIcon.png"));
 
         var prefab = new CustomPrefab(PrefabInfo);
 
         var template = new CloneTemplate(PrefabInfo, TechType.ReinforcedGloves);
-        var glovesTex = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitGloves");
+        var glovesTex = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrecursorSuitGloves");
         template.ModifyPrefab += prefab =>
         {
             var material = prefab.GetComponentInChildren<Renderer>().material;

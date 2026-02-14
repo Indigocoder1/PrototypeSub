@@ -15,7 +15,7 @@ public static class ProtoTransmissionDevice
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("ProtoTransmissionDevice",null, null)
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("TransmissionDevice_Icon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("TransmissionDevice_Icon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -29,7 +29,7 @@ public static class ProtoTransmissionDevice
     
     private static GameObject GetGameObject()
     {
-        var asset = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoTransmissionDevice");
+        var asset = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoTransmissionDevice");
         asset.gameObject.SetActive(false);
         var instance = GameObject.Instantiate(asset);
 

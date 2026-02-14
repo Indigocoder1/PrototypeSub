@@ -14,7 +14,7 @@ public class ProtoPhaseGateStabilizer
     {
         PrefabInfo = PrefabInfo.WithTechType("ProtoPhaseGateStabilizer", null, null)
             .WithSizeInInventory(new Vector2int(2, 2))
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("ProtoPhaseGateStabilizer_Icon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoPhaseGateStabilizer_Icon"));
 
         var prefab = new CustomPrefab(PrefabInfo);
         
@@ -29,7 +29,7 @@ public class ProtoPhaseGateStabilizer
 
     private static GameObject GetGameObject()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStabilizer");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStabilizer");
         var instance = GameObject.Instantiate(prefab);
         
         MaterialUtils.ApplySNShaders(instance);

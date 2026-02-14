@@ -23,7 +23,7 @@ internal class ProtoPlaque_World
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("ProtoPlaque");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoPlaque");
         prefab.SetActive(false);
 
         var gameObject = GameObject.Instantiate(prefab, new Vector3(0, 500f, 0), Quaternion.identity);

@@ -60,7 +60,7 @@ namespace PrototypeSubMod
         public static string AssetsFolderPath { get; } = Path.Combine(Path.GetDirectoryName(Assembly.Location), "Assets");
         public static string RecipesFolderPath { get; } = Path.Combine(Path.GetDirectoryName(Assembly.Location), "Recipes");
 
-        public static AssetBundle AssetBundle { get; private set; }
+        public static AssetBundle GeneralAssetBundle { get; private set; }
         public static AssetBundle AudioBundle { get; private set; }
         public static AssetBundle ScenesAssetBundle { get; private set; }
         public static AssetBundle TitleAssetBundle { get; } = AssetBundle.LoadFromFile(Path.Combine(AssetsFolderPath, "prototypetitle"));
@@ -269,7 +269,7 @@ namespace PrototypeSubMod
         private IEnumerator LoadBundleTask(WaitScreenHandler.WaitScreenTask waitTask)
         {
             waitTask.Status = Language.main.GetFormat("ProtoWaitLoadingBundle");
-            yield return new WaitUntil(() => AssetBundle != null);
+            yield return new WaitUntil(() => GeneralAssetBundle != null);
         }
 
         private IEnumerator LoadPrefabsTask(WaitScreenHandler.WaitScreenTask waitTask)
@@ -314,13 +314,13 @@ namespace PrototypeSubMod
         
         private IEnumerator LazyInitialize()
         {
-            if (AssetBundle != null) yield break;
+            if (GeneralAssetBundle != null) yield break;
 
             Logger.LogDebug($"Started loading asset bundle");
             
             var task = AssetBundle.LoadFromFileAsync(Path.Combine(AssetsFolderPath, "prototypeassets"));
             yield return task;
-            AssetBundle = task.assetBundle;
+            GeneralAssetBundle = task.assetBundle;
             
             Logger.LogDebug($"Asset bundle loaded");
             
@@ -328,13 +328,13 @@ namespace PrototypeSubMod
 
 
             PrototypePingType = EnumHandler.AddEntry<PingType>("PrototypeSub")
-                .WithIcon(AssetBundle.LoadAsset<Sprite>("Proto_HUD_Marker"));
+                .WithIcon(GeneralAssetBundle.LoadAsset<Sprite>("Proto_HUD_Marker"));
             
             Logger.LogDebug($"Set ping type");
             
             yield return PrefabRegisterer.Register();
             Logger.LogDebug($"Loaded normal prefabs");
-            yield return LoadEasyPrefabs.LoadPrefabs(AssetBundle, EncyEntryRegisterer.Register, GC.Collect, GC.WaitForPendingFinalizers);
+            yield return LoadEasyPrefabs.LoadPrefabs(GeneralAssetBundle, EncyEntryRegisterer.Register, GC.Collect, GC.WaitForPendingFinalizers);
             Logger.LogDebug($"Loaded easy prefabs");
             
             PrototypePowerSystem.AllowedPowerSources = new()
@@ -516,7 +516,7 @@ namespace PrototypeSubMod
 
         private void LoadPathfindingGrid()
         {
-            byte[] bytes = AssetBundle.LoadAsset<TextAsset>("SaveGrid.grid").bytes;
+            byte[] bytes = GeneralAssetBundle.LoadAsset<TextAsset>("SaveGrid.grid").bytes;
             ThreadStart threadStart = () => DeserializeGridData(bytes, saveData =>
             {
                 pathfindingGridSaveData = saveData;

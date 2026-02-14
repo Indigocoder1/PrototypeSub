@@ -24,7 +24,7 @@ public class ProtoTerminalVFX
 
     private static GameObject GetPrefab()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("Empty");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("Empty");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

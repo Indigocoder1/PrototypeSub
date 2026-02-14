@@ -17,8 +17,8 @@ public static class GrayRock01
         cloneTemplate.ModifyPrefab += gameObject =>
         {
             var rend = gameObject.transform.Find("Group1").GetComponent<Renderer>();
-            var rock01 = Plugin.AssetBundle.LoadAsset<Texture2D>("rock_01");
-            var rock01Normal = Plugin.AssetBundle.LoadAsset<Texture2D>("rock_01_normal");
+            var rock01 = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("rock_01");
+            var rock01Normal = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("rock_01_normal");
             rend.material.SetTexture("_CapTexture", rock01);
             rend.material.SetTexture("_CapBumpMap", rock01Normal);
             rend.material.SetTexture("_SideTexture", rock01);

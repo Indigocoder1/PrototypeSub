@@ -18,7 +18,7 @@ internal class DeployableLight_Craftable
     public static void Register()
     {
         prefabInfo = PrefabInfo.WithTechType("DeployableLight", null, null, "English")
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("LightBeacon_Icon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("LightBeacon_Icon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -36,7 +36,7 @@ internal class DeployableLight_Craftable
 
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
-        var assetPrefab = Plugin.AssetBundle.LoadAsset<GameObject>("DeployableLight");
+        var assetPrefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("DeployableLight");
 
         assetPrefab.SetActive(false);
         var prefab = GameObject.Instantiate(assetPrefab);

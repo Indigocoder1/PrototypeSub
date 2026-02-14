@@ -18,15 +18,15 @@ public static class PrecursorSuit
     {
         prefabInfo = PrefabInfo.WithTechType("PrecursorSuit", null, null, "English")
             .WithSizeInInventory(new Vector2int(2, 2))
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("PrecursorSuitIcon.png"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrecursorSuitIcon.png"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
         var template = new CloneTemplate(prefabInfo, TechType.WaterFiltrationSuit);
-        var bodyTex = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitBody");
-        var armsTex = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitArms");
-        var bodyEmission = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorSuitEmission");
-        var armsEmission = Plugin.AssetBundle.LoadAsset<Texture2D>("PrecursorArmsEmission");
+        var bodyTex = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrecursorSuitBody");
+        var armsTex = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrecursorSuitArms");
+        var bodyEmission = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrecursorSuitEmission");
+        var armsEmission = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrecursorArmsEmission");
         
         template.ModifyPrefab += gameObject =>
         {

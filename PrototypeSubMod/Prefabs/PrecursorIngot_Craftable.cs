@@ -13,7 +13,7 @@ internal class PrecursorIngot_Craftable
     {
         prefabInfo = PrefabInfo.WithTechType("Proto_PrecursorIngot", null, null, "English")
             .WithSizeInInventory(new Vector2int(2, 2))
-            .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>("AlienFramework_Icon"));
+            .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_Icon"));
 
         var prefab = new CustomPrefab(prefabInfo);
 
@@ -29,7 +29,7 @@ internal class PrecursorIngot_Craftable
 
     private static GameObject GetPrefab()
     {
-        var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("AlienFramework");
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("AlienFramework");
         prefab.SetActive(false);
 
         var instance = GameObject.Instantiate(prefab);

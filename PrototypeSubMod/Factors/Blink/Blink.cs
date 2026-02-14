@@ -262,7 +262,7 @@ public class Blink : Factor
         var oxygenBar = uGUI.main.transform.Find("ScreenCanvas/HUD/Content/BarsPanel/OxygenBar");
         if (oxygenBar.Find("BlinkFactorCharge") == null)
         {
-            var prefab = Plugin.AssetBundle.LoadAsset<GameObject>("BlinkFactorCharge");
+            var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("BlinkFactorCharge");
             var instance = Instantiate(prefab, oxygenBar);
             instance.name = "BlinkFactorCharge";
             instance.transform.localPosition = new Vector3(0, 0, 0);

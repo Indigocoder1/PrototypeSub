@@ -32,7 +32,7 @@ internal class uGUI_InventoryTab_Patches
     [HarmonyPatch(nameof(uGUI_InventoryTab.Awake)), HarmonyPostfix]
     private static void Awake_Postfix(uGUI_InventoryTab __instance)
     {
-        GameObject storageAccess = GameObject.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("VehicleStorageBackButton"), __instance.transform);
+        GameObject storageAccess = GameObject.Instantiate(Plugin.GeneralAssetBundle.LoadAsset<GameObject>("VehicleStorageBackButton"), __instance.transform);
         storageAccess.transform.localPosition = new Vector3(20, 260, 0);
         storageAccess.SetActive(false);
     }
