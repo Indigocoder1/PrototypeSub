@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 7344987362867162415, guid: d4580d7c55555a642b52a5adc891536a, type: 3}
   sprite: {fileID: 0}
   techType: {fileID: 11400000, guid: d4627d9f4866ba249aa7648dff4ad749, type: 2}
-  applySNShaders: 1
+  applySNShaders: 0
   applyPrecursorMaterialChanges: 0
   unlockAtStart: 0
   craftable: 0

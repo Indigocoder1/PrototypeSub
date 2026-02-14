@@ -103,7 +103,8 @@ internal class Player_Patches
         Plugin.DEFENSE_CHAMBER_BIOME_NAME,
         Plugin.ENGINE_FACILITY_BIOME_NAME,
         "protohullfacilitycalm",
-        "protohullfacilitytense"
+        "protohullfacilitytense",
+        "protopuzzlefacility"
     };
     
     public static bool BiomeIsWalkableBlacklisted(bool previousResult, string currentBiome)
