@@ -11,14 +11,19 @@ public class BearingRoomManager : MonoBehaviour
     [SerializeField] private FMODAsset correctSequenceSfx;
     [SerializeField] private FMODAsset incorrectSequenceSfx;
     [SerializeField] private float sfxVolume = 1;
+
+    private bool roomCompleted;
     
     public void OnConfirmationClicked()
     {
+        if (roomCompleted) return;
+        
         if (HasCorrectSequence())
         {
             ErrorMessage.AddError(Language.main.Get("ProtoPuzzleCorrectSequence"));
             onRoomComplete?.Invoke();
             FMODUWE.PlayOneShot(correctSequenceSfx, Player.main.transform.position, sfxVolume);
+            roomCompleted = true;
         }
         else
         {
