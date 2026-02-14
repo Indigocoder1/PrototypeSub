@@ -224,6 +224,13 @@ internal static class StoryGoalsRegisterer
             PDAEncyclopedia.Add("NumberPuzzlePDAEncy", true);
         });
         #endregion
+
+        #region Number Puzzle Entry Voiceline
+        StoryGoalHandler.RegisterCustomEvent("OnEnterProtoNumberPuzzle", () =>
+        {
+            PDALog.Add("OnEnterProtoNumberPuzzle");
+        });
+        #endregion
         
         StoryGoalHandler.RegisterCustomEvent("OrionSurgicalRoomTome", () =>
         {

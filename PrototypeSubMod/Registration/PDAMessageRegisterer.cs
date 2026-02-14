@@ -43,6 +43,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.orionEntries.Add(("Proto_FirstInteract", "Proto_FirstInteract"));
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionStart", "Proto_ConstructionStart"));
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionFinish", "Proto_ConstructionFinish"));
+        PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "OnEnterProtoNumberPuzzle"));
         
         sw.Stop();
         Plugin.Logger.LogInfo($"PDA Messages registered in {sw.ElapsedMilliseconds}ms");
