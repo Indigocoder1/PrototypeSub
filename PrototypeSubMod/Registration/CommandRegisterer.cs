@@ -11,7 +11,9 @@ internal static class CommandRegisterer
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
         foreach ((string name, Vector3 loc) in Plugin.FACILITY_POSITIONS)
+        {
             ConsoleCommandsHandler.AddGotoTeleportPosition(name.ToLowerInvariant(), loc);
+        }
         sw.Stop();
         Plugin.Logger.LogInfo($"Console commands registered in {sw.ElapsedMilliseconds}ms");
     }

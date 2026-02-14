@@ -131,6 +131,7 @@ namespace PrototypeSubMod
             { "HullFacility", new Vector3(-1182, -443, -1146) },
             { "HullOutpost", new Vector3(-162, -69, -226) },
             { "NumberPuzzle",  new Vector3(-242, -72, 296) },
+            { "BearingPuzzle",  new Vector3(1222, -305, 529) },
             { "PPT", new Vector3(449, -92, 1169) },
             { "Worm1", new Vector3(-898, -386, -1284) },
             { "Worm2", new Vector3(-1006, -293, -1148) },
