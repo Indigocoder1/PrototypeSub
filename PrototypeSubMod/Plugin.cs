@@ -61,6 +61,7 @@ namespace PrototypeSubMod
         public static string RecipesFolderPath { get; } = Path.Combine(Path.GetDirectoryName(Assembly.Location), "Recipes");
 
         public static AssetBundle GeneralAssetBundle { get; private set; }
+        public static AssetBundle EasyPrefabBundle { get; private set; }
         public static AssetBundle AudioBundle { get; private set; }
         public static AssetBundle ScenesAssetBundle { get; private set; }
         public static AssetBundle TitleAssetBundle { get; } = AssetBundle.LoadFromFile(Path.Combine(AssetsFolderPath, "prototypetitle"));
@@ -208,13 +209,15 @@ namespace PrototypeSubMod
 
             string modName = Language.main.Get("ProtoModName");
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadBundleTask, Language.main.Get("ProtoWaitLoadingBundle"));
-            WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadPrefabsTask, Language.main.Get("ProtoWaitLoadingPrefabs"));
+            WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadGeneralPrefabsTask, Language.main.Get("ProtoWaitLoadingPrefabs"));
+            WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadEasyPrefabsTask, Language.main.Get("ProtoWaitLoadingEasyPrefabs"));
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadStructuresTask, Language.main.Get("ProtoWaitRegisteringStructures"));
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadMiscellaneousTask, Language.main.Get("ProtoWaitRegisteringMiscellaneous"));
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadScenesBundle, Language.main.Get("ProtoWaitRegisteringScenes"));
             WaitScreenHandler.RegisterEarlyAsyncLoadTask(modName, LoadAudioBundle, Language.main.Get("ProtoWaitRegisteringAudio"));
-            
-            ModMessageSystem.SendGlobal("FindMyUpdates", "https://raw.githubusercontent.com/Indigocoder1/PrototypeSub/refs/heads/main/PrototypeSubMod/Version.json");
+
+            ModMessageSystem.SendGlobal("FindMyUpdates",
+                "https://raw.githubusercontent.com/Indigocoder1/PrototypeSub/refs/heads/main/PrototypeSubMod/Version.json");
 
             sw.Stop();
             Logger.LogInfo($"Plugin {GUID} is loaded in {sw.ElapsedMilliseconds} ms!");
@@ -272,14 +275,20 @@ namespace PrototypeSubMod
             yield return new WaitUntil(() => GeneralAssetBundle != null);
         }
 
-        private IEnumerator LoadPrefabsTask(WaitScreenHandler.WaitScreenTask waitTask)
+        private IEnumerator LoadGeneralPrefabsTask(WaitScreenHandler.WaitScreenTask waitTask)
         {
-            waitTask.Status = Language.main.GetFormat("ProtoWaitRegisteringPrefabs", 
+            waitTask.Status = Language.main.Get("ProtoWaitRegisteringGeneralPrefabs");
+            yield return new WaitUntil(() => PrefabRegisterer.PrefabsLoaded);
+        }
+
+        private IEnumerator LoadEasyPrefabsTask(WaitScreenHandler.WaitScreenTask waitTask)
+        {
+            waitTask.Status = Language.main.GetFormat("ProtoWaitRegisteringEasyPrefabs",
                 (LoadEasyPrefabs.GetLoadProgress() * 100).ToString("F0"));
             LoadEasyPrefabs.ClearProgressEvents();
             LoadEasyPrefabs.OnProgressChanged += progress =>
             {
-                waitTask.Status = Language.main.GetFormat("ProtoWaitRegisteringPrefabs", (progress * 100).ToString("F0"));
+                waitTask.Status = Language.main.GetFormat("ProtoWaitRegisteringEasyPrefabs", (progress * 100).ToString("F0"));
             };
             while (!PrefabsInitialized)
             {
@@ -316,25 +325,31 @@ namespace PrototypeSubMod
         {
             if (GeneralAssetBundle != null) yield break;
 
-            Logger.LogDebug($"Started loading asset bundle");
+            Logger.LogDebug("Started loading general asset bundle");
             
             var task = AssetBundle.LoadFromFileAsync(Path.Combine(AssetsFolderPath, "prototypeassets"));
             yield return task;
             GeneralAssetBundle = task.assetBundle;
             
-            Logger.LogDebug($"Asset bundle loaded");
+            Logger.LogDebug("General asset bundle loaded");
             
             LoadPathfindingGrid();
-
-
+            
             PrototypePingType = EnumHandler.AddEntry<PingType>("PrototypeSub")
                 .WithIcon(GeneralAssetBundle.LoadAsset<Sprite>("Proto_HUD_Marker"));
             
-            Logger.LogDebug($"Set ping type");
-            
+            Logger.LogDebug("Set ping type");
             yield return PrefabRegisterer.Register();
             Logger.LogDebug($"Loaded normal prefabs");
-            yield return LoadEasyPrefabs.LoadPrefabs(GeneralAssetBundle, EncyEntryRegisterer.Register, GC.Collect, GC.WaitForPendingFinalizers);
+            
+            Logger.LogDebug("Loading easy prefab bundle");
+            var easyPrefabBundleTask =
+                AssetBundle.LoadFromFileAsync(Path.Combine(AssetsFolderPath, "prototypeeasyprefabs"));
+            yield return easyPrefabBundleTask;
+            EasyPrefabBundle = easyPrefabBundleTask.assetBundle;
+            Logger.LogDebug("Easy prefab bundle loaded");
+            
+            yield return LoadEasyPrefabs.LoadPrefabs(EasyPrefabBundle, EncyEntryRegisterer.Register, GC.Collect, GC.WaitForPendingFinalizers);
             Logger.LogDebug($"Loaded easy prefabs");
             
             PrototypePowerSystem.AllowedPowerSources = new()

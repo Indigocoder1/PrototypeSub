@@ -12,10 +12,13 @@ namespace PrototypeSubMod.Registration;
 
 internal static class PrefabRegisterer
 {
+    public static bool PrefabsLoaded;
+    
     public static IEnumerator Register()
     {
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
+        PrefabsLoaded = false;
         
         WarperRemnant.Register();
         AlienBuildingBlock.Register();
@@ -162,6 +165,7 @@ internal static class PrefabRegisterer
         new CustomPoster("AbsoluteCinemaPoster", null, null, AssetBundle.LoadAsset<Texture2D>("AbsoluteCinema 1"), cinemaIco);
 
         sw.Stop();
+        PrefabsLoaded = true;
         Plugin.Logger.LogInfo($"Normal prefabs loaded in {sw.ElapsedMilliseconds}ms");
     }
 }
