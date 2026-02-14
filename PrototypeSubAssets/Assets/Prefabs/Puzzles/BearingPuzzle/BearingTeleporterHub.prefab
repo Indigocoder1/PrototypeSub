@@ -50,8 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 7098793010464623253}
   teleporterPreview: {fileID: 655251033407021857}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!65 &7451930187969544986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2206,8 +2205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 1425109672524673219}
   teleporterPreview: {fileID: 3125135437803948182}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!65 &153126552410635957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2650,8 +2648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 7086182668294039122}
   teleporterPreview: {fileID: 857933522162406090}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!65 &2315046600410673881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3207,7 +3204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4570283487405570731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6519064540480207764}
@@ -3470,7 +3467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4920065789825085479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 82608657940882345}
@@ -4014,8 +4011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 1453325621947857249}
   teleporterPreview: {fileID: 1772197123777770481}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!65 &5831017559012169153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5383,6 +5379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewCamera: {fileID: 685279801365527285}
   linkedTeleporters: []
+  teleportSfx: {fileID: 0}
   doorsFrom: []
   doorsTo: []
 --- !u!1 &6960724421141987111
@@ -6043,7 +6040,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7106663339524512633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6652122574757501613}
@@ -6204,7 +6201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7445000916914414983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2788780758177519546}
@@ -6425,7 +6422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7955904861278394339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9129904070711393459}
@@ -6520,8 +6517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 1727056206734501071}
   teleporterPreview: {fileID: 7018365975522070841}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!65 &1671016647915364386
 BoxCollider:
   m_ObjectHideFlags: 0

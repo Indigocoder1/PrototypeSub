@@ -436,7 +436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754379188295182034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7988347289916148472}
@@ -843,8 +843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 323699554564481142}
   teleporterPreview: {fileID: 6671016399627981744}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!65 &3003988572227242039
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1791,8 +1790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 3457475119374176963}
   teleporterPreview: {fileID: 5613272028686526805}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!65 &1984054898684447437
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3052,8 +3050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportInPosition: {fileID: 6960724420896986604}
   teleporterPreview: {fileID: 3625875649752135612}
-  blurThreshold: 7
-  maxBlur: 2
+  blurOnApproach: 1
 --- !u!1 &6960724420673268426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,7 +3187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6960724420896986605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6960724420660476588}
@@ -3687,6 +3684,7 @@ MonoBehaviour:
   - name: Left<->Right
     doorFrom: {fileID: 0}
     doorTo: {fileID: 0}
+  teleportSfx: {fileID: 0}
   doorsFrom:
   - {fileID: 0}
   doorsTo:
@@ -4764,7 +4762,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7497223512477795483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3.85, z: -16.421}
+  m_LocalPosition: {x: -0, y: 3.85, z: -16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3328763186343935164}
