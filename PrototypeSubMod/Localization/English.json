@@ -178,6 +178,7 @@
   "MeasurePuzzleInputBeacon": "Input beacon {0}",
   "MeasurePuzzleNoBeacon": "No beacon in inventory",
   "NumberPuzzleSwapHint": "Swap symbol",
+  "BearingPuzzleCycleSymbol": "Cycle symbol",
   
   // Ion Dive Suit
   "PrecursorSuit": "Ion Dive Suit",
