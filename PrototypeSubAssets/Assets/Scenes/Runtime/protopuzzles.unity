@@ -21647,7 +21647,7 @@ MonoBehaviour:
     childPath: 
     materialIndex: -1
     type: 0
-    floatValue: 8
+    floatValue: 1
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
     textureValue: {fileID: 0}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
@@ -21691,7 +21691,7 @@ MonoBehaviour:
   propertyTypes: 0300000000000000000000000000000000000000
   floatValues:
   - 0
-  - 8
+  - 1
   - 7.4
   - 0.4
   - 0.99
@@ -21882,7 +21882,7 @@ MonoBehaviour:
     childPath: 
     materialIndex: -1
     type: 0
-    floatValue: 8
+    floatValue: 1
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
     textureValue: {fileID: 0}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
@@ -21926,7 +21926,7 @@ MonoBehaviour:
   propertyTypes: 0300000000000000000000000000000000000000
   floatValues:
   - 0
-  - 8
+  - 1
   - 7.4
   - 0.4
   - 0.99
