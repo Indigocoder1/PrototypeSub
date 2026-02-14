@@ -73,6 +73,7 @@ internal static class PrefabRegisterer
         ProtoFacilitySpawner.Register("ProtoEngineFacilitySpawner", "EngineFacilitySpawner");
         ProtoFacilitySpawner.Register("ProtoDefenseFacilitySpawner", "DefenseFacilitySpawner");
         ProtoFacilitySpawner.Register("ProtoBuildTerminalSpawner", "BuildTerminalSpawner");
+        ProtoFacilitySpawner.Register("ProtoPuzzleFacilitySpawner", "PuzzleSceneSpawner");
         
         yield return new WaitForEndOfFrame();
         
