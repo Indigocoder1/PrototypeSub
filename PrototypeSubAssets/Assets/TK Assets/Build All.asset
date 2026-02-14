@@ -30,6 +30,21 @@ MonoBehaviour:
   Active: 1
   OverrideManifest: 0
   targetpipeline: {fileID: 11400000, guid: e7cc6bc4aaf84774d9227b8be4efe89e, type: 2}
+--- !u!114 &-2866428779476109035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50df4f9027e15e04b931a8d460fb22c5, type: 3}
+  m_Name: ExecutePipeline
+  m_EditorClassIdentifier: 
+  Active: 1
+  OverrideManifest: 0
+  targetpipeline: {fileID: 11400000, guid: 889e10ec83152784f9dbb95e794fd9ad, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
   - {fileID: 3605999540422964201}
+  - {fileID: -2866428779476109035}
   - {fileID: 166608925614300441}
   - {fileID: -7182646832117218026}
   - {fileID: -5445852967081316658}

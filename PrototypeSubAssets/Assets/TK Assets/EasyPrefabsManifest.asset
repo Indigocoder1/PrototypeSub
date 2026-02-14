@@ -16,14 +16,7 @@ MonoBehaviour:
   assetBundles:
   - assetBundleName: prototypeassets
     assets:
-    - {fileID: 102900000, guid: 30c7138a820148a459f70e34216ffeef, type: 3}
-    - {fileID: 102900000, guid: e603a6d43d294c74ea728d835d534a84, type: 3}
-    - {fileID: 102900000, guid: 8c87a6e39eaea6f47984dde45ce71e36, type: 3}
-    - {fileID: 102900000, guid: 77639caf065cc654ea80800ef45a4aea, type: 3}
-    - {fileID: 102900000, guid: feaa8b7523d784b45bcf00a3ed0ccc02, type: 3}
-    - {fileID: 102900000, guid: e72b47135fa59cc4ab91608efcbe83fb, type: 3}
-    - {fileID: 102900000, guid: 05ad1e5008560264596b777a4e54638f, type: 3}
-    - {fileID: 4900000, guid: 4b93aece442f7fe4c97fd26345b90e0f, type: 3}
+    - {fileID: 102900000, guid: 3e8da87f2e3701e4c8d2c7916511db7f, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,7 +27,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e563561e08b6a3642a487177f5cfbb37, type: 3}
-  m_Name: ProtoManifest
+  m_Name: EasyPrefabsManifest
   m_EditorClassIdentifier: 
   Data:
   - {fileID: 391955823819911570}

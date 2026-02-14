@@ -36,7 +36,7 @@ MonoBehaviour:
   Manifests: []
   Recursive: 0
   IsFatal: 0
-  Path: <AssetBundlePath>
+  Path: <EasyPrefabBundlePath>
 --- !u!114 &-4965751651575539623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3695521163bdd74fa2845bbd3438240, type: 3}
-  m_Name: Build Sub
+  m_Name: Build Easy Prefabs
   m_EditorClassIdentifier: 
   Data:
   - {fileID: 6767997048574729433}
@@ -76,7 +76,7 @@ MonoBehaviour:
   - {fileID: 7348288049485020624}
   - {fileID: 8778950430768257719}
   QuickAccess: 1
-  manifest: {fileID: 11400000, guid: 25ef8078ff8a3f4408dc7c3b8f38a752, type: 2}
+  manifest: {fileID: 11400000, guid: b0a8c9f1f6601de42a76fdaba23b41b4, type: 2}
 --- !u!114 &6767997048574729433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
   Recursive: 0
   SourceRequired: 1
   EstablishDestination: 1
-  Source: <AssetBundlePath>
-  Destination: <PluginPath>\prototypeassets
+  Source: <EasyPrefabBundlePath>
+  Destination: <PluginPath>\prototypeeasyprefabs
 --- !u!114 &8778950430768257719
 MonoBehaviour:
   m_ObjectHideFlags: 0
