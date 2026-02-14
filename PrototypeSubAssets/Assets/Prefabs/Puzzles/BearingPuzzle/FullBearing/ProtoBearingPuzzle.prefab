@@ -15611,7 +15611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorFrom: {fileID: 3209647021790532222}
-  doorTo: {fileID: 3626298912732424355}
+  doorTo: {fileID: 6693525436086255155}
   roomFrom: {fileID: 394019802469643923}
 --- !u!1001 &259780727175626406
 PrefabInstance:
