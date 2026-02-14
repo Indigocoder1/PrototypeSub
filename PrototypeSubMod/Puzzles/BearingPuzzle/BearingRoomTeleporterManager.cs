@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using PrototypeSubMod.MiscMonobehaviors;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
@@ -141,6 +142,7 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         Player.main.SetPosition(Player.main.transform.position + positionDelta);
 
         FMODUWE.PlayOneShot(teleportSfx, Player.main.transform.position, 0.5f);
+        InterfloorTeleporter.PlayTeleportEffect(0.2f);
     }
 
     private void OnDestroy()
