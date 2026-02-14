@@ -159,7 +159,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 3101604666510806427}
           m_MethodName: MouseEnter
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -174,7 +174,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 3101604666510806427}
           m_MethodName: MouseExit
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -125,7 +125,7 @@ MonoBehaviour:
       m_Calls: []
   onEnterFX: {fileID: 0}
   onExitFX: {fileID: 0}
-  onClickFX: {fileID: 0}
+  onClickFX: {fileID: 11400000, guid: 25405428728b3b44ebd2b1c5dfa572d0, type: 2}
   volume: 1
   minDistForSound: 15
 --- !u!114 &3442854075621117437
@@ -147,7 +147,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 9146078827136988583}
           m_MethodName: MouseEnter
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -162,7 +162,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 9146078827136988583}
           m_MethodName: MouseExit
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconType: 2
-  handTextKey: 
+  handTextKey: PuzzleConfirmTooltip
   handSubscriptTextKey: 
   maxDistance: 15
 --- !u!1 &4626923144135276934

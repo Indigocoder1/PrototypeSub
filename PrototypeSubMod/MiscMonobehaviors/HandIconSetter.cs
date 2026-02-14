@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace PrototypeSubMod.MiscMonobehaviors;
 
@@ -12,12 +13,12 @@ public class HandIconSetter : MonoBehaviour
     
     private bool mouseHovered;
     
-    public void MouseEnter()
+    public void MouseEnter(BaseEventData data)
     {
         mouseHovered = true;
     }
 
-    public void MouseExit()
+    public void MouseExit(BaseEventData data)
     {
         mouseHovered = false;
     }
