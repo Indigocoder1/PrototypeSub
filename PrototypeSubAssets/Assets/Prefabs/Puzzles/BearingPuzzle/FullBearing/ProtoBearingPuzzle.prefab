@@ -15564,6 +15564,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  correctSequenceSfx: {fileID: 11400000, guid: 3e1bc1394ebcbbb4a9fe40d3d9e3c1f7, type: 2}
+  incorrectSequenceSfx: {fileID: 11400000, guid: 8282be62b8bbdab46bab001c4ed1f5ba,
+    type: 2}
+  sfxVolume: 0.25
 --- !u!114 &7609386727447175564
 MonoBehaviour:
   m_ObjectHideFlags: 0
