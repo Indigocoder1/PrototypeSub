@@ -126,6 +126,15 @@ public class BearingRoomTeleporterManager : MonoBehaviour
             throw new Exception($"Pair for {doorFrom} not found in teleporter doors mapping!");
         }
 
+        StartCoroutine(TeleportDelayed(doorFrom, doorTo));
+    }
+
+    private IEnumerator TeleportDelayed(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
+    {
+        InterfloorTeleporter.PlayTeleportEffect(0.2f);
+        yield return new WaitForSeconds(0.1f);
+        FMODUWE.PlayOneShot(teleportSfx, Player.main.transform.position, 0.5f);
+        
         var teleportToPosition = doorTo.GetTeleportInPosition();
         var teleportFromPosition = doorFrom.GetTeleportInPosition();
         var positionDelta = teleportToPosition.position - teleportFromPosition.position;
@@ -143,9 +152,6 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         underwaterMotor.vel = newVelocity;
         underwaterMotor.previousVelocity = newVelocity;
         Player.main.SetPosition(Player.main.transform.position + positionDelta);
-
-        FMODUWE.PlayOneShot(teleportSfx, Player.main.transform.position, 0.5f);
-        InterfloorTeleporter.PlayTeleportEffect(0.2f);
     }
 
     private void OnDestroy()
