@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StagingPaths: []
   assetBundles:
-  - assetBundleName: prototypeassets
+  - assetBundleName: prototypeeasyprefabs
     assets:
     - {fileID: 102900000, guid: 3e8da87f2e3701e4c8d2c7916511db7f, type: 3}
 --- !u!114 &11400000
