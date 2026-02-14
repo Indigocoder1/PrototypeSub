@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PrototypeSubMod.Puzzles.BearingPuzzle;
 
@@ -14,13 +15,18 @@ public class BearingSymbolMirror : BearingSymbol
         }
     }
 
+    private void Start()
+    {
+        RefreshSprite();
+    }
+
     public override BearingReferenceSymbol GetReferenceSymbol() => copySymbol.GetReferenceSymbol();
 
     public override void RefreshSprite()
     {
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
-            DestroyImmediate(transform.GetChild(i).gameObject);
+            Destroy(transform.GetChild(i).gameObject);
         }
 
         var symbol = copySymbol.GetReferenceSymbol().CreateSymbolObject();
