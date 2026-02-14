@@ -7497,15 +7497,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabSpawner: {fileID: 1071812719}
   editSharedMaterials: 1
-  materialDatas: []
-  propertyNames: []
-  childPaths: []
-  materialIndices: 
-  propertyTypes: 
-  floatValues: []
-  vectorValues: []
-  textureValues: []
-  colorValues: []
+  materialDatas:
+  - propertyName: _SpecColor
+    childPath: 
+    materialIndex: -1
+    type: 3
+    floatValue: 0
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0.402, g: 0.691, b: 0.667, a: 1}
+  - propertyName: _SpecInt
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 8
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  - propertyName: _Shininess
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 7.4
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  - propertyName: _Fresnel
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 0.4
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  - propertyName: _IBLreductionAtNight
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 0.99
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  propertyNames:
+  - _SpecColor
+  - _SpecInt
+  - _Shininess
+  - _Fresnel
+  - _IBLreductionAtNight
+  childPaths:
+  - 
+  - 
+  - 
+  - 
+  - 
+  materialIndices: ffffffffffffffffffffffffffffffffffffffff
+  propertyTypes: 0300000000000000000000000000000000000000
+  floatValues:
+  - 0
+  - 8
+  - 7.4
+  - 0.4
+  - 0.99
+  vectorValues:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  textureValues:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  colorValues:
+  - {r: 0.402, g: 0.691, b: 0.667, a: 1}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1071812721
 MonoBehaviour:
   m_ObjectHideFlags: 0
