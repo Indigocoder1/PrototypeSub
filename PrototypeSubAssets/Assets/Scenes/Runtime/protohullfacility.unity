@@ -5946,7 +5946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terminal: {fileID: 770372510}
-  storyGoalKey: 
+  storyGoalKey: TransmissionDeviceUnlock
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
