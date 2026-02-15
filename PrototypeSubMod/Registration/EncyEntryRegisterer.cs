@@ -372,7 +372,7 @@ internal static class EncyEntryRegisterer
         #region Transmission Device Terminal
         string transmissionTerminalTitle = Language.main.Get("TransmissionTerminalEncy_Title");
         string transmissionTerminalDescription = Language.main.Get("TransmissionTerminalEncy_Body");
-        var transmissionDevicePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("TransmissionDevice_Icon");
+        var transmissionDevicePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("TransmissionDevice_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: transmissionDevicePopup);
         #endregion
