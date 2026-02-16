@@ -135,6 +135,6 @@ public class BearingTeleporterDoor : MonoBehaviour
     }
 
     public Transform GetTeleportInPosition() => teleportInPosition;
-    public Vector3 GetTeleportPreviewPos() => teleportInPosition.transform.position - Vector3.up;
-    public Vector3 GetTeleportPreviewLookPos() => teleportInPosition.transform.position + teleportInPosition.transform.forward - Vector3.up;
+    public Vector3 GetTeleportPreviewPos() => teleportInPosition.transform.position + Vector3.down;
+    public Vector3 GetTeleportPreviewLookPos() => teleportInPosition.transform.position + teleportInPosition.transform.forward + Vector3.down;
 }

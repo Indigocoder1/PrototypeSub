@@ -551,51 +551,7 @@
       "priority": 0
     },
     {
-      "classId": "ProtoDeactivatedTeleporter",
-      "id": "25fde726-5b1e-4b9c-92a6-c66e829cfee7",
-      "position": {
-        "x": 1254.05115,
-        "y": -280.181519,
-        "z": 613.120239
-      },
-      "rotation": {
-        "x": 0.7071068,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.7071068
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "cellLevel": 2,
-      "priority": 0
-    },
-    {
-      "classId": "ProtoDeactivatedTeleporter",
-      "id": "e3296894-1b97-4563-9d07-5bb4f134c249",
-      "position": {
-        "x": 1240.04871,
-        "y": -280.181519,
-        "z": 613.120239
-      },
-      "rotation": {
-        "x": 0.7071068,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.7071068
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "cellLevel": 2,
-      "priority": 0
-    },
-    {
-      "classId": "68c58fba-bc8d-40fc-a137-544af418f953",
+      "classId": "df9aed66-c131-4570-9dcd-1e3d2109dcaa",
       "id": "6b4719e4-277a-4498-b0f2-b79512cc397a",
       "position": {
         "x": 1247.11,
