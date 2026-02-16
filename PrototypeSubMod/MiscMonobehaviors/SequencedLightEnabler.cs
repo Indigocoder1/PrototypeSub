@@ -21,6 +21,8 @@ public class SequencedLightEnabler : MonoBehaviour
     
     private void OnValidate()
     {
+        if (lightGroups == null) return;
+        
         lightSegmentLengths = new int[lightGroups.Count];
         lights = new List<Light>();
         intensities = new List<float>();
