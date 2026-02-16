@@ -15831,6 +15831,147 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 284198442}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &479123146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479123147}
+  - component: {fileID: 479123148}
+  - component: {fileID: 479123149}
+  m_Layer: 0
+  m_Name: Structures
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479123147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479123146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1666707643}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &479123148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479123146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -869328186, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structures:
+  - {fileID: 4900000, guid: 197c8bf01064e854191671bf828fcc83, type: 3}
+  parent: {fileID: 479123147}
+  removeLWEs: 1
+--- !u!114 &479123149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479123146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2125914568, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabSpawner: {fileID: 479123148}
+  editSharedMaterials: 0
+  materialDatas:
+  - propertyName: _SpecColor
+    childPath: 
+    materialIndex: -1
+    type: 3
+    floatValue: 0
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0.402, g: 0.691, b: 0.667, a: 1}
+  - propertyName: _SpecInt
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 1
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  - propertyName: _Shininess
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 7.4
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  - propertyName: _Fresnel
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 0.4
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  - propertyName: _IBLreductionAtNight
+    childPath: 
+    materialIndex: -1
+    type: 0
+    floatValue: 0.99
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    textureValue: {fileID: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  propertyNames:
+  - _SpecColor
+  - _SpecInt
+  - _Shininess
+  - _Fresnel
+  - _IBLreductionAtNight
+  childPaths:
+  - 
+  - 
+  - 
+  - 
+  - 
+  materialIndices: ffffffffffffffffffffffffffffffffffffffff
+  propertyTypes: 0300000000000000000000000000000000000000
+  floatValues:
+  - 0
+  - 1
+  - 7.4
+  - 0.4
+  - 0.99
+  vectorValues:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  textureValues:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  colorValues:
+  - {r: 0.402, g: 0.691, b: 0.667, a: 1}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &960946141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22137,7 +22278,8 @@ MonoBehaviour:
   - {fileID: 284198445}
   loadDistance2Objects:
   - {fileID: 284198444}
-  checkInterval: 1
+  - {fileID: 479123146}
+  checkInterval: 0.5
   sceneName: 
   manageScene: 0
 --- !u!4 &1666707643
@@ -22152,6 +22294,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 284198443}
+  - {fileID: 479123147}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

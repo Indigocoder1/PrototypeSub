@@ -1,14 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.StructureLoading;
 using UnityEngine;
 using UWE;
 
 namespace PrototypeSubMod.Facilities;
 
-internal class SpawnSHProps : MonoBehaviour
+internal class SpawnSHProps : MonoBehaviour, IMaterialModifier
 {
+    public event Action<GameObject> onEditMaterial;
+    
     [SerializeField] private TextAsset[] structures;
     [SerializeField] private Transform parent;
     [Tooltip("Remove large world entity components")]
@@ -85,6 +89,11 @@ internal class SpawnSHProps : MonoBehaviour
 
                 DestroyImmediate(identifier);
                 instance.SetActive(true);
+                
+                foreach (var rend in instance.GetComponentsInChildren<Renderer>())
+                {
+                    onEditMaterial?.Invoke(rend.gameObject);
+                }
             }
             
             if (lwe) lwe.enabled = true;
