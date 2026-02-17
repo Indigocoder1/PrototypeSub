@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 479839789, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pingSfxAsset: {fileID: 11400000, guid: 58b15855dfe04b84fa9e55ce80b2977c, type: 2}
 --- !u!1001 &7295972055608533444
 PrefabInstance:
   m_ObjectHideFlags: 0

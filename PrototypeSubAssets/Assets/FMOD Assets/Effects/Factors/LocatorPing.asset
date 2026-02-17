@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: LocatorPing
   id: 
-  audioClip: {fileID: 8300000, guid: 0facc190c5addc64d9310f877ee4550c, type: 3}
+  audioClip: {fileID: 8300000, guid: e413da68c60febf41b7fc61e5bb15d20, type: 3}
   doNotAutoRegister: 0
   mode: 4210704
-  maxDistance3D: 0
+  maxDistance3D: 800
   minDistance3D: 0
   fadeOutTime: -1
   bus: 0
