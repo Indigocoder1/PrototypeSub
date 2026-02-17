@@ -81,6 +81,6 @@ public class TooltipFactory_Patches
 
         var locatorFactor = item.item.GetComponent<Factors.Locator.Locator>();
         TooltipFactory.WriteAction(sb, GameInput.FormatButton(locatorFactor.GetUseButton()),
-            Language.main.Get("LocatorPing"));
+            Language.main.Get("LocatorToggle"));
     }
 }
