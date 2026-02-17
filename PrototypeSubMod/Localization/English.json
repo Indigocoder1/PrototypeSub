@@ -198,9 +198,9 @@
   "Tooltip_TetherFactor": "Alien implement used for localized teleportation.",
   "BiomechanicsFactor": "Biomechanics Factor",
   "Tooltip_BiomechanicsFactor": "Alien implement used to convert ion energy to bodily nourishment.",
-  "LocatorFactor": "Facility Detection Factor",
-  "Tooltip_LocatorFactor": "Alien implement used to locate nearby alien facilities.",
-  "LocatorToggle": "Toggle Factor",
+  "LocatorFactor": "Locator Factor",
+  "Tooltip_LocatorFactor": "Alien implement originally used to orient by nearby facilities.",
+  "LocatorPing": "Ping locator",
   "ProtoSuitUnequipWarning": "Cannot remove suit while Factors are installed!",
   "PropulsionGlovesRelease": "Release item {0}",
   "SuitColorFactor": "Color Factor",
@@ -217,7 +217,7 @@
   "PrototypeInputCategory": "The Prototype Sub",
   "OptionProtoTetherSubButton": "Tether to Sub",
   "OptionProtoTetherMarkerButton": "Tether to Marker",
-  "OptionProtoLocatorPingButton": "Toggle Factor",
+  "OptionProtoLocatorPingButton": "Ping Locator",
   
   // Suit Colors
   "SuitColorGreen": "Green",
