@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using PrototypeSubMod.Factors;
 using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
@@ -141,5 +142,26 @@ internal class Inventory_Patches
         if ((__result & ItemAction.Switch) > 0) return;
         
         __result |= ItemAction.Eat;
+    }
+
+    [HarmonyPatch(nameof(Inventory.InternalDropItem)), HarmonyPrefix]
+    private static void InternalDropItem_Prefix(Pickupable pickupable)
+    {
+        pickupable.inventoryItem ??= new InventoryItem(pickupable);
+        
+        if (pickupable.inventoryItem.techType != PrecursorSuit.prefabInfo.TechType) return;
+
+        var factorManager = uGUI_PDA.main.GetComponentInChildren<FactorEquipmentManager>(true);
+        
+        foreach (var slot in FactorEquipmentManager.FactorSlots)
+        {
+            var item = Inventory.main.equipment.GetItemInSlot(slot);
+            if (item == null) continue;
+            
+            Inventory.main.equipment.RemoveItem(item.item);
+            Inventory.main.InternalDropItem(item.item);
+        }
+
+        factorManager.RefreshFactorSlots();
     }
 }
