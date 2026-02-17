@@ -21,7 +21,10 @@ internal class HoverfishPlush
 
         prefab.SetGameObject(GetPrefab);
         prefab.SetEquipment(EquipmentType.Hand);
-        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{prefabInfo.ClassID}.json"));
+        prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{prefabInfo.ClassID}.json"))
+            .WithFabricatorType(CraftTree.Type.Fabricator)
+            .WithStepsToFabricatorTab("Machines")
+            .WithCraftingTime(3f);
         prefab.SetPdaGroupCategory(TechGroup.Miscellaneous, TechCategory.Misc);
 
         prefab.Register();
