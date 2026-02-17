@@ -20,7 +20,7 @@ public class MultiClipFMODAsset : FMODAsset
     public float minDistance3D;
     [Tooltip("Leave at -1 to not use fading")]
     public float fadeOutTime = -1;
-    public bool randomizePlayOrder;
+    public bool randomizePlayOrder = true;
 
     [SerializeField] private SoundBus bus;
     [SerializeField] private string customBusPath;
