@@ -1,0 +1,17 @@
+{
+    "craftAmount": 1,
+    "Ingredients": [
+      {
+        "techType": "AlienBuildingBlock",
+        "amount": 1
+      },
+      {
+        "techType": "Lithium",
+        "amount": 1
+      },
+      {
+        "techType": "CopperWire",
+        "amount": 1
+      }
+    ]
+  }
