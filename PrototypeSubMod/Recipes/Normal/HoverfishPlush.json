@@ -2,7 +2,7 @@
     "craftAmount": 1,
     "Ingredients": [
       {
-        "techType": "Titanium",
+        "techType": "FiberMesh",
         "amount": 2
       }
     ]
