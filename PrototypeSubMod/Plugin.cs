@@ -32,6 +32,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UWE;
 using System.Collections.Generic;
+using System.Linq;
+using Nautilus.Extensions;
+using Nautilus.FMod;
 
 namespace PrototypeSubMod
 {
@@ -511,7 +514,32 @@ namespace PrototypeSubMod
             
             foreach (var asset in request.allAssets)
             {
-                SubAudioLoader.RegisterAssetAudio(asset as CustomFMODAsset);
+                if (asset is CustomFMODAsset customFMODAsset)
+                {
+                    SubAudioLoader.RegisterAssetAudio(customFMODAsset);
+                }
+                else if (asset is MultiClipFMODAsset multiFMODAsset)
+                {
+                    var sounds = AudioUtils.CreateSounds(multiFMODAsset.audioClips, multiFMODAsset.mode).ToArray();
+                    if (multiFMODAsset.minDistance3D > 0 || multiFMODAsset.maxDistance3D > 0)
+                    {
+                        foreach (var sound in sounds)
+                        {
+                            sound.set3DMinMaxDistance(multiFMODAsset.minDistance3D, multiFMODAsset.maxDistance3D);
+                        }
+                    }
+
+                    if (multiFMODAsset.fadeOutTime > 0)
+                    {
+                        foreach (var sound in sounds)
+                        {
+                            sound.AddFadeOut(multiFMODAsset.fadeOutTime);
+                        }
+                    }
+
+                    var multiSoundsEvent = new FModMultiSounds(sounds, multiFMODAsset.GetBus(), multiFMODAsset.randomizePlayOrder);
+                    CustomSoundHandler.RegisterCustomSound(multiFMODAsset.path, multiSoundsEvent);
+                }
             }
             audioSW.Stop();
             Logger.LogInfo($"Audio registered in {audioSW.ElapsedMilliseconds}ms");
