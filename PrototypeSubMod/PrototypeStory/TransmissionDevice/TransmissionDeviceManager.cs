@@ -47,20 +47,20 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     {
         if (!deployed)
         {
-            HandReticle.main.SetText(HandReticle.TextType.Hand, "Deploy from prototype to use", true);
+            HandReticle.main.SetText(HandReticle.TextType.Hand, "ProtoTransmissionDeviceDeploy", true);
             HandReticle.main.SetIcon(HandReticle.IconType.HandDeny);
             return;
         }
 
         if (!activated)
         {
-            HandReticle.main.SetText(HandReticle.TextType.Hand, "Insert power source", true,
+            HandReticle.main.SetText(HandReticle.TextType.Hand, "ProtoTransmissionDevicePower", true,
                 GameInput.Button.LeftHand);
             HandReticle.main.SetIcon(HandReticle.IconType.Hand);
             return;
         }
         
-        HandReticle.main.SetText(HandReticle.TextType.Hand, "Enter transmission code", true,
+        HandReticle.main.SetText(HandReticle.TextType.Hand, "ProtoTransmissionDeviceCode", true,
             GameInput.Button.LeftHand);
         HandReticle.main.SetIcon(HandReticle.IconType.Hand);
     }
