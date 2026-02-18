@@ -156,6 +156,8 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         IngameMenu_Patches.SetDenySaving(true);
         Player.main.SetHeadVisible(true);
         Player.main.playerController.SetEnabled(false);
+        Player.main.cinematicModeActive = true;
+        Player.main.FreezeStats();
         cinematicAnimator.SetTrigger("PlayAnim");
         deviceAnimator.SetTrigger("Fire");
     }
@@ -173,6 +175,8 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         IngameMenu_Patches.SetDenySaving(false);
         Player.main.SetHeadVisible(false);
         Player.main.playerController.SetEnabled(true);
+        Player.main.cinematicModeActive = false;
+        Player.main.UnfreezeStats();
         PlayCredits();
     }
     
