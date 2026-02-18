@@ -14,6 +14,10 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     [SerializeField] private GameObject poweredDownObjects;
     [SerializeField] private GameObject poweredUpObjects;
     [SerializeField] private float activationDelay;
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter activateSfx;
+    [SerializeField] private FMOD_CustomEmitter idleSfx;
 
     private bool deployed;
     private bool activated;
@@ -31,6 +35,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         deployed = true;
         deviceAnimator.SetTrigger("ActivateInstant");
         Destroy(GetComponent<Pickupable>());
+        idleSfx.Play();
     }
 
     private void Update()
@@ -129,12 +134,14 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     {
         deviceAnimator.SetTrigger("Activate");
         Plugin.GlobalSaveData.activatedTransmissionDevices.Add(GetComponent<PrefabIdentifier>().Id);
+        activateSfx.Play();
         yield return new WaitForSeconds(activationDelay);
         
         ErrorMessage.AddDebug("Powered up transmission device");
         poweredDownObjects.SetActive(false);
         poweredUpObjects.SetActive(true);
         activated = true;
+        idleSfx.Play();
     }
 
     public void DeployDevice()
