@@ -184,6 +184,7 @@
   "NumberPuzzleSwapHint": "Swap symbol",
   "BearingPuzzleCycleSymbol": "Cycle symbol",
   "PuzzleConfirmTooltip": "Submit sequence",
+  "NumberPuzzleAddHint": "Interact",
   
   // Ion Dive Suit
   "PrecursorSuit": "Ion Dive Suit",

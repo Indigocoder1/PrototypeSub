@@ -196,7 +196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconType: 10
-  handTextKey: 
+  handButton: 4
+  handSubscriptButton: 44
+  handTextKey: NumberPuzzleAddHint
   handSubscriptTextKey: 
   maxDistance: 15
 --- !u!1 &5914901589878244931

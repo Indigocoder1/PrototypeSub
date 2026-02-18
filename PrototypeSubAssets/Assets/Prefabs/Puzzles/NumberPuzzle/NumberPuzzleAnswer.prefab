@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconType: 10
+  handButton: 4
+  handSubscriptButton: 44
   handTextKey: NumberPuzzleSwapHint
   handSubscriptTextKey: 
   maxDistance: 20
