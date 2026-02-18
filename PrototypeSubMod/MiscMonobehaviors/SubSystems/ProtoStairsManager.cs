@@ -18,6 +18,7 @@ public class ProtoStairsManager : MonoBehaviour
     private bool stairsActive;
     private bool colliderChecks;
     private bool stairsFinishedMoving;
+    public bool fireSupressionActive = false;
     
     private void Start()
     {
@@ -55,6 +56,7 @@ public class ProtoStairsManager : MonoBehaviour
 
     public void ToggleStairsActive()
     {
+        if (fireSupressionActive) return;
         SetStairsActive(!stairsActive);
     }
 
@@ -73,6 +75,7 @@ public class ProtoStairsManager : MonoBehaviour
     // Called by SubRoot.OnPlayerEntered
     public void PlayerEnteredSub()
     {
+        if (fireSupressionActive) return;
         SetStairsActive(false);
     }
 
