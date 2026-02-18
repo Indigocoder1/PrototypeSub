@@ -8,8 +8,6 @@ namespace PrototypeSubMod.PrototypeStory;
 
 internal class EndCinematicCameraController : MonoBehaviour
 {
-    public static bool queuedSceneOverride;
-
     [SerializeField] private EndingMusicManager musicManager;
     [SerializeField] private CyclopsExternalCams externalCams;
     [SerializeField] private ProtoRigidbodyFreezer freezeWhenFar;
@@ -59,7 +57,7 @@ internal class EndCinematicCameraController : MonoBehaviour
     private void CleanupScene()
     {
         FMODUnity.RuntimeManager.StopAllEvents(true);
-        queuedSceneOverride = true;
+        SceneCleaner_Patches.QueueSceneOverride();
         SceneCleaner.Open();
     }
 

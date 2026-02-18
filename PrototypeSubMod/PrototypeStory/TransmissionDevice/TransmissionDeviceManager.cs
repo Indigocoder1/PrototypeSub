@@ -167,5 +167,13 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         IngameMenu_Patches.SetDenySaving(false);
         Player.main.SetHeadVisible(false);
         Player.main.playerController.SetEnabled(true);
+        PlayCredits();
+    }
+    
+    private void PlayCredits()
+    {
+        FMODUnity.RuntimeManager.StopAllEvents(true);
+        SceneCleaner_Patches.QueueSceneOverride();
+        SceneCleaner.Open();
     }
 }
