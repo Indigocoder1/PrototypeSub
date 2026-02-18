@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using PrototypeSubMod.Credits;
 using PrototypeSubMod.Patches;
 using UnityEngine;
 
@@ -157,6 +158,11 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         Player.main.playerController.SetEnabled(false);
         cinematicAnimator.SetTrigger("PlayAnim");
         deviceAnimator.SetTrigger("Fire");
+    }
+
+    public void FadeToBlack()
+    {
+        ProtoScreenFadeManager.instance.FadeIn(1);
     }
 
     public void OnCinematicFinished()
