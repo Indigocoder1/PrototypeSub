@@ -46,6 +46,8 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
     public void OnHover(HandTargetEventData eventData)
     {
         string key = string.Empty;
+
+        var handReticle = HandReticle.IconType.Hand;
         if (dockingBay.dockedVehicle)
         {
             key = "ProtoAccessVehicle";
@@ -53,16 +55,18 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
         else if (!dockingManager.DockUnlocked())
         {
             key = "ProtoDockNotUnlocked";
+            handReticle = HandReticle.IconType.HandDeny;
         }
         else
         {
             key = "ProtoNoVehicleDocked";
+            handReticle = HandReticle.IconType.HandDeny;
         }
         
         var main = HandReticle.main;
         main.SetText(HandReticle.TextType.Hand, key, true, GameInput.Button.LeftHand);
         main.SetText(HandReticle.TextType.HandSubscript, string.Empty, false);
-        main.SetIcon(HandReticle.IconType.Hand, 1f);
+        main.SetIcon(handReticle, 1f);
     }
 
     public void OnUse(HandTargetEventData eventData)
