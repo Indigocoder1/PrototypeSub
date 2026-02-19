@@ -18,7 +18,7 @@ public class FactorEquipmentManager : MonoBehaviour
     };
 
     private List<uGUI_EquipmentSlot> factorSlots = new();
-    private bool wasShowingSlots;
+    private bool hadSuit;
 
     private void Start()
     {
@@ -42,30 +42,28 @@ public class FactorEquipmentManager : MonoBehaviour
         yield return null;
         
         var hasSuit = Inventory.main.equipment.GetTechTypeInSlot("Body") == PrecursorSuit.prefabInfo.TechType;
-        bool showSlots = hasSuit && Inventory.main.usedStorage.Count == 0;
 
-        if (showSlots != wasShowingSlots)
+        if (hasSuit == hadSuit) yield break;
+        
+        if (hasSuit)
         {
-            if (showSlots)
+            Inventory.main.equipment.AddSlots(FactorSlots);
+        }
+        else
+        {
+            foreach (var slot in FactorSlots)
             {
-                Inventory.main.equipment.AddSlots(FactorSlots);
-            }
-            else
-            {
-                foreach (var slot in FactorSlots)
-                {
-                    Inventory.main.equipment.RemoveItem(slot, true, true);
-                    Inventory.main.equipment.RemoveSlot(slot);
-                }
-            }
-            
-            foreach (var slot in factorSlots)
-            {
-                slot.SetActive(showSlots);
+                Inventory.main.equipment.RemoveItem(slot, true, true);
+                Inventory.main.equipment.RemoveSlot(slot);
             }
         }
+            
+        foreach (var slot in factorSlots)
+        {
+            slot.SetActive(hasSuit);
+        }
 
-        wasShowingSlots = showSlots;
+        hadSuit = hasSuit;
     }
 
     private void OnEquip(string slot, InventoryItem item)
