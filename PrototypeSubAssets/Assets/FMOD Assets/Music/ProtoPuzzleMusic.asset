@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
-  m_Name: PuzzleMusic
+  m_Script: {fileID: -2009117098, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: ProtoPuzzleMusic
   m_EditorClassIdentifier: 
-  path: PuzzleMusic
+  path: ProtoPuzzleMusic
   id: 
-  audioClip: {fileID: 8300000, guid: 74b61214961635a4faaf36cc64e9ce65, type: 3}
-  doNotAutoRegister: 0
-  mode: 4210698
+  audioClips:
+  - {fileID: 8300000, guid: 74b61214961635a4faaf36cc64e9ce65, type: 3}
+  - {fileID: 8300000, guid: f12105fa3fa8de14e8cff5f309168c18, type: 3}
+  mode: 16394
   maxDistance3D: 0
   minDistance3D: 0
-  fadeOutTime: 6
+  fadeOutTime: 10
+  randomizePlayOrder: 1
   bus: 3
   customBusPath: 
