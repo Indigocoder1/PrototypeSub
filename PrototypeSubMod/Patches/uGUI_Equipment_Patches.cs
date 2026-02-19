@@ -160,6 +160,12 @@ internal class uGUI_Equipment_Patches
         __instance.SendMessageUpwards("RefreshFactorSlots");
     }
     
+    [HarmonyPatch(nameof(uGUI_Equipment.OnEquip)), HarmonyPostfix]
+    private static void OnEquip_Postfix(uGUI_Equipment __instance)
+    {
+        __instance.SendMessageUpwards("RefreshFactorSlots");
+    }
+    
     [HarmonyPatch(nameof(uGUI_Equipment.OnUnequip)), HarmonyPrefix]
     private static void OnUnequip_Prefix(uGUI_Equipment __instance)
     {

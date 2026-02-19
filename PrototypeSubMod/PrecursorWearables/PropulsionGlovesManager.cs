@@ -131,7 +131,7 @@ public class PropulsionGlovesManager : MonoBehaviour
             UpdateAnimationState(isGrabbingObject);
         }
 
-        if (isGrabbingObject)
+        if (isGrabbingObject && propulsionCannon.grabbedObject != null)
         {
             ikTargetHolder.transform.LookAt(propulsionCannon.grabbedObject.transform);
             UpdateSuitEmission();

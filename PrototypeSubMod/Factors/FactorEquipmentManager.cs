@@ -18,8 +18,7 @@ public class FactorEquipmentManager : MonoBehaviour
     };
 
     private List<uGUI_EquipmentSlot> factorSlots = new();
-    private uGUI_Equipment uGUIEquipment;
-    private bool wasShowingSlots;
+    private bool hadSuit;
 
     private void Start()
     {
@@ -27,13 +26,12 @@ public class FactorEquipmentManager : MonoBehaviour
         {
             factorSlots.Add(transform.Find($"Equipment/ProtoFactorSlot{i}").GetComponent<uGUI_EquipmentSlot>());
         }
-
-        uGUIEquipment = GetComponentInChildren<uGUI_Equipment>(true);
+        
         Inventory.main.equipment.onEquip += OnEquip;
     }
 
     // Called via SendMessage
-    private void RefreshFactorSlots()
+    public void RefreshFactorSlots()
     {
         UWE.CoroutineHost.StartCoroutine(RefreshSlotsDelayed());
     }
@@ -43,36 +41,35 @@ public class FactorEquipmentManager : MonoBehaviour
     {
         yield return null;
         
-        if (!uGUIEquipment.gameObject.activeSelf) yield break;
-        
         var hasSuit = Inventory.main.equipment.GetTechTypeInSlot("Body") == PrecursorSuit.prefabInfo.TechType;
-        bool showSlots = hasSuit && Inventory.main.usedStorage.Count == 0;
 
-        if (showSlots != wasShowingSlots)
+        if (hasSuit == hadSuit) yield break;
+        
+        if (hasSuit)
         {
-            if (showSlots)
+            Inventory.main.equipment.AddSlots(FactorSlots);
+        }
+        else
+        {
+            foreach (var slot in FactorSlots)
             {
-                uGUIEquipment.equipment.AddSlots(FactorSlots);
-            }
-            else
-            {
-                foreach (var slot in FactorSlots)
-                {
-                    uGUIEquipment.equipment.equipment.Remove(slot);
-                }
-            }
-            
-            foreach (var slot in factorSlots)
-            {
-                slot.SetActive(showSlots);
+                Inventory.main.equipment.RemoveItem(slot, true, true);
+                Inventory.main.equipment.RemoveSlot(slot);
             }
         }
+            
+        foreach (var slot in factorSlots)
+        {
+            slot.SetActive(hasSuit);
+        }
 
-        wasShowingSlots = showSlots;
+        hadSuit = hasSuit;
     }
 
     private void OnEquip(string slot, InventoryItem item)
     {
+        if (WaitScreen.IsWaiting) return;
+        
         if (Array.IndexOf(FactorSlots, slot) < 0)
         {
             return;
@@ -86,5 +83,4 @@ public class FactorEquipmentManager : MonoBehaviour
     {
         Inventory.main.equipment.onEquip -= OnEquip;
     }
-
 }

@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 1447267592, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconType: 2
+  iconType: 10
+  handButton: 4
+  handSubscriptButton: 44
   handTextKey: NumberPuzzleSwapHint
   handSubscriptTextKey: 
   maxDistance: 20
