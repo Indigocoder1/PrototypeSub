@@ -70,6 +70,8 @@ public class FactorEquipmentManager : MonoBehaviour
 
     private void OnEquip(string slot, InventoryItem item)
     {
+        if (WaitScreen.IsWaiting) return;
+        
         if (Array.IndexOf(FactorSlots, slot) < 0)
         {
             return;
