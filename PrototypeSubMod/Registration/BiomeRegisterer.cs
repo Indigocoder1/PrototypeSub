@@ -96,7 +96,7 @@ internal static class BiomeRegisterer
 
         #endregion
 
-        #region Calebration Site
+        #region Calibration Site
 
         var calibrationPrefabInfo = PrefabInfo.WithTechType("CalibrationSiteVoidBiome");
         var calibrationVolumePrefab = new CustomPrefab(calibrationPrefabInfo);
