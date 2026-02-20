@@ -154,8 +154,8 @@
   "BiomechanicsFactorTerminalEncy_Title": "Biomechanics factor title here",
   "BiomechanicsFactorTerminalEncy_Body": "Al-An please add details.",
 
-  "LocatorFactorTerminalEncy_Title": "Locate be like",
-  "LocatorFactorTerminalEncy_Body": "Body description",
+  "LocatorFactorTerminalEncy_Title": "Facility Detection Factor",
+  "LocatorFactorTerminalEncy_Body": "This terminal relays data on the alien's ability to 'hear' their technology. By analysing the data, this PDA was able to extract a modular implement allowing this 'sound' to be percieved by humans.\n\n<b>Note: Implement requires advanced alien bodily interface to function. Further data required.</b>",
   
   "ProtoTransmissionSiteEncy_Title": "Transmission Site",
   "ProtoTransmissionSiteEncy_Body": "Have you tried looking?",
