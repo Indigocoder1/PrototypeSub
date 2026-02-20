@@ -441,8 +441,9 @@
 
   // Ping Types
   "ProtoDefenseFacilityPing": "▙▚▛▚┃┛▚",
-  "StoryEndPingType": "Dead zone mapping site",
+  "StoryEndPingType": "▙┏┃┣▜┏┣┏┣▝▚╋┏▞▙",
   "NumberPuzzlePing": "▙▚▛▚┃┛▚",
+  "BearingPuzzlePing": "▗▚▖┗▞┃▜┓┫┇┇▄▚━┏━▚┃┣",
 
   // Build terminal
   "UpgradeScreenHeader": "┫┓▜┗▖▙▚┛",
