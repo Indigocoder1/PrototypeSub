@@ -247,7 +247,7 @@ internal static class StoryGoalsRegisterer
             KnownTech.Add(relayType1);
         });
         
-        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 67.5f,
+        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 300f,
             "PrototypeCrafted");
         StoryGoalHandler.RegisterCompoundGoal("ProtoFacilityLocationsHint", Story.GoalType.Story, 60,
             "PrototypeCrafted");
