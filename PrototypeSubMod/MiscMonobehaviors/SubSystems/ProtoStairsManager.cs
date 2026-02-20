@@ -62,6 +62,7 @@ public class ProtoStairsManager : MonoBehaviour
 
     public void ToggleFromBottom()
     {
+        if (fireSupressionActive) return;
         SetStairsActive(!stairsActive);
         colliderChecks = true;
         lowerCollider.enabled = false;
