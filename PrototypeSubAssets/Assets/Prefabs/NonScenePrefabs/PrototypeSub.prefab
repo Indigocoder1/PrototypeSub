@@ -54328,7 +54328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Proto_FireSupression
-  sound: {fileID: 11400000, guid: 5ce86571cea06ec498b37ccda60c9731, type: 2}
+  sound: {fileID: 11400000, guid: f960b6e3d3c1f334aaaeab5739a96789, type: 2}
   minInterval: 30
 --- !u!1 &3982211717349593266
 GameObject:
