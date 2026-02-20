@@ -1,0 +1,27 @@
+{
+  "Entities": [
+    {
+      "classId": "LocatorFactorTerminal",
+      "id": "8c2af85c-e469-4909-b45c-a17dea9ccfe0",
+      "position": {
+        "x": 471.643158,
+        "y": -4.597145,
+        "z": 1193.64587
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.172985345,
+        "z": 0.0,
+        "w": 0.984924436
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": 1,
+      "priority": 0
+    }
+  ],
+  "IsSorted": false
+}
