@@ -1,10 +1,10 @@
+using System.Collections;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
-using Nautilus.Assets.PrefabTemplates;
-using Nautilus.Crafting;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Factors;
-using System.Collections.Generic;
+using Nautilus.Utility;
+using PrototypeSubMod.Utility;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs.Factors;
@@ -20,19 +20,30 @@ public static class SuitColorFactor
 
         var prefab = new CustomPrefab(prefabInfo);
 
-        var cloneTemplate = new CloneTemplate(prefabInfo, TechType.Compass);
-        cloneTemplate.ModifyPrefab += gameObject =>
-        {
-            gameObject.name = "SuitColorFactor";
-            gameObject.GetComponent<PrefabIdentifier>().classId = prefabInfo.ClassID;
-            gameObject.AddComponent<ColorFactor>();
-        };
-
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe("ColorFactor.json"))
             .WithCraftingTime(3f);
         prefab.SetEquipment(Plugin.FactorEquipmentType);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
-        prefab.SetGameObject(cloneTemplate);
+        prefab.SetGameObject(GetPrefab);
         prefab.Register();
+    }
+    
+    private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
+    {
+        var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("GenericFactorModel");
+        prefab.SetActive(false);
+
+        var instance = GameObject.Instantiate(prefab);
+
+        yield return new WaitUntil(() => MaterialUtils.IsReady);
+
+        MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(3, 0));
+
+        yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
+        
+        instance.name = "SuitColorFactor";
+        instance.AddComponent<ColorFactor>();
+        
+        prefabOut.Set(instance);
     }
 }

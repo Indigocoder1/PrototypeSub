@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using PrototypeSubMod.Credits;
 using PrototypeSubMod.Patches;
 using UnityEngine;
 
@@ -13,6 +14,10 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     [SerializeField] private GameObject poweredDownObjects;
     [SerializeField] private GameObject poweredUpObjects;
     [SerializeField] private float activationDelay;
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter activateSfx;
+    [SerializeField] private FMOD_CustomEmitter idleSfx;
 
     private bool deployed;
     private bool activated;
@@ -30,6 +35,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         deployed = true;
         deviceAnimator.SetTrigger("ActivateInstant");
         Destroy(GetComponent<Pickupable>());
+        idleSfx.Play();
     }
 
     private void Update()
@@ -47,20 +53,20 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     {
         if (!deployed)
         {
-            HandReticle.main.SetText(HandReticle.TextType.Hand, "Deploy from prototype to use", true);
+            HandReticle.main.SetText(HandReticle.TextType.Hand, "ProtoTransmissionDeviceDeploy", true);
             HandReticle.main.SetIcon(HandReticle.IconType.HandDeny);
             return;
         }
 
         if (!activated)
         {
-            HandReticle.main.SetText(HandReticle.TextType.Hand, "Insert power source", true,
+            HandReticle.main.SetText(HandReticle.TextType.Hand, "ProtoTransmissionDevicePower", true,
                 GameInput.Button.LeftHand);
             HandReticle.main.SetIcon(HandReticle.IconType.Hand);
             return;
         }
         
-        HandReticle.main.SetText(HandReticle.TextType.Hand, "Enter transmission code", true,
+        HandReticle.main.SetText(HandReticle.TextType.Hand, "ProtoTransmissionDeviceCode", true,
             GameInput.Button.LeftHand);
         HandReticle.main.SetIcon(HandReticle.IconType.Hand);
     }
@@ -128,12 +134,14 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     {
         deviceAnimator.SetTrigger("Activate");
         Plugin.GlobalSaveData.activatedTransmissionDevices.Add(GetComponent<PrefabIdentifier>().Id);
+        activateSfx.Play();
         yield return new WaitForSeconds(activationDelay);
         
         ErrorMessage.AddDebug("Powered up transmission device");
         poweredDownObjects.SetActive(false);
         poweredUpObjects.SetActive(true);
         activated = true;
+        idleSfx.Play();
     }
 
     public void DeployDevice()
@@ -155,8 +163,15 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         IngameMenu_Patches.SetDenySaving(true);
         Player.main.SetHeadVisible(true);
         Player.main.playerController.SetEnabled(false);
+        Player.main.cinematicModeActive = true;
+        Player.main.FreezeStats();
         cinematicAnimator.SetTrigger("PlayAnim");
         deviceAnimator.SetTrigger("Fire");
+    }
+
+    public void FadeToBlack()
+    {
+        ProtoScreenFadeManager.instance.FadeIn(1);
     }
 
     public void OnCinematicFinished()
@@ -167,5 +182,15 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         IngameMenu_Patches.SetDenySaving(false);
         Player.main.SetHeadVisible(false);
         Player.main.playerController.SetEnabled(true);
+        Player.main.cinematicModeActive = false;
+        Player.main.UnfreezeStats();
+        PlayCredits();
+    }
+    
+    private void PlayCredits()
+    {
+        FMODUnity.RuntimeManager.StopAllEvents(true);
+        SceneCleaner_Patches.QueueSceneOverride();
+        SceneCleaner.Open();
     }
 }

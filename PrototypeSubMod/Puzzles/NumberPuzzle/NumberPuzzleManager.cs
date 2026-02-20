@@ -76,9 +76,15 @@ public class NumberPuzzleManager : MonoBehaviour
         }
         
         if (prevSelectedAnswer == answer) return;
+
+        var color = defaultColor;
+
+        if (previousSum != -1)
+        {
+            var hintNumber = puzzleAnswers[previousSum];
+            color = hintNumber == prevSelectedAnswer ? hintColor : color;
+        }
         
-        var hintNumber = puzzleAnswers[previousSum];
-        var color = hintNumber == prevSelectedAnswer ? hintColor : defaultColor;
         prevSelectedAnswer.SetColor(color);
         
         int index1 = Array.IndexOf(puzzleAnswersOrder, answer);

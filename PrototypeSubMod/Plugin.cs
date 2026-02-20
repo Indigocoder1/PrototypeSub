@@ -509,38 +509,41 @@ namespace PrototypeSubMod
             
             var audioSW = new System.Diagnostics.Stopwatch();
             audioSW.Start();
-            var request = AudioBundle.LoadAllAssetsAsync(typeof(CustomFMODAsset));
-            yield return request;
+            var customFmodRequest = AudioBundle.LoadAllAssetsAsync(typeof(CustomFMODAsset));
+            yield return customFmodRequest;
             
-            foreach (var asset in request.allAssets)
+            foreach (var asset in customFmodRequest.allAssets)
             {
-                if (asset is CustomFMODAsset customFMODAsset)
-                {
-                    SubAudioLoader.RegisterAssetAudio(customFMODAsset);
-                }
-                else if (asset is MultiClipFMODAsset multiFMODAsset)
-                {
-                    var sounds = AudioUtils.CreateSounds(multiFMODAsset.audioClips, multiFMODAsset.mode).ToArray();
-                    if (multiFMODAsset.minDistance3D > 0 || multiFMODAsset.maxDistance3D > 0)
-                    {
-                        foreach (var sound in sounds)
-                        {
-                            sound.set3DMinMaxDistance(multiFMODAsset.minDistance3D, multiFMODAsset.maxDistance3D);
-                        }
-                    }
-
-                    if (multiFMODAsset.fadeOutTime > 0)
-                    {
-                        foreach (var sound in sounds)
-                        {
-                            sound.AddFadeOut(multiFMODAsset.fadeOutTime);
-                        }
-                    }
-
-                    var multiSoundsEvent = new FModMultiSounds(sounds, multiFMODAsset.GetBus(), multiFMODAsset.randomizePlayOrder);
-                    CustomSoundHandler.RegisterCustomSound(multiFMODAsset.path, multiSoundsEvent);
-                }
+                SubAudioLoader.RegisterAssetAudio((CustomFMODAsset)asset);
             }
+            
+            var multiFmodRequest = AudioBundle.LoadAllAssetsAsync(typeof(MultiClipFMODAsset));
+            yield return multiFmodRequest;
+
+            foreach (var asset in multiFmodRequest.allAssets)
+            {
+                var multiFMODAsset = (MultiClipFMODAsset)asset;
+                var sounds = AudioUtils.CreateSounds(multiFMODAsset.audioClips, multiFMODAsset.mode).ToArray();
+                if (multiFMODAsset.minDistance3D > 0 || multiFMODAsset.maxDistance3D > 0)
+                {
+                    foreach (var sound in sounds)
+                    {
+                        sound.set3DMinMaxDistance(multiFMODAsset.minDistance3D, multiFMODAsset.maxDistance3D);
+                    }
+                }
+
+                if (multiFMODAsset.fadeOutTime > 0)
+                {
+                    foreach (var sound in sounds)
+                    {
+                        sound.AddFadeOut(multiFMODAsset.fadeOutTime);
+                    }
+                }
+
+                var multiSoundsEvent = new FModMultiSounds(sounds, multiFMODAsset.GetBus(), multiFMODAsset.randomizePlayOrder);
+                CustomSoundHandler.RegisterCustomSound(multiFMODAsset.path, multiSoundsEvent);
+            }
+            
             audioSW.Stop();
             Logger.LogInfo($"Audio registered in {audioSW.ElapsedMilliseconds}ms");
         }

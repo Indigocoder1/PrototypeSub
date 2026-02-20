@@ -287,7 +287,7 @@
   "ProtoBiomechanicsFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
   "ProtoSuitColorFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
   
-  "ProtoTransmissionSiteHint": "Detecting encrypted coordinates within recorded transmission. Outputting results to databank. Recommend further analysis.",
+  "ProtoTransmissionSiteHint": "Detecting encrypted coordinates within recorded transmission. Outputting results to databank.",
   
   // Puzzle facility voicelines
   "BearingPuzzleComplete": "FACILITY: Spacial navigation cognitive trial complete.<duration=3246>\nFACILITY: Uploading results to quarantine enforcement platform.<delay=3360><duration=3540>",
@@ -453,6 +453,11 @@
   "ArchwayUpgradeText_Native": "Archway",
   "HullUpgradeText_Native": "Hull",
   "DefenseUpgradeText_Native": "Defense",
+  
+  // Transmission device
+  "ProtoTransmissionDeviceDeploy": "Deploy from Prototype to use",
+  "ProtoTransmissionDevicePower": "Insert power source",
+  "ProtoTransmissionDeviceCode": "Enter transmission code",
   
   // Precursor Fabricator
   "ProtoPrecursorFabricator": "Alien Fabricator",

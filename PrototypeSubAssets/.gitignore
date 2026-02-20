@@ -14,6 +14,8 @@
 /ThunderKit/AssetBundleStaging/
 /[Aa]ssets/[Tt]emp[Mm]aterials/*
 /[Aa]ssets/[Tt]emp[Mm]aterials.meta
+/[As]ssets/StreamingAssets/*
+/[As]ssets/StreamingAssets.meta
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

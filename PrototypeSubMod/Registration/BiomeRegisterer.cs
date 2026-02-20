@@ -92,11 +92,11 @@ internal static class BiomeRegisterer
         var puzzleSettings = BiomeUtils.CreateBiomeSettings(new Vector3(0, 0, 0), 0.1f, Color.white, 0.01f,
             Color.clear);
         BiomeHandler.RegisterBiome("protopuzzlefacility", puzzleSettings, new BiomeHandler.SkyReference("SkyPrecursorInterior_NoLightmaps"));
-        BiomeHandler.AddBiomeMusic("protopuzzlefacility", AudioUtils.GetFmodAsset("RadioMusic"));
+        BiomeHandler.AddBiomeMusic("protopuzzlefacility", AudioUtils.GetFmodAsset("ProtoPuzzleMusic"));
 
         #endregion
 
-        #region Calebration Site
+        #region Calibration Site
 
         var calibrationPrefabInfo = PrefabInfo.WithTechType("CalibrationSiteVoidBiome");
         var calibrationVolumePrefab = new CustomPrefab(calibrationPrefabInfo);

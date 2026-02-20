@@ -31,7 +31,7 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
 
     public void OnFactorDownloaded()
     {
-        StartCoroutine(DisableLightsDelayed());
+        UWE.CoroutineHost.StartCoroutine(DisableLightsDelayed());
     }
 
     private IEnumerator DisableLightsDelayed()
