@@ -36,6 +36,7 @@ internal static class StructureRegisterer
         yield return Structure.RegisterFromBundle("ProtoNumberPuzzleCave");
         yield return Structure.RegisterFromBundle("ProtoNumberPuzzleOuterRocks");
         yield return Structure.RegisterFromBundle("SurvivorClues");
+        yield return Structure.RegisterFromBundle("LocatorFactorTerminal");
 
         if (TRPCompatManager.TRPInstalled)
         {
