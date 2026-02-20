@@ -1,7 +1,5 @@
 ﻿using Nautilus.Utility;
-using PrototypeSubMod.Prefabs;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UWE;
 
@@ -9,24 +7,31 @@ namespace PrototypeSubMod.MiscMonobehaviors;
 
 public class RandomSirenManager : MonoBehaviour
 {
-    private Vector3 gunPos = new Vector3(430, 30, 1185);
+    private static readonly Vector3 GunPos = new (430, 30, 1185);
 
-    private float maxWaitTime = 18000f;
-    private float minWaitTime = 10800f;
-    private float minDistanceToPlay = 1000f;
+    private const float MaxWaitTime = 18000f;
+    private const float MinWaitTime = 10800f;
+    private const float MinDistanceToPlay = 1000f;
 
     private void Start()
     {
-        UWE.CoroutineHost.StartCoroutine(RandomSiren());
+        CoroutineHost.StartCoroutine(RandomSiren());
     }
 
     private IEnumerator RandomSiren()
     {
-        float randomWaitTime = UnityEngine.Random.Range(maxWaitTime, minWaitTime);
+        var randomWaitTime = Random.Range(MaxWaitTime, MinWaitTime);
         yield return new WaitForSeconds(randomWaitTime);
-        var distance = Vector3.Distance(gunPos, Player.main.transform.position);
-        if (distance < minDistanceToPlay) UWE.CoroutineHost.StartCoroutine(RandomSiren());
-        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("GunSiren"), gunPos);
-        UWE.CoroutineHost.StartCoroutine(RandomSiren());
+
+        if (Player.main == null) yield break;
+        
+        var distance = Vector3.Distance(GunPos, Player.main.transform.position);
+
+        if (distance >= MinDistanceToPlay)
+        {
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("GunSiren"), GunPos);
+        }
+        
+        CoroutineHost.StartCoroutine(RandomSiren());
     }
 }
