@@ -54327,7 +54327,7 @@ MonoBehaviour:
   m_Script: {fileID: 15018958, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Proto_FireSupression
+  text: Proto_FireSuppression
   sound: {fileID: 11400000, guid: 5ce86571cea06ec498b37ccda60c9731, type: 2}
   minInterval: 30
 --- !u!1 &3982211717349593266
