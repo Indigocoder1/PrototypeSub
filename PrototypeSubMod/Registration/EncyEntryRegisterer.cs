@@ -393,6 +393,14 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: biomechanicsFactorPopup);
         #endregion
 
+        #region Locator Factor Terminal
+        string locatorFactorTerminalTitle = Language.main.Get("LocatorFactorTerminalEncy_Title");
+        string locatorFactorTerminalDescription = Language.main.Get("LocatorFactorTerminalEncy_Body");
+        var locatorFactorPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
+
+        PDAHandler.AddEncyclopediaEntry("LocatorFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", locatorFactorTerminalTitle, locatorFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: locatorFactorPopup);
+        #endregion
+
         #region Transmission Site Hint
 
         var transmissionSiteTitle = Language.main.Get("ProtoTransmissionSiteEncy_Title");

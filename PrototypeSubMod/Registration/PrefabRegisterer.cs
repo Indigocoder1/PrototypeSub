@@ -93,6 +93,7 @@ internal static class PrefabRegisterer
         StoryGoalTerminal.CreateTerminal("HullFacilityWormTerminal", "HullFacilityWormTerminalEncy");
         StoryGoalTerminal.CreateTerminal("AnimateEntropyTerminal", "AnimateEntropyTerminalEncy");
         StoryGoalTerminal.CreateTerminal("FragmentationTerminal", "FragmentationTerminalEncy");
+        StoryGoalTerminal.CreateTerminal("LocatorFactorTerminal", "LocatorFactorTerminal");
 
         yield return new WaitForEndOfFrame();
         

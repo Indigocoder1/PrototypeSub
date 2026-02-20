@@ -246,6 +246,12 @@ internal static class StoryGoalsRegisterer
             var relayType1 = (TechType)Enum.Parse(typeof(TechType), "ProtoRelayUpgrade1");
             KnownTech.Add(relayType1);
         });
+
+        StoryGoalHandler.RegisterCustomEvent("LocatorFactorTerminal", () =>
+        {
+            KnownTech.Add(LocatorFactor.prefabInfo.TechType);
+            PDAEncyclopedia.Add("LocatorFactorTerminalEncy", true);
+        });
         
         StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 300f,
             "PrototypeCrafted");

@@ -153,6 +153,9 @@
   "PrecursorSuitTerminalEncy_Body": "This alien terminal has broadcasted a unique schematic for a piece of alien equipment, adapted for the use of 'Transmission candidate #2'. The schematic draws anatomical data from the Alterra All-Environment Protection Suit, and has modified it with several key features:\n\n1. Biomechanical Energy Storage\nIn order to function properly, the Ion Dive Suit requires an input of alien biomechanical energy through Alien Building Blocks. Once charged, the suit stores this energy and discharges it in a number of different ways.\n\n2. Alien Factors\nThe suit is designed to intake modular upgrades called Factors, each of which are designed to mimic an aspect of the aliens' abilities. Examples include improved environmental resistance, time dilation, teleportation and the ability to 'hear' alien technology when in range.\n\n<b>Assessment: Invaluable technology. Return data to Alterra for mutual profit.</b>",
   "BiomechanicsFactorTerminalEncy_Title": "Biomechanics factor title here",
   "BiomechanicsFactorTerminalEncy_Body": "Al-An please add details.",
+
+  "LocatorFactorTerminalEncy_Title": "Locate be like",
+  "LocatorFactorTerminalEncy_Body": "Body description",
   
   "ProtoTransmissionSiteEncy_Title": "Transmission Site",
   "ProtoTransmissionSiteEncy_Body": "Have you tried looking?",
@@ -408,7 +411,7 @@
   "Proto_InsufficientPower": "{0}: Warning: Insufficient power",
   "Proto_LowPower": "{0}: Warning: Ion reserves low",
   "Proto_CriticalPower": "{0}: Warning: Ion reserves critical",
-  "Proto_FireSuppression": "{0} Stabilizing internal circuitry"
+  "Proto_FireSuppression": "{0} Stabilizing internal circuitry",
   
   // Terminal Voicelines
   "Proto_DevResumed": "{0}: Orion neural cluster reinitialized. Neural scans of user indicate disconnection from collective.<duration=7640>\nNetwork unavailable. Enabling black box protocol.<delay=7777><duration=4658>\nPrototype development resumed.<delay=12726><duration=2580>",
