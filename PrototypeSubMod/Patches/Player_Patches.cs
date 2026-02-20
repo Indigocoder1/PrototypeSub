@@ -30,6 +30,7 @@ internal class Player_Patches
         Player.main.gameObject.AddComponent<FactorActivationManager>();
         Player.main.gameObject.AddComponent<PrecursorSuitManager>();
         Player.main.gameObject.AddComponent<AggressiveWyrmSpawner>();
+        Player.main.gameObject.AddComponent<RandomSirenManager>();
         Camera.main.gameObject.AddComponent<LightDistortionApplier>();
         Camera.main.gameObject.AddComponent<ProtoScreenTeleporterFXManager>();
         Camera.main.gameObject.AddComponent<CloakCutoutApplier>();
