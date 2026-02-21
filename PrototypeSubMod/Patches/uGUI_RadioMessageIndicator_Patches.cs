@@ -14,7 +14,6 @@ public class uGUI_RadioMessageIndicator_Patches
     [SaveStateReference]
     private static Dictionary<uGUI_RadioMessageIndicator, SpriteData> previousSpriteDatas;
     
-    [SaveStateReference]
     private static SpriteData defaultSpriteData;
     
     [HarmonyPatch(nameof(uGUI_RadioMessageIndicator.NewRadioMessage)), HarmonyPostfix]
@@ -43,7 +42,7 @@ public class uGUI_RadioMessageIndicator_Patches
         }
         
         previousSpriteDatas[__instance] = new SpriteData(__instance.sprite.sprite, __instance.sprite.color);
-
+        
         __instance.sprite.sprite = sprite;
         __instance.sprite.color = color;
     }
@@ -76,6 +75,7 @@ public class uGUI_RadioMessageIndicator_Patches
         if (!previousSpriteDatas.TryGetValue(__instance, out var spriteData)) return;
 
         UWE.CoroutineHost.StartCoroutine(ResetSpriteDelayed(__instance, spriteData));
+        previousSpriteDatas.Remove(__instance);
     }
 
     private static IEnumerator ResetSpriteDelayed(uGUI_RadioMessageIndicator __instance, SpriteData spriteData)
