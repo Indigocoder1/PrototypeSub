@@ -38,12 +38,14 @@ public static class PuzzleHintRegistration
 
         #region Transmission Site Hint
 
+        var transmissionStartTechType = CustomPing.CreatePing("TransmissionSiteStartPing", PingType.Signal);
         StoryGoalHandler.RegisterCompoundGoal("ProtoTransmissionSiteHint", Story.GoalType.Story, 20,
             "OnPlayProtoRadioMessage4");
         StoryGoalHandler.RegisterCustomEvent("ProtoTransmissionSiteHint", () =>
         {
             PDALog.Add("ProtoTransmissionSiteHint");
             PDAEncyclopedia.Add("ProtoTransmissionSiteEncy", true);
+            UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionStartTechType, Plugin.TransmissionSiteStartPos));
         });
 
         #endregion

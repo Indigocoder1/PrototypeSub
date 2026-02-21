@@ -212,7 +212,7 @@ internal class NewUpgradesScreen : MonoBehaviour
         yield return task;
 
         var prefab = task.GetResult();
-        Instantiate(prefab, Plugin.STORY_END_POS, Quaternion.identity);
+        Instantiate(prefab, Plugin.StoryEndPos, Quaternion.identity);
     }
 
     private IEnumerator PlayQueuedVoicelines()

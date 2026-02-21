@@ -15,7 +15,7 @@ internal class DefenseStoryGoalTrigger_World
         var prefab = new CustomPrefab(prefabInfo);
 
         prefab.SetGameObject(GetPrefab);
-        prefab.SetSpawns(new SpawnLocation(Plugin.DEFENSE_PING_POS));
+        prefab.SetSpawns(new SpawnLocation(Plugin.DefensePingPos));
 
         prefab.Register();
     }

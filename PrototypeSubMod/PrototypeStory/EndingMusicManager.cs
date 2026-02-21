@@ -34,7 +34,7 @@ public class EndingMusicManager : MonoBehaviour, IScheduledUpdateBehaviour
         
         if (!Plugin.GlobalSaveData.storyEndPingSpawned) return;
         
-        bool inDistance = (Player.main.transform.position - Plugin.STORY_END_POS).sqrMagnitude < climaxActivationDistance * climaxActivationDistance;
+        bool inDistance = (Player.main.transform.position - Plugin.StoryEndPos).sqrMagnitude < climaxActivationDistance * climaxActivationDistance;
         bool inVoid = Player.main.GetBiomeString() == "void";
         
         if (inVoid && inDistance && !leadUpMusic.playing)

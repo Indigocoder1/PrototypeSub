@@ -82,7 +82,7 @@ internal static class BiomeRegisterer
         voidVolumePrefab.SetGameObject(voidTemplate);
         voidVolumePrefab.Register();
 
-        var voidSpawnInfo = new SpawnInfo(voidVolumePrefabInfo.ClassID, Plugin.STORY_END_POS, Quaternion.identity, Vector3.one * 2400);
+        var voidSpawnInfo = new SpawnInfo(voidVolumePrefabInfo.ClassID, Plugin.StoryEndPos, Quaternion.identity, Vector3.one * 2400);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(voidSpawnInfo);
 
         #endregion
