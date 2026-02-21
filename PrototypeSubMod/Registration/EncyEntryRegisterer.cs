@@ -405,9 +405,9 @@ internal static class EncyEntryRegisterer
 
         var transmissionSiteTitle = Language.main.Get("ProtoTransmissionSiteEncy_Title");
         var transmissionSiteBody = Language.main.Get("ProtoTransmissionSiteEncy_Body");
-
+        var transmissionSiteImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("TransmissionSiteDirectionsEncy");
         PDAHandler.AddEncyclopediaEntry("ProtoTransmissionSiteEncy", "DownloadedData/Prototype", transmissionSiteTitle,
-            transmissionSiteBody, unlockSound: PDAHandler.UnlockBasic);
+            transmissionSiteBody, transmissionSiteImage, unlockSound: PDAHandler.UnlockBasic);
 
         #endregion
         
