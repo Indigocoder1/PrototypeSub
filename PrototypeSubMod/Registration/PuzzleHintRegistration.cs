@@ -14,7 +14,7 @@ public static class PuzzleHintRegistration
         var numberPuzzlePingTechType = CustomPing.CreatePing("NumberPuzzlePing", PingType.Signal);
         StoryGoalHandler.RegisterCustomEvent("OnPlayProtoRadioMessage1", () =>
         {
-            var numberPuzzlePingPos = new Vector3(-238f, -68f, 290f);
+            var numberPuzzlePingPos = new Vector3(-174f, -64f, 307f);
             UWE.CoroutineHost.StartCoroutine(SpawnPrefab(numberPuzzlePingTechType, numberPuzzlePingPos));
         });
         #endregion
