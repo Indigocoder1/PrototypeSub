@@ -253,7 +253,7 @@ internal static class StoryGoalsRegisterer
             PDAEncyclopedia.Add("LocatorFactorTerminalEncy", true);
         });
         
-        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 300f,
+        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 306f,
             "PrototypeCrafted");
         StoryGoalHandler.RegisterCompoundGoal("ProtoFacilityLocationsHint", Story.GoalType.Story, 300f,
             "PrototypeCrafted");
