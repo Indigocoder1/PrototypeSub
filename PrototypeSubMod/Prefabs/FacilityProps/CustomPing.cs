@@ -50,21 +50,12 @@ internal class CustomPing
     {
         beacon.name = info.TechType.ToString();
 
-        foreach (var item in beacon.GetComponents<Component>())
-        {
-            if (!WhitelistedComponents.Contains(item.GetType()))
-            {
-                UnityEngine.Object.DestroyImmediate(item);
-            }
-        }
+        DisplayCaseProp.TrimComponents(beacon, WhitelistedComponents);
 
         foreach (Transform child in beacon.transform)
         {
-            UnityEngine.Object.DestroyImmediate(child.gameObject);
+            UnityEngine.Object.Destroy(child.gameObject);
         }
-        
-        GameObject.Destroy(beacon.transform.Find("model_FP").gameObject);
-        GameObject.Destroy(beacon.transform.Find("label").gameObject);
 
         var pingInstance = beacon.EnsureComponent<PingInstance>();
         pingInstance.pingType = pingType;
