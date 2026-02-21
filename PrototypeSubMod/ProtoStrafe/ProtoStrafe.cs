@@ -1,4 +1,5 @@
 ﻿using System;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Upgrades;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace PrototypeSubMod.ProtoStrafe;
 
 internal class ProtoStrafe : ProtoUpgrade
 {
-    [SerializeField] private float sidewaysAccel;
+    [SerializeField] private CyclopsMotorMode motorMode;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private SubControl subControl;
     [SerializeField] private FMOD_CustomEmitter strafeOnSfx;
@@ -41,7 +42,7 @@ internal class ProtoStrafe : ProtoUpgrade
     {
         if (!upgradeEnabled) return;
         
-        rigidbody.AddForce(transform.right * (sidewaysAccel * subControl.throttle.x), ForceMode.Acceleration);
+        rigidbody.AddForce(transform.right * (motorMode.motorModeSpeeds[1] * subControl.throttle.x), ForceMode.Acceleration);
     }
     
     public override bool OnActivated()

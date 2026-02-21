@@ -3646,7 +3646,7 @@ MonoBehaviour:
   techType: {fileID: 11400000, guid: fc0c1ac8300619b469e1e898fb879109, type: 2}
   enableWithInstallation: []
   installedAtStart: 1
-  sidewaysAccel: 7
+  motorMode: {fileID: 2278157053698757509}
   rigidbody: {fileID: 455190807124239361}
   subControl: {fileID: 5378019260895971750}
   strafeOnSfx: {fileID: 2954303795263178329}
