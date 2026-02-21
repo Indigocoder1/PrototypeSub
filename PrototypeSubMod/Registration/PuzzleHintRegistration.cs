@@ -39,6 +39,7 @@ public static class PuzzleHintRegistration
         #region Transmission Site Hint
 
         var transmissionStartTechType = CustomPing.CreatePing("TransmissionSiteStartPing", PingType.Signal);
+        var transmissionSiteTechType = CustomPing.CreatePing("TransmissionSitePing", PingType.Signal);
         StoryGoalHandler.RegisterCompoundGoal("ProtoTransmissionSiteHint", Story.GoalType.Story, 20,
             "OnPlayProtoRadioMessage4");
         StoryGoalHandler.RegisterCustomEvent("ProtoTransmissionSiteHint", () =>
@@ -46,6 +47,7 @@ public static class PuzzleHintRegistration
             PDALog.Add("ProtoTransmissionSiteHint");
             PDAEncyclopedia.Add("ProtoTransmissionSiteEncy", true);
             UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionStartTechType, Plugin.TransmissionSiteStartPos));
+            UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionSiteTechType, Plugin.TransmissionSitePos));
         });
 
         #endregion
