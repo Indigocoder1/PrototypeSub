@@ -49,6 +49,7 @@ public static class VoicelineRegisterer
         "Proto_InsufficientPower",
         "Proto_LowPower",
         "Proto_CriticalPower",
+        "Proto_FireSuppression",
         
         "Proto_AlphaDeployed",
         "Proto_BetaDeployed",

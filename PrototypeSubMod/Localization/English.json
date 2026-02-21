@@ -411,7 +411,7 @@
   "Proto_InsufficientPower": "{0}: Warning: Insufficient power",
   "Proto_LowPower": "{0}: Warning: Ion reserves low",
   "Proto_CriticalPower": "{0}: Warning: Ion reserves critical",
-  "Proto_FireSuppression": "{0} Stabilizing internal circuitry",
+  "Proto_FireSuppression": "{0}: Stabilizing internal circuitry",
   
   // Terminal Voicelines
   "Proto_DevResumed": "{0}: Orion neural cluster reinitialized. Neural scans of user indicate disconnection from collective.<duration=7640>\nNetwork unavailable. Enabling black box protocol.<delay=7777><duration=4658>\nPrototype development resumed.<delay=12726><duration=2580>",
