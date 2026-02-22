@@ -610,7 +610,7 @@
       },
       "scale": {
         "x": 1.0,
-        "y": 0.99999994,
+        "y": 0.9999999,
         "z": 1.0
       },
       "cellLevel": 0,
@@ -636,6 +636,50 @@
         "z": 1.0
       },
       "cellLevel": 1,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoSurvivorPDA2",
+      "id": "38643cb6-05a4-4c38-b1c8-af2e3c3eceda",
+      "position": {
+        "x": -206.6121,
+        "y": -89.95308,
+        "z": 350.061981
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.8622439,
+        "z": 0.0,
+        "w": 0.50649333
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": 0,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoSurvivorPDA1",
+      "id": "68274a7b-8924-4859-9089-079eec0a4dc8",
+      "position": {
+        "x": -205.77507,
+        "y": -87.26775,
+        "z": 312.674622
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": 0,
       "priority": 0
     }
   ],
