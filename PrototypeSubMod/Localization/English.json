@@ -160,10 +160,13 @@
   "ProtoTransmissionSiteEncy_Title": "Transmission Site",
   "ProtoTransmissionSiteEncy_Body": "Have you tried looking?",
 
-  "NumberPuzzlePDAEncy_Title": "Lifepod 3 Crew Log - Continued",
-  "NumberPuzzlePDAEncy_Body": "Insert subtitles here.",
+  "SurvivorPDA1Ency_Title": "Placeholder",
+  "SurvivorPDA1Ency_Body": "aaaaaaaaaaaaaaaa",
 
-  "Lifepod3PDAEncy_Title": "Lifepod 3 Crew Log",
+  "SurvivorPDA2Ency_Title": "Lifepod 3 Crew Log #2",
+  "SurvivorPDA2Ency_Body": "Alec's log. Day 9. I did it! I solved it! They're numbers!\nThe symbols on the walls- They're alien numbers. It's like it's like it's trying to teach me their number system! Look- The lights- They're values. On the left, zero, then all the way up to eight on the right- I guess they don't use base ten? I don't know. Anyways, tapping on the symbols swaps them, right? But how do I know which symbols hold which values?\nTapping on the four terminals on the ground lets you add the symbols together! Watch. If I touch the symbol on the left, then the one beside it the- Yeah! That's number three. So, those symbols together add up to three.\nBut... When I input the solution, the facility- It spoke again. Here, take a listen.\nFACILITY: TRANSMISSION CANNOT PROCEED WHILE ORION NEURAL CLUSTER IS SUSPENDED. REPORT TO QUARANTINE ENFORCEMENT PLATFORM FOR IMMEDIATE PROFILE SCAN.\nAlec: Just when I thought I made a breakthrough. I'll keep at it. Might as well while I'm here. They're numbers...!",
+
+  "Lifepod3PDAEncy_Title": "Lifepod 3 Crew Log #3",
   "Lifepod3PDAEncy_Body": "Insert subtitles here.",
   
   "ProtoNumbersEncy_Title": "Precursor Numbers",

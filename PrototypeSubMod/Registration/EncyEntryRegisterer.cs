@@ -411,17 +411,26 @@ internal static class EncyEntryRegisterer
 
         #endregion
         
-        #region Number Puzzle PDA
+        #region Survivor PDA 1
 
-        var numberPuzzlePDATitle = Language.main.Get("NumberPuzzlePDAEncy_Title");
-        var numberPuzzlePDABody = Language.main.Get("NumberPuzzlePDAEncy_Body");
+        var survivorPDA1Title = Language.main.Get("SurvivorPDA1Ency_Title");
+        var survivorPDA1Body = Language.main.Get("SurvivorPDA1Ency_Body");
 
-        PDAHandler.AddEncyclopediaEntry("NumberPuzzlePDAEncy", "DownloadedData/AuroraSurvivors", numberPuzzlePDATitle,
-            numberPuzzlePDABody, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("PDA_NumberPuzzleSurvivor"));
+        PDAHandler.AddEncyclopediaEntry("SurvivorPDA1Ency", "DownloadedData/AuroraSurvivors", survivorPDA1Title,
+            survivorPDA1Body, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("PlaceholderVoiceline"));
         #endregion
-        
+
+        #region Survivor PDA 2
+
+        var survivorPDA2Title = Language.main.Get("SurvivorPDA2Ency_Title");
+        var survivorPDA2Body = Language.main.Get("SurvivorPDA2Ency_Body");
+
+        PDAHandler.AddEncyclopediaEntry("SurvivorPDA2Ency", "DownloadedData/AuroraSurvivors", survivorPDA2Title,
+            survivorPDA2Body, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("SurvivorLog2"));
+        #endregion
+
         #region Puzzle Numbers
-        
+
         string protoNumbersTitle = Language.main.Get("ProtoNumbersEncy_Title");
         string protoNumbersDescription = Language.main.Get("ProtoNumbersEncy_Body");
         Texture2D protoNumbersBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoNumbersEncy");

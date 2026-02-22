@@ -218,10 +218,17 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
-        #region Number Puzzle PDA
-        StoryGoalHandler.RegisterCustomEvent("ProtoLifepod3PDA", () =>
+        #region Survivor PDA 1
+        StoryGoalHandler.RegisterCustomEvent("SurvivorPDA1", () =>
         {
-            PDAEncyclopedia.Add("NumberPuzzlePDAEncy", true);
+            PDAEncyclopedia.Add("SurvivorPDA1Ency", true);
+        });
+        #endregion
+
+        #region Survivor PDA 2
+        StoryGoalHandler.RegisterCustomEvent("SurvivorPDA2", () =>
+        {
+            PDAEncyclopedia.Add("SurvivorPDA2Ency", true);
         });
         #endregion
 

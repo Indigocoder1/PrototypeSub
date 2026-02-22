@@ -104,6 +104,8 @@ internal static class PrefabRegisterer
         ProtoLogo_World.Register();
         TeleporterTerminal_World.Register();
         SmashedDisplayCase_World.Register();
+        SurvivorPDA1.Register();
+        SurvivorPDA2.Register();
 
         yield return new WaitForEndOfFrame();
         
