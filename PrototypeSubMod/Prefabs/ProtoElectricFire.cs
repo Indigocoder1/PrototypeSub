@@ -22,16 +22,24 @@ public static class ProtoElectricFire
             mixin.health = mixin.maxHealth;
 
             var extinguishableFire = instance.EnsureComponent<VFXExtinguishableFire>();
-            extinguishableFire.elements = new VFXExtinguishableFire.FireElement[2];
+            extinguishableFire.elements = new VFXExtinguishableFire.FireElement[3];
+            var element0 = new VFXExtinguishableFire.FireElement
+            {
+                gameObject = instance.gameObject,
+                enable = true,
+                hasParticles = true
+            };
+            extinguishableFire.elements[0] = element0;
             for (int i = 0; i < 2; i++)
             {
                 var element = new VFXExtinguishableFire.FireElement
                 {
                     gameObject = instance.transform.GetChild(i).gameObject,
-                    enable = true
+                    enable = true,
+                    hasParticles = true
                 };
 
-                extinguishableFire.elements[i] = element;
+                extinguishableFire.elements[i + 1] = element;
             }
 
             var child = new GameObject("FireHolder");
@@ -55,6 +63,21 @@ public static class ProtoElectricFire
             
             fire.fireSound = fireSfx;
             instance.GetComponent<LargeWorldEntity>().cellLevel = LargeWorldEntity.CellLevel.Medium;
+
+            var lightningGreen = new Color(0.0963f, 0.3333f, 0.1429f);
+            foreach (var renderer in instance.GetComponentsInChildren<ParticleSystemRenderer>())
+            {
+                renderer.material.SetColor(ShaderPropertyID._Color, lightningGreen);
+            }
+
+            instance.GetComponentInChildren<Light>().color = lightningGreen;
+            instance.GetComponentInChildren<LightAnimator>().origIntensity = 1f;
+            
+            foreach (var particleSystem in instance.GetComponentsInChildren<ParticleSystem>())
+            {
+                var main = particleSystem.main;
+                main.simulationSpeed = 0.8f;
+            }
         };
 
         prefab.SetGameObject(cloneTemplate);
