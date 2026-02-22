@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using PrototypeSubMod.MiscMonobehaviors;
+using PrototypeSubMod.Registration;
 using Story;
 using UnityEngine;
 
@@ -25,8 +26,8 @@ public class NumberPuzzleCompletionManager : MonoBehaviour
 
     private void OnPuzzleCompleted()
     {
+        StoryGoalManager.main.OnGoalComplete("ProtoNumberPuzzleComplete");
         doorAnimator.SetBool("DoorOpen", true);
-        PDAEncyclopedia.Add("ProtoNumbersEncy", true);
     }
 
     public void OnFactorDownloaded()

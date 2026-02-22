@@ -182,7 +182,6 @@ public class NumberPuzzleManager : MonoBehaviour
         
         notificationManager.PlayVoiceNotification(puzzleSolvedVoiceline, false, true);
         onPuzzleCompleted?.Invoke();
-        StoryGoalManager.main.OnGoalComplete("ProtoNumberPuzzleComplete");
     }
 
     private bool HasCorrectSequence()

@@ -238,12 +238,33 @@ internal static class StoryGoalsRegisterer
             PDALog.Add("OnEnterProtoNumberPuzzle");
         });
         #endregion
-        
+
+        #region Number Puzzle Completion
+        StoryGoalHandler.RegisterCustomEvent("ProtoNumberPuzzleComplete", () =>
+        {
+
+        });
+
+        StoryGoalHandler.RegisterCustomEvent("Ency_ProtoNumbers", () =>
+        {
+            PDAEncyclopedia.Add("ProtoNumbersEncy", true);
+        });
+        StoryGoalHandler.RegisterCustomEvent("ProtoNumbersHint", () =>
+        {
+            PDALog.Add("ProtoNumbersHint", true);
+        });
+
+        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoNumbers", Story.GoalType.Story, 15f,
+            "ProtoNumberPuzzleComplete");
+        StoryGoalHandler.RegisterCompoundGoal("ProtoNumbersHint", Story.GoalType.Story, 10f,
+            "ProtoNumberPuzzleComplete");
+        #endregion
+
         StoryGoalHandler.RegisterCustomEvent("OrionSurgicalRoomTome", () =>
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("HullFacilityOrionTone"), Player.main.transform.position);
         });
-        
+
         StoryGoalHandler.RegisterCustomEvent("HullFacilityActivateWorm", () => WormSpawnEvent.TimeWormsEnabled = Time.time);
         StoryGoalHandler.RegisterCustomEvent("PrototypeCrafted", () =>
         {
