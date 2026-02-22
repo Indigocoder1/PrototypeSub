@@ -59,6 +59,7 @@ internal static class PrefabRegisterer
         HullFacilityKey.Register();
         DefenseFacilityKey.Register();
         EngineFacilityKey.Register();
+        ProtoElectricFire.Register();
         
         yield return new WaitForEndOfFrame();
         
