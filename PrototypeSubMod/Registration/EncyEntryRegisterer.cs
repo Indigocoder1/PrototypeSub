@@ -417,7 +417,7 @@ internal static class EncyEntryRegisterer
         var survivorPDA1Body = Language.main.Get("SurvivorPDA1Ency_Body");
 
         PDAHandler.AddEncyclopediaEntry("SurvivorPDA1Ency", "DownloadedData/AuroraSurvivors", survivorPDA1Title,
-            survivorPDA1Body, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("PlaceholderVoiceline"));
+            survivorPDA1Body, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("SurvivorLog1"));
         #endregion
 
         #region Survivor PDA 2
