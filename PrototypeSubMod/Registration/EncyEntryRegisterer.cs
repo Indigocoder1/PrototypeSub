@@ -417,7 +417,7 @@ internal static class EncyEntryRegisterer
         var survivorPDA1Body = Language.main.Get("SurvivorPDA1Ency_Body");
 
         PDAHandler.AddEncyclopediaEntry("SurvivorPDA1Ency", "DownloadedData/AuroraSurvivors", survivorPDA1Title,
-            survivorPDA1Body, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("SurvivorLog1"));
+            survivorPDA1Body, unlockSound: PDAHandler.UnlockBasic, voiceLog: AudioUtils.GetFmodAsset("SurvivorLog1"));
         #endregion
 
         #region Survivor PDA 2
@@ -426,7 +426,7 @@ internal static class EncyEntryRegisterer
         var survivorPDA2Body = Language.main.Get("SurvivorPDA2Ency_Body");
 
         PDAHandler.AddEncyclopediaEntry("SurvivorPDA2Ency", "DownloadedData/AuroraSurvivors", survivorPDA2Title,
-            survivorPDA2Body, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("SurvivorLog2"));
+            survivorPDA2Body, unlockSound: PDAHandler.UnlockBasic, voiceLog: AudioUtils.GetFmodAsset("SurvivorLog2"));
         #endregion
 
         #region Lifepod 3 PDA
@@ -434,7 +434,7 @@ internal static class EncyEntryRegisterer
         var lifepod3PDABody = Language.main.Get("Lifepod3PDAEncy_Body");
 
         PDAHandler.AddEncyclopediaEntry("Lifepod3PDAEncy", "DownloadedData/AuroraSurvivors", lifepod3PDATitle,
-            lifepod3PDABody, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("PDA_Lifepod3"));
+            lifepod3PDABody, unlockSound: PDAHandler.UnlockBasic, voiceLog: AudioUtils.GetFmodAsset("PDA_Lifepod3"));
         #endregion
 
         #region Puzzle Numbers
