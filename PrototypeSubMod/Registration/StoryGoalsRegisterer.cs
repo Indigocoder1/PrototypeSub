@@ -239,6 +239,13 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Lifepod 3 PDA
+        StoryGoalHandler.RegisterCustomEvent("ProtoLifepod3PDA", () =>
+        {
+            PDAEncyclopedia.Add("Lifepod3PDAEncy", true);
+        });
+        #endregion
+
         #region Number Puzzle Completion
         StoryGoalHandler.RegisterCustomEvent("ProtoNumberPuzzleComplete", () =>
         {

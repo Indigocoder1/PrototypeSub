@@ -429,6 +429,14 @@ internal static class EncyEntryRegisterer
             survivorPDA2Body, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("SurvivorLog2"));
         #endregion
 
+        #region Lifepod 3 PDA
+        var lifepod3PDATitle = Language.main.Get("Lifepod3PDAEncy_Title");
+        var lifepod3PDABody = Language.main.Get("Lifepod3PDAEncy_Body");
+
+        PDAHandler.AddEncyclopediaEntry("Lifepod3PDAEncy", "DownloadedData/AuroraSurvivors", lifepod3PDATitle,
+            lifepod3PDABody, unlockSound: PDAHandler.UnlockImportant, voiceLog: AudioUtils.GetFmodAsset("PDA_Lifepod3"));
+        #endregion
+
         #region Puzzle Numbers
 
         string protoNumbersTitle = Language.main.Get("ProtoNumbersEncy_Title");
