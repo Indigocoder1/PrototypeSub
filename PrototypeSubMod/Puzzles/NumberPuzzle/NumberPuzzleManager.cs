@@ -23,7 +23,8 @@ public class NumberPuzzleManager : MonoBehaviour
     [SerializeField] private VoiceNotificationManager notificationManager;
     [SerializeField] private VoiceNotification puzzleSolvedVoiceline;
     [SerializeField] private VoiceNotification puzzleIncorrectVoiceline;
-    
+    [SerializeField] private VoiceNotification puzzleCannotCompleteVoiceline;
+
     private NumberPuzzleAnswer[] puzzleAnswersOrder;
     private NumberPuzzleAnswer prevSelectedAnswer;
     
@@ -174,6 +175,11 @@ public class NumberPuzzleManager : MonoBehaviour
 
     public void OnConfirmationClicked()
     {
+        if (!StoryGoalManager.main.IsGoalComplete("PlayerFirstPPTInteraction"))
+        {
+            notificationManager.PlayVoiceNotification(puzzleCannotCompleteVoiceline, false);
+            return;
+        }
         if (!HasCorrectSequence())
         {
             notificationManager.PlayVoiceNotification(puzzleIncorrectVoiceline, false);

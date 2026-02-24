@@ -5,7 +5,7 @@
 
   // Title screen
   "ProtoModName": "The Prototype Expansion: Phase Gate Update",
-  
+
   // Items
   "Proto_PrecursorIngot": "Alien modular framework",
   "Tooltip_Proto_PrecursorIngot": "An advanced metallic alloy used in alien architecture. Unprecedented integrity.",
@@ -16,7 +16,7 @@
   "DeployableLight": "Photon beacon",
   "Tooltip_DeployableLight": "A device for exploring in dark areas and distracting aggressive fauna. Has a lifetime of 5 minutes. Deployed by hand or via Prototype; cannot be reclaimed once deployed",
   "DestroyDeployableLight": "Deactivate beacon {0}",
-  
+
   "ProtoDogPoster": "Dog(?) poster",
   "Tooltip_ProtoDogPoster": "A poster with a dog(?) in it.",
 
@@ -28,7 +28,7 @@
 
   "InterceptorFacilityKey": "Prototype interceptor tablet",
   "Tooltip_InterceptorFacilityKey": "Ancient tablet with a purple symbol. Pulses with dark energy.",
-  
+
   "HullFacilityKey": "Prototype administrative tablet",
   "Tooltip_HullFacilityKey": "Ancient tablet with a black symbol.",
 
@@ -37,10 +37,10 @@
 
   "DefenseFacilityKey": "Prototype defense tablet",
   "Tooltip_DefenseFacilityKey": "Ancient tablet with a red symbol. Hot to the touch.",
-  
+
   "WarperRemnant": "Warper remnant",
   "Tooltip_WarperRemnant": "Foundational alien resource awaiting activation.",
-  
+
   "AlienBuildingBlock": "Alien building block",
   "Tooltip_AlienBuildingBlock": "Foundational alien resource glowing with biomechanical energy.",
 
@@ -49,7 +49,7 @@
 
   "HoverfishPlush": "Hoverfish Plushy",
   "Tooltip_HoverfishPlush": "For your Daily Dose of Hoverfish",
-  
+
   "ProtoOrionFragmentor": "Alien surgical structure",
   "ProtoDecorativeWorm": "Alien wyrm",
   "ProtoHangingWorm": "Alien wyrm",
@@ -58,7 +58,7 @@
   "ProtoScannableFins": "Prototype fins",
   "ProtoBuildTerminal": "Alien terminal",
   "DefenseFacilityWall": "Facility barrier",
-  
+
   // Wait screen
   "ProtoWaitLoadingBundle": "Loading asset bundle...",
   "ProtoWaitRegisteringPrefabs": "Registering general prefabs...",
@@ -68,13 +68,13 @@
   "ProtoWaitRegisteringAudio": "Loading audio...",
   "ProtoWaitRegisteringScenes": "Loading scenes...",
   "ProtoWaitLoadingCyclops": "Loading Cyclops assets...",
-  
+
   // Ency entries
   "EncyPath_DownloadedData/Prototype": "Prototype Development",
   "EncyPath_DownloadedData/Prototype/ProtoUpgrades": "Prototype Vessel Upgrades",
   "EncyPath_DownloadedData/Prototype/ProtoTerminal": "Terminal Data",
   "EncyPath_DownloadedData/Prototype/Scanned": "Scanned Data",
-  
+
   "ProtoPrecursorIngotEncy_Title": "Alien Modular Framework",
   "ProtoPrecursorIngotEncy_Body": "An advanced material with high structural integrity. Its core, a modified alien building block, stabilizes 8 external frames used for dynamic construction.\n\nAnalysis:\n- Unprecedenteed structural integrity\n- Used in reinforced alien construction\n- Requires multiple advanced materials",
   "ProtoCloakEncy_Title": "Light Distortion Field",
@@ -127,7 +127,7 @@
   "DefenseFacilityTabletEncy_Body": "Compiled from data pertaining to the Prototype's defensive systems, this alien tablet bears a red octagonal symbol, possibly representing stability or protection. The core of this alien tablet measures a total of 200 degrees Celcius. While it is unclear what purpose this may serve, it is possible that the aliens used temperature as a form of “tag” with which to classify their artifacts.",
   "ProtoWarpReactorEncy_Title": "Warp Core",
   "ProtoWarpReactorEncy_Body": "This alien artifact, taking the shape of a square bipyramid, appears to be harbouring massive amounts of concentrated dark energy not entirely dissimilar to the kind found within the Aurora’s dark matter reactor. Due to this kind of energy being primarily used for transportation and interdimensional matter translation across vast distances, it is reasonable to assume that this artefact may be a kind of ‘battery’ containing energy used by the alien species for different manners of teleportation.\n\n<b>Protective Shields</b>\n\n8 pyramid-shaped energy barriers surround the central warp core. These barriers are exhibiting substantial signs of decay as dark matter radiates from the core between them. It is clear that these shields have been built to withstand extreme levels of quantum dissonance, but that these levels may have gone unregulated for long enough to cause the protective shields to falter and release a sudden impulse of concentrated dark energy.\n\n<b>Surrounding Structure</b>\n\nThe surrounding structure also appears to be suffering from degradation caused by the leaking dark energy from the central core, leading to visible cracks and momentary pulses of dark energy through the structure.\n\n<b>Assessment: Highly unstable levels of dark energy present; Proceed with caution\n",
-  
+
   "ProtoWormEncy_Title": "Wyrm Xenoleviathan (Operational)",
   "ProtoWormEncy_Body": "A highly advanced tool, this robotic specimen is capable of large-scale resource extraction and subterranean self-navigation. It does not exhibit any directly aggressive tendencies. However, due the high concentration of rare minerals in Alterra technology, it may still pose a substantial threat to submersible hull integrity and overall safety if it deems such technology worth extracting.\n\n1. Mineral extraction equipment:\nThis autonomous device is equipped with highly advanced material extraction technologies. A frontal set of rotating frames exceeding 1,500 degrees Celcius serve to melt the outer layers of bedrock and minerals before passing them down through the specimen's body.\n\n2. Material transportation:\nThe “spine” of the specimen controls a powerful beam of a plasma-like substance which directs the flow of liquid mineral resources, distributing it throughout each spine segment which slowly fill with raw minerals as the wyrm moves through the ground.\n\n3. Profile:\nThe specimen measures a total of 220 metres in length. It appears to disregard the presence of living fauna, suggesting purely practical applications. Because the Alterra Corporation has not published specifications regarding the class assignment “leviathan” to cybernetic or robotic phenomena, this PDA will assign this specimen the class designation Xenoleviathan. Upon re-entry to trans-gov mandated space, data pertaining to this phenomena will undergo investigation from Alterra HQ and an official designation proclamation surrounding the specimen will be made.\n\n<b>Assessment:  Remain vigilant for subterranean boring in deeper regions.</b>",
   "ProtoHangingWormEncy_Title": "Alien Wyrm (Modified)",
@@ -144,7 +144,7 @@
   "AnimateEntropyTerminalEncy_Body": "According to translated data logs, this environment was designed to imitate the natural growth conditions for a resource referred to as “animate entropy”, which is reported to have been of critical importance in the harvesting of dark energy and was reportedly discovered by a robotics researcher in the Prototype Administrative Facility.\n\nAs such, this facility was likely used to naturally cultivate animate entropy for the research of miniaturized warp technologies through dark matter manipulation. This research appears to have, at one point, been delegated to both self-warping constructs and the “dead zone mapping initiative”, but was later consolidated into self-warping construct production following the closure of the latter project.\n\nA seemingly unused data point mentions the application of animate entropy to something referred to as the “NSP”. However, no further data can be construed as to what this project may have entailed.",
   "DefenseFacilityWallEncy_Title": "Facility Barrier",
   "DefenseFacilityWallEncy_Body": "This barrier is composed of a heavily reinforced alloy of several alien materials. Its position suggests that it was created to protect the central hub from leviathan attacks. Several large shock-absorbing panels suggests the barrier was also used to record and gather data on the forces, patterns and behaviours of different leviathan attacks.\n\nIt is unclear how leviathan-class lifeforms may have been encouraged to attack the facility within as scans of the barrier's integrity show no signs recent impacts.",
-  
+
   "ProtoFins_Title": "Prototype Fins",
   "ProtoFins_Body": "These magnetically-controlled implements serve as both structural and propulsory augmentations to the Prototype’s hull. They appear to be fabricated in pairs, and schematic extrapolation indicates a maximum capacity of 4 total pairs of fins.\n\n<b>Structural support</b>\nThese fins act as storage devices for a liquid resource closely resembling the composition of alien facility architecture. While it is unclear how this liquid is extracted, it is used to coat the vessel in a thin layer of reinforcement as external water pressure rises, thereby increasing the maximum crush depth of the vessel. Each individual fin contains enough fluid to increase the Prototype’s maximum crush depth by approximately 175 meters.\n\n<b>Propulsion</b>\nSmall energy receptors lining each fin acts as a siphon to extract energy from the Prototype’s ion reactor. This energy is then channeled into propulsive thrusters located at the bottom of each fin to increase maximum speed by 0.15m/s.",
   "ProtoBuildTerminal_Title": "Construction Terminal",
@@ -156,7 +156,7 @@
 
   "LocatorFactorTerminalEncy_Title": "Facility Detection Factor",
   "LocatorFactorTerminalEncy_Body": "This terminal relays data on the alien's ability to 'hear' their technology. By analysing the data, this PDA was able to extract a modular implement allowing this 'sound' to be percieved by humans.\n\n<b>Note: Implement requires advanced alien bodily interface to function. Further data required.</b>",
-  
+
   "ProtoTransmissionSiteEncy_Title": "Transmission Site",
   "ProtoTransmissionSiteEncy_Body": "Have you tried looking?",
 
@@ -168,20 +168,20 @@
 
   "Lifepod3PDAEncy_Title": "Lifepod 3 Crew Log #1",
   "Lifepod3PDAEncy_Body": "UNIDENTIFIED CREW 1: You really think it'll carry two of us?\nUNIDENTIFIED CREW 2: Your regular Seaglide tows a mass of 80 kilograms at over 30 kilometers an hour. The power cell I rigged to this one should double that.\nUNIDENTIFIED CREW 1: You don't think there's something out there that's faster than that, do you?\nUNIDENTIFIED CREW 2: Oh, I'm sure. And that's assuming it doesn't overload three meters from the Lifepod...\nUNIDENTIFIED CREW 1: You're calm about this.\nUNIDENTIFIED CREW 2: I'm seeing the engineering problem. If I stop seeing the maths, I'll be terrified.",
-  
+
   "ProtoNumbersEncy_Title": "Precursor Numbers",
   "ProtoNumbersEncy_Body": "They do be numbers",
-  
+
   "TransmissionTerminalEncy_Title": "Transmission Device",
   "TransmissionTerminalEncy_Body": "It transmits stuff",
-  
+
   // Cameras
   "PrototypeCam1": "Camera ┓ - ▛┗┏┃┣▝",
   "PrototypeCam2": "Camera ╋ - ▄┏┻▚┗",
   "PrototypeCam3": "Camera ┫ - ┗▚▖┗",
 
   "BuildTerminal_Occupied": "Moonpool occupied!",
-  
+
   // Puzzles
   "ProtoPuzzleIncorrectSequence": "Incorrect sequence",
   "ProtoPuzzleCorrectSequence": "Correct sequence!",
@@ -191,7 +191,7 @@
   "BearingPuzzleCycleSymbol": "Cycle symbol",
   "PuzzleConfirmTooltip": "Submit sequence",
   "NumberPuzzleAddHint": "Interact",
-  
+
   // Ion Dive Suit
   "PrecursorSuit": "Ion Dive Suit",
   "Tooltip_PrecursorSuit": "Advanced alien dive suit adapted for human use. Consumes biomechanical energy.",
@@ -219,13 +219,13 @@
   "SuitToggleEditMode": "Toggle edit mode",
   "SuitCurrentColor": "Current color: {0}",
   "SuitCurrentIntensity": "Intensity: {0}",
-  
+
   // Keybinds
   "PrototypeInputCategory": "The Prototype Sub",
   "OptionProtoTetherSubButton": "Tether to Sub",
   "OptionProtoTetherMarkerButton": "Tether to Marker",
   "OptionProtoLocatorPingButton": "Toggle Factor",
-  
+
   // Suit Colors
   "SuitColorGreen": "Green",
   "SuitColorWhite": "White",
@@ -235,7 +235,7 @@
   "SuitColorMagenta": "Magenta",
   "SuitColorRed": "Red",
   "SuitColorYellow": "Yellow",
-  
+
   // Phase Gates
   "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
   "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark matter in alien technology.",
@@ -262,11 +262,11 @@
   "VehicleAccessEquipment": "Vehicle Access",
   "VehicleFrameworkNoStorage": "No storage in vehicle",
   "ProtoUndockVehicleHint": "Undock vehicles in the cockpit radial menu",
-  
+
   // Deployables terminal
   "UseDeployableTerminal": "Access launch bay",
   "ProtoDeployableEquipmentLabel": "Launch bay",
-  
+
   // PDA voicelines
   "OnEnterDefenseMoonpool": "Warning: Scans indicate the structural integral integrity of this facility may have been disturbed by the landing path of the Aurora.<duration=7681>\nThis information is legal conjecture until proven by the appropriate galactic federation authorities.<delay=8152><duration=6010>",
   "OnDefenseCloakDisabled": "Facility lockdown protocols disabled.<duration=2838>\nDetecting realignment in nearby photon particles.<delay=3000><duration=3579>",
@@ -289,19 +289,20 @@
   "ProtoFacilityLocationsHint": "This vessel's construction has prompted a broadcast from a nearby alien source. Downloading summary to databank.",
   "OnPrecursorSuitPickup": "When operating equipment infused with alien technology, please carefully document any unwanted side effects <duration=7043>\nsuch as poor blood circulation, confusion, feelings of invincibility and death to a wellbeing journal for later analysis.<delay=7043><duration=8193>",
   "PDA_ProtoNumbersHint": "Numbers!!!!!<duration=1000>\nGod they really are something...<delay=1000><duration=1000>",
-  
+
   "ProtoBlinkFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
   "ProtoBiomechanicsFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
   "ProtoSuitColorFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
-  
+
   "ProtoTransmissionSiteHint": "Detecting encrypted coordinates within recorded transmission. Outputting results to databank.",
-  
+
   // Puzzle facility voicelines
   "BearingPuzzleComplete": "FACILITY: Spacial navigation cognitive trial complete.<duration=3246>\nFACILITY: Uploading results to quarantine enforcement platform.<delay=3360><duration=3540>",
   "NumberPuzzleComplete": "FACILITY: Cognitive test passed. Opening security door.",
   "NumberPuzzleIncorrect": "FACILITY: Incorrect sequence detected.",
+  "NumberPuzzleEntryDenied": "FACILITY: Transmission cannot proceed while Orion Neural Cluster is suspended. Report to Quarantine Enforcement Platform for immediate profile scan.",
   "OnEnterProtoNumberPuzzle": "Yo dude, you should try solving this puzzle. There's like numbers and stuff.",
-  
+
   // Upgrade tech types
   "ProtoEmergencyWarp": "Emergency Warp",
   "Tooltip_ProtoEmergencyWarp": "Allows the Prototype to warp back to the Quarantine Enforcement Platform",
@@ -323,7 +324,7 @@
 
   "ProtoArchwayOverride": "Archway Override",
   "Tooltip_ProtoArchwayOverride": "Overrides the teleported archway for 2 minutes, allowing for travel back to the Prototype",
-  
+
   "ProtoRepairBotsModule": "Maintenance Bots",
   "Tooltip_ProtoRepairBotsModule": "Installs maintenance bot hangars, which will autonomously repair the sub over time",
 
@@ -332,7 +333,7 @@
 
   "ProtoVariablePowerStreams": "Variable Energy Streams",
   "Tooltip_ProtoVariablePowerStreams": "Upgrades old power circuits with new, more efficient ones, increasing energy efficiency for prolonged use",
-  
+
   "ProtoStrafe": "Lateral Thrusters",
   "Tooltip_ProtoStrafe": "Installs lateral thrusters in the Prototype's hull, allowing for sideways movement",
 
@@ -345,7 +346,7 @@
   "Tooltip_ProtoFinUpgrade3": "A set of fins which can be installed to the Prototype Sub, increasing top speed and crush depth.",
   "ProtoFinUpgrade4": "Fin Set",
   "Tooltip_ProtoFinUpgrade4": "A set of fins which can be installed to the Prototype Sub, increasing top speed and crush depth.",
-  
+
   "RelayUpgradeText": "┗▚▄▖┅┛",
   "ProtoRelayUpgrade1": "Power Relay",
   "Tooltip_ProtoRelayUpgrade1": "A power relay which can be installed to the Prototype's ion Reactor, increasing the max power capacity",
@@ -355,7 +356,7 @@
   "Tooltip_ProtoRelayUpgrade3": "A power relay which can be installed to the Prototype's ion Reactor, increasing the max power capacity",
   "ProtoRelayUpgrade4": "Power Relay",
   "Tooltip_ProtoRelayUpgrade4": "A power relay which can be installed to the Prototype's ion Reactor, increasing the max power capacity",
-  
+
   // Tech Groups & Categories (PDA Blueprints)
   "TechGroupPrototypeSub": "Alien Prototype Vessel",
   "TechGroupProtoFabricator": "Alien Facility Fabricator",
@@ -367,7 +368,7 @@
   // Engine Lever
   "ProtoEngineLeverEnable": "Start ion reactor",
   "ProtoEngineLeverDisable": "Shut down ion reactor",
-  
+
   // HUD
   "ProtoToggleStrafe": "Toggle strafe",
   "ProtoRadialHint": "Open radial menu",
@@ -416,7 +417,7 @@
   "Proto_LowPower": "{0}: Warning: Ion reserves low",
   "Proto_CriticalPower": "{0}: Warning: Ion reserves critical",
   "Proto_FireSuppression": "{0}: Stabilizing internal circuitry",
-  
+
   // Terminal Voicelines
   "Proto_DevResumed": "{0}: Orion neural cluster reinitialized. Neural scans of user indicate disconnection from collective.<duration=7640>\nNetwork unavailable. Enabling black box protocol.<delay=7777><duration=4658>\nPrototype development resumed.<delay=12726><duration=2580>",
   "Proto_StoryEndPingVoiceline": "{0}: Prototype schematic database restored. Primary directive updated.<duration=5296>\nDeadzone mapping initiative online. Awaiting manual direction to ecological dead zone.<delay=5362><duration=5470>",
@@ -427,11 +428,11 @@
   "Proto_FirstInteract": "{0}: Path confirmed. Uploading schematics.",
   "Proto_ConstructionStart": "{0}: Neural cluster transfer initialized.",
   "Proto_ConstructionFinish": "{0}: Prototype construction completed. Upgrades available at construction terminal.<duration=5910>\nDetecting unstable energy readings from Prototype Ion Reactor Facility.<delay=6011><duration=5398>",
-  
+
   "ProtoOrionUnknown": "Unknown",
   "ProtoOrionNoData": "ORION",
   "ProtoOrionFullData": "OR-ION",
-  
+
   // Radio Messages
   "ProtoRadioMessage1": "┣▝▚▛▞┣┃▚┛┛ ▜┗▖━┓▖▘▚┗┣▚┛┣ ▞┛▖━┫▄┣▞┛┣▖▜▚<duration=20000>",
   "ProtoRadioMessage2": "▖┗▚┏▗▞▘▘▖┓▖▘▞┣┅┣▚┛┣┣▝▖┣┓┗┏▜┗▚┛┛▞╋▚▄<duration=13000>",
@@ -462,12 +463,12 @@
   "ArchwayUpgradeText_Native": "Archway",
   "HullUpgradeText_Native": "Hull",
   "DefenseUpgradeText_Native": "Defense",
-  
+
   // Transmission device
   "ProtoTransmissionDeviceDeploy": "Deploy from Prototype to use",
   "ProtoTransmissionDevicePower": "Insert power source",
   "ProtoTransmissionDeviceCode": "Enter transmission code",
-  
+
   // Precursor Fabricator
   "ProtoPrecursorFabricator": "Alien Fabricator",
   "UsePrecursorFabricator": "Use alien fabricator",

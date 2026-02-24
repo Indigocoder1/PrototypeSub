@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
-  m_Name: PDA_SchematicsUnlocked
+  m_Name: NumPuzzleEntryDenied
   m_EditorClassIdentifier: 
-  path: PDA_SchematicsUnlocked
+  path: NumPuzzleEntryDenied
   id: 
-  audioClip: {fileID: 8300000, guid: c953b8d2b37f1b44ba5972cc893a0d46, type: 3}
+  audioClip: {fileID: 8300000, guid: 4fbc93beea4469e4ba96241fec4a7c4c, type: 3}
   doNotAutoRegister: 0
-  mode: 4210832
+  mode: 4210696
   maxDistance3D: 0
   minDistance3D: 0
   fadeOutTime: -1
-  bus: 1
+  bus: 2
   customBusPath: 
