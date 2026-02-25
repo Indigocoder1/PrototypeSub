@@ -9,6 +9,7 @@ internal class FireSupressionListener : MonoBehaviour
 {
 
     [SerializeField] private SubRoot subRoot;
+    [SerializeField] FMOD_CustomEmitter fireSuppressionSfx;
 
     private ProtoStairsManager stairsManager;
 
@@ -20,6 +21,8 @@ internal class FireSupressionListener : MonoBehaviour
     private void TemporaryClose(float delay)
     {
         UWE.CoroutineHost.StartCoroutine(ToggleStairs(delay));
+        fireSuppressionSfx.Play();
+        
     }
 
     private IEnumerator ToggleStairs(float delay)
