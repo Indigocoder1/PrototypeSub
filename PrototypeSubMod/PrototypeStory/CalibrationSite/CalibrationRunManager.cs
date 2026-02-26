@@ -1,4 +1,5 @@
 ﻿using System;
+using Nautilus.Utility;
 using PrototypeSubMod.Puzzles.BearingPuzzle;
 using Story;
 using UnityEngine;
@@ -83,6 +84,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         ErrorMessage.AddError($"Reached point {nextPointIndex}");
         onPointReached?.Invoke(nextPointIndex);
         nextPointIndex++;
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("LocatorPing"), Player.main.transform.position);
 
         if (nextPointIndex < calibrationPoints.Length) return;
         

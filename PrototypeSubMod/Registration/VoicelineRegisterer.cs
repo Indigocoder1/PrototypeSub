@@ -65,6 +65,7 @@ public static class VoicelineRegisterer
         "Proto_NoDeploymentSpace",
 
         "Proto_OnTransmissionDeviceFirstLoaded",
+        "Proto_OnCalibrationRunCompleted",
         "Proto_StoryEndPingVoiceline",
         "Proto_AdminFacilityOnline",
         "Proto_DefensePingSpawned",
