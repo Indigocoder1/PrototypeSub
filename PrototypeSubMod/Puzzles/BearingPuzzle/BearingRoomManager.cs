@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nautilus.Utility;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,15 +21,12 @@ public class BearingRoomManager : MonoBehaviour
         
         if (HasCorrectSequence())
         {
-            ErrorMessage.AddError(Language.main.Get("ProtoPuzzleCorrectSequence"));
             onRoomComplete?.Invoke();
-            FMODUWE.PlayOneShot(correctSequenceSfx, Player.main.transform.position, sfxVolume);
             roomCompleted = true;
         }
         else
         {
-            ErrorMessage.AddError(Language.main.Get("ProtoPuzzleIncorrectSequence"));
-            FMODUWE.PlayOneShot(incorrectSequenceSfx, Player.main.transform.position, sfxVolume);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
         }
     }
 
