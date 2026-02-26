@@ -10,6 +10,8 @@ public class AggressiveWyrmSpawner : MonoBehaviour
 {
     private bool wasInVoid;
     private bool wyrmSpawned;
+    private float minWyrmSpawnDelay = 20f;
+    private float maxWyrmSpawnDelay = 40f;
 
     private void Update()
     {
@@ -46,6 +48,16 @@ public class AggressiveWyrmSpawner : MonoBehaviour
 
     private IEnumerator SpawnWyrm(Vector3 point, Vector3 normal)
     {
+        var random = UnityEngine.Random.Range(minWyrmSpawnDelay, maxWyrmSpawnDelay);
+
+        yield return new WaitForSeconds(random);
+
+        var biomeString = Player.main.GetBiomeString();
+        bool inVoid = biomeString is "void" or "";
+        inVoid |= biomeString.EndsWith("protovoid");
+
+        if (!inVoid) yield return null;
+
         wyrmSpawned = true;
         var task = CraftData.GetPrefabForTechTypeAsync(ProtoAggressiveWyrm.prefabInfo.TechType);
         yield return task;
