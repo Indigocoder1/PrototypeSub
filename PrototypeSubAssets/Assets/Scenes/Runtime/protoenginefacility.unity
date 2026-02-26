@@ -13232,6 +13232,76 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &476432439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 476432442}
+  - component: {fileID: 476432441}
+  - component: {fileID: 476432440}
+  m_Layer: 0
+  m_Name: TransmissionDeviceTerminal
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &476432440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476432439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1104637911, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terminal: {fileID: 476432441}
+  storyGoalKey: TransmissionDeviceUnlock
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  onFirstTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  storyGoalCheckFrameDelay: 5
+  doubleRun: 0
+--- !u!114 &476432441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476432439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 710167097, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryTooltip: GenericConsole
+  secondaryTooltip: Tooltip_GenericConsole
+  allowMultipleUses: 0
+  spawnWithLight: 1
+--- !u!4 &476432442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476432439}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.0009765625, y: 0.006014347, z: -0.97003174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1659048473}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &496076725
 GameObject:
   m_ObjectHideFlags: 0
@@ -16208,6 +16278,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!114 &965551296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20552,7 +20624,7 @@ Transform:
   m_LocalScale: {x: 18.061626, y: 6.1858215, z: 10.73647}
   m_Children: []
   m_Father: {fileID: 1659048473}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1402679664
 BoxCollider:
@@ -27438,6 +27510,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1442510900}
+  - {fileID: 476432442}
   - {fileID: 1915267714}
   - {fileID: 1402679663}
   m_Father: {fileID: 2117290783}
@@ -40308,7 +40381,7 @@ Transform:
   m_LocalScale: {x: 24.670551, y: 5.098175, z: 12.947154}
   m_Children: []
   m_Father: {fileID: 1659048473}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1915267715
 BoxCollider:
