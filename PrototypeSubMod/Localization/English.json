@@ -157,8 +157,8 @@
   "LocatorFactorTerminalEncy_Title": "Facility Detection Factor",
   "LocatorFactorTerminalEncy_Body": "This terminal relays data on the alien's ability to 'hear' their technology. By analysing the data, this PDA was able to extract a modular implement allowing this 'sound' to be percieved by humans.\n\n<b>Note: Implement requires advanced alien bodily interface to function. Further data required.</b>",
 
-  "ProtoTransmissionSiteEncy_Title": "Transmission Site",
-  "ProtoTransmissionSiteEncy_Body": "Have you tried looking?",
+  "ProtoTransmissionSiteEncy_Title": "Alien Transmission Site",
+  "ProtoTransmissionSiteEncy_Body": "The coordinates outlined in this alien message appear to be encrypted. However, this PDA has successfully separated each value into the coordinate's relevant values.\n\n1. Position\nThe coordinate's position can be triangulated by locating a point of reference (Likely the unencrypted coordinate attached to the message), and travelling a specified distance from said point in a specified direction.\n\n2. Depth\nThe coordinate's depth is stored in four values, likely organized in a standard four-digit pattern.",
 
   "SurvivorPDA1Ency_Title": "Lifepod 3 Crew Log #3",
   "SurvivorPDA1Ency_Body": "Alec's Log. Day 12. The laser cutter broke today. The damn thing... And still no luck getting the Seaglide repaired. I think it's beyond saving.\nThe cave's still keeping me alive- Barely- But I'm starting to get worried about these sores. They're getting bigger every day I stay here...\nA transmission came through yesterday calling for a rendezvous about 1.5 kilometers South of here. I'll gather my things and, with any luck, I'll meet up with them tomorrow and tell them what happened to...\nI'll have another try with these terminals for now. Surely I'm missing something...'",
@@ -173,7 +173,7 @@
   "ProtoNumbersEncy_Body": "This facility appears to have been dedicated to exemplifying and demonstrating the numerical system used by the alien species. While the extent to which the shown symbols are utilised in alien technology, several characteristics can be observed:\n\n1. Base-8\nUnlike typical human numbers, the aliens appear to use an octal (base 8)number system. Because octal is typically used in low-level computing, this indicates that the aliens may have evolved alongside the need for low-level technological interfaces.\n\n2. Visual symmetry\nEach symbol is both horizontally and vertically symmetrical. While it is unclear, this may indicate a number system of higher complexity wherein symbols are merged together to represent larger values, while still being identifiable as their original numbers.\n\n<b>Assessment: These symbols are likely to appear in other instances of alien technology. Use this databank entry as a reference in such cases.</b>",
 
   "TransmissionTerminalEncy_Title": "Transmission Device",
-  "TransmissionTerminalEncy_Body": "It transmits stuff",
+  "TransmissionTerminalEncy_Body": "This device is of unique build. By analysing its safety mechanisms, it is clear that normal alien technology follows distinct manufacturing regulations. This device, however, functions irrespective of these guidelines, suggesting its creation was either a secret, or that the enforcement of these regulations was impossible at the time of its design.\n\n1. Data transmission\nThe device's primary function is to transmit data of type: [NEURAL CLUSTER] over distances of thousands, possibly millions of light-years. The device must be manually 'targeted' at the transmission receiving point, suggesting that said point's location was unknown at the time of the device's creation.\n\n2. Prototype compatibility\nThe device is configured to be deployed by the Prototype, but will prevent itself from doing so unless it is deployed at the correct location. As it is deployed, data of type [NEURAL CLUSTER] is siphoned from the Prototype and into it, which is then sent to its target.",
 
   // Cameras
   "PrototypeCam1": "Camera ┓ - ▛┗┏┃┣▝",
@@ -436,7 +436,8 @@
   // Radio Messages
   "ProtoRadioMessage1": "┣▝▚▛▞┣┃▚┛┛ ▜┗▖━┓▖▘▚┗┣▚┛┣ ▞┛▖━┫▄┣▞┛┣▖▜▚<duration=20000>",
   "ProtoRadioMessage2": "▖┗▚┏▗▞▘▘▖┓▖▘▞┣┅┣▚┛┣┣▝▖┣┓┗┏▜┗▚┛┛▞╋▚▄<duration=13000>",
-  "ProtoRadioMessage3": "▜▚┣┛━┏┗▚▙▞▛▛▞▘┫▄┣▖┛▞┣▘┏┃┣▞┃┫▚┛<duration=1300>",
+  "ProtoRadioMessage3": "▜▚┣┛━┏┗▚▙▞▛▛▞▘┫▄┣▖┛▞┣▘┏┃┣▞┃┫▚┛<duration=13000>",
+  "ProtoRadioMessage4": "▗▞┃▜▄▚▗┏┃▜▄▚▙▞┃▜▄▚▙▖┃▜▄▚┅▞▘▀▞┣┅<duration=13000>",
 
   // Facilities
   "CloakDisableTerminal": "Control terminal",
@@ -449,6 +450,8 @@
   "StoryEndPingType": "▙┏┃┣▜┏┣┏┣▝▚╋┏▞▙",
   "NumberPuzzlePing": "▙▚▛▚┃┛▚",
   "BearingPuzzlePing": "▗▚▖┗▞┃▜┓┫┇┇▄▚━┏━▚┃┣",
+  "CalibrationSitePing": "▘▖▄▞▗┗▖┣▞┏┃┛▞┣▚",
+  "TransmissionSiteStartPing": "┣┗▖┃┛━▞┣▗▖▗▖┅",
 
   // Build terminal
   "UpgradeScreenHeader": "┫┓▜┗▖▙▚┛",
@@ -467,7 +470,7 @@
   // Transmission device
   "ProtoTransmissionDeviceDeploy": "Deploy from Prototype to use",
   "ProtoTransmissionDevicePower": "Insert power source",
-  "ProtoTransmissionDeviceCode": "Enter transmission code",
+  "ProtoTransmissionDeviceCode": "Calibrate transmission device",
 
   // Precursor Fabricator
   "ProtoPrecursorFabricator": "Alien Fabricator",
