@@ -447,6 +447,63 @@ internal static class EncyEntryRegisterer
             protoNumbersDescription, protoNumbersBackground, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 
+        #region Particle Transmitter
+        string transmitterTitle = Language.main.Get("ProtoPhaseGateTransmitterEncy_Title");
+        string transmitterDescription = Language.main.Get("ProtoPhaseGateTransmitterEncy_Body");
+        var transmitterPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
+
+        PDAHandler.AddEncyclopediaEntry("ProtoPhaseGateTransmitter", "DownloadedData/Prototype/Scanned", transmitterTitle,
+            transmitterDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: transmitterPopup);
+        var transmitterEntryData = new PDAScanner.EntryData()
+        {
+            key = ProtoPhaseGateTransmitter.PrefabInfo.TechType,
+            destroyAfterScan = false,
+            encyclopedia = "ProtoPhaseGateTransmitter",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = ProtoPhaseGateTransmitter.PrefabInfo.TechType
+        };
+        PDAHandler.AddCustomScannerEntry(transmitterEntryData);
+        #endregion
+
+        #region Dark Matter Stabilizer
+        string stabilizerTitle = Language.main.Get("ProtoPhaseGateStabilizerEncy_Title");
+        string stabilizerDescription = Language.main.Get("ProtoPhaseGateStabilizerEncy_Body");
+        var stabilizerPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
+
+        PDAHandler.AddEncyclopediaEntry("ProtoPhaseGateStabilizer", "DownloadedData/Prototype/Scanned", stabilizerTitle,
+            stabilizerDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: stabilizerPopup);
+        var stabilizerEntryData = new PDAScanner.EntryData()
+        {
+            key = ProtoPhaseGateStabilizer.PrefabInfo.TechType,
+            destroyAfterScan = false,
+            encyclopedia = "ProtoPhaseGateStabilizer",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = ProtoPhaseGateStabilizer.PrefabInfo.TechType
+        };
+        PDAHandler.AddCustomScannerEntry(stabilizerEntryData);
+        #endregion
+
+        #region Structural Core
+        string coreTitle = Language.main.Get("ProtoPhaseGateStructureEncy_Title");
+        string coreDescription = Language.main.Get("ProtoPhaseGateStructureEncy_Body");
+        var corePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
+
+        PDAHandler.AddEncyclopediaEntry("ProtoPhaseGateStructure", "DownloadedData/Prototype/Scanned", coreTitle,
+            coreDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: corePopup);
+        var coreEntryData = new PDAScanner.EntryData()
+        {
+            key = ProtoPhaseGateStructure.PrefabInfo.TechType,
+            destroyAfterScan = false,
+            encyclopedia = "ProtoPhaseGateStructure",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = ProtoPhaseGateStructure.PrefabInfo.TechType
+        };
+        PDAHandler.AddCustomScannerEntry(coreEntryData);
+        #endregion
+
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()
         {
             "ProtoCloakEncy",
