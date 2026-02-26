@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: NumPuzzleCorrect
   id: 
-  audioClip: {fileID: 8300000, guid: f6ad1bdbc8317564f9f6ea1536287cba, type: 3}
+  audioClip: {fileID: 8300000, guid: b34a7eb48e036d44795c259a4d8145db, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0
