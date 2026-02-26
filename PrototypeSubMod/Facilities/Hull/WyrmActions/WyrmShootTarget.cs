@@ -68,8 +68,6 @@ public class WyrmShootTarget : CreatureAction
         impactVFX = Instantiate(livemixin.deathEffect);
 
         impactVFX.SetActive(false);
-
-        ErrorMessage.AddError($"Got impact VFX: {impactVFX.name}");
     }
 
     public override float Evaluate(Creature creature, float time)
