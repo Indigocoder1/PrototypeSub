@@ -28,8 +28,8 @@ public class ProtoAggressiveWorm : Creature
     [SerializeField] private FMOD_CustomEmitter aggroOffSfx;
     [SerializeField] private FMOD_CustomEmitter consumePlayerSfx;
     [SerializeField] private WyrmRoarManager roarManager;
-    [SerializeField] private float minRoarInterval = 20f;
-    [SerializeField] private float maxRoarInterval = 40f;
+    [SerializeField] private float minRoarInterval = 30f;
+    [SerializeField] private float maxRoarInterval = 60f;
 
     private Renderer[] headRenderers;
     private List<Renderer>[] segmentRenderers;
