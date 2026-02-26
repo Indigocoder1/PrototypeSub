@@ -26,7 +26,32 @@ internal static class StoryGoalsRegisterer
             KnownTech.Add(PrecursorIngot_Craftable.prefabInfo.TechType);
             PDAEncyclopedia.Add("ProtoPrecursorIngot", true);
         });
+        #endregion
 
+        #region Phase Gate Items Pickup
+        StoryGoalHandler.RegisterItemGoal("Ency_ProtoPhaseGateStructure", Story.GoalType.Encyclopedia, ProtoPhaseGateStructure.PrefabInfo.TechType);
+
+        StoryGoalHandler.RegisterCustomEvent("Ency_ProtoPhaseGateStructure", () =>
+        {
+            KnownTech.Add(ProtoPhaseGateStructure.PrefabInfo.TechType);
+            PDAEncyclopedia.Add("ProtoPhaseGateStructure", true);
+        });
+
+        StoryGoalHandler.RegisterItemGoal("Ency_ProtoPhaseGateStabilizer", Story.GoalType.Encyclopedia, ProtoPhaseGateStabilizer.PrefabInfo.TechType);
+
+        StoryGoalHandler.RegisterCustomEvent("Ency_ProtoPhaseGateStabilizer", () =>
+        {
+            KnownTech.Add(ProtoPhaseGateStabilizer.PrefabInfo.TechType);
+            PDAEncyclopedia.Add("ProtoPhaseGateStabilizer", true);
+        });
+
+        StoryGoalHandler.RegisterItemGoal("Ency_ProtoPhaseGateTransmitter", Story.GoalType.Encyclopedia, ProtoPhaseGateTransmitter.PrefabInfo.TechType);
+
+        StoryGoalHandler.RegisterCustomEvent("Ency_ProtoPhaseGateTransmitter", () =>
+        {
+            KnownTech.Add(ProtoPhaseGateTransmitter.PrefabInfo.TechType);
+            PDAEncyclopedia.Add("ProtoPhaseGateTransmitter", true);
+        });
         #endregion
 
         #region PPT First Interaction
