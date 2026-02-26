@@ -1,8 +1,11 @@
-﻿using PrototypeSubMod.DeployablesTerminal;
+﻿using Nautilus.Handlers;
+using PrototypeSubMod.DeployablesTerminal;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.UI.AbilitySelection;
+using Story;
 using System.Collections;
 using UnityEngine;
+using UWE;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
 
@@ -16,6 +19,9 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
     [SerializeField] private float launchDelay;
     [SerializeField] private float launchForce;
 
+    [SerializeField] private VoiceNotificationManager notificationManager;
+    [SerializeField] private VoiceNotification deviceLoadedVoiceline;
+
     private void Start()
     {
         deployableStorage.equipment.onEquip += OnItemChanged;
@@ -28,6 +34,14 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
 
         selectionMenuManager.RefreshIcons();
 
+        if (StoryGoalManager.main.IsGoalComplete("TransmissionDeviceFirstLoaded")) return;
+        UWE.CoroutineHost.StartCoroutine(DelayedStoryGoalUnlock());
+    }
+
+    private IEnumerator DelayedStoryGoalUnlock()
+    {
+        yield return new WaitForSeconds(4f);
+        StoryGoalManager.main.OnGoalComplete("TransmissionDeviceFirstLoaded");
     }
 
     private bool HasTransmissionDevice()

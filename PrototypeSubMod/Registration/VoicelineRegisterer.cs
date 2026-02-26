@@ -63,7 +63,8 @@ public static class VoicelineRegisterer
         "Proto_NoGateDetected",
         "Proto_MaxGatesPlaced",
         "Proto_NoDeploymentSpace",
-        
+
+        "Proto_OnTransmissionDeviceFirstLoaded",
         "Proto_StoryEndPingVoiceline",
         "Proto_AdminFacilityOnline",
         "Proto_DefensePingSpawned",

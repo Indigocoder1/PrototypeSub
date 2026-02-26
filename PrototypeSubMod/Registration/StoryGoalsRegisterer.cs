@@ -264,6 +264,13 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Bearing Puzzle Entry Voiceline
+        StoryGoalHandler.RegisterCustomEvent("OnEnterProtoBearingPuzzle", () =>
+        {
+            PDALog.Add("OnEnterProtoBearingPuzzle");
+        });
+        #endregion
+
         #region Lifepod 3 PDA
         StoryGoalHandler.RegisterCustomEvent("ProtoLifepod3PDA", () =>
         {
@@ -290,6 +297,20 @@ internal static class StoryGoalsRegisterer
             "ProtoNumberPuzzleComplete");
         StoryGoalHandler.RegisterCompoundGoal("ProtoNumbersHint", Story.GoalType.Story, 10f,
             "ProtoNumberPuzzleComplete");
+        #endregion
+
+        #region Calibration site completion
+        StoryGoalHandler.RegisterCustomEvent("OnCalibrationRunCompleted", () =>
+        {
+            PDALog.Add("Proto_OnCalibrationRunCompleted");
+        });
+        #endregion
+
+        #region Transmission Device First Loaded
+        StoryGoalHandler.RegisterCustomEvent("TransmissionDeviceFirstLoaded", () =>
+        {
+            PDALog.Add("Proto_OnTransmissionDeviceFirstLoaded");
+        });
         #endregion
 
         StoryGoalHandler.RegisterCustomEvent("OrionSurgicalRoomTome", () =>

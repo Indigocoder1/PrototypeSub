@@ -429,6 +429,8 @@
   "Proto_LowPower": "{0}: Warning: Ion reserves low",
   "Proto_CriticalPower": "{0}: Warning: Ion reserves critical",
   "Proto_FireSuppression": "{0}: Stabilizing internal circuitry",
+  "Proto_OnTransmissionDeviceFirstLoaded": "{0}: Warning: Unauthorized device detected in loading bay.<duration=4500>\nRemove immedia-▖▞┫▗▝┓┏<delay=4556><duration=4900>",
+  "Proto_OnCalibrationRunCompleted": "{0}: Transmission calibration complete. Broadcasting calibration key.<duration=4500>",
 
   // Terminal Voicelines
   "Proto_DevResumed": "{0}: Orion neural cluster reinitialized. Neural scans of user indicate disconnection from collective.<duration=7640>\nNetwork unavailable. Enabling black box protocol.<delay=7777><duration=4658>\nPrototype development resumed.<delay=12726><duration=2580>",

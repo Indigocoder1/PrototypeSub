@@ -34,7 +34,8 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PlaceholderPDAVoiceline", "ProtoTransmissionSiteHint"));
         PDALog_Patches.entries.Add(("NumbersPDACompile", "ProtoNumbersHint"));
         PDALog_Patches.entries.Add(("PDA_Lifepod3", "Lifepod3PDA"));
-   
+        PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoNumberPuzzle"));
+        PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoBearingPuzzle"));
 
         PDALog_Patches.entries.Add(("PDA_SchematicsUnlocked", "ProtoBlinkFactorUnlock"));
         PDALog_Patches.entries.Add(("PDA_SchematicsUnlocked", "ProtoBiomechanicsFactorUnlock"));
@@ -46,8 +47,10 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.orionEntries.Add(("Proto_FirstInteract", "Proto_FirstInteract"));
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionStart", "Proto_ConstructionStart"));
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionFinish", "Proto_ConstructionFinish"));
-        PDALog_Patches.orionEntries.Add(("Proto_ApproachTerminal", "OnEnterProtoNumberPuzzle"));
+        PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnTransmissionDeviceFirstLoaded"));
+        PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnCalibrationRunCompleted"));
         
+
         sw.Stop();
         Plugin.Logger.LogInfo($"PDA Messages registered in {sw.ElapsedMilliseconds}ms");
     }
