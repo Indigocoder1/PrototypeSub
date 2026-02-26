@@ -161,7 +161,7 @@
   "ProtoTransmissionSiteEncy_Body": "Have you tried looking?",
 
   "SurvivorPDA1Ency_Title": "Lifepod 3 Crew Log #3",
-  "SurvivorPDA1Ency_Body": "Alec's Log. Day 12. The laser cutter broke today. The damn thing... And still no luck getting the Seaglide repaired. I think it's beyond saving.\nThe cave's still keeping me alive- Barely- But I'm starting to get worried about these sores. They're getting bigger every day I stay here...\nA transmission came through yesterday calling for a rendezvous about 1.5 kilometers South of here. I'll gather my things and, with any luck, I'll meet up with them tomorrow and tell them what happened to...\nI'll I'll have another try with these terminals for now. Surely I'm missing something...'",
+  "SurvivorPDA1Ency_Body": "Alec's Log. Day 12. The laser cutter broke today. The damn thing... And still no luck getting the Seaglide repaired. I think it's beyond saving.\nThe cave's still keeping me alive- Barely- But I'm starting to get worried about these sores. They're getting bigger every day I stay here...\nA transmission came through yesterday calling for a rendezvous about 1.5 kilometers South of here. I'll gather my things and, with any luck, I'll meet up with them tomorrow and tell them what happened to...\nI'll have another try with these terminals for now. Surely I'm missing something...'",
 
   "SurvivorPDA2Ency_Title": "Lifepod 3 Crew Log #2",
   "SurvivorPDA2Ency_Body": "Alec's log. Day 9. I did it! I solved it! They're numbers!\nThe symbols on the walls- They're alien numbers. It's like it's like it's trying to teach me their number system! Look- The lights- They're values. On the left, zero, then all the way up to eight on the right- I guess they don't use base ten? I don't know. Anyways, tapping on the symbols swaps them, right? But how do I know which symbols hold which values?\nTapping on the four terminals on the ground lets you add the symbols together! Watch. If I touch the symbol on the left, then the one beside it the- Yeah! That's number three. So, those symbols together add up to three.\nBut... When I input the solution, the facility- It spoke again. Here, take a listen.\nFACILITY: TRANSMISSION CANNOT PROCEED WHILE ORION NEURAL CLUSTER IS SUSPENDED. REPORT TO QUARANTINE ENFORCEMENT PLATFORM FOR IMMEDIATE PROFILE SCAN.\nAlec: Just when I thought I made a breakthrough. I'll keep at it. Might as well since I'm here. They're numbers...!",
@@ -297,10 +297,10 @@
   "ProtoTransmissionSiteHint": "Detecting encrypted coordinates within recorded transmission. Outputting results to databank.",
 
   // Puzzle facility voicelines
-  "BearingPuzzleComplete": "FACILITY: Spacial navigation cognitive trial complete.<duration=3246>\nFACILITY: Uploading results to quarantine enforcement platform.<delay=3360><duration=3540>",
-  "NumberPuzzleComplete": "FACILITY: Cognitive test passed. Opening security door.",
-  "NumberPuzzleIncorrect": "FACILITY: Incorrect sequence detected.",
-  "NumberPuzzleEntryDenied": "FACILITY: Transmission cannot proceed while Orion Neural Cluster is suspended. Report to Quarantine Enforcement Platform for immediate profile scan.",
+  "BearingPuzzleComplete": "FACILITY: SPATIAL NAVIGATION COGNITIVE TRIAL COMPLETE.<duration=3246>\nFACILITY: UPLOADING RESULTS TO QUARANTINE ENFORCEMENT PLATFORM.<delay=3360><duration=3540>",
+  "NumberPuzzleComplete": "FACILITY: COGNITIVE TEST PASSED. OPENING SECURITY DOOR.",
+  "NumberPuzzleIncorrect": "FACILITY: INCORRECT SEQUENCE DETECTED.",
+  "NumberPuzzleEntryDenied": "FACILITY: TRANSMISSION CANNOT PROCEED WHILE ORION NEURAL CLUSTER IS SUSPENDED. REPORT TO QUARANTINE ENFORCEMENT PLATFORM FOR IMMEDIATE NEURAL SCAN.",
   "OnEnterProtoNumberPuzzle": "Yo dude, you should try solving this puzzle. There's like numbers and stuff.",
 
   // Upgrade tech types
