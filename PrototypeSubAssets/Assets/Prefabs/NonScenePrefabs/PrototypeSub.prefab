@@ -2668,7 +2668,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   soundMultiplier: 0.25
   powerRelay: {fileID: 161644787413200408}
-  secondsToConsumeCharge: 10
+  secondsToConsumeCharge: 30
   voiceNotificationManager: {fileID: 5389210478452801882}
   activateCloakNotif: {fileID: 8193633662682056480}
   invalidOpNotification: {fileID: 5744166132657847796}
