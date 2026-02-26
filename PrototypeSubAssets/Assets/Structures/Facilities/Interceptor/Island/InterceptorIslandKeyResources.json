@@ -153,6 +153,28 @@
       },
       "cellLevel": 0,
       "priority": 0
+    },
+    {
+      "classId": "ProtoPhaseGateStabilizer",
+      "id": "e425dcd1-ca9e-4bda-a762-86b8918e0fe0",
+      "position": {
+        "x": 556.0024,
+        "y": 102.684784,
+        "z": 1747.19263
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      },
+      "scale": {
+        "x": 0.407331765,
+        "y": 0.407331765,
+        "z": 0.407331765
+      },
+      "cellLevel": 1,
+      "priority": 0
     }
   ],
   "IsSorted": false
