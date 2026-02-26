@@ -504,6 +504,15 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddCustomScannerEntry(coreEntryData);
         #endregion
 
+        #region Phase Gate
+        var phaseGatePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrototypeSub_EncyPopup");
+        string phaseGateTitle = Language.main.Get("PhaseGateEncy_Title");
+        string phaseGateBody = Language.main.Get("PhaseGateEncy_Body");
+        Texture2D phaseGateBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrototypeSubEncy");
+
+        PDAHandler.AddEncyclopediaEntry("PhaseGateEncy", "DownloadedData/Prototype/ProtoTerminal", phaseGateTitle, phaseGateBody, phaseGateBackground, phaseGatePopup, PDAHandler.UnlockImportant);
+        #endregion
+
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()
         {
             "ProtoCloakEncy",
