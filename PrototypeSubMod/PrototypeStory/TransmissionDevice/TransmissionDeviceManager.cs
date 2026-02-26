@@ -137,7 +137,6 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         activateSfx.Play();
         yield return new WaitForSeconds(activationDelay);
         
-        ErrorMessage.AddDebug("Powered up transmission device");
         poweredDownObjects.SetActive(false);
         poweredUpObjects.SetActive(true);
         activated = true;

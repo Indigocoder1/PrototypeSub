@@ -175,6 +175,15 @@
   "TransmissionTerminalEncy_Title": "Transmission Device",
   "TransmissionTerminalEncy_Body": "This device is of unique build. By analysing its safety mechanisms, it is clear that normal alien technology follows distinct manufacturing regulations. This device, however, functions irrespective of these guidelines, suggesting its creation was either a secret, or that the enforcement of these regulations was impossible at the time of its design.\n\n1. Data transmission\nThe device's primary function is to transmit data of type: [NEURAL CLUSTER] over distances of thousands, possibly millions of light-years. The device must be manually 'targeted' at the transmission receiving point, suggesting that said point's location was unknown at the time of the device's creation.\n\n2. Prototype compatibility\nThe device is configured to be deployed by the Prototype, but will prevent itself from doing so unless it is deployed at the correct location. As it is deployed, data of type [NEURAL CLUSTER] is siphoned from the Prototype and into it, which is then sent to its target.",
 
+  "ProtoPhaseGateStructureEncy_Title": "Structural Core",
+  "ProtoPhaseGateStructureEncy_Body": "Nice core bro.",
+
+  "ProtoPhaseGateStabilizerEncy_Title": "Dark Matter Stabilizer",
+  "ProtoPhaseGateStabilizerEncy_Body": "Nice Stabilizer Bro",
+
+  "ProtoPhaseGateTransmitterEncy_Title": "Particle Transmitter",
+  "ProtoPhaseGateTransmitterEncy_Body": "Nice transmitter bro.",
+
   // Cameras
   "PrototypeCam1": "Camera ┓ - ▛┗┏┃┣▝",
   "PrototypeCam2": "Camera ╋ - ▄┏┻▚┗",
