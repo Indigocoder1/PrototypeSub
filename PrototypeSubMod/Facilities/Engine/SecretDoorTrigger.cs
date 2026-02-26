@@ -1,4 +1,6 @@
-﻿using PrototypeSubMod.Prefabs;
+﻿using Nautilus.Handlers;
+using PrototypeSubMod.Prefabs;
+using Story;
 using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Engine;
@@ -13,20 +15,8 @@ public class SecretDoorTrigger : MonoBehaviour
     {
         if (other.gameObject != Player.main.gameObject) return;
 
-        var chip1 = Inventory.main.equipment.GetItemInSlot("Chip1");
-        var chip2 = Inventory.main.equipment.GetItemInSlot("Chip2");
-        if (chip1 == null && chip2 == null) return;
-
-        if (chip1 != null && chip1.techType == ListeningDevice_Craftable.prefabInfo.TechType)
-        {
-            OpenDoor();
-            return;
-        }
-
-        if (chip2 != null && chip2.techType == ListeningDevice_Craftable.prefabInfo.TechType)
-        {
-            OpenDoor();
-        }
+        if (!StoryGoalManager.main.IsGoalComplete("OrionSurgicalRoomTome")) return;
+        OpenDoor();
     }
 
     private void OpenDoor()
