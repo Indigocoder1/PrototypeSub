@@ -307,7 +307,7 @@
 
   // Puzzle facility voicelines
   "BearingPuzzleComplete": "FACILITY: SPATIAL NAVIGATION COGNITIVE TRIAL COMPLETE.<duration=3246>\nFACILITY: UPLOADING RESULTS TO QUARANTINE ENFORCEMENT PLATFORM.<delay=3360><duration=3540>",
-  "NumberPuzzleComplete": "FACILITY: COGNITIVE TEST PASSED. OPENING SECURITY DOOR.",
+  "NumberPuzzleComplete": "FACILITY: COGNITIVE TRIAL COMPLETE.",
   "NumberPuzzleIncorrect": "FACILITY: INCORRECT SEQUENCE DETECTED.",
   "NumberPuzzleEntryDenied": "FACILITY: TRANSMISSION CANNOT PROCEED WHILE ORION NEURAL CLUSTER IS SUSPENDED. REPORT TO QUARANTINE ENFORCEMENT PLATFORM FOR IMMEDIATE NEURAL SCAN.",
   "OnEnterProtoNumberPuzzle": "Yo dude, you should try solving this puzzle. There's like numbers and stuff.",
