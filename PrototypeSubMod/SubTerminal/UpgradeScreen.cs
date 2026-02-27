@@ -13,7 +13,6 @@ internal class UpgradeScreen : MonoBehaviour
 
     private CanvasGroup canvasGroup;
     private float targetAlpha;
-    private List<uGUI_ProtoUpgradeIcon> installedUpgrades = new();
     private TechType[] availableUpgrades;
 
     private void Awake()
@@ -61,16 +60,6 @@ internal class UpgradeScreen : MonoBehaviour
     public void SetInteractable(bool interactable)
     {
         canvasGroup.blocksRaycasts = interactable;
-    }
-
-    public void InstallUpgrade(uGUI_ProtoUpgradeIcon icon)
-    {
-        installedUpgrades.Add(icon);
-    }
-
-    public void UninstallUpgrade(uGUI_ProtoUpgradeIcon icon)
-    {
-        installedUpgrades.Remove(icon);
     }
 
     private void OnEnable()

@@ -89,11 +89,6 @@ internal class uGUI_ProtoUpgradeIcon : MonoBehaviour
         if (!upgradeManager) yield break;
 
         SetUpgradeTechType(techType.TechType);
-        if (upgradeManager.GetInstalledUpgradeTypes().Contains(techType.TechType))
-        {
-            upgradeScreen.InstallUpgrade(this);
-        }
-
         UWE.CoroutineHost.StartCoroutine(RefreshUpgrades());
         initialized = true;
     }
@@ -112,11 +107,6 @@ internal class uGUI_ProtoUpgradeIcon : MonoBehaviour
         }
 
         upgradeManager = occupiedHandler.SubInMoonpool.GetComponentInChildren<ProtoUpgradeManager>();
-        
-        if (upgradeManager.GetInstalledUpgradeTypes().Contains(techType.TechType))
-        {
-            upgradeScreen.InstallUpgrade(this);
-        }
 
         OnUpgradesChanged(null, new UpgradeChangedEventArgs(upgradeScreen, upgradeManager.GetInstalledUpgradeTypes()));
     }
@@ -254,15 +244,6 @@ internal class uGUI_ProtoUpgradeIcon : MonoBehaviour
 
         bool currentlyInstalled = upgradeManager.GetUpgradeInstalled(techType.TechType);
         upgradeManager.SetUpgradeInstalled(techType.TechType, !currentlyInstalled);
-
-        if (!currentlyInstalled)
-        {
-            upgradeScreen.InstallUpgrade(this);
-        }
-        else
-        {
-            upgradeScreen.UninstallUpgrade(this);
-        }
 
         UpgradeChangedEventArgs args = new(upgradeScreen, upgradeManager.GetInstalledUpgradeTypes());
         onUpgradeChanged?.Invoke(this, args);
