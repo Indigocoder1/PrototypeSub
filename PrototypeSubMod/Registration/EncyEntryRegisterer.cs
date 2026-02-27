@@ -385,20 +385,37 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddEncyclopediaEntry("PrecursorSuitTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", precursorSuitTerminalTitle, precursorSuitTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: precursorSuitPopup);
         #endregion
 
+        var factorPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
         #region Biomechanics Factor Terminal
         string biomechanicsFactorTerminalTitle = Language.main.Get("BiomechanicsFactorTerminalEncy_Title");
         string biomechanicsFactorTerminalDescription = Language.main.Get("BiomechanicsFactorTerminalEncy_Body");
-        var biomechanicsFactorPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
 
-        PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: biomechanicsFactorPopup);
+        PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: factorPopup);
         #endregion
 
         #region Locator Factor Terminal
         string locatorFactorTerminalTitle = Language.main.Get("LocatorFactorTerminalEncy_Title");
         string locatorFactorTerminalDescription = Language.main.Get("LocatorFactorTerminalEncy_Body");
-        var locatorFactorPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
 
-        PDAHandler.AddEncyclopediaEntry("LocatorFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", locatorFactorTerminalTitle, locatorFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: locatorFactorPopup);
+        PDAHandler.AddEncyclopediaEntry("LocatorFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", locatorFactorTerminalTitle, locatorFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: factorPopup);
+        #endregion
+        
+        #region Blink Factor Terminal
+        string blinkFactorEncyTitle = Language.main.Get("BlinkFactorEncy_Title");
+        string blinkFactorEncyDescription = Language.main.Get("BlinkFactorEncy_Body");
+
+        PDAHandler.AddEncyclopediaEntry("BlinkFactorEncy", "DownloadedData/Prototype/ProtoTerminal",
+            blinkFactorEncyTitle, blinkFactorEncyDescription, unlockSound: PDAHandler.UnlockBasic,
+            popupImage: factorPopup);
+        #endregion
+        
+        #region Suit Color Factor
+        string suitColorFactorEncyTitle = Language.main.Get("SuitColorFactorEncy_Title");
+        string suitColorFactorEncyDescription = Language.main.Get("SuitColorFactorEncy_Body");
+
+        PDAHandler.AddEncyclopediaEntry("SuitColorFactorEncy", "DownloadedData/Prototype/ProtoTerminal",
+            suitColorFactorEncyTitle, suitColorFactorEncyDescription, unlockSound: PDAHandler.UnlockBasic,
+            popupImage: factorPopup);
         #endregion
 
         #region Transmission Site Hint

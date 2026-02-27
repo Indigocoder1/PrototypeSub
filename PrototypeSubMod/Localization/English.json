@@ -186,6 +186,12 @@
 
   "PhaseGateEncy_Title": "Alien Phasegate",
   "PhaseGateEncy_Body": "Phaaaaase",
+  
+  "BlinkFactorEncy_Title": "Blink Factor",
+  "BlinkFactorEncy_Body": "Y'know... like your eyes?",
+  
+  "SuitColorFactorEncy_Title": "Ion Dive Suit Color Factor",
+  "SuitColorFactorEncy_Body": "It like changes the color and stuff",
 
   // Cameras
   "PrototypeCam1": "Camera ┓ - ▛┗┏┃┣▝",

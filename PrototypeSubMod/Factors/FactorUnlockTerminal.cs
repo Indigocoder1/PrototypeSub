@@ -36,8 +36,7 @@ public class FactorUnlockTerminal : MonoBehaviour
         var pdaLog = $"Proto{unlockTechType.TechType.ToString()}Unlock";
         if (!Language.main.Contains(pdaLog))
         {
-            KnownTech.Add(unlockTechType.TechType);
-            PDAEncyclopedia.Add(unlockTechType.TechType.ToString(), true);
+            StartCoroutine(UnlockFactorDelayed(0));
             throw new System.Exception($"No language line for {pdaLog} detected!");
         }
         
@@ -57,6 +56,6 @@ public class FactorUnlockTerminal : MonoBehaviour
         yield return new WaitForSeconds(delay);
         
         KnownTech.Add(unlockTechType.TechType);
-        PDAEncyclopedia.Add(unlockTechType.TechType.ToString(), true);
+        PDAEncyclopedia.Add($"{unlockTechType.TechType.ToString()}Ency", true);
     }
 }
