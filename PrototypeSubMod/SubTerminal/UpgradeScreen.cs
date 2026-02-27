@@ -73,13 +73,11 @@ internal class UpgradeScreen : MonoBehaviour
         installedUpgrades.Remove(icon);
     }
 
-    public bool CanInstallNewUpgrade()
+    private void OnEnable()
     {
-        return installedUpgrades.Count < maxAllowedUpgrades;
+        KnownTech.onAdd += CheckIfUnlocked;
+        CheckIfUnlocked(TechType.None, false);
     }
-
-    public int GetCurrentInstalledUpgradeCount() => installedUpgrades.Count;
-
-    private void OnEnable() => KnownTech.onAdd += CheckIfUnlocked;
+    
     private void OnDisable() => KnownTech.onAdd -= CheckIfUnlocked;
 }
