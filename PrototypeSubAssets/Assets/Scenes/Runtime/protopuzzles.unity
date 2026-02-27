@@ -16289,6 +16289,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 481604772071830715, guid: f48bf34a68c425e4080f39452997a8dd,
+        type: 3}
+      propertyPath: skyApplier
+      value: 
+      objectReference: {fileID: 1219020300}
     - target: {fileID: 500873930989952014, guid: f48bf34a68c425e4080f39452997a8dd,
         type: 3}
       propertyPath: m_StaticEditorFlags
