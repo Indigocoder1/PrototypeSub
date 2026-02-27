@@ -62,7 +62,7 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         doorsFrom = null;
         doorsTo = null;
 
-        StartCoroutine(GeneratePreviewsDelayed());
+        UWE.CoroutineHost.StartCoroutine(GeneratePreviewsDelayed());
     }
 
     public void LinkTeleporters(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
@@ -76,6 +76,11 @@ public class BearingRoomTeleporterManager : MonoBehaviour
         if (lwe != null)
         {
             yield return new WaitUntil(() => lwe.fadeTime > 0.5f);
+        }
+        else
+        {
+            yield return null;
+            yield return new WaitUntil(() => gameObject.activeInHierarchy);
         }
 
         foreach (var item in bearingTeleporterDoors)
@@ -132,26 +137,49 @@ public class BearingRoomTeleporterManager : MonoBehaviour
     private IEnumerator TeleportDelayed(BearingTeleporterDoor doorFrom, BearingTeleporterDoor doorTo)
     {
         InterfloorTeleporter.PlayTeleportEffect(0.2f);
-        yield return new WaitForSeconds(0.1f);
-        FMODUWE.PlayOneShot(teleportSfx, Player.main.transform.position, 0.5f);
-        
         var teleportToPosition = doorTo.GetTeleportInPosition();
         var teleportFromPosition = doorFrom.GetTeleportInPosition();
         var positionDelta = teleportToPosition.position - teleportFromPosition.position;
         var rotationDelta = teleportToPosition.eulerAngles - (teleportFromPosition.eulerAngles - new Vector3(0, 180, 0));
         var camera = MainCameraControl.main.transform;
         
-        var localVelocity = teleportFromPosition.InverseTransformVector(-Player.main.rigidBody.velocity);
+        var localVelocity = teleportFromPosition.InverseTransformVector(-Player.main.playerController.velocity);
         var newVelocity = teleportToPosition.TransformVector(localVelocity);
         var underwaterMotor = Player.main.playerController.underWaterController as UnderwaterMotor;
         
         var newAngles = camera.eulerAngles + rotationDelta;
+        
+        yield return new WaitForSeconds(0.1f);
+        FMODUWE.PlayOneShot(teleportSfx, Player.main.transform.position, 0.5f);
+
+        var oldVelocity = Player.main.playerController.velocity;
+        var oldForward = Player.main.transform.forward; 
         MainCameraControl.main.rotationX += rotationDelta.y;
         camera.eulerAngles = newAngles;
-        Player.main.rigidBody.velocity = newVelocity;
+        Player.main.playerController.groundController.SetVelocity(newVelocity);
         underwaterMotor.vel = newVelocity;
         underwaterMotor.previousVelocity = newVelocity;
+
+        var velocityOffset = oldVelocity *
+                             ((1 - Mathf.Abs(Vector3.Dot(oldForward, teleportToPosition.forward))) * 3f);
+        Plugin.Logger.LogInfo(
+            $"Velocity offset = {velocityOffset} | Dot = {Vector3.Dot(Player.main.transform.forward, teleportToPosition.forward)} | Velocity magnitude = {oldVelocity.magnitude}");
         Player.main.SetPosition(Player.main.transform.position + positionDelta);
+        
+        var originalPos = Player.main.transform.position + teleportToPosition.forward * 0.5f;
+
+        yield break;
+        Player.main.playerController.enabled = false;
+        // Wait until a FixedUpdate has occurred
+        var timestepIncrements = (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime);
+        while (timestepIncrements == (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime))
+        {
+            var offset = Vector3.Project(Player.main.transform.position - originalPos, teleportToPosition.forward);
+            Player.main.SetPosition(originalPos);
+            Player.main.playerController.velocity = Vector3.zero;
+            yield return null;
+        }
+        Player.main.playerController.enabled = true;
     }
 
     private void OnDestroy()

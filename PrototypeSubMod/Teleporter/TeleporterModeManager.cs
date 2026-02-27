@@ -21,7 +21,6 @@ public class TeleporterModeManager : MonoBehaviour
     {
         colorManager.RemoveTempColor(this);
         colorManager.AddTempColor(this, new TeleporterFXColorManager.TempColor(interfloorColor, 10));
-        Plugin.Logger.LogInfo($"Normal collider = {normalCollider}");
         normalCollider.SetActive(false);
         interfloorCollider.SetActive(true);
     }
