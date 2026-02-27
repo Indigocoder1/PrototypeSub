@@ -418,6 +418,15 @@ internal static class EncyEntryRegisterer
             popupImage: factorPopup);
         #endregion
 
+        #region Tether Factor
+        string tetherFactorEncyTitle = Language.main.Get("TetherFactorEncy_Title");
+        string tetherFactorEncyDescription = Language.main.Get("TetherFactorEncy_Body");
+
+        PDAHandler.AddEncyclopediaEntry("TetherFactorEncy", "DownloadedData/Prototype/ProtoTerminal",
+            tetherFactorEncyTitle, tetherFactorEncyDescription, unlockSound: PDAHandler.UnlockBasic,
+            popupImage: factorPopup);
+        #endregion
+
         #region Transmission Site Hint
 
         var transmissionSiteTitle = Language.main.Get("ProtoTransmissionSiteEncy_Title");

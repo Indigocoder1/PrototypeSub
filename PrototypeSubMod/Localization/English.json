@@ -192,6 +192,9 @@
   
   "SuitColorFactorEncy_Title": "Ion Dive Suit Color Factor",
   "SuitColorFactorEncy_Body": "It like changes the color and stuff",
+  
+  "TetherFactorEncy_Title": "Tether Factor",
+  "TetherFactorEncy_Body": "Forms a tether",
 
   // Cameras
   "PrototypeCam1": "Camera ┓ - ▛┗┏┃┣▝",
