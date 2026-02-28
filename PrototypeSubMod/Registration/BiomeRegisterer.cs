@@ -101,7 +101,7 @@ internal static class BiomeRegisterer
         var calibrationPrefabInfo = PrefabInfo.WithTechType("CalibrationSiteVoidBiome");
         var calibrationVolumePrefab = new CustomPrefab(calibrationPrefabInfo);
         var calibrationTemplate = new AtmosphereVolumeTemplate(calibrationPrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
-            "protovoid", 11, LargeWorldEntity.CellLevel.Global);
+            "protovoid", 20, LargeWorldEntity.CellLevel.Global);
         calibrationTemplate.ModifyPrefab = prefab =>
         {
             var volum = prefab.GetComponent<AtmosphereVolume>();
@@ -111,9 +111,9 @@ internal static class BiomeRegisterer
         calibrationVolumePrefab.SetGameObject(calibrationTemplate);
         calibrationVolumePrefab.Register();
 
-        var calibrationCenter = new Vector3(-2470, -390, 853);
+        var calibrationCenter = new Vector3(-2570, -390, 753);
         var calibrationSpawnInfo = new SpawnInfo(calibrationPrefabInfo.ClassID, calibrationCenter, 
-            Quaternion.identity, Vector3.one * 1150);
+            Quaternion.identity, Vector3.one * 1200);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(calibrationSpawnInfo);
 
         #endregion
