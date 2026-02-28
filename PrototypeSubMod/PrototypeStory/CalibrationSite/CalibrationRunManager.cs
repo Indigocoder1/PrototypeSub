@@ -110,6 +110,8 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     
     public void ScheduledUpdate()
     {
+        if (StoryGoalManager.main.IsGoalComplete("OnCalibrationRunCompleted")) return;
+        
         if (doingCalibrationRun) return;
         
         if (!(Vector3.Distance(calibrationPoints[0], transform.position) < distToCountAsReached)) return;
