@@ -22,9 +22,6 @@ public class CalibrationDirectionIndicator : MonoBehaviour
         if (index > relativeAngles.Length - 1)
         {
             compassManager.ClearHighlightedAngle();
-            return;
         }
-
-        compassManager.SetHighlightedAngle((360 + 90 - relativeAngles[index]) % 360, highlightedColor);
     }
 }
