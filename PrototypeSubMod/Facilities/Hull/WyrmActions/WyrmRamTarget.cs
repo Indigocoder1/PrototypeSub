@@ -11,6 +11,7 @@ public class WyrmRamTarget : CreatureAction
     [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private float attackDamage = 200;
     [SerializeField] private float attackRadius;
+    [SerializeField] private float impulseForce;
     
     [Header("SFX")]
     [SerializeField] private WyrmRoarManager roarManager;
@@ -86,7 +87,7 @@ public class WyrmRamTarget : CreatureAction
             points[1] = targetCenter;
         }
 
-            return points;
+        return points;
     }
 
     private void OnReachedTarget()
@@ -108,7 +109,6 @@ public class WyrmRamTarget : CreatureAction
         foreach (var col in colliders)
         {
             var subRoot = col.GetComponentInParent<SubRoot>();
-            var player = Player.main;
 
             if (!subRoot) continue;
             if (subRoot.GetComponentInChildren<CloakEffectHandler>().GetActive()) continue;
@@ -116,7 +116,9 @@ public class WyrmRamTarget : CreatureAction
             subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
             hasDamagedTarget = true;
             chargeImpactSfx.Play();
-            MainCameraControl.main.ShakeCamera(5, -1, MainCameraControl.ShakeMode.Linear, 1);
+            MainCameraControl.main.ShakeCamera(5);
+
+            subRoot.rigidbody.AddForce(transform.forward * impulseForce, ForceMode.Impulse);
             break;
         }
     }
