@@ -1,4 +1,5 @@
-﻿using PrototypeSubMod.Puzzles.BearingPuzzle;
+﻿using System;
+using PrototypeSubMod.Puzzles.BearingPuzzle;
 using PrototypeSubMod.UI;
 using UnityEngine;
 
@@ -12,8 +13,7 @@ public class CalibrationDirectionIndicator : MonoBehaviour
 
     private void Start()
     {
-        runManager.onPointReached += OnPointReached;
-        runManager.onCalibrationFailed += compassManager.ClearHighlightedAngle;
+        CalibrationRunManager.OnPointReached += OnPointReached;
     }
 
     private void OnPointReached(int index)
@@ -23,5 +23,10 @@ public class CalibrationDirectionIndicator : MonoBehaviour
         {
             compassManager.ClearHighlightedAngle();
         }
+    }
+
+    private void OnDestroy()
+    {
+        CalibrationRunManager.OnPointReached -= OnPointReached;
     }
 }

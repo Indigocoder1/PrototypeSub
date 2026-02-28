@@ -10,8 +10,9 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 {
     public static readonly Vector3 InitialPoint = new(-2220, -390, 420);
 
-    public event Action<int> onPointReached;
-    public event Action onCalibrationFailed;
+    public static event Action<int> OnPointReached;
+    public static event Action OnCalibrationFailed;
+    public static event Action OnCalibrationCompleted;
     
     [SerializeField] private GameObject calibrationObjects;
     [SerializeField] private GameObject calibrationPointPrefab;
@@ -73,7 +74,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         doingCalibrationRun = false;
         nextPointIndex = 1;
         calibrationObjects.SetActive(false);
-        onCalibrationFailed?.Invoke();
+        OnCalibrationFailed?.Invoke();
     }
 
     private void HandleIndexIncrements()
@@ -82,7 +83,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         if (dist > distToCountAsReached) return;
         
         ErrorMessage.AddError($"Reached point {nextPointIndex}");
-        onPointReached?.Invoke(nextPointIndex);
+        OnPointReached?.Invoke(nextPointIndex);
         nextPointIndex++;
         FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("LocatorPing"), Player.main.transform.position);
 
@@ -93,6 +94,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         doingCalibrationRun = false;
         calibrationObjects.SetActive(false);
         StoryGoalManager.main.OnGoalComplete("OnCalibrationRunCompleted");
+        OnCalibrationCompleted?.Invoke();
     }
 
     public float GetNormalizedDistFromCenter()
@@ -114,7 +116,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         
         doingCalibrationRun = true;
         ErrorMessage.AddError("Started calibration run");
-        onPointReached?.Invoke(0);
+        OnPointReached?.Invoke(0);
         calibrationObjects.SetActive(true);
     }
 

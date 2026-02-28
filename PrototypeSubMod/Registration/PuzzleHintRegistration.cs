@@ -29,7 +29,9 @@ public static class PuzzleHintRegistration
         #endregion
         
         #region Calibration Site Ping
-        var calibrationPingTechType = CustomPing.CreatePing("CalibrationSitePing", PingType.Signal);
+
+        var calibrationPingTechType = CustomPing.CreatePing("CalibrationSitePing", PingType.Signal,
+            components: typeof(DestroyOnCalibrationCompletion));
         StoryGoalHandler.RegisterCustomEvent("OnPlayProtoRadioMessage3", () =>
         {
             UWE.CoroutineHost.StartCoroutine(SpawnPrefab(calibrationPingTechType, CalibrationRunManager.InitialPoint));

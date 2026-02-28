@@ -19,7 +19,8 @@ internal class CustomPing
         typeof(PingInstance)
     };
 
-    public static TechType CreatePing(string techType, PingType pingType, Color colorOverride = default, float minDist = 25, float fadeRange = 10, Vector3[] spawnPositions = null)
+    public static TechType CreatePing(string techType, PingType pingType, Color colorOverride = default, float minDist = 25, 
+        float fadeRange = 10, Vector3[] spawnPositions = null, params Type[] components)
     {
         var prefabInfo = PrefabInfo.WithTechType(techType);
 
@@ -27,7 +28,7 @@ internal class CustomPing
         var cloneTemplate = new CloneTemplate(prefabInfo, TechType.Beacon);
         cloneTemplate.ModifyPrefab += gameObject =>
         {
-            SetupGameObject(ref gameObject, prefabInfo, pingType, colorOverride, minDist, fadeRange);
+            SetupGameObject(ref gameObject, prefabInfo, pingType, colorOverride, minDist, fadeRange, components);
         };
 
         prefab.SetGameObject(cloneTemplate);
@@ -46,7 +47,8 @@ internal class CustomPing
         return prefabInfo.TechType;
     }
 
-    private static void SetupGameObject(ref GameObject beacon, PrefabInfo info, PingType pingType, Color colorOverride, float minDist, float fadeRange)
+    private static void SetupGameObject(ref GameObject beacon, PrefabInfo info, PingType pingType, Color colorOverride, 
+        float minDist, float fadeRange, Type[] components)
     {
         beacon.name = info.TechType.ToString();
 
@@ -55,6 +57,11 @@ internal class CustomPing
         foreach (Transform child in beacon.transform)
         {
             UnityEngine.Object.Destroy(child.gameObject);
+        }
+
+        foreach (var type in components)
+        {
+            beacon.AddComponent(type);
         }
 
         var pingInstance = beacon.EnsureComponent<PingInstance>();
