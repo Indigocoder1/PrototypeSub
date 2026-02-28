@@ -40,7 +40,7 @@ public static class PuzzleHintRegistration
 
         #region Transmission Site Hint
 
-        var transmissionStartTechType = CustomPing.CreatePing("TransmissionSiteStartPing", PingType.Signal);
+        var transmissionStartTechType = CustomPing.CreatePing("TransmissionSiteStartPing", PingType.Signal, visitable: false);
         var transmissionSiteTechType = CustomPing.CreatePing("TransmissionSitePing", PingType.Signal);
         StoryGoalHandler.RegisterCompoundGoal("ProtoTransmissionSiteHint", Story.GoalType.Story, 20,
             "OnPlayProtoRadioMessage4");

@@ -118,6 +118,49 @@ internal static class BiomeRegisterer
 
         #endregion
 
+        #region Transmission Site Runup
+
+        var transmissionRunupPrefabInfo = PrefabInfo.WithTechType("TransmissionSiteRunup");
+        var transmissionRunupVolumePrefab = new CustomPrefab(transmissionRunupPrefabInfo);
+        var transmissionRunupTemplate = new AtmosphereVolumeTemplate(transmissionRunupPrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
+            "transmissionrunup_protovoid", 20, LargeWorldEntity.CellLevel.Global);
+        transmissionRunupTemplate.ModifyPrefab = prefab =>
+        {
+            var volum = prefab.GetComponent<AtmosphereVolume>();
+            prefab.AddComponent<AtmospherePriorityEnsurer>().priority = volum.priority;
+        };
+
+        transmissionRunupVolumePrefab.SetGameObject(transmissionRunupTemplate);
+        transmissionRunupVolumePrefab.Register();
+        
+        var transmissionRunupSpawnInfo = new SpawnInfo(transmissionRunupPrefabInfo.ClassID, Plugin.TransmissionSitePos, 
+            Quaternion.identity, Vector3.one * 2500);
+        CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(transmissionRunupSpawnInfo);
+        BiomeHandler.AddBiomeMusic("transmissionrunup_protovoid", AudioUtils.GetFmodAsset("ProtoCreditsMusic"));
+        
+        #endregion
+        
+        #region Transmission Site
+
+        var transmissionPrefabInfo = PrefabInfo.WithTechType("ProtoTransmissionSite");
+        var transmissionVolumePrefab = new CustomPrefab(transmissionPrefabInfo);
+        var transmissionTemplate = new AtmosphereVolumeTemplate(transmissionPrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
+            "transmissionsite_protovoid", 50, LargeWorldEntity.CellLevel.Global);
+        transmissionTemplate.ModifyPrefab = prefab =>
+        {
+            var volum = prefab.GetComponent<AtmosphereVolume>();
+            prefab.AddComponent<AtmospherePriorityEnsurer>().priority = volum.priority;
+        };
+
+        transmissionVolumePrefab.SetGameObject(transmissionTemplate);
+        transmissionVolumePrefab.Register();
+        
+        var transmissionSpawnInfo = new SpawnInfo(transmissionPrefabInfo.ClassID, Plugin.TransmissionSitePos, 
+            Quaternion.identity, Vector3.one * 50);
+        CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(transmissionSpawnInfo);
+
+        #endregion
+
         sw.Stop();
         Plugin.Logger.LogInfo($"Biomes registered in {sw.ElapsedMilliseconds}ms");
     }

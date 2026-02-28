@@ -20,7 +20,7 @@ internal class CustomPing
     };
 
     public static TechType CreatePing(string techType, PingType pingType, Color colorOverride = default, float minDist = 25, 
-        float fadeRange = 10, Vector3[] spawnPositions = null, bool displayInManager = true, params Type[] components)
+        float fadeRange = 10, Vector3[] spawnPositions = null, bool displayInManager = true, bool visitable = true, params Type[] components)
     {
         var prefabInfo = PrefabInfo.WithTechType(techType);
 
@@ -28,7 +28,7 @@ internal class CustomPing
         var cloneTemplate = new CloneTemplate(prefabInfo, TechType.Beacon);
         cloneTemplate.ModifyPrefab += gameObject =>
         {
-            SetupGameObject(ref gameObject, prefabInfo, pingType, colorOverride, minDist, fadeRange, displayInManager, components);
+            SetupGameObject(ref gameObject, prefabInfo, pingType, colorOverride, minDist, fadeRange, displayInManager, visitable, components);
         };
 
         prefab.SetGameObject(cloneTemplate);
@@ -48,7 +48,7 @@ internal class CustomPing
     }
 
     private static void SetupGameObject(ref GameObject beacon, PrefabInfo info, PingType pingType, Color colorOverride, 
-        float minDist, float fadeRange, bool displayInManager, Type[] components)
+        float minDist, float fadeRange, bool displayInManager, bool visitable, Type[] components)
     {
         beacon.name = info.TechType.ToString();
 
@@ -70,7 +70,7 @@ internal class CustomPing
         pingInstance.displayPingInManager = displayInManager;
         pingInstance.minDist = minDist;
         pingInstance.range = fadeRange;
-        pingInstance.visitable = true;
+        pingInstance.visitable = visitable;
         pingInstance.visitDistance = 100;
         pingInstance.visitDuration = 2f;
         pingInstance.SetColor(0);
