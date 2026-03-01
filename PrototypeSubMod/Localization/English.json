@@ -442,6 +442,7 @@
   "Proto_OnCalibrationRunCompleted": "{0}: Transmission calibration complete. Broadcasting calibration key.<duration=4500>",
   "Proto_CalibrationPointReached": "{0}: Transmission calibration point reached. Continue to next location.",
   "Proto_CalibrationTestFailed": "{0}: Transmission calibration failed. Return to calibration start.",
+  "Proto_CalibrationTestStarted": "{0}: Transmission calibration started. Proceed to next calibration point.",
   
   // Terminal Voicelines
   "Proto_DevResumed": "{0}: Orion neural cluster reinitialized. Neural scans of user indicate disconnection from collective.<duration=7640>\nNetwork unavailable. Enabling black box protocol.<delay=7777><duration=4658>\nPrototype development resumed.<delay=12726><duration=2580>",

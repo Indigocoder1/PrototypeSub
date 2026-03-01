@@ -27,6 +27,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     [SerializeField] private VoiceNotificationManager voiceNotificationManager;
     [SerializeField] private VoiceNotification reachedPointVoiceline;
     [SerializeField] private VoiceNotification failedCalibrationVoiceline;
+    [SerializeField] private VoiceNotification startedCalibrationVoiceline;
     
     private bool doingCalibrationRun;
     private int nextPointIndex = 1;
@@ -129,6 +130,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         ErrorMessage.AddError("Started calibration run");
         OnPointReached?.Invoke(0);
         calibrationObjects.SetActive(true);
+        voiceNotificationManager.PlayVoiceNotification(startedCalibrationVoiceline);
     }
 
     public string GetProfileTag() => "CalibrationRunManager";
