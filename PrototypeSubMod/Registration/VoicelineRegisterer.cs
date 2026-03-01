@@ -66,6 +66,8 @@ public static class VoicelineRegisterer
 
         "Proto_OnTransmissionDeviceFirstLoaded",
         "Proto_OnCalibrationRunCompleted",
+        "Proto_CalibrationPointReached",
+        "Proto_CalibrationTestFailed",
         "Proto_StoryEndPingVoiceline",
         "Proto_AdminFacilityOnline",
         "Proto_DefensePingSpawned",
