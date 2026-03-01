@@ -41,6 +41,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour
             
             Plugin.Logger.LogInfo($"Entered the void | Spawn point at {point}");
             StartCoroutine(SpawnWyrm(point, normal));
+            wyrmSpawned = true;
         }
 
         wasInVoid = inVoid;
@@ -57,8 +58,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour
         inVoid |= biomeString.EndsWith("protovoid");
 
         if (!inVoid) yield return null;
-
-        wyrmSpawned = true;
+        
         var task = CraftData.GetPrefabForTechTypeAsync(ProtoAggressiveWyrm.prefabInfo.TechType);
         yield return task;
 
