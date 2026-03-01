@@ -141,7 +141,7 @@ public class ProtoAggressiveWorm : Creature
             secondsInVoid -= Time.deltaTime;
         }
 
-        if (secondsInVoid < 0 && !inVoid && !despawnAction.IsPerforming())
+        if (secondsInVoid <= 0 && !inVoid && !despawnAction.IsPerforming())
         {
             foreach (var action in actions)
             {
