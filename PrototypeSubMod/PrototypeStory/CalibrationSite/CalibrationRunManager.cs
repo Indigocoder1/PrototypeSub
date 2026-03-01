@@ -22,7 +22,12 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     [SerializeField] private float[] relativePointAngles;
     [SerializeField] private float distToCountAsReached = 10;
     [SerializeField] private float maxDistanceFromCenter;
-
+    
+    [Header("SFX")]
+    [SerializeField] private VoiceNotificationManager voiceNotificationManager;
+    [SerializeField] private VoiceNotification reachedPointVoiceline;
+    [SerializeField] private VoiceNotification failedCalibrationVoiceline;
+    
     private bool doingCalibrationRun;
     private int nextPointIndex = 1;
     private Vector3[] calibrationPoints;
@@ -75,6 +80,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         nextPointIndex = 1;
         calibrationObjects.SetActive(false);
         OnCalibrationFailed?.Invoke();
+        voiceNotificationManager.PlayVoiceNotification(failedCalibrationVoiceline);
     }
 
     private void HandleIndexIncrements()
@@ -85,9 +91,12 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         ErrorMessage.AddError($"Reached point {nextPointIndex}");
         OnPointReached?.Invoke(nextPointIndex);
         nextPointIndex++;
-        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("LocatorPing"), Player.main.transform.position);
 
-        if (nextPointIndex < calibrationPoints.Length) return;
+        if (nextPointIndex < calibrationPoints.Length)
+        {
+            voiceNotificationManager.PlayVoiceNotification(reachedPointVoiceline);
+            return;
+        }
         
         ErrorMessage.AddError("Calibration complete");
         nextPointIndex = 1;

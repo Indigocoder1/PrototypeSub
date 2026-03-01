@@ -440,7 +440,9 @@
   "Proto_FireSuppression": "{0}: Stabilizing internal circuitry",
   "Proto_OnTransmissionDeviceFirstLoaded": "{0}: Warning: Unauthorized device detected in loading bay.<duration=4500>\nRemove immedia-▖▞┫▗▝┓┏<delay=4556><duration=4900>",
   "Proto_OnCalibrationRunCompleted": "{0}: Transmission calibration complete. Broadcasting calibration key.<duration=4500>",
-
+  "Proto_CalibrationPointReached": "{0}: Transmission calibration point reached. Continue to next location.",
+  "Proto_CalibrationTestFailed": "{0}: Transmission calibration failed. Return to calibration start.",
+  
   // Terminal Voicelines
   "Proto_DevResumed": "{0}: Orion neural cluster reinitialized. Neural scans of user indicate disconnection from collective.<duration=7640>\nNetwork unavailable. Enabling black box protocol.<delay=7777><duration=4658>\nPrototype development resumed.<delay=12726><duration=2580>",
   "Proto_StoryEndPingVoiceline": "{0}: Prototype schematic database restored. Primary directive updated.<duration=5296>\nDeadzone mapping initiative online. Awaiting manual direction to ecological dead zone.<delay=5362><duration=5470>",
