@@ -50,6 +50,7 @@ public static class VoicelineRegisterer
         "Proto_LowPower",
         "Proto_CriticalPower",
         "Proto_FireSuppression",
+        "Proto_OnTransmissionSiteReached",
         
         "Proto_AlphaDeployed",
         "Proto_BetaDeployed",

@@ -299,10 +299,19 @@ internal static class StoryGoalsRegisterer
             "ProtoNumberPuzzleComplete");
         #endregion
 
-        #region Calibration site completion
+        #region Calibration Site Completion
         StoryGoalHandler.RegisterCustomEvent("OnCalibrationRunCompleted", () =>
         {
             PDALog.Add("Proto_OnCalibrationRunCompleted");
+        });
+        #endregion
+
+        #region On Transmission Site Reached
+        StoryGoalHandler.RegisterBiomeGoal("OnTransmissionSiteReached", Story.GoalType.Story,
+            "transmissionsite_protovoid", 10f);
+        StoryGoalHandler.RegisterCustomEvent("OnTransmissionSiteReached", () =>
+        {
+            PDALog.Add("Proto_OnTransmissionSiteReached");
         });
         #endregion
 

@@ -49,6 +49,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionFinish", "Proto_ConstructionFinish"));
         PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnTransmissionDeviceFirstLoaded"));
         PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnCalibrationRunCompleted"));
+        PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnTransmissionSiteReached"));
         
 
         sw.Stop();
