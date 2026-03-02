@@ -38,7 +38,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
     private float damageReductionMultipier;
     private bool shieldActive;
     private bool onCooldown;
-    private bool chargesRefunded;
+    private bool shieldWasHit;
 
     private void OnValidate()
     {
@@ -108,15 +108,6 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
         {
             wyrmShootTarget.OnShotParried(damageInfo.position);
         }
-        
-        if (!chargesRefunded)
-        {
-            chargesRefunded = true;
-            powerRelay.AddEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
-        }
-        
-        float powerCost = damageInfo.originalDamage * powerPerDamage;
-        powerRelay.ConsumeEnergy(powerCost, out _);
 
         foreach (var rend in shieldRenderers)
         {
@@ -131,6 +122,8 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
             UWE.CoroutineHost.StartCoroutine(DealDamageOverTime(damageInfo.dealer.GetComponent<LiveMixin>(), 20, 5,
                 DamageType.Electrical));
         }
+
+        shieldWasHit = true;
     }
 
     private IEnumerator DealDamageOverTime(LiveMixin target, float damage, float duration, DamageType type)
@@ -152,8 +145,8 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
         
         if (enabled)
         {
-            bool couldDraw = powerRelay.ConsumeEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
-            if (!couldDraw)
+            bool canDraw = powerRelay.GetPower() > chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT;
+            if (!canDraw)
             {
                 SetUpgradeEnabled(false);
                 return;
@@ -163,7 +156,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
             subRoot.voiceNotificationManager.PlayVoiceNotification(shieldsUpNotification);
             StartCoroutine(DisableShieldDelayed());
             sfxEmitter.Play();
-            chargesRefunded = false;
+            shieldWasHit = false;
         }
         else
         {
@@ -172,6 +165,11 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
             DeactivateShield();
             StartCoroutine(ResetCooldownDelayed());
             sfxEmitter.Stop();
+
+            if (!shieldWasHit)
+            {
+                powerRelay.ConsumeEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
+            }
         }
         
         shieldActive = enabled;
