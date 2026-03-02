@@ -145,6 +145,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
         
         if (enabled)
         {
+            shieldWasHit = false;
             bool canDraw = powerRelay.GetPower() > chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT;
             if (!canDraw)
             {
@@ -156,7 +157,6 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
             subRoot.voiceNotificationManager.PlayVoiceNotification(shieldsUpNotification);
             StartCoroutine(DisableShieldDelayed());
             sfxEmitter.Play();
-            shieldWasHit = false;
         }
         else
         {
