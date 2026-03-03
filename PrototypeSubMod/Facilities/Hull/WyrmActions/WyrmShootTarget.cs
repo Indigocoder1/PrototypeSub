@@ -29,8 +29,7 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private FMOD_CustomEmitter shotReflectSfx;
     [SerializeField] private FMOD_CustomEmitter reflectShutdownSfx;
     [SerializeField] private FMOD_CustomEmitter shotChargeStartSfx;
-
-    private CloakEffectHandler targetCloakHandler;
+    
     private GameObject laserVFX;
     private GameObject muzzleVFX;
     private GameObject impactVFX;
@@ -38,7 +37,6 @@ public class WyrmShootTarget : CreatureAction
     private bool canShoot;
     private bool hasShot;
     private float currentChargeUpTime;
-    private int prevChargeUpTime;
     private int rightHandVectorSign;
     private int attackStage;
     private int timesParried;
@@ -80,7 +78,6 @@ public class WyrmShootTarget : CreatureAction
         if (performing) return;
         
         base.Perform(creature, time, deltaTime);
-        targetCloakHandler = GetTargetMixin().GetComponentInChildren<CloakEffectHandler>(true);
         performing = true;
         canShoot = false;
         hasShot = false;
@@ -130,19 +127,10 @@ public class WyrmShootTarget : CreatureAction
             canShoot = true;
             targetingLineRenderer.enabled = true;
         }
-
-        if (prevChargeUpTime != (int)currentChargeUpTime)
-        {
-            // ErrorMessage.AddError($"Shooting in {(int)currentChargeUpTime + 1}");
-        }
-
-        prevChargeUpTime = (int)currentChargeUpTime;
     }
 
     public void OnShotParried(Vector3 returnFrom)
     {
-        // ErrorMessage.AddError("Parried!");
-
         StartCoroutine(ReturnParryProjectile(returnFrom));
     }
 
@@ -202,9 +190,9 @@ public class WyrmShootTarget : CreatureAction
 
         if (timesParried < parriesToResetAggression) return;
         
-        // ErrorMessage.AddError($"Resetting aggression for {timePassiveAfterParries} seconds");
         GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
         reflectShutdownSfx.Play();
+        timesParried = 0;
     }
 
     private void OnReachedTarget()
@@ -258,8 +246,6 @@ public class WyrmShootTarget : CreatureAction
         shotTravelSfx.Play();
         shotChargeSfx.Stop();
 
-        // ErrorMessage.AddError("Laser fired at " + targetMixin.name);
-
         float travelTime = 0;
         while (travelTime < laserTravelTime)
         {
@@ -289,13 +275,9 @@ public class WyrmShootTarget : CreatureAction
         muzzleVFX.SetActive(false);
 
         var mixin = GetAttackMixin(laserTargetPoint);
-        // ErrorMessage.AddError(mixin != null ? "Hit object " + mixin.name : "Missed object " + mixin.name);
         if (mixin == null) yield break;
 
-        var originalHealth = mixin.health;
-
         DamageTarget(laserTargetPoint, mixin);
-        // ErrorMessage.AddError("Damaged " + mixin.name);
 
         shotHitSfx.Play();
         roarManager.PlayRoar(Player.main.transform.position);
@@ -341,7 +323,6 @@ public class WyrmShootTarget : CreatureAction
 
     private void DamageTarget(Vector3 laserTargetPoint, LiveMixin hitMixin)
     {
-        // ErrorMessage.AddError("Laser reached target");
         hitMixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.Electrical, gameObject);
     }
 
