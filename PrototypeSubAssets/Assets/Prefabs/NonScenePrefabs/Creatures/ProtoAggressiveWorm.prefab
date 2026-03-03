@@ -6862,7 +6862,7 @@ GameObject:
   - component: {fileID: 6753871278772561756}
   - component: {fileID: 775455774015457791}
   m_Layer: 0
-  m_Name: ProtoAgressiveWorm
+  m_Name: ProtoAggressiveWorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
