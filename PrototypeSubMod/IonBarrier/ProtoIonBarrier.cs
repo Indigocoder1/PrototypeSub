@@ -35,10 +35,10 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
     private float targetShieldIntensity;
     private float currentShieldIntensity;
     private float currentImpactIntensity;
-    private float damageReductionMultipier;
+    private float damageReductionMultiplier;
     private bool shieldActive;
     private bool onCooldown;
-    private bool shieldWasHit;
+    private bool powerReturned;
 
     private void OnValidate()
     {
@@ -90,7 +90,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
     {
         DamageReductor reductor = serializedDamageReductors.FirstOrDefault(r => r.type == type);
 
-        float multiplier = damageReductionMultipier < 0 ? 1 : damageReductionMultipier;
+        float multiplier = damageReductionMultiplier < 0 ? 1 : damageReductionMultiplier;
 
         if (reductor == null)
         {
@@ -123,7 +123,10 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
                 DamageType.Electrical));
         }
 
-        shieldWasHit = true;
+        if (powerReturned) return;
+        
+        powerRelay.AddEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
+        powerReturned = true;
     }
 
     private IEnumerator DealDamageOverTime(LiveMixin target, float damage, float duration, DamageType type)
@@ -145,13 +148,8 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
         
         if (enabled)
         {
-            shieldWasHit = false;
-            bool canDraw = powerRelay.GetPower() > chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT;
-            if (!canDraw)
-            {
-                SetUpgradeEnabled(false);
-                return;
-            }
+            powerReturned = false;
+            powerRelay.ConsumeEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
             
             ActivateShield();
             subRoot.voiceNotificationManager.PlayVoiceNotification(shieldsUpNotification);
@@ -165,11 +163,6 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
             DeactivateShield();
             StartCoroutine(ResetCooldownDelayed());
             sfxEmitter.Stop();
-
-            if (!shieldWasHit)
-            {
-                powerRelay.ConsumeEnergy(chargeUseCount * PrototypePowerSystem.CHARGE_POWER_AMOUNT, out _);
-            }
         }
         
         shieldActive = enabled;
@@ -210,7 +203,7 @@ internal class ProtoIonBarrier : ProtoUpgrade, IOnTakeDamage
 
     public void SetDamageReductionMultiplier(float multiplier)
     {
-        damageReductionMultipier = multiplier;
+        damageReductionMultiplier = multiplier;
     }
 
     public override bool OnActivated()
