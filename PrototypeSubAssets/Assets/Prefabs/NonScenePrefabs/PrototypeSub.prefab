@@ -60929,7 +60929,7 @@ MonoBehaviour:
   interpolateDuringAnimation: 1
   debug: 0
   animator: {fileID: 1528186747040085670}
-  sound: {fileID: 0}
+  sound: {fileID: 11400000, guid: a54dcd9d13a28a84eaa0ac6a203eeb5e, type: 2}
   enforceCinematicModeEnd: 1
 --- !u!1 &4508121796037645156
 GameObject:
@@ -99727,7 +99727,7 @@ MonoBehaviour:
   interpolateDuringAnimation: 1
   debug: 0
   animator: {fileID: 1528186747040085670}
-  sound: {fileID: 0}
+  sound: {fileID: 11400000, guid: 5a812c082b0963b44898f65540b0bc61, type: 2}
   enforceCinematicModeEnd: 1
 --- !u!1 &7698677530494539146
 GameObject:
