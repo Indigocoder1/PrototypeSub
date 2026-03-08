@@ -9,9 +9,11 @@
     <Exec Command="if not exist &quot;$(ModFolder)\$(TargetName)&quot; (mkdir &quot;$(ModFolder)\$(TargetName)&quot;)" />
     <Exec Command="if not exist &quot;$(ModFolder)\$(TargetName)\Localization&quot; (mkdir &quot;$(ModFolder)\$(TargetName)\Localization&quot;)" />
     <Exec Command="if not exist &quot;$(ModFolder)\$(TargetName)\Recipes&quot; (mkdir &quot;$(ModFolder)\$(TargetName)\Recipes&quot;)" />
+    <Exec Command="if not exist &quot;$(ModFolder)\$(TargetName)\TerrainPatches&quot; (mkdir &quot;$(ModFolder)\$(TargetName)\TerrainPatches&quot;)" />
 	<Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(ModFolder)\$(TargetName)&quot;" />
     <Exec Command="xcopy /I /E /Y &quot;$(ProjectDir)Localization&quot; &quot;$(ModFolder)\$(TargetName)\Localization&quot;" />
     <Exec Command="xcopy /I /E /Y &quot;$(ProjectDir)Recipes&quot; &quot;$(ModFolder)\$(TargetName)\Recipes&quot;" />
+    <Exec Command="xcopy /I /E /Y &quot;$(ProjectDir)TerrainPatches&quot; &quot;$(ModFolder)\$(TargetName)\TerrainPatches&quot;" />
     <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(ReferencesFolder)\$(TargetName).dll&quot;" />
     <Exec Command="if $(ConfigurationName) == Debug (copy /Y &quot;$(PDBPath)&quot; &quot;$(PDBPluginPath)&quot;) else (del &quot;$(PDBPluginPath)&quot;)" />
 </Target>
