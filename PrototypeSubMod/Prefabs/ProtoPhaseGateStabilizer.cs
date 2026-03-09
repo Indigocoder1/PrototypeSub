@@ -1,5 +1,6 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
+using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using UnityEngine;
@@ -23,6 +24,8 @@ public class ProtoPhaseGateStabilizer
         prefab.SetGameObject(GetGameObject);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetUnlock(ProtoPhaseGate.PrefabInfo.TechType);
+
+        CraftDataHandler.SetBackgroundType(PrefabInfo.TechType, CraftData.BackgroundType.ExosuitArm);
 
         prefab.Register();
     }

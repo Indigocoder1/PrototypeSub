@@ -1,8 +1,10 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
+using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using UnityEngine;
+using static GameObjectPoolPrefabMap;
 
 namespace PrototypeSubMod.Prefabs;
 
@@ -24,6 +26,8 @@ public class ProtoPhaseGateItem
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetEquipment(Plugin.PhaseGateEquipmentType);
         prefab.SetUnlock(ProtoPhaseGate.PrefabInfo.TechType);
+
+        CraftDataHandler.SetBackgroundType(PrefabInfo.TechType, CraftData.BackgroundType.Blueprint);
 
         prefab.Register();
     }

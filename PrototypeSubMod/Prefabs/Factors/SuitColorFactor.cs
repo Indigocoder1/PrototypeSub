@@ -1,10 +1,11 @@
-using System.Collections;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
+using Nautilus.Handlers;
+using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Factors;
-using Nautilus.Utility;
 using PrototypeSubMod.Utility;
+using System.Collections;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs.Factors;
@@ -25,6 +26,7 @@ public static class SuitColorFactor
         prefab.SetEquipment(Plugin.FactorEquipmentType);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetGameObject(GetPrefab);
+        CraftDataHandler.SetBackgroundType(prefabInfo.TechType, CraftData.BackgroundType.PlantAirSeed);
         prefab.Register();
     }
     

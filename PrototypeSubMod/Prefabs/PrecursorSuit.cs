@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using Nautilus.Assets;
+﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
+using Nautilus.Handlers;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Factors;
 using PrototypeSubMod.PrecursorWearables;
 using SuitLib;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs;
@@ -50,6 +51,8 @@ public static class PrecursorSuit
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{prefabInfo.ClassID}.json"));
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetEquipment(EquipmentType.Body);
+
+        CraftDataHandler.SetBackgroundType(prefabInfo.TechType, CraftData.BackgroundType.PlantAirSeed);
 
         prefab.Register();
 

@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Nautilus.Assets;
+﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
+using Nautilus.Handlers;
 using PrototypeSubMod.Compatibility;
 using SuitLib;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static GameObjectPoolPrefabMap;
 
 namespace PrototypeSubMod.Prefabs;
 
@@ -33,6 +35,8 @@ public static class PrecursorPropulsionGloves
         prefab.SetRecipe(ROTACompatManager.GetRelevantRecipe($"{PrefabInfo.ClassID}.json"));
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetEquipment(EquipmentType.Gloves);
+
+        CraftDataHandler.SetBackgroundType(PrefabInfo.TechType, CraftData.BackgroundType.PlantAirSeed);
 
         prefab.Register();
         

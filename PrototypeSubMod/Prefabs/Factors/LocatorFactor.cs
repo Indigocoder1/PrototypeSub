@@ -2,6 +2,7 @@ using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
+using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Factors.Locator;
@@ -29,6 +30,7 @@ public static class LocatorFactor
         prefab.SetEquipment(Plugin.FactorEquipmentType);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetGameObject(GetPrefab);
+        CraftDataHandler.SetBackgroundType(prefabInfo.TechType, CraftData.BackgroundType.PlantAirSeed);
         prefab.Register();
     }
     

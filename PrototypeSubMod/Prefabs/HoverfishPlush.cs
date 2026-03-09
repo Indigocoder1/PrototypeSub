@@ -1,5 +1,6 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
+using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Utility;
@@ -26,6 +27,8 @@ internal class HoverfishPlush
             .WithStepsToFabricatorTab("Machines")
             .WithCraftingTime(3f);
         prefab.SetPdaGroupCategory(TechGroup.Miscellaneous, TechCategory.Misc);
+
+        CraftDataHandler.SetBackgroundType(prefabInfo.TechType, CraftData.BackgroundType.Blueprint);
 
         prefab.Register();
     }
