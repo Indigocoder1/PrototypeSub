@@ -43,8 +43,10 @@ public class uGUI_TransmissionTab : uGUI_PDATab
     {
         var playerPos = Player.main.transform.position;
         var sitePos = Plugin.TransmissionSitePos;
-        if (Vector3.Distance(playerPos, sitePos) > 30f)
+        var distance = Vector3.Distance(playerPos, sitePos);
+        if (distance > 150f)
         {
+            ErrorMessage.AddError($"Incorrect sequence or not in transmission site! Distance: {distance}");
             return false;
         }
         return true;
@@ -54,7 +56,6 @@ public class uGUI_TransmissionTab : uGUI_PDATab
     {
         if (!onCorrectSequence || !InTransmissionSite())
         {
-            ErrorMessage.AddError($"Incorrect sequence or not in transmission site! Site: {Plugin.TransmissionSitePos}");
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
             return;
         }
