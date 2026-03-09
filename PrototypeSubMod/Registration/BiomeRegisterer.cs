@@ -145,7 +145,7 @@ internal static class BiomeRegisterer
         var transmissionPrefabInfo = PrefabInfo.WithTechType("ProtoTransmissionSite");
         var transmissionVolumePrefab = new CustomPrefab(transmissionPrefabInfo);
         var transmissionTemplate = new AtmosphereVolumeTemplate(transmissionPrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
-            "transmissionsite_protovoid", 100, LargeWorldEntity.CellLevel.Global);
+            "transmissionsite_protovoid", 150, LargeWorldEntity.CellLevel.Global);
         transmissionTemplate.ModifyPrefab = prefab =>
         {
             var volum = prefab.GetComponent<AtmosphereVolume>();
@@ -156,7 +156,7 @@ internal static class BiomeRegisterer
         transmissionVolumePrefab.Register();
         
         var transmissionSpawnInfo = new SpawnInfo(transmissionPrefabInfo.ClassID, Plugin.TransmissionSitePos, 
-            Quaternion.identity, Vector3.one * 100);
+            Quaternion.identity, Vector3.one * 150);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(transmissionSpawnInfo);
 
         #endregion
