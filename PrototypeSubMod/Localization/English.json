@@ -7,7 +7,7 @@
   "ProtoModName": "The Prototype Expansion: Phase Gate Update",
 
   // Items
-  "Proto_PrecursorIngot": "Alien modular framework",
+  "Proto_PrecursorIngot": "Almanite framework",
   "Tooltip_Proto_PrecursorIngot": "An advanced metallic alloy used in alien architecture. Unprecedented integrity.",
 
   "IonPrism": "Ion prism",
@@ -38,10 +38,10 @@
   "DefenseFacilityKey": "Prototype defense tablet",
   "Tooltip_DefenseFacilityKey": "Ancient tablet with a red symbol. Hot to the touch.",
 
-  "WarperRemnant": "Warper remnant",
+  "WarperRemnant": "Almanite block",
   "Tooltip_WarperRemnant": "Foundational alien resource awaiting activation.",
 
-  "AlienBuildingBlock": "Alien building block",
+  "AlienBuildingBlock": "Charged almanite",
   "Tooltip_AlienBuildingBlock": "Foundational alien resource glowing with biomechanical energy.",
 
   "ProtoTransmissionDevice": "Transmission Device",
@@ -75,8 +75,8 @@
   "EncyPath_DownloadedData/Prototype/ProtoTerminal": "Terminal Data",
   "EncyPath_DownloadedData/Prototype/Scanned": "Scanned Data",
 
-  "ProtoPrecursorIngotEncy_Title": "Alien Modular Framework",
-  "ProtoPrecursorIngotEncy_Body": "An advanced material with high structural integrity. Its core, a modified alien building block, stabilizes 8 external frames used for dynamic construction.\n\nAnalysis:\n- Unprecedenteed structural integrity\n- Used in reinforced alien construction\n- Requires multiple advanced materials",
+  "ProtoPrecursorIngotEncy_Title": "Almanite Framework",
+  "ProtoPrecursorIngotEncy_Body": "An advanced material with high structural integrity. Its core, composed of charged almanite, stabilizes 8 external frames used for dynamic construction.\n\nAnalysis:\n- Unprecedenteed structural integrity\n- Used in reinforced alien construction\n- Requires multiple advanced materials",
   "ProtoCloakEncy_Title": "Light Distortion Field",
   "ProtoCloakEncy_Body": "This schematic provides missing data used by light refractors lining the hull of the Prototype. The refractors generate a radius around the Prototype whereby external light is dynamically bent around the submarine, making it difficult for aggressive fauna to hit.\n\nIt is clear that the intended use for this technology is to decrease the accuracy of aggressive fauna during emergency scenarios, and the reflective barrier does <b>NOT</b> appear to hinder fauna from initially detecting the Prototype through vibrations and sound.",
   "ProtoEmergencyWarpEncy_Title": "Emergency Warp Protocol",
@@ -115,8 +115,8 @@
   "HullFacilityLogsEncy_Body": "This terminal contains data corresponding to alien researchers posted within the Prototype administrative facility. The dataset is hugely complex, but some key information can be extracted regarding a total of 6 members of the alien species.\n\n┏▘┣┏\nDiscipline: Prototype project administrator\nStatus: Awaiting download from sanctuary Omega\n\n▙▚▖━┏┇\nDiscipline: Mechanical division\nStatus: Awaiting download from sanctuary Theta\n\n▄┅┏┃▞▘\nDiscipline: Resources management\nStatus: Deceased\n\n▞┃▙▞▜┏\nDiscipline: Technological research\nStatus: Awaiting download from sanctuary Gamma\n\n┏┗▞┏┃\nDiscipline: Robotics development\nStatus: Presumed deceased\n\n▘▄┫▗\nDiscipline: Non-essential systems maintenance\nStatus: Deceased",
   "OrionEndeavorsEncy_Title": "Or-Ion Analytic Endeavors",
   "OrionEndeavorsEncy_Body": "This terminal contains data detailing the acedemic achievements of a particular member of the alien species automatically translated to Or-Ion.\n\n- Was grown from seed approximately 2,000 earth years ago\n- Was inducted into temple of research at age 130 after showing early promise in the field of neurotechnology and robotics\nPresented dissertation for 'Natural Selection Protocol' to primary biotechnological temple of research under study of alien network 'AL-MAN-AC'. Dissertation rejected.\n- Dispatched to aquatic planet to aid in bacterium research branch “Dead zone mapping initiative”\n- Invented design for quadrupedal maintenance robot modelled after terrestrial species “Cave Crawler”; Added to quarantine procedure\n- Led development of resource collection network modelled after subterrestrial species “Ice Worm” in aid of bacterium research\n- Received disciplinary infraction warnings from Dead Zone Mapping Initiative project administrator for attempting to modify Wyrm units without permission\n- Waived right to enter sanctuary hibernation. Reason: Unfinished work",
-  "AlienBuildingBlockEncy_Title": "Alien Building Block",
-  "AlienBuildingBlockEncy_Body": "This terminal describes a foundational resource used in the construction of alien architecture and technology. The building block contains both cybernetic and biological elements, and serves as both a structural template and a store of biomechanical energy.\n\nA disclaimer at the summary of the info sheet reads:\n'Self-warping constructs consume and dispel biomechanical energy through building blocks. Recharge building blocks at multipurpose fabrication terminals.'\n\nBased on this message, it may be possible to acquire discharged building blocks from warper constructs or from the ground surrounding them.\n\n<b>Assessment: The Alterra corporation is not responsible for bodily harm caused by failed attempts to retrieve this object from self-warping constructs.</b>",
+  "AlienBuildingBlockEncy_Title": "Charged Almanite",
+  "AlienBuildingBlockEncy_Body": "This terminal describes a foundational resource used in the construction of alien architecture and technology. It contains both cybernetic and biological elements, and serves as both a structural template and a store of biomechanical energy.\n\nA disclaimer at the summary of the info sheet reads:\n'Self-warping constructs consume and discard almanite blocks. Recharge blocks at multipurpose fabrication terminals.'\n\nBased on this message, it may be possible to acquire discharged almanite blocks from warper constructs or from the ground surrounding them.\n\n<b>Assessment: The Alterra corporation is not responsible for bodily harm caused by failed attempts to retrieve this object from self-warping constructs.</b>",
   "HullFacilityTabletEncy_Title": "Prototype Administrative Tablet",
   "HullFacilityTabletEncy_Body": "This alien tablet hums with a constant stream of low-level ionic pulses, possibly as a form of location tracking or clearance detection. This suggests the tablet is of a higher security class than previously discovered alien tablets. The central black symbol resembles the previously encountered symbol for the alien Prototype vessel project, suggesting that it was developed to manage security clearance solely for individuals working on it.",
   "EngineFacilityTabletEncy_Title": "Ion Facility Tablet",
@@ -150,8 +150,8 @@
   "ProtoBuildTerminal_Title": "Construction Terminal",
   "ProtoBuildTerminal_Body": "This device seems to be the origin of the recently-detected neural analysis. Thankfully, the device has been calibrated only to read neural data, and not to write it.\n\nThe device itself appears to serve two primary functions.\n\n1. Data storage:\nThe device harbours a form of algorithmic software referred to as a neural cluster suspended between its upper and lower halves. The neural cluster is marked with seed code “Orion”, a name typically reserved for the famous earth constellation, but that may be a universal identifier. In this case, it is being used possibly as a project title or specimen identification.\n\nThe device is being constantly fed large amounts of highly encrypted data from an unnamed source, likely an off-planet database. The data follows a fractal-like organizational pattern, suggesting infinite possible situational data under infinitely increasing conditions, allowing the terminal to adapt to situational factors in real-time.\n\n2. Vessel construction:\nThe two structures to either side of the terminal appear to be energy storage devices designed to passively gather and quickly discharge large bursts of energy to the central terminal. The drones hovering around the terminal seem to be used to transmit matter. This indicates that the terminal may be used as a fabrication station for a piece of alien technology. Given its position beside an enclosed moonpool, this technology is likely subaquatic in nature.\n\n<b>Assessment: Further research required.</b>",
   "PrecursorSuitTerminalEncy_Title": "Ion Dive Suit Schematic",
-  "PrecursorSuitTerminalEncy_Body": "This alien terminal has broadcasted a unique schematic for a piece of alien equipment, adapted for the use of “Transmission Candidate Beta”. The schematic draws anatomical data from the Alterra All-Environment Protection Suit, and has modified it with several key features:\n\n1. Biomechanical Energy Storage\nIn order to function properly, the Ion Dive Suit requires an input of alien biomechanical energy through Alien Building Blocks. Once charged, the suit stores this energy and discharges it in a number of different ways.\n\n2. Alien Factors\nThe suit is designed to intake modular upgrades called Factors, each of which are designed to mimic an aspect of the aliens' abilities. Examples include improved environmental resistance, time dilation, teleportation and the ability to 'hear' alien technology when in range.\n\n<b>Assessment: Invaluable technology. Return data to Alterra for mutual profit.</b>",
-  "BiomechanicsFactorTerminalEncy_Title": "Biomechanics factor title here",
+  "PrecursorSuitTerminalEncy_Body": "This alien terminal has broadcasted a unique schematic for a piece of alien equipment, adapted for the use of “Transmission Candidate Beta”. The device appears to have been designed to mimic the abilities of the alien race, and translate it for the use of lesser-evolved life forms. The schematic draws anatomical data from the Alterra All-Environment Protection Suit, and has modified it with several key features:\n\n1. Biomechanical Energy Storage\nIn order to function properly, the Ion Dive Suit requires an input of alien biomechanical energy through Alien Building Blocks. Once charged, the suit stores this energy and discharges it in a number of different ways.\n\n2. Alien Factors\nThe suit is designed to intake modular upgrades called Factors, each of which are designed to mimic an aspect of the aliens' abilities. Examples include improved environmental resistance, time dilation, teleportation and the ability to 'hear' alien technology when in range.\n\n<b>Assessment: Invaluable technology. Return data to Alterra for mutual profit.</b>",
+  "BiomechanicsFactorTerminalEncy_Title": "Biomechanics Factor",
   "BiomechanicsFactorTerminalEncy_Body": "Al-An please add details.",
 
   "LocatorFactorTerminalEncy_Title": "Facility Detection Factor",
@@ -175,33 +175,33 @@
   "TransmissionTerminalEncy_Title": "Transmission Device",
   "TransmissionTerminalEncy_Body": "This device is of unique build. By analysing its safety mechanisms, it is clear that normal alien technology follows distinct manufacturing regulations. This device, however, functions irrespective of these guidelines, suggesting its creation was either a secret, or that the enforcement of these regulations was impossible at the time of its design.\n\n1. Data transmission\nThe device's primary function is to transmit data of type: [NEURAL CLUSTER] over distances of thousands, possibly millions of light-years. The device must be manually 'targeted' at the transmission receiving point, suggesting that said point's location was unknown at the time of the device's creation.\n\n2. Prototype compatibility\nThe device is configured to be deployed by the Prototype, but will prevent itself from doing so unless it is deployed at the correct location. As it is deployed, data of type: [NEURAL CLUSTER] is siphoned from the Prototype and into it, which is then sent to its target.",
 
-  "ProtoPhaseGateStructureEncy_Title": "Structural Core",
-  "ProtoPhaseGateStructureEncy_Body": "Nice core bro.",
+  "ProtoPhaseGateStructureEncy_Title": "Almanite Core",
+  "ProtoPhaseGateStructureEncy_Body": "This alien block is composed entirely of purified almanite. As such, it boasts a nearly indestructible frame and a highly configurable magnetic field. This makes it perfect for large-scale alien construction and the stabilization of large alien structures where no solid ground is present.\n\n<b>Assessment: Highly valuable advanced structual tool</b>",
 
-  "ProtoPhaseGateStabilizerEncy_Title": "Dark Matter Stabilizer",
-  "ProtoPhaseGateStabilizerEncy_Body": "Nice Stabilizer Bro",
+  "ProtoPhaseGateStabilizerEncy_Title": "Dark Energy Stabilizer",
+  "ProtoPhaseGateStabilizerEncy_Body": "This alien artifact appears to be designed to regulate the dispersal of dark energy by filtering it through the crystal contained within it. Due to its small size, it was likely highly portable, and thus used as a safety device for teleportation-based research. However, it may also be used to channel pulses of dark energy for localized teleportation.\n\n<b>Assessment: May be equipped to prevent unwanted teleportation.</b>",
 
   "ProtoPhaseGateTransmitterEncy_Title": "Particle Transmitter",
-  "ProtoPhaseGateTransmitterEncy_Body": "Nice transmitter bro.",
+  "ProtoPhaseGateTransmitterEncy_Body": "This alien device features several interconnected frames held together magnetically. Structural analysis shows millions of microscopic railgun-like implements embedded in the device's core, seemingly used to transmit particles one-by-one. It is likely that teleportation with this device involves the destruction and re-assembly of the host, as opposed to faster-than-light transportation. Ethical considerations may apply.\n\n<b>Assessment: Handle with caution. Do not insert fingers into device.</b>",
 
   "PhaseGateEncy_Title": "Alien Phasegate",
-  "PhaseGateEncy_Body": "Phaaaaase",
+  "PhaseGateEncy_Body": "This colossal alien apparatus is used to transport large cargo across a wide range of distances. It requires a substantially powerful tool to construct, and may be used to connect two points in space regardless of depth or distance.\n\n1. Supporting frames\nThe device features two supportive structures on either side, which supply the inner archway with both power and stability.\n\n2. Primary archway\nThe central archway is lined with a mesh supplied by a dark energy stabilizer. The mesh prevents matter from unintentionally seeping from the mechanism during transmission.\n<b>Assessment: May be used to eliminate commute times for frequent journies. Vehicle-compatible.",
   
   "BlinkFactorEncy_Title": "Blink Factor",
-  "BlinkFactorEncy_Body": "This alien implement appears to have been designed to mimic a specific ability of the alien race, and translate it for the use of “Transmission Candidate Beta”.\n\nBy using elements of an alien particle transmitter, this implement dilates the user's perception of time, allowing the user to quickly and precisely travel short distances. It is likely that this ability was used by the aliens to increase work efficiency, and not as a defensive measure against common threats.\n\nDuring time dilation, the implement creates momentary translucent copies of the user's body. While the purpose of this is unclear, the aliens may have required a means of tracking the direction of these 'blinks', when several aliens moved unison, to avoid bodily collisions.\n\n<b>Assessment: Further research required</b>",
+  "BlinkFactorEncy_Body": "By using elements of an alien particle transmitter, this implement dilates the user's perception of time, allowing the user to quickly and precisely travel short distances. It is likely that this ability was used by the aliens to increase work efficiency, and not as a defensive measure against common threats.\n\nDuring time dilation, the implement creates momentary translucent copies of the user's body. While the purpose of this is unclear, the aliens may have required a means of tracking the direction of these 'blinks', when several aliens moved unison, to avoid bodily collisions.\n\n<b>Assessment: Further research required</b>",
   
-  "SuitColorFactorEncy_Title": "Ion Dive Suit Color Factor",
-  "SuitColorFactorEncy_Body": "It like changes the color and stuff",
+  "SuitColorFactorEncy_Title": "Colour Factor",
+  "SuitColorFactorEncy_Body": "This alien implement appears to serve little practical function, instead choosing to increase the user's attachment to their ion dive suit through customization. The factor allows the user to select the colour of the suit's wiring accents from a prefabricated selection. While it is unclear why the aliens have created a device specifically to increase user attachment, it is nonetheless valuable.\n\n<b>Assessment: Experiment with colour choices to achieve intergalactic beauty.</b>",
   
   "TetherFactorEncy_Title": "Tether Factor",
-  "TetherFactorEncy_Body": "this implement creates momentary copies of the user's body, shifted forward in a given direction, destroys the user and re-assembles them at the target destination",
+  "TetherFactorEncy_Body": "Using a precisely calibrated dark energy stabilizer, this alien implement is used for instantaneous travel across short to medium distances. upon interaction the device copies the composition of the user's body, destroys the user and re-assembles them at the target destination.\n\n<b>Assessment: May prove useful for cave exploration.</b>",
 
   // Cameras
   "PrototypeCam1": "Camera ┓ - ▛┗┏┃┣▝",
   "PrototypeCam2": "Camera ╋ - ▄┏┻▚┗",
   "PrototypeCam3": "Camera ┫ - ┗▚▖┗",
 
-  "BuildTerminal_Occupied": "Moonpool occupied!",
+  "BuildTerminal_Occupied": "Remove objects in moonpool!",
 
   // Puzzles
   "ProtoPuzzleIncorrectSequence": "Incorrect sequence",
