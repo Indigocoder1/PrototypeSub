@@ -436,7 +436,17 @@ internal static class EncyEntryRegisterer
             transmissionSiteBody, transmissionSiteImage, unlockSound: PDAHandler.UnlockBasic);
 
         #endregion
-        
+
+        #region Transmission Calibration Code
+
+        var calibrationCodeTitle = Language.main.Get("ProtoCalibrationCodeEncy_Title");
+        var calibrationCodeBody = Language.main.Get("ProtoCalibrationCodeEncy_Body");
+        var calibrationCodeImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("CalibrationCodeEncy");
+        PDAHandler.AddEncyclopediaEntry("ProtoCalibrationCodeEncy", "DownloadedData/Prototype", calibrationCodeTitle,
+            calibrationCodeBody, calibrationCodeImage, unlockSound: PDAHandler.UnlockBasic);
+
+        #endregion
+
         #region Survivor PDA 1
 
         var survivorPDA1Title = Language.main.Get("SurvivorPDA1Ency_Title");
