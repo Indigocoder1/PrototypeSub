@@ -223,6 +223,14 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Tether Factor Unlock
+        StoryGoalHandler.RegisterCustomEvent("TetherFactorTerminal", () =>
+        {
+            KnownTech.Add(TetherFactor.prefabInfo.TechType);
+            PDAEncyclopedia.Add("TetherFactorEncy", true);
+        });
+        #endregion
+
         #region Biomechanics Factor Unlock
         StoryGoalHandler.RegisterCustomEvent("BiomechanicsFactorTerminal", () =>
         {
