@@ -142,7 +142,8 @@ namespace PrototypeSubMod
             { "Worm1", new Vector3(-898, -386, -1284) },
             { "Worm2", new Vector3(-1006, -293, -1148) },
             { "Worm3", new Vector3(-1205, -312, -707) },
-            { "Worm4", new Vector3(-1224, -217, -697) }
+            { "Worm4", new Vector3(-1224, -217, -697) },
+            { "TransmissionSite", (TransmissionSitePos) }
         };
         internal static TechType StoryEndPingTechType;
         internal static GridSaveData pathfindingGridSaveData;
