@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
   m_Name: ExitPiloting
   m_EditorClassIdentifier: 
-  path: EnterPiloting
+  path: ExitPiloting
   id: 
-  audioClip: {fileID: 8300000, guid: 79a16948f9976ad49b032d6d21cefcd4, type: 3}
+  audioClip: {fileID: 8300000, guid: 2d6b39b9ca854424d990a730289090a6, type: 3}
   doNotAutoRegister: 0
   mode: 4210704
   maxDistance3D: 0
