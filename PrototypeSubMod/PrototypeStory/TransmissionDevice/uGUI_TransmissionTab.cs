@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nautilus.Utility;
+using System;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
@@ -38,14 +39,26 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         onCorrectSequence = true;
     }
 
+    public bool InTransmissionSite()
+    {
+        var playerPos = Player.main.transform.position;
+        var sitePos = Plugin.TransmissionSitePos;
+        if (Vector3.Distance(playerPos, sitePos) > 30f)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public void OnTransmitClicked()
     {
-        if (!onCorrectSequence)
+        if (!onCorrectSequence || !InTransmissionSite())
         {
-            ErrorMessage.AddError("Incorrect sequence!");
+            ErrorMessage.AddError($"Incorrect sequence or not in transmission site! Site: {Plugin.TransmissionSitePos}");
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
             return;
         }
-        
+
         ErrorMessage.AddError("Transmission complete");
         onTransmissionComplete?.Invoke();
     }
