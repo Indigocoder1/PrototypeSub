@@ -75,6 +75,7 @@ internal static class StoryGoalsRegisterer
         StoryGoalHandler.RegisterCustomEvent("OnDefenseCloakDisabled", () =>
         {
             PDALog.Add("OnDefenseCloakDisabled");
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineAllBreachesRepaired"), Player.main.transform.position);
         });
         #endregion
 
