@@ -441,7 +441,7 @@ internal static class EncyEntryRegisterer
 
         var calibrationCodeTitle = Language.main.Get("ProtoCalibrationCodeEncy_Title");
         var calibrationCodeBody = Language.main.Get("ProtoCalibrationCodeEncy_Body");
-        var calibrationCodeImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("CalibrationCodeEncy");
+        var calibrationCodeImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoCalibrationCodeEncy");
         PDAHandler.AddEncyclopediaEntry("ProtoCalibrationCodeEncy", "DownloadedData/Prototype", calibrationCodeTitle,
             calibrationCodeBody, calibrationCodeImage, unlockSound: PDAHandler.UnlockBasic);
 
