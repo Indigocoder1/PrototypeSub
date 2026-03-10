@@ -8,6 +8,8 @@ namespace PrototypeSubMod.MiscMonobehaviors;
 public class ElectricArcsSegment : MonoBehaviour, IMaterialModifier
 {
     [SerializeField] private Transform arcTarget;
+    [SerializeField] private bool setToTile;
+    [SerializeField] private Vector2 textureScale = Vector2.one;
     
     public event Action<GameObject> onEditMaterial;
 
@@ -33,6 +35,16 @@ public class ElectricArcsSegment : MonoBehaviour, IMaterialModifier
         electricArcs = instance.GetComponent<VFXElectricArcs>();
         electricArcs.target = arcTarget;
         electricArcs.Play();
+
+        if (!setToTile) yield break;
+        
+        yield return null;
+
+        foreach (var line in electricArcs.lines)
+        {
+            line.line.textureMode = LineTextureMode.Tile;
+            line.line.material.SetTextureScale("_MainTex", textureScale);
+        }
     }
 
     private void OnEnable()

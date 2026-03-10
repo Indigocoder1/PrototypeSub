@@ -950,6 +950,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arcTarget: {fileID: 1037497349014320983}
+  setToTile: 1
+  textureScale: {x: 0.1, y: 1}
 --- !u!1 &6909046365872742854
 GameObject:
   m_ObjectHideFlags: 0
