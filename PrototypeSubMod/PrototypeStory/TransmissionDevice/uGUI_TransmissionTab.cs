@@ -39,17 +39,9 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         onCorrectSequence = true;
     }
 
-    public bool InTransmissionSite()
+    private bool InTransmissionSite()
     {
-        var playerPos = Player.main.transform.position;
-        var sitePos = Plugin.TransmissionSitePos;
-        var distance = Vector3.Distance(playerPos, sitePos);
-        if (distance > 150f)
-        {
-            ErrorMessage.AddError($"Incorrect sequence or not in transmission site! Distance: {distance}");
-            return false;
-        }
-        return true;
+        return Player.main.GetBiomeString() == "transmissionsite_protovoid";
     }
 
     public void OnTransmitClicked()
@@ -57,10 +49,10 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         if (!onCorrectSequence || !InTransmissionSite())
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
+            ErrorMessage.AddError(Language.main.Get("ProtoInvalidTransmission"));
             return;
         }
-
-        ErrorMessage.AddError("Transmission complete");
+        
         onTransmissionComplete?.Invoke();
     }
 
