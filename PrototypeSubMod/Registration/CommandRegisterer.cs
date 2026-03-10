@@ -14,6 +14,8 @@ internal static class CommandRegisterer
         {
             ConsoleCommandsHandler.AddGotoTeleportPosition(name.ToLowerInvariant(), loc);
         }
+
+        ConsoleCommandsHandler.AddGotoTeleportPosition("transmissionsite", Plugin.TransmissionSitePos);
         sw.Stop();
         Plugin.Logger.LogInfo($"Console commands registered in {sw.ElapsedMilliseconds}ms");
     }

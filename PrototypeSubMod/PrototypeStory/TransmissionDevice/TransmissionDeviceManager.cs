@@ -120,6 +120,11 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         StartCoroutine(ActivateDevice());
     }
 
+    public void OnDrop()
+    {
+        Plugin.Logger.LogInfo($"Dropped transmission device");
+    }
+
     private IEnumerator ActivateDevice()
     {
         deviceAnimator.SetTrigger("Activate");
@@ -188,5 +193,10 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         deployed = true;
         deviceAnimator.SetTrigger("ActivateInstant");
         idleSfx.Play();
+    }
+
+    private void OnDestroy()
+    {
+        Plugin.Logger.LogInfo($"Transmission device destroyed");
     }
 }
