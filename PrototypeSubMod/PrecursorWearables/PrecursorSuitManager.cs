@@ -17,7 +17,7 @@ public class PrecursorSuitManager : MonoBehaviour
     private readonly float[] originalArmsEmission = new float[2];
     private readonly Color[] originalEmissionCols = new Color[2];
 
-    private const float TimeBetweenWarperRemnants = 120f;
+    private const float TimeBetweenWarperRemnants = 300f;
     
     private Dictionary<Component, EmissionController> emissionControllers = new();
     private Renderer stillsuitRenderer;
