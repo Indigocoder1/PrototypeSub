@@ -303,7 +303,7 @@ MonoBehaviour:
   isPickupable: 1
   destroyOnDeath: 1
   randomizeRotationWhenDropped: 0
-  activateRigidbodyWhenDropped: 0
+  activateRigidbodyWhenDropped: 1
   usePackUpIcon: 1
 --- !u!114 &4731905386038343351
 MonoBehaviour:

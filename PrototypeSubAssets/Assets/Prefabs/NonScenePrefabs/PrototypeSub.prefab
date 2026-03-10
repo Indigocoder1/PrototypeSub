@@ -6212,7 +6212,7 @@ MonoBehaviour:
   selectionMenuManager: {fileID: 2803608410014716689}
   deploySFX: {fileID: 2026357936259892559}
   launchDelay: 3
-  launchForce: 7500
+  launchForce: 1500
   notificationManager: {fileID: 5389210478452801882}
   deviceLoadedVoiceline: {fileID: 0}
 --- !u!1 &322690883619111333

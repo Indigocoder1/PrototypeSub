@@ -60,13 +60,14 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
 
         var deviceItem = deployableStorage.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT);
         deployableStorage.equipment.RemoveItem(deviceItem.item);
-
+        
+        deviceItem.item.GetComponent<TransmissionDeviceManager>().DeployDevice();
         deviceItem.item.transform.position = launchOrigin.position;
         deviceItem.item.transform.forward = launchOrigin.forward;
 
-        deviceItem.item.GetComponent<TransmissionDeviceManager>().DeployDevice();
-        deviceItem.item.transform.SetParent(null);
-        deviceItem.item.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * launchForce, ForceMode.Impulse);
+        var rb = deviceItem.item.GetComponent<Rigidbody>();
+        UWE.Utils.SetIsKinematicAndUpdateInterpolation(rb, false);
+        rb.AddForce(launchOrigin.forward * launchForce, ForceMode.Impulse);
     }
 
     private IEnumerator DeployDelayed()
