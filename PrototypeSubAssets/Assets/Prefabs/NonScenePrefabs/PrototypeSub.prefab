@@ -57036,7 +57036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2385506624548458604}
   - component: {fileID: 873524390354042142}
-  - component: {fileID: 8430209773899558876}
+  - component: {fileID: 714125103778212233}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -57052,15 +57052,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4182851140980763185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0003994788}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00046874}
+  m_LocalScale: {x: 4.588278, y: 4.588278, z: 4.588278}
   m_Children: []
   m_Father: {fileID: 498258055196627790}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00016784668, y: 0}
+  m_AnchoredPosition: {x: -0.00010681152, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &873524390354042142
@@ -57071,7 +57071,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4182851140980763185}
   m_CullTransparentMesh: 0
---- !u!114 &8430209773899558876
+--- !u!114 &714125103778212233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57084,13 +57084,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.25, b: 0.28750014, a: 1}
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 026c9dcbc2584644690fc8d1ddb7d2e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1905373c06f544d49b25ba818840830a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
