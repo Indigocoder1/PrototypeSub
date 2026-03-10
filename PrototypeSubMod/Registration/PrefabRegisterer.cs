@@ -141,6 +141,10 @@ internal static class PrefabRegisterer
             TechType.PrecursorIonCrystalMatrix, new Vector3(0, 1.3f, 0), Vector3.one * 1.3f);
         DisplayCaseProp.Register(AlienBuildingBlock.prefabInfo.ClassID, "AlienBuildingBlock_DisplayCase",
             TechType.PrecursorIonCrystalMatrix, new Vector3(0, 1.3f, 0), Vector3.one);
+        DisplayCaseProp.Register(ProtoPhaseGateTransmitter.PrefabInfo.ClassID, "PhaseGateTransmitter_DisplayCase",
+            ProtoPhaseGateTransmitter.PrefabInfo.TechType, new Vector3(0, 1.3f, 0), Vector3.one * 0.5f);
+        DisplayCaseProp.Register(ProtoPhaseGateStabilizer.PrefabInfo.ClassID, "PhaseGateStabilizer_DisplayCase",
+            ProtoPhaseGateStabilizer.PrefabInfo.TechType, new Vector3(0, 1.35f, 0), Vector3.one * 0.45f);
 
         ProtoWormSpawnEvent.RegisterEvent("WormSpawnEventVertical",
             Plugin.GeneralAssetBundle.LoadAsset<GameObject>("WormSpawnEventVertical"),
