@@ -64,10 +64,9 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
         deviceItem.item.transform.position = launchOrigin.position;
         deviceItem.item.transform.forward = launchOrigin.forward;
 
-        deviceItem.item.gameObject.SetActive(true);
-        deviceItem.item.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * launchForce, ForceMode.Impulse);
         deviceItem.item.GetComponent<TransmissionDeviceManager>().DeployDevice();
         deviceItem.item.transform.SetParent(null);
+        deviceItem.item.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * launchForce, ForceMode.Impulse);
     }
 
     private IEnumerator DeployDelayed()

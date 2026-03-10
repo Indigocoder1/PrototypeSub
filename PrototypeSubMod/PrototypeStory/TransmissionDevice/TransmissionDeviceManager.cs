@@ -26,16 +26,6 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     private void Start()
     {
         uGUI_PDA.main.GetComponentInChildren<uGUI_TransmissionTab>(true).onTransmissionComplete += PlayEndingCinematic;
-        
-        if (!Plugin.GlobalSaveData.activatedTransmissionDevices.Contains(GetComponent<PrefabIdentifier>().Id)) return;
-        
-        poweredDownObjects.SetActive(false);
-        poweredUpObjects.SetActive(true);
-        activated = true;
-        deployed = true;
-        deviceAnimator.SetTrigger("ActivateInstant");
-        Destroy(GetComponent<Pickupable>());
-        idleSfx.Play();
     }
 
     private void Update()
@@ -145,13 +135,8 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     public void DeployDevice()
     {
-        var pickupable = GetComponent<Pickupable>();
-        if (pickupable)
-        {
-            Destroy(pickupable);
-        }
-
         deployed = true;
+        GetComponent<Pickupable>().Drop();
     }
 
     public void PlayEndingCinematic()
@@ -191,5 +176,17 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         FMODUnity.RuntimeManager.StopAllEvents(true);
         SceneCleaner_Patches.QueueSceneOverride();
         SceneCleaner.Open();
+    }
+
+    private void OnEnable()
+    {
+        if (!Plugin.GlobalSaveData.activatedTransmissionDevices.Contains(GetComponent<PrefabIdentifier>().Id)) return;
+        
+        poweredDownObjects.SetActive(false);
+        poweredUpObjects.SetActive(true);
+        activated = true;
+        deployed = true;
+        deviceAnimator.SetTrigger("ActivateInstant");
+        idleSfx.Play();
     }
 }
