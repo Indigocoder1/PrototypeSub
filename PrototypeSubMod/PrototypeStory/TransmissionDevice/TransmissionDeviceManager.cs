@@ -120,11 +120,6 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         StartCoroutine(ActivateDevice());
     }
 
-    public void OnDrop()
-    {
-        Plugin.Logger.LogInfo($"Dropped transmission device");
-    }
-
     private IEnumerator ActivateDevice()
     {
         deviceAnimator.SetTrigger("Activate");
@@ -150,10 +145,10 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         HideForScreenshots.Hide(HideForScreenshots.HideType.HUD);
         Player_Patches.SetOxygenReqOverride(true, 0);
         IngameMenu_Patches.SetDenySaving(true);
-        Player.main.SetHeadVisible(true);
-        Player.main.playerController.SetEnabled(false);
+        Player.main.EnterLockedMode(null);
         Player.main.cinematicModeActive = true;
         Player.main.FreezeStats();
+        Player.main.transform.Find("body").gameObject.SetActive(false);
         cinematicAnimator.SetTrigger("PlayAnim");
         deviceAnimator.SetTrigger("Fire");
     }
@@ -193,10 +188,5 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         deployed = true;
         deviceAnimator.SetTrigger("ActivateInstant");
         idleSfx.Play();
-    }
-
-    private void OnDestroy()
-    {
-        Plugin.Logger.LogInfo($"Transmission device destroyed");
     }
 }
