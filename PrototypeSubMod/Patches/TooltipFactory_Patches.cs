@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using HarmonyLib;
 using PriorityQueueInternal;
 using PrototypeSubMod.Factors;
@@ -12,6 +13,8 @@ namespace PrototypeSubMod.Patches;
 [HarmonyPatch(typeof(TooltipFactory))]
 public class TooltipFactory_Patches
 {
+    public static event Action onRunItemActions;
+    
     [HarmonyPatch(nameof(TooltipFactory.ItemCommons)), HarmonyPriority(Priority.High), HarmonyPostfix]
     private static void ItemCommons_Postfix(StringBuilder sb, TechType techType, GameObject obj)
     {
@@ -33,8 +36,6 @@ public class TooltipFactory_Patches
         TooltipFactory.WriteDescription(sb, "────────────────");
         TooltipFactory.WriteDescription(sb, Language.main.GetFormat("SuitCurrentColor", localizedName));
         TooltipFactory.WriteDescription(sb, Language.main.GetFormat("SuitCurrentIntensity", colorFactor.GetIntensity()));
-        
-        colorFactor.UpdateFromUI();
     }
     
     private static void HandleAlienBuildingBlockTooltips(StringBuilder sb, GameObject obj)
@@ -57,6 +58,9 @@ public class TooltipFactory_Patches
     {
         HandleColorFactorActions(sb, item);
         HandleLocatorFactorTooltips(sb, item);
+        HandlePrecursorSuitTooltips(sb, item);
+
+        onRunItemActions?.Invoke();
     }
 
     private static void HandleColorFactorActions(StringBuilder sb, InventoryItem item)
@@ -73,7 +77,6 @@ public class TooltipFactory_Patches
         TooltipFactory.WriteAction(sb, GameInput.FormatButton(GameInput.Button.AltTool),
             Language.main.Get("SuitToggleEditMode"));
     }
-
     
     private static void HandleLocatorFactorTooltips(StringBuilder sb, InventoryItem item)
     {
@@ -82,5 +85,18 @@ public class TooltipFactory_Patches
         var locatorFactor = item.item.GetComponent<Factors.Locator.Locator>();
         TooltipFactory.WriteAction(sb, GameInput.FormatButton(locatorFactor.GetUseButton()),
             Language.main.Get("LocatorToggle"));
+    }
+
+    private static void HandlePrecursorSuitTooltips(StringBuilder sb, InventoryItem item)
+    {
+        if (item.techType != PrecursorSuit.prefabInfo.TechType) return;
+
+        TooltipFactory.WriteAction(sb, GameInput.FormatButton(GameInput.Button.AltTool), 
+            Language.main.Get("PrecursorSuitRemnantToggle"));
+        var key = Plugin.GlobalSaveData.precursorSuitGivesRemnants ? "LocalizedTrue" : "LocalizedFalse";
+        var localizedRemnantValue = Language.main.Get(key);
+        
+        TooltipFactory.WriteDescription(sb,
+            Language.main.GetFormat("PrecursorSuitRemnantState", localizedRemnantValue));
     }
 }

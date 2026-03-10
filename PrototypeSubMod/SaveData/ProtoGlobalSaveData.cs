@@ -31,6 +31,7 @@ internal class ProtoGlobalSaveData : SaveDataCache
     
     public bool prototypePresent;
     public bool prototypeDestroyed;
+    public bool precursorSuitGivesRemnants = true;
 
     public bool insideEngineFacility;
     public bool moonpoolDoorOpened;

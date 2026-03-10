@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
+using PrototypeSubMod.Prefabs.AlienBuildingBlock;
 using SuitLib;
 using UnityEngine;
 
@@ -13,6 +16,8 @@ public class PrecursorSuitManager : MonoBehaviour
     private readonly float[] originalBodyEmissions = new float[2];
     private readonly float[] originalArmsEmission = new float[2];
     private readonly Color[] originalEmissionCols = new Color[2];
+
+    private const float TimeBetweenWarperRemnants = 120f;
     
     private Dictionary<Component, EmissionController> emissionControllers = new();
     private Renderer stillsuitRenderer;
@@ -28,6 +33,8 @@ public class PrecursorSuitManager : MonoBehaviour
             .GetComponent<Renderer>();
         emissionColor = defaultEmissionColor;
         emissionIntensity = defaultEmissionIntensity;
+
+        TooltipFactory_Patches.onRunItemActions += UpdateFromUI;
     }
 
     private void Update()
@@ -43,15 +50,17 @@ public class PrecursorSuitManager : MonoBehaviour
         bool wearingSuit = itemInSlot != null && itemInSlot.techType == PrecursorSuit.prefabInfo.TechType;
         if (wearingSuit != wasWearingSuit)
         {
-            if (!wasWearingSuit)
+            if (wearingSuit)
             {
                 StoreProperties();
                 UpdateEmissionValues();
                 stillsuitRenderer.materials[1].EnableKeyword("MARMO_EMISSION");
+                InvokeRepeating(nameof(GivePlayerWarperRemnant), TimeBetweenWarperRemnants, TimeBetweenWarperRemnants);
             }
             else
             {
                 RestoreProperties();
+                CancelInvoke(nameof(GivePlayerWarperRemnant));
             }
         }
         
@@ -102,9 +111,36 @@ public class PrecursorSuitManager : MonoBehaviour
         }
     }
 
+    private void GivePlayerWarperRemnant()
+    {
+        if (!Plugin.GlobalSaveData.precursorSuitGivesRemnants) return;
+
+        StartCoroutine(SpawnRemnantAsync());
+    }
+
+    private IEnumerator SpawnRemnantAsync()
+    {
+        var task = CraftData.GetPrefabForTechTypeAsync(WarperRemnant.prefabInfo.TechType);
+        yield return task;
+
+        var prefab = task.GetResult();
+        var pickupable = GameObject.Instantiate(prefab).GetComponent<Pickupable>();
+        Inventory.main.ForcePickup(pickupable);
+    }
+
+    private void UpdateFromUI()
+    {
+        if (IngameMenu.main.selected) return;
+
+        if (!GameInput.GetButtonDown(GameInput.Button.AltTool)) return;
+
+        Plugin.GlobalSaveData.precursorSuitGivesRemnants = !Plugin.GlobalSaveData.precursorSuitGivesRemnants;
+    }
+
     private void OnDestroy()
     {
         ModdedSuitsManager.onSuitEquippedChanged -= OnEquippedSuitChanged;
+        TooltipFactory_Patches.onRunItemActions -= UpdateFromUI;
     }
 
     public void RegisterEmissionController(Component owner, EmissionController controller)

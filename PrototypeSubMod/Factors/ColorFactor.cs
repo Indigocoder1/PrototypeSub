@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using BepInEx;
 using Newtonsoft.Json;
+using PrototypeSubMod.Patches;
 using PrototypeSubMod.PrecursorWearables;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class ColorFactor : MonoBehaviour
         
         Inventory.main.equipment.onEquip += OnEquip;
         Inventory.main.equipment.onUnequip += OnUnequip;
+        TooltipFactory_Patches.onRunItemActions += UpdateFromUI;
     }
 
     private void OnEquip(string slot, InventoryItem item)
@@ -79,7 +81,7 @@ public class ColorFactor : MonoBehaviour
             : GameInput.Button.CyclePrev;
     }
 
-    public void UpdateFromUI()
+    private void UpdateFromUI()
     {
         if (IngameMenu.main.selected) return;
         
@@ -133,6 +135,7 @@ public class ColorFactor : MonoBehaviour
     {
         Inventory.main.equipment.onEquip -= OnEquip;
         Inventory.main.equipment.onUnequip -= OnUnequip;
+        TooltipFactory_Patches.onRunItemActions -= UpdateFromUI;
     }
 
     private static void CreateDefaultColors()

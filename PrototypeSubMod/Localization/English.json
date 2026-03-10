@@ -231,6 +231,8 @@
   "LocatorToggle": "Toggle Factor",
   "ProtoSuitUnequipWarning": "Cannot remove suit while Factors are installed!",
   "PropulsionGlovesRelease": "Release item {0}",
+  "PrecursorSuitRemnantToggle": "toggle almanite return",
+  "PrecursorSuitRemnantState": "Return almanite = {0}",
   "SuitColorFactor": "Color Factor",
   "Tooltip_SuitColorFactor": "Alien implement used to customize light colours of the ion dive suit.",
   "SuitColorNext": "Next color",
@@ -240,6 +242,8 @@
   "SuitToggleEditMode": "Toggle edit mode",
   "SuitCurrentColor": "Current color: {0}",
   "SuitCurrentIntensity": "Intensity: {0}",
+  "LocalizedTrue": "True",
+  "LocalizedFalse": "False",
 
   // Keybinds
   "PrototypeInputCategory": "The Prototype Sub",
