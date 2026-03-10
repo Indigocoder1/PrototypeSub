@@ -321,6 +321,8 @@
 
   "ProtoTransmissionSiteHint": "Detecting encrypted coordinates within recorded transmission. Outputting results to databank.",
 
+  "EngineFacilityReturnHint": "FACILITY: UNAUTHORIZED COMMAND ISSUED TO PROTOTYPE ION REACTOR TESTING FACILITY<duration=1000>\nBLOCKING COMMA┃▙▗┫-N- ▞┣ ▘D-┻▝▚┃▖━<delay=1000><duration=1000>\nCOMMAND ACCEPTED. PASSAGE UNLOCKED.<delay=1000><duration=1000>",
+
   "ProtoCalibrationCodeEncy_Title": "Transmission device calibration code",
   "ProtoCalibrationCodeEncy_Body": "A local alien broadcast has outlined a six-point pattern matching the movements of the Prototype during the prior excercise.\n\nThe pattern appears to represent a highly precise set of instructions to assist in the transmission of data type: [NEURAL CLUSTER]. While it is unknown why such data may require transmitting, it may lead to further acquisition of valuable alien data.\n\n<b>Assessment: Continue following alien instructions to retrieve advanced technologies. Mutual profit will follow.</b>",
   // Puzzle facility voicelines

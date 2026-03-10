@@ -340,6 +340,26 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Engine Facility Scream + PDA hint
+        StoryGoalHandler.RegisterCustomEvent("EngineScream", () =>
+        {
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineScream"), new Vector3(-1000, -400, -1100));
+        });
+
+        StoryGoalHandler.RegisterCustomEvent("EngineFacilityReturnHint", () =>
+        {
+            PDALog.Add("EngineFacilityReturnHint");
+        });
+
+        StoryGoalHandler.RegisterCompoundGoal("EngineFacilityReturnHint", Story.GoalType.PDA, 120f, "OrionSurgicalRoomTome");
+        StoryGoalHandler.RegisterCompoundGoal("EngineScream", Story.GoalType.Story, 7f, "EngineFacilityReturnHint");
+        #endregion
+
+        StoryGoalHandler.RegisterCustomEvent("HullFacilityTeleporterUnlocked", () =>
+        {
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineAllBreachesRepaired"), Player.main.transform.position);
+        });
+
         StoryGoalHandler.RegisterCustomEvent("OrionSurgicalRoomTome", () =>
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("HullFacilityOrionTone"), Player.main.transform.position);
@@ -361,9 +381,9 @@ internal static class StoryGoalsRegisterer
             PDAEncyclopedia.Add("LocatorFactorTerminalEncy", true);
         });
         
-        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 306f,
+        StoryGoalHandler.RegisterCompoundGoal("Ency_ProtoFacilitiesEncy", Story.GoalType.Story, 156,
             "PrototypeCrafted");
-        StoryGoalHandler.RegisterCompoundGoal("ProtoFacilityLocationsHint", Story.GoalType.Story, 300f,
+        StoryGoalHandler.RegisterCompoundGoal("ProtoFacilityLocationsHint", Story.GoalType.Story, 150,
             "PrototypeCrafted");
 
         StoryGoalHandler.RegisterItemGoal("OnPickupDefenseTablet", Story.GoalType.Story,
