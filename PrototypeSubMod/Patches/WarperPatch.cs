@@ -17,11 +17,8 @@ public class WarperPatch
 
     private static void RollBuildingBlockSpawnChance(Vector3 spawnPos)
     {
-        if (Random.Range(0f, 10f) > 5f)
-        {
-            CoroutineHost.StartCoroutine(WarperRemnant.TrySpawnBiome(spawnPos,
+        CoroutineHost.StartCoroutine(WarperRemnant.TrySpawnBiome(spawnPos,
                 LargeWorld.main.GetBiome(spawnPos)));
-        }
     }
     
 }
