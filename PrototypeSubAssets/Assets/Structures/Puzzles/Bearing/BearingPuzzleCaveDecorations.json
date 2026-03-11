@@ -1365,28 +1365,6 @@
       "priority": 0
     },
     {
-      "classId": "InterceptorFacilityKey",
-      "id": "b63abfdf-8984-426d-ad82-b323c406a9ac",
-      "position": {
-        "x": 1214.97729,
-        "y": -309.6131,
-        "z": 528.4911
-      },
-      "rotation": {
-        "x": 0.166516766,
-        "y": 0.514534056,
-        "z": -0.101406693,
-        "w": 0.8350111
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "cellLevel": 1,
-      "priority": 0
-    },
-    {
       "classId": "ProtoPlaque",
       "id": "517c0116-4acf-4649-a76a-e49760fa683b",
       "position": {
@@ -1399,6 +1377,28 @@
         "y": -0.8500659,
         "z": 0.0,
         "w": 0.5266765
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": 1,
+      "priority": 0
+    },
+    {
+      "classId": "DefenseFacilityKey",
+      "id": "3ad12b3e-cae1-460f-ae40-aa09db089eb6",
+      "position": {
+        "x": 1214.96191,
+        "y": -309.5644,
+        "z": 528.572632
+      },
+      "rotation": {
+        "x": 0.166438565,
+        "y": 0.513890564,
+        "z": -0.101534955,
+        "w": 0.8354073
       },
       "scale": {
         "x": 1.0,
