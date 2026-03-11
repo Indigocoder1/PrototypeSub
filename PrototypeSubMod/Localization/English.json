@@ -262,8 +262,8 @@
   "SuitColorYellow": "Yellow",
 
   // Phase Gates
-  "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
-  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark matter in alien technology.",
+  "ProtoPhaseGateStabilizer": "Dark Energy Stabilizer",
+  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark energy in alien technology.",
   "ProtoPhaseGateStructure": "Almanite Core",
   "Tooltip_ProtoPhaseGateStructure": "A strong core used in deployable alien architecture.",
   "ProtoPhaseGateTransmitter": "Particle Transmitter",
