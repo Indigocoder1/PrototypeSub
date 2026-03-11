@@ -26,6 +26,7 @@ internal class BuildTerminalScreenManager : MonoBehaviour
         animatorScreen.gameObject.SetActive(false);
         newUpgradesScreen.gameObject.SetActive(false);
         rebuildScreen.gameObject.SetActive(false);
+        buildScreen.gameObject.SetActive(false);
 
         EnableRelevantScreens();
 
