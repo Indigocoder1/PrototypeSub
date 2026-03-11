@@ -106,7 +106,7 @@ internal class NewUpgradesScreen : MonoBehaviour
         {
             pingSpawnAttempted = true;
             downloadActive = false;
-            screenManager.EnableRelevantScreensAtStart();
+            screenManager.EnableRelevantScreens();
             queuedVoicelines.Clear();
             queuedVoicelines.Enqueue(newDataNotification);
             SpawnPingIfNeeded();

@@ -27,7 +27,7 @@ internal class BuildTerminalScreenManager : MonoBehaviour
         newUpgradesScreen.gameObject.SetActive(false);
         rebuildScreen.gameObject.SetActive(false);
 
-        EnableRelevantScreensAtStart();
+        EnableRelevantScreens();
 
         bool hasInteracted = StoryGoalManager.main.completedGoals.Contains("PlayerFirstPPTInteraction");
         if (!hasInteracted)
@@ -43,6 +43,7 @@ internal class BuildTerminalScreenManager : MonoBehaviour
         }
 
         firstInteractScreen.UpdateLightingController();
+        occupiedHandler.onHasSubChanged += EnableRelevantScreens;
     }
 
     public void OnConstructionStarted()
@@ -100,7 +101,7 @@ internal class BuildTerminalScreenManager : MonoBehaviour
         EnableMenusWhenSubInWorld();
     }
 
-    public void EnableRelevantScreensAtStart()
+    public void EnableRelevantScreens()
     {
         newUpgradesScreen.gameObject.SetActive(false);
         if (Plugin.GlobalSaveData.prototypeDestroyed && StoryGoalManager.main.IsGoalComplete("PrototypeCrafted"))
@@ -142,5 +143,10 @@ internal class BuildTerminalScreenManager : MonoBehaviour
             upgradeScreen.gameObject.SetActive(occupiedHandler.MoonpoolHasSub);
             recentralizeScreen.gameObject.SetActive(!occupiedHandler.MoonpoolHasSub);
         }
+    }
+
+    private void OnEnable()
+    {
+        EnableRelevantScreens();
     }
 }

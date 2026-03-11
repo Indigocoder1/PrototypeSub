@@ -1,4 +1,5 @@
-﻿using PrototypeSubMod.LightDistortionField;
+﻿using System;
+using PrototypeSubMod.LightDistortionField;
 using UnityEngine;
 
 namespace PrototypeSubMod.SubTerminal;
@@ -6,6 +7,8 @@ namespace PrototypeSubMod.SubTerminal;
 internal class MoonpoolOccupiedHandler : MonoBehaviour
 {
     public static readonly Bounds MoonpoolBounds = new Bounds(new Vector3(465.67f, -109.81f, 1216.69f), new Vector3(53.32f, 34.50f, 89.36f));
+
+    public event Action onHasSubChanged;
     
     public bool MoonpoolHasSub
     {
@@ -36,6 +39,12 @@ internal class MoonpoolOccupiedHandler : MonoBehaviour
                 SubInMoonpool = subRoot.gameObject;
                 break;
             }
+        }
+
+        if (foundSub != MoonpoolHasSub)
+        {
+            MoonpoolHasSub = foundSub;
+            onHasSubChanged?.Invoke();
         }
 
         MoonpoolHasSub = foundSub;
