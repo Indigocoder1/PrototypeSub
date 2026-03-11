@@ -58,6 +58,12 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
             return;
         }
 
+        if (Player.main.biomeString != "transmissionsite_protovoid")
+        {
+            ErrorMessage.AddError("Invalid deployment site");
+            return;
+        }
+
         var deviceItem = deployableStorage.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT);
         deployableStorage.equipment.RemoveItem(deviceItem.item);
         
