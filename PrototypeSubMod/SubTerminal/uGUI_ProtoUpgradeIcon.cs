@@ -80,6 +80,8 @@ internal class uGUI_ProtoUpgradeIcon : MonoBehaviour
         {
             CoroutineHost.StartCoroutine(LateInitialize());
         }
+        
+        CoroutineHost.StartCoroutine(RefreshUpgrades());
     }
 
     private IEnumerator LateInitialize()
