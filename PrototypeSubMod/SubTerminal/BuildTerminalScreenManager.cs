@@ -30,19 +30,6 @@ internal class BuildTerminalScreenManager : MonoBehaviour
 
         EnableRelevantScreens();
 
-        bool hasInteracted = StoryGoalManager.main.completedGoals.Contains("PlayerFirstPPTInteraction");
-        if (!hasInteracted)
-        {
-            firstInteractScreen.OnStageStarted();
-            buildScreen.gameObject.SetActive(false);
-            upgradeScreen.gameObject.SetActive(false);
-            recentralizeScreen.gameObject.SetActive(false);
-        }
-        else
-        {
-            firstInteractScreen.gameObject.SetActive(false);
-        }
-
         firstInteractScreen.UpdateLightingController();
         occupiedHandler.onHasSubChanged += EnableRelevantScreens;
     }
@@ -104,6 +91,8 @@ internal class BuildTerminalScreenManager : MonoBehaviour
 
     public void EnableRelevantScreens()
     {
+        if (isBuilding) return;
+        
         newUpgradesScreen.gameObject.SetActive(false);
         if (Plugin.GlobalSaveData.prototypeDestroyed && StoryGoalManager.main.IsGoalComplete("PrototypeCrafted"))
         {
@@ -124,6 +113,19 @@ internal class BuildTerminalScreenManager : MonoBehaviour
             rebuildScreen.gameObject.SetActive(false);
             upgradeScreen.gameObject.SetActive(false);
             recentralizeScreen.gameObject.SetActive(false);
+        }
+        
+        var hasInteracted = StoryGoalManager.main.completedGoals.Contains("PlayerFirstPPTInteraction");
+        if (!hasInteracted)
+        {
+            firstInteractScreen.OnStageStarted();
+            buildScreen.gameObject.SetActive(false);
+            upgradeScreen.gameObject.SetActive(false);
+            recentralizeScreen.gameObject.SetActive(false);
+        }
+        else
+        {
+            firstInteractScreen.gameObject.SetActive(false);
         }
     }
 
