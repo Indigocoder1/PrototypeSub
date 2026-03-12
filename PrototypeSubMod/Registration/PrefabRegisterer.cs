@@ -96,6 +96,7 @@ internal static class PrefabRegisterer
         StoryGoalTerminal.CreateTerminal("FragmentationTerminal", "FragmentationTerminalEncy");
         StoryGoalTerminal.CreateTerminal("LocatorFactorTerminal", "LocatorFactorTerminal");
         StoryGoalTerminal.CreateTerminal("BiomechanicsFactorTerminal", "BiomechanicsFactorTerminal");
+        StoryGoalTerminal.CreateTerminal("PrecursorPropulsionGlovesTerminal", "PrecursorPropulsionGlovesTerminal");
 
         yield return new WaitForEndOfFrame();
         

@@ -247,6 +247,14 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
+        #region Propulsion Gloves Terminal
+        StoryGoalHandler.RegisterCustomEvent("PrecursorPropulsionGlovesTerminal", () =>
+        {
+            KnownTech.Add(PrecursorPropulsionGloves.PrefabInfo.TechType);
+            PDAEncyclopedia.Add("PrecursorPropulsionGlovesTerminalEncy", true);
+        });
+        #endregion
+
         #region Precursor Suit Pickup
         StoryGoalHandler.RegisterItemGoal("OnPrecursorSuitPickup", Story.GoalType.PDA, PrecursorSuit.prefabInfo.TechType);
 

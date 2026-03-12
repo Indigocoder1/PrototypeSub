@@ -374,7 +374,7 @@ internal static class EncyEntryRegisterer
         string transmissionTerminalDescription = Language.main.Get("TransmissionTerminalEncy_Body");
         var transmissionDevicePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("TransmissionDevice_EncyPopup");
 
-        PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: transmissionDevicePopup);
+        PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: transmissionDevicePopup);
         #endregion
 
         #region Precursor Suit Terminal
@@ -382,7 +382,15 @@ internal static class EncyEntryRegisterer
         string precursorSuitTerminalDescription = Language.main.Get("PrecursorSuitTerminalEncy_Body");
         var precursorSuitPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrecursorSuit_EncyPopup");
 
-        PDAHandler.AddEncyclopediaEntry("PrecursorSuitTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", precursorSuitTerminalTitle, precursorSuitTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: precursorSuitPopup);
+        PDAHandler.AddEncyclopediaEntry("PrecursorSuitTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", precursorSuitTerminalTitle, precursorSuitTerminalDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: precursorSuitPopup);
+        #endregion
+
+        #region Propulsion Gloves Terminal
+        string glovesTerminalTitle = Language.main.Get("PrecursorPropulsionGlovesTerminalEncy_Title");
+        string glovesTerminalDescription = Language.main.Get("PrecursorPropulsionGlovesTerminalEncy_Body");
+        var glovesPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrecursorPropulsionGlovesIcon");
+
+        PDAHandler.AddEncyclopediaEntry("PrecursorPropulsionGlovesTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", glovesTerminalTitle, glovesTerminalDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: glovesPopup);
         #endregion
 
         var factorPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
