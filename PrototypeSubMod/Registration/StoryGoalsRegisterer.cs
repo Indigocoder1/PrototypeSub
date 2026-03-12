@@ -238,6 +238,14 @@ internal static class StoryGoalsRegisterer
             PDAEncyclopedia.Add("BiomechanicsFactorTerminalEncy", true);
         });
         #endregion
+        
+        #region Color Factor Unlock
+        StoryGoalHandler.RegisterCustomEvent("ColorFactorTerminal", () =>
+        {
+            KnownTech.Add(SuitColorFactor.prefabInfo.TechType);
+            PDAEncyclopedia.Add("SuitColorFactorEncy", true);
+        });
+        #endregion
 
         #region Precursor Suit Pickup
         StoryGoalHandler.RegisterItemGoal("OnPrecursorSuitPickup", Story.GoalType.PDA, PrecursorSuit.prefabInfo.TechType);
