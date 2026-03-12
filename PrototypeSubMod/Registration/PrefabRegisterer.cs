@@ -92,10 +92,9 @@ internal static class PrefabRegisterer
         StoryGoalTerminal.CreateTerminal("HullFacilityLogsTerminal", "HullFacilityLogsEncy");
         StoryGoalTerminal.CreateTerminal("OrionDataTerminal", "OrionEndeavorsEncy");
         StoryGoalTerminal.CreateTerminal("HullFacilityWormTerminal", "HullFacilityWormTerminalEncy");
-        StoryGoalTerminal.CreateTerminal("AnimateEntropyTerminal", "AnimateEntropyTerminalEncy");
+        StoryGoalTerminal.CreateTerminal("AnimateEntropyTerminal", "BiomechanicsFactorTerminal");
         StoryGoalTerminal.CreateTerminal("FragmentationTerminal", "FragmentationTerminalEncy");
         StoryGoalTerminal.CreateTerminal("LocatorFactorTerminal", "LocatorFactorTerminal");
-        StoryGoalTerminal.CreateTerminal("BiomechanicsFactorTerminal", "BiomechanicsFactorTerminal");
         StoryGoalTerminal.CreateTerminal("PrecursorPropulsionGlovesTerminal", "PrecursorPropulsionGlovesTerminal");
 
         yield return new WaitForEndOfFrame();
