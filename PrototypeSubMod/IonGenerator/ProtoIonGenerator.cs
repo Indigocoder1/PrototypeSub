@@ -89,7 +89,7 @@ internal class ProtoIonGenerator : ProtoUpgrade
         base.SetUpgradeEnabled(enabled);
         if (enabled)
         {
-            emissionController.RegisterTempColor(new EmissionColorController.EmissionRegistrarData(this, Color.black));
+            emissionController.RegisterTempColor(this, new EmissionColorController.EmissionRegistrarData(Color.black));
             generatorLoop.Play();
             generatorStart.Play();
             notificationManager.PlayVoiceNotification(activationVoiceline);

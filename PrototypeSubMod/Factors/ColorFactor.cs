@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using BepInEx;
@@ -9,11 +10,13 @@ using UnityEngine;
 
 namespace PrototypeSubMod.Factors;
 
-public class ColorFactor : MonoBehaviour
+public class ColorFactor : Factor
 {
     private static readonly string ConfigFolder = Path.Combine(Path.GetDirectoryName(Paths.BepInExConfigPath), Plugin.Assembly.GetName().Name);
     private static readonly string SuitColorsPath = Path.Combine(ConfigFolder, "SuitColors.json");
 
+    public static event Action<Color, float> OnChangeSuitEmission; 
+    
     private SuitColors suitColors;
     private PrecursorSuitManager suitManager;
     private Pickupable pickupable;
@@ -129,6 +132,7 @@ public class ColorFactor : MonoBehaviour
     {
         suitManager.RegisterEmissionController(this,
             new PrecursorSuitManager.EmissionController(GetCurrentColor(), intensity, 5));
+        OnChangeSuitEmission?.Invoke(GetCurrentColor(), intensity);
     }
 
     private void OnDestroy()
@@ -161,6 +165,8 @@ public class ColorFactor : MonoBehaviour
         var jsonData = File.ReadAllText(SuitColorsPath);
         return JsonConvert.DeserializeObject<SuitColors>(jsonData);
     }
+
+    public override GameInput.Button GetUseButton() => GameInput.Button.None;
 }
 
 public class SuitColors

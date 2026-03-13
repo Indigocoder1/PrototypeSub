@@ -11,7 +11,7 @@ internal class EmissionColorController : PrefabModifier
     [SerializeField] private float transitionSpeed;
 
     private Dictionary<Material, Color> trackedMaterials = new();
-    private List<EmissionRegistrarData> overrideColorData = new();
+    private Dictionary<Component, EmissionRegistrarData> overrideColorData = new();
     private bool initialized;
 
     private Color tempColor;
@@ -60,9 +60,9 @@ internal class EmissionColorController : PrefabModifier
         }
     }
 
-    public void RegisterTempColor(EmissionRegistrarData registerData)
+    public void RegisterTempColor(Component component, EmissionRegistrarData registerData)
     {
-        overrideColorData.Add(registerData);
+        overrideColorData[component] = registerData;
         tempColorActive = true;
         currentTransitionTime = 0;
 
@@ -71,10 +71,9 @@ internal class EmissionColorController : PrefabModifier
 
     public void RemoveTempColor(Component component)
     {
-        var data = overrideColorData.FirstOrDefault(i => i.owner == component);
-        if (data.Equals(default)) return;
-
-        overrideColorData.Remove(data);
+        if (!overrideColorData.ContainsKey(component)) return;
+        
+        overrideColorData.Remove(component);
         tempColorActive = overrideColorData.Count > 0;
         currentTransitionTime = 0;
 
@@ -84,7 +83,7 @@ internal class EmissionColorController : PrefabModifier
     private void UpdateTempColor()
     {
         int greatestPriority = int.MinValue;
-        foreach (var data in overrideColorData)
+        foreach (var data in overrideColorData.Values)
         {
             if (data.priority > greatestPriority)
             {
@@ -96,13 +95,11 @@ internal class EmissionColorController : PrefabModifier
 
     public struct EmissionRegistrarData
     {
-        public Component owner;
         public Color overrideColor;
         public int priority;
 
-        public EmissionRegistrarData(Component owner, Color overrideColor, int priority = 10)
+        public EmissionRegistrarData(Color overrideColor, int priority = 10)
         {
-            this.owner = owner;
             this.overrideColor = overrideColor;
             this.priority = priority;
         }
