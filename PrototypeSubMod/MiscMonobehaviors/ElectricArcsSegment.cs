@@ -2,6 +2,7 @@
 using System.Collections;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 namespace PrototypeSubMod.MiscMonobehaviors;
 
@@ -37,8 +38,8 @@ public class ElectricArcsSegment : MonoBehaviour, IMaterialModifier
         electricArcs.Play();
 
         if (!setToTile) yield break;
-        
-        yield return null;
+
+        yield return new WaitUntil(() => electricArcs.lines != null);
 
         foreach (var line in electricArcs.lines)
         {
