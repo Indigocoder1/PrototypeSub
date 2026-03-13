@@ -1,5 +1,6 @@
 ﻿using Nautilus.Utility;
 using System;
+using PrototypeSubMod.Registration;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
@@ -41,7 +42,7 @@ public class uGUI_TransmissionTab : uGUI_PDATab
 
     private bool InTransmissionSite()
     {
-        return Player.main.GetBiomeString() == "transmissionsite_protovoid";
+        return Player.main.GetBiomeString() == BiomeRegisterer.TransmissionSiteBiome;
     }
 
     public void OnTransmitClicked()

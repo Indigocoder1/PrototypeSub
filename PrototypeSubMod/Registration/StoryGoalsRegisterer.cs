@@ -342,7 +342,7 @@ internal static class StoryGoalsRegisterer
 
         #region On Transmission Site Reached
         StoryGoalHandler.RegisterBiomeGoal("OnTransmissionSiteReached", Story.GoalType.Story,
-            "transmissionsite_protovoid", 10f);
+            BiomeRegisterer.TransmissionSiteBiome, 10f);
         StoryGoalHandler.RegisterCustomEvent("OnTransmissionSiteReached", () =>
         {
             PDALog.Add("Proto_OnTransmissionSiteReached");

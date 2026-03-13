@@ -11,6 +11,8 @@ namespace PrototypeSubMod.Registration;
 
 internal static class BiomeRegisterer
 {
+    public const string TransmissionSiteBiome = "transmissionsite_protovoid";
+    
     public static void Register()
     {
         var sw = new System.Diagnostics.Stopwatch();
@@ -136,7 +138,6 @@ internal static class BiomeRegisterer
         var transmissionRunupSpawnInfo = new SpawnInfo(transmissionRunupPrefabInfo.ClassID, Plugin.TransmissionSitePos, 
             Quaternion.identity, Vector3.one * 2500);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(transmissionRunupSpawnInfo);
-        BiomeHandler.AddBiomeMusic("transmissionrunup_protovoid", AudioUtils.GetFmodAsset("ProtoCreditsMusic"));
         
         #endregion
         
@@ -145,7 +146,7 @@ internal static class BiomeRegisterer
         var transmissionPrefabInfo = PrefabInfo.WithTechType("ProtoTransmissionSite");
         var transmissionVolumePrefab = new CustomPrefab(transmissionPrefabInfo);
         var transmissionTemplate = new AtmosphereVolumeTemplate(transmissionPrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
-            "transmissionsite_protovoid", 300, LargeWorldEntity.CellLevel.Global);
+            TransmissionSiteBiome, 300, LargeWorldEntity.CellLevel.Global);
         transmissionTemplate.ModifyPrefab = prefab =>
         {
             var volum = prefab.GetComponent<AtmosphereVolume>();
