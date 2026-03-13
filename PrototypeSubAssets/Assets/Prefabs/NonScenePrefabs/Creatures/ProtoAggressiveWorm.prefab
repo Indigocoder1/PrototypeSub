@@ -2922,7 +2922,6 @@ GameObject:
   m_Component:
   - component: {fileID: 81476294774449740}
   - component: {fileID: 5574985794993970521}
-  - component: {fileID: 4050803283466815705}
   m_Layer: 0
   m_Name: TargetingLR
   m_TagString: Untagged
@@ -2962,7 +2961,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 42853f0bd93ece1469766ae7c9c0bee5, type: 2}
+  - {fileID: 2100000, guid: b7f4a0eb4c8a76a4bb5c54179c9ae9d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3006,8 +3005,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.374466, g: 0.9339623, b: 0.37922406, a: 1}
+      key1: {r: 0.374466, g: 0.9339623, b: 0.37922406, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -3034,26 +3033,13 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 10
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &4050803283466815705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2497535253919242014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 988076807, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blacklistedMaterials: []
 --- !u!1 &2511293006631680832
 GameObject:
   m_ObjectHideFlags: 0
@@ -7054,8 +7040,8 @@ MonoBehaviour:
   aggroOffSfx: {fileID: 5207917267241166288}
   consumePlayerSfx: {fileID: 6017198227269601848}
   roarManager: {fileID: 121548284677876063}
-  minRoarInterval: 5
-  maxRoarInterval: 15
+  minRoarInterval: 15
+  maxRoarInterval: 30
 --- !u!114 &4983591340796008379
 MonoBehaviour:
   m_ObjectHideFlags: 0
