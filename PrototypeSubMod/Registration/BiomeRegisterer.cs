@@ -4,7 +4,6 @@ using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
-using PrototypeSubMod.PrototypeStory.CalibrationSite;
 using UnityEngine;
 
 namespace PrototypeSubMod.Registration;
@@ -12,6 +11,7 @@ namespace PrototypeSubMod.Registration;
 internal static class BiomeRegisterer
 {
     public const string TransmissionSiteBiome = "transmissionsite_protovoid";
+    public const string TransmissionRunupBiome = "transmissionrunup_protovoid";
     
     public static void Register()
     {
@@ -125,7 +125,7 @@ internal static class BiomeRegisterer
         var transmissionRunupPrefabInfo = PrefabInfo.WithTechType("TransmissionSiteRunup");
         var transmissionRunupVolumePrefab = new CustomPrefab(transmissionRunupPrefabInfo);
         var transmissionRunupTemplate = new AtmosphereVolumeTemplate(transmissionRunupPrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
-            "transmissionrunup_protovoid", 20, LargeWorldEntity.CellLevel.Global);
+            TransmissionRunupBiome, 20, LargeWorldEntity.CellLevel.Global);
         transmissionRunupTemplate.ModifyPrefab = prefab =>
         {
             var volum = prefab.GetComponent<AtmosphereVolume>();
