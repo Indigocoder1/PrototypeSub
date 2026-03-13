@@ -19,9 +19,6 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
     [SerializeField] private float launchDelay;
     [SerializeField] private float launchForce;
 
-    [SerializeField] private VoiceNotificationManager notificationManager;
-    [SerializeField] private VoiceNotification deviceLoadedVoiceline;
-
     private void Start()
     {
         deployableStorage.equipment.onEquip += OnItemChanged;
