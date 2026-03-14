@@ -7,12 +7,12 @@ public static class RadioMessageRegisterer
 {
     public static void Register()
     {
-        #region Warper Radio Messages
+        #region Transmissions
 
         RegisterMessage("ProtoRadioMessage1", "ProtoRadioMessage1");
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage1", Story.GoalType.Radio, 300, "PlayerFirstPPTInteraction");
         RegisterMessage("ProtoRadioMessage2", "ProtoRadioMessage2");
-        StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage2", Story.GoalType.Radio, 3600, "ProtoRadioMessage1");
+        StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage2", Story.GoalType.Radio, 1000, "ProtoRadioMessage1");
         RegisterMessage("ProtoRadioMessage3", "ProtoRadioMessage3");
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage3", Story.GoalType.Radio, 300, "ProtoRadioMessage2", "HullFacilityWormTerminalEncy");
         
