@@ -93,9 +93,9 @@
   "ProtoStasisPulseEncy_Body": "This schematic uses energy emitters lining the hull of the ship to passively collect and discharge electrostatic energy. The discharge of this energy  resembles the latest defensive developments in the <i>Survival-Grade Alterra Stasis Rifle</i>. Upon charge and activation, the electrostatic pulse will temporarily paralyse nearby biological tissues, some internal organs and all brain activity. Paralysis of nearby organisms is dependent on their size; Larger organisms may regain mental functioning faster than smaller ones.\n\n<b>Warning: Experiencing a discharge from this module may semi-permanently damage key cognitive functions such as muscle control, mental clarity and communication from the brain stem to vital and sensory organs causing potential brain death from cerebral hypoxia within 10 minutes of infliction. Avoid at all costs.</b>",
   "ProtoIonGeneratorEncy_Title": "Ion Generator",
   "ProtoIonGeneratorEncy_Body": "By re-routing power from all non-essential systems onboard the Prototype, this module allows the ion reactor to serve as a miniaturized fusion reactor, Slowly regenerating power over time.Due to the extreme conservation of power necessary to carry out the fusion reaction, the following systems are non-functional while the ion generator is active:\n   - Defense modules\n   - Ion thrusters\n\n- If left unsupervised for extended periods of time, there is a significant risk of potentially dangerous gamma radiation buildup.",
-  "ProtoDataStreamsEncy_Title": "Variable Data Streams",
-  "ProtoDataStreamsEncy_Body": "Hydrodynamic Ventilation",
-  "ProtoOverclockEncy_Title": "The Prototype features several water intake grills on its upper bow. This upgrade enhances said grills, allowing them to increase flow to the vessel's ion reactor. Doing so allows the vessel to more efficiently store and deploy energy to its secondary systems, including those delegated to other upgrades. When installed, the Hydrodynamic Ventilation system will reduce the cost of upgrades by 1 charge, and reduce the depletion-over-time of all upgrades by approximately 50%.\n\n<b>Assessment: Vital energy-saving measure. Highly reccomended for long journeys.</b>",
+  "ProtoDataStreamsEncy_Title": "Hydrodynamic Ventilation",
+  "ProtoDataStreamsEncy_Body": "The Prototype features several water intake grills on its upper bow. This upgrade enhances said grills, allowing them to increase flow to the vessel's ion reactor. Doing so allows the vessel to more efficiently store and deploy energy to its secondary systems, including those delegated to other upgrades. When installed, the Hydrodynamic Ventilation system will reduce the cost of upgrades by 1 charge, and reduce the depletion-over-time of all upgrades by approximately 50%.\n\n<b>Assessment: Vital energy-saving measure. Highly reccomended for long journeys.</b>",
+  "ProtoOverclockEncy_Title": "Overclock Protocol",
   "ProtoOverclockEncy_Body": "This protocol appears to temporarily sever several safety protocols onboard the Prototype. On activation, the vessel will expend a significant amount of energy to increase power running through the ship’s ion thruster, resulting in an increased speed.",
   "ProtoDeployableLightEncy_Title": "Photon Beacon",
   "ProtoDeployableLightEncy_Body": "This device appears to have been designed either as a navigational and visual aid, or as a decoy for aggressive fauna; perhaps both. Its design accomodates a central exothermic and chemiluminescent reaction suspended between two halves of the device using precise sound waves. The energy contained within this sample is enough to illuminate the device’s surroundings a few hundred meters in each direction, and will last for approximately five minutes.",
@@ -354,8 +354,8 @@
   "ProtoIonGenerator": "Ion Generator",
   "Tooltip_ProtoIonGenerator": "Directs all sub resources to siphoning energy from its surroundings. WARNING: Generates excess noise",
 
-  "ProtoOverclockModule": "Reactor Overclock Module",
-  "Tooltip_ProtoOverclockModule": "Overclocks the ion reactor, consuming additional power. WARNING: May cause hull ruptures",
+  "ProtoOverclockModule": "Overclock Protocol",
+  "Tooltip_ProtoOverclockModule": "Overclocks the ion reactor, consuming additional power.",
 
   "ProtoArchwayOverride": "Archway Override",
   "Tooltip_ProtoArchwayOverride": "Overrides the teleported archway for 2 minutes, allowing for travel back to the Prototype",
@@ -366,8 +366,8 @@
   "ProtoStasisPulse": "Stasis Pulse",
   "Tooltip_ProtoStasisPulse": "Dumps a large amount of energy into the surrounding area, causing temporary muscle atrophy",
 
-  "ProtoVariablePowerStreams": "Variable Energy Streams",
-  "Tooltip_ProtoVariablePowerStreams": "Upgrades old power circuits with new, more efficient ones, increasing energy efficiency for prolonged use",
+  "ProtoVariablePowerStreams": "Hydrodynamic Ventilation",
+  "Tooltip_ProtoVariablePowerStreams": "Routes passive water flow to ion reactor. Increases engine efficiency for all abilities.",
 
   "ProtoStrafe": "Lateral Thrusters",
   "Tooltip_ProtoStrafe": "Installs lateral thrusters in the Prototype's hull, allowing for sideways movement",
