@@ -36442,7 +36442,7 @@ MonoBehaviour:
   terminal: {fileID: 1821603210}
   upgradeCategory: {fileID: 11400000, guid: f5552b54320ce7b4c91aca85fa30d213, type: 2}
   techType: {fileID: 11400000, guid: 0e9c33782ef0f5148b428e0ec9db301d, type: 2}
-  encyclopediaKey: 
+  encyclopediaKey: ProtoDataStreamsEncy
 --- !u!114 &1821603210
 MonoBehaviour:
   m_ObjectHideFlags: 0
