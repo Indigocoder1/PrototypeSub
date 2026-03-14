@@ -125,8 +125,8 @@ namespace PrototypeSubMod
         internal const string DEFENSE_CHAMBER_BIOME_NAME = "protodefensefacility";
         internal const string ENGINE_FACILITY_BIOME_NAME = "protoenginefacility";
         internal static readonly Vector3 StoryEndPos = new (858, -800, 3116);
-        internal static readonly Vector3 TransmissionSitePos = new (-1000, -750, -3250);
-        internal static readonly Vector3 TransmissionSiteStartPos = new (-1000, -250, -1600);
+        internal static readonly Vector3 TransmissionSitePos = new (-1000, -850, -3250);
+        internal static readonly Vector3 TransmissionSiteStartPos = new (-1000, -350, -1600);
         internal static readonly Vector3 DefensePingPos = new (700, -489, -1456);
         internal static readonly Dictionary<string, Vector3> FACILITY_POSITIONS = new()
         {
