@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
   m_Name: FacilityVoiceProfileFound
   m_EditorClassIdentifier: 
-  path: NumPuzzleCorrect
+  path: FacilityVoiceProfileFound
   id: 
-  audioClip: {fileID: 8300000, guid: b34a7eb48e036d44795c259a4d8145db, type: 3}
+  audioClip: {fileID: 8300000, guid: a17cb2ae5fe3c694a852dd102292da44, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0

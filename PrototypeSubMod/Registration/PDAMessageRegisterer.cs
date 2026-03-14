@@ -34,9 +34,12 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PlaceholderPDAVoiceline", "ProtoTransmissionSiteHint"));
         PDALog_Patches.entries.Add(("NumbersPDACompile", "ProtoNumbersHint"));
         PDALog_Patches.entries.Add(("PDA_Lifepod3", "Lifepod3PDA"));
-        PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoNumberPuzzle"));
         PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoBearingPuzzle"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "EngineFacilityReturnHint"));
+
+        PDALog_Patches.entries.Add(("FacilityVoiceFetchingProfile", "OnEnterProtoNumberPuzzle"));
+        PDALog_Patches.entries.Add(("FacilityVoiceProfileFound", "OnEnterProtoNumberPuzzle_ProfileFound"));
+        PDALog_Patches.entries.Add(("FacilityVoiceNoProfile", "OnEnterProtoNumberPuzzle_ProfileNotFound"));
 
         PDALog_Patches.entries.Add(("PDA_SchematicsUnlocked", "ProtoBlinkFactorUnlock"));
         PDALog_Patches.entries.Add(("PDA_SchematicsUnlocked", "ProtoBiomechanicsFactorUnlock"));

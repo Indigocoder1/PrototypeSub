@@ -6,6 +6,7 @@ using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.FacilityProps;
 using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.PrototypeStory;
+using Story;
 using UnityEngine;
 
 namespace PrototypeSubMod.Registration;
@@ -286,7 +287,27 @@ internal static class StoryGoalsRegisterer
         StoryGoalHandler.RegisterCustomEvent("OnEnterProtoNumberPuzzle", () =>
         {
             PDALog.Add("OnEnterProtoNumberPuzzle");
+
+            if (StoryGoalManager.main.IsGoalComplete("PlayerFirstPPTInteraction"))
+            {
+                StoryGoalManager.main.OnGoalComplete("OnEnterProtoNumberPuzzle_ProfileFound");
+            }
+            else
+            {
+                StoryGoalManager.main.OnGoalComplete("OnEnterProtoNumberPuzzle_ProfileNotFound");
+            }
         });
+
+        StoryGoalHandler.RegisterCustomEvent("OnEnterProtoNumberPuzzle_ProfileFound", () =>
+        {
+            PDALog.Add("OnEnterProtoNumberPuzzle_ProfileFound");
+        });
+
+        StoryGoalHandler.RegisterCustomEvent("OnEnterProtoNumberPuzzle_ProfileNotFound", () =>
+        {
+            PDALog.Add("OnEnterProtoNumberPuzzle_ProfileNotFound");
+        });
+
         #endregion
 
         #region Bearing Puzzle Entry Voiceline
