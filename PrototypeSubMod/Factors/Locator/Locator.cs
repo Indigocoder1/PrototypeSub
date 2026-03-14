@@ -55,12 +55,12 @@ public class Locator : Factor
         if (toggle)
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ButtonSelect"), Player.main.transform.position);
-            ErrorMessage.AddError("Listening device active. Press again to toggle.");
+            ErrorMessage.AddError("Facility detection factor activated. Press again to toggle.");
         }
          else
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ButtonBack"), Player.main.transform.position);
-            ErrorMessage.AddError("Listening device deactivated. Press again to toggle.");
+            ErrorMessage.AddError("Facility detection factor deactivated. Press again to toggle.");
         }
     }
 
