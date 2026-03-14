@@ -17,6 +17,8 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private VehicleDockingBay dockingBay;
+    [SerializeField] private FMOD_CustomEmitter depotOpenSFX;
+    [SerializeField] private FMOD_CustomEmitter depotCloseSFX;
 
     private ProtoVehicleAccessManager accessManager;
     private ProtoDockingManager dockingManager;
@@ -162,12 +164,13 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
     public void OnPlayerEnterRange()
     {
         if (!dockingBay.dockedVehicle) return;
-        
         animator.SetBool(ProxyActivated, true);
+        depotOpenSFX.Play();
     }
 
     public void OnPlayerExitRange()
     {
         animator.SetBool(ProxyActivated, false);
+        depotCloseSFX.Play();
     }
 }
