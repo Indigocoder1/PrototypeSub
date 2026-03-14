@@ -180,14 +180,14 @@
   "ProtoPhaseGateStructureEncy_Title": "Almanite Core",
   "ProtoPhaseGateStructureEncy_Body": "This alien block is composed entirely of purified almanite. As such, it boasts a nearly indestructible frame and a highly configurable magnetic field. This makes it perfect for large-scale alien construction and the stabilization of large alien structures where no solid ground is present.\n\n<b>Assessment: Highly valuable advanced structual tool</b>",
 
-  "ProtoPhaseGateStabilizerEncy_Title": "Dark Energy Stabilizer",
-  "ProtoPhaseGateStabilizerEncy_Body": "This alien artifact appears to be designed to regulate the dispersal of dark energy by filtering it through the crystal contained within it. Due to its small size, it was likely highly portable, and thus used as a safety device for teleportation-based research. However, it may also be used to channel pulses of dark energy for localized teleportation.\n\n<b>Assessment: May be equipped to prevent unwanted teleportation.</b>",
+  "ProtoPhaseGateStabilizerEncy_Title": "Dark Matter Stabilizer",
+  "ProtoPhaseGateStabilizerEncy_Body": "This alien artifact appears to be designed to regulate the dispersal of dark matter by filtering it through the crystal contained within it. Due to its small size, it was likely highly portable, and thus used as a safety device for teleportation-based research. However, it may also be used to channel pulses of dark matter for localized teleportation.\n\n<b>Assessment: May be equipped to prevent unwanted teleportation.</b>",
 
   "ProtoPhaseGateTransmitterEncy_Title": "Particle Transmitter",
   "ProtoPhaseGateTransmitterEncy_Body": "This alien device features several interconnected frames held together magnetically. Structural analysis shows millions of microscopic railgun-like implements embedded in the device's core, seemingly used to transmit particles one-by-one. It is likely that teleportation with this device involves the destruction and re-assembly of the host, as opposed to faster-than-light transportation. Ethical considerations may apply.\n\n<b>Assessment: Handle with caution. Do not insert fingers into device.</b>",
 
   "PhaseGateEncy_Title": "Alien Phasegate",
-  "PhaseGateEncy_Body": "This colossal alien apparatus is used to transport large cargo across a wide range of distances. It requires a substantially powerful tool to construct, and may be used to connect two points in space regardless of depth or distance.\n\n1. Supporting frames\nThe device features two supportive structures on either side, which supply the inner archway with both power and stability.\n\n2. Primary archway\nThe central archway is lined with a mesh supplied by a dark energy stabilizer. The mesh prevents matter from unintentionally seeping from the mechanism during transmission.\n<b>Assessment: May be used to eliminate commute times for frequent journies. Vehicle-compatible.",
+  "PhaseGateEncy_Body": "This colossal alien apparatus is used to transport large cargo across a wide range of distances. It requires a substantially powerful tool to construct, and may be used to connect two points in space regardless of depth or distance.\n\n1. Supporting frames\nThe device features two supportive structures on either side, which supply the inner archway with both power and stability.\n\n2. Primary archway\nThe central archway is lined with a mesh supplied by a dark matter stabilizer. The mesh prevents matter from unintentionally seeping from the mechanism during transmission.\n<b>Assessment: May be used to eliminate commute times for frequent journies. Vehicle-compatible.",
   
   "BlinkFactorEncy_Title": "Blink Factor",
   "BlinkFactorEncy_Body": "By using elements of an alien particle transmitter, this implement dilates the user's perception of time, allowing the user to quickly and precisely travel short distances. It is likely that this ability was used by the aliens to increase work efficiency, and not as a defensive measure against common threats.\n\nDuring time dilation, the implement creates momentary translucent copies of the user's body. While the purpose of this is unclear, the aliens may have required a means of tracking the direction of these 'blinks', when several aliens moved unison, to avoid bodily collisions.\n\n<b>Assessment: Further research required</b>",
@@ -196,7 +196,7 @@
   "SuitColorFactorEncy_Body": "This alien implement appears to serve little practical function, instead choosing to increase the user's attachment to their ion dive suit through customization. The factor allows the user to select the colour of the suit's wiring accents from a prefabricated selection. While it is unclear why the aliens have created a device specifically to increase user attachment, it is nonetheless valuable.\n\n<b>Assessment: Implement requires advanced alien bodily interface to function. Experiment with colour choices to achieve intergalactic beauty.</b>",
   
   "TetherFactorEncy_Title": "Tether Factor",
-  "TetherFactorEncy_Body": "Using a precisely calibrated dark energy stabilizer, this alien implement is used for instantaneous travel across short to medium distances. Upon interaction the device copies the composition of the user's body, destroys the user and re-assembles them at the target destination.\n\n<b>Assessment: May prove useful for cave exploration.</b>",
+  "TetherFactorEncy_Body": "Using a precisely calibrated dark matter stabilizer, this alien implement is used for instantaneous travel across short to medium distances. Upon interaction the device copies the composition of the user's body, destroys the user and re-assembles them at the target destination.\n\n<b>Assessment: May prove useful for cave exploration.</b>",
 
   "PrecursorPropulsionGlovesTerminalEncy_Title": "Alien Propulsion Gloves",
   "PrecursorPropulsionGlovesTerminalEncy_Body": "This data outlines blueprints for a smaller, more efficient method of telekinetic object manipulation used by the aliens for research and construction purposes. By analysing this data, this PDA was able to synthesize blueprints for a pair of gloves capable of manipulating objects at range, requiring practically zero energy. However, due to the use of alien materials, these schematics cannot be constructed in standard Alterra Survival Fabricators.\n\n<b>Note: For your safety, the propulsion gloves cannot be used while holding objects.</b>",
@@ -276,8 +276,8 @@
   "SuitColorYellow": "Yellow",
 
   // Phase Gates
-  "ProtoPhaseGateStabilizer": "Dark Energy Stabilizer",
-  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark energy in alien technology.",
+  "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
+  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark matter in alien technology.",
   "ProtoPhaseGateStructure": "Almanite Core",
   "Tooltip_ProtoPhaseGateStructure": "A strong core used in deployable alien architecture.",
   "ProtoPhaseGateTransmitter": "Particle Transmitter",
