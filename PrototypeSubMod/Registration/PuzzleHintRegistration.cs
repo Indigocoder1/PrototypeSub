@@ -15,8 +15,15 @@ public static class PuzzleHintRegistration
         StoryGoalHandler.RegisterCustomEvent("OnPlayProtoRadioMessage1", () =>
         {
             var numberPuzzlePingPos = new Vector3(-174f, -64f, 307f);
-            UWE.CoroutineHost.StartCoroutine(SpawnPrefab(numberPuzzlePingTechType, numberPuzzlePingPos));
+            // UWE.CoroutineHost.StartCoroutine(SpawnPrefab(numberPuzzlePingTechType, numberPuzzlePingPos));
         });
+
+        StoryGoalHandler.RegisterCustomEvent("ProtoNumberPuzzleHint", () =>
+        {
+            PDAEncyclopedia.Add("ProtoNumberPuzzleHint", true);
+        });
+
+        StoryGoalHandler.RegisterCompoundGoal("ProtoNumberPuzzleHint", Story.GoalType.Encyclopedia, 20, "OnPlayProtoRadioMessage1");
         #endregion
         
         #region Bearing Puzzle Ping
@@ -24,10 +31,17 @@ public static class PuzzleHintRegistration
         StoryGoalHandler.RegisterCustomEvent("OnPlayProtoRadioMessage2", () =>
         {
             var bearingPuzzlePingPos = new Vector3(1226, -306, 534);
-            UWE.CoroutineHost.StartCoroutine(SpawnPrefab(bearingPingTechType, bearingPuzzlePingPos));
+            // UWE.CoroutineHost.StartCoroutine(SpawnPrefab(bearingPingTechType, bearingPuzzlePingPos));
         });
+
+        StoryGoalHandler.RegisterCustomEvent("ProtoBearingPuzzleHint", () =>
+        {
+            PDAEncyclopedia.Add("ProtoBearingPuzzleHint", true);
+        });
+
+        StoryGoalHandler.RegisterCompoundGoal("ProtoBearingPuzzleHint", Story.GoalType.Encyclopedia, 20, "OnPlayProtoRadioMessage2");
         #endregion
-        
+
         #region Calibration Site Ping
 
         var calibrationPingTechType = CustomPing.CreatePing("CalibrationSitePing", PingType.Signal,
@@ -48,7 +62,8 @@ public static class PuzzleHintRegistration
         {
             PDALog.Add("ProtoTransmissionSiteHint");
             PDAEncyclopedia.Add("ProtoTransmissionSiteEncy", true);
-            UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionStartTechType, Plugin.TransmissionSiteStartPos));
+            PDAEncyclopedia.Add("TransmissionSiteHint", true);
+            // UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionStartTechType, Plugin.TransmissionSiteStartPos));
             UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionSiteTechType, Plugin.TransmissionSitePos));
         });
 

@@ -557,6 +557,33 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddEncyclopediaEntry("PhaseGateEncy", "DownloadedData/Prototype/ProtoTerminal", phaseGateTitle, phaseGateBody, phaseGateBackground, phaseGatePopup, PDAHandler.UnlockImportant);
         #endregion
 
+        #region Number Puzzle Location Hint
+        var numberPuzzleHintTitle = Language.main.Get("NumberPuzzleHint_Title");
+        var numberPuzzleHintBody = Language.main.Get("NumberPuzzleHint_Body");
+        var numberPuzzleHintImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("NumberPuzzleHint");
+
+        PDAHandler.AddEncyclopediaEntry("ProtoNumberPuzzleHint", "DownloadedData/Prototype", numberPuzzleHintTitle,
+            numberPuzzleHintBody, image : numberPuzzleHintImage, unlockSound: PDAHandler.UnlockBasic);
+        #endregion
+
+        #region Bearing Puzzle Location Hint
+        var bearingPuzzleHintTitle = Language.main.Get("BearingPuzzleHint_Title");
+        var bearingPuzzleHintBody = Language.main.Get("BearingPuzzleHint_Body");
+        var bearingPuzzleHintImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("BearingPuzzleHint");
+
+        PDAHandler.AddEncyclopediaEntry("ProtoBearingPuzzleHint", "DownloadedData/Prototype", bearingPuzzleHintTitle,
+            bearingPuzzleHintBody, image: bearingPuzzleHintImage, unlockSound: PDAHandler.UnlockBasic);
+        #endregion
+
+        #region Transmission Site Start Location Hint
+        var transmissionSiteHintTitle = Language.main.Get("TransmissionSiteHint_Title");
+        var transmissionSiteHintBody = Language.main.Get("TransmissionSiteHint_Body");
+        var transmissionSiteHintImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("TransmissionSiteHint");
+
+        PDAHandler.AddEncyclopediaEntry("TransmissionSiteHint", "DownloadedData/Prototype", transmissionSiteHintTitle,
+            transmissionSiteHintBody, image: transmissionSiteHintImage, unlockSound: PDAHandler.UnlockBasic);
+        #endregion
+
         RegisterEncyEntries("DownloadedData/Prototype/ProtoUpgrades", PDAHandler.UnlockBasic, new()
         {
             "ProtoCloakEncy",
