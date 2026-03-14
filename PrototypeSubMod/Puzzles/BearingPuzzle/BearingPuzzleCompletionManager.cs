@@ -29,7 +29,6 @@ public class BearingPuzzleCompletionManager : MonoBehaviour
     public void OnFactorDownloaded()
     {
         UWE.CoroutineHost.StartCoroutine(DisableLightsDelayed());
-        ErrorMessage.AddError("Disabling lights!");
     }
 
     private IEnumerator DisableLightsDelayed()
