@@ -29,15 +29,16 @@ public class TeleporterMapManager : MonoBehaviour
         float surfaceAlpha = targetingSurface ? normalizedProgress : 1 - normalizedProgress;
         float depthsAlpha =  1 - surfaceAlpha;
         surfaceGroup.alpha = surfaceAlpha;
-        surfaceGroup.blocksRaycasts = targetingSurface;
         depthsGroup.alpha = depthsAlpha;
-        depthsGroup.blocksRaycasts = !targetingSurface;
     }
 
     public void SetTargetDepth(bool atSurface)
     {
         targetingSurface = atSurface;
         currentTransitionDuration = 0;
+        
+        surfaceGroup.blocksRaycasts = targetingSurface;
+        depthsGroup.blocksRaycasts = !targetingSurface;
     }
 
     public void ToggleDepth()
