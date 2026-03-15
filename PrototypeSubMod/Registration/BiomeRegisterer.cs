@@ -10,7 +10,7 @@ namespace PrototypeSubMod.Registration;
 
 internal static class BiomeRegisterer
 {
-    public const string TransmissionSiteBiome = "transmissionsite_protovoid";
+    public const string TransmissionSiteBiome = "transmissionsite";
     public const string TransmissionRunupBiome = "transmissionrunup_protovoid";
     
     public static void Register()
