@@ -11,7 +11,7 @@ using UWE;
 
 namespace PrototypeSubMod.Prefabs;
 
-internal class DisplayCaseProp
+internal static class DisplayCaseProp
 {
     public static void Register(string displayObjectClassID, string newTechType, TechType scanTechType, Vector3 localOffset, Vector3 localScale, string[] destroyChildObjects = null)
     {
@@ -21,10 +21,8 @@ internal class DisplayCaseProp
         var cloneTemplate = new CloneTemplate(prefabInfo, "d0fea4da-39f2-47b4-aece-bb12fe7f9410");
 
         CraftData.PreparePrefabIDCache();
-        cloneTemplate.ModifyPrefabAsync = gameObject =>
-        {
-            return ModifyPrefab(gameObject, displayObjectClassID, scanTechType, localOffset, localScale, destroyChildObjects);
-        };
+        cloneTemplate.ModifyPrefabAsync = gameObject => ModifyPrefab(gameObject, displayObjectClassID, scanTechType,
+            localOffset, localScale, destroyChildObjects);
 
         prefab.SetGameObject(cloneTemplate);
 
@@ -36,8 +34,7 @@ internal class DisplayCaseProp
         var prefabTask = PrefabDatabase.GetPrefabAsync(displayObjectClassID);
         yield return prefabTask;
 
-        GameObject modelPrefab = null;
-        if (!prefabTask.TryGetPrefab(out modelPrefab))
+        if (!prefabTask.TryGetPrefab(out var modelPrefab))
         {
             throw new Exception($"Error retrieving prefab with class ID = {displayObjectClassID}");
         }
