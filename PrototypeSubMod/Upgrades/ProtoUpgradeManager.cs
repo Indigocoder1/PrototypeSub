@@ -2,6 +2,7 @@
 using PrototypeSubMod.SaveData;
 using SubLibrary.SaveData;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.PowerSystem;
@@ -158,7 +159,21 @@ internal class ProtoUpgradeManager : MonoBehaviour, ISaveDataListener
         GetComponentInChildren<ProtoFinsManager>().SetInstalledFinCount(4);
         GetComponentInChildren<PrototypePowerSystem>().SetAllowedSourcesCount(6);
         
-        ErrorMessage.AddError("All upgrades installed; relays and fins set to max");
+        ErrorMessage.AddError("Prototype story progressed to the end. Final ping spawned");
+        
+        if (Plugin.GlobalSaveData.storyEndPingSpawned) return;
+        
+        Plugin.GlobalSaveData.storyEndPingSpawned = true;
+        UWE.CoroutineHost.StartCoroutine(SpawnStoryPing());
+    }
+
+    private IEnumerator SpawnStoryPing()
+    {
+        var task = CraftData.GetPrefabForTechTypeAsync(Plugin.StoryEndPingTechType);
+        yield return task;
+
+        var prefab = task.GetResult();
+        Instantiate(prefab, Plugin.StoryEndPos, Quaternion.identity);
     }
 
     private (bool, TechType) TryParseTTFromNotification(NotificationCenter.Notification notification)
