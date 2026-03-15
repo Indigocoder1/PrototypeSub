@@ -159,7 +159,7 @@ internal class ProtoUpgradeManager : MonoBehaviour, ISaveDataListener
         GetComponentInChildren<ProtoFinsManager>().SetInstalledFinCount(4);
         GetComponentInChildren<PrototypePowerSystem>().SetAllowedSourcesCount(6);
         
-        ErrorMessage.AddError("Prototype story progressed to the end. Final ping spawned");
+        ErrorMessage.AddError("Prototype story progressed to the end: all upgrades installed and final ping spawned");
         
         if (Plugin.GlobalSaveData.storyEndPingSpawned) return;
         
