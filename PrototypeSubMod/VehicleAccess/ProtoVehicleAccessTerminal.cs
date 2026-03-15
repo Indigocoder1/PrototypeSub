@@ -171,6 +171,7 @@ public class ProtoVehicleAccessTerminal : MonoBehaviour
     public void OnPlayerExitRange()
     {
         animator.SetBool(ProxyActivated, false);
+        if (!dockingBay.dockedVehicle) return;
         depotCloseSFX.Play();
     }
 }
