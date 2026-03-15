@@ -76,7 +76,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     {
         if (GetNormalizedDistFromCenter() < 1) return;
         
-        ErrorMessage.AddError("Too far from line! Failed calibration run");
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineScream"), transform.position);
         doingCalibrationRun = false;
         nextPointIndex = 1;
         calibrationObjects.SetActive(false);
@@ -89,17 +89,18 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         var dist = Vector3.Distance(transform.position, calibrationPoints[nextPointIndex]);
         if (dist > distToCountAsReached) return;
         
-        ErrorMessage.AddError($"Reached point {nextPointIndex}");
+        // ErrorMessage.AddError($"Reached point {nextPointIndex}");
         OnPointReached?.Invoke(nextPointIndex);
         nextPointIndex++;
 
         if (nextPointIndex < calibrationPoints.Length)
         {
             voiceNotificationManager.PlayVoiceNotification(reachedPointVoiceline);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Searching"), transform.position);
             return;
         }
         
-        ErrorMessage.AddError("Calibration complete");
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Found"), transform.position);
         nextPointIndex = 1;
         doingCalibrationRun = false;
         calibrationObjects.SetActive(false);
@@ -127,10 +128,10 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         if (!(Vector3.Distance(calibrationPoints[0], transform.position) < distToCountAsReached)) return;
         
         doingCalibrationRun = true;
-        ErrorMessage.AddError("Started calibration run");
         OnPointReached?.Invoke(0);
         calibrationObjects.SetActive(true);
         voiceNotificationManager.PlayVoiceNotification(startedCalibrationVoiceline);
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Searching"), transform.position);
     }
 
     public string GetProfileTag() => "CalibrationRunManager";
