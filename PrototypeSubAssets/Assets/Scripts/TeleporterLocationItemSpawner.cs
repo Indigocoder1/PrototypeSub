@@ -1,10 +1,12 @@
 ﻿using PrototypeSubMod.Teleporter;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Test : MonoBehaviour
+public class TeleporterLocationItemSpawner : MonoBehaviour
 {
     public bool spawnPrefabs;
+    public bool setAllDirty;
     public float realToMapScaleRatio;
     public ProtoTeleporterIDManager teleporterIDManager;
     public Transform itemsParent;
@@ -12,6 +14,12 @@ public class Test : MonoBehaviour
 
     #if UNITY_EDITOR
     private void OnDrawGizmos()
+    {
+        HandleSpawning();
+        HandleDirtying();
+    }
+
+    private void HandleSpawning()
     {
         if (!spawnPrefabs) return;
         spawnPrefabs = false;
@@ -27,6 +35,20 @@ public class Test : MonoBehaviour
 
             bool host = positionData.Key.Contains("M");
             item.SetInfo(positionData.Key, host, teleporterIDManager);
+            EditorUtility.SetDirty(item);
+        }
+    }
+
+    private void HandleDirtying()
+    {
+        if (!setAllDirty) return;
+        setAllDirty = false;
+
+        foreach (var item in GetComponentsInChildren<TeleporterLocationItem>(true))
+        {
+            EditorUtility.SetDirty(item);
+            EditorUtility.SetDirty(item.GetComponentInChildren<Button>());
+            EditorUtility.SetDirty(item.gameObject);
         }
     }
 #endif

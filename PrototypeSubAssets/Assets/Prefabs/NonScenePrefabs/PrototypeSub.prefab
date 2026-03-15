@@ -122168,6 +122168,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleporterLocation
       objectReference: {fileID: 0}
+    - target: {fileID: 1686889157971359777, guid: c3be0cd1d9513cb4e83ebaf019d1942d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4571450959396615905, guid: c3be0cd1d9513cb4e83ebaf019d1942d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -125004,6 +125009,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleporterLocation
       objectReference: {fileID: 0}
+    - target: {fileID: 1686889157971359777, guid: c3be0cd1d9513cb4e83ebaf019d1942d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4571450959396615905, guid: c3be0cd1d9513cb4e83ebaf019d1942d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -127263,6 +127273,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1602700942083908142}
     m_Modifications:
+    - target: {fileID: 142632456553596713, guid: c3be0cd1d9513cb4e83ebaf019d1942d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1686889157971359777, guid: c3be0cd1d9513cb4e83ebaf019d1942d,
         type: 3}
       propertyPath: m_Name
