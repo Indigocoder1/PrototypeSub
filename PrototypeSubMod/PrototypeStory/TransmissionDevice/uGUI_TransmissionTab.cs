@@ -50,7 +50,6 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         if (!onCorrectSequence || !InTransmissionSite())
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
-            ErrorMessage.AddError(Language.main.Get("ProtoInvalidTransmission"));
             return;
         }
         
