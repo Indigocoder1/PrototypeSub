@@ -1,6 +1,7 @@
 ﻿using System;
 using Story;
 using System.Collections;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using UnityEngine;
 
 namespace PrototypeSubMod.SubTerminal;
@@ -41,7 +42,7 @@ internal class BuildTerminalScreenManager : MonoBehaviour
     }
 
     // Called by VFX Constructing in Update via SendMessage()
-    public void OnConstructionDone()
+    public void OnConstructionDone(GameObject sender)
     {
         isBuilding = false;
     }
@@ -151,5 +152,11 @@ internal class BuildTerminalScreenManager : MonoBehaviour
     private void OnEnable()
     {
         EnableRelevantScreens();
+        SubConstructionCompleteEvent.OnSubConstructed += OnConstructionDone;
+    }
+
+    private void OnDisable()
+    {
+        SubConstructionCompleteEvent.OnSubConstructed -= OnConstructionDone;
     }
 }
