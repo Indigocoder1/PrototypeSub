@@ -440,7 +440,7 @@ internal static class EncyEntryRegisterer
         var transmissionSiteTitle = Language.main.Get("ProtoTransmissionSiteEncy_Title");
         var transmissionSiteBody = Language.main.Get("ProtoTransmissionSiteEncy_Body");
         var transmissionSiteImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("TransmissionSiteDirectionsEncy");
-        PDAHandler.AddEncyclopediaEntry("ProtoTransmissionSiteEncy", "DownloadedData/Prototype", transmissionSiteTitle,
+        PDAHandler.AddEncyclopediaEntry("ProtoTransmissionSiteEncy", "DownloadedData/Prototype/AlienClues", transmissionSiteTitle,
             transmissionSiteBody, transmissionSiteImage, unlockSound: PDAHandler.UnlockBasic);
 
         #endregion
@@ -450,7 +450,7 @@ internal static class EncyEntryRegisterer
         var calibrationCodeTitle = Language.main.Get("ProtoCalibrationCodeEncy_Title");
         var calibrationCodeBody = Language.main.Get("ProtoCalibrationCodeEncy_Body");
         var calibrationCodeImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoCalibrationCodeEncy");
-        PDAHandler.AddEncyclopediaEntry("ProtoCalibrationCodeEncy", "DownloadedData/Prototype", calibrationCodeTitle,
+        PDAHandler.AddEncyclopediaEntry("ProtoCalibrationCodeEncy", "DownloadedData/Prototype/AlienClues", calibrationCodeTitle,
             calibrationCodeBody, calibrationCodeImage, unlockSound: PDAHandler.UnlockBasic);
 
         #endregion
@@ -487,7 +487,7 @@ internal static class EncyEntryRegisterer
         string protoNumbersDescription = Language.main.Get("ProtoNumbersEncy_Body");
         Texture2D protoNumbersBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoNumbersEncy");
         
-        PDAHandler.AddEncyclopediaEntry("ProtoNumbersEncy", "DownloadedData/Prototype/ProtoTerminal", protoNumbersTitle,
+        PDAHandler.AddEncyclopediaEntry("ProtoNumbersEncy", "DownloadedData/Prototype/AlienClues", protoNumbersTitle,
             protoNumbersDescription, protoNumbersBackground, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 
@@ -562,7 +562,7 @@ internal static class EncyEntryRegisterer
         var numberPuzzleHintBody = Language.main.Get("NumberPuzzleHint_Body");
         var numberPuzzleHintImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("NumberPuzzleHint");
 
-        PDAHandler.AddEncyclopediaEntry("ProtoNumberPuzzleHint", "DownloadedData/Prototype", numberPuzzleHintTitle,
+        PDAHandler.AddEncyclopediaEntry("ProtoNumberPuzzleHint", "DownloadedData/Prototype/AlienClues", numberPuzzleHintTitle,
             numberPuzzleHintBody, image : numberPuzzleHintImage, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 
@@ -571,7 +571,7 @@ internal static class EncyEntryRegisterer
         var bearingPuzzleHintBody = Language.main.Get("BearingPuzzleHint_Body");
         var bearingPuzzleHintImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("BearingPuzzleHint");
 
-        PDAHandler.AddEncyclopediaEntry("ProtoBearingPuzzleHint", "DownloadedData/Prototype", bearingPuzzleHintTitle,
+        PDAHandler.AddEncyclopediaEntry("ProtoBearingPuzzleHint", "DownloadedData/Prototype/AlienClues", bearingPuzzleHintTitle,
             bearingPuzzleHintBody, image: bearingPuzzleHintImage, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 
@@ -580,7 +580,7 @@ internal static class EncyEntryRegisterer
         var transmissionSiteHintBody = Language.main.Get("TransmissionSiteHint_Body");
         var transmissionSiteHintImage = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("TransmissionSiteHint");
 
-        PDAHandler.AddEncyclopediaEntry("TransmissionSiteHint", "DownloadedData/Prototype", transmissionSiteHintTitle,
+        PDAHandler.AddEncyclopediaEntry("TransmissionSiteHint", "DownloadedData/Prototype/AlienClues", transmissionSiteHintTitle,
             transmissionSiteHintBody, image: transmissionSiteHintImage, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 

@@ -74,6 +74,7 @@
   "EncyPath_DownloadedData/Prototype/ProtoUpgrades": "Prototype Vessel Upgrades",
   "EncyPath_DownloadedData/Prototype/ProtoTerminal": "Terminal Data",
   "EncyPath_DownloadedData/Prototype/Scanned": "Scanned Data",
+  "EncyPath_DownloadedData/Prototype/AlienClues": "Alien Clues",
 
   "ProtoPrecursorIngotEncy_Title": "Almanite Framework",
   "ProtoPrecursorIngotEncy_Body": "An advanced material with high structural integrity. Its core, composed of charged almanite, stabilizes 8 external frames used for dynamic construction.\n\nAnalysis:\n- Unprecedenteed structural integrity\n- Used in reinforced alien construction\n- Requires multiple advanced materials",
