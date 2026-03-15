@@ -208,7 +208,7 @@
   "BearingPuzzleHint_Body": "▙┏┏▙take▄┅ ▙┏┏▙▄┅ ▙┏┏ ▙homeworld▖▝ ▙▖▝ ┻▚ ▖┗▚\n┃┣┅┓▞▞┃▜ ▗╋▚┗┅ ▘┏┏▄ locate┣▝▞┃▜┛ ▞┃ ┣▝▞┛ ╋▞▙┏\n┃▜▖━▞┃▜ ▞┛ ▖━▖┇▞transmit┃▜ ┻▚ ▄┏╋▚ ┣┏ ━▖▀▚ ▜▖━▚┛ ▗▖▗▖▜▖▗┏┏┛▝",
 
   "TransmissionSiteHint_Title": "Alien Transmission Site (1/2)",
-  "TransmissionSiteHint_Body": "┻▚┃▖━▚t▘ans▝m▖t▞┃┣▝▚┛┏━▖ ┣┏me ━▖▝▖┗┣▗▚▚┣┛┏┫┃▙\n\n┓▄▚▖┛t▚ke┣▖▀▚━▚ ▝┏━▚ ┅┏┫ me▄▞┣┣▄▚ ┛▝▞┣\n┃▞ ┻▖┃┣ ┣┏ ▜┏home┏━▚ ┅┏┫ ┃▚┗▙",
+  "TransmissionSiteHint_Body": "The signal attached to this message appears to be coming from a location on the very outer edge of the crater. The message is unable to be fully translated and reads as follows:\n\n┻▚┃▖━▚t▘ans▝m▖t▞┃┣▝▚┛┏━▖ ┣┏me ━▖▝▖┗┣▗▚▚┣┛┏┫┃▙\n\n┓▄▚▖┛t▚ke┣▖▀▚━▚ ▝┏━▚ ┅┏┫ me▄▞┣┣▄▚ ┛▝▞┣\n┃▞ ┻▖┃┣ ┣┏ ▜┏home┏━▚ ┅┏┫ ┃▚┗▙",
 
   // Cameras
   "PrototypeCam1": "Camera ┓ - ▛┗┏┃┣▝",
