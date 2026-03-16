@@ -1,4 +1,5 @@
-﻿using SubLibrary.Monobehaviors;
+﻿using System.Collections;
+using SubLibrary.Monobehaviors;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,6 +25,13 @@ internal class EmissionColorController : PrefabModifier
         transitionTimeOut = 1 / transitionSpeed * 8f;
         currentTransitionTime = transitionTimeOut;
 
+        UWE.CoroutineHost.StartCoroutine(Initialize());
+    }
+
+    private IEnumerator Initialize()
+    {
+        yield return null;
+        
         foreach (var rend in subRoot.GetComponentsInChildren<Renderer>(true))
         {
             if (rend.TryGetComponent(out EmissionControllerExempt _)) continue;
