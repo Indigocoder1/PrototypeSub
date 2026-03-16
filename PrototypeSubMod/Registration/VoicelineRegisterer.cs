@@ -78,7 +78,11 @@ public static class VoicelineRegisterer
         "Proto_ConstructionStart",
         "Proto_ConstructionFinish",
         "Proto_ApproachTerminal",
-        "Proto_FirstInteract"
+        "Proto_FirstInteract",
+        "Proto_DeadZoneMappingImminent",
+        "Proto_ReadyingDetectors",
+        "Proto_PleaseDoNotProceed",
+        "Proto_DeadZoneMappingInitialized"
     };
     
     public static void UpdateVoicelines()

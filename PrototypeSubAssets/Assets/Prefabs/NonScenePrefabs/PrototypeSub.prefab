@@ -2273,7 +2273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activationDistance: 150
-  saveLockDistance: 300
+  saveLockDistance: 1000
   checkInterval: 2
   subRoot: {fileID: 6246764057006774658}
   upgradeManager: {fileID: 9153870078702174837}
@@ -2290,6 +2290,9 @@ MonoBehaviour:
   - {fileID: 1151785989363241043}
   - {fileID: 6093697494563109956}
   teleporterManager: {fileID: 4787321135117219906}
+  controller: {fileID: 166681490149920772}
+  emissionController: {fileID: 3371763760948927259}
+  emissiveColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &5078914799393188479
 MonoBehaviour:
   m_ObjectHideFlags: 0

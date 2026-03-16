@@ -1,19 +1,21 @@
 ﻿using PrototypeSubMod.EngineLever;
+using PrototypeSubMod.MiscMonobehaviors.Emission;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.MotorHandler;
 using PrototypeSubMod.Patches;
+using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.Teleporter;
+using PrototypeSubMod.UI.AbilitySelection;
 using PrototypeSubMod.Upgrades;
+using PrototypeSubMod.Utility;
+using Story;
 using SubLibrary.Monobehaviors;
+using SubLibrary.SubFire;
 using System;
 using System.Collections;
 using System.Linq;
-using PrototypeSubMod.MiscMonobehaviors.SubSystems;
-using PrototypeSubMod.PowerSystem;
-using PrototypeSubMod.UI.AbilitySelection;
-using PrototypeSubMod.Utility;
-using Story;
-using SubLibrary.SubFire;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 namespace PrototypeSubMod.PrototypeStory;
 
@@ -41,6 +43,9 @@ internal class ProtoStoryLocker : MonoBehaviour
     [SerializeField] private GameObject[] interceptorButtons;
     [SerializeField] private InterfloorTeleporter[] teleporters;
     [SerializeField] private ProtoTeleporterManager teleporterManager;
+    [SerializeField] private LightingController controller;
+    [SerializeField] private EmissionColorController emissionController;
+    [SerializeField] private Color emissiveColor = Color.black;
 
     private bool wasInLockZone;
     private bool enteredFullLock;
@@ -100,6 +105,12 @@ internal class ProtoStoryLocker : MonoBehaviour
             upgrade.SetUpgradeLocked(true);
             tetherManager.UpdateIcon(upgrade);
         }
+
+        StoryGoalManager.main.OnGoalComplete("Proto_DeadZoneMappingInitialized");
+
+        emissionController.RegisterTempColor(this, new EmissionColorController.EmissionRegistrarData
+            (emissiveColor, 20));
+        ErrorMessage.AddError($"Turning {emissionController.name}, into the color: {emissiveColor}");
 
         motorHandler.RemoveAllNoiseOverrides();
         motorHandler.RemoveAllPowerMultipliers();

@@ -21,7 +21,6 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_Breach0Left", "PDA_Breach0Left"));
         PDALog_Patches.entries.Add(("PDA_OnEnterEngineFacility", "OnEnterEngineFacility"));
         PDALog_Patches.entries.Add(("PDA_OnTeleportToIsland", "OnInterceptorSequenceFinished"));
-        PDALog_Patches.entries.Add(("PDA_OnEnterStoryEnd", "OnEnterStoryEndProximity"));
         PDALog_Patches.entries.Add(("PDA_OnEnterQEP", "OnEnterPrecursorGun"));
         PDALog_Patches.entries.Add(("PDA_OnEnterGrandReef", "ProtoOnEnterGrandReef"));
         PDALog_Patches.entries.Add(("PDA_ApproachEngineFacility", "ProtoApproachEngineFacility"));
@@ -36,6 +35,13 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_Lifepod3", "Lifepod3PDA"));
         PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoBearingPuzzle"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "EngineFacilityReturnHint"));
+
+        // Bad ending voicelines
+        PDALog_Patches.entries.Add(("PDA_BadEndingIntro", "BadEndingIntro"));
+        PDALog_Patches.entries.Add(("Proto_DeadZoneMappingImminent", "Proto_DeadZoneMappingImminent"));
+        PDALog_Patches.entries.Add(("Proto_ReadyingDetectors", "Proto_ReadyingDetectors"));
+        PDALog_Patches.entries.Add(("Proto_PleaseDoNotProceed", "Proto_PleaseDoNotProceed"));
+        PDALog_Patches.entries.Add(("Proto_DeadZoneMappingInitialized", "Proto_DeadZoneMappingInitialized"));
 
         PDALog_Patches.entries.Add(("FacilityVoiceFetchingProfile", "OnEnterProtoNumberPuzzle"));
         PDALog_Patches.entries.Add(("FacilityVoiceProfileFound", "OnEnterProtoNumberPuzzle_ProfileFound"));

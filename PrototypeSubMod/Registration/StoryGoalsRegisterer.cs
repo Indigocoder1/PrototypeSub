@@ -393,14 +393,45 @@ internal static class StoryGoalsRegisterer
         #endregion
 
         #region Fins first installed
-
-
         StoryGoalHandler.RegisterCustomEvent("FinsFirstInstalled", () =>
         {
             var hintText = Language.main.Get("ProtoDockVehicleHint");
             Hint.main.message.SetText(hintText, TextAnchor.MiddleCenter);
             Hint.main.message.Show();
         });
+        #endregion
+        #region Bad ending voicelines
+        StoryGoalHandler.RegisterCustomEvent("OnEnterStoryEndProximity", () =>
+        {
+            PDALog.Add("BadEndingIntro");
+        });
+
+        StoryGoalHandler.RegisterCustomEvent("Proto_DeadZoneMappingImminent", () =>
+        {
+            PDALog.Add("Proto_DeadZoneMappingImminent");
+        });
+
+        StoryGoalHandler.RegisterCustomEvent("Proto_ReadyingDetectors", () =>
+        {
+            PDALog.Add("Proto_ReadyingDetectors");
+        });
+
+        StoryGoalHandler.RegisterCustomEvent("Proto_PleaseDoNotProceed", () =>
+        {
+            PDALog.Add("Proto_PleaseDoNotProceed");
+        });
+
+        StoryGoalHandler.RegisterCustomEvent("Proto_DeadZoneMappingInitialized", () =>
+        {
+            PDALog.Add("Proto_DeadZoneMappingInitialized");
+        });
+
+        StoryGoalHandler.RegisterCompoundGoal("Proto_DeadZoneMappingImminent", Story.GoalType.Story, 10, "OnEnterStoryEndProximity");
+
+        StoryGoalHandler.RegisterCompoundGoal("Proto_ReadyingDetectors", Story.GoalType.Story, 10, "Proto_DeadZoneMappingImminent");
+
+        StoryGoalHandler.RegisterCompoundGoal("Proto_PleaseDoNotProceed", Story.GoalType.Story, 10, "Proto_ReadyingDetectors");
+
         #endregion
 
         StoryGoalHandler.RegisterCustomEvent("HullFacilityTeleporterUnlocked", () =>
@@ -457,10 +488,6 @@ internal static class StoryGoalsRegisterer
             PDAEncyclopedia.Add("EngineFacilityTabletEncy", true);
         });
         
-        StoryGoalHandler.RegisterCustomEvent("OnEnterStoryEndProximity", () =>
-        {
-            PDALog.Add("OnEnterStoryEndProximity");
-        });
 
         StoryGoalHandler.RegisterBiomeGoal("OnEnterPrecursorGun", Story.GoalType.PDA, "Precursor_Gun_OuterRooms", 0, delay: 20);
         StoryGoalHandler.RegisterCustomEvent("OnEnterPrecursorGun", () =>
