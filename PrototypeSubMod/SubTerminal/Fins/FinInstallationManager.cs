@@ -1,6 +1,7 @@
-﻿using System;
-using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+﻿using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.SubTerminal.Relays;
+using Story;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -79,5 +80,11 @@ public class FinInstallationManager : MonoBehaviour
             installationButtons[finsManager.GetInstalledFinCount()].UnlockTechType();
         }
         UpdateIcons();
+
+        if (!StoryGoalManager.main.IsGoalComplete("FinsFirstInstalled") && finsManager.GetInstalledFinCount() == 1)
+        {
+            StoryGoalManager.main.OnGoalComplete("FinsFirstInstalled");
+        }
+
     }
 }

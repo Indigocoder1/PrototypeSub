@@ -392,6 +392,17 @@ internal static class StoryGoalsRegisterer
         StoryGoalHandler.RegisterCompoundGoal("EngineScream", Story.GoalType.Story, 7f, "EngineFacilityReturnHint");
         #endregion
 
+        #region Fins first installed
+
+
+        StoryGoalHandler.RegisterCustomEvent("FinsFirstInstalled", () =>
+        {
+            var hintText = Language.main.Get("ProtoDockVehicleHint");
+            Hint.main.message.SetText(hintText, TextAnchor.MiddleCenter);
+            Hint.main.message.Show();
+        });
+        #endregion
+
         StoryGoalHandler.RegisterCustomEvent("HullFacilityTeleporterUnlocked", () =>
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineAllBreachesRepaired"), Player.main.transform.position);
