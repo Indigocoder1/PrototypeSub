@@ -70,6 +70,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         
         HandleIndexIncrements();
         HandleDistanceFromCenter();
+        HandleWrongPointFailure();
     }
 
     private void HandleDistanceFromCenter()
@@ -89,7 +90,6 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         var dist = Vector3.Distance(transform.position, calibrationPoints[nextPointIndex]);
         if (dist > distToCountAsReached) return;
         
-        // ErrorMessage.AddError($"Reached point {nextPointIndex}");
         OnPointReached?.Invoke(nextPointIndex);
         nextPointIndex++;
 
@@ -106,6 +106,25 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         calibrationObjects.SetActive(false);
         StoryGoalManager.main.OnGoalComplete("OnCalibrationRunCompleted");
         OnCalibrationCompleted?.Invoke();
+    }
+
+    private void HandleWrongPointFailure()
+    {
+        for (int i = 0; i < calibrationPoints.Length; i++)
+        {
+            if (i == nextPointIndex || i == nextPointIndex - 1) continue;
+            
+            if ((transform.position - calibrationPoints[i]).sqrMagnitude > distToCountAsReached * distToCountAsReached) continue;
+
+            ErrorMessage.AddError("Wrong point reached! Calibration failed");
+            doingCalibrationRun = false;
+            nextPointIndex = 1;
+            calibrationObjects.SetActive(false);
+            OnCalibrationFailed?.Invoke();
+            voiceNotificationManager.PlayVoiceNotification(failedCalibrationVoiceline);
+
+            break;
+        }
     }
 
     public float GetNormalizedDistFromCenter()
