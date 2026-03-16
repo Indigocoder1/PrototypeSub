@@ -2,6 +2,7 @@
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Handlers;
 using Nautilus.Utility;
+using PrototypeSubMod.MiscMonobehaviors;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using UnityEngine;
@@ -151,6 +152,8 @@ internal static class BiomeRegisterer
         {
             var volum = prefab.GetComponent<AtmosphereVolume>();
             prefab.AddComponent<AtmospherePriorityEnsurer>().priority = volum.priority;
+            var biomeScaler = prefab.AddComponent<IncreaseSizeOnBiomeEnter>();
+            biomeScaler.SetInfo(TransmissionSiteBiome, 4f);
         };
 
         transmissionVolumePrefab.SetGameObject(transmissionTemplate);
