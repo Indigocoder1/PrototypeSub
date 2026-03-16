@@ -139,6 +139,18 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         GetComponent<Pickupable>().Drop();
     }
 
+    // Called via SendMessage in Pickupable
+    private void OnExamine()
+    {
+        deployed = false;
+        activated = false;
+        poweredDownObjects.SetActive(true);
+        poweredUpObjects.SetActive(false);
+        idleSfx.Stop();
+        deviceAnimator.SetTrigger("Deactivate");
+        Plugin.GlobalSaveData.activatedTransmissionDevices.Remove(GetComponent<PrefabIdentifier>().Id);
+    }
+
     public void PlayEndingCinematic()
     {
         Player.main.pda.Close();

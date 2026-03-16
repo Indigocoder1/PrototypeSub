@@ -6245,7 +6245,7 @@ MonoBehaviour:
   selectionMenuManager: {fileID: 2803608410014716689}
   deploySFX: {fileID: 2026357936259892559}
   launchDelay: 3
-  launchForce: 3000
+  launchForce: 1500
 --- !u!114 &300854810106142240
 MonoBehaviour:
   m_ObjectHideFlags: 0
