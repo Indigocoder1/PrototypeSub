@@ -43,7 +43,7 @@ internal class ProtoStoryLocker : MonoBehaviour
     [SerializeField] private GameObject[] interceptorButtons;
     [SerializeField] private InterfloorTeleporter[] teleporters;
     [SerializeField] private ProtoTeleporterManager teleporterManager;
-    [SerializeField] private LightingController controller;
+    [SerializeField] private LightingController lightingController;
     [SerializeField] private EmissionColorController emissionController;
     [SerializeField] private Color emissiveColor = Color.black;
 
@@ -109,8 +109,7 @@ internal class ProtoStoryLocker : MonoBehaviour
         StoryGoalManager.main.OnGoalComplete("Proto_DeadZoneMappingInitialized");
 
         emissionController.RegisterTempColor(this, new EmissionColorController.EmissionRegistrarData
-            (emissiveColor, 20));
-        ErrorMessage.AddError($"Turning {emissionController.name}, into the color: {emissiveColor}");
+            (emissiveColor, 30));
 
         motorHandler.RemoveAllNoiseOverrides();
         motorHandler.RemoveAllPowerMultipliers();
