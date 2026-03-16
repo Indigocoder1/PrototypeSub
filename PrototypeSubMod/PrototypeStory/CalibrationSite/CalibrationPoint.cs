@@ -1,4 +1,5 @@
-﻿using PrototypeSubMod.Puzzles.BearingPuzzle;
+﻿using System;
+using PrototypeSubMod.Puzzles.BearingPuzzle;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class CalibrationPoint : MonoBehaviour
     [SerializeField] private float maxUpdateDistance;
     
     private Image bearingImage;
-    
+
     private void LateUpdate()
     {
         var mainCamera = Camera.main;
@@ -47,5 +48,20 @@ public class CalibrationPoint : MonoBehaviour
         
         var distToCamera = Vector3.Distance(Camera.main.transform.position, transform.position);
         UpdateAlpha(distToCamera);
+    }
+
+    private void OnCalibrationComplete()
+    {
+        Destroy(gameObject);
+    }
+    
+    private void OnEnable()
+    {
+        CalibrationRunManager.OnCalibrationCompleted += OnCalibrationComplete;
+    }
+    
+    private void OnDisable()
+    {
+        CalibrationRunManager.OnCalibrationCompleted -= OnCalibrationComplete;
     }
 }

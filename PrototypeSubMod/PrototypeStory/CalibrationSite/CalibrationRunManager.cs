@@ -36,6 +36,8 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 
     private void Start()
     {
+        if (StoryGoalManager.main.IsGoalComplete("OnCalibrationRunCompleted")) return;
+        
         // Add one to account for initial point
         calibrationPoints = new Vector3[relativePointAngles.Length + 1];
         calibrationPoints[0] = InitialPoint;
@@ -68,9 +70,9 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     {
         if (!doingCalibrationRun) return;
         
+        HandleWrongPointFailure();
         HandleIndexIncrements();
         HandleDistanceFromCenter();
-        HandleWrongPointFailure();
     }
 
     private void HandleDistanceFromCenter()
