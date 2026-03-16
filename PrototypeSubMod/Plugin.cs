@@ -387,6 +387,7 @@ namespace PrototypeSubMod
             BiomeRegisterer.Register();
             LootRegister.Register();
             CommandRegisterer.Register();
+            ConsoleCommandsHandler.RegisterConsoleCommands(typeof(CommandRegisterer));
             MiscellaneousRegistered = true;
         }
 
