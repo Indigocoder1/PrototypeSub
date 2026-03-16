@@ -154,11 +154,14 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     public void PlayEndingCinematic()
     {
         Player.main.pda.Close();
+        Player.main.pda.Deactivated();
+        Player.main.SetScubaMaskActive(false);
         HideForScreenshots.Hide(HideForScreenshots.HideType.HUD);
         Player_Patches.SetOxygenReqOverride(true, 0);
         IngameMenu_Patches.SetDenySaving(true);
-        Player.main.EnterLockedMode(null);
         Player.main.cinematicModeActive = true;
+        Player.main.playerController.SetEnabled(false);
+        Inventory.main.quickSlots.DeselectImmediate();
         Player.main.FreezeStats();
         Player.main.transform.Find("body").gameObject.SetActive(false);
         cinematicAnimator.SetTrigger("PlayAnim");
