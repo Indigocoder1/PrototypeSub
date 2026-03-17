@@ -425,6 +425,7 @@
   // HUD
   "ProtoToggleStrafe": "Toggle strafe",
   "ProtoRadialHint": "Open radial menu",
+  "ProtoInterceptorMapHint": "Open the\ninterceptor map",
 
   // Voice Notifications
   "Proto_AbandonShip": "{0}: Warning: Critical hull failure! Pressure destabilizing! Abandon ship!",

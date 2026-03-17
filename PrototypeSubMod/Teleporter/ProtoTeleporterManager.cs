@@ -3,6 +3,7 @@ using System.Collections;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Upgrades;
 using PrototypeSubMod.Facilities.Interceptor;
+using Story;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

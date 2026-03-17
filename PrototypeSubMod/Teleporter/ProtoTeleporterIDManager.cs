@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using PrototypeSubMod.SaveData;
+using Story;
 using SubLibrary.SaveData;
 using TMPro;
 using UnityEngine;
@@ -129,6 +130,11 @@ public class ProtoTeleporterIDManager : MonoBehaviour, ISaveDataListener
     {
         screenActive = active;
         animator.SetBool(ScreenActive, screenActive);
+
+        if (active)
+        {
+            StoryGoalManager.main.OnGoalComplete("ProtoOpenInterceptorMap");
+        }
     }
 
     public void OnSaveDataLoaded(BaseSubDataClass saveData)
