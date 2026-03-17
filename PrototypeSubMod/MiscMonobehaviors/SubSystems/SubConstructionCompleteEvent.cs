@@ -8,8 +8,8 @@ public class SubConstructionCompleteEvent : MonoBehaviour
     public static event Action<GameObject> OnSubConstructed; 
     
     // Called via BroadcastMessage by VFXConstructing
-    private void SubConstructionComplete(GameObject sender)
+    private void SubConstructionComplete()
     {
-        OnSubConstructed?.Invoke(sender);
+        OnSubConstructed?.Invoke(null);
     }
 }
