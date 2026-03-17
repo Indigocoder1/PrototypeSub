@@ -20,6 +20,8 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private float laserTravelTime;
     [SerializeField] private int parriesToResetAggression = 3;
     [SerializeField] private float timePassiveAfterParries;
+    [SerializeField] private float timeBetweenTargetJitters = 0.2f;
+    [SerializeField] private float jitterMagnitude = 5f;
     
     [Header("SFX")]
     [SerializeField] private WyrmRoarManager roarManager;
@@ -33,10 +35,12 @@ public class WyrmShootTarget : CreatureAction
     private GameObject laserVFX;
     private GameObject muzzleVFX;
     private GameObject impactVFX;
+    private Vector3 lastJitterVector;
     private bool performing;
     private bool canShoot;
     private bool hasShot;
     private float currentChargeUpTime;
+    private float timeLastJittered;
     private int rightHandVectorSign;
     private int attackStage;
     private int timesParried;
@@ -226,8 +230,6 @@ public class WyrmShootTarget : CreatureAction
         }
 
         var targetPos = targetMixin.transform.position;
-        var player = Player.main;
-
         var laserTargetPoint = targetPos;
         var effectHandler = targetMixin.GetComponentInChildren<CloakEffectHandler>();
 
@@ -341,18 +343,29 @@ public class WyrmShootTarget : CreatureAction
         if (cloak != null && cloak.GetActive())
         {
             // Aim at cloaked sub
-            positions[1] = cloak.GetContinuousPointOnSurface();
+            positions[1] = cloak.GetContinuousPointOnSurface() + lastJitterVector;
         }
         else if (cloak != null)
         {
             // Aim at sub with offset when cloak isn't active
             positions[1] = cloak.GetClosestPointOnSurface(
-                targetPos + targetMixin.transform.forward * 50f, -4f);
+                targetPos + targetMixin.transform.forward * 50f, -4f) + lastJitterVector;
+        }
+        else if (Player.main.currentSub != null)
+        {
+            var currentSub = Player.main.currentSub;
+            positions[1] = currentSub.centerOfMass.position + currentSub.subAxis.forward * 30f + lastJitterVector;
         }
         else
         {
-            // aim at player with slight downward offset to avoid particle camera clipping
+            // Aim at player with slight downward offset to avoid camera clipping
             positions[1] = targetPos + new Vector3(0, -3, 0);
+        }
+
+        if (Time.time >= timeLastJittered + timeBetweenTargetJitters)
+        {
+            timeLastJittered = Time.time;
+            lastJitterVector = Random.onUnitSphere * jitterMagnitude;
         }
 
         targetingLineRenderer.SetPositions(positions);
