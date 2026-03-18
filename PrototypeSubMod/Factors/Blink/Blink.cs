@@ -42,10 +42,10 @@ public class Blink : Factor
     private float ghostFadeTime = 0.1f;
     private float timeNextDeleteGhost;
 
-    private float chromaticAbberationVal = 3f;
+    private float chromaticAbberationVal = 2.5f;
     private float depthOfFieldVal = 0.1f;
     private float fovMultiplier = 1.5f;
-    private float fovTransitionTime = 0.1f;
+    private float fovTransitionTime = 0.5f;
     
     private float resourceRegenDelay = 2f;
     [HideInInspector] public float resourceBarFadeDelay = 1f;
