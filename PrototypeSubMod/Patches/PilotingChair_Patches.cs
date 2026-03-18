@@ -16,7 +16,7 @@ public class PilotingChair_Patches
             var exitString = LanguageCache.GetButtonFormat("PressToExit", GameInput.Button.Exit);
 
             var strafeText = Language.main.Get("ProtoToggleStrafe");
-            var formattedButton = GameInput.FormatButton(GameInput.Button.Deconstruct);
+            var formattedButton = GameInput.FormatButton(GameInput.Button.AltTool);
             var strafeString = Language.main.GetFormat("HandReticleAddButtonFormat", strafeText, formattedButton);
             HandReticle.main.SetTextRaw(HandReticle.TextType.Use, $"{exitString} | {strafeString}");
         }
