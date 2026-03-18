@@ -17,6 +17,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!114 &4083334904265718174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +401,7 @@ MonoBehaviour:
   terminal: {fileID: 710493713020115576}
   upgradeCategory: {fileID: 11400000, guid: 2c05c1940cd3aa2459c00cd2afe2478d, type: 2}
   techType: {fileID: 11400000, guid: 1462dd9e3bff95a42ad63f96590c14ca, type: 2}
-  encyclopediaKey: 
+  encyclopediaKey: ProtoArchwayOverrideEncy
 --- !u!1 &3452990753789928882
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,8 +702,6 @@ MonoBehaviour:
     type: 2}
   teleporter: {fileID: 1546889808817345465}
   islandObjects: {fileID: 8605504854609786654}
-  emergencyWarpTechType: {fileID: 11400000, guid: de6e1b2d637172f479b0df5a5fcf2856,
-    type: 2}
   respawnPoint: {fileID: 3592839177049703684}
 --- !u!114 &5587376507108641409
 MonoBehaviour:

@@ -596,7 +596,8 @@ internal static class EncyEntryRegisterer
             "ProtoStasisPulseEncy",
             "ProtoIonGeneratorEncy",
             "ProtoOverclockEncy",
-            "ProtoDataStreamsEncy"
+            "ProtoDataStreamsEncy",
+            "ProtoArchwayOverrideEncy"
         });
 
         sw.Stop();
