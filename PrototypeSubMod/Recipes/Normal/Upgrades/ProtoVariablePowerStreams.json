@@ -3,15 +3,15 @@
     "Ingredients": [
       {
         "techType": "CopperWire",
-        "amount": 3
+        "amount": 1
       },
       {
-        "techType": "AdvancedWiringKit",
+        "techType": "Wiringkit",
+        "amount": 1
+      },
+      {
+        "techType": "Gold",
         "amount": 2
-      },
-      {
-        "techType": "Lithium",
-        "amount": 5
       }
     ]
   }
