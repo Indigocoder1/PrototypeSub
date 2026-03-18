@@ -24,7 +24,7 @@ internal class ProtoStrafe : ProtoUpgrade
     {
         if (Player.main.currChair != chair) return;
         
-        if (GameInput.GetButtonDown(GameInput.Button.Deconstruct))
+        if (GameInput.GetButtonDown(GameInput.Button.AltTool))
         {
             SetUpgradeEnabled(!upgradeEnabled);
             if (upgradeEnabled)
