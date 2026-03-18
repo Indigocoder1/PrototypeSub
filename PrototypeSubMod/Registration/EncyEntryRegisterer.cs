@@ -108,7 +108,7 @@ internal static class EncyEntryRegisterer
         #region Facility Locations
         string locationsTitle = Language.main.Get("ProtoFacilitiesEncy_Title");
         string locationsBody = Language.main.Get("ProtoFacilitiesEncy_Body");
-        PDAHandler.AddEncyclopediaEntry("ProtoFacilitiesEncy", "DownloadedData/Prototype/ProtoTerminal", locationsTitle,
+        PDAHandler.AddEncyclopediaEntry("ProtoFacilitiesEncy", "DownloadedData/Prototype/AlienClues", locationsTitle,
             locationsBody, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 
