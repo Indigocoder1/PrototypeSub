@@ -2,8 +2,8 @@
     "craftAmount": 1,
     "Ingredients": [
       {
-        "techType": "PrecursorIonBattery",
-        "amount": 2
+        "techType": "PowerCell",
+        "amount": 1
       },
       {
         "techType": "ComputerChip",
