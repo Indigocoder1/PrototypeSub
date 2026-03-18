@@ -369,12 +369,13 @@ internal static class EncyEntryRegisterer
         PDAHandler.AddCustomScannerEntry(wallEntry);
         #endregion
 
-        #region Transmission Device Terminal
+        #region Transmission Device
         string transmissionTerminalTitle = Language.main.Get("TransmissionTerminalEncy_Title");
         string transmissionTerminalDescription = Language.main.Get("TransmissionTerminalEncy_Body");
         var transmissionDevicePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("TransmissionDevice_EncyPopup");
+        Texture2D transmissionDeviceBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("TransmissionDeviceEncy");
 
-        PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: transmissionDevicePopup);
+        PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, transmissionDeviceBackground,  unlockSound: PDAHandler.UnlockImportant, popupImage: transmissionDevicePopup);
         #endregion
 
         #region Precursor Suit Terminal
@@ -552,7 +553,7 @@ internal static class EncyEntryRegisterer
         var phaseGatePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrototypeSub_EncyPopup");
         string phaseGateTitle = Language.main.Get("PhaseGateEncy_Title");
         string phaseGateBody = Language.main.Get("PhaseGateEncy_Body");
-        Texture2D phaseGateBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PrototypeSubEncy");
+        Texture2D phaseGateBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PhaseGateEncy");
 
         PDAHandler.AddEncyclopediaEntry("PhaseGateEncy", "DownloadedData/Prototype/ProtoTerminal", phaseGateTitle, phaseGateBody, phaseGateBackground, phaseGatePopup, PDAHandler.UnlockImportant);
         #endregion
