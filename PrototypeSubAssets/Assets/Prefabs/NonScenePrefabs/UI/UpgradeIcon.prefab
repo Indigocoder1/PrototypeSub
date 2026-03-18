@@ -560,11 +560,11 @@ MonoBehaviour:
   m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 0}
+  asset: {fileID: 11400000, guid: 25405428728b3b44ebd2b1c5dfa572d0, type: 2}
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
   followParent: 0
-  restartOnPlay: 0
+  restartOnPlay: 1
   debug: 0
   subtitlesKey: 
   playSubtitlesWithUnscaledTime: 1
