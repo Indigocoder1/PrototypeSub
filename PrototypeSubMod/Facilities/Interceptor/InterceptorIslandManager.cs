@@ -5,6 +5,7 @@ using System.Collections;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Teleporter;
 using UnityEngine;
+using Story;
 
 namespace PrototypeSubMod.Facilities.Interceptor;
 
@@ -20,6 +21,7 @@ internal class InterceptorIslandManager : MonoBehaviour
 
     private Vector3 voidTeleportPos;
     private Vector3 originalTeleportPos;
+    private float tabletUnlockInterval = 10f;
 
     private void Awake()
     {
@@ -38,9 +40,14 @@ internal class InterceptorIslandManager : MonoBehaviour
     private void OnCategoryComplete(ProtoUpgradeCategory category)
     {
         if (interceptorCategory != category) return;
-        
-        KnownTech.Add(InterceptorFacilityKey.prefabInfo.TechType);
-        PDAEncyclopedia.Add("InterceptorFacilityTabletEncy", true);
+
+        UWE.CoroutineHost.StartCoroutine(DelayedTabletUnlock());
+    }
+
+    private IEnumerator DelayedTabletUnlock()
+    {
+        yield return new WaitForSeconds(tabletUnlockInterval);
+        StoryGoalManager.main.OnGoalComplete("InterceptorFacilityTabletEncy");
     }
 
     public void SetIslandEnabled(bool enabled)

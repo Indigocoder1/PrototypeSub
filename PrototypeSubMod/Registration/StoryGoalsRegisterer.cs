@@ -480,6 +480,13 @@ internal static class StoryGoalsRegisterer
             PDALog.Add("ProtoApproachEngineFacility");
         });
 
+        StoryGoalHandler.RegisterCustomEvent("InterceptorFacilityTabletEncy", () =>
+        {
+            KnownTech.Add(InterceptorFacilityKey.prefabInfo.TechType);
+            PDAEncyclopedia.Add("InterceptorFacilityTabletEncy", true);
+            PDALog.Add("InterceptorFacilityTabletUnlock");
+        });
+
         StoryGoalHandler.RegisterCompoundGoal("UnlockEngineFacilityKey", Story.GoalType.Story, 16,
             "ProtoApproachEngineFacility");
         StoryGoalHandler.RegisterCustomEvent("UnlockEngineFacilityKey", () =>

@@ -35,6 +35,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_Lifepod3", "Lifepod3PDA"));
         PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoBearingPuzzle"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "EngineFacilityReturnHint"));
+        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "InterceptorFacilityTabletUnlock"));
 
         // Bad ending voicelines
         PDALog_Patches.entries.Add(("PDA_BadEndingIntro", "BadEndingIntro"));
