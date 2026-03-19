@@ -33,7 +33,7 @@ internal static class EncyEntryRegisterer
         var ingotPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoPrecursorIngot", "DownloadedData/Prototype/Scanned", ingotTitle,
-            ingotDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: ingotPopup);
+            ingotDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: ingotPopup);
         var precursorIngotEntryData = new PDAScanner.EntryData()
         {
             key = PrecursorIngot_Craftable.prefabInfo.TechType,
@@ -52,7 +52,7 @@ internal static class EncyEntryRegisterer
         var lightPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("DeployableLight_EncyPopup");
         Texture2D lightBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("PhotonBeaconEncy");
         
-        PDAHandler.AddEncyclopediaEntry("ProtoDeployableLightEncy", "DownloadedData/Prototype/Scanned", lightTitle, lightDescription, image: lightBackground, unlockSound: PDAHandler.UnlockBasic, popupImage: lightPopup);
+        PDAHandler.AddEncyclopediaEntry("ProtoDeployableLightEncy", "DownloadedData/Prototype/Scanned", lightTitle, lightDescription, image: lightBackground, unlockSound: PDAHandler.UnlockImportant, popupImage: lightPopup);
         var deployableLightEntryData = new PDAScanner.EntryData()
         {
             key = DeployableLight_Craftable.prefabInfo.TechType,
@@ -71,7 +71,7 @@ internal static class EncyEntryRegisterer
         var prismPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("IonPrism_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoIonPrismEncy", "DownloadedData/Prototype/Scanned", prismTitle,
-            prismDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: prismPopup);
+            prismDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: prismPopup);
         var ionPrismEntryData = new PDAScanner.EntryData()
         {
             key = IonPrism_Craftable.prefabInfo.TechType,
@@ -156,7 +156,7 @@ internal static class EncyEntryRegisterer
         string hullTabletDescription = Language.main.Get("HullFacilityTabletEncy_Body");
         var hullTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("HullFacilityTablet_EncyPopup");
         
-        PDAHandler.AddEncyclopediaEntry("HullFacilityTabletEncy", "DownloadedData/Prototype/Scanned", hullTabletTitle, hullTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: hullTabletPopup);
+        PDAHandler.AddEncyclopediaEntry("HullFacilityTabletEncy", "DownloadedData/Prototype/Scanned", hullTabletTitle, hullTabletDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: hullTabletPopup);
         #endregion
         
         #region Engine Facility Tablet
@@ -164,7 +164,7 @@ internal static class EncyEntryRegisterer
         string engineTabletDescription = Language.main.Get("EngineFacilityTabletEncy_Body");
         var engineTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("EngineFacilityTablet_EncyPopup");
         
-        PDAHandler.AddEncyclopediaEntry("EngineFacilityTabletEncy", "DownloadedData/Prototype/Scanned", engineTabletTitle, engineTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: engineTabletPopup);
+        PDAHandler.AddEncyclopediaEntry("EngineFacilityTabletEncy", "DownloadedData/Prototype/Scanned", engineTabletTitle, engineTabletDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: engineTabletPopup);
         #endregion
         
         #region Interceptor Facility Tablet
@@ -172,7 +172,7 @@ internal static class EncyEntryRegisterer
         string interceptorTabletDescription = Language.main.Get("InterceptorFacilityTabletEncy_Body");
         var interceptorTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("InterceptorFacilityTablet_EncyPopup");
         
-        PDAHandler.AddEncyclopediaEntry("InterceptorFacilityTabletEncy", "DownloadedData/Prototype/Scanned", interceptorTabletTitle, interceptorTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: interceptorTabletPopup);
+        PDAHandler.AddEncyclopediaEntry("InterceptorFacilityTabletEncy", "DownloadedData/Prototype/Scanned", interceptorTabletTitle, interceptorTabletDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: interceptorTabletPopup);
         #endregion
         
         #region Defense Facility Tablet
@@ -180,7 +180,7 @@ internal static class EncyEntryRegisterer
         string defenseTabletDescription = Language.main.Get("DefenseFacilityTabletEncy_Body");
         var defenseTabletPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("DefenseFacilityTablet_EncyPopup");
         
-        PDAHandler.AddEncyclopediaEntry("DefenseFacilityTabletEncy", "DownloadedData/Prototype/Scanned", defenseTabletTitle, defenseTabletDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: defenseTabletPopup);
+        PDAHandler.AddEncyclopediaEntry("DefenseFacilityTabletEncy", "DownloadedData/Prototype/Scanned", defenseTabletTitle, defenseTabletDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: defenseTabletPopup);
         #endregion
 
         #region Decorative Worm
@@ -399,14 +399,14 @@ internal static class EncyEntryRegisterer
         string biomechanicsFactorTerminalTitle = Language.main.Get("BiomechanicsFactorTerminalEncy_Title");
         string biomechanicsFactorTerminalDescription = Language.main.Get("BiomechanicsFactorTerminalEncy_Body");
 
-        PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: factorPopup);
+        PDAHandler.AddEncyclopediaEntry("BiomechanicsFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", biomechanicsFactorTerminalTitle, biomechanicsFactorTerminalDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: factorPopup);
         #endregion
 
         #region Locator Factor Terminal
         string locatorFactorTerminalTitle = Language.main.Get("LocatorFactorTerminalEncy_Title");
         string locatorFactorTerminalDescription = Language.main.Get("LocatorFactorTerminalEncy_Body");
 
-        PDAHandler.AddEncyclopediaEntry("LocatorFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", locatorFactorTerminalTitle, locatorFactorTerminalDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: factorPopup);
+        PDAHandler.AddEncyclopediaEntry("LocatorFactorTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", locatorFactorTerminalTitle, locatorFactorTerminalDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: factorPopup);
         #endregion
         
         #region Blink Factor Terminal
@@ -414,7 +414,7 @@ internal static class EncyEntryRegisterer
         string blinkFactorEncyDescription = Language.main.Get("BlinkFactorEncy_Body");
 
         PDAHandler.AddEncyclopediaEntry("BlinkFactorEncy", "DownloadedData/Prototype/ProtoTerminal",
-            blinkFactorEncyTitle, blinkFactorEncyDescription, unlockSound: PDAHandler.UnlockBasic,
+            blinkFactorEncyTitle, blinkFactorEncyDescription, unlockSound: PDAHandler.UnlockImportant,
             popupImage: factorPopup);
         #endregion
         
@@ -423,7 +423,7 @@ internal static class EncyEntryRegisterer
         string suitColorFactorEncyDescription = Language.main.Get("SuitColorFactorEncy_Body");
 
         PDAHandler.AddEncyclopediaEntry("SuitColorFactorEncy", "DownloadedData/Prototype/ProtoTerminal",
-            suitColorFactorEncyTitle, suitColorFactorEncyDescription, unlockSound: PDAHandler.UnlockBasic,
+            suitColorFactorEncyTitle, suitColorFactorEncyDescription, unlockSound: PDAHandler.UnlockImportant,
             popupImage: factorPopup);
         #endregion
 
@@ -432,7 +432,7 @@ internal static class EncyEntryRegisterer
         string tetherFactorEncyDescription = Language.main.Get("TetherFactorEncy_Body");
 
         PDAHandler.AddEncyclopediaEntry("TetherFactorEncy", "DownloadedData/Prototype/ProtoTerminal",
-            tetherFactorEncyTitle, tetherFactorEncyDescription, unlockSound: PDAHandler.UnlockBasic,
+            tetherFactorEncyTitle, tetherFactorEncyDescription, unlockSound: PDAHandler.UnlockImportant,
             popupImage: factorPopup);
         #endregion
 
@@ -498,7 +498,7 @@ internal static class EncyEntryRegisterer
         var transmitterPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoPhaseGateTransmitter", "DownloadedData/Prototype/Scanned", transmitterTitle,
-            transmitterDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: transmitterPopup);
+            transmitterDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: transmitterPopup);
         var transmitterEntryData = new PDAScanner.EntryData()
         {
             key = ProtoPhaseGateTransmitter.PrefabInfo.TechType,
