@@ -482,7 +482,7 @@ internal static class StoryGoalsRegisterer
 
         #region Interceptor tablet
 
-        StoryGoalHandler.RegisterCustomEvent("InterceptorFacilityEncy", () =>
+        StoryGoalHandler.RegisterCustomEvent("InterceptorFacilityTabletEncy", () =>
         {
             PDALog.Add("InterceptorFacilityTabletUnlock");
         });
@@ -493,7 +493,7 @@ internal static class StoryGoalsRegisterer
             PDAEncyclopedia.Add("InterceptorFacilityTabletEncy", true);
         });
 
-        StoryGoalHandler.RegisterCompoundGoal("InterceptorFacilityTabletEncyUnlock", Story.GoalType.Encyclopedia, 7, "InterceptorFacilityEncy");
+        StoryGoalHandler.RegisterCompoundGoal("InterceptorFacilityTabletEncyUnlock", Story.GoalType.Encyclopedia, 7, "InterceptorFacilityTabletEncy");
         #endregion
 
         StoryGoalHandler.RegisterCompoundGoal("UnlockEngineFacilityKey", Story.GoalType.Story, 16,
