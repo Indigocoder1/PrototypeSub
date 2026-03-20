@@ -20,17 +20,17 @@ internal class EmissionColorController : PrefabModifier
     private float transitionTimeOut;
     private float currentTransitionTime;
 
-    private void Start()
+    private void Awake()
     {
-        transitionTimeOut = 1 / transitionSpeed * 8f;
-        currentTransitionTime = transitionTimeOut;
-
-        UWE.CoroutineHost.StartCoroutine(Initialize());
+        Initialize();
     }
 
-    private IEnumerator Initialize()
+    private void Initialize()
     {
-        yield return null;
+        if (initialized) return;
+        
+        transitionTimeOut = 50f / transitionSpeed;
+        currentTransitionTime = transitionTimeOut;
         
         foreach (var rend in subRoot.GetComponentsInChildren<Renderer>(true))
         {
@@ -60,21 +60,24 @@ internal class EmissionColorController : PrefabModifier
             return;
         }
 
+        currentTransitionTime = Mathf.Clamp(currentTransitionTime, 0, transitionTimeOut);
         foreach (var material in trackedMaterials.Keys)
         {
             Color targetCol = tempColorActive ? tempColor : trackedMaterials[material];
-            Color currentCol = Color.Lerp(material.GetColor("_GlowColor"), targetCol, transitionSpeed * Time.deltaTime);
+            Color currentCol = Color.Lerp(material.GetColor("_GlowColor"), targetCol, currentTransitionTime / transitionTimeOut);
             material.SetColor("_GlowColor", currentCol);
         }
     }
 
     public void RegisterTempColor(Component component, EmissionRegistrarData registerData)
     {
+        Initialize();
         overrideColorData[component] = registerData;
         tempColorActive = true;
         currentTransitionTime = 0;
 
         UpdateTempColor();
+        Plugin.Logger.LogInfo($"Registering temp color. Tracked materials count = {trackedMaterials.Count}");
     }
 
     public void RemoveTempColor(Component component)

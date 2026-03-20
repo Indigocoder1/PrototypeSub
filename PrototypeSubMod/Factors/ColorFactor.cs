@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace PrototypeSubMod.Factors;
 
-public class ColorFactor : Factor
+public class ColorFactor : Factor, IProtoTreeEventListener
 {
     private static readonly string ConfigFolder = Path.Combine(Path.GetDirectoryName(Paths.BepInExConfigPath), Plugin.Assembly.GetName().Name);
     private static readonly string SuitColorsPath = Path.Combine(ConfigFolder, "SuitColors.json");
@@ -44,6 +44,9 @@ public class ColorFactor : Factor
         Inventory.main.equipment.onEquip += OnEquip;
         Inventory.main.equipment.onUnequip += OnUnequip;
         TooltipFactory_Patches.onRunItemActions += UpdateFromUI;
+
+        UpdateSubColor();
+        UpdateSuitColor();
     }
 
     private void OnEquip(string slot, InventoryItem item)
@@ -179,7 +182,7 @@ public class ColorFactor : Factor
         
         if (editingSubColor)
         {
-            OnChangeSubEmission?.Invoke(GetCurrentSubColor(), subColorIntensity);
+            UpdateSubColor();
         }
         else
         {
@@ -189,9 +192,18 @@ public class ColorFactor : Factor
 
     private void UpdateSuitColor()
     {
+        if (!equipped) return;
+        
         suitManager.RegisterEmissionController(this,
             new PrecursorSuitManager.EmissionController(GetCurrentSuitColor(), suitIntensity, 5));
         OnChangeSuitEmission?.Invoke(GetCurrentSuitColor(), suitIntensity);
+    }
+
+    private void UpdateSubColor()
+    {
+        if (!equipped) return;
+
+        OnChangeSubEmission?.Invoke(GetCurrentSubColor(), subColorIntensity);
     }
 
     private void OnDestroy()
@@ -226,6 +238,30 @@ public class ColorFactor : Factor
     }
 
     public override GameInput.Button GetUseButton() => GameInput.Button.None;
+
+    public void OnProtoSerializeObjectTree(ProtobufSerializer serializer)
+    {
+        var id = GetComponent<PrefabIdentifier>().Id;
+        Plugin.GlobalSaveData.colorFactorSelections[id] = new ColorSelection(currentColorIndex, currentSubColorIndex,
+            suitIntensity, subColorIntensity);
+    }
+
+    public void OnProtoDeserializeObjectTree(ProtobufSerializer serializer)
+    {
+        var id = GetComponent<PrefabIdentifier>().Id;
+        if (!Plugin.GlobalSaveData.colorFactorSelections.TryGetValue(id, out var colorData))
+        {
+            Plugin.Logger.LogWarning($"Color factor with id '{id}' did not have stored color selections. Possibly from an old save.");
+            return;
+        }
+
+        currentColorIndex = colorData.suitColorIndex;
+        currentSubColorIndex = colorData.subColorIndex;
+        suitIntensity = colorData.suitIntensity;
+        subColorIntensity = colorData.subIntensity;
+        UpdateSuitColor();
+        UpdateSubColor();
+    }
 }
 
 public class SuitColors
@@ -286,4 +322,20 @@ public struct SerializableColor
     public float r;
     public float g;
     public float b;
+}
+
+public struct ColorSelection
+{
+    public int suitColorIndex;
+    public int subColorIndex;
+    public float suitIntensity;
+    public float subIntensity;
+
+    public ColorSelection(int suitColorIndex, int subColorIndex, float suitIntensity, float subIntensity)
+    {
+        this.suitColorIndex = suitColorIndex;
+        this.subColorIndex = subColorIndex;
+        this.suitIntensity = suitIntensity;
+        this.subIntensity = subIntensity;
+    }
 }

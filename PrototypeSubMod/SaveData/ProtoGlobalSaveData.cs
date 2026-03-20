@@ -3,6 +3,7 @@ using PrototypeSubMod.Utility;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using PrototypeSubMod.Facilities.Engine;
+using PrototypeSubMod.Factors;
 using PrototypeSubMod.PhaseGates;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ internal class ProtoGlobalSaveData : SaveDataCache
     public List<string> unlockedCategoriesLastCheck = new();
     public List<string> repairedEngineFacilityPoints = new();
     public List<string> activatedTransmissionDevices = new();
+    public Dictionary<string, ColorSelection> colorFactorSelections = new();
     
     public Vector3? tetherFactorMarkerLocation = null;
     public bool tetherMarkerOutOfWater;
