@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.MotorHandler;
 
 namespace PrototypeSubMod.Patches;
@@ -21,5 +22,14 @@ internal class SubRoot_Patches
         if (!__instance.voiceNotificationManager) return;
         
         __instance.voiceNotificationManager.ClearQueue();
+    }
+
+    [HarmonyPatch(nameof(SubRoot.UpdateLighting)), HarmonyPrefix]
+    private static bool UpdateLighting_Prefix(SubRoot __instance)
+    {
+        var lightingControllerManager = __instance.GetComponentInChildren<LightingControllerManager>();
+        if (lightingControllerManager == null) return true;
+
+        return !lightingControllerManager.ManualLightControlActive();
     }
 }

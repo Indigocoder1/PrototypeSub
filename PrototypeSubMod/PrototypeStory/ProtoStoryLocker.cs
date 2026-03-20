@@ -46,6 +46,7 @@ internal class ProtoStoryLocker : MonoBehaviour
     [SerializeField] private LightingController lightingController;
     [SerializeField] private EmissionColorController emissionController;
     [SerializeField] private Color emissiveColor = Color.black;
+    [SerializeField] private LightingControllerManager lightingControllerManager;
 
     private bool wasInLockZone;
     private bool enteredFullLock;
@@ -120,6 +121,9 @@ internal class ProtoStoryLocker : MonoBehaviour
         engineLever.SetStoryLocked(true);
         subRoot.GetComponent<Stabilizer>().uprightAccelerationStiffness = 100;
         subRoot.GetComponentInChildren<ProtoFinsManager>().UpdateMotorBonuses();
+
+        lightingControllerManager.SetManualLightControlActive(true);
+        lightingController.LerpToState(2);
 
         foreach (var button in interceptorButtons)
         {
