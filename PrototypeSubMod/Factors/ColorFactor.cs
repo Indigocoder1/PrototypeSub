@@ -15,15 +15,20 @@ public class ColorFactor : Factor
     private static readonly string ConfigFolder = Path.Combine(Path.GetDirectoryName(Paths.BepInExConfigPath), Plugin.Assembly.GetName().Name);
     private static readonly string SuitColorsPath = Path.Combine(ConfigFolder, "SuitColors.json");
 
-    public static event Action<Color, float> OnChangeSuitEmission; 
+    public static event Action<Color, float> OnChangeSuitEmission;
+    public static event Action<Color, float> OnChangeSubEmission;
     
     private SuitColors suitColors;
     private PrecursorSuitManager suitManager;
     private Pickupable pickupable;
-    private float intensity = 1;
+    private float suitIntensity = 1;
     private bool equipped;
     private bool editingColor = true;
+    private bool editingSubColor;
     private int currentColorIndex;
+    
+    private int currentSubColorIndex;
+    private float subColorIntensity = 1;
     
     private void Awake()
     {
@@ -57,18 +62,32 @@ public class ColorFactor : Factor
         suitManager.DeregisterEmissionController(this);
     }
 
-    public Color GetCurrentColor()
+    public Color GetCurrentSuitColor()
     {
         return suitColors.suitColorDatas[currentColorIndex].color;
     }
     
+    public Color GetCurrentSubColor()
+    {
+        return suitColors.suitColorDatas[currentSubColorIndex].color;
+    }
+    
+    public float GetCurrentIntensity()
+    {
+        return editingSubColor ? subColorIntensity : suitIntensity;
+    }
+
+    public float GetSubIntensity() => subColorIntensity;
+
+    public bool GetEditingSubColor() => editingSubColor;
+    
     public string GetCurrentLocalizationKey()
     {
-        return suitColors.suitColorDatas[currentColorIndex].localizationKey;
+        var index = editingSubColor ? currentSubColorIndex : currentColorIndex;
+        return suitColors.suitColorDatas[index].localizationKey;
     }
 
     public bool GetIsEditingColor() => editingColor;
-    public float GetIntensity() => intensity;
 
     public GameInput.Button GetNextButton()
     {
@@ -104,35 +123,75 @@ public class ColorFactor : Factor
         {
             editingColor = !editingColor;
         }
+        
+        if (GameInput.GetButtonDown(GameInput.Button.Deconstruct))
+        {
+            editingSubColor = !editingSubColor;
+        }
     }
 
     private void HandleColorChange(int direction)
     {
-        currentColorIndex += direction;
+        int index = editingSubColor ? currentSubColorIndex : currentColorIndex;
+        
+        index += direction;
         
         int colorDataCount = suitColors.suitColorDatas.Count;
-        if (currentColorIndex < 0)
+        if (index < 0)
         {
-            currentColorIndex = colorDataCount - 1;
+            index = colorDataCount - 1;
         }
         
-        currentColorIndex %= colorDataCount;
+        index %= colorDataCount;
+        if (editingSubColor)
+        {
+            currentSubColorIndex = index;
+        }
+        else
+        {
+            currentColorIndex = index;
+        }
 
-        if (equipped) UpdateSuitColor();
+        UpdateApplicableColors();
     }
 
     private void HandleIncrementChange(int direction)
     {
+        var intensity = editingSubColor ? subColorIntensity : suitIntensity;
+        
         intensity += 0.25f * direction;
         intensity = Mathf.Clamp(intensity, 0, 5);
-        UpdateSuitColor();
+        if (editingSubColor)
+        {
+            subColorIntensity = intensity;
+        }
+        else
+        {
+            suitIntensity = intensity;
+        }
+
+        UpdateApplicableColors();
+    }
+
+    private void UpdateApplicableColors()
+    {
+        if (!equipped) return;
+        
+        if (editingSubColor)
+        {
+            OnChangeSubEmission?.Invoke(GetCurrentSubColor(), subColorIntensity);
+        }
+        else
+        {
+            UpdateSuitColor();
+        }
     }
 
     private void UpdateSuitColor()
     {
         suitManager.RegisterEmissionController(this,
-            new PrecursorSuitManager.EmissionController(GetCurrentColor(), intensity, 5));
-        OnChangeSuitEmission?.Invoke(GetCurrentColor(), intensity);
+            new PrecursorSuitManager.EmissionController(GetCurrentSuitColor(), suitIntensity, 5));
+        OnChangeSuitEmission?.Invoke(GetCurrentSuitColor(), suitIntensity);
     }
 
     private void OnDestroy()

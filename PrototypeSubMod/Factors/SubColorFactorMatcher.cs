@@ -10,14 +10,14 @@ public class SubColorFactorMatcher : MonoBehaviour
 
     private void OnEnable()
     {
-        ColorFactor.OnChangeSuitEmission += UpdateFromSuit;
+        ColorFactor.OnChangeSubEmission += UpdateFromSuit;
         FactorActivationManager.onEquippedFactor += OnEquipFactor;
         FactorActivationManager.onUnequippedFactor += OnUnequipFactor;
     }
 
     private void OnDisable()
     {
-        ColorFactor.OnChangeSuitEmission -= UpdateFromSuit;
+        ColorFactor.OnChangeSubEmission -= UpdateFromSuit;
         FactorActivationManager.onEquippedFactor -= OnEquipFactor;
         FactorActivationManager.onUnequippedFactor -= OnUnequipFactor;
     }
@@ -32,7 +32,7 @@ public class SubColorFactorMatcher : MonoBehaviour
     {
         if (factor is not ColorFactor colorFactor) return;
 
-        var modifiedColor = colorFactor.GetCurrentColor() * colorFactor.GetIntensity();
+        var modifiedColor = colorFactor.GetCurrentSubColor() * colorFactor.GetSubIntensity();
         emissionColorController.RegisterTempColor(this, new EmissionColorController.EmissionRegistrarData(modifiedColor));
     }
     

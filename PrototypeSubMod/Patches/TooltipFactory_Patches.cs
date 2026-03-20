@@ -35,7 +35,10 @@ public class TooltipFactory_Patches
         string localizedName = Language.main.Get(colorFactor.GetCurrentLocalizationKey());
         TooltipFactory.WriteDescription(sb, "────────────────");
         TooltipFactory.WriteDescription(sb, Language.main.GetFormat("SuitCurrentColor", localizedName));
-        TooltipFactory.WriteDescription(sb, Language.main.GetFormat("SuitCurrentIntensity", colorFactor.GetIntensity()));
+        TooltipFactory.WriteDescription(sb, Language.main.GetFormat("SuitCurrentIntensity", colorFactor.GetCurrentIntensity()));
+
+        var textKey = colorFactor.GetEditingSubColor() ? "LocalizedTrue" : "LocalizedFalse";
+        TooltipFactory.WriteDescription(sb, Language.main.GetFormat("SuitEditingSub", Language.main.Get(textKey)));
     }
     
     private static void HandleAlienBuildingBlockTooltips(StringBuilder sb, GameObject obj)
@@ -76,6 +79,8 @@ public class TooltipFactory_Patches
             Language.main.Get($"Suit{editKey}Prev"));
         TooltipFactory.WriteAction(sb, GameInput.FormatButton(GameInput.Button.AltTool),
             Language.main.Get("SuitToggleEditMode"));
+        TooltipFactory.WriteAction(sb, GameInput.FormatButton(GameInput.Button.Deconstruct),
+            Language.main.Get("SuitToggleEditSub"));
     }
     
     private static void HandleLocatorFactorTooltips(StringBuilder sb, InventoryItem item)

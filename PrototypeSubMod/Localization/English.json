@@ -257,8 +257,10 @@
   "SuitIntensityNext": "Increase intensity",
   "SuitIntensityPrev": "Decrease intensity",
   "SuitToggleEditMode": "Toggle edit mode",
+  "SuitToggleEditSub": "Toggle edit Prototype",
   "SuitCurrentColor": "Current color: {0}",
   "SuitCurrentIntensity": "Intensity: {0}",
+  "SuitEditingSub": "Editing Prototype: {0}",
   "LocalizedTrue": "True",
   "LocalizedFalse": "False",
 

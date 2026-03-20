@@ -45,13 +45,10 @@ internal class uGUI_InventoryTab_Patches
         if (returnManager == null) return;
 
         if (__result == returnManager) return;
-
-        Plugin.Logger.LogInfo($"Grid = {grid} | Result = {__result}");
         
         if (__result == null)
         {
             __result = __instance.usedStorageGrids[0];
-            Plugin.Logger.LogInfo($"Setting result to {__instance.usedStorageGrids[0]}");
             return;
         }
         
@@ -68,14 +65,12 @@ internal class uGUI_InventoryTab_Patches
             if (grid == (uGUI_INavigableIconGrid)__instance.inventory)
             {
                 __result = returnManager;
-                Plugin.Logger.LogInfo($"Setting result to {returnManager}");
                 return;
             }
             
             if (grid != returnManager)
             {
                 __result = returnManager;
-                Plugin.Logger.LogInfo($"Setting result to {returnManager}");
                 return;
             }
         }
