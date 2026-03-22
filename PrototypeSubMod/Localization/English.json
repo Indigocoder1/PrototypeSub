@@ -544,7 +544,7 @@
   "ProtoPrecursorFabricator_Tab_Keys": "Alien Tablets",
   "ProtoPrecursorFabricator_Tab_Resources": "Resources",
   "ProtoPrecursorFabricator_Tab_Devices": "Devices",
-  "ProtoPrecursorFabricator_Tab_PhaseGate": "Phase gates",
+  "ProtoPrecursorFabricator_Tab_PhaseGate": "Advanced Fabrication",
 
   // Phase Gates
   "Proto_AlphaLoaded": "{0}: Phase Gate: Alpha ready for deployment.",
