@@ -1,28 +1,6 @@
 {
   "Entities": [
     {
-      "classId": "IonPrism_DisplayCase",
-      "id": "80a70565-e48e-4532-88fb-a4a4976b20b2",
-      "position": {
-        "x": 433.462433,
-        "y": -83.486084,
-        "z": 1154.84839
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.171452552,
-        "z": 0.0,
-        "w": 0.985192358
-      },
-      "scale": {
-        "x": 1.41264939,
-        "y": 1.41264939,
-        "z": 1.41264939
-      },
-      "cellLevel": 1,
-      "priority": 0
-    },
-    {
       "classId": "DeployableLight_DisplayCase",
       "id": "ff85c81b-260f-4616-b6f6-346f2cefcbd6",
       "position": {
@@ -92,20 +70,20 @@
       "classId": "IonCrystalMatrix_DisplayCase",
       "id": "f10cdbcb-f836-4272-91bb-b6419b02ce7b",
       "position": {
-        "x": 409.957581,
-        "y": -86.94656,
-        "z": 1128.64075
+        "x": 433.488739,
+        "y": -83.24477,
+        "z": 1154.91
       },
       "rotation": {
         "x": 0.0,
-        "y": 0.16343008,
+        "y": 0.9865549,
         "z": 0.0,
-        "w": 0.9865549
+        "w": -0.163430125
       },
       "scale": {
-        "x": 1.45374942,
+        "x": 1.45374966,
         "y": 1.45374942,
-        "z": 1.45374942
+        "z": 1.45374966
       },
       "cellLevel": 1,
       "priority": 0
