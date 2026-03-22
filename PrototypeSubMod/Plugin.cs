@@ -360,7 +360,7 @@ namespace PrototypeSubMod
             
             PrototypePowerSystem.AllowedPowerSources = new()
             {
-                { WarperRemnant.prefabInfo.TechType, new PowerConfigData(2) },
+                { WarperRemnant.prefabInfo.TechType, new PowerConfigData(1) },
                 { AlienBuildingBlock.prefabInfo.TechType, new PowerConfigData(4) },
                 { TechType.PrecursorIonCrystal, new PowerConfigData(5) },
                 { EngineFacilityKey.prefabInfo.TechType, new PowerConfigData(6) },
