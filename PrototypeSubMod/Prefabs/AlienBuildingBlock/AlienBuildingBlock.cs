@@ -17,7 +17,7 @@ internal class AlienBuildingBlock : RelicBlock
     
     public static void Register()
     {
-        prefabInfo = PrefabInfo.WithTechType("AlienBuildingBlock", null, null, unlockAtStart: true)
+        prefabInfo = PrefabInfo.WithTechType("AlienBuildingBlock", null, null)
             .WithIcon(Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienBuildingBlockIcon.png"));
         
         prefab = new CustomPrefab(prefabInfo);
