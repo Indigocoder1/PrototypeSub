@@ -2,6 +2,7 @@
 using Nautilus.Utility;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
+using PrototypeSubMod.Prefabs.AlienBuildingBlock;
 using PrototypeSubMod.Prefabs.FacilityProps.Hull;
 using System;
 using System.Collections.Generic;
@@ -147,8 +148,35 @@ internal static class EncyEntryRegisterer
         #region Alien Building Block
         string alienBuildingBlockEncyTitle = Language.main.Get("AlienBuildingBlockEncy_Title");
         string alienBuildingBlockEncyBody = Language.main.Get("AlienBuildingBlockEncy_Body");
-        PDAHandler.AddEncyclopediaEntry("AlienBuildingBlockEncy", "DownloadedData/Prototype/ProtoTerminal",
+        PDAHandler.AddEncyclopediaEntry("AlienBuildingBlockEncy", "DownloadedData/Prototype/Scanned",
             alienBuildingBlockEncyTitle, alienBuildingBlockEncyBody, unlockSound: PDAHandler.UnlockBasic);
+        var alienBuildingBlockEntryData = new PDAScanner.EntryData()
+        {
+            key = AlienBuildingBlock.prefabInfo.TechType,
+            destroyAfterScan = false,
+            encyclopedia = "AlienBuildingBlockEncy",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = AlienBuildingBlock.prefabInfo.TechType
+        };
+        PDAHandler.AddCustomScannerEntry(alienBuildingBlockEntryData);
+        #endregion
+
+        #region Ion Cube Matrix
+        string ionCrystalMatrixEncyTitle = Language.main.Get("IonCrystalMatrixEncy_Title");
+        string ionCrystalMatrixEncyBody = Language.main.Get("IonCrystalMatrixEncy_Body");
+        PDAHandler.AddEncyclopediaEntry("IonCrystalMatrixEncy", "DownloadedData/Prototype/Scanned",
+            ionCrystalMatrixEncyTitle, ionCrystalMatrixEncyBody, unlockSound: PDAHandler.UnlockBasic);
+        var ionCrystalMatrixEntryData = new PDAScanner.EntryData()
+        {
+            key = TechType.PrecursorIonCrystalMatrix,
+            destroyAfterScan = false,
+            encyclopedia = "IonCrystalMatrixEncy",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = TechType.PrecursorIonCrystalMatrix
+        };
+        PDAHandler.AddCustomScannerEntry(ionCrystalMatrixEntryData);
         #endregion
 
         #region Hull Facility Tablet
