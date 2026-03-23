@@ -140,7 +140,7 @@ internal static class PrefabRegisterer
         DisplayCaseProp.Register("f90d7d3c-d017-426f-af1a-62ca93fae22e", "IonCrystalMatrix_DisplayCase",
             TechType.PrecursorIonCrystalMatrix, new Vector3(0, 1.3f, 0), Vector3.one * 1.3f);
         DisplayCaseProp.Register(AlienBuildingBlock.prefabInfo.ClassID, "AlienBuildingBlock_DisplayCase",
-            TechType.PrecursorIonCrystalMatrix, new Vector3(0, 1.3f, 0), Vector3.one);
+            AlienBuildingBlock.prefabInfo.TechType, new Vector3(0, 1.3f, 0), Vector3.one);
         DisplayCaseProp.Register(ProtoPhaseGateTransmitter.PrefabInfo.ClassID, "PhaseGateTransmitter_DisplayCase",
             ProtoPhaseGateTransmitter.PrefabInfo.TechType, new Vector3(0, 1.3f, 0), Vector3.one * 0.5f);
         DisplayCaseProp.Register(ProtoPhaseGateStabilizer.PrefabInfo.ClassID, "PhaseGateStabilizer_DisplayCase",
