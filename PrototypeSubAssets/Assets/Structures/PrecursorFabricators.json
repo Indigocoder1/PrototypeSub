@@ -1,1 +1,247 @@
-{"Entities":[{"classId":"ProtoPrecursorFabricator","id":"9ad9d204-a62f-44a2-add8-b0d11bf01e00","position":{"x":409.056335,"y":-86.81616,"z":1143.88965},"rotation":{"x":0.0,"y":0.818707,"z":0.0,"w":0.574211538},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":1,"priority":0},{"classId":"ProtoPrecursorFabricator","id":"70e8c189-b0d3-4007-b11f-e9fb4b23094c","position":{"x":-241.162445,"y":-796.7522,"z":302.401123},"rotation":{"x":0.09108097,"y":-0.214390025,"z":0.0175373089,"w":0.972334146},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":-1,"priority":0},{"classId":"ProtoPrecursorFabricator","id":"6d22f0b1-dd42-480c-9f28-1d66ebebbfc4","position":{"x":-54.867363,"y":-1212.393,"z":103.186157},"rotation":{"x":0.0,"y":0.004081237,"z":0.0,"w":0.9999917},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":-1,"priority":0},{"classId":"ProtoPrecursorFabricator","id":"2671ff0a-74f0-4a1c-9bfb-39f99e97dea9","position":{"x":269.870117,"y":-1438.3512,"z":-354.849823},"rotation":{"x":0.0,"y":-0.249006435,"z":0.0,"w":0.968501866},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":-1,"priority":0},{"classId":"ProtoPrecursorFabricator","id":"1997b058-df88-44e8-99f1-9a7ac0c2456a","position":{"x":-662.622131,"y":0.600151658,"z":-1088.27307},"rotation":{"x":0.0138150277,"y":8.53638E-09,"z":1.17941573E-10,"w":0.9999046},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":-1,"priority":0},{"classId":"ProtoPrecursorFabricator","id":"3827d8bd-29a9-44f0-b247-47420470cf56","position":{"x":-1119.99841,"y":-687.5509,"z":-689.8428},"rotation":{"x":0.0,"y":0.00157645193,"z":0.0,"w":0.999998748},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":-1,"priority":0},{"classId":"ProtoPrecursorFabricator","id":"dfe6bbdf-7fc1-47e2-918b-03e5436175d5","position":{"x":833.804749,"y":-465.25885,"z":-1141.14233},"rotation":{"x":0.0,"y":-0.245127961,"z":0.0,"w":0.9694907},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":-1,"priority":0},{"classId":"AlienBuildingBlock_DisplayCase","id":"f03bd603-dbba-4ce9-a7a3-112b79b02596","position":{"x":408.684631,"y":-86.90339,"z":1140.95789},"rotation":{"x":0.0,"y":0.174587384,"z":0.0,"w":0.984641731},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":1,"priority":0},{"classId":"738892ae-64b0-4240-953c-cea1d19ca111","id":"55c0b963-792e-48f5-b0da-203f3f417211","position":{"x":408.692657,"y":-87.1168747,"z":1140.95569},"rotation":{"x":-0.00146201358,"y":0.175186,"z":0.00171715871,"w":0.984532833},"scale":{"x":0.417898476,"y":0.417898476,"z":0.417898417},"cellLevel":0,"priority":0},{"classId":"AlienBuildingBlockTerminal","id":"d92c427e-643f-4f6c-af45-b8352ce94ede","position":{"x":410.124725,"y":-86.90348,"z":1146.5824},"rotation":{"x":-0.0009747445,"y":-0.5735732,"z":0.00139209616,"w":0.8191526},"scale":{"x":1.0,"y":1.0,"z":1.0},"cellLevel":1,"priority":0}],"IsSorted":false}
+{
+  "Entities": [
+    {
+      "classId": "ProtoPrecursorFabricator",
+      "id": "9ad9d204-a62f-44a2-add8-b0d11bf01e00",
+      "position": {
+        "x": 410.2409,
+        "y": -86.81616,
+        "z": 1143.53516
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.818707,
+        "z": 0.0,
+        "w": 0.574211538
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": 1,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoPrecursorFabricator",
+      "id": "70e8c189-b0d3-4007-b11f-e9fb4b23094c",
+      "position": {
+        "x": -241.162445,
+        "y": -796.7522,
+        "z": 302.401123
+      },
+      "rotation": {
+        "x": 0.09108097,
+        "y": -0.214390025,
+        "z": 0.0175373089,
+        "w": 0.972334146
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": -1,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoPrecursorFabricator",
+      "id": "6d22f0b1-dd42-480c-9f28-1d66ebebbfc4",
+      "position": {
+        "x": -54.867363,
+        "y": -1212.393,
+        "z": 103.186157
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.004081237,
+        "z": 0.0,
+        "w": 0.9999917
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": -1,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoPrecursorFabricator",
+      "id": "2671ff0a-74f0-4a1c-9bfb-39f99e97dea9",
+      "position": {
+        "x": 269.870117,
+        "y": -1438.3512,
+        "z": -354.849823
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.249006435,
+        "z": 0.0,
+        "w": 0.968501866
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": -1,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoPrecursorFabricator",
+      "id": "1997b058-df88-44e8-99f1-9a7ac0c2456a",
+      "position": {
+        "x": -662.622131,
+        "y": 0.600151658,
+        "z": -1088.27307
+      },
+      "rotation": {
+        "x": 0.0138150277,
+        "y": 8.53638E-09,
+        "z": 1.17941573E-10,
+        "w": 0.9999046
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": -1,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoPrecursorFabricator",
+      "id": "3827d8bd-29a9-44f0-b247-47420470cf56",
+      "position": {
+        "x": -1119.99841,
+        "y": -687.5509,
+        "z": -689.8428
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.00157645193,
+        "z": 0.0,
+        "w": 0.999998748
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": -1,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoPrecursorFabricator",
+      "id": "dfe6bbdf-7fc1-47e2-918b-03e5436175d5",
+      "position": {
+        "x": 833.804749,
+        "y": -465.25885,
+        "z": -1141.14233
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.245127961,
+        "z": 0.0,
+        "w": 0.9694907
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": -1,
+      "priority": 0
+    },
+    {
+      "classId": "AlienBuildingBlock_DisplayCase",
+      "id": "f03bd603-dbba-4ce9-a7a3-112b79b02596",
+      "position": {
+        "x": 409.9266,
+        "y": -86.70922,
+        "z": 1128.65393
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.5727949,
+        "z": 0.0,
+        "w": 0.819698751
+      },
+      "scale": {
+        "x": 1.24178576,
+        "y": 1.24178576,
+        "z": 1.24178576
+      },
+      "cellLevel": 1,
+      "priority": 0
+    },
+    {
+      "classId": "67acd25f-9e63-45b9-bef2-e6a85dd5eb4b",
+      "id": "90c95a80-0989-4c06-a14f-42e84d6e189a",
+      "position": {
+        "x": 410.189148,
+        "y": -80.7876,
+        "z": 1143.53845
+      },
+      "rotation": {
+        "x": -0.5716894,
+        "y": -3.58638879E-08,
+        "z": 0.8204701,
+        "w": -2.49893386E-08
+      },
+      "scale": {
+        "x": 0.5,
+        "y": 0.25,
+        "z": 0.25
+      },
+      "cellLevel": 1,
+      "priority": 0
+    },
+    {
+      "classId": "78009225-a9fa-4d21-9580-8719a3368373",
+      "id": "99418abc-80b5-4151-9aac-ec789f9271a4",
+      "position": {
+        "x": 409.809,
+        "y": -86.8375,
+        "z": 1139.41663
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.170680329,
+        "z": 0.0,
+        "w": 0.985326469
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": 1,
+      "priority": 0
+    },
+    {
+      "classId": "78009225-a9fa-4d21-9580-8719a3368373",
+      "id": "48ce6f3a-631a-4fc5-a217-6a445acc8cf3",
+      "position": {
+        "x": 412.503326,
+        "y": -86.8375,
+        "z": 1146.96033
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.170680329,
+        "z": 0.0,
+        "w": 0.985326469
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "cellLevel": 1,
+      "priority": 0
+    }
+  ],
+  "IsSorted": false
+}
