@@ -18,7 +18,7 @@ internal static class StoryGoalsRegisterer
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
         
-        #region Precursor Ingot
+        #region Precursor Ingot Pickup Unlock
 
         StoryGoalHandler.RegisterItemGoal("Ency_ProtoPrecursorIngot", Story.GoalType.Encyclopedia, PrecursorIngot_Craftable.prefabInfo.TechType);
 
@@ -26,6 +26,16 @@ internal static class StoryGoalsRegisterer
         {
             KnownTech.Add(PrecursorIngot_Craftable.prefabInfo.TechType);
             PDAEncyclopedia.Add("ProtoPrecursorIngot", true);
+        });
+        #endregion
+
+        #region Photon Beacon Pickup Unlock
+        StoryGoalHandler.RegisterItemGoal("DeployableLightPickup", Story.GoalType.Encyclopedia, DeployableLight_Craftable.prefabInfo.TechType);
+
+        StoryGoalHandler.RegisterCustomEvent("DeployableLightPickup", () =>
+        {
+            KnownTech.Add(DeployableLight_Craftable.prefabInfo.TechType);
+            PDAEncyclopedia.Add("ProtoDeployableLightEncy", true);
         });
         #endregion
 
