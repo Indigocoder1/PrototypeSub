@@ -8,45 +8,21 @@ public class CalibrationProgressTracker : MonoBehaviour, IScheduledUpdateBehavio
     [SerializeField] private SubRoot subRoot;
     [SerializeField] private CalibrationRunManager runManager;
     [SerializeField] private Transform subIcon;
-    [SerializeField] private Transform pointNumbersParent;
+    [SerializeField] private Transform[] locationPoints;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float positionScalar;
-    [SerializeField] private float iconScale;
     
     public string GetProfileTag() => "CalibrationRunProgressTracker";
     public int scheduledUpdateIndex { get; set; }
-
-    private Transform[] locationPoints;
-    private int prevPositionCount = -1;
     
-    private void Start()
-    {
-        var calibrationPoints = runManager.GetCalibrationPoints();
-        locationPoints = new Transform[calibrationPoints.Length];
-        
-        for (int i = 0; i < calibrationPoints.Length; i++)
-        {
-            locationPoints[i] = CreatePoint(i, calibrationPoints[i]);
-        }
-    }
-
-    private Transform CreatePoint(int index, Vector3 worldPos)
-    {
-        var pointNumbers = runManager.GetPointNumbers();
-        var localPos = WorldSpaceToDisplaySpace(worldPos);
-
-        var symbolObject = pointNumbers[index].CreateSymbolObject();
-        symbolObject.transform.SetParent(pointNumbersParent, false);
-
-        symbolObject.transform.localPosition = localPos;
-        symbolObject.transform.localScale = Vector3.one * iconScale;
-        return symbolObject.transform;
-    }
+    private int prevPositionCount = -1;
 
     public void ScheduledUpdate()
     {
         subIcon.transform.localPosition = WorldSpaceToDisplaySpace(subRoot.transform.position);
-
+        var eulerAngles = subIcon.transform.localEulerAngles;
+        subIcon.transform.localEulerAngles = new Vector3(eulerAngles.x, eulerAngles.y, -subRoot.transform.localEulerAngles.y);
+        
         var positionCount = runManager.GetNextIndex() + 1;
         lineRenderer.positionCount = positionCount;
         lineRenderer.SetPosition(positionCount - 1, subIcon.transform.localPosition);
