@@ -539,6 +539,7 @@
   "ProtoTransmissionDevicePower": "Insert power source",
   "ProtoTransmissionDeviceCode": "Calibrate transmission device",
   "ProtoInvalidTransmission": "Invalid calibration sequence - Unable to receive connection",
+  "ProtoCalibrateButton": "CALIBRATE",
 
   // Precursor Fabricator
   "ProtoPrecursorFabricator": "Alien Fabricator",
