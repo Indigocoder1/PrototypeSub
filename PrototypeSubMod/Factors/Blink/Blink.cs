@@ -20,9 +20,7 @@ public class Blink : Factor
     }
 
     [SerializeField] private FMOD_CustomEmitter startSfx;
-    [SerializeField] private FMOD_CustomEmitter stopSfx;
     [SerializeField] private FMOD_CustomLoopingEmitter loopingSfx;
-    [SerializeField] private FMOD_CustomEmitter stopDueToChargeSfx;
     [SerializeField] private FMOD_CustomEmitter rechargeLoopSfx;
     [SerializeField] private FMOD_CustomEmitter rechargeFinishedSfx;
     [SerializeField] private AnimationCurve frequencyOverCharge;
@@ -48,9 +46,6 @@ public class Blink : Factor
     private float fovTransitionTime = 0.5f;
     
     private float resourceRegenDelay = 2f;
-    [HideInInspector] public float resourceBarFadeDelay = 1f;
-    [HideInInspector] public float resourceFadeInTime = 0.2f;
-    [HideInInspector] public float resourceFadeOutTime = 0.5f;
 
     private readonly List<GameObject> ghostFrames = new();
     
@@ -67,10 +62,8 @@ public class Blink : Factor
     private float timeStartResourceRegen;
     private float timeStartedBlink;
     private float currentBlinkResource;
-    private float blinkResourceLastFrame;
     private float timeNextGhostFrame;
     private bool wasChromaticActive;
-    private bool stoppedDueToCharge;
 
     private void Awake()
     {
@@ -178,18 +171,6 @@ public class Blink : Factor
         timeStartResourceRegen = Time.time + resourceRegenDelay;
 
         loopingSfx.Stop();
-        /*
-        if (stoppedDueToCharge)
-        {
-            stopDueToChargeSfx.Play();
-        }
-        else
-        {
-            stopSfx.Play();
-        }
-        */
-
-        stoppedDueToCharge = false;
     }
 
     private void ResetEffects()
@@ -300,7 +281,6 @@ public class Blink : Factor
         
         if (currentBlinkResource <= 0 && inUse)
         {
-            stoppedDueToCharge = true;
             StopUse();
         }
 
@@ -326,8 +306,6 @@ public class Blink : Factor
             UWE.CoroutineHost.StartCoroutine(FadeOutGhost(ghostFrames[0]));
             ghostFrames.RemoveAt(0);
         }
-
-        blinkResourceLastFrame = currentBlinkResource;
     }
 
     private void HandleRechargeSfx()
