@@ -42,6 +42,14 @@ internal class ProtoStrafe : ProtoUpgrade
     {
         if (!upgradeEnabled) return;
         
+        if (!subControl.canAccel) return;
+        
+        if (subControl.powerRelay.GetPowerStatus() == global::PowerSystem.Status.Offline) return;
+        
+        if (Mathf.Abs(subControl.throttle.x) <= 0.001f) return;
+        
+        if (Ocean.GetDepthOf(subControl.gameObject) <= 0) return;
+        
         rigidbody.AddForce(transform.right * (motorMode.motorModeSpeeds[1] * subControl.throttle.x), ForceMode.Acceleration);
     }
     
