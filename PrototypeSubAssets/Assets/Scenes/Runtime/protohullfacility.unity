@@ -5634,7 +5634,7 @@ MonoBehaviour:
     type: 2
     floatValue: 0
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 2800000, guid: fc7d823e1d611de4f847986ad4b12869, type: 3}
+    textureValue: {fileID: 2800000, guid: a380eb7515b34d541ae6c0d5a02f92c4, type: 3}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
   - propertyName: _SideBumpMap
     childPath: 
@@ -5642,7 +5642,7 @@ MonoBehaviour:
     type: 2
     floatValue: 0
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
+    textureValue: {fileID: 2800000, guid: e983d5c94ab09a6408f98c2341b3c2cb, type: 3}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
   propertyNames:
   - _CapTexture
@@ -5669,8 +5669,8 @@ MonoBehaviour:
   textureValues:
   - {fileID: 2800000, guid: 11b86fe591799964cb5d9e227ed4397a, type: 3}
   - {fileID: 2800000, guid: dfdd3602f2fbe3742badd9ff174c4a96, type: 3}
-  - {fileID: 2800000, guid: fc7d823e1d611de4f847986ad4b12869, type: 3}
-  - {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
+  - {fileID: 2800000, guid: a380eb7515b34d541ae6c0d5a02f92c4, type: 3}
+  - {fileID: 2800000, guid: e983d5c94ab09a6408f98c2341b3c2cb, type: 3}
   colorValues:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
@@ -11427,7 +11427,7 @@ MonoBehaviour:
     type: 2
     floatValue: 0
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 2800000, guid: fc7d823e1d611de4f847986ad4b12869, type: 3}
+    textureValue: {fileID: 2800000, guid: a380eb7515b34d541ae6c0d5a02f92c4, type: 3}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
   - propertyName: _SideBumpMap
     childPath: 
@@ -11435,7 +11435,7 @@ MonoBehaviour:
     type: 2
     floatValue: 0
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
+    textureValue: {fileID: 2800000, guid: e983d5c94ab09a6408f98c2341b3c2cb, type: 3}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
   propertyNames:
   - _CapTexture
@@ -11462,8 +11462,8 @@ MonoBehaviour:
   textureValues:
   - {fileID: 2800000, guid: 11b86fe591799964cb5d9e227ed4397a, type: 3}
   - {fileID: 2800000, guid: dfdd3602f2fbe3742badd9ff174c4a96, type: 3}
-  - {fileID: 2800000, guid: fc7d823e1d611de4f847986ad4b12869, type: 3}
-  - {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
+  - {fileID: 2800000, guid: a380eb7515b34d541ae6c0d5a02f92c4, type: 3}
+  - {fileID: 2800000, guid: e983d5c94ab09a6408f98c2341b3c2cb, type: 3}
   colorValues:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
@@ -12036,7 +12036,7 @@ MonoBehaviour:
     type: 2
     floatValue: 0
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 2800000, guid: fc7d823e1d611de4f847986ad4b12869, type: 3}
+    textureValue: {fileID: 2800000, guid: a380eb7515b34d541ae6c0d5a02f92c4, type: 3}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
   - propertyName: _SideBumpMap
     childPath: 
@@ -12044,7 +12044,7 @@ MonoBehaviour:
     type: 2
     floatValue: 0
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
+    textureValue: {fileID: 2800000, guid: e983d5c94ab09a6408f98c2341b3c2cb, type: 3}
     colorValue: {r: 0, g: 0, b: 0, a: 0}
   - propertyName: _CapBorderBlendOffset
     childPath: 
@@ -12107,8 +12107,8 @@ MonoBehaviour:
   textureValues:
   - {fileID: 2800000, guid: 9a8b7049f6ced5849a85c6400e9c9e1e, type: 3}
   - {fileID: 2800000, guid: 3d3d0ce938c9a444488fb809cfe601f5, type: 3}
-  - {fileID: 2800000, guid: fc7d823e1d611de4f847986ad4b12869, type: 3}
-  - {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
+  - {fileID: 2800000, guid: a380eb7515b34d541ae6c0d5a02f92c4, type: 3}
+  - {fileID: 2800000, guid: e983d5c94ab09a6408f98c2341b3c2cb, type: 3}
   - {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
   - {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
   - {fileID: 2800000, guid: 4b93cd8d1cab8684599ce79ad38cf2c6, type: 3}
