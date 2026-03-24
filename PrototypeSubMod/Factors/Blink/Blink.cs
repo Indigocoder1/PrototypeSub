@@ -9,6 +9,7 @@ using PrototypeSubMod.Prefabs;
 using SubLibrary.Handlers;
 using UnityEngine;
 using UnityEngine.PostProcessing;
+using UnityEngine.XR;
 
 namespace PrototypeSubMod.Factors.Blink;
 
@@ -140,8 +141,11 @@ public class Blink : Factor
         var depthSettings = postProcessing.profile.depthOfField.settings;
         depthSettings.focusDistance = depthOfFieldVal;
         postProcessing.profile.depthOfField.settings = depthSettings;
-        
-        pdaCameraControl.enabled = false;
+
+        if (pdaCameraControl)
+        {
+            pdaCameraControl.enabled = false;
+        }
         
         timeNextDeleteGhost = Time.time + ghostDeletionDelay;
         timeStartedBlink = Time.unscaledTime;
@@ -177,6 +181,7 @@ public class Blink : Factor
     {
         UWE.CoroutineHost.StartCoroutine(LerpFOV(MiscSettings.fieldOfView, fovTransitionTime, () =>
         {
+            if (!pdaCameraControl) return;
             pdaCameraControl.enabled = true;
         }));
         
@@ -217,6 +222,12 @@ public class Blink : Factor
 
     private IEnumerator LerpFOV(float targetFOV, float time, Action onComplete = null)
     {
+        if (XRSettings.enabled)
+        {
+            onComplete?.Invoke();
+            yield break;
+        }
+        
         float currentTime = 0;
         float initialFOV = SNCameraRoot.main.CurrentFieldOfView;
         while (currentTime < time)
