@@ -44,7 +44,8 @@ public class Blink : Factor
     private float chromaticAbberationVal = 2.5f;
     private float depthOfFieldVal = 0.1f;
     private float fovMultiplier = 1.5f;
-    private float fovTransitionTime = 0.5f;
+    private float fovEnterTransitionTime = 1.5f;
+    private float fovExitTransitionTime = 0.5f;
     
     private float resourceRegenDelay = 2f;
 
@@ -56,6 +57,7 @@ public class Blink : Factor
     private PlayerController controller;
     private PDACameraFOVControl pdaCameraControl;
     private Coroutine timescaleCoroutine;
+    private Coroutine fovCoroutine;
     private BlinkResourceUI resourceUi;
     private FactorIonManager ionManager;
     private SpeedData speedData;
@@ -127,7 +129,13 @@ public class Blink : Factor
         PlayerController_Patches.SetBlockMotorModeAssignment(true);
 
         float targetFOV = Mathf.Min(MiscSettings.fieldOfView * fovMultiplier, 100);
-        UWE.CoroutineHost.StartCoroutine(LerpFOV(targetFOV, fovTransitionTime));
+
+        if (fovCoroutine != null)
+        {
+            UWE.CoroutineHost.StopCoroutine(fovCoroutine);
+        }
+        
+        fovCoroutine = UWE.CoroutineHost.StartCoroutine(LerpFOV(targetFOV, fovEnterTransitionTime));
         var postProcessing = SNCameraRoot.main.mainCam.GetComponent<PostProcessingBehaviour>();
         originalChromaticSettings = postProcessing.profile.chromaticAberration.settings;
         originalDepthOfFieldSettings = postProcessing.profile.depthOfField.settings;
@@ -179,7 +187,11 @@ public class Blink : Factor
 
     private void ResetEffects()
     {
-        UWE.CoroutineHost.StartCoroutine(LerpFOV(MiscSettings.fieldOfView, fovTransitionTime, () =>
+        if (fovCoroutine != null)
+        {
+            UWE.CoroutineHost.StopCoroutine(fovCoroutine);
+        }
+        fovCoroutine = UWE.CoroutineHost.StartCoroutine(LerpFOV(MiscSettings.fieldOfView, fovExitTransitionTime, () =>
         {
             if (!pdaCameraControl) return;
             pdaCameraControl.enabled = true;
@@ -208,7 +220,7 @@ public class Blink : Factor
 
     private IEnumerator SetTimescaleDelayed(float timeScale)
     {
-        // Wait until a FixedUpdate has ocurred to actually update the player velocity
+        // Wait until a FixedUpdate has occurred to actually update the player velocity
         var timestepIncrements = (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime);
         while (timestepIncrements == (int)(Time.fixedUnscaledTime / Time.fixedUnscaledDeltaTime))
         {
@@ -232,8 +244,9 @@ public class Blink : Factor
         float initialFOV = SNCameraRoot.main.CurrentFieldOfView;
         while (currentTime < time)
         {
-            SNCameraRoot.main.SetFov(CubicOut(initialFOV, targetFOV, currentTime / time));
-            currentTime += Time.deltaTime;
+            var fov = CubicOut(initialFOV, targetFOV, currentTime / time);
+            SNCameraRoot.main.SetFov(fov);
+            currentTime += Time.unscaledDeltaTime;
             yield return null;
         }
         
