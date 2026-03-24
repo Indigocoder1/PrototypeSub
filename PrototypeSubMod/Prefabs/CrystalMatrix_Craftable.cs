@@ -53,7 +53,6 @@ internal class CrystalMatrix_Craftable
         };
         
         patch.SetGameObject(template);
-        patch.AddGadget(new ScanningGadget(matrix, Prototype_Craftable.SubInfo.TechType));
 
         var recipeData = ROTACompatManager.GetRelevantRecipe("PrecursorIonCrystalMatrix.json");
         patch.AddGadget(new CraftingGadget(matrix, recipeData)

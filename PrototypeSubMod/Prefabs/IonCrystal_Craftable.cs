@@ -25,7 +25,6 @@ internal class IonCrystal_Craftable
         craftableCrystalInfo = patch.Info;
         
         patch.SetGameObject(Plugin.GeneralAssetBundle.LoadAsset<GameObject>("Empty"));
-        patch.AddGadget(new ScanningGadget(matrix, Prototype_Craftable.SubInfo.TechType));
 
         var recipeData = ROTACompatManager.GetRelevantRecipe("PrecursorIonCrystal.json");
         patch.AddGadget(new CraftingGadget(matrix, recipeData)
