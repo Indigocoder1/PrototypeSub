@@ -417,11 +417,11 @@ internal static class EncyEntryRegisterer
         #region Propulsion Gloves Terminal
         string glovesTerminalTitle = Language.main.Get("PrecursorPropulsionGlovesTerminalEncy_Title");
         string glovesTerminalDescription = Language.main.Get("PrecursorPropulsionGlovesTerminalEncy_Body");
-        var glovesPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PrecursorPropulsionGlovesIcon");
+        var glovesPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("PropulsionGloves_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("PrecursorPropulsionGlovesTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", glovesTerminalTitle, glovesTerminalDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: glovesPopup);
         #endregion
-
+        
         var factorPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("Factor_EncyPopup");
         #region Biomechanics Factor Terminal
         string biomechanicsFactorTerminalTitle = Language.main.Get("BiomechanicsFactorTerminalEncy_Title");
@@ -523,7 +523,7 @@ internal static class EncyEntryRegisterer
         #region Particle Transmitter
         string transmitterTitle = Language.main.Get("ProtoPhaseGateTransmitterEncy_Title");
         string transmitterDescription = Language.main.Get("ProtoPhaseGateTransmitterEncy_Body");
-        var transmitterPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
+        var transmitterPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoTransmitter_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoPhaseGateTransmitter", "DownloadedData/Prototype/Scanned", transmitterTitle,
             transmitterDescription, unlockSound: PDAHandler.UnlockImportant, popupImage: transmitterPopup);
@@ -542,7 +542,7 @@ internal static class EncyEntryRegisterer
         #region Dark Matter Stabilizer
         string stabilizerTitle = Language.main.Get("ProtoPhaseGateStabilizerEncy_Title");
         string stabilizerDescription = Language.main.Get("ProtoPhaseGateStabilizerEncy_Body");
-        var stabilizerPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
+        var stabilizerPopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoStabilizer_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoPhaseGateStabilizer", "DownloadedData/Prototype/Scanned", stabilizerTitle,
             stabilizerDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: stabilizerPopup);
@@ -561,7 +561,7 @@ internal static class EncyEntryRegisterer
         #region Structural Core
         string coreTitle = Language.main.Get("ProtoPhaseGateStructureEncy_Title");
         string coreDescription = Language.main.Get("ProtoPhaseGateStructureEncy_Body");
-        var corePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("AlienFramework_EncyPopup");
+        var corePopup = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("ProtoStructure_EncyPopup");
 
         PDAHandler.AddEncyclopediaEntry("ProtoPhaseGateStructure", "DownloadedData/Prototype/Scanned", coreTitle,
             coreDescription, unlockSound: PDAHandler.UnlockBasic, popupImage: corePopup);
