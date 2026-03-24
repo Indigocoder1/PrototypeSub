@@ -204,6 +204,7 @@ internal class NewUpgradesScreen : MonoBehaviour
         UWE.CoroutineHost.StartCoroutine(SpawnStoryEndPing());
         PDALog.Add(storyEndPDAKey);
         queuedPdaMessages.Add(storyEndPDAKey);
+        IngameMenu.main.SaveGame();
     }
     
     private IEnumerator SpawnStoryEndPing()
