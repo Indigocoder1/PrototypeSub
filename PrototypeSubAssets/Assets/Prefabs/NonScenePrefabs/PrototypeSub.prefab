@@ -6281,7 +6281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deployableStorage: {fileID: 2874070112182103862}
   launchOrigin: {fileID: 8766064905710971552}
-  transmissionDeviceSprite: {fileID: 21300000, guid: 243f2e311b8dfe244b8536a4a5026605,
+  transmissionDeviceSprite: {fileID: 21300000, guid: c506689df7608f94ebe42a1cb1a486d2,
     type: 3}
   selectionMenuManager: {fileID: 2803608410014716689}
   deploySFX: {fileID: 2026357936259892559}
