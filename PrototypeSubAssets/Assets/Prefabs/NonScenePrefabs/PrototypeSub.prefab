@@ -2294,6 +2294,8 @@ MonoBehaviour:
   emissionController: {fileID: 3371763760948927259}
   emissiveColor: {r: 0, g: 0, b: 0, a: 1}
   lightingControllerManager: {fileID: 1369342963250766631}
+  moddedSubHudManager: {fileID: 1023472354084001354}
+  hudCanvasGroup: {fileID: 1178562909987698232}
 --- !u!114 &5078914799393188479
 MonoBehaviour:
   m_ObjectHideFlags: 0
