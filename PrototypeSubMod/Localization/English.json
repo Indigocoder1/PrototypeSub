@@ -151,7 +151,7 @@
   "AnimateEntropyTerminalEncy_Body": "According to translated data logs, this environment was designed to imitate the natural growth conditions for a resource referred to as “animate entropy”, which is reported to have been of critical importance in the harvesting of dark energy and was reportedly discovered by a robotics researcher in the Prototype Administrative Facility.\n\nAs such, this facility was likely used to naturally cultivate animate entropy for the research of miniaturized warp technologies through dark matter manipulation. This research appears to have, at one point, been delegated to both self-warping constructs and the “dead zone mapping initiative”, but was later consolidated into self-warping construct production following the closure of the latter project.\n\nA seemingly unused data point mentions the application of animate entropy to something referred to as the “NSP”. However, no further data can be construed as to what this project may have entailed.",
   "DefenseFacilityWallEncy_Title": "Facility Barrier",
   "DefenseFacilityWallEncy_Body": "This barrier is composed of a heavily reinforced alloy of several alien materials. Its position suggests that it was created to protect the central hub from leviathan attacks. Several large shock-absorbing panels suggests the barrier was also used to record and gather data on the forces, patterns and behaviours of different leviathan attacks.\n\nIt is unclear how leviathan-class lifeforms may have been encouraged to attack the facility within as scans of the barrier's integrity show no signs recent impacts.",
-
+  
   "ProtoFins_Title": "Prototype Fins",
   "ProtoFins_Body": "These magnetically-controlled implements serve as both structural and propulsory augmentations to the Prototype’s hull. They appear to be fabricated in pairs, and schematic extrapolation indicates a maximum capacity of 4 total pairs of fins.\n\n<b>Structural support</b>\nThese fins act as storage devices for a liquid resource closely resembling the composition of alien facility architecture. While it is unclear how this liquid is extracted, it is used to coat the vessel in a thin layer of reinforcement as external water pressure rises, thereby increasing the maximum crush depth of the vessel. Each individual fin contains enough fluid to increase the Prototype’s maximum crush depth by approximately 175 meters.\n\n<b>Propulsion</b>\nSmall energy receptors lining each fin acts as a siphon to extract energy from the Prototype’s ion reactor. This energy is then channeled into propulsive thrusters located at the bottom of each fin to increase maximum speed by 0.15m/s.",
   "ProtoBuildTerminal_Title": "Construction Terminal",
@@ -432,7 +432,8 @@
   // HUD
   "ProtoToggleStrafe": "Toggle strafe",
   "ProtoRadialHint": "Open radial menu",
-  "ProtoInterceptorMapHint": "Open the\ninterceptor map",
+  "ProtoInterceptorMapHint": "Open map",
+  "ArchwayOverrideHint": "Access activated archways with the Prototype's portal",
 
   // Voice Notifications
   "Proto_AbandonShip": "{0}: Warning: Critical hull failure! Pressure destabilizing! Abandon ship!",

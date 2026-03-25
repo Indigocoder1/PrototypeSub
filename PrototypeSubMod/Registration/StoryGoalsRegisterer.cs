@@ -410,6 +410,15 @@ internal static class StoryGoalsRegisterer
             Hint.main.message.Show();
         });
         #endregion
+        
+        #region Archway override installed
+        StoryGoalHandler.RegisterCustomEvent("ArchwayOverrideHint", () =>
+        {
+            var hintText = Language.main.Get("ArchwayOverrideHint");
+            Hint.main.message.SetText(hintText, TextAnchor.MiddleCenter);
+            Hint.main.message.Show();
+        });
+        #endregion
         #region Bad ending voicelines
         StoryGoalHandler.RegisterCustomEvent("OnEnterStoryEndProximity", () =>
         {

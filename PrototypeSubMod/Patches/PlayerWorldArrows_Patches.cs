@@ -3,6 +3,7 @@ using HarmonyLib;
 using PrototypeSubMod.LightDistortionField;
 using PrototypeSubMod.Teleporter;
 using UnityEngine;
+using Story;
 
 namespace PrototypeSubMod.Patches;
 
@@ -59,6 +60,11 @@ public class PlayerWorldArrows_Patches
                 if (!teleporterManager.GetUpgradeInstalled()) continue;
 
                 transform = teleporterManager.transform.Find("MapOpenHint");
+
+                if (!StoryGoalManager.main.IsGoalComplete(("ArchwayOverrideHint")))
+                {
+                    StoryGoalManager.main.OnGoalComplete(("ArchwayOverrideHint"));
+                }
                 return true;
             }
 
