@@ -2294,6 +2294,8 @@ MonoBehaviour:
   emissionController: {fileID: 3371763760948927259}
   emissiveColor: {r: 0, g: 0, b: 0, a: 1}
   lightingControllerManager: {fileID: 1369342963250766631}
+  moddedSubHudManager: {fileID: 1023472354084001354}
+  hudCanvasGroup: {fileID: 1178562909987698232}
 --- !u!114 &5078914799393188479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24087,6 +24089,8 @@ MonoBehaviour:
   emissionController: {fileID: 3371763760948927259}
   powerSystem: {fileID: 7912620590259993429}
   activatedAbilitiesManager: {fileID: 5667138996818512471}
+  lightingController: {fileID: 166681490149920772}
+  lightingControllerManager: {fileID: 1369342963250766631}
   notificationManager: {fileID: 5389210478452801882}
   activationVoiceline: {fileID: 1863483386814636405}
   powerSourceFilledVoiceline: {fileID: 6733927785179229513}

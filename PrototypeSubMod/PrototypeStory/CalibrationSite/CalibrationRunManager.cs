@@ -8,7 +8,7 @@ namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
 
 public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 {
-    public static readonly Vector3 InitialPoint = new(-2220, -390, 420);
+    public static readonly Vector3 InitialPoint = new(-2720, -390, 420);
 
     public static event Action<int> OnPointReached;
     public static event Action OnCalibrationFailed;

@@ -47,6 +47,8 @@ internal class ProtoStoryLocker : MonoBehaviour
     [SerializeField] private EmissionColorController emissionController;
     [SerializeField] private Color emissiveColor = Color.black;
     [SerializeField] private LightingControllerManager lightingControllerManager;
+    [SerializeField] private MonoBehaviour moddedSubHudManager;
+    [SerializeField] private CanvasGroup hudCanvasGroup;
 
     private bool wasInLockZone;
     private bool enteredFullLock;
@@ -121,6 +123,9 @@ internal class ProtoStoryLocker : MonoBehaviour
         engineLever.SetStoryLocked(true);
         subRoot.GetComponent<Stabilizer>().uprightAccelerationStiffness = 100;
         subRoot.GetComponentInChildren<ProtoFinsManager>().UpdateMotorBonuses();
+        
+        moddedSubHudManager.enabled = false;
+        UWE.CoroutineHost.StartCoroutine(FadeOutHUD());
 
         lightingControllerManager.SetManualLightControlActive(true);
         lightingController.LerpToState(2);
@@ -163,6 +168,15 @@ internal class ProtoStoryLocker : MonoBehaviour
         }
         
         onEndingStart?.Invoke();
+    }
+
+    private IEnumerator FadeOutHUD()
+    {
+        while (hudCanvasGroup.alpha > 0)
+        {
+            hudCanvasGroup.alpha -= Time.deltaTime * 4f;
+            yield return null;
+        }
     }
 
     private void OnEnterSaveLock()
