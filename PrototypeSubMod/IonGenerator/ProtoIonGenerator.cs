@@ -1,9 +1,13 @@
-﻿using PrototypeSubMod.MotorHandler;
+﻿using System.Runtime.CompilerServices;
+using PrototypeSubMod.MotorHandler;
 using PrototypeSubMod.Upgrades;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+using PrototypeSubMod.Patches;
 using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.UI.ActivatedAbilities;
 using PrototypeSubMod.UI.PowerDisplay;
+using SubLibrary.SubFire;
 using UnityEngine;
 
 namespace PrototypeSubMod.IonGenerator;
@@ -19,6 +23,8 @@ internal class ProtoIonGenerator : ProtoUpgrade
     [SerializeField] private EmissionColorController emissionController;
     [SerializeField] private PrototypePowerSystem powerSystem;
     [SerializeField] private ActivatedAbilitiesManager activatedAbilitiesManager;
+    [SerializeField] private LightingController lightingController;
+    [SerializeField] private LightingControllerManager lightingControllerManager;
 
     [Header("Voicelines")]
     [SerializeField] private VoiceNotificationManager notificationManager;
@@ -93,12 +99,15 @@ internal class ProtoIonGenerator : ProtoUpgrade
             generatorLoop.Play();
             generatorStart.Play();
             notificationManager.PlayVoiceNotification(activationVoiceline);
+            lightingControllerManager.SetManualLightControlActive(true);
+            lightingController.LerpToState(2);
         }
         else
         {
             emissionController.RemoveTempColor(this);
             generatorLoop.Stop();
             generatorStop.Play();
+            lightingControllerManager.SetManualLightControlActive(false);
         }
     }
 

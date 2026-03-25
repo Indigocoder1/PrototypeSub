@@ -24089,6 +24089,8 @@ MonoBehaviour:
   emissionController: {fileID: 3371763760948927259}
   powerSystem: {fileID: 7912620590259993429}
   activatedAbilitiesManager: {fileID: 5667138996818512471}
+  lightingController: {fileID: 166681490149920772}
+  lightingControllerManager: {fileID: 1369342963250766631}
   notificationManager: {fileID: 5389210478452801882}
   activationVoiceline: {fileID: 1863483386814636405}
   powerSourceFilledVoiceline: {fileID: 6733927785179229513}
