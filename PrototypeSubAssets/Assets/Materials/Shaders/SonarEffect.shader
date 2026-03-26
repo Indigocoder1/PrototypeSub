@@ -27,6 +27,7 @@ Shader "Image Effects/Sonar" {
 			float4x4 _Camera2World;
 			float _SonarPingDistance;
 			float _SonarNearPlane;
+			float _BorderStartPoint;
 			fixed4 _SonarOutlineColor;
 			fixed4 _CrossHatchColor;
 			// Custom ConstantBuffers for Vertex Shader
@@ -127,16 +128,16 @@ Shader "Image Effects/Sonar" {
 				
                 tmp0.z = ceil(tmp0.z);
 				float3 distanceMask; // Not too sure if this is the whole mask
-                crossHatches.w = _SonarPingDistance * 2.0 - linearDepth;
+                crossHatches.w =  _SonarPingDistance * 2.0 - linearDepth;
                 distanceMask.x = crossHatches.w * 100.0;
-                crossHatches.w = saturate(crossHatches.w * 4.0 - 2.5);
+                crossHatches.w = saturate(crossHatches.w * 4.0 + lerp(2, -5, _BorderStartPoint));
                 //crossHatches.w = 1.0 - crossHatches.w; // This line adds the fade out as _SonarPingDistance increases
                 distanceMask.x = saturate(distanceMask.x);
                 distanceMask.x = crossHatches.w * distanceMask.x;
                 distanceMask.x = (0.9 - linearDepth) * distanceMask.x;
-                distanceMask.y = min(linearDepth * 1000, 1) * exp(1 / _SonarNearPlane);
+                distanceMask.y = saturate(min(linearDepth * 1000, 1) * exp(1 / _SonarNearPlane));
                 distanceMask.x = distanceMask.y * distanceMask.x;
-				float oldDist = distanceMask.y;
+				float oldDist = crossHatches.w;
                 tmp0.z = saturate(tmp0.z * distanceMask.x);
                 tmp0.xy = tmp0.zz * tmp0.xy;
                 tmp0.y = linearDepth * tmp0.y;
@@ -157,11 +158,13 @@ Shader "Image Effects/Sonar" {
 				
 				// Negating, halving, then adding one makes the effect part of the image slightly dark and everything else white
                 effectMask = -effectMask * 0.5 + 1.0;
+				
                 crossHatches.w = effectMask * crossHatches.w;
                 crossHatches.w = log(crossHatches.w);
                 crossHatches.w = crossHatches.w * 20.0;
                 crossHatches.w = exp(crossHatches.w);
                 crossHatches.w = tmp0.z * crossHatches.w;
+				
                 tmp0.y = crossHatches.w * 10.0 + tmp0.y;
 				// tmp0.y has the blueOutline mask
                 blueOutline = blueOutline * tmp0.yyy;

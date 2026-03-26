@@ -25961,11 +25961,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: d96b90098a6516f48b6b21f1cee66d2c, type: 3}
-  pingDistance: 0.496
+  pingDistance: 1
+  sonarNearPlane: 0.044
+  borderStartPoint: 0.252
   outlineColor: {r: 0.3879441, g: 1, b: 0, a: 1}
   crossHatchColor: {r: 0.3024702, g: 0.7169812, b: 0.07102172, a: 1}
   resetMaterial: 0
-  sonarNearPlane: 0.065
 --- !u!1 &884888858
 GameObject:
   m_ObjectHideFlags: 0
