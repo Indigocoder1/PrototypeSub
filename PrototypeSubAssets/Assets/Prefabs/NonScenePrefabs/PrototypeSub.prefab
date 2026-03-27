@@ -105154,9 +105154,9 @@ MonoBehaviour:
   - 0
   - 7.3
   motorModePowerConsumption:
-  - 0.075
-  - 0.165
-  - 0.33
+  - 0.25
+  - 0.5
+  - 1
 --- !u!114 &5378019260895971750
 MonoBehaviour:
   m_ObjectHideFlags: 0
