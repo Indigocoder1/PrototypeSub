@@ -34,6 +34,7 @@ internal class Player_Patches
         Camera.main.gameObject.AddComponent<LightDistortionApplier>();
         Camera.main.gameObject.AddComponent<ProtoScreenTeleporterFXManager>();
         Camera.main.gameObject.AddComponent<CloakCutoutApplier>();
+        Camera.main.gameObject.AddComponent<ProtoSonarVFXManager>();
 
         DummyLDFTarget = new GameObject("DummyLDFTarget");
 

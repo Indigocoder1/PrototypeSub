@@ -1,4 +1,4 @@
-Shader "Image Effects/Sonar" {
+Shader "Custom/ProtoSonar" {
 	Properties {
 		_MainTex ("-", 2D) = "" {}
 	}
