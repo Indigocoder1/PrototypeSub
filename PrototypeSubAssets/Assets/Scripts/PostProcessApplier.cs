@@ -27,7 +27,7 @@ public class PostProcessApplier : MonoBehaviour
             resetMaterial = false;
         }
 
-        _material.SetFloat("_SonarPingDistance", pingDistance);
+        _material.SetFloat("_ProtoSonarPingDistance", pingDistance);
         _material.SetFloat("_SonarNearPlane", sonarNearPlane);
         _material.SetFloat("_BorderStartPoint", borderStartPoint);
         _material.SetColor("_SonarOutlineColor", outlineColor);

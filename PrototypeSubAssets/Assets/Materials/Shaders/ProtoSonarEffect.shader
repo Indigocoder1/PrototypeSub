@@ -25,7 +25,7 @@ Shader "Custom/ProtoSonar" {
 			// $Globals ConstantBuffers for Vertex Shader
 			// $Globals ConstantBuffers for Fragment Shader
 			float4x4 _Camera2World;
-			float _SonarPingDistance;
+			float _ProtoSonarPingDistance;
 			float _SonarNearPlane;
 			float _BorderStartPoint;
 			fixed4 _SonarOutlineColor;
@@ -128,10 +128,10 @@ Shader "Custom/ProtoSonar" {
 				
                 tmp0.z = ceil(tmp0.z);
 				float3 distanceMask; // Not too sure if this is the whole mask
-                crossHatches.w =  _SonarPingDistance * 2.0 - linearDepth;
+                crossHatches.w =  _ProtoSonarPingDistance * 2.0 - linearDepth;
                 distanceMask.x = crossHatches.w * 100.0;
                 crossHatches.w = saturate(crossHatches.w * 4.0 + lerp(2, -5, _BorderStartPoint));
-                //crossHatches.w = 1.0 - crossHatches.w; // This line adds the fade out as _SonarPingDistance increases
+                //crossHatches.w = 1.0 - crossHatches.w; // This line adds the fade out as _ProtoSonarPingDistance increases
                 distanceMask.x = saturate(distanceMask.x);
                 distanceMask.x = crossHatches.w * distanceMask.x;
                 distanceMask.x = (0.9 - linearDepth) * distanceMask.x;

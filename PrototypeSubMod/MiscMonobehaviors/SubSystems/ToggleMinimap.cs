@@ -80,7 +80,8 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
 
     public bool OnActivated()
     {
-        ToggleMap();
+        //ToggleMap();
+        Camera.main.gameObject.GetComponent<ProtoSonarVFXManager>().ToggleActivated();
         return true;
     }
 
