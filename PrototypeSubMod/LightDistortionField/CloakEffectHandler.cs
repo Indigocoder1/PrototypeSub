@@ -2,6 +2,7 @@
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.Upgrades;
 using System.Collections.Generic;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.Utility;
 using UnityEngine;
@@ -57,6 +58,12 @@ internal class CloakEffectHandler : ProtoUpgrade
     [SerializeField] private PowerRelay powerRelay;
     [SerializeField] private float secondsToConsumeCharge;
     
+    [Header("Lighting")]
+    [SerializeField] private LightingController lightingController;
+    [SerializeField] private LightingControllerManager lightingControllerManager;
+    [SerializeField] private EmissionColorController emissionController;
+    [SerializeField] private Color emissiveColor = Color.black;
+    
     [Header("Sound")]
     [SerializeField] private VoiceNotificationManager  voiceNotificationManager;
     [SerializeField] private VoiceNotification activateCloakNotif;
@@ -67,8 +74,7 @@ internal class CloakEffectHandler : ProtoUpgrade
     [Header("Miscellaneous")]
     [SerializeField] private FMOD_CustomLoopingEmitter emitter;
     public ProtoIonGenerator ionGenerator;
-    [SerializeField] private EmissionColorController emissionController;
-    [SerializeField] private Color emissiveColor = Color.black;
+
 
     private float TargetScaleMultiplier => GetIsCloaking() ? 1 : 0;
 
@@ -176,12 +182,15 @@ internal class CloakEffectHandler : ProtoUpgrade
             voiceNotificationManager.PlayVoiceNotification(activateCloakNotif, false);
             distortionActiveSFX.Play();
             distortionActivateSFX.Play();
+            lightingControllerManager.SetManualLightControlActive(true);
+            lightingController.LerpToState(2);
         }
         else if (!enabled && upgradeEnabled)
         {
             emissionController.RemoveTempColor(this);
             emitter.Stop();
             distortionActiveSFX.Stop();
+            lightingControllerManager.SetManualLightControlActive(false);
         }
         
         base.SetUpgradeEnabled(enabled);

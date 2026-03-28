@@ -2675,6 +2675,10 @@ MonoBehaviour:
   soundMultiplier: 0.25
   powerRelay: {fileID: 161644787413200408}
   secondsToConsumeCharge: 30
+  lightingController: {fileID: 166681490149920772}
+  lightingControllerManager: {fileID: 1369342963250766631}
+  emissionController: {fileID: 3371763760948927259}
+  emissiveColor: {r: 0, g: 0, b: 0, a: 1}
   voiceNotificationManager: {fileID: 5389210478452801882}
   activateCloakNotif: {fileID: 8193633662682056480}
   invalidOpNotification: {fileID: 5744166132657847796}
@@ -2682,8 +2686,6 @@ MonoBehaviour:
   distortionActivateSFX: {fileID: 7063823425750407999}
   emitter: {fileID: 8451232688611630082}
   ionGenerator: {fileID: 8702380383007559634}
-  emissionController: {fileID: 3371763760948927259}
-  emissiveColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &28093429622942538
 GameObject:
   m_ObjectHideFlags: 0
