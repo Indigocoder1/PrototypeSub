@@ -10,11 +10,11 @@ public class ProtoSonarVFXManager : MonoBehaviour
     private float sonarNearPlane = 20f;
     private float borderStartPoint = 0.7f;
     private float transitonDuration = 2f;
-    private Color outlineColor = new (0f, 0.419f, 0);
-    private Color crossHatchColor = new (0.3f, 0.72f, 0.07f);
+    private Color outlineColor = new (0f, 0f, 0.33f);
+    private Color crossHatchColor = new (0f, 0.07f, 0f);
     
     private Material material;
-    private bool activated;
+    public bool activated;
     private float currentActivationTime = 1;
 
     private void Awake()
@@ -38,7 +38,7 @@ public class ProtoSonarVFXManager : MonoBehaviour
         if (!(currentActivationTime < 1)) return;
         
         currentActivationTime += Time.deltaTime / transitonDuration;
-        float progress = activated ? EaseInCubic(currentActivationTime) : 1 - EaseInCubic(currentActivationTime);
+        float progress = activated ? EaseOutCubic(currentActivationTime) : 1 - EaseOutCubic(currentActivationTime);
         pingDistance = progress;
     }
 
@@ -63,10 +63,5 @@ public class ProtoSonarVFXManager : MonoBehaviour
     private float EaseOutCubic(float x)
     {
         return 1 - Mathf.Pow(1 - x, 3);
-    }
-
-    private float EaseInCubic(float x)
-    {
-        return x * x * x;
     }
 }
