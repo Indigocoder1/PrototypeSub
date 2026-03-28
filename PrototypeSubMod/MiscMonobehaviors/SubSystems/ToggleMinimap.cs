@@ -31,7 +31,10 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
     // Called by BroadcastMessage in SubRoot.OnPlayerExited
     public void SaveEngineStateAndPowerDown()
     {
-        sonarVFX.SetActivated(false);
+        if (sonarVFX.activated)
+        {
+            sonarVFX.ToggleActivated();
+        }
         GetComponentInParent<SubRoot>().GetComponentInChildren<TetherManager>(true)
             .UpdateIcon(this);
     }
