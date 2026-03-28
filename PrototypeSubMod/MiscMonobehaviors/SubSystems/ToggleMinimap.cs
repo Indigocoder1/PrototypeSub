@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.UI.AbilitySelection;
 using PrototypeSubMod.UI.ActivatedAbilities;
 using UnityEngine;
@@ -9,11 +10,12 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
 {
     [SerializeField] private Sprite minimapSprite;
     [SerializeField] private FMOD_CustomEmitter nearfieldSFX;
-    [SerializeField] private GameObject positionDisplay;
-    [SerializeField] private int maxSpawnWaitFrames = 10;
+    
+    [Header("Power Draw")]
+    [SerializeField] private PowerRelay powerRelay;
+    [SerializeField] private float secondsToConsumeCharge;
 
-    private int frameCount;
-    private MiniWorld miniWorld;
+    private ProtoSonarVFXManager sonarVFX;
 
     private void Start()
     {
@@ -23,65 +25,33 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
     private IEnumerator Initialize()
     {
         yield return new WaitForEndOfFrame();
-        
-        positionDisplay.SetActive(false);
-
-        while (frameCount < maxSpawnWaitFrames)
-        {
-            yield return new WaitForEndOfFrame();
-
-            var world = gameObject.GetComponentInChildren<MiniWorld>();
-            if (world)
-            {
-                miniWorld = world;
-                miniWorld.active = false;
-                yield break;
-            }
-
-            frameCount++;
-        }
-
-        Plugin.Logger.LogError($"Mini world not found as a child of {gameObject} after {maxSpawnWaitFrames} frames");
-    }
-
-    public void ToggleMap()
-    {
-        if (!miniWorld) return;
-
-        miniWorld.ToggleMap();
-        positionDisplay.SetActive(!positionDisplay.activeSelf);
-
-        if (miniWorld.active)
-        {
-            nearfieldSFX.Play();
-        }
-        else
-        {
-            nearfieldSFX.Stop();
-        }
-    }
-
-    public void ToggleMap(bool active)
-    {
-        if (!miniWorld) return;
-
-        miniWorld.active = active;
-        positionDisplay.SetActive(active);
-        nearfieldSFX.Stop();
+        sonarVFX = Camera.main.gameObject.GetComponent<ProtoSonarVFXManager>();
     }
     
     // Called by BroadcastMessage in SubRoot.OnPlayerExited
     public void SaveEngineStateAndPowerDown()
     {
-        ToggleMap(false);
+        sonarVFX.SetActivated(false);
         GetComponentInParent<SubRoot>().GetComponentInChildren<TetherManager>(true)
             .UpdateIcon(this);
     }
 
+    private void Update()
+    {
+        if (sonarVFX.activated)
+        {
+            bool couldConsume = powerRelay.ConsumeEnergy(PrototypePowerSystem.CHARGE_POWER_AMOUNT / secondsToConsumeCharge * Time.deltaTime,
+                out _);
+
+            if (!couldConsume)
+            {
+                sonarVFX.SetActivated(false);
+            }
+        }
+    }
+
     public bool OnActivated()
     {
-        //ToggleMap();
-        var sonarVFX = Camera.main.gameObject.GetComponent<ProtoSonarVFXManager>();
         sonarVFX.ToggleActivated();
 
         if (sonarVFX.activated)
@@ -100,7 +70,7 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
 
     public bool GetActive()
     {
-        return miniWorld.active;
+        return sonarVFX.activated;
     }
 
     public bool GetCanActivate() => true;

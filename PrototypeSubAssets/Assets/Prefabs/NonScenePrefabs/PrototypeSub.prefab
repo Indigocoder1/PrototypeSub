@@ -97338,8 +97338,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapSprite: {fileID: 21300000, guid: 7bf4e34d33f075040b5a0c31eb4983d6, type: 3}
   nearfieldSFX: {fileID: 1654143376242418153}
-  positionDisplay: {fileID: 7129084718674829316}
-  maxSpawnWaitFrames: 10
+  powerRelay: {fileID: 161644787413200408}
+  secondsToConsumeCharge: 60
 --- !u!1 &7484966521267981720
 GameObject:
   m_ObjectHideFlags: 0
