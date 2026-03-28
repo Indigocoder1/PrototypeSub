@@ -34,6 +34,7 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
         if (sonarVFX.activated)
         {
             sonarVFX.ToggleActivated();
+            nearfieldSFX.Stop();
         }
         GetComponentInParent<SubRoot>().GetComponentInChildren<TetherManager>(true)
             .UpdateIcon(this);
