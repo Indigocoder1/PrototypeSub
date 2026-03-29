@@ -8,6 +8,7 @@ public class CalibrationProgressTracker : MonoBehaviour, IScheduledUpdateBehavio
     [SerializeField] private SubRoot subRoot;
     [SerializeField] private CalibrationRunManager runManager;
     [SerializeField] private Transform subIcon;
+    [SerializeField] private Transform pointsParent;
     [SerializeField] private Transform[] locationPoints;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float positionScalar;
@@ -32,7 +33,7 @@ public class CalibrationProgressTracker : MonoBehaviour, IScheduledUpdateBehavio
         var positions = new Vector3[positionCount];
         for (int i = 0; i < positionCount - 1; i++)
         {
-            positions[i] = locationPoints[i].localPosition;
+            positions[i] = pointsParent.InverseTransformPoint(locationPoints[i].position);
         }
 
         positions[positionCount - 1] = subIcon.transform.localPosition;
