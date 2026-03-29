@@ -6,6 +6,7 @@ using PrototypeSubMod.Teleporter;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using PrototypeSubMod.Facilities.Interceptor;
 using Story;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -23,6 +24,12 @@ public class SubTetherLogic : Factor
     
     public override void StartUse()
     {
+        if (InterceptorReactorSequenceManager.SequenceInProgress)
+        {
+            ErrorMessage.AddError(Language.main.Get("TetherUnavailable"));
+            return;
+        }
+        
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
         FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
 

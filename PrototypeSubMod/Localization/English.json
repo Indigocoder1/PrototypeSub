@@ -271,6 +271,7 @@
   "TetherFactorTooFar": "Too far from marker!",
   "TetherFactorConfirmAgain": "Press again to confirm teleportation",
   "TetherFactorNoSub": "No Prototype Sub to teleport to!",
+  "TetherUnavailable": "Tether factor currently unable to operate",
   "ProtoLocatorHint": "Press {0} to toggle the facility detection factor",
   "ProtoLocatorEnabled": "Facility detection factor activated. Press again to toggle",
   "ProtoLocatorDisabled": "Facility detection factor deactivated. Press again to toggle",

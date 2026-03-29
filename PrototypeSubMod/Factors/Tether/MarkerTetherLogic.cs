@@ -7,6 +7,7 @@ using RootMotion;
 using SubLibrary.Audio;
 using System;
 using System.Collections;
+using PrototypeSubMod.Facilities.Interceptor;
 using UnityEngine;
 
 namespace PrototypeSubMod.Factors.Tether;
@@ -37,6 +38,12 @@ public class MarkerTetherLogic : Factor
 
     public override void StartUse()
     {
+        if (InterceptorReactorSequenceManager.SequenceInProgress)
+        {
+            ErrorMessage.AddError(Language.main.Get("TetherUnavailable"));
+            return;
+        }
+        
         if (Player.main.isPiloting) return;
         if (Player.main.precursorOutOfWater && Plugin.GlobalSaveData.tetherFactorMarkerLocation == null) return;
         if (Player.main.cinematicModeActive) return;
