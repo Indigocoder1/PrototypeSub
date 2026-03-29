@@ -19,11 +19,16 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
     [SerializeField] private Animator menuManager;
     [SerializeField] private Transform cameraFocus;
     [SerializeField] private float maxAlignmentSpeed;
+    
+    [Header("Engine hint fade")]
+    [SerializeField] private CanvasGroup engineHint;
+    [SerializeField] private float fadeDuration;
 
     [SerializeField, HideInInspector] public List<IAbilityIcon> abilityIcons = new();
     private List<IAbilityIcon> iconsToShow = new();
     private bool menuEnabled;
     private PilotingChair chair;
+    private Coroutine fadeRoutine;
 
     private void OnValidate()
     {
@@ -149,6 +154,11 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
         if (!enabled)
         {
             MainCameraControl_Patches.SetOverwriteDelta(Vector2.zero, false);
+            StartEngineHintFade(1f);
+        }
+        else
+        {
+            StartEngineHintFade(0f);
         }
     }
 
@@ -157,6 +167,30 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
         if (menuEnabled) return;
 
         SetMenuEnabled(true);
+    }
+    
+    private void StartEngineHintFade(float targetAlpha)
+    {
+        if (fadeRoutine != null)
+            UWE.CoroutineHost.StopCoroutine(fadeRoutine);
+
+        fadeRoutine = UWE.CoroutineHost.StartCoroutine(FadeEngineHint(targetAlpha));
+    }
+    
+    private IEnumerator FadeEngineHint(float targetAlpha)
+    {
+        if (!engineHint) yield break;
+        float startAlpha = engineHint.alpha;
+        float time = 0f;
+
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            engineHint.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
+            yield return null;
+        }
+
+        engineHint.alpha = targetAlpha;
     }
 
     private void OnDestroy()
