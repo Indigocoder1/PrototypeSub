@@ -11,6 +11,7 @@ using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.Registration;
+using Story;
 using SubLibrary.Handlers;
 using Unity.Audio;
 using UnityEngine;
@@ -38,13 +39,14 @@ public class Locator : Factor
     {
         base.OnEquipped();
         timeLastPing = Time.time - duration;
-    }
+        
+        if (StoryGoalManager.main.IsGoalComplete("ProtoLocatorEquipped")) return;
 
-    public override void OnUnequipped()
-    {
-        base.OnUnequipped();
+        StoryGoalManager.main.OnGoalComplete("ProtoLocatorEquipped");
+        var text = Language.main.GetFormat("ProtoLocatorHint", GameInput.FormatButton(GetUseButton()));
+        Hint.main.message.SetText(text);
+        Hint.main.message.Show();
     }
-
 
     public override void StartUse()
     {
@@ -55,12 +57,12 @@ public class Locator : Factor
         if (toggle)
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ButtonSelect"), Player.main.transform.position);
-            ErrorMessage.AddError("Facility detection factor activated. Press again to toggle.");
+            ErrorMessage.AddError(Language.main.Get("ProtoLocatorEnabled"));
         }
-         else
+        else
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ButtonBack"), Player.main.transform.position);
-            ErrorMessage.AddError("Facility detection factor deactivated. Press again to toggle.");
+            ErrorMessage.AddError(Language.main.Get("ProtoLocatorDisabled"));
         }
     }
 
