@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: TetherPlace
   id: 
-  audioClip: {fileID: 8300000, guid: a3d48d75a5e04a541951d9ace628a9af, type: 3}
+  audioClip: {fileID: 8300000, guid: 07c4a843d71eab745b13d00cca8253e5, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 10
