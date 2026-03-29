@@ -59,13 +59,12 @@ internal class CrystalMatrix_Craftable
             .WithCraftingTime(5f)
             .WithFabricatorType(PrecursorFabricator.precursorFabricatorType)
             .WithStepsToFabricatorTab("PowerSources"));
-    patch.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
+        patch.AddGadget(new ScanningGadget(matrix, TechType.None)
+            .WithPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory));
 
         Sprite matrixSprite = Plugin.GeneralAssetBundle.LoadAsset<Sprite>("matrixSprite");
         SpriteHandler.RegisterSprite(TechType.PrecursorIonCrystalMatrix, matrixSprite);
-
-
-
+        
         CraftDataHandler.SetPickupSound(TechType.PrecursorIonCrystalMatrix, "event:/loot/pickup_precursorioncrystal");
 
         patch.Register();
