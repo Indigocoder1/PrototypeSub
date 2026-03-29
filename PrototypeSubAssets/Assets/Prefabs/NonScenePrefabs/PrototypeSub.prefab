@@ -105909,7 +105909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Proto_HullDamage
   sound: {fileID: 11400000, guid: 233779d3dc34ba2479b5729b662e597d, type: 2}
-  minInterval: 120
+  minInterval: 240
 --- !u!1 &8057458715113343597
 GameObject:
   m_ObjectHideFlags: 0
