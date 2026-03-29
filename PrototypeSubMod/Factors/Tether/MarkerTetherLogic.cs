@@ -62,7 +62,7 @@ public class MarkerTetherLogic : Factor
 
         if (ionManager.GetCurrentEnergy() < powerConsumption)
         {
-            ErrorMessage.AddError("Not enough power!");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorNoPower"));
             noPowerSFX.Play();
             return;
         }
@@ -70,7 +70,7 @@ public class MarkerTetherLogic : Factor
         if (Vector3.Distance(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value, Player.main.transform.position) >
             maxDistFromTether)
         {
-            ErrorMessage.AddError("Too far from tether!");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorTooFar"));
             return;
         }
         

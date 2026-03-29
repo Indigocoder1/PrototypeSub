@@ -29,21 +29,21 @@ public class SubTetherLogic : Factor
         base.StartUse();
         if (!Plugin.GlobalSaveData.prototypePresent || Plugin.GlobalSaveData.prototypeDestroyed)
         {
-            ErrorMessage.AddError("No sub to teleport to!");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorNoSub"));
             return;
         }
 
         if (Time.time > timeAskedToConfirm + confirmationWaitPeriod)
         {
             timeAskedToConfirm = Time.time;
-            ErrorMessage.AddError("Press again to confirm teleportation");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorConfirmAgain"));
             return;
         }
 
         if (ionManager.GetCurrentEnergy() < resourceCost)
         {
-            ErrorMessage.AddError("Not enough power!");
-            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
+            ErrorMessage.AddError(Language.main.Get("TetherFactorNoPower"));
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("TetherNoPower"), Player.main.transform.position);
             return;
         }
         
