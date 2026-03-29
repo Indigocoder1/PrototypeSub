@@ -1,4 +1,5 @@
-﻿using Nautilus.Extensions;
+﻿using System;
+using Nautilus.Extensions;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Patches;
@@ -28,6 +29,8 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     
     private void Start()
     {
+        IngameMenu_Patches.OnQuitToMainMenu += OnQuitToMainMenu;
+        
         if (Plugin.GlobalSaveData.reactorSequenceComplete)
         {
             activationTerminal.ForceInteracted();
@@ -137,5 +140,21 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         Inventory.main.quickSlots.SetIgnoreHotkeyInput(false);
         Player.main.GetPDA().SetIgnorePDAInput(false);
         Player.main.teleportingLoopSound.Stop();
+    }
+
+    private void OnQuitToMainMenu()
+    {
+        LargeWorldStreamer_Patches.SetOverwriteCamPos(false, Vector3.zero);
+        IngameMenu_Patches.SetDenySaving(false);
+        GUIController_Patches.SetDenyHideCycling(false);
+        WeatherCompatManager.SetWeatherEnabled(true);
+        Player_Patches.SetOxygenReqOverride(false, 0);
+        BiomeGoalTracker_Patches.SetTrackingBlocked(false);
+        SequenceInProgress = false;
+    }
+
+    private void OnDestroy()
+    {
+        IngameMenu_Patches.OnQuitToMainMenu -= OnQuitToMainMenu;
     }
 }
