@@ -45131,7 +45131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Proto_WelcomeAboard
   sound: {fileID: 11400000, guid: 67745b251ea499342bc9fb24dd6af374, type: 2}
-  minInterval: 30
+  minInterval: 180
 --- !u!1 &3306056678989469392
 GameObject:
   m_ObjectHideFlags: 0
@@ -49671,7 +49671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Proto_WelcomeAboard_Issue
   sound: {fileID: 11400000, guid: be4155a853bbe2546b1333ae31e1e5db, type: 2}
-  minInterval: 30
+  minInterval: 180
 --- !u!1 &3604568437329352226
 GameObject:
   m_ObjectHideFlags: 0
@@ -72702,7 +72702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Proto_WelcomeAboard_Critical
   sound: {fileID: 11400000, guid: 0554e93024d3781428b49f286f80eb44, type: 2}
-  minInterval: 30
+  minInterval: 180
 --- !u!1 &5586264620946356894
 GameObject:
   m_ObjectHideFlags: 0
