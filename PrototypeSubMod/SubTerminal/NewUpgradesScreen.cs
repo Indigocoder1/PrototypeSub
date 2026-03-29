@@ -186,6 +186,9 @@ internal class NewUpgradesScreen : MonoBehaviour
         KnownTech.Add(HullFacilityKey.prefabInfo.TechType);
         PDAEncyclopedia.Add("HullFacilityTabletEncy", true);
         queuedPdaMessages.Add(hullKeyPDAKey);
+        
+        // Remove the new upgrades message
+        queuedVoicelines.Dequeue();
     }
     
     private void CheckForStoryPing()
@@ -231,7 +234,7 @@ internal class NewUpgradesScreen : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay + 1f);
         
         while (queuedVoicelines.Count > 0)
         {
