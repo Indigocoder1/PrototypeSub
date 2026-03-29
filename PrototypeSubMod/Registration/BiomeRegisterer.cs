@@ -153,7 +153,7 @@ internal static class BiomeRegisterer
             var volum = prefab.GetComponent<AtmosphereVolume>();
             prefab.AddComponent<AtmospherePriorityEnsurer>().priority = volum.priority;
             var biomeScaler = prefab.AddComponent<IncreaseSizeOnBiomeEnter>();
-            biomeScaler.SetInfo(TransmissionSiteBiome, 4f);
+            biomeScaler.SetInfo(TransmissionSiteBiome, 3f);
         };
 
         transmissionVolumePrefab.SetGameObject(transmissionTemplate);
