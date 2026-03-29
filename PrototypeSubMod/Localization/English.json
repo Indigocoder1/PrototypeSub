@@ -318,6 +318,7 @@
   "VehicleFrameworkNoStorage": "No storage in vehicle",
   "ProtoDockVehicleHint": "Dock vehicles by driving into fins from below",
   "ProtoUndockVehicleHint": "Undock vehicles in the cockpit radial menu",
+  "ProtoNoDockingClearance": "No space to undock!",
 
   // Deployables terminal
   "UseDeployableTerminal": "Access launch bay",
