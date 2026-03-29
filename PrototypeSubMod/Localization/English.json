@@ -265,6 +265,7 @@
   "SuitEditingSub": "Editing Prototype: {0}",
   "LocalizedTrue": "True",
   "LocalizedFalse": "False",
+  "ProtoBlinkFactorHint": "Hold {0} while in water to activate the blink factor",
 
   // Keybinds
   "PrototypeInputCategory": "The Prototype Sub",

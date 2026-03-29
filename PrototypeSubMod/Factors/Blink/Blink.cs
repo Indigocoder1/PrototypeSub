@@ -6,6 +6,7 @@ using Nautilus.Handlers;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.PrecursorWearables;
 using PrototypeSubMod.Prefabs;
+using Story;
 using SubLibrary.Handlers;
 using UnityEngine;
 using UnityEngine.PostProcessing;
@@ -459,6 +460,13 @@ public class Blink : Factor
         RetrieveIndicatorReference();
         speedData = new SpeedData();
         currentBlinkResource = maxBlinkDuration;
+        
+        if (StoryGoalManager.main.IsGoalComplete("ProtoBlinkEquipped")) return;
+
+        StoryGoalManager.main.OnGoalComplete("ProtoBlinkEquipped");
+        var tooltipText = Language.main.GetFormat("ProtoBlinkFactorHint", GameInput.FormatButton(GetUseButton()));
+        Hint.main.message.SetText(tooltipText);
+        Hint.main.message.Show();
     }
 
     private void OnDestroy()
