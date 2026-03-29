@@ -14,6 +14,7 @@ public class EngineExteriorEnabledManager : MonoBehaviour
     {
         Plugin.GlobalSaveData.OnStartedSaving += SaveStatus;
         FreecamController_Patches.onExitFreecam += OnExitFreecam;
+        Player.main.playerRespawnEvent.AddHandler(this, _ => UpdateEnabledStatus());
 
         disabledObjects.SetActive(!Plugin.GlobalSaveData.insideEngineFacility);
     }
@@ -24,6 +25,11 @@ public class EngineExteriorEnabledManager : MonoBehaviour
     }
 
     private void OnExitFreecam()
+    {
+        UpdateEnabledStatus();
+    }
+
+    private void UpdateEnabledStatus()
     {
         bool inBounds = facilityBounds.bounds.Contains(Player.main.transform.position);
         disabledObjects.SetActive(!inBounds);
