@@ -6,6 +6,7 @@ using PrototypeSubMod.Teleporter;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Story;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -22,7 +23,6 @@ public class SubTetherLogic : Factor
     
     public override void StartUse()
     {
-
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
         FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
 
@@ -92,5 +92,17 @@ public class SubTetherLogic : Factor
         player.transform.rotation = rotation;
         player.WaitForTeleportation();
         Player.main.SetPrecursorOutOfWater(false);
+    }
+
+    public override void OnEquipped()
+    {
+        if (StoryGoalManager.main.IsGoalComplete("ProtoTetherEquipped")) return;
+
+        StoryGoalManager.main.OnGoalComplete("ProtoTetherEquipped");
+        var markerLogic = GetComponent<MarkerTetherLogic>();
+        var hintText = Language.main.GetFormat("ProtoTetherTooltip", GameInput.FormatButton(GetUseButton()),
+            GameInput.FormatButton(markerLogic.GetUseButton()));
+        Hint.main.message.SetText(hintText);
+        Hint.main.message.Show();
     }
 }

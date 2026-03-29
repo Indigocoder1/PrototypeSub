@@ -266,6 +266,7 @@
   "LocalizedTrue": "True",
   "LocalizedFalse": "False",
   "ProtoBlinkFactorHint": "Hold {0} while in water to activate the blink factor",
+  "ProtoTetherTooltip": "Press {0} to teleport to the Prototype and {1} to place and teleport to your marker",
 
   // Keybinds
   "PrototypeInputCategory": "The Prototype Sub",

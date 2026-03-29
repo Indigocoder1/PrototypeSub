@@ -19,7 +19,6 @@ public class MarkerTetherLogic : Factor
     [SerializeField] private float powerConsumption = 10f;
     [SerializeField] private float maxDistFromTether = 1000;
 
-
     public static event Action onClearTetherMarker;
 
     private GameObject warpInFx;
@@ -77,8 +76,7 @@ public class MarkerTetherLogic : Factor
         
         ionManager.ConsumeEnergy(powerConsumption);
 
-        var fx = Instantiate(warpInFx, Player.main.transform.position, Player.main.transform.rotation);
-
+        Instantiate(warpInFx, Player.main.transform.position, Player.main.transform.rotation);
         UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
         Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
 
