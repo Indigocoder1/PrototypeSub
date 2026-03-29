@@ -49,6 +49,7 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
 
             if (!couldConsume)
             {
+                if (!sonarVFX) return;
                 sonarVFX.SetActivated(false);
             }
         }
