@@ -1,5 +1,6 @@
 ﻿using Nautilus.Handlers;
 using PrototypeSubMod.Patches;
+using Story;
 
 namespace PrototypeSubMod.Registration;
 
@@ -18,6 +19,13 @@ public static class RadioMessageRegisterer
         
         RegisterMessage("ProtoRadioMessage4", "ProtoRadioMessage3");
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage4", Story.GoalType.Radio, 120, "OnCalibrationRunCompleted");
+        
+        // Wyrm messages
+        RegisterMessage("WyrmRadioMessageActivated", "WyrmRadioMessageActivated");
+        StoryGoalHandler.RegisterCompoundGoal("WyrmRadioMessageActivated", Story.GoalType.Radio, 10, "HullFacilityWormTerminalEncy");
+        
+        RegisterMessage("WyrmRadioMessageVoid", "WyrmRadioMessageVoid");
+        StoryGoalHandler.RegisterCompoundGoal("PDA_OnEnterVoidWyrmActivated", Story.GoalType.PDA, 0f, "WyrmRadioMessageVoid");
         #endregion
     }
 

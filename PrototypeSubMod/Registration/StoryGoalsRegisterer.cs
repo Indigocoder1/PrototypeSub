@@ -189,6 +189,7 @@ internal static class StoryGoalsRegisterer
         StoryGoalHandler.RegisterCustomEvent("HullFacilityWormTerminalEncy", () =>
         {
             PDAEncyclopedia.Add("HullFacilityWormTerminalEncy", true);
+            StoryGoalHandler.RegisterBiomeGoal("WyrmRadioMessageVoid",  Story.GoalType.Radio, "void", 5f);
         });
         #endregion
 

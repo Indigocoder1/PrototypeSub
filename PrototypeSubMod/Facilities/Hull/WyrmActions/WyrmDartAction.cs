@@ -96,7 +96,7 @@ public class WyrmDartAction : CreatureAction
             roarManager.PlayRoar(Player.main.transform.position);
             speedIncreased = true;
 
-            var random = Random.Range(0f, 500f);
+            var random = Random.Range(0f, 1000f);
             if (random < 1)
             {
                 dartSpecialSFX.Play();

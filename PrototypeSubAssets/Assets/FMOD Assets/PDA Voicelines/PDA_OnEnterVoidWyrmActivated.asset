@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
+  m_Name: PDA_OnEnterVoidWyrmActivated
+  m_EditorClassIdentifier: 
+  path: PDA_OnEnterVoidWyrmActivated
+  id: 
+  audioClip: {fileID: 8300000, guid: 33d80c060b896bd4a8c5ed7d3e9b9ce8, type: 3}
+  doNotAutoRegister: 0
+  mode: 4210832
+  maxDistance3D: 0
+  minDistance3D: 0
+  fadeOutTime: -1
+  bus: 1
+  customBusPath: 
