@@ -6,14 +6,13 @@ using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull;
 
-public class AggressiveWyrmSpawner : MonoBehaviour
+public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
 {
-    private bool wasInVoid;
     private bool wyrmSpawned;
     private float minWyrmSpawnDelay = 20f;
     private float maxWyrmSpawnDelay = 40f;
 
-    private void Update()
+    public void ScheduledUpdate()
     {
         if (WaitScreen.IsWaiting) return;
 
@@ -23,33 +22,30 @@ public class AggressiveWyrmSpawner : MonoBehaviour
         bool inVoid = biomeString is "void" or "";
         inVoid |= biomeString.EndsWith("protovoid");
 
-        if (inVoid != wasInVoid && inVoid && !wyrmSpawned)
+        if (!inVoid || wyrmSpawned) return;
+        
+        var (hitPoint, info) = FindSpawnPoint();
+        var point = info.point;
+        var normal = info.normal;
+        if (!hitPoint)
         {
-            var (hitPoint, info) = FindSpawnPoint();
-            var point = info.point;
-            var normal = info.normal;
-            if (!hitPoint)
-            {
-                const float spawnOffset = 250;
-                var playerPos = Player.main.transform.position;
-                var dir = (-playerPos.normalized - Vector3.up) / 2;
-                dir.Normalize();
-                point = playerPos + dir * spawnOffset;
-                normal = -dir;
-                Plugin.Logger.LogInfo($"Wyrm spawner didn't detect any hits. Resorting to fallback spawn location");
-            }
-            
-            Plugin.Logger.LogInfo($"Entered the void | Spawn point at {point}");
-            StartCoroutine(SpawnWyrm(point, normal));
-            wyrmSpawned = true;
+            const float spawnOffset = 250;
+            var playerPos = Player.main.transform.position;
+            var dir = (-playerPos.normalized - Vector3.up) / 2;
+            dir.Normalize();
+            point = playerPos + dir * spawnOffset;
+            normal = -dir;
+            Plugin.Logger.LogInfo($"Wyrm spawner didn't detect any hits. Resorting to fallback spawn location");
         }
-
-        wasInVoid = inVoid;
+        
+        Plugin.Logger.LogInfo($"Entered the void | Spawn point at {point}");
+        StartCoroutine(SpawnWyrm(point, normal));
+        wyrmSpawned = true;
     }
 
     private IEnumerator SpawnWyrm(Vector3 point, Vector3 normal)
     {
-        var random = UnityEngine.Random.Range(minWyrmSpawnDelay, maxWyrmSpawnDelay);
+        var random = Random.Range(minWyrmSpawnDelay, maxWyrmSpawnDelay);
 
         yield return new WaitForSeconds(random);
 
@@ -107,4 +103,18 @@ public class AggressiveWyrmSpawner : MonoBehaviour
 
         return points;
     }
+
+    public string GetProfileTag() => "AggressiveWyrmSpawner";
+    
+    public void OnEnable()
+    {
+        UpdateSchedulerUtils.Register(this);
+    }
+
+    public void OnDisable()
+    {
+        UpdateSchedulerUtils.Deregister(this);
+    }
+
+    public int scheduledUpdateIndex { get; set; }
 }
