@@ -42,16 +42,15 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
 
     private void Update()
     {
-        if (sonarVFX.activated)
-        {
-            bool couldConsume = powerRelay.ConsumeEnergy(PrototypePowerSystem.CHARGE_POWER_AMOUNT / secondsToConsumeCharge * Time.deltaTime,
-                out _);
+        if (sonarVFX == null || !sonarVFX.activated) return;
+        
+        bool couldConsume = powerRelay.ConsumeEnergy(PrototypePowerSystem.CHARGE_POWER_AMOUNT / secondsToConsumeCharge * Time.deltaTime,
+            out _);
 
-            if (!couldConsume)
-            {
-                if (!sonarVFX) return;
-                sonarVFX.SetActivated(false);
-            }
+        if (!couldConsume)
+        {
+            if (!sonarVFX) return;
+            sonarVFX.SetActivated(false);
         }
     }
 
