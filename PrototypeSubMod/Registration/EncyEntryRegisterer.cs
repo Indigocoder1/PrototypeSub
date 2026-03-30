@@ -405,6 +405,25 @@ internal static class EncyEntryRegisterer
 
         PDAHandler.AddEncyclopediaEntry("TransmissionTerminalEncy", "DownloadedData/Prototype/ProtoTerminal", transmissionTerminalTitle, transmissionTerminalDescription, transmissionDeviceBackground,  unlockSound: PDAHandler.UnlockImportant, popupImage: transmissionDevicePopup);
         #endregion
+        
+        #region Alien Fabricator
+        string fabricatorTitle = Language.main.Get("PrecursorFabricator_Title");
+        string fabricatorBody = Language.main.Get("PrecursorFabricator_Body");
+        
+        PDAHandler.AddEncyclopediaEntry("PrecursorFabricatorEncy", "DownloadedData/Prototype/Scanned", fabricatorTitle, 
+            fabricatorBody, unlockSound: PDAHandler.UnlockBasic);
+        var fabricatorType = (TechType)Enum.Parse(typeof(TechType), "ProtoPrecursorFabricator");
+        var fabricatorEntry = new PDAScanner.EntryData()
+        {
+            key = fabricatorType,
+            destroyAfterScan = false,
+            encyclopedia = "PrecursorFabricatorEncy",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = fabricatorType
+        };
+        PDAHandler.AddCustomScannerEntry(fabricatorEntry);
+        #endregion
 
         #region Precursor Suit Terminal
         string precursorSuitTerminalTitle = Language.main.Get("PrecursorSuitTerminalEncy_Title");
