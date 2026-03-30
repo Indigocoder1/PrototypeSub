@@ -1,4 +1,5 @@
-﻿using Nautilus.Assets;
+﻿using System.Collections;
+using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Handlers;
 using Nautilus.Utility;
@@ -34,10 +35,9 @@ public class ProtoPhaseGateStabilizer
     private static GameObject GetGameObject()
     {
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStabilizer");
-        var instance = GameObject.Instantiate(prefab);
         
-        MaterialUtils.ApplySNShaders(instance);
+        MaterialUtils.ApplySNShaders(prefab);
         
-        return instance;
+        return prefab;
     }
 }

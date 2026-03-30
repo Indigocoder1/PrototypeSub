@@ -35,7 +35,7 @@ public class ProtoPhaseGateItem
     private static GameObject GetGameObject()
     {
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("AlienFramework");
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
         MaterialUtils.ApplySNShaders(instance);
         
