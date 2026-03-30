@@ -20,6 +20,8 @@ public class CalibrationProgressTracker : MonoBehaviour, IScheduledUpdateBehavio
 
     public void ScheduledUpdate()
     {
+        if (WaitScreen.IsWaiting) return;
+        
         subIcon.transform.localPosition = WorldSpaceToDisplaySpace(subRoot.transform.position);
         var eulerAngles = subIcon.transform.localEulerAngles;
         subIcon.transform.localEulerAngles = new Vector3(eulerAngles.x, eulerAngles.y, -subRoot.transform.localEulerAngles.y);
