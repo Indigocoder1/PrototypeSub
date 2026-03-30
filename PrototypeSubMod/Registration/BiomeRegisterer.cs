@@ -114,7 +114,7 @@ internal static class BiomeRegisterer
         calibrationVolumePrefab.SetGameObject(calibrationTemplate);
         calibrationVolumePrefab.Register();
 
-        var calibrationCenter = new Vector3(-2570, -390, 753);
+        var calibrationCenter = new Vector3(-2970, -390, 853);
         var calibrationSpawnInfo = new SpawnInfo(calibrationPrefabInfo.ClassID, calibrationCenter, 
             Quaternion.identity, Vector3.one * 1200);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(calibrationSpawnInfo);
@@ -153,7 +153,7 @@ internal static class BiomeRegisterer
             var volum = prefab.GetComponent<AtmosphereVolume>();
             prefab.AddComponent<AtmospherePriorityEnsurer>().priority = volum.priority;
             var biomeScaler = prefab.AddComponent<IncreaseSizeOnBiomeEnter>();
-            biomeScaler.SetInfo(TransmissionSiteBiome, 4f);
+            biomeScaler.SetInfo(TransmissionSiteBiome, 3f);
         };
 
         transmissionVolumePrefab.SetGameObject(transmissionTemplate);

@@ -178,11 +178,6 @@ namespace PrototypeSubMod
             LanguageHandler.RegisterLocalizationFolder();
             InputRegisterer.Register();
             
-            var voicelineSW = new System.Diagnostics.Stopwatch();
-            voicelineSW.Start();
-            VoicelineRegisterer.UpdateVoicelines();
-            voicelineSW.Stop();
-            Logger.LogInfo($"Voiceline variations registered in {sw.ElapsedMilliseconds}ms");
             CompatPatchRegisterer.RegisterCompatibilityPatches(harmony);
             InitializeSlotMapping();
             RegisterTitleAddons();

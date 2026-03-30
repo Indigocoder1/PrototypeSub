@@ -18,10 +18,16 @@ public class IncreaseSizeOnBiomeEnter : MonoBehaviour, IScheduledUpdateBehaviour
     public string GetProfileTag() => "IncreaseSizeOnBiomeEnter";
     public void ScheduledUpdate()
     {
-        if (hasScaledUp || Player.main.biomeString != biome) return;
-
-        transform.localScale *= scaleFactor;
-        hasScaledUp = true;
+        if (!hasScaledUp && Player.main.biomeString == biome)
+        {
+            transform.localScale *= scaleFactor;
+            hasScaledUp = true;
+        }
+        else if (hasScaledUp && Player.main.biomeString == biome)
+        {
+            transform.localScale *= (1 / scaleFactor);
+            hasScaledUp = false;
+        }
     }
 
     public int scheduledUpdateIndex { get; set; }

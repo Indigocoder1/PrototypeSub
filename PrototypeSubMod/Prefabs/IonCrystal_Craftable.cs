@@ -10,7 +10,6 @@ namespace PrototypeSubMod.Prefabs;
 
 internal class IonCrystal_Craftable
 {
-
     public static PrefabInfo craftableCrystalInfo;
     
     public static void Register()

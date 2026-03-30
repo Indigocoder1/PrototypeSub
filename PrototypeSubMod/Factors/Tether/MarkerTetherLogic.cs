@@ -7,6 +7,7 @@ using RootMotion;
 using SubLibrary.Audio;
 using System;
 using System.Collections;
+using PrototypeSubMod.Facilities.Interceptor;
 using UnityEngine;
 
 namespace PrototypeSubMod.Factors.Tether;
@@ -18,7 +19,6 @@ public class MarkerTetherLogic : Factor
     [SerializeField] private FMOD_CustomEmitter noPowerSFX;
     [SerializeField] private float powerConsumption = 10f;
     [SerializeField] private float maxDistFromTether = 1000;
-
 
     public static event Action onClearTetherMarker;
 
@@ -38,6 +38,12 @@ public class MarkerTetherLogic : Factor
 
     public override void StartUse()
     {
+        if (InterceptorReactorSequenceManager.SequenceInProgress)
+        {
+            ErrorMessage.AddError(Language.main.Get("TetherUnavailable"));
+            return;
+        }
+        
         if (Player.main.isPiloting) return;
         if (Player.main.precursorOutOfWater && Plugin.GlobalSaveData.tetherFactorMarkerLocation == null) return;
         if (Player.main.cinematicModeActive) return;
@@ -63,7 +69,7 @@ public class MarkerTetherLogic : Factor
 
         if (ionManager.GetCurrentEnergy() < powerConsumption)
         {
-            ErrorMessage.AddError("Not enough power!");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorNoPower"));
             noPowerSFX.Play();
             return;
         }
@@ -71,14 +77,13 @@ public class MarkerTetherLogic : Factor
         if (Vector3.Distance(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value, Player.main.transform.position) >
             maxDistFromTether)
         {
-            ErrorMessage.AddError("Too far from tether!");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorTooFar"));
             return;
         }
         
         ionManager.ConsumeEnergy(powerConsumption);
 
-        var fx = Instantiate(warpInFx, Player.main.transform.position, Player.main.transform.rotation);
-
+        Instantiate(warpInFx, Player.main.transform.position, Player.main.transform.rotation);
         UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
         Plugin.GlobalSaveData.tetherFactorMarkerLocation = null;
 

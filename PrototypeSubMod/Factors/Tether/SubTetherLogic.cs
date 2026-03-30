@@ -6,6 +6,8 @@ using PrototypeSubMod.Teleporter;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using PrototypeSubMod.Facilities.Interceptor;
+using Story;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -22,28 +24,33 @@ public class SubTetherLogic : Factor
     
     public override void StartUse()
     {
-
+        if (InterceptorReactorSequenceManager.SequenceInProgress)
+        {
+            ErrorMessage.AddError(Language.main.Get("TetherUnavailable"));
+            return;
+        }
+        
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
         FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
 
         base.StartUse();
         if (!Plugin.GlobalSaveData.prototypePresent || Plugin.GlobalSaveData.prototypeDestroyed)
         {
-            ErrorMessage.AddError("No sub to teleport to!");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorNoSub"));
             return;
         }
 
         if (Time.time > timeAskedToConfirm + confirmationWaitPeriod)
         {
             timeAskedToConfirm = Time.time;
-            ErrorMessage.AddError("Press again to confirm teleportation");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorConfirmAgain"));
             return;
         }
 
         if (ionManager.GetCurrentEnergy() < resourceCost)
         {
-            ErrorMessage.AddError("Not enough power!");
-            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
+            ErrorMessage.AddError(Language.main.Get("TetherFactorNoPower"));
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("TetherNoPower"), Player.main.transform.position);
             return;
         }
         
@@ -92,5 +99,17 @@ public class SubTetherLogic : Factor
         player.transform.rotation = rotation;
         player.WaitForTeleportation();
         Player.main.SetPrecursorOutOfWater(false);
+    }
+
+    public override void OnEquipped()
+    {
+        if (StoryGoalManager.main.IsGoalComplete("ProtoTetherEquipped")) return;
+
+        StoryGoalManager.main.OnGoalComplete("ProtoTetherEquipped");
+        var markerLogic = GetComponent<MarkerTetherLogic>();
+        var hintText = Language.main.GetFormat("ProtoTetherTooltip", GameInput.FormatButton(GetUseButton()),
+            GameInput.FormatButton(markerLogic.GetUseButton()));
+        Hint.main.message.SetText(hintText);
+        Hint.main.message.Show();
     }
 }

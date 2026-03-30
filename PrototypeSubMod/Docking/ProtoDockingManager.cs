@@ -124,10 +124,10 @@ public class ProtoDockingManager : MonoBehaviour, IProtoEventListener, IProtoTre
 
         hudCanvasGroup.alpha = 0;
         var vehicle = vehicleHolder.GetChild(0).gameObject;
-        dockingBay.OnUndockingComplete(Player.main);
         vehicle.SetActive(true);
         var vehicleComp = vehicle.GetComponent<Vehicle>();
         vehicleComp.UpdateCollidersForDocking(true);
+        dockingBay.OnUndockingComplete(Player.main);
         
         onDockedStatusChanged?.Invoke();
         

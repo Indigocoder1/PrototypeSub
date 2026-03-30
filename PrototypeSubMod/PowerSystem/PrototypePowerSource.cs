@@ -46,7 +46,7 @@ public class PrototypePowerSource : MonoBehaviour, IPowerInterface, ISaveDataLis
     {
         UpdateConnection();
 
-        if (protoSaveData == null && !powerSourceData.defaultBatteryCreated && transform.GetSiblingIndex() <= 1)
+        if (protoSaveData == null && !powerSourceData.defaultBatteryCreated)
         {
             CoroutineHost.StartCoroutine(SpawnDefaultBattery());
         }
@@ -164,7 +164,7 @@ public class PrototypePowerSource : MonoBehaviour, IPowerInterface, ISaveDataLis
         }
 
         powerSourceData = protoSaveData.powerSourceDatas[gameObject.name];
-        if (!powerSourceData.defaultBatteryCreated && transform.GetSiblingIndex() <= 1)
+        if (!powerSourceData.defaultBatteryCreated)
         {
             CoroutineHost.StartCoroutine(SpawnDefaultBattery());
         }
@@ -180,6 +180,7 @@ public class PrototypePowerSource : MonoBehaviour, IPowerInterface, ISaveDataLis
     public IEnumerator SpawnDefaultBattery()
     {
         if (this.battery) yield break;
+        if (defaultBattery == TechType.None) yield break;
         
         CoroutineTask<GameObject> prefabTask = CraftData.GetPrefabForTechTypeAsync(defaultBattery);
 

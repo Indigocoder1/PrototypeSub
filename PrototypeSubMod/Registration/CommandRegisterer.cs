@@ -2,6 +2,7 @@
 using Nautilus.Handlers;
 using UnityEngine;
 using PrototypeSubMod.Extensions;
+using PrototypeSubMod.Teleporter;
 
 namespace PrototypeSubMod.Registration;
 
@@ -26,6 +27,18 @@ internal static class CommandRegisterer
     {
         TeleporterManager.ActivateTeleporter(teleporterID);
         ErrorMessage.AddError($"Teleporter '{teleporterID}' activated");
+        return string.Empty;
+    }
+    
+    [ConsoleCommand("activateallteleporters")]
+    public static string ActivateAllTeleporters()
+    {
+        foreach (var teleporter in TeleporterPositionHandler.TeleporterPositions.Keys)
+        {
+            string teleporterID = teleporter.Replace("M", string.Empty).Replace("S", string.Empty);
+            TeleporterManager.ActivateTeleporter(teleporterID);
+        }
+        ErrorMessage.AddError("All teleporters activated");
         return string.Empty;
     }
 }

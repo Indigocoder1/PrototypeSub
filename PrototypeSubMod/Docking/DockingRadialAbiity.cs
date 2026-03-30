@@ -28,6 +28,12 @@ internal class DockingRadialAbility : ProtoUpgrade
     public override bool OnActivated()
     {
         if (ProtoStoryLocker.StoryEndingActive) return false;
+
+        if (!dockingManager.GetDockingBay().HasUndockingClearance())
+        {
+            ErrorMessage.AddError(Language.main.Get("ProtoNoDockingClearance"));
+            return false;
+        }
         
         dockingManager.Undock();
         return true;

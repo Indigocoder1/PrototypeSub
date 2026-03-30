@@ -24,6 +24,7 @@ public class ProtoPhaseGateStabilizer
         prefab.SetGameObject(GetGameObject);
         prefab.SetPdaGroupCategory(Plugin.ProtoFabricatorGroup, Plugin.ProtoFabricatorCatgeory);
         prefab.SetUnlock(ProtoPhaseGate.PrefabInfo.TechType);
+        prefab.SetEquipment(EquipmentType.Chip);
 
         CraftDataHandler.SetBackgroundType(PrefabInfo.TechType, CraftData.BackgroundType.ExosuitArm);
 
