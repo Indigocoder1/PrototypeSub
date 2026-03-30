@@ -20,9 +20,14 @@ internal static class DisplayCaseProp
         var prefab = new CustomPrefab(prefabInfo);
         var cloneTemplate = new CloneTemplate(prefabInfo, "d0fea4da-39f2-47b4-aece-bb12fe7f9410");
 
+        IEnumerator ModifyPrefabAsync(GameObject gameObject)
+        {
+            yield return ModifyPrefab(gameObject, displayObjectClassID, scanTechType,
+                localOffset, localScale, destroyChildObjects);
+        }
+        
         CraftData.PreparePrefabIDCache();
-        cloneTemplate.ModifyPrefabAsync = gameObject => ModifyPrefab(gameObject, displayObjectClassID, scanTechType,
-            localOffset, localScale, destroyChildObjects);
+        cloneTemplate.ModifyPrefabAsync = ModifyPrefabAsync;
 
         prefab.SetGameObject(cloneTemplate);
 
