@@ -102,7 +102,6 @@ public class WyrmShootTarget : CreatureAction
     {
         if (!performing) return;
         
-        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
         if (currentChargeUpTime > 0)
         {
             if (!aimStarted)
@@ -120,7 +119,15 @@ public class WyrmShootTarget : CreatureAction
             aimStarted = false;
         }
         
-        if (attackStage == 2 && !hasShot && canShoot)
+        var angle = Mathf.Abs(
+            Vector3.Angle(GetTargetMixin().transform.position - transform.position, transform.forward));
+        const float angleToChargeLaser = 30f;
+        if (angleToChargeLaser < angle && !canShoot && attackStage == 2)
+        {
+            canShoot = true;
+        }
+        
+        if (attackStage == 2 && !hasShot && canShoot && !targetingLineRenderer.enabled)
         {
             currentChargeUpTime = chargeUpTime;
             FMODUWE.PlayOneShot(shotChargeSfx.asset, transform.position);
@@ -201,11 +208,10 @@ public class WyrmShootTarget : CreatureAction
         {
             performing = false;
         }
-
-        if (attackStage == 2)
-        {
-            canShoot = true;
-        }
+        
+        if (attackStage > GetAttackPoints().Length - 1) return;
+        
+        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
     }
 
     private IEnumerator Shoot()
