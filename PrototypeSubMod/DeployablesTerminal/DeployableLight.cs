@@ -192,7 +192,7 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
     {
         if (!identifier) return;
         
-        if (Plugin.GlobalSaveData.deployableLightLifetimes.TryGetValue(identifier.id, out currentLifetime) && currentLifetime < lifetime)
+        if (Plugin.GlobalSaveData.deployableLightLifetimes.TryGetValue(identifier.Id, out currentLifetime) && currentLifetime < lifetime)
         {
             ActivateLight();
         }
