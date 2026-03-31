@@ -35,7 +35,8 @@ internal class EmissionColorController : PrefabModifier
         
         foreach (var rend in subRoot.GetComponentsInChildren<Renderer>(true))
         {
-            if (rend.TryGetComponent(out EmissionControllerExempt _)) continue;
+            var exempt = rend.GetComponentInParent<EmissionControllerExempt>();
+            if (exempt != null) continue;
 
             foreach (var mat in rend.materials)
             {
