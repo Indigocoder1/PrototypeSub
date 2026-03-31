@@ -97,7 +97,6 @@ public class WyrmShootTarget : CreatureAction
     {
         performing = false;
     }
-
     
     private void Update()
     {
@@ -120,15 +119,11 @@ public class WyrmShootTarget : CreatureAction
             StartCoroutine(Shoot());
             aimStarted = false;
         }
-
-        var angle = Mathf.Abs(
-            Vector3.Angle(GetTargetMixin().transform.position - transform.position, transform.forward));
-        const float angleToChargeLaser = 30f;
-        if (attackStage == 2 && angle < angleToChargeLaser && !canShoot && !hasShot)
+        
+        if (attackStage == 2 && !hasShot && canShoot)
         {
             currentChargeUpTime = chargeUpTime;
             FMODUWE.PlayOneShot(shotChargeSfx.asset, transform.position);
-            canShoot = true;
             targetingLineRenderer.enabled = true;
         }
     }
@@ -205,6 +200,11 @@ public class WyrmShootTarget : CreatureAction
         if (attackStage > GetAttackPoints().Length - 1)
         {
             performing = false;
+        }
+
+        if (attackStage == 2)
+        {
+            canShoot = true;
         }
     }
 
@@ -370,8 +370,7 @@ public class WyrmShootTarget : CreatureAction
 
         targetingLineRenderer.SetPositions(positions);
     }
-
-
+    
     private Vector3[] GetAttackPoints()
     {
         const float setupDist = 200;
@@ -389,13 +388,15 @@ public class WyrmShootTarget : CreatureAction
         }
         
         var forwardDir = targetCenter.normalized;
-        var rightDir = -Vector3.Cross(forwardDir, Vector3.up);
+        var sign = Mathf.Sign(Random.Range(-1f, 1f));
+        sign = sign == 0 ? 1 : sign;
+        var rightDir = Vector3.Cross(forwardDir, Vector3.up) * sign;
         // Offset to the right to set up for the swing towards the target
         points[0] = targetCenter + (forwardDir + rightDir) * setupDist;
         // Go off towards the right
         points[1] = targetCenter + (forwardDir + rightDir * rightHandVectorSign) * setupDist;
         // Straight towards target
-        points[2] = targetCenter + Vector3.down * 20f;
+        points[2] = targetCenter + forwardDir * 20f;
 
         return points;
     }
