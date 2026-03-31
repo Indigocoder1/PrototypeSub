@@ -7182,7 +7182,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
-  attackDamage: 750
+  attackDamage: 1500
   attackRadius: 5
   impulseForce: 750000
   roarManager: {fileID: 121548284677876063}
@@ -7276,7 +7276,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  attackDamage: 2000
+  attackDamage: 2500
   chargeUpTime: 10
   laserTravelTime: 1.5
   parriesToResetAggression: 3
