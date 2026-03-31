@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using SubLibrary.Monobehaviors;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace PrototypeSubMod.MiscMonobehaviors.Emission;
@@ -22,15 +21,17 @@ internal class EmissionColorController : PrefabModifier
 
     private void Awake()
     {
-        Initialize();
+        UWE.CoroutineHost.StartCoroutine(Initialize());
     }
 
-    private void Initialize()
+    private IEnumerator Initialize()
     {
-        if (initialized) return;
+        if (initialized) yield break;
+
+        yield return new WaitUntil(() => subRoot.activeInHierarchy);
+        yield return null;
         
         transitionTimeOut = 50f / transitionSpeed;
-        currentTransitionTime = transitionTimeOut;
         
         foreach (var rend in subRoot.GetComponentsInChildren<Renderer>(true))
         {
@@ -71,7 +72,6 @@ internal class EmissionColorController : PrefabModifier
 
     public void RegisterTempColor(Component component, EmissionRegistrarData registerData)
     {
-        Initialize();
         overrideColorData[component] = registerData;
         tempColorActive = true;
         currentTransitionTime = 0;
