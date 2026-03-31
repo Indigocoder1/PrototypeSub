@@ -16,8 +16,7 @@ public class AggressiveWormAnimator : ProtoWormAnimator
     private float distMoved;
     private float spineIncrement;
     private float rotationSpeed;
-    private float angleTravelled;
-    private float angleTravelledRecalculate;
+    private float distMovedRecalculate;
     
     protected override void Start()
     {
@@ -36,12 +35,10 @@ public class AggressiveWormAnimator : ProtoWormAnimator
         
         float angleDelta = rotationSpeed * Time.deltaTime;
         transform.forward = Quaternion.AngleAxis(angleDelta, upVector) * transform.forward;
-        angleTravelled += Mathf.Abs(angleDelta);
 
-        if (angleTravelled > angleTravelledRecalculate)
+        if (distMoved > distMovedRecalculate)
         {
             rotationSpeed = GetRotationSpeed(transform.position, transform.forward);
-            rotationSpeed = ValidateRotationSpeed(rotationSpeed, angleTravelled, out angleTravelledRecalculate);
         }
         
         distMoved += forwardsSpeed * Time.deltaTime;
@@ -78,16 +75,17 @@ public class AggressiveWormAnimator : ProtoWormAnimator
         upVector = Vector3.Cross(dirToTarget, transform.forward);
     }
     
-    private float ValidateRotationSpeed(float rotSpeed, float currentAngle, out float angleRecalculate)
+    private float ValidateRotationSpeed(float rotSpeed, float currentDist, out float distRecalculate)
     {
-        angleRecalculate = Mathf.Infinity;
+        distRecalculate = Mathf.Infinity;
 
         float speedSign = Mathf.Sign(rotSpeed);
         float absRotSpeed = Mathf.Abs(rotSpeed);
         if (absRotSpeed > maxRotationSpeed)
         {
             rotSpeed = maxRotationSpeed * 0.5f * speedSign;
-            angleRecalculate = currentAngle + maxRotationSpeed * 2;
+            // Recalculate in 2 seconds
+            distRecalculate = currentDist + forwardsSpeed * 2f;
         }
 
         return rotSpeed;
@@ -100,7 +98,7 @@ public class AggressiveWormAnimator : ProtoWormAnimator
         float diameter = Vector3.Distance(currentPosition, targetPoint) / (Mathf.Sin(angleToTarget * Mathf.Deg2Rad) * forwardsSpeed);
         var speed = 1 / (diameter * 8.74e-3f);
 
-        return -speed;
+        return ValidateRotationSpeed(-speed, distMoved, out distMovedRecalculate);
     }
 
     private bool WithinRange(float value, float target, float halfRange)
@@ -137,19 +135,20 @@ public class AggressiveWormAnimator : ProtoWormAnimator
     private void UpdateRotationSpeed()
     {
         rotationSpeed = GetRotationSpeed(transform.position, transform.forward);
-        rotationSpeed = ValidateRotationSpeed(rotationSpeed, 0, out _);
 
         var angleToTarget = GetAngleToTarget();
+        // If almost exactly 180 degrees from the target, turn at max speed for 90 degrees
         if (WithinRange(angleToTarget, 180, 0.05f))
         {
             rotationSpeed = -maxRotationSpeed;
-            angleTravelledRecalculate = maxRotationSpeed * 2;
+            distMovedRecalculate = distMoved + forwardsSpeed / maxRotationSpeed * 90;
         }
         
+        // If the angle is further than we can rotate in a second, go at max speed for half the angle to target
         if (angleToTarget > maxRotationSpeed)
         {
             rotationSpeed = Mathf.Sign(rotationSpeed) * maxRotationSpeed;
-            angleTravelledRecalculate = angleToTarget;
+            distMovedRecalculate = distMoved + forwardsSpeed / maxRotationSpeed * (angleToTarget * 0.5f);
         }
 
         RecalculateUpVector();

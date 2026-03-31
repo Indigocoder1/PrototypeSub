@@ -126,7 +126,8 @@ public class ProtoAggressiveWorm : Creature
             break;
         }
 
-        damageTimer -= Time.deltaTime;
+        if (damageTimer > 0) damageTimer -= Time.deltaTime;
+        
         if (damageTimer <= 0f)
         {
             hasDamagedTarget = false;

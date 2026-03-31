@@ -7089,8 +7089,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spineManager: {fileID: 3559386083336854524}
   spineSegmentsParent: {fileID: 8262272570642887209}
-  forwardsSpeed: 15
-  maxRotationSpeed: 20
+  forwardsSpeed: 25
+  maxRotationSpeed: 30
 --- !u!114 &28949104760699908
 MonoBehaviour:
   m_ObjectHideFlags: 0
