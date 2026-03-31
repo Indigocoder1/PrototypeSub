@@ -379,34 +379,34 @@
 
   // Upgrade tech types
   "ProtoEmergencyWarp": "Emergency Warp",
-  "Tooltip_ProtoEmergencyWarp": "Allows the Prototype to warp back to the Quarantine Enforcement Platform",
+  "Tooltip_ProtoEmergencyWarp": "Spends all available energy to warp the Prototype to warp back to the point of its construction",
 
   "ProtoCloak": "Light Distortion Field",
-  "Tooltip_ProtoCloak": "Distorts light around the Prototype, allowing for travel without aggravating wildlife",
+  "Tooltip_ProtoCloak": "Distorts light around the Prototype, confusing aggressive fauna",
 
   "ProtoDepthOptimizers": "Depth Optimizers",
-  "Tooltip_ProtoDepthOptimizers": "Reroutes power to hull systems, removing crush depth and increasing efficiency in deeper areas",
+  "Tooltip_ProtoDepthOptimizers": "Reinforces the Prototype's hull, eliminating crush depth and increasing efficiency in deeper areas",
 
   "ProtoIonBarrier": "Ion Barrier",
-  "Tooltip_ProtoIonBarrier": "Converts large amounts of energy into a shield that reduces damage",
+  "Tooltip_ProtoIonBarrier": "Creates a large shield that converts blunt impact force to power",
 
   "ProtoIonGenerator": "Ion Generator",
   "Tooltip_ProtoIonGenerator": "Directs all sub resources to siphoning energy from its surroundings.",
 
   "ProtoOverclockModule": "Overclock Protocol",
-  "Tooltip_ProtoOverclockModule": "Overclocks the ion reactor, consuming additional power.",
+  "Tooltip_ProtoOverclockModule": "Overclocks the ion reactor, consuming additional power for increased speed.",
 
   "ProtoArchwayOverride": "Archway Override",
-  "Tooltip_ProtoArchwayOverride": "Overrides the teleported archway for 2 minutes, allowing for travel back to the Prototype",
+  "Tooltip_ProtoArchwayOverride": "Overrides any activated archway teleporter for 2 minutes, allowing for travel to and from the Prototype",
 
   "ProtoRepairBotsModule": "Maintenance Bots",
-  "Tooltip_ProtoRepairBotsModule": "Installs maintenance bot hangars, which will autonomously repair the sub over time",
+  "Tooltip_ProtoRepairBotsModule": "Activates maintenance bot constructors which autonomously repair the Prototype",
 
   "ProtoStasisPulse": "Stasis Pulse",
-  "Tooltip_ProtoStasisPulse": "Dumps a large amount of energy into the surrounding area, causing temporary muscle atrophy",
+  "Tooltip_ProtoStasisPulse": "Emits a burst of electrostatic energy causing temporary muscle atrophy",
 
   "ProtoVariablePowerStreams": "Hydrodynamic Ventilation",
-  "Tooltip_ProtoVariablePowerStreams": "Routes passive water flow to ion reactor. Increases engine efficiency for all abilities.",
+  "Tooltip_ProtoVariablePowerStreams": "Routes passive water flow to ion reactor. Permanently reduces energy costs for all abilities.",
 
   "ProtoStrafe": "Lateral Thrusters",
   "Tooltip_ProtoStrafe": "Installs lateral thrusters in the Prototype's hull, allowing for sideways movement",
@@ -423,21 +423,21 @@
 
   "RelayUpgradeText": "┗▚▄▖┅┛",
   "ProtoRelayUpgrade1": "Power Relay",
-  "Tooltip_ProtoRelayUpgrade1": "A power relay which can be installed to the Prototype's ion Reactor, increasing the max power capacity",
+  "Tooltip_ProtoRelayUpgrade1": "A power relay which can be installed to the Prototype's ion Reactor, increasing max power capacity",
   "ProtoRelayUpgrade2": "Power Relay",
-  "Tooltip_ProtoRelayUpgrade2": "A power relay which can be installed to the Prototype's ion Reactor, increasing the max power capacity",
+  "Tooltip_ProtoRelayUpgrade2": "A power relay which can be installed to the Prototype's ion Reactor, increasing max power capacity",
   "ProtoRelayUpgrade3": "Power Relay",
-  "Tooltip_ProtoRelayUpgrade3": "A power relay which can be installed to the Prototype's ion Reactor, increasing the max power capacity",
+  "Tooltip_ProtoRelayUpgrade3": "A power relay which can be installed to the Prototype's ion Reactor, increasing max power capacity",
   "ProtoRelayUpgrade4": "Power Relay",
-  "Tooltip_ProtoRelayUpgrade4": "A power relay which can be installed to the Prototype's ion Reactor, increasing the max power capacity",
+  "Tooltip_ProtoRelayUpgrade4": "A power relay which can be installed to the Prototype's ion Reactor, increasing max power capacity",
 
   // Tech Groups & Categories (PDA Blueprints)
-  "TechGroupPrototypeSub": "Alien Prototype Vessel",
-  "TechGroupProtoFabricator": "Alien Facility Fabricator",
+  "TechGroupPrototypeSub": "The Prototype",
+  "TechGroupProtoFabricator": "Alien Facility Constructor",
 
-  "TechCategoryPrototypeSub": "Alien Prototype Vessel",
-  "TechCategoryProtoModules": "Alien Sub Upgrades",
-  "TechCategoryProtoFabricator": "Alien Facility Fabricator",
+  "TechCategoryPrototypeSub": "The Prototype",
+  "TechCategoryProtoModules": "Prototype Upgrades",
+  "TechCategoryProtoFabricator": "Alien Facility Constructor",
 
   // Engine Lever
   "ProtoEngineLeverEnable": "Start ion reactor",
@@ -445,7 +445,7 @@
 
   // HUD
   "ProtoToggleStrafe": "Toggle strafe",
-  "ProtoRadialHint": "Open radial menu",
+  "ProtoRadialHint": "Open ability menu",
   "ProtoInterceptorMapHint": "Open map",
   "ArchwayOverrideHint": "Access activated archways with the Prototype's portal",
 
