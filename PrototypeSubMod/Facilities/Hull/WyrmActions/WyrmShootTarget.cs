@@ -2,6 +2,7 @@
 using PrototypeSubMod.LightDistortionField;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
@@ -247,8 +248,7 @@ public class WyrmShootTarget : CreatureAction
                 : effectHandler.GetClosestPointOnSurface(
                     targetPos + targetMixin.transform.forward * 50f, -15f);
         }
-
-
+        
         var beamMaterials = laserVFX.GetComponent<Renderer>().materials;
         var originalPoint = laserOrigin.position;
         shotTravelSfx.Play();
@@ -282,17 +282,20 @@ public class WyrmShootTarget : CreatureAction
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);
 
-        var mixin = GetAttackMixin(laserTargetPoint);
-        if (mixin == null) yield break;
+        var mixins = GetAttackMixins(laserTargetPoint);
+        if (mixins.Count == 0) yield break;
 
-        DamageTarget(laserTargetPoint, mixin);
+        foreach (var mixin in mixins)
+        {
+            DamageTarget(laserTargetPoint, mixin);
+            
+            // Do impact VFX if hitting a sub
+            if (mixin.GetComponent<SubRoot>() != null) StartCoroutine(DoImpactVFX(laserTargetPoint));
+        }
 
         shotHitSfx.Play();
         roarManager.PlayRoar(Player.main.transform.position);
         MainCameraControl.main.ShakeCamera(5, -1, MainCameraControl.ShakeMode.Linear, 1);
-
-        // Do impact VFX if hitting a sub
-        if (mixin.GetComponent<SubRoot>() != null) StartCoroutine(DoImpactVFX(laserTargetPoint));
     }
 
     private IEnumerator DoImpactVFX(Vector3 position)
@@ -315,23 +318,29 @@ public class WyrmShootTarget : CreatureAction
         }
     }
 
-    private LiveMixin GetAttackMixin(Vector3 laserTargetPoint)
+    private List<LiveMixin> GetAttackMixins(Vector3 laserTargetPoint)
     {
         var colliders = Physics.OverlapSphere(laserTargetPoint, 10f);
-        LiveMixin mixin = null;
+        List<LiveMixin> mixins = new();
         foreach (var collider in colliders)
         {
-            if (collider.attachedRigidbody == null) continue;
+            var mixin = collider.GetComponentInParent<LiveMixin>();
+            if (mixin == null) continue;
             
-            if (collider.attachedRigidbody.TryGetComponent(out mixin)) break;
+            if (mixins.Contains(mixin)) continue;
+
+            mixins.Add(mixin);
         }
 
-        return mixin;
+        return mixins;
     }
 
     private void DamageTarget(Vector3 laserTargetPoint, LiveMixin hitMixin)
     {
+        var wasInvincible = hitMixin.invincible;
+        hitMixin.invincible = false;
         hitMixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.Electrical, gameObject);
+        hitMixin.invincible = wasInvincible;
     }
 
     private void HandleTargetingLaser()
