@@ -16,13 +16,19 @@ public class ApplyMaterialFromPrefab : MonoBehaviour, IMaterialModifier
     [SerializeField] private int applyIndex;
     [SerializeField] private bool applyToSharedMaterials;
 
+    private bool applied;
+    
     private void Start()
     {
         CoroutineHost.StartCoroutine(ApplyMaterial());
     }
 
-    private IEnumerator ApplyMaterial()
+    public IEnumerator ApplyMaterial()
     {
+        if (applied) yield break;
+        
+        applied = true;
+        
         var task = PrefabDatabase.GetPrefabAsync(prefabClassID);
         yield return task;
 
