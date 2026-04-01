@@ -107584,7 +107584,7 @@ MonoBehaviour:
   m_Script: {fileID: 146425932, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 60
+  maxDistance: 110
 --- !u!114 &212730829469122399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107597,7 +107597,7 @@ MonoBehaviour:
   m_Script: {fileID: -1671642931, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiateRadius: 50
+  radiateRadius: 100
 --- !u!114 &6509795847862605240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107611,7 +107611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateInterval: 1
-  damageRadius: 50
+  damageRadius: 100
   damageAmount: 5
   damageType: 12
   doDebug: 0

@@ -14,15 +14,21 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
     [SerializeField] private Animator hydrolockDoorsAnimator;
     [SerializeField] private GameObject radiationObject;
     [SerializeField] private float meltdownWarningDuration = 18f;
+    [SerializeField] private float radiationGrowthSpeed = 1f;
 
     [Header("Sequences")]
     [SerializeField] private DestructionSequence internalSequence;
     [SerializeField] private DestructionSequence externalSequence;
+    
+    private RadiatePlayerInRange radiate;
+    private float targetRadius;
 
     private void Start()
     {
         DevConsole.RegisterConsoleCommand(this, "destroyproto");
         Player.main.playerDeathEvent.AddHandler(this, OnPlayerDied);
+        
+        radiate = radiationObject.GetComponent<RadiatePlayerInRange>();
     }
 
     public IEnumerator OnDestroySub()
@@ -49,10 +55,28 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         hydrolockDoorsAnimator.SetBool("HydrolockEnabled", true);
         radiationObject.SetActive(true);
         
+        targetRadius = radiate.radiateRadius;
+        radiate.radiateRadius = 0f;
+        UWE.CoroutineHost.StartCoroutine(GrowRadiationRange());
+        
         CleanupSub();
         StartSequences();
         
         subRoot.GetComponent<ProtoSaveStateManager>().UpdateManagerStatus();
+    }
+
+    private IEnumerator GrowRadiationRange()
+    {
+        while (radiate.radiateRadius < targetRadius)
+        {
+            radiate.radiateRadius += radiationGrowthSpeed * Time.deltaTime;
+
+            // Clamp to avoid overshooting
+            if (radiate.radiateRadius > targetRadius)
+                radiate.radiateRadius = targetRadius;
+
+            yield return null; // wait one frame
+        }
     }
 
     public void DestroySubNoSequence()
