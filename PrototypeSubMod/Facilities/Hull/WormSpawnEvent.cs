@@ -10,7 +10,7 @@ namespace PrototypeSubMod.Facilities.Hull;
 
 public class WormSpawnEvent : MonoBehaviour
 {
-    private const float MIN_TIME_BETWEEN_SPAWNS = 120;
+    private const float MIN_TIME_BETWEEN_SPAWNS = 600;
 
     private static readonly Vector3 QepLocation = new Vector3(465.67f, -109.81f, 1216.69f);
     
