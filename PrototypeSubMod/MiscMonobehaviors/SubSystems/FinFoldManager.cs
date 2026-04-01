@@ -40,6 +40,7 @@ public class FinFoldManager : MonoBehaviour
         }
 
         foldFins |= outOfRange;
+        foldFins |= Plugin.GlobalSaveData.prototypeDestroyed;
 
         if (foldFins != hadHitObject)
         {

@@ -1,5 +1,6 @@
-﻿using SubLibrary.SubFire;
-using System.Collections;
+﻿using System.Collections;
+using PrototypeSubMod.VehicleAccess;
+using SubLibrary.SubFire;
 using UnityEngine;
 
 namespace PrototypeSubMod.DestructionEvent;
@@ -9,6 +10,10 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
     [SerializeField] private SubRoot subRoot;
     [SerializeField] private LiveMixin mixin;
     [SerializeField] private CanvasGroup hudCanvasGroup;
+    [SerializeField] private VoiceNotification reactorMeltdownOccurred;
+    [SerializeField] private Animator hydrolockDoorsAnimator;
+    [SerializeField] private GameObject radiationObject;
+    [SerializeField] private float meltdownWarningDuration = 18f;
 
     [Header("Sequences")]
     [SerializeField] private DestructionSequence internalSequence;
@@ -17,11 +22,12 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
     private void Start()
     {
         DevConsole.RegisterConsoleCommand(this, "destroyproto");
+        Player.main.playerDeathEvent.AddHandler(this, OnPlayerDied);
     }
 
     public IEnumerator OnDestroySub()
     {
-        yield return new WaitForSeconds(18f);
+        yield return new WaitForSeconds(meltdownWarningDuration);
 
         DestroySub();
     }
@@ -39,6 +45,10 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
     {
         Plugin.GlobalSaveData.prototypeDestroyed = true;
 
+        subRoot.voiceNotificationManager.PlayVoiceNotification(reactorMeltdownOccurred, false, true);
+        hydrolockDoorsAnimator.SetBool("HydrolockEnabled", true);
+        radiationObject.SetActive(true);
+        
         CleanupSub();
         StartSequences();
         
@@ -53,10 +63,14 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
 
     private void CleanupSub()
     {
-        subRoot.subWarning = false;
+        subRoot.subWarning = true;
         subRoot.fireSuppressionState = false;
         subRoot.silentRunning = false;
+        
+        var subFire = subRoot.GetComponentInChildren<ModdedSubFire>(true);
+        subFire.CreateFire(subRoot.GetComponentInChildren<SubRoom>(true));
         subRoot.GetComponentInChildren<SubFloodAlarm>().NewAlarmState();
+        
         foreach (var item in subRoot.GetComponentsInChildren<FMOD_CustomEmitter>(true))
         {
             item.Stop();
@@ -66,19 +80,7 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         {
             damagePoint.OnRepair();
         }
-
-        foreach (var room in subRoot.GetComponentsInChildren<SubRoom>(true))
-        {
-            var nodes = room.GetSpawnNodes();
-            foreach (var node in nodes)
-            {
-                for (int i = 0; i < node.childCount; i++)
-                {
-                    Destroy(node.GetChild(i).gameObject);
-                }
-            }
-        }
-
+        
         UWE.CoroutineHost.StartCoroutine(CleanupDelayed());
         subRoot.subDestroyed = true;
     }
@@ -101,11 +103,32 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         {
             externalSequence.StartSequence(subRoot);
         }
-
     }
 
     private void OnConsoleCommand_destroyproto(NotificationCenter.Notification n)
     {
         DestroySub();
+    }
+
+    private void OnPlayerDied(Player player)
+    {
+        if (!Plugin.GlobalSaveData.prototypeDestroyed) return;
+
+        foreach (var room in subRoot.GetComponentsInChildren<SubRoom>(true))
+        {
+            var nodes = room.GetSpawnNodes();
+            foreach (var node in nodes)
+            {
+                for (int i = 0; i < node.childCount; i++)
+                {
+                    Destroy(node.GetChild(i).gameObject);
+                }
+            }
+        }
+        
+        subRoot.subWarning = false;
+        subRoot.fireSuppressionState = false;
+        subRoot.silentRunning = false;
+        subRoot.BroadcastMessage("NewAlarmState");
     }
 }

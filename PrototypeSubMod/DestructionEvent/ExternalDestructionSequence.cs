@@ -1,5 +1,6 @@
 ﻿using PrototypeSubMod.IonGenerator;
 using System.Collections;
+using SubLibrary.SubFire;
 using UnityEngine;
 
 namespace PrototypeSubMod.DestructionEvent;
@@ -33,8 +34,8 @@ internal class ExternalDestructionSequence : DestructionSequence
 
         var fx = Instantiate(warpOutFX, warpOutSpawnPos.position, warpOutSpawnPos.rotation);
         fx.transform.localScale = Vector3.one * 10f;
-
-        subRoot.gameObject.SetActive(false);
-        subRoot.transform.position = new Vector3(0, 100, 0);
+        
+        subRoot.GetComponent<Stabilizer>().enabled = false;
+        subRoot.worldForces.underwaterGravity = 3;
     }
 }

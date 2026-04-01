@@ -1,4 +1,5 @@
-﻿using PrototypeSubMod.MiscMonobehaviors.SubSystems;
+﻿using System;
+using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Patches;
 using System.Collections;
 using UnityEngine;
@@ -7,46 +8,27 @@ namespace PrototypeSubMod.DestructionEvent;
 
 internal class InternalDestructionSequence : DestructionSequence
 {
-    private static readonly Vector3 VoidTeleportPos = new Vector3(-2030, -612, -1551);
-
     [SerializeField] private Transform playerPos;
     [SerializeField] private InterfloorTeleporter[] teleporters;
     [SerializeField] private GameObject[] teleporterObjects;
 
     private void Start()
     {
-        Player.main.playerDeathEvent.AddHandler(this, OnPlayerDeath);
+        Player.main.playerDeathEvent.AddHandler(this, OnPlayerDied);
     }
 
     public override void StartSequence(SubRoot subRoot)
     {
-        UWE.CoroutineHost.StartCoroutine(TeleportToVoid(subRoot));
-
+        LeakingRadiation.main.GetComponent<RadiatePlayerInRange>().CancelInvoke(nameof(RadiatePlayerInRange.Radiate));
         foreach (var teleporter in teleporters)
         {
             teleporter.GetComponent<Collider>().enabled = false;
         }
     }
 
-    private IEnumerator TeleportToVoid(SubRoot subRoot)
+    private void OnPlayerDied(Player player)
     {
-        foreach (var obj in teleporterObjects)
-        {
-            obj.SetActive(false);
-        }
-        IngameMenu_Patches.SetDenySaving(true);
-        InterfloorTeleporter.PlayTeleportEffect(3f);
-        subRoot.GetComponent<PingInstance>().enabled = false;
-        subRoot.GetComponent<VoiceNotificationManager>().enabled = false;
-        yield return new WaitForSeconds(0.5f);
-
-        Player.main.SetCurrentSub(null, true);
-        Player.main.SetPosition(VoidTeleportPos + subRoot.transform.InverseTransformPoint(playerPos.position));
-        subRoot.transform.position = VoidTeleportPos;
-    }
-
-    private void OnPlayerDeath(Player player)
-    {
-        IngameMenu_Patches.SetDenySaving(false);
+        var radiateInRange = LeakingRadiation.main.GetComponent<RadiatePlayerInRange>();
+        radiateInRange.InvokeRepeating(nameof(RadiatePlayerInRange.Radiate), 0, 0.2f);
     }
 }
