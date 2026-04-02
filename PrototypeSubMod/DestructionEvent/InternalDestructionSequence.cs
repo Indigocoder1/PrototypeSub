@@ -21,7 +21,6 @@ internal class InternalDestructionSequence : DestructionSequence
     public override void StartSequence(SubRoot subRoot)
     {
         this.subRoot = subRoot;
-        LeakingRadiation.main.GetComponent<RadiatePlayerInRange>().CancelInvoke(nameof(RadiatePlayerInRange.Radiate));
         foreach (var teleporter in teleporters)
         {
             teleporter.GetComponent<Collider>().enabled = false;
@@ -31,9 +30,6 @@ internal class InternalDestructionSequence : DestructionSequence
     private void OnPlayerDied(Player player)
     {
         if (subRoot == null) return;
-        
-        var radiateInRange = LeakingRadiation.main.GetComponent<RadiatePlayerInRange>();
-        radiateInRange.InvokeRepeating(nameof(RadiatePlayerInRange.Radiate), 0, 0.2f);
 
         subRoot.GetComponent<Stabilizer>().enabled = false;
         subRoot.worldForces.underwaterGravity = 3;

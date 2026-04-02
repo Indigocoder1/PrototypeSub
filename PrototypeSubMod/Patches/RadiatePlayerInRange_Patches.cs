@@ -3,12 +3,19 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using PrototypeSubMod.DestructionEvent;
+using PrototypeSubMod.MiscMonobehaviors;
 
 namespace PrototypeSubMod.Patches;
 
 [HarmonyPatch(typeof(RadiatePlayerInRange))]
 public static class RadiatePlayerInRange_Patches
 {
+    [HarmonyPatch(nameof(RadiatePlayerInRange.Start)), HarmonyPostfix]
+    private static void Start_Postfix(RadiatePlayerInRange __instance)
+    {
+        __instance.gameObject.EnsureComponent<RadiateInRangeManager>();
+    }
+    
     [HarmonyPatch(nameof(RadiatePlayerInRange.Radiate)), HarmonyTranspiler]
     private static IEnumerable<CodeInstruction> Radiate_Transpiler(IEnumerable<CodeInstruction> instructions)
     {
