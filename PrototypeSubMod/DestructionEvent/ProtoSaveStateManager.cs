@@ -1,6 +1,4 @@
-﻿using System;
-using PrototypeSubMod.Utility;
-using System.Collections;
+﻿using PrototypeSubMod.Utility;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,9 +13,8 @@ internal class ProtoSaveStateManager : MonoBehaviour, IProtoEventListener
 
     private void Awake()
     {
-        if (DestroyedManagers == null) DestroyedManagers = new();
+        DestroyedManagers ??= new();
 
-        root.gameObject.SetActive(!Plugin.GlobalSaveData.prototypeDestroyed);
         UpdateManagerStatus();
     }
 
@@ -50,7 +47,6 @@ internal class ProtoSaveStateManager : MonoBehaviour, IProtoEventListener
 
     public GameObject GetSubRoot()
     {
-        Plugin.Logger.LogDebug($"Root = {root}");
         return root.gameObject;
     }
 
@@ -64,7 +60,6 @@ internal class ProtoSaveStateManager : MonoBehaviour, IProtoEventListener
     public void OnProtoDeserialize(ProtobufSerializer serializer)
     {
         UpdateManagerStatus();
-        root.gameObject.SetActive(!Plugin.GlobalSaveData.prototypeDestroyed);
     }
 
     private void OnDestroy()

@@ -8,6 +8,7 @@ namespace PrototypeSubMod.DestructionEvent;
 
 internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
 {
+    private static readonly int HydrolockEnabled = Animator.StringToHash("HydrolockEnabled");
     public static event Action OnSubDestroyed; 
     
     [SerializeField] private SubRoot subRoot;
@@ -32,6 +33,9 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         Player.main.playerDeathEvent.AddHandler(this, OnPlayerDied);
         
         radiate = radiationObject.GetComponent<RadiatePlayerInRange>();
+
+        radiationObject.SetActive(Plugin.GlobalSaveData.prototypeDestroyed);
+        hydrolockDoorsAnimator.SetBool(HydrolockEnabled, true);
     }
 
     public IEnumerator OnDestroySub()
@@ -57,7 +61,7 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         OnSubDestroyed?.Invoke();
 
         subRoot.voiceNotificationManager.PlayVoiceNotification(reactorMeltdownOccurred, false, true);
-        hydrolockDoorsAnimator.SetBool("HydrolockEnabled", true);
+        hydrolockDoorsAnimator.SetBool(HydrolockEnabled, true);
         radiationObject.SetActive(true);
 
         subRoot.GetComponent<PingInstance>().enabled = false;
