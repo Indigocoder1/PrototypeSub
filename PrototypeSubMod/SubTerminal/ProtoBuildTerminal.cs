@@ -3,6 +3,8 @@ using PrototypeSubMod.Prefabs;
 using Story;
 using System.Collections;
 using Nautilus.Utility;
+using PrototypeSubMod.DestructionEvent;
+using PrototypeSubMod.IonBarrier;
 using PrototypeSubMod.LightDistortionField;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.PowerSystem;
@@ -159,6 +161,10 @@ internal class ProtoBuildTerminal : Crafter
         sub.transform.rotation = buildPosition.rotation;
         sub.gameObject.SetActive(true);
         warpFXSpawner.SpawnWarpInFX(buildPosition.position, Vector3.one * 2f);
+        sub.GetComponentInChildren<ProtoDestructionEvent>().OnRebuilt();
+
+        var hydrolockAnimator = sub.GetComponentInChildren<ProtoIonBarrier>().GetComponentInChildren<Animator>();
+        hydrolockAnimator.gameObject.SetActive(false);
         
         yield return new WaitForEndOfFrame();
         var constructing = sub.GetComponent<VFXConstructing>();
@@ -166,12 +172,17 @@ internal class ProtoBuildTerminal : Crafter
         constructing.delay = 2;
         yield return new WaitForEndOfFrame();
         
+        hydrolockAnimator.gameObject.SetActive(true);
+        
         StartConstruction(sub, TechType.None, buildDuration);
 
-        sub.GetComponent<SubRoot>().subDestroyed = false;
+        var subRoot = sub.GetComponent<SubRoot>();
+        subRoot.subDestroyed = false;
+        subRoot.worldForces.underwaterGravity = 0;
         sub.GetComponent<Stabilizer>().enabled = true;
         sub.GetComponent<PingInstance>().enabled = true;
         sub.GetComponentInChildren<ProtoHealthDisplay>().UpdateHealth();
+        sub.GetComponent<ProtoRigidbodyFreezer>().SendMessage("FixedUpdate");
         foreach (var interfloorTeleporter in sub.GetComponentsInChildren<InterfloorTeleporter>(true))
         {
             var col = interfloorTeleporter.GetComponent<Collider>();

@@ -1,6 +1,7 @@
 ﻿using System;
 using Story;
 using System.Collections;
+using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using UnityEngine;
 
@@ -153,10 +154,12 @@ internal class BuildTerminalScreenManager : MonoBehaviour
     {
         EnableRelevantScreens();
         SubConstructionCompleteEvent.OnSubConstructed += OnConstructionDone;
+        ProtoDestructionEvent.OnSubDestroyed += EnableRelevantScreens;
     }
 
     private void OnDisable()
     {
         SubConstructionCompleteEvent.OnSubConstructed -= OnConstructionDone;
+        ProtoDestructionEvent.OnSubDestroyed -= EnableRelevantScreens;
     }
 }

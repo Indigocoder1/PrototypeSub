@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using PrototypeSubMod.VehicleAccess;
 using SubLibrary.SubFire;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace PrototypeSubMod.DestructionEvent;
 
 internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
 {
+    public static event Action OnSubDestroyed; 
+    
     [SerializeField] private SubRoot subRoot;
     [SerializeField] private LiveMixin mixin;
     [SerializeField] private CanvasGroup hudCanvasGroup;
@@ -51,10 +54,13 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
     {
         Plugin.GlobalSaveData.prototypeDestroyed = true;
 
+        OnSubDestroyed?.Invoke();
+
         subRoot.voiceNotificationManager.PlayVoiceNotification(reactorMeltdownOccurred, false, true);
         hydrolockDoorsAnimator.SetBool("HydrolockEnabled", true);
         radiationObject.SetActive(true);
-        
+
+        subRoot.GetComponent<PingInstance>().enabled = false;
         targetRadius = radiate.radiateRadius;
         radiate.radiateRadius = 0f;
         UWE.CoroutineHost.StartCoroutine(GrowRadiationRange());
@@ -154,5 +160,10 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         subRoot.fireSuppressionState = false;
         subRoot.silentRunning = false;
         subRoot.BroadcastMessage("NewAlarmState");
+    }
+
+    public void OnRebuilt()
+    {
+        radiationObject.SetActive(false);
     }
 }
