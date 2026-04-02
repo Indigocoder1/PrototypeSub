@@ -35,7 +35,7 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         radiate = radiationObject.GetComponent<RadiatePlayerInRange>();
 
         radiationObject.SetActive(Plugin.GlobalSaveData.prototypeDestroyed);
-        hydrolockDoorsAnimator.SetBool(HydrolockEnabled, true);
+        hydrolockDoorsAnimator.SetBool(HydrolockEnabled, Plugin.GlobalSaveData.prototypeDestroyed);
     }
 
     public IEnumerator OnDestroySub()

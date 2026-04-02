@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Upgrades;
 using PrototypeSubMod.Facilities.Interceptor;
@@ -62,6 +63,8 @@ internal class ProtoTeleporterManager : ProtoUpgrade
             modeManager.SetInterfloorMode();
         };
         
+        ProtoDestructionEvent.OnSubDestroyed += OnSubDestroyed;
+        
         activeLoopSound.Stop();
     }
 
@@ -110,7 +113,6 @@ internal class ProtoTeleporterManager : ProtoUpgrade
 
     public void SetTeleporterID(string id)
     {
-        Plugin.Logger.LogInfo($"Setting teleporter ID to {id}");
         teleporterID = id;
     }
 
@@ -148,9 +150,26 @@ internal class ProtoTeleporterManager : ProtoUpgrade
         overrideStatus2.Play();
     }
 
+    private void OnSubDestroyed()
+    {
+        foreach (var obj in enableWithInstallation)
+        {
+            obj.SetActive(false);
+        }
+    }
+
+    public void OnSubRebuilt()
+    {
+        foreach (var obj in enableWithInstallation)
+        {
+            obj.SetActive(upgradeInstalled);
+        }
+    }
+
     private void OnDestroy()
     {
         PrecursorTeleporter.TeleportEventEnd -= OnTeleportEnd;
+        ProtoDestructionEvent.OnSubDestroyed -= OnSubDestroyed;
     }
 
     public override bool GetUpgradeEnabled() => upgradeInstalled;
@@ -158,20 +177,4 @@ internal class ProtoTeleporterManager : ProtoUpgrade
     public override bool OnActivated() => false;
     public override void OnSelectedChanged(bool selected) { }
     public override bool GetShouldShow() => false;
-}
-
-public struct ColorOverrideData
-{
-    public bool overrideActive;
-    public Color innerColor;
-    public Color middleColor;
-    public Color outerColor;
-
-    public ColorOverrideData(bool overrideActive, Color innerColor, Color middleColor, Color outerColor)
-    {
-        this.overrideActive = overrideActive;
-        this.innerColor = innerColor;
-        this.middleColor = middleColor;
-        this.outerColor = outerColor;
-    }
 }

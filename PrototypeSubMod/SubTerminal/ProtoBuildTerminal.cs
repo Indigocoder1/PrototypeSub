@@ -183,6 +183,7 @@ internal class ProtoBuildTerminal : Crafter
         sub.GetComponent<PingInstance>().enabled = true;
         sub.GetComponentInChildren<ProtoHealthDisplay>().UpdateHealth();
         sub.GetComponent<ProtoRigidbodyFreezer>().SendMessage("FixedUpdate");
+        sub.GetComponentInChildren<ProtoTeleporterManager>().OnSubRebuilt();
 
         foreach (var damagePoint in sub.GetComponentsInChildren<CyclopsDamagePoint>(true))
         {
