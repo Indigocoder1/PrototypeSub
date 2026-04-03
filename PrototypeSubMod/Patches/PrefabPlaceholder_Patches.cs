@@ -18,7 +18,7 @@ public static class PrefabPlaceholder_Patches
         return !inFacility;
     }
 
-    private static string GetVolumeBiome(Vector3 worldPosition)
+    public static string GetVolumeBiome(Vector3 worldPosition)
     {
         foreach (var volume in AtmosphereDirector.main.GetVolumes())
         {
