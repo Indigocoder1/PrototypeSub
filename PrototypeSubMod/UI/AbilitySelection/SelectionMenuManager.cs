@@ -80,7 +80,7 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
             SetMenuEnabled(false);
         }
 
-        if (Player.main.currChair == chair) return;
+        if (Player.main.currChair == chair || !menuEnabled) return;
 
         SetMenuEnabled(false);
     }

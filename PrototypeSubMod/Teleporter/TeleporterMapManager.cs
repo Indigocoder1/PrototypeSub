@@ -24,7 +24,11 @@ public class TeleporterMapManager : MonoBehaviour
         {
             currentTransitionDuration += Time.deltaTime;
         }
-        
+        else
+        {
+            return;
+        }
+         
         float normalizedProgress = currentTransitionDuration / transitionDuration;
         float surfaceAlpha = targetingSurface ? normalizedProgress : 1 - normalizedProgress;
         float depthsAlpha =  1 - surfaceAlpha;
