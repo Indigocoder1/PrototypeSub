@@ -12,13 +12,11 @@ public static class PrefabPlaceholder_Patches
     private static bool Spawn_Prefix(PrefabPlaceholder __instance)
     {
         var testPos = __instance.transform.position;
-        var currentBiome = (GetVolumeBiome(testPos) ?? LargeWorld.main.GetBiome(testPos)).ToLower();
-        var inFacility = currentBiome.Contains("proto") && currentBiome.Contains("facility");
         
-        return !inFacility;
+        return !InFacilityBiome(testPos);
     }
 
-    public static string GetVolumeBiome(Vector3 worldPosition)
+    private static string GetVolumeBiome(Vector3 worldPosition)
     {
         foreach (var volume in AtmosphereDirector.main.GetVolumes())
         {
@@ -30,5 +28,11 @@ public static class PrefabPlaceholder_Patches
         }
 
         return null;
+    }
+
+    public static bool InFacilityBiome(Vector3 worldPosition)
+    {
+        var currentBiome = (GetVolumeBiome(worldPosition) ?? LargeWorld.main.GetBiome(worldPosition)).ToLower();
+        return currentBiome.Contains("proto") && currentBiome.Contains("facility");
     }
 }
