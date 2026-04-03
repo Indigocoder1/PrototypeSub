@@ -47,6 +47,12 @@
   "ProtoTransmissionDevice": "Transmission Device",
   "Tooltip_ProtoTransmissionDevice": "Unique device used to transmit signals. Deployed via the Prototype and requires a calibration pattern.",
 
+  "HamCheesePoster1": "Strange poster",
+  "Tooltip_HamCheesePoster1": "A poster depicting a ham and cheese sandwich",
+  
+  "HamCheesePoster2": "Strange poster",
+  "Tooltip_HamCheesePoster2": "A poster depicting a ham and cheese sandwich",
+
   "HoverfishPlush": "Hoverfish Plushy",
   "Tooltip_HoverfishPlush": "For your Daily Dose of Hoverfish",
 
