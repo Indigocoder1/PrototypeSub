@@ -50,7 +50,7 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ButtonSelect"), Player.main.transform.position);
         if (!onCorrectSequence || !InTransmissionSite())
         {
-            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("NoPower"), Player.main.transform.position);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("TetherFactorNoPower"), Player.main.transform.position);
             return;
         }
         
