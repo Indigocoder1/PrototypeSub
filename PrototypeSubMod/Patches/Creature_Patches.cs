@@ -10,8 +10,7 @@ public class Creature_Patches
     private static bool Start_Prefix(Creature __instance)
     {
         var isLeviathan = __instance is ReaperLeviathan or GhostLeviathan or SeaTreader;
-        // Add the isWaiting check to hopefully only get deserialized creatures
-        if (PrefabPlaceholder_Patches.InFacilityBiome(__instance.transform.position) && !isLeviathan && WaitScreen.IsWaiting)
+        if (PrefabPlaceholder_Patches.InFacilityBiome(__instance.transform.position) && !isLeviathan)
         {
             GameObject.Destroy(__instance.gameObject);
             return false;
