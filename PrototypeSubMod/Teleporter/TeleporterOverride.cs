@@ -169,6 +169,7 @@ internal class TeleporterOverride : MonoBehaviour
             teleporter.warpToAngle = originalTeleportAngle;
             overrideActive = false;
             OnOverrideRunOut?.Invoke(teleporterID);
+            LastOverrideOwner = null;
         }
 
         if (overrideTimeLastFrame > 30f && currentOverrideTime <= 30f)
@@ -241,6 +242,8 @@ internal class TeleporterOverride : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        if (currentOverrideTime < 100f) yield break;
+        
         if (LastOverrideOwner != null)
         {
             LastOverrideOwner.PlayOverrideMarker1();
