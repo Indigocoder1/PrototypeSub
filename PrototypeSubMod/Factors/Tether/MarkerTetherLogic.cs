@@ -59,7 +59,7 @@ public class MarkerTetherLogic : Factor
             Plugin.GlobalSaveData.tetherFactorMarkerLocation = Player.main.transform.position;
             Plugin.GlobalSaveData.tetherMarkerOutOfWater = Player.main.precursorOutOfWater;
             UWE.CoroutineHost.StartCoroutine(SpawnMarker(Player.main.transform.position));
-            ErrorMessage.AddError("Tether marker placed. Use again to teleport to marker");
+            ErrorMessage.AddError(Language.main.Get("TetherFactorPlaced"));
             tetherPlaceSFX.Play();
             return;
         }
