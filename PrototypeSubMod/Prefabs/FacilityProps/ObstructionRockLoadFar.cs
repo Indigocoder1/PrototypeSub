@@ -20,6 +20,7 @@ public static class ObstructionRockLoadFar
         };
 
         prefab.SetGameObject(cloneTemplate);
+        prefab.RemoveFromCache();
 
         prefab.Register();
     }
