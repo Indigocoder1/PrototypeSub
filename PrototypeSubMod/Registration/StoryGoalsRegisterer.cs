@@ -3,6 +3,7 @@ using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Facilities.Hull;
 using PrototypeSubMod.Prefabs;
+using PrototypeSubMod.Prefabs.AlienBuildingBlock;
 using PrototypeSubMod.Prefabs.FacilityProps;
 using PrototypeSubMod.Prefabs.Factors;
 using PrototypeSubMod.PrototypeStory;
@@ -21,7 +22,7 @@ internal static class StoryGoalsRegisterer
         #region Precursor Ingot Pickup Unlock
 
         StoryGoalHandler.RegisterItemGoal("Ency_ProtoPrecursorIngot", Story.GoalType.Encyclopedia, PrecursorIngot_Craftable.prefabInfo.TechType);
-
+        
         StoryGoalHandler.RegisterCustomEvent("Ency_ProtoPrecursorIngot", () =>
         {
             KnownTech.Add(PrecursorIngot_Craftable.prefabInfo.TechType);
@@ -176,6 +177,12 @@ internal static class StoryGoalsRegisterer
         {
             PDAEncyclopedia.Add("AlienBuildingBlockEncy", true);
         });
+        
+        StoryGoalHandler.RegisterCustomEvent("IonCubeUnlock", () =>
+        {
+            KnownTech.Add(TechType.PrecursorIonCrystal);
+        });
+        StoryGoalHandler.RegisterItemGoal("IonCubeUnlock", Story.GoalType.Story, AlienBuildingBlock.prefabInfo.TechType);
         #endregion
         
         #region On Enter Engine Facility
