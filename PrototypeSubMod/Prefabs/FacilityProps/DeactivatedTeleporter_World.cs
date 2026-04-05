@@ -20,6 +20,8 @@ internal class DeactivatedTeleporter_World
             GameObject.Destroy(teleporter);
         };
 
+
+        prefab.RemoveFromCache();
         prefab.SetGameObject(cloneTemplate);
 
         prefab.Register();

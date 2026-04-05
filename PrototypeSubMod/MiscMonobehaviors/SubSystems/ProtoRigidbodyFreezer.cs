@@ -21,6 +21,8 @@ public class ProtoRigidbodyFreezer : MonoBehaviour, IProtoTreeEventListener
 
     private void FixedUpdate()
     {
+        if (Player.main.isWaitingForTeleportation) return;
+        
         bool inDistance = (MainCamera.camera.transform.position - transform.position).sqrMagnitude < freezeDistance * freezeDistance;
         if (inDistance != wasInDistance)
         {
