@@ -492,6 +492,14 @@ internal static class StoryGoalsRegisterer
             KnownTech.Add(DefenseFacilityKey.prefabInfo.TechType);
             PDAEncyclopedia.Add("DefenseFacilityTabletEncy", true);
         });
+        
+        StoryGoalHandler.RegisterItemGoal("OnPickupIonPrism", Story.GoalType.Story,
+            IonPrism_Craftable.prefabInfo.TechType);
+        StoryGoalHandler.RegisterCustomEvent("OnPickupIonPrism", () =>
+        {
+            KnownTech.Add(IonPrism_Craftable.prefabInfo.TechType);
+            PDAEncyclopedia.Add("ProtoIonPrismEncy", true);
+        });
 
         StoryGoalHandler.RegisterLocationGoal("ProtoApproachEngineFacility", Story.GoalType.Story, new Vector3(-530, -465, 1530), 300,
             3);
