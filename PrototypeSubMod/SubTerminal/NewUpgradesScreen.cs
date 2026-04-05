@@ -185,9 +185,7 @@ internal class NewUpgradesScreen : MonoBehaviour
         PDALog.Add(hullKeyPDAKey);
         KnownTech.Add(HullFacilityKey.prefabInfo.TechType);
         PDAEncyclopedia.Add("HullFacilityTabletEncy", true);
-
-        KnownTech.Add(IonPrism_Craftable.prefabInfo.TechType);
-        PDAEncyclopedia.Add("ProtoIonPrismEncy", true);
+        
         queuedPdaMessages.Add(hullKeyPDAKey);
         
         // Remove the new upgrades message
