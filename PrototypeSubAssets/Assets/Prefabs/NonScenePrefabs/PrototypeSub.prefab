@@ -44675,8 +44675,8 @@ MonoBehaviour:
   timeToConstruct: 60
   timeToDeconstruct: 30
   voiceNotificationManager: {fileID: 5389210478452801882}
-  alphaConstructing: {fileID: 0}
-  betaConstructing: {fileID: 0}
+  alphaConstructing: {fileID: 4053582668325900008}
+  betaConstructing: {fileID: 5238005141233981826}
   alphaOnline: {fileID: 6654510160674239507}
   betaOnline: {fileID: 2863942002838912694}
   alphaOffline: {fileID: 207345414706337998}
