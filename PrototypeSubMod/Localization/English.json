@@ -571,17 +571,17 @@
   "ProtoPrecursorFabricator_Tab_PhaseGate": "Advanced Fabrication",
 
   // Phase Gates
-  "Proto_AlphaLoaded": "{0}: Phase Gate: Alpha ready for deployment.",
-  "Proto_BetaLoaded": "{0}: Phase Gate: Beta ready for deployment.",
-  "Proto_AlphaDeployed": "{0}: Beginning construction of Phase Gate: Alpha.",
-  "Proto_BetaDeployed": "{0}: Beginning construction of Phase Gate: Beta.",
-  "Proto_AlphaOnline": "{0}: Phase Gate: Alpha online.",
-  "Proto_BetaOnline": "{0}: Phase Gate: Beta online.",
-  "Proto_ConfirmDeconstruction": "{0}: Confirm Phase Gate deconstruction.",
-  "Proto_AlphaOffline": "{0}: Phase Gate: Alpha offline.",
-  "Proto_BetaOffline": "{0}: Phase Gate: Beta offline.",
-  "Proto_NoGateDetected": "{0}: Error. No Phase Gate detected.",
-  "Proto_NoDeploymentSpace": "{0}: Error. Inadequate space for Phase Gate deployment.",
+  "Proto_AlphaLoaded": "PROTOTYPE: Phase Gate: Alpha ready for deployment.",
+  "Proto_BetaLoaded": "PROTOTYPE: Phase Gate: Beta ready for deployment.",
+  "Proto_AlphaDeployed": "PROTOTYPE: Beginning construction of Phase Gate: Alpha.",
+  "Proto_BetaDeployed": "PROTOTYPE: Beginning construction of Phase Gate: Beta.",
+  "Proto_AlphaOnline": "PROTOTYPE: Phase Gate: Alpha online.",
+  "Proto_BetaOnline": "PROTOTYPE: Phase Gate: Beta online.",
+  "Proto_ConfirmDeconstruction": "PROTOTYPE: Confirm Phase Gate deconstruction.",
+  "Proto_AlphaOffline": "PROTOTYPE: Phase Gate: Alpha offline.",
+  "Proto_BetaOffline": "PROTOTYPE: Phase Gate: Beta offline.",
+  "Proto_NoGateDetected": "PROTOTYPE: Error. No Phase Gate detected.",
+  "Proto_NoDeploymentSpace": "PROTOTYPE: Error. Inadequate space for Phase Gate deployment.",
 
   // Button tooltips
   "ProtoToggleStairs": "Raise / Lower Stairs",
