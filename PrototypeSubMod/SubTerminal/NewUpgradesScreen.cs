@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using PrototypeSubMod.Prefabs;
+using Story;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -203,6 +204,8 @@ internal class NewUpgradesScreen : MonoBehaviour
         {
             if (!Plugin.GlobalSaveData.unlockedCategoriesLastCheck.Contains(item.localizationKey)) return;
         }
+        
+        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy")) return;
 
         Plugin.GlobalSaveData.storyEndPingSpawned = true;
         UWE.CoroutineHost.StartCoroutine(SpawnStoryEndPing());
