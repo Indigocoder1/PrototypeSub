@@ -7184,7 +7184,7 @@ MonoBehaviour:
   wormAnimator: {fileID: 5351068426189712924}
   attackDamage: 1500
   attackRadius: 5
-  impulseForce: 750000
+  impulseForce: 1500000
   roarManager: {fileID: 121548284677876063}
   chargeImpactSfx: {fileID: 3899844511224395324}
 --- !u!114 &2563168583705512565
