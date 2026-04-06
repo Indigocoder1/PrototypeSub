@@ -398,7 +398,7 @@
   "Tooltip_ProtoIonBarrier": "Creates a large shield that converts blunt impact force to power",
 
   "ProtoIonGenerator": "Ion Generator",
-  "Tooltip_ProtoIonGenerator": "Directs all sub resources to siphoning energy from its surroundings.",
+  "Tooltip_ProtoIonGenerator": "Creates a local fusion reaction to produce power over time.",
 
   "ProtoOverclockModule": "Overclock Protocol",
   "Tooltip_ProtoOverclockModule": "Overclocks the ion reactor, consuming additional power for increased speed.",
