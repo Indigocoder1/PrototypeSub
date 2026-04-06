@@ -116,9 +116,10 @@ public class Blink : Factor
         speedData.CopyFromController(controller);
         speedData.Multiply(speedMultiplier / timeScaleSlow);
         speedData.AssignToMotor(controller.underWaterController);
-        var moveDir = MainCameraControl.main.transform.right * GameInput.moveDirection.normalized.x +
-            MainCameraControl.main.transform.forward * GameInput.moveDirection.normalized.z +
-            MainCameraControl.main.transform.up * GameInput.moveDirection.normalized.y;
+        var camera = Camera.main;
+        var moveDir = camera.transform.right * GameInput.moveDirection.normalized.x +
+              camera.transform.forward * GameInput.moveDirection.normalized.z +
+              camera.transform.up * GameInput.moveDirection.normalized.y;
         Player.main.rigidBody.velocity = moveDir * (controller.swimForwardMaxSpeed * (speedMultiplier / timeScaleSlow));
 
         if (timescaleCoroutine != null)
