@@ -30,6 +30,8 @@ internal class ProtoEngineLever : CinematicModeTriggerBase
     private bool ensureAnimFinished;
     private bool locked;
     private bool initialized;
+    private bool wasEngineEnabled;
+    private bool justChangedEngine;
 
     private void OnEnable()
     {
@@ -113,6 +115,8 @@ internal class ProtoEngineLever : CinematicModeTriggerBase
         motorMode.subController.NewEngineMode(motorMode.engineOn);
         motorMode.BroadcastMessage("RecalculateNoiseValues");
         onEngineStateChanged?.Invoke(motorMode.engineOn);
+
+        justChangedEngine = true;
     }
     
     private void Update()
@@ -127,6 +131,19 @@ internal class ProtoEngineLever : CinematicModeTriggerBase
                 interactableCollider.enabled = true;
             }
         }
+
+        if (motorMode.engineOn != wasEngineEnabled && !justChangedEngine)
+        {
+            leverAnimator.SetBool(LeverEnabled, motorMode.engineOn);
+            hullPistonsAnimator.SetBool(PistonsActive, motorMode.engineOn);
+        }
+
+        if (justChangedEngine)
+        {
+            justChangedEngine = false;
+        }
+
+        wasEngineEnabled = motorMode.engineOn;
     }
 
     public void SetStoryLocked(bool locked)
