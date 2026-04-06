@@ -43,6 +43,8 @@ public class PlayerWorldArrows_Patches
 
     private static void CreateInterceptorMapArrow(PlayerWorldArrows instance)
     {
+        if (StoryGoalManager.main.IsGoalComplete("ProtoOpenInterceptorMap")) return;
+        
         var interceptorMapTT = (TechType)Enum.Parse(typeof(TechType), "ProtoInterceptorMap");
         instance.CreateWorldArrow(false, false, interceptorMapTT, "ProtoInterceptorMapHint",
             null, "ProtoOpenInterceptorMap", 0, new Vector3(0, -0.2f, 0), true, localScale: 0.75f);
