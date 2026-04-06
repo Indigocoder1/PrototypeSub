@@ -388,7 +388,7 @@ public class WyrmShootTarget : CreatureAction
     
     private Vector3[] GetAttackPoints()
     {
-        const float setupDist = 200;
+        const float setupDist = 500;
         
         var points = new Vector3[3];
         var player = Player.main;
