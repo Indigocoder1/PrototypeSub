@@ -37,7 +37,7 @@ public static class TetherFactor
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoTetherFactor");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
         yield return new WaitUntil(() => MaterialUtils.IsReady);
 

@@ -35,7 +35,7 @@ public static class SuitColorFactor
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("GenericFactorModel");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
         yield return new WaitUntil(() => MaterialUtils.IsReady);
 

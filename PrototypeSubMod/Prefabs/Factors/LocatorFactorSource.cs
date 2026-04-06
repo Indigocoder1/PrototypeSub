@@ -23,7 +23,7 @@ public static class LocatorFactorSource
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("LocatorFactorSource");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
         return instance;
     }
 }

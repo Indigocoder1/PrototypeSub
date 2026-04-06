@@ -24,6 +24,6 @@ public class PrototypeSpawner
     {
         var asset = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PrototypeSpawner");
         asset.gameObject.SetActive(false);
-        return GameObject.Instantiate(asset);
+        return UWE.Utils.InstantiateDeactivated(asset);
     }
 }

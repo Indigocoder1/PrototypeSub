@@ -35,7 +35,7 @@ public static class ProtoTransmissionDevice
     {
         var asset = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoTransmissionDevice");
         asset.gameObject.SetActive(false);
-        var instance = GameObject.Instantiate(asset);
+        var instance = UWE.Utils.InstantiateDeactivated(asset);
 
         MaterialUtils.ApplySNShaders(instance, modifiers: new ProtoMaterialModifier(6f));
 

@@ -25,7 +25,7 @@ public static class ProtoPhaseGate
     private static IEnumerator GetGameObject(IOut<GameObject> prefabOut)
     {
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("PhaseGate");
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
         foreach (var collider in instance.GetComponentsInChildren<Collider>(true))
         {

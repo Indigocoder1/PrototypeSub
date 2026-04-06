@@ -33,7 +33,7 @@ public class ProtoPhaseGateStructure
     private static GameObject GetGameObject()
     {
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStructure");
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
         MaterialUtils.ApplySNShaders(instance);
         

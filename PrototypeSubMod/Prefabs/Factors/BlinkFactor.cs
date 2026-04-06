@@ -40,7 +40,7 @@ public static class BlinkFactor
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoBlinkFactor");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
         yield return new WaitUntil(() => MaterialUtils.IsReady);
 

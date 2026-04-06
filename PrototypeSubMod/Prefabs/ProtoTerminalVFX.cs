@@ -27,7 +27,7 @@ public class ProtoTerminalVFX
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("Empty");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
         PrefabUtils.AddBasicComponents(instance, prefabInfo.ClassID, prefabInfo.TechType,
             LargeWorldEntity.CellLevel.Near);
 

@@ -33,7 +33,7 @@ internal class PrecursorIngot_Craftable
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("AlienFramework");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
         return instance;
     }
 }

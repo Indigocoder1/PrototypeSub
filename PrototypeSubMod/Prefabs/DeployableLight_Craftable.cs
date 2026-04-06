@@ -38,7 +38,7 @@ internal class DeployableLight_Craftable
         var assetPrefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("DeployableLight");
 
         assetPrefab.SetActive(false);
-        var prefab = GameObject.Instantiate(assetPrefab);
+        var prefab = UWE.Utils.InstantiateDeactivated(assetPrefab);
 
         prefab.GetComponent<Pickupable>().isPickupable = false;
 

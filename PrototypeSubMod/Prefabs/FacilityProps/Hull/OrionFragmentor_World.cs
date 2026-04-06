@@ -69,7 +69,7 @@ public static class OrionFragmentor_World
     private static IEnumerator GetPrefab(IOut<GameObject> prefabOut)
     {
         var empty = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("Empty");
-        var instance = GameObject.Instantiate(empty);
+        var instance = UWE.Utils.InstantiateDeactivated(empty);
 
         PrefabUtils.AddBasicComponents(instance, prefabInfo.ClassID, prefabInfo.TechType,
             LargeWorldEntity.CellLevel.Far);

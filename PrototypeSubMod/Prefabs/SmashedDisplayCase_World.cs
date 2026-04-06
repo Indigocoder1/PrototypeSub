@@ -25,7 +25,7 @@ internal static class SmashedDisplayCase_World
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("SmashedDisplayCase");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
         var displayCaseTask = PrefabDatabase.GetPrefabAsync("d0fea4da-39f2-47b4-aece-bb12fe7f9410");
         yield return displayCaseTask;

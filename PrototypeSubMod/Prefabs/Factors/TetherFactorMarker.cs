@@ -23,7 +23,7 @@ public static class TetherFactorMarker
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("TetherFactorMarker");
         prefab.SetActive(false);
 
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
         return instance;
     }
 }

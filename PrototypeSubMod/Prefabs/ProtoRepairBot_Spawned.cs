@@ -25,7 +25,7 @@ internal class ProtoRepairBot_Spawned
         GameObject model = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoRepairBot");
 
         model.SetActive(false);
-        GameObject prefab = GameObject.Instantiate(model);
+        GameObject prefab = UWE.Utils.InstantiateDeactivated(model);
 
         var botTask = CraftData.GetPrefabForTechTypeAsync(TechType.PrecursorDroid);
         yield return botTask;

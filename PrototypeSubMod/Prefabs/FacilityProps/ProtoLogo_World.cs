@@ -25,7 +25,7 @@ internal class ProtoLogo_World
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoLogo");
         prefab.SetActive(false);
 
-        var gameObject = GameObject.Instantiate(prefab, new Vector3(0, 500f, 0), Quaternion.identity);
+        var gameObject = UWE.Utils.InstantiateDeactivated(prefab);
 
         yield return new WaitUntil(() => MaterialUtils.IsReady);
 

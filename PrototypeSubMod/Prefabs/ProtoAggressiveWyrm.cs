@@ -24,7 +24,7 @@ public static class ProtoAggressiveWyrm
     private static IEnumerator GetGameObject(IOut<GameObject> prefabOut)
     {
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoAggressiveWorm");
-        var instance = GameObject.Instantiate(prefab);
+        var instance = UWE.Utils.InstantiateDeactivated(prefab);
         
         yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
         
