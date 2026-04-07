@@ -36,6 +36,8 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
 
     private void Start()
     {
+        calibrationObjects.SetActive(false);
+        
         if (StoryGoalManager.main.IsGoalComplete("OnCalibrationRunCompleted")) return;
         
         // Add one to account for initial point
@@ -62,8 +64,6 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
             
             index++;
         }
-
-        calibrationObjects.SetActive(false);
     }
     
     private void Update()
