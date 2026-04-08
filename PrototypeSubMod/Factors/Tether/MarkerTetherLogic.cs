@@ -57,7 +57,6 @@ public class MarkerTetherLogic : Factor
         if (Plugin.GlobalSaveData.tetherFactorMarkerLocation == null)
         {
             Plugin.GlobalSaveData.tetherFactorMarkerLocation = Player.main.transform.position;
-            Plugin.GlobalSaveData.tetherMarkerOutOfWater = Player.main.precursorOutOfWater;
             UWE.CoroutineHost.StartCoroutine(SpawnMarker(Player.main.transform.position));
             ErrorMessage.AddError(Language.main.Get("TetherFactorPlaced"));
             tetherPlaceSFX.Play();
@@ -82,6 +81,7 @@ public class MarkerTetherLogic : Factor
         }
         
         ionManager.ConsumeEnergy(powerConsumption);
+        Player.main.SetPrecursorOutOfWater(false);
 
         Instantiate(warpInFx, Player.main.transform.position, Player.main.transform.rotation);
         UWE.CoroutineHost.StartCoroutine(TeleportPlayer(Plugin.GlobalSaveData.tetherFactorMarkerLocation.Value));
@@ -97,7 +97,6 @@ public class MarkerTetherLogic : Factor
         {
             moonpoolTrigger.OnTriggerExit(Player.mainCollider);
         }
-        Player.main.SetPrecursorOutOfWater(Plugin.GlobalSaveData.tetherMarkerOutOfWater);
 
         if (isLoaded)
         {

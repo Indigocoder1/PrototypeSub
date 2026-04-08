@@ -29,7 +29,6 @@ internal class ProtoGlobalSaveData : SaveDataCache
     public Dictionary<string, ColorSelection> colorFactorSelections = new();
     
     public Vector3? tetherFactorMarkerLocation = null;
-    public bool tetherMarkerOutOfWater;
     
     public bool prototypePresent;
     public bool prototypeDestroyed;
