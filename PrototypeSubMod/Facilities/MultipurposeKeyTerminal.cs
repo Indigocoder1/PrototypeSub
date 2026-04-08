@@ -13,7 +13,7 @@ namespace PrototypeSubMod.Facilities;
 internal class MultipurposeKeyTerminal : InteractableTerminal
 {
     [SaveStateReference]
-    private static GameObject KeyTerminalPrefab;
+    private static GameObject _keyTerminalPrefab;
 
     public override event Action onTerminalInteracted
     {
@@ -31,9 +31,9 @@ internal class MultipurposeKeyTerminal : InteractableTerminal
     
     private void Start()
     {
-        if (KeyTerminalPrefab)
+        if (_keyTerminalPrefab)
         {
-            SpawnPrefab(KeyTerminalPrefab);
+            SpawnPrefab(_keyTerminalPrefab);
             return;
         }
 
@@ -50,8 +50,8 @@ internal class MultipurposeKeyTerminal : InteractableTerminal
         if (!prefabRequest.TryGetPrefab(out prefab)) throw new Exception("Error retrieving precursor key terminal prefab!");
 
         prefab.SetActive(false);
-        KeyTerminalPrefab = prefab;
-        SpawnPrefab(KeyTerminalPrefab);
+        _keyTerminalPrefab = prefab;
+        SpawnPrefab(_keyTerminalPrefab);
     }
 
     private void SpawnPrefab(GameObject prefab)
@@ -82,8 +82,8 @@ internal class MultipurposeKeyTerminal : InteractableTerminal
 
         glyphRenderer.material.mainTexture = replacementSprite;
 
-        Destroy(instance.GetComponent<PrefabIdentifier>());
-        Destroy(instance.GetComponent<LargeWorldEntity>());
+        DestroyImmediate(instance.GetComponent<PrefabIdentifier>());
+        DestroyImmediate(instance.GetComponent<LargeWorldEntity>());
 
         var applier = GetComponentInParent<SkyApplier>();
         if (applier)
