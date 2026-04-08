@@ -43,6 +43,9 @@ public class ProtoRigidbodyFreezer : MonoBehaviour, IProtoTreeEventListener
         {
             UWE.Utils.SetIsKinematicAndUpdateInterpolation(rigidbody, false);
         }
+
+        var originalPosition = rigidbody.transform.position;
+        var originalRotation = rigidbody.transform.rotation;
         
         for (int i = 0; i < colliderActivationStages.Length; i++)
         {
@@ -52,12 +55,17 @@ public class ProtoRigidbodyFreezer : MonoBehaviour, IProtoTreeEventListener
                 yield return new WaitForEndOfFrame();
                 yield return new WaitForEndOfFrame();
             }
+
+            rigidbody.transform.position = originalPosition;
+            rigidbody.transform.rotation = originalRotation;
         }
         
         if (!inDistance)
         {
             UWE.Utils.SetIsKinematicAndUpdateInterpolation(rigidbody, true);
         }
+        
+        Physics.SyncTransforms();
         
         collidersTransitioning = false;
     }
