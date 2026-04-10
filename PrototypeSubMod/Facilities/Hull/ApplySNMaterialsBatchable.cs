@@ -16,7 +16,7 @@ public class ApplySNMaterialsBatchable : MonoBehaviour
         if (!applyTo) applyTo = gameObject;
     }
 
-    private void Start()
+    private void Awake()
     {
         foreach (var rend in GetComponentsInChildren<Renderer>(true))
         {
