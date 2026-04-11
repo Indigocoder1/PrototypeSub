@@ -378,6 +378,7 @@
 
   "ProtoCalibrationCodeEncy_Title": "Transmission Calibration Code",
   "ProtoCalibrationCodeEncy_Body": "A local alien broadcast has outlined a six-point pattern matching the movements of the Prototype during the prior exercise.\n\nThe pattern appears to represent a highly precise set of instructions to assist in the transmission of data type: [NEURAL CLUSTER]. While it is unknown why such data may require transmitting, it may lead to further acquisition of valuable alien data.\n\n<b>Assessment: Continue following alien instructions to retrieve advanced technologies. Mutual profit will follow.</b>",
+  
   // Puzzle facility voicelines
   "BearingPuzzleComplete": "FACILITY: SPATIAL NAVIGATION COGNITIVE TRIAL COMPLETE.<duration=3246>\nFACILITY: UPLOADING RESULTS TO QUARANTINE ENFORCEMENT PLATFORM.<delay=3360><duration=3540>",
   "NumberPuzzleComplete": "FACILITY: COGNITIVE TRIAL COMPLETE.",
@@ -456,6 +457,7 @@
   "ProtoRadialHint": "Open ability menu",
   "ProtoInterceptorMapHint": "Open map",
   "ArchwayOverrideHint": "Access activated archways with the Prototype's portal",
+  "DarkMatterDetected": "DARK MATTER DETECTED",
 
   // Voice Notifications
   "Proto_AbandonShip": "PROTOTYPE: Critical Warning: Reactor meltdown imminent! Abandon ship!",

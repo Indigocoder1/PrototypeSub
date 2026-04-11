@@ -31,7 +31,9 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     [SerializeField] private GameObject[] activeObjects;
 
     private RadiationsScreenFX radiationsScreenFX;
+    private uGUI_RadiationWarning radiationWarning;
     private Color originalRadiationColor;
+    private bool wasOutOfRange;
     
     private void Start()
     {
@@ -39,6 +41,9 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         OnSequenceCompleteEvent += OnSequenceComplete;
         radiationsScreenFX = Camera.main.GetComponent<RadiationsScreenFX>();
         originalRadiationColor = radiationsScreenFX.color;
+
+        radiationWarning = uGUI.main.transform.Find("ScreenCanvas/HUD/Content/RadiationWarning")
+            .GetComponent<uGUI_RadiationWarning>();
 
         foreach (var obj in inactiveObjects)
         {
@@ -72,7 +77,13 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
             PDALog.Add("PDA_OnApproachWarpCore");
         }
 
-        radiationsScreenFX.color = distance < pdaMessageDistance ? closeRadiationColor : originalRadiationColor;
+        bool outOfRange = distance > pdaMessageDistance;
+
+        if (outOfRange != wasOutOfRange)
+        {
+            radiationsScreenFX.color = outOfRange ? originalRadiationColor : closeRadiationColor;
+            radiationWarning.text.text = Language.main.Get(outOfRange ? "RadiationDetected": "DarkMatterDetected");
+        }
         
         if (distance < teleportationDistance && !SequenceInProgress)
         {
@@ -80,6 +91,8 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
             StartReactorSequence();
             Player.main.TryEject();
         }
+
+        wasOutOfRange = distance > pdaMessageDistance;
     }
 
     private void StartReactorSequence()
