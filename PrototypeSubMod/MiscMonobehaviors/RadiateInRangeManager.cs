@@ -17,6 +17,8 @@ public class RadiateInRangeManager : MonoBehaviour
 
     public float GetRadiationAmount()
     {
+        if (!radiatePlayerInRange.enabled) return 0;
+        
         var prevAmount = Player.main.radiationAmount;
         radiatePlayerInRange.Radiate();
         var amount = Player.main.radiationAmount;

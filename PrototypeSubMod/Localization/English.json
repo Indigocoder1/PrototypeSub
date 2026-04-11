@@ -362,6 +362,7 @@
   "ProtoNumbersHint": "For your convenience, this PDA has compiled a sheet of alien numbers and their corresponding values for future reference.<delay=1000><duration=13000>",
   "InterceptorFacilityTabletUnlock": "Unlocking interceptor tablet...<duration=13000>",
   "PDA_OnEnterVoidWyrmActivated": "Alert. High priority radio message received<duration=2000>",
+  "PDA_OnApproachWarpCore": "Warning: Detecting unstable dark energy readings ahead. Proceed with caution.",
 
   "ProtoBlinkFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
   "ProtoBiomechanicsFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",

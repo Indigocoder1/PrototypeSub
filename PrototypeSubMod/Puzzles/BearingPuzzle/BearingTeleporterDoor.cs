@@ -61,6 +61,8 @@ public class BearingTeleporterDoor : MonoBehaviour
     {
         if (!blurOnApproach) return;
         
+        if ((Player.main.transform.position - transform.position).sqrMagnitude > 100 * 100) return;
+        
         HandleBlurVFX(out var doingBlur);
 
         if (doingBlur && !wasHandlingBlur)

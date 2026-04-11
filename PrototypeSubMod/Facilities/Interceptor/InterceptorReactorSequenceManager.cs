@@ -11,38 +11,34 @@ namespace PrototypeSubMod.Facilities.Interceptor;
 
 internal class InterceptorReactorSequenceManager : MonoBehaviour
 {
-    private static readonly Vector3 VoidTeleportPos = new Vector3(-1590, -562, -288);
-
+    private static readonly Vector3 VoidTeleportPos = new (-1590, -562, -288);
+    private static event Action OnSequenceCompleteEvent;
+    
     [SaveStateReference]
-    private static InterfloorTeleporter Teleporter;
-    private static Vector3 MostRecentReturnPos;
-
-    [SerializeField] private MultipurposeAlienTerminal activationTerminal;
+    private static InterfloorTeleporter _teleporter;
+    private static Vector3 _mostRecentReturnPos;
+    
     [SerializeField] private InterfloorTeleporter teleporter;
-    [SerializeField] private Transform returnPos;
-    [SerializeField] private Vector3 islandTeleportPos;
-    [SerializeField] private Vector3 voidTeleportPos;
+    [SerializeField] private RadiatePlayerInRange radiatePlayerInRange;
+    [SerializeField] private Animator warpCoreAnimator;
+    [SerializeField] private AnimationCurve animationSpeedOverDistance;
+    [SerializeField] private Color closeRadiationColor;
+    [SerializeField] private float pdaMessageDistance;
+    [SerializeField] private float teleportationDistance;
 
     [Header("Activation Objects")]
     [SerializeField] private GameObject[] inactiveObjects;
     [SerializeField] private GameObject[] activeObjects;
+
+    private RadiationsScreenFX radiationsScreenFX;
+    private Color originalRadiationColor;
     
     private void Start()
     {
         IngameMenu_Patches.OnQuitToMainMenu += OnQuitToMainMenu;
-        
-        if (Plugin.GlobalSaveData.reactorSequenceComplete)
-        {
-            activationTerminal.ForceInteracted();
-        }
-        else
-        {
-            activationTerminal.onTerminalInteracted += () =>
-            {
-                MostRecentReturnPos = returnPos.position;
-                StartReactorSequence();
-            };
-        }
+        OnSequenceCompleteEvent += OnSequenceComplete;
+        radiationsScreenFX = Camera.main.GetComponent<RadiationsScreenFX>();
+        originalRadiationColor = radiationsScreenFX.color;
 
         foreach (var obj in inactiveObjects)
         {
@@ -53,16 +49,40 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
             obj.SetActive(Plugin.GlobalSaveData.EngineFacilityPointsRepaired);
         }
 
-        if (!Teleporter)
+        if (!_teleporter)
         {
             var teleporterHolder = new GameObject("IslandTeleporterHolder");
             teleporterHolder.transform.position = new Vector3(0, 50, 0);
             
-            Teleporter = teleporterHolder.AddComponent<InterfloorTeleporter>().CopyComponent(teleporter);
+            _teleporter = teleporterHolder.AddComponent<InterfloorTeleporter>().CopyComponent(teleporter);
+        }
+
+        radiatePlayerInRange.enabled = Plugin.GlobalSaveData.EngineFacilityPointsRepaired;
+    }
+
+    private void Update()
+    {
+        if (!Plugin.GlobalSaveData.EngineFacilityPointsRepaired || Plugin.GlobalSaveData.reactorSequenceComplete) return;
+
+        var distance = Vector3.Distance(transform.position, Player.main.transform.position);
+        warpCoreAnimator.speed = animationSpeedOverDistance.Evaluate(distance);
+
+        if (distance < pdaMessageDistance)
+        {
+            PDALog.Add("PDA_OnApproachWarpCore");
+        }
+
+        radiationsScreenFX.color = distance < pdaMessageDistance ? closeRadiationColor : originalRadiationColor;
+        
+        if (distance < teleportationDistance && !SequenceInProgress)
+        {
+            _mostRecentReturnPos = Player.main.transform.position;
+            StartReactorSequence();
+            Player.main.TryEject();
         }
     }
 
-    public static void StartReactorSequence()
+    private void StartReactorSequence()
     {
         UWE.CoroutineHost.StartCoroutine(TeleportToIsland());
     }
@@ -73,12 +93,13 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     public static void EndReactorSequence()
     {
         IngameMenu_Patches.SetDenySaving(false);
-        Teleporter.StartTeleportPlayer(MostRecentReturnPos, Camera.main.transform.forward);
+        _teleporter.StartTeleportPlayer(_mostRecentReturnPos, Camera.main.transform.forward);
         LargeWorldStreamer_Patches.SetOverwriteCamPos(false, Vector3.zero);
         GUIController_Patches.SetDenyHideCycling(false);
         GUIController.SetHidePhase(GUIController.HidePhase.None);
         WeatherCompatManager.SetWeatherEnabled(true);
 
+        
         Player_Patches.SetOxygenReqOverride(false, 0);
         BiomeGoalTracker_Patches.SetTrackingBlocked(false);
         SequenceInProgress = false;
@@ -118,11 +139,11 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         WeatherCompatManager.SetWeatherEnabled(false);
         WeatherCompatManager.SetWeatherClear();
 
-        InterfloorTeleporter.PlayTeleportEffect(4f);
+        InterfloorTeleporter.PlayTeleportEffect(3f);
 
         yield return new WaitForSeconds(0.5f);
 
-        LargeWorldStreamer_Patches.SetOverwriteCamPos(true, MostRecentReturnPos);
+        LargeWorldStreamer_Patches.SetOverwriteCamPos(true, _mostRecentReturnPos);
         Player.main.cinematicModeActive = true;
         Player.main.playerController.inputEnabled = false;
         Inventory.main.quickSlots.SetIgnoreHotkeyInput(true);
@@ -153,8 +174,15 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         SequenceInProgress = false;
     }
 
+    private void OnSequenceComplete()
+    {
+        radiationsScreenFX.color = originalRadiationColor;
+    }
+
     private void OnDestroy()
     {
         IngameMenu_Patches.OnQuitToMainMenu -= OnQuitToMainMenu;
+        OnSequenceCompleteEvent -= OnSequenceComplete;
+        radiationsScreenFX.color = originalRadiationColor;
     }
 }
