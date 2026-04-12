@@ -13840,6 +13840,8 @@ MonoBehaviour:
   arcTarget: {fileID: 7506125251094611054}
   setToTile: 0
   textureScale: {x: 0.8, y: 1}
+  startWidth: 5
+  endWidth: 4
 --- !u!114 &7160189109477816334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13855,6 +13857,8 @@ MonoBehaviour:
   arcTarget: {fileID: 1986475214416457206}
   setToTile: 0
   textureScale: {x: 0.8, y: 1}
+  startWidth: 5
+  endWidth: 4
 --- !u!114 &6038665746612725688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13870,6 +13874,8 @@ MonoBehaviour:
   arcTarget: {fileID: 2910112221582022082}
   setToTile: 0
   textureScale: {x: 0.8, y: 1}
+  startWidth: 5
+  endWidth: 4
 --- !u!114 &843959634265590368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13885,6 +13891,8 @@ MonoBehaviour:
   arcTarget: {fileID: 2898013660252198288}
   setToTile: 0
   textureScale: {x: 0.8, y: 1}
+  startWidth: 5
+  endWidth: 4
 --- !u!114 &7200146273020633921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13900,6 +13908,8 @@ MonoBehaviour:
   arcTarget: {fileID: 3152878407588062600}
   setToTile: 0
   textureScale: {x: 0.8, y: 1}
+  startWidth: 5
+  endWidth: 4
 --- !u!1 &4074527023385691090
 GameObject:
   m_ObjectHideFlags: 0

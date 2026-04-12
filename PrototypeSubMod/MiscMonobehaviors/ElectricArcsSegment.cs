@@ -11,6 +11,8 @@ public class ElectricArcsSegment : MonoBehaviour, IMaterialModifier
     [SerializeField] private Transform arcTarget;
     [SerializeField] private bool setToTile;
     [SerializeField] private Vector2 textureScale = Vector2.one;
+    [SerializeField] private float startWidth = 1f;
+    [SerializeField] private float endWidth = 0.4f;
     
     public event Action<GameObject> onEditMaterial;
 
@@ -46,6 +48,9 @@ public class ElectricArcsSegment : MonoBehaviour, IMaterialModifier
                 line.line.textureMode = LineTextureMode.Tile;
                 line.line.material.SetTextureScale("_MainTex", textureScale);
             }
+
+            line.line.startWidth = startWidth;
+            line.line.endWidth = endWidth;
             
             onEditMaterial?.Invoke(line.line.gameObject);
             Plugin.Logger.LogInfo($"Calling onEditMaterial for {line.line.gameObject}");
