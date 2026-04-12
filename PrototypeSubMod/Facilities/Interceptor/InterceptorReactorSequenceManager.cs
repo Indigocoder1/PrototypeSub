@@ -5,6 +5,7 @@ using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Utility;
 using System.Collections;
+using PrototypeSubMod.IonGenerator;
 using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Interceptor;
@@ -20,6 +21,8 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     
     [SerializeField] private InterfloorTeleporter teleporter;
     [SerializeField] private RadiatePlayerInRange radiatePlayerInRange;
+    [SerializeField] private EmpSpawner empSpawner;
+    [SerializeField] private FMOD_CustomEmitter empSfx;
     [SerializeField] private Animator warpCoreAnimator;
     [SerializeField] private AnimationCurve animationSpeedOverDistance;
     [SerializeField] private Color closeRadiationColor;
@@ -111,7 +114,6 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         GUIController_Patches.SetDenyHideCycling(false);
         GUIController.SetHidePhase(GUIController.HidePhase.None);
         WeatherCompatManager.SetWeatherEnabled(true);
-
         
         Player_Patches.SetOxygenReqOverride(false, 0);
         BiomeGoalTracker_Patches.SetTrackingBlocked(false);
@@ -138,7 +140,7 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         PDALog.Add("OnInterceptorSequenceFinished");
     }
 
-    private static IEnumerator TeleportToIsland()
+    private IEnumerator TeleportToIsland()
     {
         if (SequenceInProgress) yield break;
 
@@ -151,6 +153,12 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         InterceptorIslandManager.Instance.UpdateSeaglideLights(true);
         WeatherCompatManager.SetWeatherEnabled(false);
         WeatherCompatManager.SetWeatherClear();
+
+        empSfx.Play();
+        empSpawner.FireEMP(0);
+        var distToPlayer = Vector3.Distance(empSpawner.transform.position, Player.main.transform.position);
+        // Wait until the EMP hits the player
+        yield return new WaitForSeconds(distToPlayer / empSpawner.GetFinalRadius() * empSpawner.GetLifetime() * 0.5f);
 
         InterfloorTeleporter.PlayTeleportEffect(3f);
 
@@ -190,6 +198,8 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     private void OnSequenceComplete()
     {
         radiationsScreenFX.color = originalRadiationColor;
+        radiationWarning.text.text = Language.main.Get("RadiationDetected");
+        radiatePlayerInRange.enabled = false;
     }
 
     private void OnDestroy()

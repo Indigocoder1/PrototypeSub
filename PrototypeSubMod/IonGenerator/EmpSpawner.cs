@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 
 namespace PrototypeSubMod.IonGenerator;
 
-internal class EmpSpawner : MonoBehaviour
+internal class EmpSpawner : MonoBehaviour, IMaterialModifier
 {
+    public event Action<GameObject> onEditMaterial;
+    
     [SerializeField] private Transform empSpawnPos;
     [SerializeField] private float empLifetime;
     [SerializeField] private AnimationCurve blastRadius;
@@ -12,7 +16,12 @@ internal class EmpSpawner : MonoBehaviour
 
     private GameObject empPrefab;
 
-    private IEnumerator Start()
+    private void Start()
+    {
+        UWE.CoroutineHost.StartCoroutine(RetrievePrefab());
+    }
+
+    private IEnumerator RetrievePrefab()
     {
         CoroutineTask<GameObject> crabsquidTask = CraftData.GetPrefabForTechTypeAsync(TechType.CrabSquid);
 
@@ -20,24 +29,30 @@ internal class EmpSpawner : MonoBehaviour
 
         GameObject crabsquid = crabsquidTask.result.Get();
         var empAttack = crabsquid.GetComponent<EMPAttack>();
-
-        empAttack.ammoPrefab.SetActive(false);
-        empPrefab = Instantiate(empAttack.ammoPrefab);
-
-        empAttack.ammoPrefab.SetActive(true);
-        var empBlast = empPrefab.GetComponent<EMPBlast>();
-
-        empBlast.lifeTime = empLifetime;
-        empBlast.blastRadius = blastRadius;
-        empBlast.blastHeight = blastHeight;
+        
+        empPrefab = UWE.Utils.InstantiateDeactivated(empAttack.ammoPrefab);
     }
 
     public void FireEMP(float disableElectronicsTime)
     {
-        var newEMP = Instantiate(empPrefab, empSpawnPos.position, empSpawnPos.rotation);
+        var newEMP = Instantiate(empPrefab, empSpawnPos.position, empSpawnPos.rotation, transform);
         newEMP.SetActive(true);
-        newEMP.GetComponent<EMPBlast>().disableElectronicsTime = disableElectronicsTime;
+        var empBlast = newEMP.GetComponent<EMPBlast>();
+        
+        empBlast.disableElectronicsTime = disableElectronicsTime;
+        empBlast.lifeTime = empLifetime;
+        empBlast.blastRadius = blastRadius;
+        empBlast.blastHeight = blastHeight;
+        Destroy(empBlast.GetComponentInChildren<VFXLerpColor>());
+
+        onEditMaterial?.Invoke(newEMP.gameObject);
     }
 
     public Transform GetSpawnPos() => empSpawnPos;
+    public float GetLifetime() => empLifetime;
+
+    public float GetFinalRadius()
+    {
+        return blastRadius.Evaluate(1);
+    }
 }
