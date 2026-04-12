@@ -53,7 +53,6 @@ public class ElectricArcsSegment : MonoBehaviour, IMaterialModifier
             line.line.endWidth = endWidth;
             
             onEditMaterial?.Invoke(line.line.gameObject);
-            Plugin.Logger.LogInfo($"Calling onEditMaterial for {line.line.gameObject}");
         }
     }
 

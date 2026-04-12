@@ -15019,6 +15019,7 @@ Transform:
   - {fileID: 2484095189611517275}
   - {fileID: 7545647049068384910}
   - {fileID: 6959471338054804645}
+  - {fileID: 6275516956069215123}
   m_Father: {fileID: 7552182899850119223}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25735,9 +25736,6 @@ GameObject:
   - component: {fileID: 7552182899850119217}
   - component: {fileID: 7552182899850119222}
   - component: {fileID: 7853790407755736471}
-  - component: {fileID: 7460424149588523111}
-  - component: {fileID: 6178931295299720295}
-  - component: {fileID: 2909285429152930151}
   m_Layer: 0
   m_Name: WarpReactor
   m_TagString: Untagged
@@ -25837,7 +25835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleporter: {fileID: 4069329735203607055}
-  radiatePlayerInRange: {fileID: 6178931295299720295}
+  radiatePlayerInRange: {fileID: 0}
   warpCoreAnimator: {fileID: 7552182899812784035}
   animationSpeedOverDistance:
     serializedVersion: 2
@@ -25865,49 +25863,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   closeRadiationColor: {r: 0.9118862, g: 0, b: 1, a: 1}
   pdaMessageDistance: 300
-  teleportationDistance: 40
   inactiveObjects:
   - {fileID: 1710542388730050162}
   activeObjects:
   - {fileID: 4465453433614407337}
---- !u!114 &7460424149588523111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552182899850119220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 146425932, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 215
---- !u!114 &6178931295299720295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552182899850119220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1671642931, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radiateRadius: 200
---- !u!114 &2909285429152930151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552182899850119220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 2011765085, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7552182899857332174
 GameObject:
   m_ObjectHideFlags: 0
@@ -31766,6 +31725,110 @@ Transform:
   m_Father: {fileID: 859676134592997436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8559121524072683808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6275516956069215123}
+  - component: {fileID: 1319934862430554928}
+  - component: {fileID: 8556937267788864243}
+  - component: {fileID: 685102834314009896}
+  - component: {fileID: 6619337120640226826}
+  - component: {fileID: 6668721654611660340}
+  m_Layer: 0
+  m_Name: Radiation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6275516956069215123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559121524072683808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6048862997935194568}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1319934862430554928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559121524072683808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 146425932, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 215
+--- !u!114 &8556937267788864243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559121524072683808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1671642931, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiateRadius: 200
+--- !u!114 &685102834314009896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559121524072683808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1601788176, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateInterval: 1
+  damageRadius: 200
+  damageAmount: 3
+  damageType: 12
+  doDebug: 0
+--- !u!114 &6619337120640226826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559121524072683808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2011765085, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6668721654611660340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559121524072683808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1212153326, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiatePlayerInRange: {fileID: 8556937267788864243}
+  damagePlayerInRadius: {fileID: 685102834314009896}
 --- !u!1 &8564761892010126643
 GameObject:
   m_ObjectHideFlags: 0

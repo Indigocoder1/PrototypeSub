@@ -27,7 +27,6 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     [SerializeField] private AnimationCurve animationSpeedOverDistance;
     [SerializeField] private Color closeRadiationColor;
     [SerializeField] private float pdaMessageDistance;
-    [SerializeField] private float teleportationDistance;
 
     [Header("Activation Objects")]
     [SerializeField] private GameObject[] inactiveObjects;
@@ -48,14 +47,7 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         radiationWarning = uGUI.main.transform.Find("ScreenCanvas/HUD/Content/RadiationWarning")
             .GetComponent<uGUI_RadiationWarning>();
 
-        foreach (var obj in inactiveObjects)
-        {
-            obj.SetActive(!Plugin.GlobalSaveData.EngineFacilityPointsRepaired);
-        }
-        foreach (var obj in activeObjects)
-        {
-            obj.SetActive(Plugin.GlobalSaveData.EngineFacilityPointsRepaired);
-        }
+        EnableRelevantObjects();
 
         if (!_teleporter)
         {
@@ -145,7 +137,7 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         WeatherCompatManager.SetWeatherEnabled(false);
         WeatherCompatManager.SetWeatherClear();
 
-        InterfloorTeleporter.PlayTeleportEffect(3f);
+        InterfloorTeleporter.PlayTeleportEffect(2.5f);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -160,13 +152,28 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         Plugin.GlobalSaveData.reactorSequenceComplete = true;
         Player.main.SetPosition(InterceptorIslandManager.Instance.GetRespawnPoint());
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2.5f);
 
         Player.main.cinematicModeActive = false;
         Player.main.playerController.inputEnabled = true;
         Inventory.main.quickSlots.SetIgnoreHotkeyInput(false);
         Player.main.GetPDA().SetIgnorePDAInput(false);
         Player.main.teleportingLoopSound.Stop();
+        EnableRelevantObjects();
+    }
+
+    private void EnableRelevantObjects()
+    {
+        var showActiveObjects = Plugin.GlobalSaveData.EngineFacilityPointsRepaired &&
+                                !Plugin.GlobalSaveData.reactorSequenceComplete;
+        foreach (var obj in inactiveObjects)
+        {
+            obj.SetActive(!showActiveObjects);
+        }
+        foreach (var obj in activeObjects)
+        {
+            obj.SetActive(showActiveObjects);
+        }
     }
 
     private void OnQuitToMainMenu()
