@@ -25,7 +25,7 @@ public class WyrmDartAction : CreatureAction
 
     public override float Evaluate(Creature creature, float time)
     {
-        return performing ? 1 : Random.Range(0f, 0.8f);
+        return performing ? 1 : Random.Range(0f, 0.85f);
     }
     
     public override void Perform(Creature creature, float time, float deltaTime)
