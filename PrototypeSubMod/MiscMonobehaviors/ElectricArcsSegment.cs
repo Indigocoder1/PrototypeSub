@@ -37,14 +37,18 @@ public class ElectricArcsSegment : MonoBehaviour, IMaterialModifier
         electricArcs.target = arcTarget;
         electricArcs.Play();
 
-        if (!setToTile) yield break;
-
         yield return new WaitUntil(() => electricArcs.lines != null);
 
         foreach (var line in electricArcs.lines)
         {
-            line.line.textureMode = LineTextureMode.Tile;
-            line.line.material.SetTextureScale("_MainTex", textureScale);
+            if (setToTile)
+            {
+                line.line.textureMode = LineTextureMode.Tile;
+                line.line.material.SetTextureScale("_MainTex", textureScale);
+            }
+            
+            onEditMaterial?.Invoke(line.line.gameObject);
+            Plugin.Logger.LogInfo($"Calling onEditMaterial for {line.line.gameObject}");
         }
     }
 
