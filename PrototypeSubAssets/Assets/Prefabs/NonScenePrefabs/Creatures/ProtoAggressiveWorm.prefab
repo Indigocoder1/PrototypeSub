@@ -7132,7 +7132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorSky: 0
   customSkyPrefab: {fileID: 0}
-  dynamic: 1
+  dynamic: 0
   emissiveFromPower: 0
   renderers: []
   overrideSky: 1
@@ -10062,7 +10062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentsParent: {fileID: 8262272570642887209}
-  spineSegmentPrefab: {fileID: 5212892746868434058, guid: 5b33fa7ba83b0264e8bd720c37900869,
+  spineSegmentPrefab: {fileID: 5212892746868434058, guid: f773a9ea6acbb2d4fa43ff12e7456885,
     type: 3}
   initialLocalPos: {x: 0, y: 0, z: -12.25}
   incrementPerSpine: {x: 0, y: 0, z: -7}

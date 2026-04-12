@@ -23,6 +23,7 @@ public class WyrmShootTarget : CreatureAction
     [SerializeField] private float timePassiveAfterParries;
     [SerializeField] private float timeBetweenTargetJitters = 0.2f;
     [SerializeField] private float jitterMagnitude = 5f;
+    [SerializeField] private float targetingSpeedMultiplier = 0.5f;
     
     [Header("SFX")]
     [SerializeField] private WyrmRoarManager roarManager;
@@ -42,6 +43,7 @@ public class WyrmShootTarget : CreatureAction
     private bool hasShot;
     private float currentChargeUpTime;
     private float timeLastJittered;
+    private float originalSpeed;
     private int rightHandVectorSign;
     private int attackStage;
     private int timesParried;
@@ -59,6 +61,7 @@ public class WyrmShootTarget : CreatureAction
         laserVFX.SetActive(false);
 
         muzzleVFX.transform.localScale = Vector3.one * 0.25f;
+        originalSpeed = wormAnimator.GetForwardsSpeed();
         Destroy(muzzleVFX.GetComponent<VFXDestroyAfterSeconds>());
     }
 
@@ -211,6 +214,11 @@ public class WyrmShootTarget : CreatureAction
         }
         
         if (attackStage > GetAttackPoints().Length - 1) return;
+
+        if (attackStage == 2)
+        {
+            wormAnimator.SetForwardsSpeed(originalSpeed * targetingSpeedMultiplier);
+        }
         
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
     }
@@ -279,6 +287,8 @@ public class WyrmShootTarget : CreatureAction
             yield return new WaitForEndOfFrame();
         }
 
+        wormAnimator.SetForwardsSpeed(originalSpeed);
+        
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);
 
@@ -295,7 +305,7 @@ public class WyrmShootTarget : CreatureAction
 
         shotHitSfx.Play();
         roarManager.PlayRoar(Player.main.transform.position);
-        MainCameraControl.main.ShakeCamera(5, -1, MainCameraControl.ShakeMode.Linear, 1);
+        MainCameraControl.main.ShakeCamera(5);
     }
 
     private IEnumerator DoImpactVFX(Vector3 position)
@@ -388,7 +398,7 @@ public class WyrmShootTarget : CreatureAction
     
     private Vector3[] GetAttackPoints()
     {
-        const float setupDist = 500;
+        const float setupDist = 250;
         
         var points = new Vector3[3];
         var player = Player.main;
