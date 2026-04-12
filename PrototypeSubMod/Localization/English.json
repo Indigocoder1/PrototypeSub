@@ -102,8 +102,8 @@
   "ProtoIonGeneratorEncy_Body": "By re-routing power from all non-essential systems onboard the Prototype, this protocol initiates a fusion reaction in the ion reactor, which generates power over time. Due to the extreme conservation of power necessary to carry out the fusion reaction, several critical systems, such as movement and ability use, will be disabled while the generator is active.\n\n<b>Assessment: Use higher-capacity energy devices for maximum recharge efficiency.</b>",
   "ProtoDataStreamsEncy_Title": "Hydrodynamic Ventilation",
   "ProtoDataStreamsEncy_Body": "The Prototype features several water intake grills on its upper bow. This upgrade enhances said grills, allowing them to increase flow to the vessel's ion reactor. Doing so allows the vessel to more efficiently store and deploy energy to its secondary systems, including those delegated to other upgrades. When installed, the Hydrodynamic Ventilation system will reduce the cost of upgrades by 1 charge, and reduce the depletion-over-time of all upgrades by approximately 50%.\n\n<b>Assessment: Vital energy-saving measure. Highly recommended for long journeys.</b>",
-  "ProtoArchwayOverrideEncy_Title": "Archway Override",
-  "ProtoArchwayOverrideEncy_Body": "Insert description here",
+  "ProtoArchwayOverrideEncy_Title": "Archway Override Protocol",
+  "ProtoArchwayOverrideEncy_Body": "On the activation of this protocol, the Prototype's onboard teleporter connects to and re-routes the connection between any pair of activated alien teleporters, allowing for free travel between them and the Prototype. Additionally, the dark energy signatures of each teleporter appears to feed into the Prototype's navigational systems, allowing the vessel to triangulate its position anywhere on the planet. While it is unclear why this function was necessary, it indicates that the Prototype may have been designed for autonomous travel over vast distances.",
   "ProtoOverclockEncy_Title": "Overclock Protocol",
   "ProtoOverclockEncy_Body": "This protocol appears to temporarily sever several safety protocols onboard the Prototype. On activation, the vessel will expend a significant amount of energy to increase power running through the ship’s ion thruster, resulting in an increased speed.",
   "ProtoDeployableLightEncy_Title": "Photon Decoy",
@@ -139,7 +139,7 @@
   "DefenseFacilityTabletEncy_Title": "Defense Facility Tablet",
   "DefenseFacilityTabletEncy_Body": "Compiled from data pertaining to the Prototype's defensive systems, this alien tablet bears a red octagonal symbol, possibly representing stability or protection. The core of this alien tablet measures a total of 200 degrees Celsius. While it is unclear what purpose this may serve, it is possible that the aliens used temperature as a form of “tag” with which to classify their artifacts.",
   "ProtoWarpReactorEncy_Title": "Warp Core",
-  "ProtoWarpReactorEncy_Body": "This alien structure, appears to harbour massive amounts of concentrated dark energy similar to the kind found within the Aurora’s dark matter reactor. As this type of energy is primarily used for interdimensional matter transportation across vast distances, it is reasonable to assume that this artefact may be a kind of battery containing energy used by the alien species for different manners of teleportation.\n\n<b>Protective Shields</b>\n\n8 pyramid-shaped energy barriers surround the structure's core. The barriers are exhibiting substantial signs of decay as dark matter spreads between them. It is clear that these shields have been subject to unforeseen levels of quantum dissonance, weakening them over time.\n\n<b>Surrounding Structure</b>\n\nThe overall structure also appears to be suffering from degradation caused by the core's dark energy leak, leading to visible cracks and momentary pulses of dark energy through the structure.\n\n<b>Assessment: Highly unstable levels of dark energy present. Proceed with caution\n",
+  "ProtoWarpReactorEncy_Body": "This alien structure, appears to harbour massive amounts of concentrated dark energy similar to the kind found within the Aurora’s dark matter reactor. As this type of energy is primarily used for interdimensional matter transportation across vast distances, it is reasonable to assume that this artefact may be a kind of battery containing energy used by the alien species for different manners of teleportation.\n\n<b>Protective Shields</b>\n\n8 pyramid-shaped energy barriers surround the structure's core. The barriers are exhibiting substantial signs of decay as dark energy spreads between them. It is clear that these shields have been subject to unforeseen levels of quantum dissonance, weakening them over time.\n\n<b>Surrounding Structure</b>\n\nThe overall structure also appears to be suffering from degradation caused by the core's dark energy leak, leading to visible cracks and momentary pulses of dark energy through the structure.\n\n<b>Assessment: Highly unstable levels of dark energy present. Proceed with caution\n",
 
   "ProtoWormEncy_Title": "Wyrm Xenoleviathan (Operational)",
   "ProtoWormEncy_Body": "A highly advanced tool, this specimen of Wyrm Xenoleviathan is capable of extracting massive amounts of mineral resources and navigating autonomously. It does not exhibit any directly aggressive tendencies. However, due the high concentration of rare minerals in Alterra technology, it may still pose a substantial threat if it deems such technology worth extracting.\n\n1. Mineral extraction equipment:\nThe front of the device features a set of rotating frames exceeding 1,500 degrees Celsius which melt through tough bedrock before passing them down through the specimen's body.\n\n2. Material transportation:\nThe “spine” of the specimen controls a beam of a plasma-like substance which directs the flow of liquid resources and distributes them throughout each spine segment, slowly filling the Wyrm with minerals as it moves through the ground.\n\n3. Profile:\nThe specimen measures a total of 220 metres in length. It appears to disregard the presence of living fauna, suggesting purely practical applications. Because the Alterra Corporation has not published specifications regarding the class assignment “leviathan” to cybernetic phenomena, this PDA will assign this specimen the class designation Xenoleviathan. Upon re-entry to trans-gov mandated space, this specimen's data will undergo heavy investigation and an official designation will be made.\n\n<b>Assessment:  Remain vigilant for subterranean boring in deeper regions.</b>",
@@ -193,14 +193,14 @@
   "ProtoPhaseGateStructureEncy_Title": "Almanite Core",
   "ProtoPhaseGateStructureEncy_Body": "This alien block is composed entirely of purified almanite. As such, it boasts a nearly indestructible frame and a highly configurable magnetic field. This makes it perfect for large-scale alien construction and the stabilization of large alien structures where no solid ground is present.\n\n<b>Assessment: Highly valuable advanced structual tool</b>",
 
-  "ProtoPhaseGateStabilizerEncy_Title": "Dark Matter Stabilizer",
-  "ProtoPhaseGateStabilizerEncy_Body": "This alien artifact appears to be designed to regulate the dispersal of dark matter by filtering it through the crystal contained within it. Due to its small size, it was likely highly portable, and thus used as a safety device for teleportation-based research. However, it may also be used to channel pulses of dark matter for localized teleportation.\n\n<b>Assessment: May be equipped to prevent unwanted teleportation.</b>",
+  "ProtoPhaseGateStabilizerEncy_Title": "Dark Energy Stabilizer",
+  "ProtoPhaseGateStabilizerEncy_Body": "This alien artifact appears to be designed to regulate the dispersal of dark energy by filtering it through the crystal contained within it. Due to its small size, it was likely highly portable, and thus used as a safety device for teleportation-based research. However, it may also be used to channel pulses of dark energy for localized teleportation.\n\n<b>Assessment: May be equipped to prevent unwanted teleportation.</b>",
 
   "ProtoPhaseGateTransmitterEncy_Title": "Particle Transmitter",
   "ProtoPhaseGateTransmitterEncy_Body": "This alien device features several interconnected frames held together magnetically. Structural analysis shows millions of microscopic railgun-like implements embedded in the device's core, seemingly used to transmit particles one-by-one. It is likely that teleportation with this device involves the destruction and re-assembly of the host, as opposed to faster-than-light transportation. Ethical considerations may apply.\n\n<b>Assessment: Handle with caution. Do not insert fingers into device.</b>",
 
   "PhaseGateEncy_Title": "Alien Phasegate",
-  "PhaseGateEncy_Body": "This colossal alien apparatus is used to transport large cargo across a wide range of distances. It requires a substantially powerful tool to construct, and may be used to connect two points in space regardless of depth or distance.\n\n1. Supporting frames\nThe device features two supportive structures on either side, which supply the inner archway with both power and stability.\n\n2. Primary archway\nThe central archway is lined with a mesh supplied by a dark matter stabilizer. The mesh prevents matter from unintentionally seeping from the mechanism during transmission.\n\n<b>Assessment: May be used to eliminate commute times for frequent journeys. Vehicle-compatible.",
+  "PhaseGateEncy_Body": "This colossal alien apparatus is used to transport large cargo across a wide range of distances. It requires a substantially powerful tool to construct, and may be used to connect two points in space regardless of depth or distance.\n\n1. Supporting frames\nThe device features two supportive structures on either side, which supply the inner archway with both power and stability.\n\n2. Primary archway\nThe central archway is lined with a mesh supplied by a dark energy stabilizer. The mesh prevents matter from unintentionally seeping from the mechanism during transmission.\n\n<b>Assessment: May be used to eliminate commute times for frequent journeys. Vehicle-compatible.",
   
   "BlinkFactorEncy_Title": "Blink Factor",
   "BlinkFactorEncy_Body": "By using elements of an alien particle transmitter, this implement dilates the user's perception of time, allowing the user to quickly and precisely travel short distances. It is likely that this ability was used by the aliens to increase work efficiency, and not as a defensive measure against common threats.\n\nDuring time dilation, the implement creates momentary translucent copies of the user's body. While the purpose of this is unclear, the aliens may have required a means of tracking the direction of these 'blinks', when several aliens moved unison, to avoid bodily collisions.\n\n<b>Assessment: Further research required</b>",
@@ -209,7 +209,7 @@
   "SuitColorFactorEncy_Body": "This alien implement appears to serve little practical function, instead choosing to increase the user's attachment to their ion dive suit through customization. The factor allows the user to select the colour of the suit's wiring accents from a prefabricated selection. While it is unclear why the aliens have created a device specifically to increase user attachment, it is nonetheless valuable.\n\n<b>Assessment: Implement requires advanced alien bodily interface to function. Experiment with colour choices to achieve intergalactic beauty.</b>",
   
   "TetherFactorEncy_Title": "Tether Factor",
-  "TetherFactorEncy_Body": "Using a precisely calibrated dark matter stabilizer, this alien implement is used for instantaneous travel across short to medium distances. Upon interaction the device copies the composition of the user's body, destroys the user and re-assembles them at the target destination.\n\n<b>Assessment: May prove useful for cave exploration.</b>",
+  "TetherFactorEncy_Body": "Using a precisely calibrated dark energy stabilizer, this alien implement is used for instantaneous travel across short to medium distances. Upon interaction the device copies the composition of the user's body, destroys the user and re-assembles them at the target destination.\n\n<b>Assessment: May prove useful for cave exploration.</b>",
 
   "PrecursorPropulsionGlovesTerminalEncy_Title": "Alien Propulsion Gloves",
   "PrecursorPropulsionGlovesTerminalEncy_Body": "This data outlines blueprints for a smaller, more efficient method of telekinetic object manipulation used by the aliens for research and construction purposes. By analysing this data, this PDA was able to synthesize blueprints for a pair of gloves capable of manipulating objects at range, requiring practically zero energy. However, due to the use of alien materials, these schematics cannot be constructed in standard Alterra Survival Fabricators.\n\n<b>Note: For your safety, the propulsion gloves cannot be used while holding objects.</b>",
@@ -302,8 +302,8 @@
   "SuitColorYellow": "Yellow",
 
   // Phase Gates
-  "ProtoPhaseGateStabilizer": "Dark Matter Stabilizer",
-  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark matter in alien technology.",
+  "ProtoPhaseGateStabilizer": "Dark Energy Stabilizer",
+  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark energy in alien technology.",
   "ProtoPhaseGateStructure": "Almanite Core",
   "Tooltip_ProtoPhaseGateStructure": "A strong core used in deployable alien architecture.",
   "ProtoPhaseGateTransmitter": "Particle Transmitter",
@@ -360,7 +360,7 @@
   "ProtoFacilityLocationsHint": "This vessel's construction has prompted a broadcast from a nearby alien source. Downloading summary to databank.",
   "OnPrecursorSuitPickup": "When operating equipment infused with alien technology, please carefully document any unwanted side effects <duration=7043>\nsuch as poor blood circulation, confusion, feelings of invincibility and death to a wellbeing journal for later analysis.<delay=7043><duration=8193>",
   "ProtoNumbersHint": "For your convenience, this PDA has compiled a sheet of alien numbers and their corresponding values for future reference.<delay=1000><duration=13000>",
-  "InterceptorFacilityTabletUnlock": "Unlocking interceptor tablet...<duration=13000>",
+  "InterceptorFacilityTabletUnlock": "Translating local alien broadcast: Archway clearance is required from all island personnel. Issuing clearance key schematics…<duration=13000>",
   "PDA_OnEnterVoidWyrmActivated": "Alert. High priority radio message received<duration=2000>",
   "PDA_OnApproachWarpCore": "Warning: Detecting unstable dark energy readings ahead. Proceed with caution.",
 
@@ -457,7 +457,7 @@
   "ProtoRadialHint": "Open ability menu",
   "ProtoInterceptorMapHint": "Open map",
   "ArchwayOverrideHint": "Access activated archways with the Prototype's portal",
-  "DarkMatterDetected": "DARK MATTER DETECTED",
+  "DarkMatterDetected": "DARK ENERGY DETECTED",
 
   // Voice Notifications
   "Proto_AbandonShip": "PROTOTYPE: Critical Warning: Reactor meltdown imminent! Abandon ship!",
