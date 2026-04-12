@@ -7150,8 +7150,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6959471338054804645}
+  - component: {fileID: 3949759559971196621}
   - component: {fileID: 2237730468284793932}
-  - component: {fileID: 2319025679372920427}
   - component: {fileID: 346829956081315398}
   m_Layer: 0
   m_Name: EMPSpawner
@@ -7174,6 +7174,22 @@ Transform:
   m_Father: {fileID: 7552182899850119223}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3949759559971196621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158473389421493456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1392581101, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequenceManager: {fileID: 7853790407755736471}
+  empSpawner: {fileID: 2237730468284793932}
+  empSfx: {fileID: 346829956081315398}
+  timeBetweenEMPs: 1.5
 --- !u!114 &2237730468284793932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7194,15 +7210,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 106.35684
-      outSlope: 106.35684
+      inSlope: 56.355312
+      outSlope: 56.355312
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.07955801
+      outWeight: 0.066298336
     - serializedVersion: 3
       time: 1
-      value: 50
+      value: 40
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7218,15 +7234,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 39.780224
-      outSlope: 39.780224
+      inSlope: 25.783478
+      outSlope: 25.783478
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.055248614
+      outWeight: 0.059668504
     - serializedVersion: 3
       time: 1
-      value: 20
+      value: 10
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7236,55 +7252,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2319025679372920427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2158473389421493456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2125914568, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabSpawner: {fileID: 2237730468284793932}
-  editSharedMaterials: 0
-  materialDatas:
-  - propertyName: _Color
-    childPath: x_CrabSquid_EmpBlast
-    materialIndex: 0
-    type: 3
-    floatValue: 0
-    vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 0}
-    colorValue: {r: 0.5568628, g: 0.19607843, b: 0.80784315, a: 1}
-  - propertyName: _Color
-    childPath: x_CrabSquid_EmpBlast
-    materialIndex: 1
-    type: 3
-    floatValue: 0
-    vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    textureValue: {fileID: 0}
-    colorValue: {r: 0.5568628, g: 0.19607843, b: 0.80784315, a: 1}
-  propertyNames:
-  - _Color
-  - _Color
-  childPaths:
-  - x_CrabSquid_EmpBlast
-  - x_CrabSquid_EmpBlast
-  materialIndices: 0000000001000000
-  propertyTypes: 0300000003000000
-  floatValues:
-  - 0
-  - 0
-  vectorValues:
-  - {x: 0, y: 0, z: 0, w: 0}
-  - {x: 0, y: 0, z: 0, w: 0}
-  textureValues:
-  - {fileID: 0}
-  - {fileID: 0}
-  colorValues:
+  startColors:
   - {r: 0.5568628, g: 0.19607843, b: 0.80784315, a: 1}
   - {r: 0.5568628, g: 0.19607843, b: 0.80784315, a: 1}
 --- !u!114 &346829956081315398
@@ -7299,7 +7267,7 @@ MonoBehaviour:
   m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: dbc7c19729dfc794ab0dc148ce3beb4a, type: 2}
+  asset: {fileID: 11400000, guid: 0ae7fb6c84beef34eb927558d3a226f1, type: 2}
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
   followParent: 0
@@ -25472,8 +25440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleporter: {fileID: 4069329735203607055}
   radiatePlayerInRange: {fileID: 6178931295299720295}
-  empSpawner: {fileID: 2237730468284793932}
-  empSfx: {fileID: 346829956081315398}
   warpCoreAnimator: {fileID: 7552182899812784035}
   animationSpeedOverDistance:
     serializedVersion: 2

@@ -13,6 +13,7 @@ internal class EmpSpawner : MonoBehaviour, IMaterialModifier
     [SerializeField] private float empLifetime;
     [SerializeField] private AnimationCurve blastRadius;
     [SerializeField] private AnimationCurve blastHeight;
+    [SerializeField] private Color[] startColors;
 
     private GameObject empPrefab;
 
@@ -33,7 +34,7 @@ internal class EmpSpawner : MonoBehaviour, IMaterialModifier
         empPrefab = UWE.Utils.InstantiateDeactivated(empAttack.ammoPrefab);
     }
 
-    public void FireEMP(float disableElectronicsTime)
+    public void FireEMP(float disableElectronicsTime, Action<Collider> onTouch = null)
     {
         var newEMP = Instantiate(empPrefab, empSpawnPos.position, empSpawnPos.rotation, transform);
         newEMP.SetActive(true);
@@ -43,7 +44,18 @@ internal class EmpSpawner : MonoBehaviour, IMaterialModifier
         empBlast.lifeTime = empLifetime;
         empBlast.blastRadius = blastRadius;
         empBlast.blastHeight = blastHeight;
-        Destroy(empBlast.GetComponentInChildren<VFXLerpColor>());
+        if (startColors.Length > 0)
+        {
+            empBlast.GetComponentInChildren<VFXLerpColor>().colorStart = startColors;
+        }
+
+        if (onTouch != null)
+        {
+            foreach (var touch in GetComponentsInChildren<OnTouch>())
+            {
+                touch.onTouch.AddListener(collider => onTouch(collider));
+            }
+        }
 
         onEditMaterial?.Invoke(newEMP.gameObject);
     }

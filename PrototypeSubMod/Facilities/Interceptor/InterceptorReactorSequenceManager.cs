@@ -18,11 +18,11 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     [SaveStateReference]
     private static InterfloorTeleporter _teleporter;
     private static Vector3 _mostRecentReturnPos;
+    [SaveStateReference(false)]
+    public static bool SequenceInProgress;
     
     [SerializeField] private InterfloorTeleporter teleporter;
     [SerializeField] private RadiatePlayerInRange radiatePlayerInRange;
-    [SerializeField] private EmpSpawner empSpawner;
-    [SerializeField] private FMOD_CustomEmitter empSfx;
     [SerializeField] private Animator warpCoreAnimator;
     [SerializeField] private AnimationCurve animationSpeedOverDistance;
     [SerializeField] private Color closeRadiationColor;
@@ -87,26 +87,17 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
             radiationsScreenFX.color = outOfRange ? originalRadiationColor : closeRadiationColor;
             radiationWarning.text.text = Language.main.Get(outOfRange ? "RadiationDetected": "DarkMatterDetected");
         }
-        
-        if (distance < teleportationDistance && !SequenceInProgress)
-        {
-            _mostRecentReturnPos = Player.main.transform.position;
-            StartReactorSequence();
-            Player.main.TryEject();
-        }
 
         wasOutOfRange = distance > pdaMessageDistance;
     }
 
-    private void StartReactorSequence()
+    public void StartReactorSequence()
     {
+        _mostRecentReturnPos = Player.main.transform.position;
         UWE.CoroutineHost.StartCoroutine(TeleportToIsland());
     }
 
-    [SaveStateReference(false)]
-    public static bool SequenceInProgress;
-
-    public static void EndReactorSequence()
+    private static void EndReactorSequence()
     {
         IngameMenu_Patches.SetDenySaving(false);
         _teleporter.StartTeleportPlayer(_mostRecentReturnPos, Camera.main.transform.forward);
@@ -153,12 +144,6 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         InterceptorIslandManager.Instance.UpdateSeaglideLights(true);
         WeatherCompatManager.SetWeatherEnabled(false);
         WeatherCompatManager.SetWeatherClear();
-
-        empSfx.Play();
-        empSpawner.FireEMP(0);
-        var distToPlayer = Vector3.Distance(empSpawner.transform.position, Player.main.transform.position);
-        // Wait until the EMP hits the player
-        yield return new WaitForSeconds(distToPlayer / empSpawner.GetFinalRadius() * empSpawner.GetLifetime() * 0.5f);
 
         InterfloorTeleporter.PlayTeleportEffect(3f);
 
