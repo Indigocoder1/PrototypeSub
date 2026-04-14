@@ -1,0 +1,49 @@
+{
+  "Entities": [
+    {
+      "classId": "ProtoGrassyWyrm",
+      "id": "d8b61950-a35b-4772-b7f0-ae6deae0377b",
+      "position": {
+        "x": -435.574036,
+        "y": -90.32419,
+        "z": -404.682343
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0370864235,
+        "z": 0.0,
+        "w": 0.9993121
+      },
+      "scale": {
+        "x": 12.745,
+        "y": 12.745,
+        "z": 12.745
+      },
+      "cellLevel": 3,
+      "priority": 0
+    },
+    {
+      "classId": "ProtoSparseReefWyrm",
+      "id": "7b5917ab-a2a4-4ff7-af6d-37f2ba9af526",
+      "position": {
+        "x": -762.064453,
+        "y": -253.933914,
+        "z": -786.114258
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0443795249,
+        "z": 0.0,
+        "w": 0.9990148
+      },
+      "scale": {
+        "x": 12.76478,
+        "y": 12.76478,
+        "z": 12.76478
+      },
+      "cellLevel": 3,
+      "priority": 0
+    }
+  ],
+  "IsSorted": false
+}
