@@ -60,7 +60,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
 
         var prefab = task.GetResult();
         var instance = Instantiate(prefab, point - normal * 10f, Quaternion.LookRotation(normal));
-        instance.GetComponent<ProtoAggressiveWorm>().onDespawn += OnWyrmDespawned;
+        instance.GetComponent<ProtoAggressiveWorm>().OnDespawn += OnWyrmDespawned;
     }
 
     private void OnWyrmDespawned()

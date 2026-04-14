@@ -11,7 +11,7 @@ namespace PrototypeSubMod.Facilities.Hull;
 
 public class ProtoAggressiveWorm : Creature
 {
-    public event Action onDespawn;
+    public event Action OnDespawn;
 
     [SerializeField] private WyrmDespawnAction despawnAction;
     [SerializeField] private ProtoWormSpineManager spineManager;
@@ -22,6 +22,7 @@ public class ProtoAggressiveWorm : Creature
     [SerializeField] private float attackRadius = 5f;
     [SerializeField] private float attackDamage = 200f;
     [SerializeField] private PlayerCinematicController cinematicController;
+    [SerializeField] private CreatureAction[] nonRepeatingActions;
 
     [Header("SFX")]
     [SerializeField] private FMOD_CustomEmitter aggroOnSfx;
@@ -33,6 +34,7 @@ public class ProtoAggressiveWorm : Creature
 
     private Renderer[] headRenderers;
     private List<Renderer>[] segmentRenderers;
+    private List<CreatureAction> recentActions = new();
     private VFXElectricArcs[] electricArcs;
     private float secondsInVoid;
     private bool wasAggressive;
@@ -76,7 +78,8 @@ public class ProtoAggressiveWorm : Creature
     {
         if (despawnAction.IsPerforming()) return false;
         
-        return base.TryStartAction(action);
+        var startedAction = base.TryStartAction(action);
+        return startedAction;
     }
 
     private IEnumerator RetrieveSegmentRends()
@@ -220,6 +223,21 @@ public class ProtoAggressiveWorm : Creature
         }
     }
 
+    public void OnActionStarted(CreatureAction action)
+    {
+        recentActions.Add(action);
+
+        if (recentActions.All(a => nonRepeatingActions.Contains(a) && recentActions.Count == nonRepeatingActions.Length))
+        {
+            recentActions.Clear();
+        }
+    }
+
+    public bool WasActionRecentlyStarted(CreatureAction action)
+    {
+        return recentActions.Contains(action);
+    }
+
     public void ResetAggression(float timeToBecomeAggressive)
     {
         secondsInVoid = 0;
@@ -230,7 +248,7 @@ public class ProtoAggressiveWorm : Creature
 
     public override void OnDestroy()
     {
-        onDespawn?.Invoke();
+        OnDespawn?.Invoke();
     }
 
     private IEnumerator EatPlayer()

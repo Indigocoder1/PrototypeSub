@@ -7036,6 +7036,10 @@ MonoBehaviour:
   attackRadius: 5
   attackDamage: 200
   cinematicController: {fileID: 4245532708370257002}
+  nonRepeatingActions:
+  - {fileID: 1020735297128332148}
+  - {fileID: 2563168583705512565}
+  - {fileID: 4846019268480220019}
   aggroOnSfx: {fileID: 8370760665603014420}
   aggroOffSfx: {fileID: 5207917267241166288}
   consumePlayerSfx: {fileID: 6017198227269601848}
@@ -7283,6 +7287,7 @@ MonoBehaviour:
   timePassiveAfterParries: 30
   timeBetweenTargetJitters: 0.05
   jitterMagnitude: 0.2
+  targetingSpeedMultiplier: 0.5
   roarManager: {fileID: 121548284677876063}
   shotChargeSfx: {fileID: 783688339255574968}
   shotTravelSfx: {fileID: 8438192860530699916}

@@ -37,6 +37,7 @@ public class WyrmShootTarget : CreatureAction
     private GameObject laserVFX;
     private GameObject muzzleVFX;
     private GameObject impactVFX;
+    private ProtoAggressiveWorm aggressiveWorm;
     private Vector3 lastJitterVector;
     private bool performing;
     private bool canShoot;
@@ -63,6 +64,8 @@ public class WyrmShootTarget : CreatureAction
         muzzleVFX.transform.localScale = Vector3.one * 0.25f;
         originalSpeed = wormAnimator.GetForwardsSpeed();
         Destroy(muzzleVFX.GetComponent<VFXDestroyAfterSeconds>());
+        
+        aggressiveWorm = GetComponent<ProtoAggressiveWorm>();
     }
 
     private IEnumerator SetImpactVFX()
@@ -78,6 +81,8 @@ public class WyrmShootTarget : CreatureAction
 
     public override float Evaluate(Creature creature, float time)
     {
+        if (aggressiveWorm.WasActionRecentlyStarted(this) && !performing) return 0;
+        
         return performing ? 1 : Random.Range(0f, 0.8f);
     }
     
@@ -94,6 +99,7 @@ public class WyrmShootTarget : CreatureAction
         attackStage = 0;
         currentChargeUpTime = 0;
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
+        aggressiveWorm.OnActionStarted(this);
         Plugin.Logger.LogInfo($"Started shoot target");
     }
     
@@ -219,6 +225,10 @@ public class WyrmShootTarget : CreatureAction
         {
             wormAnimator.SetForwardsSpeed(originalSpeed * targetingSpeedMultiplier);
         }
+        else
+        {
+            wormAnimator.SetForwardsSpeed(originalSpeed);
+        }
         
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
     }
@@ -286,8 +296,6 @@ public class WyrmShootTarget : CreatureAction
             travelTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-
-        wormAnimator.SetForwardsSpeed(originalSpeed);
         
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);

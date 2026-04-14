@@ -23,8 +23,17 @@ public class WyrmDartAction : CreatureAction
     private int rightHandSign;
     private int attackStage;
 
+    private ProtoAggressiveWorm aggressiveWorm;
+    
+    private void Start()
+    {
+        aggressiveWorm = GetComponent<ProtoAggressiveWorm>();
+    }
+
     public override float Evaluate(Creature creature, float time)
     {
+        if (aggressiveWorm.WasActionRecentlyStarted(this) && !performing) return 0;
+        
         return performing ? 1 : Random.Range(0f, 0.85f);
     }
     
@@ -59,6 +68,7 @@ public class WyrmDartAction : CreatureAction
 
         originalSpeed = wormAnimator.GetForwardsSpeed();
         wormAnimator.SetTravelTarget(GetMovementPoints()[attackStage], OnPointReached);
+        aggressiveWorm.OnActionStarted(this);
     }
     
     public void OverrideStopPerform()

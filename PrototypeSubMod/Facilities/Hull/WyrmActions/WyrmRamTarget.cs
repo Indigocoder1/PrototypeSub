@@ -16,13 +16,21 @@ public class WyrmRamTarget : CreatureAction
     [Header("SFX")]
     [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private FMOD_CustomEmitter chargeImpactSfx;
-    
+
+    private ProtoAggressiveWorm aggressiveWorm;
     private bool performing;
     private bool hasDamagedTarget;
     private int attackStage;
     
+    private void Start()
+    {
+        aggressiveWorm = GetComponent<ProtoAggressiveWorm>();
+    }
+    
     public override float Evaluate(Creature creature, float time)
     {
+        if (aggressiveWorm.WasActionRecentlyStarted(this) && !performing) return 0;
+        
         return performing ? 1 : Random.Range(0f, 0.8f);
     }
 
@@ -35,6 +43,7 @@ public class WyrmRamTarget : CreatureAction
         hasDamagedTarget = false;
         attackStage = 0;
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
+        aggressiveWorm.OnActionStarted(this);
         Plugin.Logger.LogInfo($"Started ram target");
     }
     
