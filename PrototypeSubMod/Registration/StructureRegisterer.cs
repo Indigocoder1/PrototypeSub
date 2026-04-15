@@ -40,6 +40,7 @@ internal static class StructureRegisterer
         yield return Structure.RegisterFromBundle("BearingPuzzleCaveDecorations");
         yield return Structure.RegisterFromBundle("TransmissionSiteStartPlaque");
         yield return Structure.RegisterFromBundle("ProtoDecorativeWyrms");
+        yield return Structure.RegisterFromBundle("ExtraWyrmRocks");
 
         if (TRPCompatManager.TRPInstalled)
         {
