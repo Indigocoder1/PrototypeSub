@@ -233,6 +233,34 @@ internal static class EncyEntryRegisterer
             PDALog.Add("OnScanDisabledWyrm");
         });
         #endregion
+
+        #region Grasy Plateaus Worm
+        TechType grassyWormTechType = (TechType)Enum.Parse(typeof(TechType), "ProtoGrassyWyrm");
+        var grassyWormEntryData = new PDAScanner.EntryData()
+        {
+            key = grassyWormTechType,
+            destroyAfterScan = false,
+            encyclopedia = "ProtoDecorativeWormEncy",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = grassyWormTechType
+        };
+        PDAHandler.AddCustomScannerEntry(grassyWormEntryData);
+        #endregion
+
+        #region Sparse Reef Worm
+        TechType sparseWormTechType = (TechType)Enum.Parse(typeof(TechType), "ProtoSparseReefWyrm");
+        var sparseWormEntryData = new PDAScanner.EntryData()
+        {
+            key = sparseWormTechType,
+            destroyAfterScan = false,
+            encyclopedia = "ProtoDecorativeWormEncy",
+            scanTime = 5f,
+            isFragment = false,
+            blueprint = sparseWormTechType
+        };
+        PDAHandler.AddCustomScannerEntry(sparseWormEntryData);
+        #endregion
         
         #region Hanging Worm
         TechType hangingWormType = (TechType)Enum.Parse(typeof(TechType), "ProtoHangingWorm");
