@@ -2587,7 +2587,7 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 8
       m_NumAlphaKeys: 2
-    scale: 1
+    scale: 0
   version: 0
   overrideBiome: protopuzzlefacility
   highDetail: 1

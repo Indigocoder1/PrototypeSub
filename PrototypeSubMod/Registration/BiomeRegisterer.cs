@@ -49,9 +49,19 @@ internal static class BiomeRegisterer
 
         var engineSettings = BiomeUtils.CreateBiomeSettings(new Vector3(35, 7f, 5.5f), 0.4f, Color.white, 0.15f,
             Color.clear,
-            1f, 25, 1, 1, 24);
+            1f, 25, 0f, 0f, 24);
         BiomeHandler.RegisterBiome(Plugin.ENGINE_FACILITY_BIOME_NAME, engineSettings, new BiomeHandler.SkyReference("SkyBloodKelpTwo"));
         BiomeHandler.AddBiomeMusic(Plugin.ENGINE_FACILITY_BIOME_NAME, AudioUtils.GetFmodAsset("EngineFacilityMusic"));
+
+        #endregion
+        
+        #region Warp Core
+
+        var warpCoreSettings = BiomeUtils.CreateBiomeSettings(new Vector3(4.0f, 2.0f, 1.3f), 0f, Color.white, 0.5f,
+            new Color(0f, 0.561f, 0.376f),0.05f,
+            25f, 0f, 0f, 30);
+        BiomeHandler.RegisterBiome("warpcore", warpCoreSettings, new BiomeHandler.SkyReference("SkyLostRiver_Junction"));
+        BiomeHandler.AddBiomeMusic("warpcore", AudioUtils.GetFmodAsset("WarpCoreMusic"));
 
         #endregion
 
@@ -59,7 +69,7 @@ internal static class BiomeRegisterer
         var hullSettings =
             BiomeUtils.CreateBiomeSettings(new Vector3(16, 12, 6), 2f, new Color(0, 1, 0.912f), 
                 0.25f, new Color(0, 0.95f, 1),
-                0.03f, 40, 0.5f, 20f);
+                0.03f, 40, 0f, 0f);
         BiomeHandler.RegisterBiome("protohullfacilitycalm", hullSettings, new BiomeHandler.SkyReference("SkyPrecursorInterior_NoLightmaps"));
         BiomeHandler.AddBiomeMusic("protohullfacilitycalm",
             AudioUtils.GetFmodAsset("HullFacility_Calm"));
@@ -93,7 +103,7 @@ internal static class BiomeRegisterer
         #region Puzzle Facilities
 
         var puzzleSettings = BiomeUtils.CreateBiomeSettings(new Vector3(0, 0, 0), 0.1f, Color.white, 0.01f,
-            Color.clear);
+            Color.clear, sunlightScale:0f, ambientScale:0f);
         BiomeHandler.RegisterBiome("protopuzzlefacility", puzzleSettings, new BiomeHandler.SkyReference("SkyPrecursorInterior_NoLightmaps"));
         BiomeHandler.AddBiomeMusic("protopuzzlefacility", AudioUtils.GetFmodAsset("ProtoPuzzleMusic"));
 
