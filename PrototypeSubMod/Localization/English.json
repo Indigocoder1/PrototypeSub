@@ -292,6 +292,7 @@
   "OptionProtoLocatorPingButton": "Toggle Factor",
 
   // Suit Colors
+  "SuitColorDefault": "Default",
   "SuitColorGreen": "Green",
   "SuitColorWhite": "White",
   "SuitColorBlack": "Black",
