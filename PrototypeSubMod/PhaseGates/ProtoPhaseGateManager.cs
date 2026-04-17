@@ -15,6 +15,7 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     [SerializeField] private PrecursorTeleporter teleporter;
     [SerializeField] private PrefabIdentifier prefabIdentifier;
     [SerializeField] private LightingController lightingController;
+    [SerializeField] private Vector3 localTeleportPos;
     
     [Header("SFX")]
     [SerializeField] private FMOD_CustomLoopingEmitter ambienceSfx;
@@ -44,7 +45,9 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         int offset = -(gateIndex % 2 * 2 - 1);
         connectedGateLocation = Plugin.GlobalSaveData.phaseGateLocations.Values.ElementAt(gateIndex + offset);
 
-        teleporter.warpToPos = connectedGateLocation.Position + connectedGateLocation.TeleporterForward * 50;
+        var matrix = Matrix4x4.TRS(connectedGateLocation.Position,
+            Quaternion.LookRotation(connectedGateLocation.TeleporterForward), Vector3.one);
+        teleporter.warpToPos = matrix.MultiplyPoint3x4(localTeleportPos);
         var forward = connectedGateLocation.TeleporterForward;
         float angle = Mathf.Atan2(forward.x, forward.z) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
