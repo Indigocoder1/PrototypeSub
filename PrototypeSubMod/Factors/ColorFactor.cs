@@ -215,6 +215,7 @@ public class ColorFactor : Factor, IProtoTreeEventListener
 
     private static void CreateDefaultColors()
     {
+        var defaultCol = new SuitColorData("SuitColorDefault", new Color(0.571f, 1f, 0.682f));
         var green = new SuitColorData("SuitColorGreen", Color.green);
         var white = new SuitColorData("SuitColorWhite", Color.white);
         var black = new SuitColorData("SuitColorBlack", Color.black);
@@ -224,7 +225,7 @@ public class ColorFactor : Factor, IProtoTreeEventListener
         var red = new SuitColorData("SuitColorRed", Color.red);
         var yellow = new SuitColorData("SuitColorYellow", Color.yellow);
 
-        var colors = new SuitColors(green, white, black, blue, cyan, magenta, red, yellow);
+        var colors = new SuitColors(defaultCol, green, white, black, blue, cyan, magenta, red, yellow);
         var jsonData = JsonConvert.SerializeObject(colors, Formatting.Indented);
         
         Directory.CreateDirectory(ConfigFolder);

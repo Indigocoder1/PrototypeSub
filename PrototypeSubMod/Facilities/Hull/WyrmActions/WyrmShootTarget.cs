@@ -219,15 +219,12 @@ public class WyrmShootTarget : CreatureAction
             performing = false;
         }
         
+        wormAnimator.SetForwardsSpeed(originalSpeed);
         if (attackStage > GetAttackPoints().Length - 1) return;
 
         if (attackStage == 2)
         {
             wormAnimator.SetForwardsSpeed(originalSpeed * targetingSpeedMultiplier);
-        }
-        else
-        {
-            wormAnimator.SetForwardsSpeed(originalSpeed);
         }
         
         wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);

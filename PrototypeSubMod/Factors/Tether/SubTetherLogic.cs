@@ -30,6 +30,13 @@ public class SubTetherLogic : Factor
             return;
         }
         
+        if (Player.main.isPiloting) return;
+        if (Player.main.precursorOutOfWater && Plugin.GlobalSaveData.tetherFactorMarkerLocation == null) return;
+        if (Player.main.cinematicModeActive) return;
+        if (Player.main.pda.isOpen) return;
+        if (Player.main.currentSub != null) return;
+        if (DevConsole.instance.state) return;
+        
         var itemInSlot = Inventory.main.equipment.GetItemInSlot("Body");
         FactorIonManager ionManager = itemInSlot.item.GetComponent<FactorIonManager>();
 

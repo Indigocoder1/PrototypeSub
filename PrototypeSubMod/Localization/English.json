@@ -58,6 +58,8 @@
 
   "ProtoOrionFragmentor": "Alien surgical structure",
   "ProtoDecorativeWorm": "Alien wyrm",
+  "ProtoGrassyWyrm": "Alien wyrm",
+  "ProtoSparseReefWyrm": "Alien wyrm",
   "ProtoHangingWorm": "Alien wyrm",
   "ProtoWorm": "Wyrm Xenoleviathan (Operational)",
   "ProtoAggressiveWyrm": "Wyrm Xenoleviathan (Aggressive)",
@@ -292,6 +294,7 @@
   "OptionProtoLocatorPingButton": "Toggle Factor",
 
   // Suit Colors
+  "SuitColorDefault": "Default",
   "SuitColorGreen": "Green",
   "SuitColorWhite": "White",
   "SuitColorBlack": "Black",

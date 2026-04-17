@@ -2171,6 +2171,7 @@ MonoBehaviour:
   teleporter: {fileID: 4734307473616998318}
   prefabIdentifier: {fileID: 2787409612874087260}
   lightingController: {fileID: 2746175507675242184}
+  localTeleportPos: {x: 0, y: 1.34, z: 74.4}
   ambienceSfx: {fileID: 4418011305378446703}
   constructSfx: {fileID: 235917185161763447}
   impulseConnected: {fileID: 3618338960864733433}

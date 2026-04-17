@@ -418,6 +418,15 @@ internal static class StoryGoalsRegisterer
             Hint.main.message.Show();
         });
         #endregion
+
+        #region On Worm Scanned
+
+        StoryGoalHandler.RegisterCustomEvent("OnShallowWyrmScanned", () =>
+        {
+            PDALog.Add("OnShallowWyrmScanned");
+        });
+
+        #endregion
         
         #region Archway override installed
         StoryGoalHandler.RegisterCustomEvent("ArchwayOverrideHint", () =>
