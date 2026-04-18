@@ -10072,6 +10072,7 @@ MonoBehaviour:
   initialLocalPos: {x: 0, y: 0, z: -12.25}
   incrementPerSpine: {x: 0, y: 0, z: -7}
   spineSegmentCount: 30
+  segmentsPerFrame: 4
 --- !u!1 &7271072954184994121
 GameObject:
   m_ObjectHideFlags: 0

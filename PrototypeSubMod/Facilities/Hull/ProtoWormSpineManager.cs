@@ -12,6 +12,7 @@ public class ProtoWormSpineManager : MonoBehaviour
     [SerializeField] private Vector3 initialLocalPos;
     [SerializeField] private Vector3 incrementPerSpine;
     [SerializeField] private int spineSegmentCount;
+    [SerializeField] private int segmentsPerFrame;
 
     private bool spawned;
     
@@ -21,11 +22,24 @@ public class ProtoWormSpineManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        
+
+        UWE.CoroutineHost.StartCoroutine(SpawnSpineSegments());
+    }
+
+    private IEnumerator SpawnSpineSegments()
+    {
+        int spawnedSegments = 0;
         for (int i = 0; i < spineSegmentCount; i++)
         {
             var spine = Instantiate(spineSegmentPrefab, segmentsParent);
             spine.transform.localPosition = initialLocalPos + incrementPerSpine * i;
+            spawnedSegments++;
+
+            if (spawnedSegments > segmentsPerFrame)
+            {
+                yield return null;
+                spawnedSegments = 0;
+            }
         }
 
         spawned = true;

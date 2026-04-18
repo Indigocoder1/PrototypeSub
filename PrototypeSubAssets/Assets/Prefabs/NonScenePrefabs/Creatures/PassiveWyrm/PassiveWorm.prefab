@@ -1424,13 +1424,13 @@ MonoBehaviour:
   m_Script: {fileID: 1908645677, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skyApplier: {fileID: 0}
   segmentsParent: {fileID: 1117820556053399684}
   spineSegmentPrefab: {fileID: 5212892746868434058, guid: 5b33fa7ba83b0264e8bd720c37900869,
     type: 3}
   initialLocalPos: {x: 0, y: 0, z: -12.25}
   incrementPerSpine: {x: 0, y: 0, z: -7}
   spineSegmentCount: 30
+  segmentsPerFrame: 4
 --- !u!1 &1117820557460319805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,8 +1484,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spineManager: {fileID: 5944109554965922695}
   spineSegmentsParent: {fileID: 1117820556053399684}
-  speed: 15
   headObject: {fileID: 234787574202617350}
+  speed: 15
   rotationSpeed: 10
   gizmoDrawLength: 0.874
 --- !u!114 &6713589418733850190
