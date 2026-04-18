@@ -320,8 +320,8 @@
   "ProtoCancelSelection": "Cancel",
   "ProtoPowerFull": "Power at max capacity",
   "ProtoReactorOpening": "Reactor opening",
-  "ProtoUninstallSource": "Uninstall source",
-  "UseProtoPowerSystem": "Access power system",
+  "ProtoUninstallSource": "Uninstall power source",
+  "UseProtoPowerSystem": "Insert power source",
 
   // Vehicle access
   "ProtoAccessVehicle": "Access docked vehicle",
