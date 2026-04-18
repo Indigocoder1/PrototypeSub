@@ -48,6 +48,7 @@ public class WyrmDartAction : CreatureAction
         speedIncreased = false;
         attackStage = 0;
         rightHandSign = (int)Mathf.Sign(Random.Range(-1f, 1f));
+        rightHandSign = rightHandSign == 0 ? 1 : rightHandSign;
         
         var player = Player.main;
         if (player.currentSub)
@@ -75,8 +76,7 @@ public class WyrmDartAction : CreatureAction
     {
         performing = false;
     }
-
-
+    
     private void OnPointReached()
     {
         attackStage++;
@@ -86,7 +86,10 @@ public class WyrmDartAction : CreatureAction
         {
             performing = false;
             wormAnimator.SetForwardsSpeed(originalSpeed);
+            return;
         }
+        
+        wormAnimator.SetTravelTarget(GetMovementPoints()[attackStage], OnPointReached);
     }
 
     private void Update()
@@ -100,7 +103,7 @@ public class WyrmDartAction : CreatureAction
         }
 
         var angle = Vector3.Angle(transform.forward, movementPoints[attackStage] - transform.position);
-        if (attackStage == 3 && angle < 25 && !speedIncreased)
+        if (attackStage == 3 && angle < 15 && !speedIncreased)
         {
             wormAnimator.SetForwardsSpeed(increasedSpeed);
             roarManager.PlayRoar(Player.main.transform.position);
@@ -112,29 +115,28 @@ public class WyrmDartAction : CreatureAction
                 dartSpecialSFX.Play();
             }
 
+            wormAnimator.SetTravelTarget(movementPoints[attackStage], OnPointReached);
         }
-        
-        wormAnimator.SetTravelTarget(movementPoints[attackStage], OnPointReached);
     }
 
     private Vector3[] GetMovementPoints()
     {
         var points = new Vector3[5];
-        const float setupOffset = 200;
+        const float setupOffset = 250;
         points[0] = target.position + (target.right * -rightHandSign - target.forward).normalized * setupOffset;
         if (targetCloakHandler != null)
         {
             points[1] = target.position - target.forward * setupOffset;
             points[2] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.right * (rightHandSign * setupOffset), setupOffset / 2f);
             points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * setupOffset);
-            points[4] = points[3] - target.right * (rightHandSign * setupOffset * 2f);
+            points[4] = points[3] - target.right * (rightHandSign * setupOffset);
         }
         else
         {
             points[1] = target.position - target.forward * setupOffset;
-            points[2] = target.position - target.right * setupOffset;
+            points[2] = target.position + target.right * (rightHandSign * setupOffset);
             points[3] = target.position + target.forward * 10f;
-            points[4] = points[3] - target.right * (rightHandSign * setupOffset * 2f);
+            points[4] = points[3] - target.right * (rightHandSign * setupOffset);
         }
 
         return points;

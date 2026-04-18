@@ -27,7 +27,7 @@ public class WyrmFollowPlayer : CreatureAction
             return 1f;
         }
         
-        return performing ? 1 : Random.Range(0f, 0.3f);
+        return performing ? 1 : Random.Range(0f, 0.2f);
     }
 
     public override void Perform(Creature creature, float time, float deltaTime)
