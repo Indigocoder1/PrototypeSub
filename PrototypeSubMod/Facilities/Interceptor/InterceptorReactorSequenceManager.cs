@@ -101,6 +101,7 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         Player_Patches.SetOxygenReqOverride(false, 0);
         BiomeGoalTracker_Patches.SetTrackingBlocked(false);
         SequenceInProgress = false;
+        OnSequenceCompleteEvent?.Invoke();
     }
 
     public static void OnTeleportToVoid()
