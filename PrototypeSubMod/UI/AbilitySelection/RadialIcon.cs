@@ -8,6 +8,7 @@ public class RadialIcon : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private Color enabledCol = Color.white;
     [SerializeField] private Color disabledCol = Color.black;
+    [SerializeField] private Color notInstalledCol = Color.black;
     [SerializeField] private float colorTransitionSpeed = 1;
     [SerializeField] private float hoverScale;
     [SerializeField] private float scaleSpeed;
@@ -34,7 +35,8 @@ public class RadialIcon : MonoBehaviour
         float scale = Mathf.Lerp(transform.localScale.x, currentScale, Time.deltaTime * scaleSpeed);
         transform.localScale = Vector3.one * scale;
 
-        image.color = Color.Lerp(image.color, selected ? enabledCol : disabledCol, Time.deltaTime * colorTransitionSpeed);
+        var targetCol = !ability.GetIsInstalled() ? notInstalledCol : selected ? enabledCol : disabledCol;
+        image.color = Color.Lerp(image.color, targetCol, Time.deltaTime * colorTransitionSpeed);
     }
 
     public void SetAbility(IAbilityIcon ability)

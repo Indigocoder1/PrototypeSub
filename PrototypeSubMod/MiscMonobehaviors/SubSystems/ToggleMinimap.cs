@@ -79,6 +79,7 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
 
     public bool GetCanActivate() => true;
     public bool GetShouldShow() => true;
+    public bool GetIsInstalled() => true;
     public Sprite GetSprite() => minimapSprite;
     public TechType GetTechType() => TechType.None;
 }

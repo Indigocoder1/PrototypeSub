@@ -141,13 +141,21 @@ public class TetherManager : MonoBehaviour, IUIElement
 
         if (!lastIcon) return;
 
-        if (selectedIcon) selectedIcon.Deselect();
-
-        SelectIcon(lastIcon);
+        var prevIcon = selectedIcon;
+        if (prevIcon != null && SelectIcon(lastIcon))
+        {
+            prevIcon.Deselect();
+        }
     }
 
-    public void SelectIcon(RadialIcon icon, bool forceColSwap = false, bool closeIfSameAbility = true, bool playSFX = true)
+    public bool SelectIcon(RadialIcon icon, bool forceColSwap = false, bool closeIfSameAbility = true, bool playSFX = true)
     {
+        if (!icon.GetAbility().GetIsInstalled())
+        {
+            PlayInvalidOperationVoiceline();
+            return false;
+        }
+        
         icon.Select();
         if (selectedIcon != null && (selectedIcon.GetAbility() != icon.GetAbility() || closeIfSameAbility))
         {
@@ -165,6 +173,7 @@ public class TetherManager : MonoBehaviour, IUIElement
         }
 
         if (playSFX) FMODUWE.PlayOneShot(selectSFX, transform.position, 0.1f);
+        return true;
     }
 
     private void HandleActivation()
@@ -191,7 +200,7 @@ public class TetherManager : MonoBehaviour, IUIElement
         
         if (ProtoStoryLocker.StoryEndingActive)
         {
-            notificationManager.PlayVoiceNotification(invalidOperationVoiceline, false);
+            PlayInvalidOperationVoiceline();
             return;
         }
         
@@ -262,6 +271,11 @@ public class TetherManager : MonoBehaviour, IUIElement
     public void UpdateIcon(IAbilityIcon abilityIcon)
     {
         onAbilityActivatedChanged?.Invoke(abilityIcon);
+    }
+
+    private void PlayInvalidOperationVoiceline()
+    {
+        notificationManager.PlayVoiceNotification(invalidOperationVoiceline, false);
     }
 
     public PilotingChair GetPilotingChair() => chair;

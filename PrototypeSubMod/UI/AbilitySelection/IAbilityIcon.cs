@@ -9,6 +9,7 @@ public interface IAbilityIcon
     public bool GetActive();
     public bool GetCanActivate();
     public bool GetShouldShow();
+    public bool GetIsInstalled();
     public Sprite GetSprite();
     public TechType GetTechType();
 }

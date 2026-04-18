@@ -14,6 +14,7 @@ internal class GenericRadialAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private UnityEvent onUnselected;
 
     public bool GetShouldShow() => showAbility;
+    public bool GetIsInstalled() => true;
     public Sprite GetSprite() => sprite;
     public TechType GetTechType() => TechType.None;
     public bool GetCanActivate() => true;

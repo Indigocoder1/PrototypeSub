@@ -52,6 +52,7 @@ MonoBehaviour:
   image: {fileID: 9175393742644524210}
   enabledCol: {r: 1, g: 1, b: 1, a: 1}
   disabledCol: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+  notInstalledCol: {r: 0, g: 0.16078432, b: 0, a: 1}
   colorTransitionSpeed: 10
   hoverScale: 1.2
   scaleSpeed: 20

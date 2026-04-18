@@ -123,7 +123,7 @@ internal class SelectionMenuManager : MonoBehaviour, IUIElement
             selectedAbility.OnSelectedChanged(false);
             tetherManager.SelectIcon(distributor.GetIconAtIndex(defaultAbilityIndex).GetComponent<RadialIcon>(), true, playSFX: false);
         }
-        else if (selectedAbility != null)
+        else if (selectedAbility != null && selectedAbility.GetIsInstalled())
         {
             tetherManager.SelectIcon(distributor.GetIconAtIndex(index).GetComponent<RadialIcon>(), playSFX: false, closeIfSameAbility: false);
         }

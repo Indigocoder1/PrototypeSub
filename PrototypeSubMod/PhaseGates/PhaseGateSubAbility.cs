@@ -348,6 +348,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
         return Plugin.GlobalSaveData.phaseGateLocations.Count >= 1 || HasPhaseGate();
     }
 
+    public bool GetIsInstalled() => true;
     public Sprite GetSprite()
     {
         return HasPhaseGate() ? constructIcon : deconstructIcon;

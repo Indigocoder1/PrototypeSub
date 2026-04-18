@@ -98,4 +98,5 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
     }
 
     public TechType GetTechType() => TechType.None;
+    public bool GetIsInstalled() => true;
 }
