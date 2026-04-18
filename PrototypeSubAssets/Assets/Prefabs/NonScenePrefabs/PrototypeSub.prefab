@@ -56918,13 +56918,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
+  - {fileID: 3579314377981088549}
   - {fileID: 4517937687221544355}
   - {fileID: 898894699017302475}
   - {fileID: 7483557656513532704}
   - {fileID: 135121029220628093}
-  - {fileID: 678661710746351020}
   - {fileID: 8912682445717477544}
-  - {fileID: 3579314377981088549}
+  - {fileID: 678661710746351020}
   - {fileID: 7799883488178593711}
   - {fileID: 3529236547574020402}
   - {fileID: 1787061301903815760}
@@ -56934,7 +56934,7 @@ MonoBehaviour:
   - {fileID: 26816724303997190}
   - {fileID: 3274634815981272787}
   - {fileID: 310845984879026037}
-  defaultAbilityIndex: 0
+  defaultAbilityIndex: 2
   distributor: {fileID: 3451990594638149854}
   tetherManager: {fileID: 1496008767091281460}
   upgradeManager: {fileID: 9153870078702174837}
@@ -62196,6 +62196,7 @@ MonoBehaviour:
   radialIconPrefab: {fileID: 5143063316484894426, guid: 8242ee44f4c257f479e24c196d858181,
     type: 3}
   distanceFromCenter: 280
+  offsetByHalfIncrement: 1
 --- !u!1 &4577066434981412819
 GameObject:
   m_ObjectHideFlags: 0

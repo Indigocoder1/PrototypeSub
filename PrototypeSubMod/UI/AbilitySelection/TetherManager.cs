@@ -128,8 +128,9 @@ public class TetherManager : MonoBehaviour, IUIElement
         else if (currentIcon.GetHovering())
         {
             selectionHighlight.gameObject.SetActive(true);
-            float increment = distributor.GetIncrement();
-            selectionHighlight.transform.localEulerAngles = new Vector3(0, 0, currentIcon.transform.GetSiblingIndex() * increment - increment / 2);
+            var increment = distributor.GetIncrement();
+            var additionalIncrement = distributor.GetInitialRotation();
+            selectionHighlight.transform.localEulerAngles = new Vector3(0, 0, currentIcon.transform.GetSiblingIndex() * increment - increment / 2 + additionalIncrement);
         }
 
         lastIcon = currentIcon;
@@ -221,7 +222,7 @@ public class TetherManager : MonoBehaviour, IUIElement
     
     private RadialIcon GetIconClosestToPointer()
     {
-        return distributor.GetIconClosestToAngle(CalculateTetherAngle()).GetComponent<RadialIcon>();
+        return distributor.GetIconClosestToAngle(CalculateTetherAngle() - distributor.GetInitialRotation()).GetComponent<RadialIcon>();
     }
 
     public RadialIcon GetSelectedIcon()
