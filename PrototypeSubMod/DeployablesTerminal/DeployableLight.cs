@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Nautilus.Json;
 using System.Net;
 using UnityEngine;
@@ -58,6 +59,13 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
     private void Start()
     {
         TryRestartLight();
+        UWE.CoroutineHost.StartCoroutine(CancelDecoyDespawn());
+    }
+
+    private IEnumerator CancelDecoyDespawn()
+    {
+        yield return null;
+        GetComponent<CyclopsDecoy>().CancelInvoke(nameof(CyclopsDecoy.Despawn));
     }
 
     public void LaunchWithForce(float force, Vector3 previousVelocity)
