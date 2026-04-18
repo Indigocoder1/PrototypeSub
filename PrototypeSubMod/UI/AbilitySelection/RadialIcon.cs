@@ -43,6 +43,11 @@ public class RadialIcon : MonoBehaviour
     {
         this.ability = ability;
         image.sprite = ability.GetSprite();
+
+        if (!ability.GetIsInstalled())
+        {
+            image.color = notInstalledCol;
+        }
     }
 
     public IAbilityIcon GetAbility() => ability;
