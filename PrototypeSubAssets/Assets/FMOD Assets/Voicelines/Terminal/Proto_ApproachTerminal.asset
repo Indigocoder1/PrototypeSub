@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: Proto_ApproachTerminal
   id: 
-  audioClip: {fileID: 8300000, guid: cb3913e0d0594d44c903a0f4eefb02bb, type: 3}
+  audioClip: {fileID: 8300000, guid: 2143f32304aae25468d7a70cdd24d8a6, type: 3}
   doNotAutoRegister: 0
   mode: 4210704
   maxDistance3D: 0
