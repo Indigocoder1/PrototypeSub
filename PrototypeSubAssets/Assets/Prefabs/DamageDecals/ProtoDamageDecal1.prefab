@@ -63,7 +63,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 88132b0c33ae5574794611353c76f5b3, type: 2}
-  - {fileID: 2100000, guid: 7dedb199a31807145bf958e652bc34ee, type: 2}
+  - {fileID: 2100000, guid: 6430cba967136714798c042eb0ae7cce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -570,6 +570,8 @@ MonoBehaviour:
   dynamic: 1
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!114 &7973217236228239868
 MonoBehaviour:
   m_ObjectHideFlags: 0
