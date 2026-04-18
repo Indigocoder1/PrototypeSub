@@ -346,11 +346,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noiseScalar: 0
-  lifeTime: 500
+  lifeTime: 800
   sonarDetectable: 0
   launch: 0
-  launchSpeed: 2
-  despawnVFX: {fileID: 0}
+  launchSpeed: 0
+  despawnVFX: {fileID: 5202994655063119702, guid: 65ed226df7af8754e8e4455cf8093c0d,
+    type: 3}
 --- !u!1 &2317376191387782488
 GameObject:
   m_ObjectHideFlags: 0
