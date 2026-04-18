@@ -436,6 +436,7 @@ internal static class StoryGoalsRegisterer
             Hint.main.message.Show();
         });
         #endregion
+        
         #region Bad ending voicelines
         StoryGoalHandler.RegisterCustomEvent("OnEnterStoryEndProximity", () =>
         {
@@ -489,6 +490,14 @@ internal static class StoryGoalsRegisterer
             var relayType1 = (TechType)Enum.Parse(typeof(TechType), "ProtoRelayUpgrade1");
             KnownTech.Add(relayType1);
         });
+
+        StoryGoalHandler.RegisterCustomEvent("SubUpgradeHint", () =>
+        {
+            var hintText = Language.main.Get("SubUpgradeHint");
+            Hint.main.message.SetText(hintText, TextAnchor.MiddleCenter);
+            Hint.main.message.Show();
+        });
+        StoryGoalHandler.RegisterCompoundGoal("SubUpgradeHint", Story.GoalType.Story, 35, "PrototypeCrafted");
 
         StoryGoalHandler.RegisterCustomEvent("LocatorFactorTerminal", () =>
         {
