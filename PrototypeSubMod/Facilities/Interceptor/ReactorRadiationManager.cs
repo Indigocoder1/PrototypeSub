@@ -16,6 +16,7 @@ public class ReactorRadiationManager : MonoBehaviour
         Inventory.main.equipment.onEquip += OnEquipmentChanged;
         Inventory.main.equipment.onUnequip += OnEquipmentChanged;
         originalDamage = damagePlayerInRadius.damageAmount;
+        OnEquipmentChanged(string.Empty, null);
     }
 
     private void OnEquipmentChanged(string slot, InventoryItem item)

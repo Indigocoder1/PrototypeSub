@@ -25997,7 +25997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleporter: {fileID: 4069329735203607055}
-  radiatePlayerInRange: {fileID: 0}
+  radiatePlayerInRange: {fileID: 8556937267788864243}
   warpCoreAnimator: {fileID: 7552182899812784035}
   animationSpeedOverDistance:
     serializedVersion: 2
