@@ -26,7 +26,7 @@ internal class HoverfishPlush
             .WithFabricatorType(CraftTree.Type.Fabricator)
             .WithStepsToFabricatorTab("Machines")
             .WithCraftingTime(3f);
-        prefab.SetPdaGroupCategory(TechGroup.Miscellaneous, TechCategory.Misc);
+        prefab.SetPdaGroupCategory(TechGroup.Machines, TechCategory.Machines);
 
         CraftDataHandler.SetBackgroundType(prefabInfo.TechType, CraftData.BackgroundType.Blueprint);
 
