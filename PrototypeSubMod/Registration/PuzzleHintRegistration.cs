@@ -70,7 +70,7 @@ public static class PuzzleHintRegistration
         #endregion
     }
 
-    private static IEnumerator SpawnPrefab(TechType techType, Vector3 position)
+    public static IEnumerator SpawnPrefab(TechType techType, Vector3 position)
     {
         var task = CraftData.GetPrefabForTechTypeAsync(techType);
         yield return task;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5202994655063119702, guid: 75d75610f3ee595458a3edd1e73a3ace, type: 3}
   sprite: {fileID: 0}
-  techType: {fileID: 11400000, guid: 8390c3bf34edc1849874983c24a7d16f, type: 2}
+  techType: {fileID: 11400000, guid: dd98037b5d58db04a80aae61d44910d0, type: 2}
   applySNShaders: 0
   applyPrecursorMaterialChanges: 0
   unlockAtStart: 0

@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1601712057, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: ProtoDecorativeWormPrefab_TT
+  m_Name: ProtoWormPrefab_TT
   m_EditorClassIdentifier: 
-  techTypeName: ProtoDecorativeWorm
+  techTypeName: ProtoWorm

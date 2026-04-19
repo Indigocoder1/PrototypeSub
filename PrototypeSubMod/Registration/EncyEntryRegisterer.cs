@@ -6,6 +6,7 @@ using PrototypeSubMod.Prefabs.AlienBuildingBlock;
 using PrototypeSubMod.Prefabs.FacilityProps.Hull;
 using System;
 using System.Collections.Generic;
+using PrototypeSubMod.Prefabs.DecorativeWyrms;
 using UnityEngine;
 
 namespace PrototypeSubMod.Registration;
@@ -212,7 +213,6 @@ internal static class EncyEntryRegisterer
         #endregion
 
         #region Decorative Worm
-        TechType decorativeWormType = (TechType)Enum.Parse(typeof(TechType), "ProtoDecorativeWorm");
         string decorativeWormTitle = Language.main.Get("ProtoDecorativeWormEncy_Title");
         string decorativeWormDescription = Language.main.Get("ProtoDecorativeWormEncy_Body");
         
@@ -220,46 +220,15 @@ internal static class EncyEntryRegisterer
             decorativeWormDescription, unlockSound: PDAHandler.UnlockBasic);
         var decorativeWormEntryData = new PDAScanner.EntryData()
         {
-            key = decorativeWormType,
+            key = ProtoUnlockedWyrm.prefabInfo.TechType,
             destroyAfterScan = false,
             encyclopedia = "ProtoDecorativeWormEncy",
             scanTime = 5f,
             isFragment = false,
-            blueprint = decorativeWormType
+            blueprint = ProtoUnlockedWyrm.prefabInfo.TechType,
+            totalFragments = 3
         };
         PDAHandler.AddCustomScannerEntry(decorativeWormEntryData);
-        PDAEncyclopedia_Patches.EncyclopediaUnlockEvents.Add("ProtoDecorativeWormEncy", () =>
-        {
-            PDALog.Add("OnScanDisabledWyrm");
-        });
-        #endregion
-
-        #region Grasy Plateaus Worm
-        TechType grassyWormTechType = (TechType)Enum.Parse(typeof(TechType), "ProtoGrassyWyrm");
-        var grassyWormEntryData = new PDAScanner.EntryData()
-        {
-            key = grassyWormTechType,
-            destroyAfterScan = false,
-            encyclopedia = "ProtoDecorativeWormEncy",
-            scanTime = 5f,
-            isFragment = false,
-            blueprint = grassyWormTechType
-        };
-        PDAHandler.AddCustomScannerEntry(grassyWormEntryData);
-        #endregion
-
-        #region Sparse Reef Worm
-        TechType sparseWormTechType = (TechType)Enum.Parse(typeof(TechType), "ProtoSparseReefWyrm");
-        var sparseWormEntryData = new PDAScanner.EntryData()
-        {
-            key = sparseWormTechType,
-            destroyAfterScan = false,
-            encyclopedia = "ProtoDecorativeWormEncy",
-            scanTime = 5f,
-            isFragment = false,
-            blueprint = sparseWormTechType
-        };
-        PDAHandler.AddCustomScannerEntry(sparseWormEntryData);
         #endregion
         
         #region Hanging Worm

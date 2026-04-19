@@ -421,9 +421,12 @@ internal static class StoryGoalsRegisterer
 
         #region On Worm Scanned
 
-        StoryGoalHandler.RegisterCustomEvent("OnShallowWyrmScanned", () =>
+        StoryGoalHandler.RegisterCustomEvent("OnScannedSparseReefWyrms", () =>
         {
             PDALog.Add("OnShallowWyrmScanned");
+            var grandReefPing = CustomPing.CreatePing("ProtoGrandReefPing", PingType.Signal);
+            UWE.CoroutineHost.StartCoroutine(
+                PuzzleHintRegistration.SpawnPrefab(grandReefPing, new Vector3(-761, -293, -1175)));
         });
 
         #endregion

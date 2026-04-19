@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
+using PrototypeSubMod.Prefabs.DecorativeWyrms;
 using PrototypeSubMod.Prefabs.FacilityProps;
 using PrototypeSubMod.Prefabs.FacilityProps.Hull;
 using PrototypeSubMod.Prefabs.Factors;
@@ -62,6 +63,11 @@ internal static class PrefabRegisterer
         ProtoElectricFire.Register();
         
         yield return new WaitForEndOfFrame();
+
+        ProtoUnlockedWyrm.Register();
+        ProtoGrandReefWyrms.Register();
+        ProtoSparseReefWyrms.Register();
+        ProtoGrassyWyrms.Register();
         
         HullOutpostTeleporter.Register();
         ProtoPhaseGateTransmitter.Register();
