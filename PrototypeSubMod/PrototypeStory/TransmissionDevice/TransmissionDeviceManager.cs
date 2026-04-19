@@ -188,6 +188,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     
     private void PlayCredits()
     {
+        ProtoCreditsManager.QueueTransmissionEnding = true;
         FMODUnity.RuntimeManager.StopAllEvents(true);
         SceneCleaner_Patches.QueueSceneOverride();
         SceneCleaner.Open();

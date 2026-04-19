@@ -843,6 +843,9 @@ MonoBehaviour:
   creditsText: {fileID: 3717724402593088319}
   titleImage: {fileID: 855549750}
   creditsLength: 120
+  additionalCreditsLength: 40
+  timePlayTransmissionVoiceline: 130
+  transmissionVoiceline: {fileID: 768306056}
 --- !u!1 &4892765202640835361
 GameObject:
   m_ObjectHideFlags: 0

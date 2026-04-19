@@ -7,11 +7,18 @@ namespace PrototypeSubMod.Credits;
 
 internal class ProtoCreditsManager : MonoBehaviour
 {
+    public static bool QueueTransmissionEnding;
+    
     [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform creditsTextRect;
     [SerializeField] private TextMeshProUGUI creditsText;
     [SerializeField] private RectTransform titleImage;
     [SerializeField] private float creditsLength;
+    
+    [Header("Transmission Ending")]
+    [SerializeField] private float additionalCreditsLength;
+    [SerializeField] private float timePlayTransmissionVoiceline;
+    [SerializeField] private FMOD_CustomEmitter transmissionVoiceline;
     
     private float creditsSpeed;
     private float currentCreditsLength;
@@ -41,8 +48,9 @@ internal class ProtoCreditsManager : MonoBehaviour
     private void Update()
     {
         if (!initialized) return;
-        
-        if (currentCreditsLength < creditsLength)
+
+        var targetLength = creditsLength + (QueueTransmissionEnding ? additionalCreditsLength : 0);
+        if (currentCreditsLength < targetLength)
         {
             currentCreditsLength += Time.deltaTime;
             creditsTextRect.localPosition += new Vector3(0, creditsSpeed * Time.deltaTime, 0);
@@ -52,10 +60,17 @@ internal class ProtoCreditsManager : MonoBehaviour
             StartCoroutine(LoadMainMenu());
             loadedMainMenu = true;
         }
+
+        if (currentCreditsLength >= timePlayTransmissionVoiceline && QueueTransmissionEnding &&
+            !transmissionVoiceline.playing)
+        {
+            transmissionVoiceline.Play();
+        }
     }
 
     private IEnumerator LoadMainMenu()
     {
+        QueueTransmissionEnding = false;
         yield return new WaitForSeconds(1);
         SceneCleaner.Open();
     }
