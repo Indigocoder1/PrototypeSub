@@ -206,7 +206,7 @@ internal class ProtoStasisPulse : ProtoUpgrade
     {
         if (currentSphereGrowTimeTime < sphereGrowTime || currentCooldownTime > 0)
         {
-            subRoot.voiceNotificationManager.PlayVoiceNotification(invalidOperationVoiceline);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
             return false;
         }
 

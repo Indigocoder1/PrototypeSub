@@ -26,7 +26,7 @@ public class BearingRoomManager : MonoBehaviour
         }
         else
         {
-            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("TetherFactorNoPower"), Player.main.transform.position);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
         }
     }
 

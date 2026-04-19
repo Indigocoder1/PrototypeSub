@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nautilus.Utility;
 using Story;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -183,6 +184,7 @@ public class NumberPuzzleManager : MonoBehaviour
         if (!HasCorrectSequence())
         {
             notificationManager.PlayVoiceNotification(puzzleIncorrectVoiceline, false);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
             return;
         }
         

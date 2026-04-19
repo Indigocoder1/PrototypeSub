@@ -324,7 +324,7 @@
   "UseProtoPowerSystem": "Insert power source",
 
   // Vehicle access
-  "ProtoAccessVehicle": "Access docked vehicle",
+  "ProtoAccessVehicle": "Configure docked vehicle",
   "ProtoNoVehicleDocked": "Use fins to dock vehicles",
   "ProtoDockNotUnlocked": "Can't dock; not enough fins",
   "VehicleAccessEquipment": "Vehicle Access",

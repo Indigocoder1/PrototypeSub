@@ -2,6 +2,7 @@
 using PrototypeSubMod.Upgrades;
 using System.Collections;
 using System.Collections.Generic;
+using Nautilus.Utility;
 using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.UI.AbilitySelection;
@@ -40,7 +41,8 @@ internal class ProtoDeployableManager : ProtoUpgrade
         }
         else
         {
-            subRoot.voiceNotificationManager.PlayVoiceNotification(invalidOperationNotification);
+            //subRoot.voiceNotificationManager.PlayVoiceNotification(invalidOperationNotification);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
             lightAbility.SetQueuedActivationFailure();
         }       
     }

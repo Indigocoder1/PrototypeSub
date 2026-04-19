@@ -1,4 +1,5 @@
 ﻿using Nautilus.Handlers;
+using Nautilus.Utility;
 using PrototypeSubMod.IonGenerator;
 using PrototypeSubMod.MotorHandler;
 using PrototypeSubMod.PowerSystem;
@@ -193,7 +194,7 @@ internal class ProtoOverclockModule : ProtoUpgrade
     {
         if (ionGenerator.GetUpgradeEnabled())
         {
-            subRoot.voiceNotificationManager.PlayVoiceNotification(invalidOperationNotification);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
             return false;
         }
 

@@ -3,6 +3,7 @@ using PrototypeSubMod.UI.ProceduralArcGenerator;
 using SubLibrary.UI;
 using System;
 using System.Collections.Generic;
+using Nautilus.Utility;
 using PrototypeSubMod.PrototypeStory;
 using PrototypeSubMod.UI.ActivatedAbilities;
 using PrototypeSubMod.Utility;
@@ -153,7 +154,7 @@ public class TetherManager : MonoBehaviour, IUIElement
     {
         if (!icon.GetAbility().GetIsInstalled())
         {
-            PlayInvalidOperationVoiceline();
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
             return false;
         }
         
@@ -276,7 +277,7 @@ public class TetherManager : MonoBehaviour, IUIElement
 
     private void PlayInvalidOperationVoiceline()
     {
-        notificationManager.PlayVoiceNotification(invalidOperationVoiceline, false);
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
     }
 
     public PilotingChair GetPilotingChair() => chair;

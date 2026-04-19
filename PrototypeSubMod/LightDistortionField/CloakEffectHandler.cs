@@ -2,6 +2,7 @@
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.Upgrades;
 using System.Collections.Generic;
+using Nautilus.Utility;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.Utility;
@@ -213,7 +214,7 @@ internal class CloakEffectHandler : ProtoUpgrade
     {
         if (ionGenerator.GetUpgradeEnabled())
         {
-            voiceNotificationManager.PlayVoiceNotification(invalidOpNotification);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ErrorSound"), Player.main.transform.position);
             return false;
         }
         
