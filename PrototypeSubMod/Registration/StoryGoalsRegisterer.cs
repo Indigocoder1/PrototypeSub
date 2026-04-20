@@ -378,6 +378,18 @@ internal static class StoryGoalsRegisterer
             "OnCalibrationRunCompleted");
 
         #endregion
+        
+        #region On Almanite Material Identified
+        StoryGoalHandler.RegisterCustomEvent("OnAlmaniteIdentified", () =>
+        {
+            PDALog.Add("OnAlmaniteIdentified");
+        });
+        StoryGoalHandler.RegisterCustomEvent("AlmaniteEncy", () =>
+        {
+            PDAEncyclopedia.Add("AlmaniteEncy", true);
+        });
+        StoryGoalHandler.RegisterCompoundGoal("AlmaniteEncy", Story.GoalType.Story, 5f, "OnAlmaniteIdentified");
+        #endregion
 
         #region On Transmission Site Reached
         StoryGoalHandler.RegisterBiomeGoal("OnTransmissionSiteReached", Story.GoalType.Story,

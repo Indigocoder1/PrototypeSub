@@ -66,6 +66,13 @@ internal static class EncyEntryRegisterer
         };
         PDAHandler.AddCustomScannerEntry(deployableLightEntryData);
         #endregion
+        
+        #region Almanite AlmaniteEncy
+        string almaniteTitle = Language.main.Get("AlmaniteEncy_Title");
+        string almaniteBody = Language.main.Get("AlmaniteEncy_Body");
+        PDAHandler.AddEncyclopediaEntry("AlmaniteEncy", "DownloadedData/Prototype/Scanned",
+            almaniteTitle, almaniteBody, unlockSound: PDAHandler.UnlockBasic);
+        #endregion
 
         #region Ion Prism
         string prismTitle = Language.main.Get("ProtoIonPrismEncy_Title");

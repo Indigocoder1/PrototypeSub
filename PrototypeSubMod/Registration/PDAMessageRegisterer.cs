@@ -39,6 +39,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_OnEnterVoidWyrmActivated", "PDA_OnEnterVoidWyrmActivated"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "PDA_OnApproachWarpCore"));
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "OnShallowWyrmScanned"));
+        PDALog_Patches.entries.Add(("PDA_OnAlmaniteIdentified", "OnAlmaniteIdentified"));
 
         // Bad ending voicelines
         PDALog_Patches.entries.Add(("PDA_BadEndingIntro", "BadEndingIntro"));
