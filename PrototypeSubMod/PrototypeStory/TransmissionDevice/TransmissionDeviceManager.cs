@@ -163,9 +163,11 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         Player.main.playerController.SetEnabled(false);
         Inventory.main.quickSlots.DeselectImmediate();
         Player.main.FreezeStats();
-        Player.main.transform.Find("body").gameObject.SetActive(false);
         cinematicAnimator.SetTrigger("PlayAnim");
         deviceAnimator.SetTrigger("Fire");
+
+        HideForScreenshots.Hide(HideForScreenshots.HideType.Mask | HideForScreenshots.HideType.HUD | HideForScreenshots.HideType.ViewModel);
+        GUIController_Patches.SetDenyHideCycling(true);
     }
 
     public void FadeToBlack()
@@ -183,6 +185,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         Player.main.playerController.SetEnabled(true);
         Player.main.cinematicModeActive = false;
         Player.main.UnfreezeStats();
+        GUIController_Patches.SetDenyHideCycling(false);
         PlayCredits();
     }
     
