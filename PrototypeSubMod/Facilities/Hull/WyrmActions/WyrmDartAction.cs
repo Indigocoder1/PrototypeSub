@@ -7,34 +7,21 @@ using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
-public class WyrmDartAction : CreatureAction
+public class WyrmDartAction : WyrmAction
 {
-    [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private float increasedSpeed;
     [SerializeField] private FMOD_CustomEmitter dartSpecialSFX;
 
     private Transform target;
     private CloakEffectHandler targetCloakHandler;
-    private Vector3[] movementPoints;
-    private bool performing;
     private bool speedIncreased;
     private float originalSpeed;
     private int rightHandSign;
-    private int attackStage;
 
-    private ProtoAggressiveWorm aggressiveWorm;
-    
     private void Start()
     {
-        aggressiveWorm = GetComponent<ProtoAggressiveWorm>();
-    }
-
-    public override float Evaluate(Creature creature, float time)
-    {
-        if (aggressiveWorm.WasActionRecentlyStarted(this) && !performing) return 0;
-        
-        return performing ? 1 : Random.Range(0f, 0.85f);
+        onReachedTarget += OnPointReached;
     }
     
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -43,13 +30,18 @@ public class WyrmDartAction : CreatureAction
         
         Plugin.Logger.LogInfo("Starting dart action");
         
+        SetupTargetTransform();
         base.Perform(creature, time, deltaTime);
-        performing = true;
         speedIncreased = false;
-        attackStage = 0;
         rightHandSign = (int)Mathf.Sign(Random.Range(-1f, 1f));
         rightHandSign = rightHandSign == 0 ? 1 : rightHandSign;
         
+        targetCloakHandler = target.GetComponentInChildren<CloakEffectHandler>();
+        originalSpeed = wormAnimator.GetForwardsSpeed();
+    }
+
+    private void SetupTargetTransform()
+    {
         var player = Player.main;
         if (player.currentSub)
         {
@@ -64,62 +56,45 @@ public class WyrmDartAction : CreatureAction
         {
             target = player.transform;
         }
-
-        targetCloakHandler = target.GetComponentInChildren<CloakEffectHandler>();
-
-        originalSpeed = wormAnimator.GetForwardsSpeed();
-        wormAnimator.SetTravelTarget(GetMovementPoints()[attackStage], OnPointReached);
-        aggressiveWorm.OnActionStarted(this);
-    }
-    
-    public void OverrideStopPerform()
-    {
-        performing = false;
     }
     
     private void OnPointReached()
     {
-        attackStage++;
         dartSpecialSFX.Stop();
         
-        if (attackStage >= GetMovementPoints().Length)
+        if (AttackStage >= GetMovementPoints().Length)
         {
-            performing = false;
             wormAnimator.SetForwardsSpeed(originalSpeed);
-            return;
         }
-        
-        wormAnimator.SetTravelTarget(GetMovementPoints()[attackStage], OnPointReached);
     }
 
     private void Update()
     {
         if (!performing) return;
 
-        var tempPoints = GetMovementPoints();
-        if (attackStage < tempPoints.Length - 2)
+        var movementPoints = GetMovementPoints();
+        // Don't update anything if past the speed-up stage
+        if (AttackStage >= movementPoints.Length - 1)
         {
-            movementPoints = tempPoints;
+            return;
         }
 
-        var angle = Vector3.Angle(transform.forward, movementPoints[attackStage] - transform.position);
-        if (attackStage == 3 && angle < 15 && !speedIncreased)
+        var angle = Vector3.Angle(transform.forward, movementPoints[AttackStage] - transform.position);
+        if (AttackStage != 3 || !(angle < 20) || speedIncreased) return;
+        
+        wormAnimator.SetForwardsSpeed(increasedSpeed);
+        roarManager.PlayRoar(Player.main.transform.position);
+        speedIncreased = true;
+        
+        if (Random.Range(0f, 1000f) < 1)
         {
-            wormAnimator.SetForwardsSpeed(increasedSpeed);
-            roarManager.PlayRoar(Player.main.transform.position);
-            speedIncreased = true;
-
-            var random = Random.Range(0f, 1000f);
-            if (random < 1)
-            {
-                dartSpecialSFX.Play();
-            }
-
-            wormAnimator.SetTravelTarget(movementPoints[attackStage], OnPointReached);
+            dartSpecialSFX.Play();
         }
+
+        wormAnimator.SetTravelTarget(movementPoints[AttackStage], OnReachedTarget);
     }
 
-    private Vector3[] GetMovementPoints()
+    protected override Vector3[] GetMovementPoints()
     {
         var points = new Vector3[5];
         const float setupOffset = 250;

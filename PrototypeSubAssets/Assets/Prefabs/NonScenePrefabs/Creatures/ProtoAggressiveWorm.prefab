@@ -7162,6 +7162,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   minActionCheckInterval: 10
   wormAnimator: {fileID: 5351068426189712924}
+  activationChance: 0.2
   offsetFromPlayer: 75
   timeBetweenPointRecalculations: 10
   maxAngleFromForward: 30
@@ -7186,6 +7187,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
+  activationChance: 0.8
   attackDamage: 1500
   attackRadius: 5
   impulseForce: 1500000
@@ -7212,6 +7214,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
+  activationChance: 0.8
   targetingLineRenderer: {fileID: 5574985794993970521}
   laserOrigin: {fileID: 1275925625256178328}
   beamLengthCurve:
@@ -7315,6 +7318,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   minActionCheckInterval: -1
+  wormAnimator: {fileID: 5351068426189712924}
+  activationChance: 0.85
   wormAnimator: {fileID: 5351068426189712924}
   roarManager: {fileID: 121548284677876063}
   increasedSpeed: 60

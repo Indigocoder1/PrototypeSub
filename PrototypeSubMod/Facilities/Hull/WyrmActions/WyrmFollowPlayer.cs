@@ -2,32 +2,18 @@
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
-public class WyrmFollowPlayer : CreatureAction
+public class WyrmFollowPlayer : WyrmAction
 {
-    [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private float offsetFromPlayer;
     [SerializeField] private float timeBetweenPointRecalculations = 15f;
     [Range(0, 90)]
     [SerializeField] private float maxAngleFromForward;
     
-    private Vector3 targetPoint;
-    private bool performing;
     private float timeLastPerformed;
-
-    private void Start()
-    {
-        RecalculateTargetPoint();
-    }
 
     public override float Evaluate(Creature creature, float time)
     {
-        bool aggressive = ((ProtoAggressiveWorm)creature).IsAggressive();
-        if (!aggressive)
-        {
-            return 1f;
-        }
-        
-        return performing ? 1 : Random.Range(0f, 0.2f);
+        return !aggressiveWorm.IsAggressive() ? 1f : base.Evaluate(creature, time);
     }
 
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -35,34 +21,22 @@ public class WyrmFollowPlayer : CreatureAction
         if (performing) return;
 
         if (Time.time < timeLastPerformed + timeBetweenPointRecalculations) return;
+
+        base.Perform(creature, time, deltaTime);
         
-        RecalculateTargetPoint();
+        Plugin.Logger.LogInfo($"Starting wyrm follow player");
         timeLastPerformed = Time.time;
-        performing = true;
     }
 
-    public void OverrideStopPerform()
-    {
-        performing = false;
-    }
-
-    private void RecalculateTargetPoint()
+    protected override Vector3[] GetMovementPoints()
     {
         var dir = Random.onUnitSphere;
         var forward = Player.main.transform.position.normalized;
         dir *= Mathf.Sign(Vector3.Dot(dir, forward));
         float angleBetween = Vector3.Angle(dir, forward);
         dir = Vector3.RotateTowards(dir, forward, angleBetween * (1 - maxAngleFromForward / 90) * Mathf.Deg2Rad, 1);
-        
-        targetPoint = Player.main.transform.position + dir.normalized * offsetFromPlayer;
-        wormAnimator.SetTravelTarget(targetPoint, OnReachTarget);
-        Plugin.Logger.LogInfo($"Recalculating target point on {gameObject}");
-    }
 
-    private void OnReachTarget()
-    {
-        performing = false;
+        var targetPoint = Player.main.transform.position + dir.normalized * offsetFromPlayer;
+        return new[] { targetPoint };
     }
-    
-    public override bool NeedsToBeChecked(float time) => true;
 }

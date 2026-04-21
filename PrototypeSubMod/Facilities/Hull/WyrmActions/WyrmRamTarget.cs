@@ -6,9 +6,8 @@ using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
-public class WyrmRamTarget : CreatureAction
+public class WyrmRamTarget : WyrmAction
 {
-    [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private float attackDamage = 200;
     [SerializeField] private float attackRadius;
     [SerializeField] private float impulseForce;
@@ -16,51 +15,32 @@ public class WyrmRamTarget : CreatureAction
     [Header("SFX")]
     [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private FMOD_CustomEmitter chargeImpactSfx;
-
-    private ProtoAggressiveWorm aggressiveWorm;
-    private bool performing;
-    private bool hasDamagedTarget;
-    private int attackStage;
     
+    private bool hasDamagedTarget;
+
     private void Start()
     {
-        aggressiveWorm = GetComponent<ProtoAggressiveWorm>();
+        onReachedTarget += OnReachedPoint;
     }
     
-    public override float Evaluate(Creature creature, float time)
-    {
-        if (aggressiveWorm.WasActionRecentlyStarted(this) && !performing) return 0;
-        
-        return performing ? 1 : Random.Range(0f, 0.8f);
-    }
-
     public override void Perform(Creature creature, float time, float deltaTime)
     {
         if (performing) return;
         
         base.Perform(creature, time, deltaTime);
-        performing = true;
         hasDamagedTarget = false;
-        attackStage = 0;
-        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
-        aggressiveWorm.OnActionStarted(this);
+        
         Plugin.Logger.LogInfo($"Started ram target");
     }
     
-    public void OverrideStopPerform()
-    {
-        performing = false;
-    }
-
-
     private void Update()
     {
         if (!performing) return;
         
-        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
+        wormAnimator.SetTravelTarget(GetMovementPoints()[AttackStage], OnReachedTarget);
     }
     
-    private Vector3[] GetAttackPoints()
+    protected override Vector3[] GetMovementPoints()
     {
         const float setupDist = 150;
         
@@ -99,20 +79,15 @@ public class WyrmRamTarget : CreatureAction
         return points;
     }
 
-    private void OnReachedTarget()
+    private void OnReachedPoint()
     {
-        attackStage++;
-
-        var pointsLength = GetAttackPoints().Length;
-        if (attackStage == 1)
+        var pointsLength = GetMovementPoints().Length;
+        if (AttackStage == 1)
         {
             roarManager.PlayRoar(Player.main.transform.position);
         }
         
-        if (attackStage <= pointsLength - 1) return;
-        
-        performing = false;
-        if (hasDamagedTarget) return;
+        if (AttackStage <= pointsLength - 1 || hasDamagedTarget) return;
         
         var colliders = Physics.OverlapSphere(transform.position, attackRadius);
         foreach (var col in colliders)
@@ -137,6 +112,4 @@ public class WyrmRamTarget : CreatureAction
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
-    
-    public override bool NeedsToBeChecked(float time) => true;
 }

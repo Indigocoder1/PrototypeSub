@@ -9,9 +9,8 @@ using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
-public class WyrmShootTarget : CreatureAction
+public class WyrmShootTarget : WyrmAction
 {
-    [SerializeField] private AggressiveWormAnimator wormAnimator;
     [SerializeField] private LineRenderer targetingLineRenderer;
     [SerializeField] private Transform laserOrigin;
     [SerializeField] private AnimationCurve beamLengthCurve;
@@ -37,16 +36,13 @@ public class WyrmShootTarget : CreatureAction
     private GameObject laserVFX;
     private GameObject muzzleVFX;
     private GameObject impactVFX;
-    private ProtoAggressiveWorm aggressiveWorm;
     private Vector3 lastJitterVector;
-    private bool performing;
     private bool canShoot;
     private bool hasShot;
     private float currentChargeUpTime;
     private float timeLastJittered;
     private float originalSpeed;
     private int rightHandVectorSign;
-    private int attackStage;
     private int timesParried;
     private bool aimStarted;
 
@@ -64,8 +60,8 @@ public class WyrmShootTarget : CreatureAction
         muzzleVFX.transform.localScale = Vector3.one * 0.25f;
         originalSpeed = wormAnimator.GetForwardsSpeed();
         Destroy(muzzleVFX.GetComponent<VFXDestroyAfterSeconds>());
-        
-        aggressiveWorm = GetComponent<ProtoAggressiveWorm>();
+
+        onReachedTarget += OnReachedPoint;
     }
 
     private IEnumerator SetImpactVFX()
@@ -78,34 +74,19 @@ public class WyrmShootTarget : CreatureAction
 
         impactVFX.SetActive(false);
     }
-
-    public override float Evaluate(Creature creature, float time)
-    {
-        if (aggressiveWorm.WasActionRecentlyStarted(this) && !performing) return 0;
-        
-        return performing ? 1 : Random.Range(0f, 0.8f);
-    }
     
     public override void Perform(Creature creature, float time, float deltaTime)
     {
         if (performing) return;
         
         base.Perform(creature, time, deltaTime);
-        performing = true;
+        
         canShoot = false;
         hasShot = false;
         targetingLineRenderer.enabled = false;
         rightHandVectorSign = (int)Mathf.Sign(Random.Range(-1f, 1f));
-        attackStage = 0;
         currentChargeUpTime = 0;
-        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
-        aggressiveWorm.OnActionStarted(this);
         Plugin.Logger.LogInfo($"Started shoot target");
-    }
-    
-    public void OverrideStopPerform()
-    {
-        performing = false;
     }
     
     private void Update()
@@ -132,12 +113,12 @@ public class WyrmShootTarget : CreatureAction
         var angle = Mathf.Abs(
             Vector3.Angle(GetTargetMixin().transform.position - transform.position, transform.forward));
         const float angleToChargeLaser = 30f;
-        if (angleToChargeLaser < angle && !canShoot && attackStage == 2)
+        if (angleToChargeLaser < angle && !canShoot && AttackStage == 2)
         {
             canShoot = true;
         }
         
-        if (attackStage == 2 && !hasShot && canShoot && !targetingLineRenderer.enabled)
+        if (AttackStage == 2 && !hasShot && canShoot && !targetingLineRenderer.enabled)
         {
             currentChargeUpTime = chargeUpTime;
             FMODUWE.PlayOneShot(shotChargeSfx.asset, transform.position);
@@ -211,23 +192,20 @@ public class WyrmShootTarget : CreatureAction
         timesParried = 0;
     }
 
-    private void OnReachedTarget()
+    private void OnReachedPoint()
     {
-        attackStage++;
-        if (attackStage > GetAttackPoints().Length - 1)
+        if (AttackStage > GetMovementPoints().Length - 1)
         {
             performing = false;
         }
         
         wormAnimator.SetForwardsSpeed(originalSpeed);
-        if (attackStage > GetAttackPoints().Length - 1) return;
+        if (AttackStage > GetMovementPoints().Length - 1) return;
 
-        if (attackStage == 2)
+        if (AttackStage == 2)
         {
             wormAnimator.SetForwardsSpeed(originalSpeed * targetingSpeedMultiplier);
         }
-        
-        wormAnimator.SetTravelTarget(GetAttackPoints()[attackStage], OnReachedTarget);
     }
 
     private IEnumerator Shoot()
@@ -401,7 +379,7 @@ public class WyrmShootTarget : CreatureAction
         targetingLineRenderer.SetPositions(positions);
     }
     
-    private Vector3[] GetAttackPoints()
+    protected override Vector3[] GetMovementPoints()
     {
         const float setupDist = 250;
         
@@ -443,8 +421,6 @@ public class WyrmShootTarget : CreatureAction
 
         return player.liveMixin;
     }
-
-    public override bool NeedsToBeChecked(float time) => true;
 
     private void OnDestroy()
     {
