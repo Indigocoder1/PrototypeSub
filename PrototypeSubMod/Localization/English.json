@@ -347,8 +347,6 @@
   "OnApproachDefenseFacility": "Detecting irregularity in the alignment of nearby photon particles.<duration=4697>\nEnvironmental scans indicate the existence of a subterranean tunnel extending into, and connecting to the surface of the surrounding terrain.<delay=4884><duration=8405>\nApproximate distance: 300m<delay=13607><duration=3138>",
   "NotifyPlayerNoExtinguishers": "Warning: Interior scans of this vessel indicate a breach of Alterra submersible safety code #I7513.<duration=8081>\nPlease fabricate supplementary fire suppression equipment before attempting to pilot this vehicle.<delay=8081><duration=5828>",
   "OnAlmaniteIdentified": "Facility strucural analysis complete. Adding new material profile to database...<duration=5828>",
-  "OnGrassyWyrmScanned": "Scan that grassy boi!!<duration=5828>",
-  "OnSparseReefWyrmScanned": "Oh you'd better scan that sparse boi!!<duration=5828>",
   "PDA_Breach3Left": "Alien breach sealed. 3 further breaches detected.",
   "PDA_Breach2Left": "Alien breach sealed. 2 further breaches detected.",
   "PDA_Breach1Left": "Alien breach sealed. 1 further breach detected.",
@@ -388,8 +386,8 @@
   "ProtoCalibrationCodeEncy_Title": "Transmission Calibration Code",
   "ProtoCalibrationCodeEncy_Body": "A local alien broadcast has outlined a six-point pattern matching the movements of the Prototype during the prior exercise.\n\nThe pattern appears to represent a highly precise set of instructions to assist in the transmission of data type: [NEURAL CLUSTER]. While it is unknown why such data may require transmitting, it may lead to further acquisition of valuable alien data.\n\n<b>Assessment: Continue following alien instructions to retrieve advanced technologies. Mutual profit will follow.</b>",
   
-  "OnGrassyWyrmScanned": "This alien structure appears to be of alien origin. Purpose unkonwn. Further data required.<duration=5000>",
-  "OnSparseReefWyrmScanned": "This alien structure appears to be of alien origin. Onboard systems are receiving encrpted data packets from an unknown source.<duration=5000>\nSignal location uploaded to PDA.<delay=5000><duration=1000>",
+  "OnGrassyWyrmScanned": "This alien structure appears to be of alien origin. Purpose unknown. Further data required.<duration=5000>",
+  "OnSparseReefWyrmScanned": "This alien structure appears to be of alien origin. Onboard systems are receiving encrypted data packets from an unknown source.<duration=5000>\nSignal location uploaded to PDA.<delay=5000><duration=1000>",
   
   // Puzzle facility voicelines
   "BearingPuzzleComplete": "FACILITY: SPATIAL NAVIGATION COGNITIVE TRIAL COMPLETE.<duration=3246>\nFACILITY: UPLOADING RESULTS TO QUARANTINE ENFORCEMENT PLATFORM.<delay=3360><duration=3540>",
