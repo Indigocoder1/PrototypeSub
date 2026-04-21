@@ -346,7 +346,7 @@
   "OnMoonpoolNoPrototype": "The following broadcast is being continually transmitted from approximately 150 meters below:<duration=6382>\nScanning for Prototype signature...signature not found.<delay=7255><duration=4354>",
   "OnApproachDefenseFacility": "Detecting irregularity in the alignment of nearby photon particles.<duration=4697>\nEnvironmental scans indicate the existence of a subterranean tunnel extending into, and connecting to the surface of the surrounding terrain.<delay=4884><duration=8405>\nApproximate distance: 300m<delay=13607><duration=3138>",
   "NotifyPlayerNoExtinguishers": "Warning: Interior scans of this vessel indicate a breach of Alterra submersible safety code #I7513.<duration=8081>\nPlease fabricate supplementary fire suppression equipment before attempting to pilot this vehicle.<delay=8081><duration=5828>",
-  "OnAlmaniteIdentified": "OHMAGOD IT'S ALMANITE WOOOO<duration=5828>",
+  "OnAlmaniteIdentified": "Facility strucural analysis complete. Adding new material profile to database...<duration=5828>",
   "OnGrassyWyrmScanned": "Scan that grassy boi!!<duration=5828>",
   "OnSparseReefWyrmScanned": "Oh you'd better scan that sparse boi!!<duration=5828>",
   "PDA_Breach3Left": "Alien breach sealed. 3 further breaches detected.",
