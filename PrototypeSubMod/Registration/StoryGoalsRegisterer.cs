@@ -431,16 +431,20 @@ internal static class StoryGoalsRegisterer
         });
         #endregion
 
-        #region On Worm Scanned
+        #region Extra worms
 
         StoryGoalHandler.RegisterCustomEvent("OnScannedSparseReefWyrms", () =>
         {
-            PDALog.Add("OnShallowWyrmScanned");
+            PDALog.Add("OnSparseReefWyrmScanned");
             var grandReefPing = CustomPing.CreatePing("ProtoGrandReefPing", PingType.Signal);
             UWE.CoroutineHost.StartCoroutine(
                 PuzzleHintRegistration.SpawnPrefab(grandReefPing, new Vector3(-761, -293, -1175)));
         });
 
+        StoryGoalHandler.RegisterCustomEvent("OnScannedGrassyWyrms", () =>
+        {
+            PDALog.Add("OnGrassyWyrmScanned");
+        });
         #endregion
         
         #region Archway override installed

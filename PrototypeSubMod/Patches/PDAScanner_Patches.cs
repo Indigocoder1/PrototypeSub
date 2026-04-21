@@ -33,6 +33,7 @@ public static class PDAScanner_Patches
 
         if (WasJustUnlocked(ProtoGrassyWyrms.prefabInfo.TechType, __state.wasUnlocked))
         {
+            StoryGoalManager.main.OnGoalComplete("OnScannedGrassyWyrms");
             ScanUnlockedWyrm();
         }
     }
