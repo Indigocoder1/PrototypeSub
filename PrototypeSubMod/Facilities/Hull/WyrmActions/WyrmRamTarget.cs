@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using PrototypeSubMod.LightDistortionField;
-using PrototypeSubMod.Patches;
+﻿using PrototypeSubMod.LightDistortionField;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
@@ -20,7 +17,7 @@ public class WyrmRamTarget : WyrmAction
 
     private void Start()
     {
-        onReachedTarget += OnReachedPoint;
+        OnReachedTarget += OnReachedPoint;
     }
     
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -37,7 +34,7 @@ public class WyrmRamTarget : WyrmAction
     {
         if (!performing) return;
         
-        wormAnimator.SetTravelTarget(GetMovementPoints()[AttackStage], OnReachedTarget);
+        wormAnimator.SetTravelTarget(GetMovementPoints()[AttackStage], OnReachedTargetPoint);
     }
     
     protected override Vector3[] GetMovementPoints()

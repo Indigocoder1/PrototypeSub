@@ -21,7 +21,7 @@ public class WyrmDartAction : WyrmAction
 
     private void Start()
     {
-        onReachedTarget += OnPointReached;
+        OnReachedTarget += OnPointReached;
     }
     
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -91,19 +91,19 @@ public class WyrmDartAction : WyrmAction
             dartSpecialSFX.Play();
         }
 
-        wormAnimator.SetTravelTarget(movementPoints[AttackStage], OnReachedTarget);
+        wormAnimator.SetTravelTarget(movementPoints[AttackStage], OnReachedTargetPoint);
     }
 
     protected override Vector3[] GetMovementPoints()
     {
         var points = new Vector3[5];
-        const float setupOffset = 250;
+        const float setupOffset = 300;
         points[0] = target.position + (target.right * -rightHandSign - target.forward).normalized * setupOffset;
         if (targetCloakHandler != null)
         {
             points[1] = target.position - target.forward * setupOffset;
             points[2] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.right * (rightHandSign * setupOffset), setupOffset / 2f);
-            points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * setupOffset);
+            points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * (setupOffset));
             points[4] = points[3] - target.right * (rightHandSign * setupOffset);
         }
         else

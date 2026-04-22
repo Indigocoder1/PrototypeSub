@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using PrototypeSubMod.Facilities.Hull.WyrmActions;
-using PrototypeSubMod.LightDistortionField;
+﻿using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -78,8 +76,7 @@ public class ProtoAggressiveWorm : Creature
     {
         if (despawnAction.IsPerforming()) return false;
         
-        var startedAction = base.TryStartAction(action);
-        return startedAction;
+        return base.TryStartAction(action);
     }
 
     private IEnumerator RetrieveSegmentRends()
@@ -102,10 +99,34 @@ public class ProtoAggressiveWorm : Creature
 
     private void Update()
     {
-        var biomeString = Player.main.GetBiomeString();
-        bool inVoid = biomeString is "void" or "";
-        inVoid |= biomeString.EndsWith("protovoid");
+        HandleEatPlayer();
+        HandleVoidTimer();
+        
+        if (IsAggressive() != wasAggressive)
+        {
+            if (IsAggressive())
+            {
+                aggroOnSfx.Play();
+            }
+            else
+            {
+                aggroOffSfx.Play();
+            }
+        }
 
+        var segmentsAggressive = Mathf.Clamp((int)(secondsInVoid / secondsInVoidForAggression * segmentCount), 0, segmentCount);
+
+        if (segmentsAggressive != numSegmentsAggressiveLastFrame)
+        {
+            UpdateSegmentColors(segmentsAggressive);
+        }
+        
+        numSegmentsAggressiveLastFrame = segmentsAggressive;
+        wasAggressive = IsAggressive();
+    }
+
+    private void HandleEatPlayer()
+    {
         var colliders = Physics.OverlapSphere(transform.position, attackRadius);
         foreach (var col in colliders)
         {
@@ -135,7 +156,13 @@ public class ProtoAggressiveWorm : Creature
         {
             hasDamagedTarget = false;
         }
+    }
 
+    private void HandleVoidTimer()
+    {
+        var biomeString = Player.main.GetBiomeString();
+        var inVoid = biomeString is "void" or "" || biomeString.EndsWith("protovoid");
+        
         if (secondsInVoid < secondsInVoidForAggression && inVoid)
         {
             secondsInVoid += Time.deltaTime;
@@ -147,37 +174,22 @@ public class ProtoAggressiveWorm : Creature
 
         if (secondsInVoid <= 0 && !inVoid && !despawnAction.IsPerforming())
         {
-            foreach (var action in actions)
-            {
-                action.StopPerform(this, Time.time);
-                action.SendMessage("OverrideStopPerform");
-            }
-            
-            despawnAction.Perform(this, Time.time, 0);
+            DespawnWorm();
         }
+    }
 
-        if (IsAggressive() != wasAggressive)
+    private void DespawnWorm()
+    {
+        foreach (var action in actions)
         {
-            if (IsAggressive())
-            {
-                aggroOnSfx.Play();
-            }
-            else
-            {
-                aggroOffSfx.Play();
-            }
-        }
-
-        var segmentsAggressive = Mathf.Clamp((int)(secondsInVoid / secondsInVoidForAggression * segmentCount), 0, segmentCount);
-
-        if (segmentsAggressive != numSegmentsAggressiveLastFrame)
-        {
-            UpdateSegmentColors(segmentsAggressive);
+            action.StopPerform(this, Time.time);
+            action.SendMessage("OverrideStopPerform");
         }
         
-        numSegmentsAggressiveLastFrame = segmentsAggressive;
-        wasAggressive = IsAggressive();
+        despawnAction.Perform(this, Time.time, 0);
     }
+
+    public bool IsDespawning() => despawnAction.IsPerforming();
 
     private void UpdateSegmentColors(int segmentsAggressive)
     {
@@ -225,6 +237,8 @@ public class ProtoAggressiveWorm : Creature
 
     public void OnActionStarted(CreatureAction action)
     {
+        if (!nonRepeatingActions.Contains(action)) return;
+        
         recentActions.Add(action);
 
         if (recentActions.All(a => nonRepeatingActions.Contains(a) && recentActions.Count == nonRepeatingActions.Length))
@@ -242,6 +256,11 @@ public class ProtoAggressiveWorm : Creature
     {
         secondsInVoid = 0;
         secondsInVoidForAggression = timeToBecomeAggressive;
+    }
+
+    public void ForceDespawn()
+    {
+        DespawnWorm();
     }
 
     public bool IsAggressive() => secondsInVoid >= secondsInVoidForAggression;

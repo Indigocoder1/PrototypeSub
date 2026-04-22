@@ -131,6 +131,9 @@ internal static class BiomeRegisterer
         var calibrationSpawnInfo2 = new SpawnInfo(calibrationPrefabInfo.ClassID,
             new Vector3(-2183.74f, -376.7f, 861.93f), Quaternion.identity, Vector3.one * 546.6f);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(calibrationSpawnInfo2);
+        var calibrationSpawnInfo3 = new SpawnInfo(calibrationPrefabInfo.ClassID,
+            new Vector3(-2383.74f, -376.7f, 261.93f), Quaternion.identity, Vector3.one * 846.6f);
+        CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(calibrationSpawnInfo3);
         
         #endregion
 

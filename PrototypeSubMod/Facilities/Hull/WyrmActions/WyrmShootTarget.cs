@@ -61,7 +61,7 @@ public class WyrmShootTarget : WyrmAction
         originalSpeed = wormAnimator.GetForwardsSpeed();
         Destroy(muzzleVFX.GetComponent<VFXDestroyAfterSeconds>());
 
-        onReachedTarget += OnReachedPoint;
+        OnReachedTarget += OnReachedPoint;
     }
 
     private IEnumerator SetImpactVFX()

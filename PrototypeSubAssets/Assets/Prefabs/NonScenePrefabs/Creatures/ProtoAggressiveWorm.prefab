@@ -6847,6 +6847,7 @@ GameObject:
   - component: {fileID: 4846019268480220019}
   - component: {fileID: 6753871278772561756}
   - component: {fileID: 775455774015457791}
+  - component: {fileID: 6168566770618422719}
   m_Layer: 0
   m_Name: ProtoAggressiveWorm
   m_TagString: Untagged
@@ -7320,7 +7321,6 @@ MonoBehaviour:
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
   activationChance: 0.85
-  wormAnimator: {fileID: 5351068426189712924}
   roarManager: {fileID: 121548284677876063}
   increasedSpeed: 60
   dartSpecialSFX: {fileID: 5271690660070952517}
@@ -7358,6 +7358,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   immuneToRepulsionCannon: 1
+--- !u!114 &6168566770618422719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351068426189712925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1649093822, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggressiveWorm: {fileID: 7131750357433951656}
+  predeterminedActions:
+  - {fileID: 4846019268480220019}
+  - {fileID: 2563168583705512565}
 --- !u!1 &5358476355074318651
 GameObject:
   m_ObjectHideFlags: 0
