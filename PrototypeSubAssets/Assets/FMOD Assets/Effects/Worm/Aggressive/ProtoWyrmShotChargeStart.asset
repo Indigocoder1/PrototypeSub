@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: ProtoWyrmShotChargeStart
   id: 
-  audioClip: {fileID: 8300000, guid: caf85e7bc00e8b649bdb1c3fa78dcd0e, type: 3}
+  audioClip: {fileID: 8300000, guid: 4f74897d2308a94488dea806cc61a832, type: 3}
   doNotAutoRegister: 0
   mode: 2113552
   maxDistance3D: 0

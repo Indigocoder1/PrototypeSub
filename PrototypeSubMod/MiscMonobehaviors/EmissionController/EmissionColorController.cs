@@ -78,7 +78,6 @@ internal class EmissionColorController : PrefabModifier
         currentTransitionTime = 0;
 
         UpdateTempColor();
-        Plugin.Logger.LogInfo($"Registering temp color. Tracked materials count = {trackedMaterials.Count}");
     }
 
     public void RemoveTempColor(Component component)
