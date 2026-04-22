@@ -16,7 +16,8 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
     {
         if (WaitScreen.IsWaiting) return;
 
-        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy")) return;
+        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy") || 
+            !StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun")) return;
         
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";

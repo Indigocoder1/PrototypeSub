@@ -10,36 +10,15 @@ public static class PuzzleHintRegistration
 {
     public static void Register()
     {
-        #region Number Puzzle Ping
-        var numberPuzzlePingTechType = CustomPing.CreatePing("NumberPuzzlePing", PingType.Signal);
-        StoryGoalHandler.RegisterCustomEvent("OnPlayProtoRadioMessage1", () =>
-        {
-            var numberPuzzlePingPos = new Vector3(-174f, -64f, 307f);
-            // UWE.CoroutineHost.StartCoroutine(SpawnPrefab(numberPuzzlePingTechType, numberPuzzlePingPos));
-        });
-
-        StoryGoalHandler.RegisterCustomEvent("ProtoNumberPuzzleHint", () =>
-        {
-            PDAEncyclopedia.Add("ProtoNumberPuzzleHint", true);
-        });
-
-        StoryGoalHandler.RegisterCompoundGoal("ProtoNumberPuzzleHint", Story.GoalType.Encyclopedia, 20, "OnPlayProtoRadioMessage1");
+        #region Number Puzzle Hint
+        StoryGoalHandler.RegisterCompoundGoal("ProtoNumberPuzzleHint", Story.GoalType.Encyclopedia, 20,
+            "OnPlayProtoRadioMessage1");
+        
         #endregion
         
-        #region Bearing Puzzle Ping
-        var bearingPingTechType = CustomPing.CreatePing("BearingPuzzlePing", PingType.Signal);
-        StoryGoalHandler.RegisterCustomEvent("OnPlayProtoRadioMessage2", () =>
-        {
-            var bearingPuzzlePingPos = new Vector3(1226, -306, 534);
-            // UWE.CoroutineHost.StartCoroutine(SpawnPrefab(bearingPingTechType, bearingPuzzlePingPos));
-        });
-
-        StoryGoalHandler.RegisterCustomEvent("ProtoBearingPuzzleHint", () =>
-        {
-            PDAEncyclopedia.Add("ProtoBearingPuzzleHint", true);
-        });
-
-        StoryGoalHandler.RegisterCompoundGoal("ProtoBearingPuzzleHint", Story.GoalType.Encyclopedia, 20, "OnPlayProtoRadioMessage2");
+        #region Bearing Puzzle Hint
+        StoryGoalHandler.RegisterCompoundGoal("ProtoBearingPuzzleHint", Story.GoalType.Encyclopedia, 20,
+            "OnPlayProtoRadioMessage2");
         #endregion
 
         #region Calibration Site Ping

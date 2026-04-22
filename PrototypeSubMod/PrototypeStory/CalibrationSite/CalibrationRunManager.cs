@@ -153,6 +153,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         calibrationObjects.SetActive(true);
         voiceNotificationManager.PlayVoiceNotification(startedCalibrationVoiceline);
         FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Searching"), transform.position);
+        StoryGoalManager.main.OnGoalComplete("StartedCalibrationRun");
     }
 
     public string GetProfileTag() => "CalibrationRunManager";

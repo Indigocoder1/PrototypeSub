@@ -1,8 +1,5 @@
 ﻿using HarmonyLib;
-using Nautilus.Handlers;
 using Story;
-using UnityEngine;
-using UWE;
 
 namespace PrototypeSubMod.Patches;
 
@@ -11,16 +8,10 @@ public class VoidGhostLeviathanSpawnerPatch
 {
     [HarmonyPatch(nameof(VoidGhostLeviathansSpawner.IsPlayerInVoid))]
     [HarmonyPrefix]
-    public static bool CheckWormActivationGoal()
+    private static bool IsPlayerInVoid_Prefix()
     {
         StoryGoalManager storyGoalManager = StoryGoalManager.main;
-        if (storyGoalManager.IsGoalComplete("HullFacilityWormTerminalEncy"))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return !storyGoalManager.IsGoalComplete("HullFacilityWormTerminalEncy") ||
+               !storyGoalManager.IsGoalComplete("StartedCalibrationRun");
     }
 }
