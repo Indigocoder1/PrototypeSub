@@ -10693,7 +10693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   techTag: {fileID: 1494567982}
-  techType: {fileID: 11400000, guid: dd98037b5d58db04a80aae61d44910d0, type: 2}
+  techType: {fileID: 11400000, guid: c1746187546f47d4bacbf4be7c5fb76d, type: 2}
 --- !u!114 &1494567982
 MonoBehaviour:
   m_ObjectHideFlags: 0
