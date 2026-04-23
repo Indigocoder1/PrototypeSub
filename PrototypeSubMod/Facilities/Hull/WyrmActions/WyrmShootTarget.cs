@@ -128,6 +128,8 @@ public class WyrmShootTarget : WyrmAction
 
     public void OnShotParried(Vector3 returnFrom)
     {
+        if (!performing) return;
+        
         StartCoroutine(ReturnParryProjectile(returnFrom));
     }
 
