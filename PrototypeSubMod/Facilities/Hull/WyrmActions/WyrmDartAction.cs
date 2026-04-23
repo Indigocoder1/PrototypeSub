@@ -11,10 +11,12 @@ public class WyrmDartAction : WyrmAction
 {
     [SerializeField] private WyrmRoarManager roarManager;
     [SerializeField] private float increasedSpeed;
+    [SerializeField] private float maxDistMovedToRecalculate;
     [SerializeField] private FMOD_CustomEmitter dartSpecialSFX;
 
     private Transform target;
     private CloakEffectHandler targetCloakHandler;
+    private Vector3 targetPointWhenStartedPath;
     private bool speedIncreased;
     private float originalSpeed;
     private int rightHandSign;
@@ -38,6 +40,7 @@ public class WyrmDartAction : WyrmAction
         
         targetCloakHandler = target.GetComponentInChildren<CloakEffectHandler>();
         originalSpeed = wormAnimator.GetForwardsSpeed();
+        targetPointWhenStartedPath = target.position;
     }
 
     private void SetupTargetTransform()
@@ -66,19 +69,32 @@ public class WyrmDartAction : WyrmAction
         {
             wormAnimator.SetForwardsSpeed(originalSpeed);
         }
+
+        targetPointWhenStartedPath = target.position;
     }
 
     private void Update()
     {
         if (!performing) return;
 
+        if (Vector3.Distance(target.position, targetPointWhenStartedPath) > maxDistMovedToRecalculate)
+        {
+            wormAnimator.SetTravelTarget(GetMovementPoints()[AttackStage], OnReachedTargetPoint);
+            targetPointWhenStartedPath = target.position;
+        }
+        
+        HandleSpeedIncrease();
+    }
+
+    private void HandleSpeedIncrease()
+    {
         var movementPoints = GetMovementPoints();
         // Don't update anything if past the speed-up stage
         if (AttackStage >= movementPoints.Length - 1)
         {
             return;
         }
-
+        
         var angle = Vector3.Angle(transform.forward, movementPoints[AttackStage] - transform.position);
         if (AttackStage != 3 || !(angle < 20) || speedIncreased) return;
         
@@ -92,6 +108,7 @@ public class WyrmDartAction : WyrmAction
         }
 
         wormAnimator.SetTravelTarget(movementPoints[AttackStage], OnReachedTargetPoint);
+        targetPointWhenStartedPath = target.position;
     }
 
     protected override Vector3[] GetMovementPoints()
