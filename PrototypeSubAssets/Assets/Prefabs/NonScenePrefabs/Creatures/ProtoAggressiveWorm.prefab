@@ -7094,7 +7094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spineManager: {fileID: 3559386083336854524}
   spineSegmentsParent: {fileID: 8262272570642887209}
-  forwardsSpeed: 25
+  forwardsSpeed: 35
   maxRotationSpeed: 30
 --- !u!114 &28949104760699908
 MonoBehaviour:
@@ -7323,6 +7323,7 @@ MonoBehaviour:
   activationChance: 0.85
   roarManager: {fileID: 121548284677876063}
   increasedSpeed: 60
+  maxDistMovedToRecalculate: 250
   dartSpecialSFX: {fileID: 5271690660070952517}
 --- !u!114 &6753871278772561756
 MonoBehaviour:
