@@ -23,7 +23,7 @@ public class WyrmDespawnAction : CreatureAction
         performing = true;
 
         var dir = Player.main.transform.position.normalized + Vector3.down * 0.5f;
-        var point = Player.main.transform.position + dir * 300;
+        var point = Player.main.transform.position + dir * 500;
         wormAnimator.SetTravelTarget(point, OnReachedTarget);
         StartCoroutine(TargetRecheck(point));
         Plugin.Logger.LogInfo($"Started despawn action");

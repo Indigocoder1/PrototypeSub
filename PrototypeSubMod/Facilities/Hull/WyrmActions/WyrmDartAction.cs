@@ -115,12 +115,17 @@ public class WyrmDartAction : WyrmAction
     {
         var points = new Vector3[5];
         const float setupOffset = 300;
+        var targetRb = target.GetComponent<Rigidbody>();
+        
         points[0] = target.position + (target.right * -rightHandSign - target.forward).normalized * setupOffset;
         if (targetCloakHandler != null)
         {
             points[1] = target.position - target.forward * setupOffset;
             points[2] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.right * (rightHandSign * setupOffset), setupOffset / 2f);
-            points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * (setupOffset));
+            var magnitudeMultiplier = targetRb == null
+                ? 1
+                : Mathf.Lerp(2, 5f, Mathf.InverseLerp(1, 15, Mathf.Clamp(targetRb.velocity.magnitude, 1, 15)));
+            points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * (setupOffset * magnitudeMultiplier));
             points[4] = points[3] - target.right * (rightHandSign * setupOffset);
         }
         else

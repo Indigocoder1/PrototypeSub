@@ -180,6 +180,8 @@ public class ProtoAggressiveWorm : Creature
 
     private void DespawnWorm()
     {
+        prevBestAction = null;
+        
         foreach (var action in actions)
         {
             action.StopPerform(this, Time.time);

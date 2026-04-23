@@ -1,16 +1,26 @@
-﻿using PrototypeSubMod.Prefabs;
+﻿using System;
+using PrototypeSubMod.Prefabs;
 using Story;
 using System.Collections;
 using System.Collections.Generic;
+using PrototypeSubMod.PrototypeStory.CalibrationSite;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull;
 
 public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
 {
     private bool wyrmSpawned;
+    private bool canSpawn;
     private float minWyrmSpawnDelay = 20f;
     private float maxWyrmSpawnDelay = 40f;
+
+    private void Start()
+    {
+        CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
+        canSpawn = true;
+    }
 
     public void ScheduledUpdate()
     {
@@ -23,7 +33,12 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
         bool inVoid = biomeString is "void" or "";
         inVoid |= biomeString.EndsWith("protovoid");
 
-        if (!inVoid || wyrmSpawned) return;
+        if (!inVoid)
+        {
+            canSpawn = true;
+        }
+        
+        if (!inVoid || !canSpawn || wyrmSpawned) return;
         
         var (hitPoint, info) = FindSpawnPoint();
         var point = info.point;
@@ -42,6 +57,11 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
         Plugin.Logger.LogInfo($"Entered the void | Spawn point at {point}");
         StartCoroutine(SpawnWyrm(point, normal));
         wyrmSpawned = true;
+    }
+
+    private void OnCalibrationCompleted()
+    {
+        canSpawn = false;
     }
 
     private IEnumerator SpawnWyrm(Vector3 point, Vector3 normal)
@@ -103,6 +123,11 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
         }
 
         return points;
+    }
+
+    private void OnDestroy()
+    {
+        CalibrationRunManager.OnCalibrationCompleted -= OnCalibrationCompleted;
     }
 
     public string GetProfileTag() => "AggressiveWyrmSpawner";

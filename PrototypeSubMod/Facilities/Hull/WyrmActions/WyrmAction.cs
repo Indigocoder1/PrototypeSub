@@ -25,10 +25,10 @@ public abstract class WyrmAction : CreatureAction
 
     public override float Evaluate(Creature creature, float time)
     {
+        if (aggressiveWorm.IsDespawning()) return 0;
+        
         if (performing) return 1;
         
-        if (aggressiveWorm.IsDespawning()) return 0;
-
         if (aggressiveWorm.WasActionRecentlyStarted(this) && !performing) return 0;
 
         if (firstEncounterManager && firstEncounterManager.IsManagingActions()) return 0;

@@ -7291,7 +7291,7 @@ MonoBehaviour:
   timePassiveAfterParries: 30
   timeBetweenTargetJitters: 0.05
   jitterMagnitude: 0.2
-  targetingSpeedMultiplier: 0.5
+  targetingSpeedMultiplier: 0.4
   roarManager: {fileID: 121548284677876063}
   shotChargeSfx: {fileID: 783688339255574968}
   shotTravelSfx: {fileID: 8438192860530699916}
