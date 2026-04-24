@@ -3,6 +3,7 @@ using PrototypeSubMod.Prefabs;
 using Story;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using PrototypeSubMod.PrototypeStory.CalibrationSite;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,6 +16,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
     private bool canSpawn;
     private float minWyrmSpawnDelay = 20f;
     private float maxWyrmSpawnDelay = 40f;
+    private float calibrationSpawnDelay = 10f;
 
     private void Start()
     {
@@ -66,9 +68,13 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
 
     private IEnumerator SpawnWyrm(Vector3 point, Vector3 normal)
     {
-        var random = Random.Range(minWyrmSpawnDelay, maxWyrmSpawnDelay);
-
-        yield return new WaitForSeconds(random);
+        var delay = Random.Range(minWyrmSpawnDelay, maxWyrmSpawnDelay);
+        if (!StoryGoalManager.main.IsGoalComplete("WyrmFirstEncounterComplete"))
+        {
+            delay = calibrationSpawnDelay + Random.Range(-2f, 2f);
+        }
+        
+        yield return new WaitForSeconds(delay);
 
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";
