@@ -9,6 +9,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
 {
     [SerializeField] private ProtoAggressiveWorm aggressiveWorm;
     [SerializeField] private WyrmAction[] predeterminedActions;
+    [SerializeField] private float firstAggressionTime;
 
     private bool startedSequence;
     private int actionStage;
@@ -16,6 +17,10 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     private void Start()
     {
         CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
+        
+        if (FirstEncounterCompleted()) return;
+
+        aggressiveWorm.SetTimeInVoidForAggression(firstAggressionTime);
     }
 
     private void Update()

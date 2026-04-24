@@ -7375,6 +7375,7 @@ MonoBehaviour:
   predeterminedActions:
   - {fileID: 4846019268480220019}
   - {fileID: 2563168583705512565}
+  firstAggressionTime: 10
 --- !u!1 &5358476355074318651
 GameObject:
   m_ObjectHideFlags: 0

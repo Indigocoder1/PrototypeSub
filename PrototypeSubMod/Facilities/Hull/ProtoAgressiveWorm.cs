@@ -265,6 +265,13 @@ public class ProtoAggressiveWorm : Creature
         DespawnWorm();
     }
 
+    public void SetTimeInVoidForAggression(float timeInVoid)
+    {
+        secondsInVoidForAggression = timeInVoid;
+        var segmentsAggressive = Mathf.Clamp((int)(secondsInVoid / secondsInVoidForAggression * segmentCount), 0, segmentCount);
+        UpdateSegmentColors(segmentsAggressive);
+    }
+
     public bool IsAggressive() => secondsInVoid >= secondsInVoidForAggression;
 
     public override void OnDestroy()
