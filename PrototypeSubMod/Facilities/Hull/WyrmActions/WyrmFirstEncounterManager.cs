@@ -68,7 +68,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
 
     public bool IsManagingActions()
     {
-        return actionStage < predeterminedActions.Length;
+        return actionStage < predeterminedActions.Length && !FirstEncounterCompleted();
     }
 
     private void OnCalibrationCompleted()
