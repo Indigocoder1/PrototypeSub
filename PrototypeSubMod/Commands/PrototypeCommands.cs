@@ -36,11 +36,21 @@ internal static class PrototypeCommands
     }
 
     [ConsoleCommand("enableworm")]
-        public static string EnableWorm()
+    public static string EnableWorm()
     {
         Story.StoryGoalManager.main.OnGoalComplete("HullFacilityWormTerminalEncy");
         Plugin.Logger.LogInfo("Hull Facility Wyrm Enabled");
         ErrorMessage.AddError("Hull Facility Wyrm Enabled");
+        return string.Empty;
+    }
+    
+    [ConsoleCommand("skipwormintro")]
+    public static string SkipWormIntro()
+    {
+        Story.StoryGoalManager.main.OnGoalComplete("WyrmFirstEncounterComplete");
+        Story.StoryGoalManager.main.OnGoalComplete("StartedCalibrationRun");
+        Plugin.Logger.LogInfo("Wyrm intro skipped");
+        ErrorMessage.AddError("Wyrm intro skipped. All attacks now active");
         return string.Empty;
     }
     
