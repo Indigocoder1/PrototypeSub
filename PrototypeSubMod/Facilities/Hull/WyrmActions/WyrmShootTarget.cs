@@ -335,6 +335,10 @@ public class WyrmShootTarget : WyrmAction
         var wasInvincible = hitMixin.invincible;
         hitMixin.invincible = false;
         hitMixin.TakeDamage(attackDamage, laserTargetPoint, DamageType.Electrical, gameObject);
+        var damageInfo = LiveMixin.damageInfoPool.Get();
+        damageInfo.Clear();
+        hitMixin.NotifyAllAttachedDamageReceivers(damageInfo); // Required to update the Cyclops voicelines and call the destruction sequence
+        LiveMixin.damageInfoPool.Return(damageInfo);
         hitMixin.invincible = wasInvincible;
     }
 
