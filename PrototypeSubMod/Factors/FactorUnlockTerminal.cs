@@ -12,6 +12,8 @@ public class FactorUnlockTerminal : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private DummyTechType unlockTechType;
     [SerializeField] private UnityEvent onInteracted;
+    [SerializeField] private FMOD_CustomEmitter openSFX;
+
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class FactorUnlockTerminal : MonoBehaviour
     private void OnInteracted()
     {
         animator.SetBool("Activated", true);
+        openSFX.Play();
         onInteracted?.Invoke();
     }
 

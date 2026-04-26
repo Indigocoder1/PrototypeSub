@@ -520,6 +520,7 @@
   "Proto_CalibrationPointReached": "PROTOTYPE: Transmission calibration point reached. Continue to next location.",
   "Proto_CalibrationTestFailed": "PROTOTYPE: Transmission calibration failed. Return to calibration start.",
   "Proto_CalibrationTestStarted": "PROTOTYPE: Transmission calibration started. Proceed to next calibration point.",
+  "CalibrationFirstWyrmInteract": "PROTOTYPE: Offensive vessel targeting detected. Initializing defensive measures.",
   "Proto_OnTransmissionSiteReached": "PROTOTYPE: Transmission site reached. Proceed to transmission device deployment.",
   
   // Terminal Voicelines

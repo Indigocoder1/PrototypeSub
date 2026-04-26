@@ -28,6 +28,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     [SerializeField] private VoiceNotification reachedPointVoiceline;
     [SerializeField] private VoiceNotification failedCalibrationVoiceline;
     [SerializeField] private VoiceNotification startedCalibrationVoiceline;
+    [SerializeField] private VoiceNotification wyrmFirstInteractionVoiceline;
     
     private bool doingCalibrationRun;
     private int nextPointIndex = 1;
@@ -153,6 +154,12 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         calibrationObjects.SetActive(true);
         voiceNotificationManager.PlayVoiceNotification(startedCalibrationVoiceline);
         FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Searching"), transform.position);
+
+        if (!StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun"))
+        {
+            voiceNotificationManager.PlayVoiceNotification(wyrmFirstInteractionVoiceline);
+        }
+        
         StoryGoalManager.main.OnGoalComplete("StartedCalibrationRun");
     }
 

@@ -33,6 +33,7 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         Player.main.playerDeathEvent.AddHandler(this, OnPlayerDied);
         
         radiate = radiationObject.GetComponent<RadiatePlayerInRange>();
+        targetRadius = radiate.radiateRadius;
 
         radiationObject.SetActive(Plugin.GlobalSaveData.prototypeDestroyed);
         hydrolockDoorsAnimator.SetBool(HydrolockEnabled, Plugin.GlobalSaveData.prototypeDestroyed);
@@ -65,7 +66,6 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         radiationObject.SetActive(true);
 
         subRoot.GetComponent<PingInstance>().enabled = false;
-        targetRadius = radiate.radiateRadius;
         radiate.radiateRadius = 0f;
         UWE.CoroutineHost.StartCoroutine(GrowRadiationRange());
         
@@ -77,14 +77,10 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
 
     private IEnumerator GrowRadiationRange()
     {
-        while (radiate.radiateRadius < targetRadius)
+        while (!Mathf.Approximately(radiate.radiateRadius, targetRadius))
         {
-            radiate.radiateRadius += radiationGrowthSpeed * Time.deltaTime;
-
-            // Clamp to avoid overshooting
-            if (radiate.radiateRadius > targetRadius)
-                radiate.radiateRadius = targetRadius;
-
+            radiate.radiateRadius =
+                Mathf.MoveTowards(radiate.radiateRadius, targetRadius, radiationGrowthSpeed * Time.deltaTime);
             yield return null; // wait one frame
         }
     }
