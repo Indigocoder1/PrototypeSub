@@ -438,7 +438,7 @@ internal static class StoryGoalsRegisterer
             PDALog.Add("OnSparseReefWyrmScanned");
             var grandReefPing = CustomPing.CreatePing("ProtoGrandReefPing", PingType.Signal);
             UWE.CoroutineHost.StartCoroutine(
-                PuzzleHintRegistration.SpawnPrefab(grandReefPing, new Vector3(-761, -293, -1175)));
+                PuzzleHintRegistration.SpawnPrefab(grandReefPing, new Vector3(-1147, -445, -1110)));
         });
 
         StoryGoalHandler.RegisterCustomEvent("OnScannedGrassyWyrms", () =>
