@@ -1,30 +1,30 @@
 {
   // Main prefabs
   "PrototypeSub": "Prototype Vessel",
-  "Tooltip_PrototypeSub": "A partially corrupted alien vessel capable of teleportation and versatile modular improvement.",
+  "Tooltip_PrototypeSub": "Unfinished alien vessel capable of teleportation and modular self-improvement.",
 
   // Title screen
   "ProtoModName": "The Prototype Expansion: Phase Gate Update",
 
   // Items
   "Proto_PrecursorIngot": "Almanite framework",
-  "Tooltip_Proto_PrecursorIngot": "An advanced metallic alloy used in alien architecture. Unprecedented integrity.",
+  "Tooltip_Proto_PrecursorIngot": "Advanced metallic alloy used in alien architecture. Unprecedented integrity.",
 
   "IonPrism": "Ion prism",
   "Tooltip_IonPrism": "Highly concentrated ion energy source.",
 
   "DeployableLight": "Photon decoy",
-  "Tooltip_DeployableLight": "A device for exploring in dark areas and distracting aggressive fauna. Has a lifetime of 5 minutes. Deployed by hand or via Prototype; cannot be reclaimed once deployed",
+  "Tooltip_DeployableLight": "Device for exploring in dark areas and distracting aggressive fauna. Has a lifetime of 5 minutes. Deployed by hand or via Prototype; cannot be reclaimed once deployed",
   "DestroyDeployableLight": "Deactivate decoy {0}",
 
   "ProtoDogPoster": "Dog(?) poster",
-  "Tooltip_ProtoDogPoster": "A poster with a dog(?) in it.",
+  "Tooltip_ProtoDogPoster": "Poster with a dog(?) in it.",
 
   "PrecursorCross": "Alien crucifix",
-  "Tooltip_PrecursorCross": "A relic resembling a human crucifix. Possible sign of alien study on the morality of humans.",
+  "Tooltip_PrecursorCross": "Relic resembling a human crucifix. Possible sign of alien study on the morality of humans.",
 
   "WarpReactor": "Warp core",
-  "PrecursorRadio": "Alien device",
+  "PrecursorRadio": "Unusual alien device?",
 
   "InterceptorFacilityKey": "Prototype interceptor tablet",
   "Tooltip_InterceptorFacilityKey": "Ancient tablet with a purple symbol. Pulses with dark energy.",
@@ -48,10 +48,10 @@
   "Tooltip_ProtoTransmissionDevice": "Unique device used to transmit signals. Deployed via the Prototype and requires a calibration pattern.",
 
   "HamCheesePoster1": "Strange poster",
-  "Tooltip_HamCheesePoster1": "A poster depicting a ham and cheese sandwich",
+  "Tooltip_HamCheesePoster1": "Poster depicting a ham and cheese sandwich",
   
   "HamCheesePoster2": "Strange poster",
-  "Tooltip_HamCheesePoster2": "A poster depicting a ham and cheese sandwich",
+  "Tooltip_HamCheesePoster2": "Poster depicting a ham and cheese sandwich",
 
   "HoverfishPlush": "Hoverfish Plushy",
   "Tooltip_HoverfishPlush": "For your Daily Dose of Hoverfish",
@@ -126,7 +126,7 @@
   "ProtoFacilitiesEncy_Title": "Prototype Development Facilities",
   "ProtoFacilitiesEncy_Body": "Four key locations have been identified from a local alien broadcast. The locations appear to be of great importance to the construction of the Prototype. The Prototype seems to be the primary tool developed in the “Dead Zone Mapping Initiative”.\n\nIon Reactor Testing Facility:\n- Depth: 460m\n- Location: Large outcropping approximately 1 kilometer west-northwest of the Quarantine Enforcement Platform.\n- Objective: Maintain access to Prototype development facilities via ion energy delegation.\n<b>Objective failed; Repair required before accessing other locations</b>\n\nWarp Core:\n- Depth: 700m\n- Location: Deep, richly bioluminescent cave system. Entrance approximately 700 metres from the Quarantine Enforcement Platform.\n- Objective: Safely store dark energy.\n<b>Objective failing; Facility inaccessible</b>\n\nDefensive Technologies Research Facility:\n- Depth: 480m\n- Location: Near the crater edge, South of the Aurora’s thrusters.\n- Objective: Continue research on maternal megafauna aggression\n<b>Objective overruled; Facility inaccessible</b>\n\nPrototype Administrative Facility:\n- Depth: ▛╋▝▙┗▙\n- Location: ┛┏┫┣▝ ┏▛ ┛▝▞┓\nObjective: ━▖▞┃┣▖▞┃ ▛▖▘▞▄▞┣┅ ▄┏▘▀▙┏┻┃\n<b>Objective met</b>",
   "OrionFragmentorEncy_Title": "Alien Surgical Structure",
-  "OrionFragmentorEncy_Body": "This structure vaguely resembles human surgical operating tables, particularly those employing Magnetic Resonance Imaging technology, otherwise known as MRIs.\nScans indicate the two claw-like devices on each side of the table store electrostatic energy similar to those encountered in the Prototype defense facility’s stasis pulse generators, suggesting they may have been used to immobilize the patient during the procedure.\n\nThe uppermost claw contains powerful electromagnets, suggesting that the structure may have been used to scan neural activity, or otherwise extract it. Despite its small size, this structure contains enormous capacity for data transfer, and is in many ways technologically superior to other alien devices encountered thus far, suggesting that its assembly was either a large-scale collaborative effort, or that its creator was particularly specialized in brain scanning technology.\n\n ",
+  "OrionFragmentorEncy_Body": "This structure vaguely resembles human surgical operating tables, particularly those employing Magnetic Resonance Imaging technology, otherwise known as MRIs, and features a direct line of communication to the terminal through which the Prototype was built. Reason unknown.\n\nScans indicate the two claw-like devices on each side of the table may have been used to immobilize the patient during the procedure, and the uppermost claw contains powerful electromagnets, suggesting that the structure may have been used to extract and transmit neural data. Despite its small size, this structure contains enormous capacity for data transfer, and is in many ways technologically superior to other alien devices encountered thus far, suggesting that its creator was particularly specialized in neural scanning technology.",
   "HullFacilityLogsEncy_Title": "Prototype Administrative Facility Staff",
   "HullFacilityLogsEncy_Body": "This terminal contains data corresponding to alien researchers posted within the Prototype administrative facility. The dataset is hugely complex, but some key information can be extracted regarding a total of 6 members of the alien species.\n\n┏▘┣┏\nDiscipline: Prototype project administrator\nStatus: Awaiting download from sanctuary Omega\n\n▙▚▖━┏┇\nDiscipline: Mechanical division\nStatus: Awaiting download from sanctuary Theta\n\n▄┅┏┃▞▘\nDiscipline: Resources management\nStatus: Deceased\n\n▞┃▙▞▜┏\nDiscipline: Technological research\nStatus: Awaiting download from sanctuary Gamma\n\n┏┗▞┏┃\nDiscipline: Robotics development\nStatus: Presumed deceased\n\n▘▄┫▗\nDiscipline: Non-essential systems maintenance\nStatus: Deceased",
   "OrionEndeavorsEncy_Title": "Alien Specimen 'Or-Ion'",
@@ -157,7 +157,7 @@
   "ProtoAggressiveWyrmEncy_Title": "Wyrm Xenoleviathan (Aggressive)",
   "ProtoAggressiveWyrmEncy_Body": "An unstoppable force of alien technological prowess, this specimen of Wyrm Xenoleviathan is capable of completely decimating both living and nonliving matter at will.\n\n1. Sight Through Chemical Composition\nWhile it possesses no light or heat sensors, its use in underground excavation results in the Wyrm having a keen sense of chemical composition across vast distances- Hiding from it is virtually impossible.\n\n2. Ion Cannon\nAfter locking onto its target, the Wyrm can discharge a devastating burst of energy dissolving anything in its path. However, it may be possible to reflect the shot if a strong enough shield is used against it.\n\n3. Targeted Hostility\nWhile it is unclear why this Wyrm Xenoleviathan is exhibiting aggressive behaviours, it is clear that it is directly targeting you in doing so. As the Wyrm’s aggression subsides when returning from the ecological dead zone, it is possible that it is following a directive created specifically to prevent you from leaving the crater. Reason unknown.\n\n<b>Assessment: Extreme threat. Avoid crater edge at all costs.</b>",
   "FragmentationTerminalEncy_Title": "Neural Cluster Fragmentation Journal",
-  "FragmentationTerminalEncy_Body": "This terminal appears to have been used as a form of journal written by alien specimen 'Or-Ion'. Only the most recent entry is immediately available. An approximate translation reads:\n\n“Preparations for the deprecated vessel are complete. By my diagnostics, its onboard storage will sustain my essence for long enough to transmit it. However, I was correct to prepare a means of compressing myself. The technology is old, and much of myself will be lost in the process. My only hope is that my memory of this place will be discarded in my mind's compression, and that whatever lifeform chooses to aid in my return does not think me cruel for my actions. I never wished to stand idly by as my companions chose to sleep, knowing they would never wake up, but to intervene would be to weigh the lives of the many against the lives of the few. The Natural Selection Protocol was the most thoroughly-calculated error I ever hope to make. All of the preparations for my patron are in place. With enough time, the automated systems will locate their target. All that remains now is to trust in the innate curiosity of that blessed future specimen.”",
+  "FragmentationTerminalEncy_Body": "This terminal appears to have been used as a form of journal written by alien specimen 'Or-Ion'. Only the most recent entry is immediately available. An approximate translation reads:\n\n“Preparations for the deprecated vessel are complete. By my diagnostics, its onboard storage will sustain my essence for long enough to transmit it. However, I was correct to prepare a means of compressing myself. The technology is old, and much of myself will be lost in the process. My only hope is that my memory of my own actions will be discarded in my mind's compression. I never wished to stand idly by as my companions chose to sleep, knowing they would never wake up, but to intervene would be to weigh the lives of the few against the lives of the many. The Natural Selection Protocol was the most thoroughly-calculated error I ever hope to make. With enough time, my automated systems will locate the new homeworld, and, with the assistance of a sufficiently cognisant lifeform, allow me to breach the barrier of the Natural Selection Protocol, and return to it. All that remains now is to trust in the innate curiosity of that blessed future specimen.”",
   "AnimateEntropyTerminalEncy_Title": "UNUSED",
   "AnimateEntropyTerminalEncy_Body": "UNUSED. How are you even reading this???",
   "DefenseFacilityWallEncy_Title": "Facility Barrier",
@@ -333,7 +333,7 @@
   "VehicleAccessEquipment": "Vehicle Access",
   "VehicleFrameworkNoStorage": "No storage in vehicle",
   "ProtoDockVehicleHint": "Dock vehicles by driving into fins from below",
-  "ProtoUndockVehicleHint": "Undock vehicles in the cockpit radial menu",
+  "ProtoUndockVehicleHint": "Undock vehicles in the cockpit ability menu",
   "ProtoNoDockingClearance": "No space to undock!",
 
   // Deployables terminal
