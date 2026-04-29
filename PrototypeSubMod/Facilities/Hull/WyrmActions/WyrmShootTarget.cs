@@ -86,7 +86,17 @@ public class WyrmShootTarget : WyrmAction
         currentChargeUpTime = 0;
         Plugin.Logger.LogInfo($"Started shoot target");
     }
-    
+
+    public override void OverrideStopPerform()
+    {
+        canShoot = false;
+        hasShot = false;
+        shotChargeSfx.Stop();
+        shotChargeStartSfx.Stop();
+        targetingLineRenderer.enabled = false;
+        base.OverrideStopPerform();
+    }
+
     private void Update()
     {
         if (!performing) return;
