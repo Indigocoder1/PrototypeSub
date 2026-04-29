@@ -16421,7 +16421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  fadeDuration: 1
+  fadeDuration: 5
   skies:
   - sky: {fileID: 0}
     masterIntensities:
