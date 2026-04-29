@@ -47,4 +47,5 @@ internal class DockingRadialAbility : ProtoUpgrade
 
     public override TechType GetTechType() => TechType.None;
     public override Sprite GetSprite() => sprite;
+    public override bool GetIsInstalled() => true;
 }

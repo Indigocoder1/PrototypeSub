@@ -26,7 +26,7 @@ public class RadialIcon : MonoBehaviour
         originalScale = transform.localScale.x;
         targetScale = originalScale;
         currentScale = originalScale;
-        image.color = selected ? enabledCol : disabledCol;
+        image.color = !ability.GetIsInstalled() ? notInstalledCol : selected ? enabledCol : disabledCol;
     }
 
     private void Update()
