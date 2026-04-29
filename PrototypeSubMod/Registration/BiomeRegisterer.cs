@@ -13,6 +13,7 @@ internal static class BiomeRegisterer
 {
     public const string TransmissionSiteBiome = "transmissionsite";
     public const string TransmissionRunupBiome = "transmissionrunup_protovoid";
+    public const string DZMIRunupBiome = "mappingrunup_protovoid";
     
     public static void Register()
     {
@@ -94,7 +95,7 @@ internal static class BiomeRegisterer
         PrefabInfo voidVolumePrefabInfo = PrefabInfo.WithTechType("StoryPingVoidBiome");
         CustomPrefab voidVolumePrefab = new CustomPrefab(voidVolumePrefabInfo);
         AtmosphereVolumeTemplate voidTemplate = new AtmosphereVolumeTemplate(voidVolumePrefabInfo, AtmosphereVolumeTemplate.VolumeShape.Sphere,
-            "void", 11, LargeWorldEntity.CellLevel.Global);
+            DZMIRunupBiome, 11, LargeWorldEntity.CellLevel.Global);
         voidTemplate.ModifyPrefab = prefab =>
         {
             var volum = prefab.GetComponent<AtmosphereVolume>();
@@ -105,7 +106,7 @@ internal static class BiomeRegisterer
         voidVolumePrefab.SetGameObject(voidTemplate);
         voidVolumePrefab.Register();
 
-        var voidSpawnInfo = new SpawnInfo(voidVolumePrefabInfo.ClassID, Plugin.StoryEndPos, Quaternion.identity, Vector3.one * 2400);
+        var voidSpawnInfo = new SpawnInfo(voidVolumePrefabInfo.ClassID, Plugin.StoryEndPos, Quaternion.identity, Vector3.one * 2600);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(voidSpawnInfo);
 
         #endregion

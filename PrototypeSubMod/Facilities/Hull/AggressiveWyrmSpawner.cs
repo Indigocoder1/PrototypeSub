@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using PrototypeSubMod.PrototypeStory.CalibrationSite;
+using PrototypeSubMod.Registration;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -28,8 +29,9 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
     {
         if (WaitScreen.IsWaiting) return;
 
-        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy") || 
-            !StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun")) return;
+        if ((!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy") || 
+            !StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun")) &&
+            AtmosphereDirector.main.GetBiomeOverride() != BiomeRegisterer.DZMIRunupBiome) return;
         
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";
