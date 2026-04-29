@@ -60,6 +60,15 @@ internal class Player_Patches
         __result = InterceptorIslandManager.Instance.GetRespawnPoint();
     }
 
+    [HarmonyPatch(nameof(Player.GetPlayMetalFootstepSounds)), HarmonyPrefix]
+    private static bool GetPlayMetalFootstepSounds_Postfix(ref bool __result)
+    {
+        if (AtmosphereDirector.main.GetBiomeOverride() != "protohulloutpost") return true;
+
+        __result = false;
+        return false;
+    }
+
     [HarmonyPatch(nameof(Player.MovePlayerToRespawnPoint)), HarmonyPrefix]
     private static bool MovePlayerToRespawnPoint_Prefix(Player __instance)
     {

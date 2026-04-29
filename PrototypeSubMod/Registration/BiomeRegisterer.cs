@@ -79,6 +79,16 @@ internal static class BiomeRegisterer
             AudioUtils.GetFmodAsset("HullFacility_Tense"));
         #endregion
 
+        #region Hull Outpost
+
+        var outpostSettings =
+            BiomeUtils.CreateBiomeSettings(new Vector3(16, 12, 6), 2f, new Color(0, 1, 0.912f), 
+                0.25f, new Color(0, 0.95f, 1),
+                0.03f, 40, 0f, 0f);
+        BiomeHandler.RegisterBiome("protohulloutpost", outpostSettings, new BiomeHandler.SkyReference("SkyPrecursorInterior_NoLightmaps"));
+
+        #endregion
+
         #region Story Ping Void
         
         PrefabInfo voidVolumePrefabInfo = PrefabInfo.WithTechType("StoryPingVoidBiome");
