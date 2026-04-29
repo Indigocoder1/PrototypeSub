@@ -5,6 +5,8 @@ namespace PrototypeSubMod.Facilities.Engine;
 
 public class EngineFacilityRepairPoint : MonoBehaviour
 {
+    public static event Action OnPointRepaired;
+    
     public const int REPAIR_POINTS_COUNT = 4;
 
     [SerializeField] private FMODAsset[] remainingPointsVoicelines;
@@ -28,5 +30,7 @@ public class EngineFacilityRepairPoint : MonoBehaviour
         {
             onAllSealedSfx.Play();
         }
+
+        OnPointRepaired?.Invoke();
     }
 }

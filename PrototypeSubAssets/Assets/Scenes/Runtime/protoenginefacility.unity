@@ -16235,6 +16235,10 @@ GameObject:
   - component: {fileID: 965551297}
   - component: {fileID: 965551296}
   - component: {fileID: 965551298}
+  - component: {fileID: 965551300}
+  - component: {fileID: 965551299}
+  - component: {fileID: 965551301}
+  - component: {fileID: 965551302}
   m_Layer: 0
   m_Name: EngineObjects
   m_TagString: Untagged
@@ -16404,6 +16408,261 @@ MonoBehaviour:
   shininess: 4
   specularIntensity: 2
   glowStrength: 1
+--- !u!114 &965551299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965551293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1164896107, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  fadeDuration: 1
+  skies:
+  - sky: {fileID: 0}
+    masterIntensities:
+    - 1
+    - 1
+    - 1
+    diffIntensities:
+    - 1
+    - 1
+    - 1
+    specIntensities:
+    - 1
+    - 1
+    - 1
+  lights: []
+  emissiveController:
+    intensities:
+    - 0
+    - 0
+    - 1
+--- !u!114 &965551300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965551293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -247076990, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightingController: {fileID: 965551299}
+  skyApplier: {fileID: 965551295}
+  defaultState: 0
+--- !u!114 &965551301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965551293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -855719180, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightingController: {fileID: 965551299}
+  sequencedLightEnabler: {fileID: 965551302}
+--- !u!114 &965551302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965551293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1430339455, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightGroups:
+  - lightsInGroup:
+    - {fileID: 743960147}
+    - {fileID: 1750212881}
+    - {fileID: 1109591907}
+    - {fileID: 1604188164}
+    - {fileID: 43103702}
+    - {fileID: 603368297}
+    - {fileID: 1254707592}
+    - {fileID: 1386860526}
+    - {fileID: 169804915}
+    - {fileID: 1796284024}
+    - {fileID: 613766966}
+    - {fileID: 2090690476}
+    - {fileID: 5832656}
+    - {fileID: 637268554}
+    - {fileID: 1468601240}
+    - {fileID: 868685085}
+    - {fileID: 1616726752}
+    - {fileID: 534372245}
+    - {fileID: 589754250}
+    - {fileID: 797361145}
+    - {fileID: 399620112}
+    - {fileID: 336419935}
+    - {fileID: 2117924273}
+    - {fileID: 1016376593}
+    - {fileID: 1514478898}
+    - {fileID: 94746305}
+    - {fileID: 1537826383}
+    - {fileID: 584646585}
+    - {fileID: 4115381}
+    - {fileID: 1569573202}
+    - {fileID: 903027058}
+    - {fileID: 1119188599}
+    - {fileID: 1770927545}
+    - {fileID: 1136952404}
+    - {fileID: 1279980440}
+    - {fileID: 914593076}
+    - {fileID: 374300521}
+    - {fileID: 877831363}
+    - {fileID: 47268605}
+    - {fileID: 1946199414}
+    - {fileID: 100062969}
+    - {fileID: 1014810992}
+    - {fileID: 242256602}
+    - {fileID: 1664465500}
+    - {fileID: 2003144770}
+    - {fileID: 790709821}
+    - {fileID: 761403574}
+    - {fileID: 2109716391}
+    - {fileID: 1244571562}
+    intensities: []
+  initialDelay: 0
+  delayBetweenGroups: 0
+  activationDuration: 1
+  intensityOverDuration:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lightSegmentLengths: 31000000
+  intensities:
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  lights:
+  - {fileID: 743960147}
+  - {fileID: 1750212881}
+  - {fileID: 1109591907}
+  - {fileID: 1604188164}
+  - {fileID: 43103702}
+  - {fileID: 603368297}
+  - {fileID: 1254707592}
+  - {fileID: 1386860526}
+  - {fileID: 169804915}
+  - {fileID: 1796284024}
+  - {fileID: 613766966}
+  - {fileID: 2090690476}
+  - {fileID: 5832656}
+  - {fileID: 637268554}
+  - {fileID: 1468601240}
+  - {fileID: 868685085}
+  - {fileID: 1616726752}
+  - {fileID: 534372245}
+  - {fileID: 589754250}
+  - {fileID: 797361145}
+  - {fileID: 399620112}
+  - {fileID: 336419935}
+  - {fileID: 2117924273}
+  - {fileID: 1016376593}
+  - {fileID: 1514478898}
+  - {fileID: 94746305}
+  - {fileID: 1537826383}
+  - {fileID: 584646585}
+  - {fileID: 4115381}
+  - {fileID: 1569573202}
+  - {fileID: 903027058}
+  - {fileID: 1119188599}
+  - {fileID: 1770927545}
+  - {fileID: 1136952404}
+  - {fileID: 1279980440}
+  - {fileID: 914593076}
+  - {fileID: 374300521}
+  - {fileID: 877831363}
+  - {fileID: 47268605}
+  - {fileID: 1946199414}
+  - {fileID: 100062969}
+  - {fileID: 1014810992}
+  - {fileID: 242256602}
+  - {fileID: 1664465500}
+  - {fileID: 2003144770}
+  - {fileID: 790709821}
+  - {fileID: 761403574}
+  - {fileID: 2109716391}
+  - {fileID: 1244571562}
 --- !u!1 &1014810990
 GameObject:
   m_ObjectHideFlags: 0
