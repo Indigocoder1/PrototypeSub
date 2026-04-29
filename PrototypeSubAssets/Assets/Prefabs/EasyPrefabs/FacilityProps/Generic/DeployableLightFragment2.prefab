@@ -92,6 +92,8 @@ MonoBehaviour:
   dynamic: 0
   emissiveFromPower: 0
   renderers: []
+  overrideSky: 0
+  overrideSkyPos: {x: 0, y: 0, z: 0}
 --- !u!1 &6145939623614531673
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +200,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1b7cdc56a346aaf4ea9c40464ffe9fb3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1036e94e3ccb1a445969d6f5b1c8eba6, type: 2}
     - target: {fileID: 919132149155446097, guid: 1b7cdc56a346aaf4ea9c40464ffe9fb3,
         type: 3}
       propertyPath: m_Name
