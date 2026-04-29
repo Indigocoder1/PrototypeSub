@@ -49,7 +49,7 @@ public abstract class WyrmAction : CreatureAction
         aggressiveWorm.OnActionStarted(this);
     }
 
-    public void OverrideStopPerform()
+    public virtual void OverrideStopPerform()
     {
         performing = false;
     }
