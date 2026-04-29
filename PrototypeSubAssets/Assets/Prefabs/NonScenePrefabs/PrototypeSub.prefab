@@ -8504,7 +8504,7 @@ GameObject:
   - component: {fileID: 8379005203345228063}
   - component: {fileID: 792538775469447211}
   m_Layer: 0
-  m_Name: CalibrationFirstWyrmInteract
+  m_Name: WyrmFirstInteract
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56226,7 +56226,6 @@ MonoBehaviour:
   reachedPointVoiceline: {fileID: 2491250030614356199}
   failedCalibrationVoiceline: {fileID: 6195256433147553700}
   startedCalibrationVoiceline: {fileID: 7432858445481749045}
-  wyrmFirstInteractionVoiceline: {fileID: 792538775469447211}
 --- !u!114 &978866783042066402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100908,6 +100907,7 @@ GameObject:
   - component: {fileID: 3371763760948927259}
   - component: {fileID: 1369342963250766631}
   - component: {fileID: 7039344239093920621}
+  - component: {fileID: 6213313396215825347}
   m_Layer: 0
   m_Name: Lights
   m_TagString: Untagged
@@ -100994,6 +100994,22 @@ MonoBehaviour:
   emissionColor: {r: 0.5707547, g: 1, b: 0.6820405, a: 1}
   intensity: 1.25
   priority: 0
+--- !u!114 &6213313396215825347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698677530494539146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1784667947, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceNotificationManager: {fileID: 5389210478452801882}
+  wyrmFirstInteractionVoiceline: {fileID: 792538775469447211}
+  emissionColorController: {fileID: 3371763760948927259}
+  colorDuringSequence: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &7711173583319160317
 GameObject:
   m_ObjectHideFlags: 0

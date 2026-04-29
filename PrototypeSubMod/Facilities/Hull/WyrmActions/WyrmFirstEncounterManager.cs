@@ -7,6 +7,9 @@ namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
 public class WyrmFirstEncounterManager : MonoBehaviour
 {
+    public static event Action OnFirstEncounterStarted;
+    public static event Action OnFirstEncounterEnded;
+    
     [SerializeField] private ProtoAggressiveWorm aggressiveWorm;
     [SerializeField] private WyrmAction[] predeterminedActions;
     [SerializeField] private float firstAggressionTime;
@@ -21,6 +24,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         if (FirstEncounterCompleted()) return;
 
         aggressiveWorm.SetTimeInVoidForAggression(firstAggressionTime);
+        OnFirstEncounterStarted?.Invoke();
     }
 
     private void Update()
@@ -75,6 +79,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     {
         StoryGoalManager.main.OnGoalComplete("WyrmFirstEncounterComplete");
         aggressiveWorm.ForceDespawn();
+        OnFirstEncounterEnded?.Invoke();
     }
 
     private void OnDestroy()
