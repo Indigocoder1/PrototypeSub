@@ -18,7 +18,6 @@ public class WyrmShootTarget : WyrmAction
     [SerializeField] private float attackDamage;
     [SerializeField] private float chargeUpTime;
     [SerializeField] private float laserTravelTime;
-    [SerializeField] private int parriesToResetAggression = 3;
     [SerializeField] private float timePassiveAfterParries;
     [SerializeField] private float timeBetweenTargetJitters = 0.2f;
     [SerializeField] private float jitterMagnitude = 5f;
@@ -43,7 +42,6 @@ public class WyrmShootTarget : WyrmAction
     private float timeLastJittered;
     private float originalSpeed;
     private int rightHandVectorSign;
-    private int timesParried;
     private bool aimStarted;
 
     private void Start()
@@ -176,22 +174,9 @@ public class WyrmShootTarget : WyrmAction
             travelTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-
-        IncrementParry();
+        
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);
-    }
-
-    private void IncrementParry()
-    {
-        timesParried++;
-        roarManager.PlayRoar(Player.main.transform.position);
-
-        if (timesParried < parriesToResetAggression) return;
-        
-        GetComponent<ProtoAggressiveWorm>().ResetAggression(timePassiveAfterParries);
-        reflectShutdownSfx.Play();
-        timesParried = 0;
     }
 
     private void OnReachedPoint()
