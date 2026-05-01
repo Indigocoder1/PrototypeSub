@@ -95,6 +95,11 @@ public class WyrmRamTarget : WyrmAction
             if (subRoot.GetComponentInChildren<CloakEffectHandler>().GetActive()) continue;
 
             subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
+            var damageInfo = LiveMixin.damageInfoPool.Get();
+            damageInfo.Clear();
+            // Required to update the Cyclops voicelines and call the destruction sequence
+            subRoot.live.NotifyAllAttachedDamageReceivers(damageInfo);
+            LiveMixin.damageInfoPool.Return(damageInfo);
             hasDamagedTarget = true;
             chargeImpactSfx.Play();
             MainCameraControl.main.ShakeCamera(5);
