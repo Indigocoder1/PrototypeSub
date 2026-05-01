@@ -45,6 +45,7 @@ public class MarkerTetherLogic : Factor
         }
         
         if (Player.main.isPiloting) return;
+        if (Player.main.pda.isOpen) return;
         if (Player.main.precursorOutOfWater && Plugin.GlobalSaveData.tetherFactorMarkerLocation == null) return;
         if (Player.main.cinematicModeActive) return;
         if (Player.main.pda.isOpen) return;
