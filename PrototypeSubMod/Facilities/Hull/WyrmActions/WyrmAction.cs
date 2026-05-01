@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,6 +10,7 @@ public abstract class WyrmAction : CreatureAction
     [SerializeField] protected AggressiveWormAnimator wormAnimator;
     [Tooltip("From 0-1, with 1 being most like and 0 being least likely")]
     [SerializeField] private float activationChance;
+    [SerializeField] private float maxTimePerStage = 20f;
 
     public event Action OnActionComplete;
     protected int AttackStage { get; private set; }
@@ -47,6 +49,7 @@ public abstract class WyrmAction : CreatureAction
 
         wormAnimator.SetTravelTarget(GetMovementPoints()[AttackStage], OnReachedTargetPoint);
         aggressiveWorm.OnActionStarted(this);
+        StartCoroutine(ProgressActionDelayed());
     }
 
     public virtual void OverrideStopPerform()
@@ -69,6 +72,19 @@ public abstract class WyrmAction : CreatureAction
         }
         
         wormAnimator.SetTravelTarget(GetMovementPoints()[AttackStage], OnReachedTargetPoint);
+        StartCoroutine(ProgressActionDelayed());
+    }
+
+    private IEnumerator ProgressActionDelayed()
+    {
+        int stageWhenStarted = AttackStage;
+        yield return new WaitForSeconds(maxTimePerStage);
+        if (!performing) yield break;
+        if (AttackStage != stageWhenStarted) yield break;
+        if (AttackStage == GetMovementPoints().Length - 1) yield break;
+
+        Plugin.Logger.LogInfo($"Spent too much time on stage {AttackStage} for {this}. Force progressing stage");
+        OnReachedTargetPoint();
     }
 
     protected abstract Vector3[] GetMovementPoints();
