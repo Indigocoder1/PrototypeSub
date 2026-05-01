@@ -5,6 +5,7 @@ using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Utility;
 using System.Collections;
+using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.IonGenerator;
 using UnityEngine;
 
@@ -25,27 +26,17 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
     [SerializeField] private RadiatePlayerInRange radiatePlayerInRange;
     [SerializeField] private Animator warpCoreAnimator;
     [SerializeField] private AnimationCurve animationSpeedOverDistance;
-    [SerializeField] private Color closeRadiationColor;
+    [SerializeField] private DarkEnergyRadiation darkEnergyRadiation;
     [SerializeField] private float pdaMessageDistance;
 
     [Header("Activation Objects")]
     [SerializeField] private GameObject[] inactiveObjects;
     [SerializeField] private GameObject[] activeObjects;
-
-    private RadiationsScreenFX radiationsScreenFX;
-    private uGUI_RadiationWarning radiationWarning;
-    private Color originalRadiationColor;
-    private bool wasOutOfRange;
     
     private void Start()
     {
         IngameMenu_Patches.OnQuitToMainMenu += OnQuitToMainMenu;
         OnSequenceCompleteEvent += OnSequenceComplete;
-        radiationsScreenFX = Camera.main.GetComponent<RadiationsScreenFX>();
-        originalRadiationColor = radiationsScreenFX.color;
-
-        radiationWarning = uGUI.main.transform.Find("ScreenCanvas/HUD/Content/RadiationWarning")
-            .GetComponent<uGUI_RadiationWarning>();
 
         EnableRelevantObjects();
 
@@ -71,16 +62,6 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
         {
             PDALog.Add("PDA_OnApproachWarpCore");
         }
-
-        bool outOfRange = distance > pdaMessageDistance;
-
-        if (outOfRange != wasOutOfRange)
-        {
-            radiationsScreenFX.color = outOfRange ? originalRadiationColor : closeRadiationColor;
-            radiationWarning.text.text = Language.main.Get(outOfRange ? "RadiationDetected": "DarkMatterDetected");
-        }
-
-        wasOutOfRange = distance > pdaMessageDistance;
     }
 
     public void StartReactorSequence()
@@ -190,15 +171,14 @@ internal class InterceptorReactorSequenceManager : MonoBehaviour
 
     private void OnSequenceComplete()
     {
-        radiationsScreenFX.color = originalRadiationColor;
-        radiationWarning.text.text = Language.main.Get("RadiationDetected");
         radiatePlayerInRange.enabled = false;
+        darkEnergyRadiation.UpdateRadiationStatus();
     }
 
     private void OnDestroy()
     {
         IngameMenu_Patches.OnQuitToMainMenu -= OnQuitToMainMenu;
         OnSequenceCompleteEvent -= OnSequenceComplete;
-        radiationsScreenFX.color = originalRadiationColor;
+        darkEnergyRadiation.UpdateRadiationStatus();
     }
 }

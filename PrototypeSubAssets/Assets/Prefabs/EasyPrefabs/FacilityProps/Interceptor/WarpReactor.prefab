@@ -26023,7 +26023,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  closeRadiationColor: {r: 0.9118862, g: 0, b: 1, a: 1}
+  darkEnergyRadiation: {fileID: 2139581291319855230}
   pdaMessageDistance: 300
   inactiveObjects:
   - {fileID: 1710542388730050162}
@@ -31901,6 +31901,7 @@ GameObject:
   - component: {fileID: 685102834314009896}
   - component: {fileID: 6619337120640226826}
   - component: {fileID: 6668721654611660340}
+  - component: {fileID: 2139581291319855230}
   m_Layer: 0
   m_Name: Radiation
   m_TagString: Untagged
@@ -31991,6 +31992,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiatePlayerInRange: {fileID: 8556937267788864243}
   damagePlayerInRadius: {fileID: 685102834314009896}
+--- !u!114 &2139581291319855230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559121524072683808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1305427864, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiatePlayerInRange: {fileID: 8556937267788864243}
+  radiationColor: {r: 0.9118862, g: 0, b: 1, a: 1}
 --- !u!1 &8564761892010126643
 GameObject:
   m_ObjectHideFlags: 0
