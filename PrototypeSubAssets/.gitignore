@@ -16,6 +16,8 @@
 /[Aa]ssets/[Tt]emp[Mm]aterials.meta
 /[As]ssets/StreamingAssets/*
 /[As]ssets/StreamingAssets.meta
+/[As]ssets/AddressableAssetsData/*
+/[As]ssets/AddressableAssetsData.meta
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
