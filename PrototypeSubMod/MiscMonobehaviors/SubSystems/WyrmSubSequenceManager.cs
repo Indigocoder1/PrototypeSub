@@ -1,4 +1,5 @@
 ﻿using System;
+using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class WyrmSubSequenceManager : MonoBehaviour
     {
         WyrmFirstEncounterManager.OnFirstEncounterStarted += OnSequenceStarted;
         WyrmFirstEncounterManager.OnFirstEncounterEnded += OnSequenceEnded;
+        ProtoDestructionEvent.OnSubDestroyed += OnSequenceEnded;
     }
 
     private void OnSequenceStarted()
@@ -34,5 +36,6 @@ public class WyrmSubSequenceManager : MonoBehaviour
     {
         WyrmFirstEncounterManager.OnFirstEncounterStarted -= OnSequenceStarted;
         WyrmFirstEncounterManager.OnFirstEncounterEnded -= OnSequenceEnded;
+        ProtoDestructionEvent.OnSubDestroyed -= OnSequenceEnded;
     }
 }
