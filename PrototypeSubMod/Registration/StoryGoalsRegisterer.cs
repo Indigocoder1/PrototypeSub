@@ -396,12 +396,8 @@ internal static class StoryGoalsRegisterer
         #endregion
 
         #region On Transmission Site Reached
-        StoryGoalHandler.RegisterBiomeGoal("OnTransmissionSiteReached", Story.GoalType.Story,
+        StoryGoalHandler.RegisterBiomeGoal("Proto_OnTransmissionSiteReached", Story.GoalType.PDA,
             BiomeRegisterer.TransmissionSiteBiome, 10f);
-        StoryGoalHandler.RegisterCustomEvent("OnTransmissionSiteReached", () =>
-        {
-            PDALog.Add("Proto_OnTransmissionSiteReached");
-        });
         #endregion
 
         #region Transmission Device First Loaded

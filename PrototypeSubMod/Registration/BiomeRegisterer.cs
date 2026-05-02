@@ -191,7 +191,7 @@ internal static class BiomeRegisterer
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(transmissionSpawnInfo);
 
         var transmissionSiteSettings = BiomeUtils.CreateBiomeSettings(new Vector3(150, 27.435f, 5.295f), 10f, Color.white, 5f,
-            Color.black, startDistance: 30f);
+            Color.black, startDistance: 80f);
         BiomeHandler.RegisterBiome(TransmissionSiteBiome, transmissionSiteSettings,
             new BiomeHandler.SkyReference("SkyMountains"));
         

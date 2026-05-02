@@ -15,7 +15,7 @@ internal class DockingRadialAbility : ProtoUpgrade
 
     private void Start()
     {
-        finsManager.onFinCountChanged += () =>
+        finsManager.OnFinCountChanged += () =>
         {
             if (finsManager.GetInstalledFinCount() < ProtoFinsManager.FinsForDocking) return;
 

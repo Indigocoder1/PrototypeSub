@@ -9,7 +9,7 @@ public class DisableWithFins : MonoBehaviour
 
     private void Start()
     {
-        finsManager.onFinCountChanged += UpdateActive;
+        finsManager.OnFinCountChanged += UpdateActive;
         UpdateActive();
     }
 

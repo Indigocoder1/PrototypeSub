@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PrototypeSubMod.Credits;
 using PrototypeSubMod.Patches;
+using PrototypeSubMod.PrototypeStory.TransmissionCinematic;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
@@ -19,6 +20,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     [SerializeField] private FMOD_CustomEmitter activateSfx;
     [SerializeField] private FMOD_CustomEmitter idleSfx;
 
+    private SubRoot ownerSub;
     private bool deployed;
     private bool activated;
     private bool pdaOpen;
@@ -133,9 +135,10 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         idleSfx.Play();
     }
 
-    public void DeployDevice()
+    public void DeployDevice(SubRoot subDeployedFrom)
     {
         deployed = true;
+        ownerSub = subDeployedFrom;
         GetComponent<Pickupable>().Drop();
     }
 
@@ -163,11 +166,19 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         Player.main.playerController.SetEnabled(false);
         Inventory.main.quickSlots.DeselectImmediate();
         Player.main.FreezeStats();
-        cinematicAnimator.SetTrigger("PlayAnim");
-        deviceAnimator.SetTrigger("Fire");
+
+        var transmissionCinematic = ownerSub.GetComponentInChildren<SubTransmissionCinematic>();
+        transmissionCinematic.PlayCinematic(this);
+        transmissionCinematic.OnCinematicComplete += OnSubCinematicFinished;
 
         HideForScreenshots.Hide(HideForScreenshots.HideType.Mask | HideForScreenshots.HideType.HUD | HideForScreenshots.HideType.ViewModel);
         GUIController_Patches.SetDenyHideCycling(true);
+    }
+
+    private void OnSubCinematicFinished()
+    {
+        cinematicAnimator.SetTrigger("PlayAnim");
+        deviceAnimator.SetTrigger("Fire");
     }
 
     public void FadeToBlack()

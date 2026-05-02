@@ -61,6 +61,6 @@ public class ProtoScreenFadeManager : MonoBehaviour
         currentFadeTime = 0;
         targetFadeTime = duration;
         previousColor = targetColor;
-        targetColor = new Color(0, 0, 0, 0);
+        targetColor = Color.clear;
     }
 }

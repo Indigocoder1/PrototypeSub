@@ -16,8 +16,9 @@ public class ProtoFinsManager : MonoBehaviour, ISaveDataListener
     
     private static readonly int EngineOn = Animator.StringToHash("FinsActive");
     private static readonly int ResetAnimState = Animator.StringToHash("ResetAnimState");
+    private static readonly int TransmissionDeactivated = Animator.StringToHash("TransmissionDeactivated");
 
-    public event Action onFinCountChanged;
+    public event Action OnFinCountChanged;
 
     [SerializeField] private GameObject dockingBay;
     [SerializeField] private GameObject[] leftFins;
@@ -34,6 +35,7 @@ public class ProtoFinsManager : MonoBehaviour, ISaveDataListener
     private Animator[] leftFinAnimators;
     private Animator[] rightFinAnimators;
     private int installedFinCount;
+    private bool transmissionDeactivated;
 
     private void Start()
     {
@@ -81,7 +83,13 @@ public class ProtoFinsManager : MonoBehaviour, ISaveDataListener
     {
         installedFinCount = count;
         UpdateFinStatus();
-        onFinCountChanged?.Invoke();
+        OnFinCountChanged?.Invoke();
+    }
+
+    public void SetTransmissionDeactivated(bool deactivated)
+    {
+        transmissionDeactivated = deactivated;
+        UpdateFinStatus();
     }
 
     private void UpdateFinStatus()
@@ -121,6 +129,9 @@ public class ProtoFinsManager : MonoBehaviour, ISaveDataListener
             var animR = rightFinAnimators[i];
             animL.SetBool(EngineOn, targetState);
             animR.SetBool(EngineOn, targetState);
+            
+            animL.SetBool(TransmissionDeactivated, transmissionDeactivated);
+            animR.SetBool(TransmissionDeactivated, transmissionDeactivated);
 
             animL.SetTrigger(ResetAnimState);
             animR.SetTrigger(ResetAnimState);

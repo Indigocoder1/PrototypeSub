@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using SubLibrary.Monobehaviors;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PrototypeSubMod.MiscMonobehaviors.Emission;
 
 internal class EmissionColorController : PrefabModifier
 {
-    [SerializeField] private GameObject subRoot;
+    [SerializeField] private GameObject[] objectRoots;
     [SerializeField] private float transitionSpeed;
+    [SerializeField] private bool updateOnStart = true;
 
     private Dictionary<Material, Color> trackedMaterials = new();
     private Dictionary<Component, EmissionRegistrarData> overrideColorData = new();
@@ -28,12 +31,26 @@ internal class EmissionColorController : PrefabModifier
     {
         if (initialized) yield break;
 
-        yield return new WaitUntil(() => subRoot.activeInHierarchy);
+        yield return new WaitUntil(() => objectRoots.All(o => o.activeInHierarchy));
         yield return null;
         
         transitionTimeOut = 50f / transitionSpeed;
-        
-        foreach (var rend in subRoot.GetComponentsInChildren<Renderer>(true))
+        if (!updateOnStart)
+        {
+            currentTransitionTime = transitionTimeOut;
+        }
+
+        foreach (var objectRoot in objectRoots)
+        {
+            RegisterMaterials(objectRoot);
+        }
+
+        initialized = true;
+    }
+
+    private void RegisterMaterials(GameObject objectRoot)
+    {
+        foreach (var rend in objectRoot.GetComponentsInChildren<Renderer>(true))
         {
             var exempt = rend.GetComponentInParent<EmissionControllerExempt>();
             if (exempt != null) continue;
@@ -45,8 +62,6 @@ internal class EmissionColorController : PrefabModifier
                 trackedMaterials.Add(mat, mat.GetColor("_GlowColor"));
             }
         }
-
-        initialized = true;
     }
 
     private void Update()
@@ -102,6 +117,11 @@ internal class EmissionColorController : PrefabModifier
                 tempColor = data.overrideColor;
             }
         }
+    }
+    
+    public void ForceUpdate()
+    {
+        currentTransitionTime = 0;
     }
 
     public struct EmissionRegistrarData

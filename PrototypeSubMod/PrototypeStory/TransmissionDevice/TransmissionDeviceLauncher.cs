@@ -11,6 +11,7 @@ namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
 
 public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
 {
+    [SerializeField] private SubRoot subRoot;
     [SerializeField] private DeployablesStorageTerminal deployableStorage;
     [SerializeField] private Transform launchOrigin;
     [SerializeField] private Sprite transmissionDeviceSprite;
@@ -58,7 +59,7 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
         var deviceItem = deployableStorage.equipment.GetItemInSlot(DeployablesStorageTerminal.PHASE_GATE_SLOT);
         deployableStorage.equipment.RemoveItem(deviceItem.item);
         
-        deviceItem.item.GetComponent<TransmissionDeviceManager>().DeployDevice();
+        deviceItem.item.GetComponent<TransmissionDeviceManager>().DeployDevice(subRoot);
         deviceItem.item.transform.position = launchOrigin.position;
         deviceItem.item.transform.forward = launchOrigin.forward;
 
