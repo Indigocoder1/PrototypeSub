@@ -29,6 +29,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaMultiplier: 3
+    - _Axis: 1
+    - _DiscardNoAlpha: 1
     - _EmissiveStrength: 9.1
     - _Falloff: 6.14
     - _NoiseMultiplier: 0.29
@@ -36,6 +38,7 @@ Material:
     - _ObjMinY: -15.78
     - _UVSpread: 0.063
     - _UVTarget: 0
+    - _UseLocal: 0
     m_Colors:
     - _EmissiveColor: {r: 1, g: 1, b: 1, a: 1}
     - _MoveDir: {r: 0, g: 1, b: 0, a: 1}

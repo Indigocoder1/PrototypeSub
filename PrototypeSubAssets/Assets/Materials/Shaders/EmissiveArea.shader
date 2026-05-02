@@ -6,19 +6,22 @@
         _NoiseTex ("Noise Texture", 2D) = "white" {}
         _EmissiveColor ("Emissive Color", Color) = (1, 1, 1, 1)
         _EmissiveStrength ("Emissive Strength", Range(0, 20)) = 1
-        _UVTarget ("Y Pos", Range(0, 1)) = 0.5
-        _UVSpread ("Range", Range(0, 0.5)) = 0.1
+        _UVTarget ("Progress", Range(0, 1)) = 0.5
+        _UVSpread ("Range", Range(0, 2)) = 0.1
         _Falloff ("Falloff", Float) = 1
-        _ObjMinY ("Object Min Y", Float) = 0
-        _ObjMaxY ("Object Max Y", Float) = 1
+        _ObjMinY ("Object Min Coord", Float) = 0
+        _ObjMaxY ("Object Max Coord", Float) = 1
         _AlphaMultiplier ("Alpha Multiplier", Float) = 2
         _NoiseMultiplier ("Noise Multiplier", Range(0, 1)) = 0.1
+        [Toggle] _UseMatrix ("Use Custom Matrix", Float) = 0
+        [Toggle] _DiscardNoAlpha ("Discard if no alpha", Float) = 1
+        [Enum(X, 0, Y, 1, Z, 2)] _Axis ("Axis", Float) = 1
     }
     SubShader
     {
         Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 100
-        ZWrite Off
+        ZWrite On
         Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
@@ -51,9 +54,12 @@
             sampler2D _NoiseTex;
             float4 _NoiseTex_ST;
 
+            float4x4 _EmissiveAreaTransformMatrix;
             fixed4 _EmissiveColor;
             half _EmissiveStrength;
-            fixed _UVTarget;
+            half _UseMatrix;
+            half _Axis;
+            half _UVTarget;
             fixed _UVSpread;
             
             float _ObjMaxY;
@@ -61,6 +67,7 @@
             float _Falloff;
             half _AlphaMultiplier;
             fixed _NoiseMultiplier;
+            fixed _DiscardNoAlpha;
 
             v2f vert (appdata v)
             {
@@ -98,9 +105,19 @@
                 float posMin = _UVTarget - _UVSpread;
                 float posMax = _UVTarget + _UVSpread;
 
-                float uvCurrent = invLerp(_ObjMinY - _UVSpread, _ObjMaxY + _UVSpread * 10 + _NoiseMultiplier * 4, i.worldPos.y) + (noiseVal * _NoiseMultiplier);
-
-                if (uvCurrent < posMin || uvCurrent > posMax) discard;
+                float3 coord = i.worldPos * (1 - _UseMatrix) + mul(_EmissiveAreaTransformMatrix, i.worldPos) * _UseMatrix;
+                float scalar = 
+                              coord.x * saturate(1 - _Axis)
+                            + coord.y * saturate(2 - _Axis) * saturate(abs(_Axis - 2)) * saturate(_Axis)
+                            + coord.z * saturate(3 - _Axis) * saturate(abs(_Axis - 1)) * saturate(_Axis);
+                float uvCurrent = invLerp(_ObjMinY - _UVSpread, _ObjMaxY + _UVSpread * 10 + _NoiseMultiplier * 4, scalar) + (noiseVal * _NoiseMultiplier);
+                
+                if (uvCurrent < posMin || uvCurrent > posMax)
+                {
+                    if (_DiscardNoAlpha == 1) discard;
+                    
+                    return fixed4(0,0,0,1);
+                }
 
                 float stepMax = smoothstep(1, 0, invLerp(_UVTarget, posMax, uvCurrent));
                 float stepMin = smoothstep(0, 1, invLerp(posMin, _UVTarget, uvCurrent));
@@ -109,7 +126,8 @@
                 fixed4 col = emissive * _EmissiveColor * _EmissiveStrength;
 
                 float val = dot(emissive.rgb, fixed3(0.3, 0.59, 0.11));
-                return fixed4(col.rgb, pow(smoothStep, _Falloff) * val * _AlphaMultiplier);
+                float emissionStrength = pow(smoothStep, _Falloff) * val * _AlphaMultiplier;
+                return fixed4(col.rgb * emissionStrength, emissionStrength * _DiscardNoAlpha + 1 - _DiscardNoAlpha);
             }
             ENDCG
         }
