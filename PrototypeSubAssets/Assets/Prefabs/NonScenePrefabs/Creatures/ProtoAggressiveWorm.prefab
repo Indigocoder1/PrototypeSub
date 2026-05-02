@@ -6871,6 +6871,7 @@ Transform:
   - {fileID: 4699808734583788080}
   - {fileID: 6225381943400952255}
   - {fileID: 4896556848661707955}
+  - {fileID: 689510741452761588}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7164,6 +7165,7 @@ MonoBehaviour:
   minActionCheckInterval: 10
   wormAnimator: {fileID: 5351068426189712924}
   activationChance: 0.2
+  maxTimePerStage: 15
   offsetFromPlayer: 75
   timeBetweenPointRecalculations: 10
   maxAngleFromForward: 30
@@ -7189,11 +7191,10 @@ MonoBehaviour:
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
   activationChance: 0.8
+  maxTimePerStage: 15
+  shoveSub: {fileID: 1085629547716279477}
   attackDamage: 1500
-  attackRadius: 5
-  impulseForce: 1500000
   roarManager: {fileID: 121548284677876063}
-  chargeImpactSfx: {fileID: 3899844511224395324}
 --- !u!114 &2563168583705512565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7216,6 +7217,7 @@ MonoBehaviour:
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
   activationChance: 0.8
+  maxTimePerStage: 15
   targetingLineRenderer: {fileID: 5574985794993970521}
   laserOrigin: {fileID: 1275925625256178328}
   beamLengthCurve:
@@ -7287,7 +7289,6 @@ MonoBehaviour:
   attackDamage: 2500
   chargeUpTime: 10
   laserTravelTime: 1.5
-  parriesToResetAggression: 3
   timePassiveAfterParries: 30
   timeBetweenTargetJitters: 0.05
   jitterMagnitude: 0.2
@@ -7321,6 +7322,7 @@ MonoBehaviour:
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
   activationChance: 0.85
+  maxTimePerStage: 15
   roarManager: {fileID: 121548284677876063}
   increasedSpeed: 60
   maxDistMovedToRecalculate: 250
@@ -11701,6 +11703,65 @@ Transform:
   m_Father: {fileID: 1563852477254856907}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: -0.0000016690104, y: 0.000017118526, z: -7.0989904e-13}
+--- !u!1 &8402167350829239916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 689510741452761588}
+  - component: {fileID: 1932940449579826817}
+  - component: {fileID: 1085629547716279477}
+  m_Layer: 0
+  m_Name: ShoveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &689510741452761588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402167350829239916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 5.97}
+  m_LocalScale: {x: 8.325603, y: 8.325603, z: 8.325603}
+  m_Children: []
+  m_Father: {fileID: 3230497408674094389}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1932940449579826817
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402167350829239916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1085629547716279477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402167350829239916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1851140538, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shoveImpulse: 1500000
+  impactSfx: {fileID: 3899844511224395324}
 --- !u!1 &8412220139845116049
 GameObject:
   m_ObjectHideFlags: 0

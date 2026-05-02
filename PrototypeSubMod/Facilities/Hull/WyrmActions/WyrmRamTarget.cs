@@ -5,19 +5,18 @@ namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
 public class WyrmRamTarget : WyrmAction
 {
+    [SerializeField] private WyrmShoveSub shoveSub;
     [SerializeField] private float attackDamage = 200;
-    [SerializeField] private float attackRadius;
-    [SerializeField] private float impulseForce;
     
     [Header("SFX")]
     [SerializeField] private WyrmRoarManager roarManager;
-    [SerializeField] private FMOD_CustomEmitter chargeImpactSfx;
     
     private bool hasDamagedTarget;
 
     private void Start()
     {
         OnReachedTarget += OnReachedPoint;
+        shoveSub.OnHitSub += OnHitSub;
     }
     
     public override void Perform(Creature creature, float time, float deltaTime)
@@ -78,40 +77,23 @@ public class WyrmRamTarget : WyrmAction
 
     private void OnReachedPoint()
     {
-        var pointsLength = GetMovementPoints().Length;
         if (AttackStage == 1)
         {
             roarManager.PlayRoar(Player.main.transform.position);
         }
-        
-        if (AttackStage <= pointsLength - 1 || hasDamagedTarget) return;
-        
-        var colliders = Physics.OverlapSphere(transform.position, attackRadius);
-        foreach (var col in colliders)
-        {
-            var subRoot = col.GetComponentInParent<SubRoot>();
-
-            if (!subRoot) continue;
-            if (subRoot.GetComponentInChildren<CloakEffectHandler>().GetActive()) continue;
-
-            subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
-            var damageInfo = LiveMixin.damageInfoPool.Get();
-            damageInfo.Clear();
-            // Required to update the Cyclops voicelines and call the destruction sequence
-            subRoot.live.NotifyAllAttachedDamageReceivers(damageInfo);
-            LiveMixin.damageInfoPool.Return(damageInfo);
-            hasDamagedTarget = true;
-            chargeImpactSfx.Play();
-            MainCameraControl.main.ShakeCamera(5);
-
-            subRoot.rigidbody.AddForce(transform.forward * impulseForce, ForceMode.Impulse);
-            break;
-        }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnHitSub(SubRoot subRoot)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRadius);
+        if (!performing) return;
+        
+        subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
+        var damageInfo = LiveMixin.damageInfoPool.Get();
+        damageInfo.Clear();
+        // Required to update the Cyclops voicelines and call the destruction sequence
+        subRoot.live.NotifyAllAttachedDamageReceivers(damageInfo);
+        LiveMixin.damageInfoPool.Return(damageInfo);
+
+        performing = false;
     }
 }
