@@ -190,8 +190,8 @@ internal static class BiomeRegisterer
             Quaternion.identity, Vector3.one * 300);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(transmissionSpawnInfo);
 
-        var transmissionSiteSettings = BiomeUtils.CreateBiomeSettings(new Vector3(150, 27.435f, 5.295f), 10f, Color.white, 10f,
-            Color.black, startDistance: 15f);
+        var transmissionSiteSettings = BiomeUtils.CreateBiomeSettings(new Vector3(150, 27.435f, 5.295f), 10f, Color.white, 5f,
+            Color.black, startDistance: 30f);
         BiomeHandler.RegisterBiome(TransmissionSiteBiome, transmissionSiteSettings,
             new BiomeHandler.SkyReference("SkyMountains"));
         
