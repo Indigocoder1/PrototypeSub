@@ -537,12 +537,22 @@ internal static class EncyEntryRegisterer
 
         string protoNumbersTitle = Language.main.Get("ProtoNumbersEncy_Title");
         string protoNumbersDescription = Language.main.Get("ProtoNumbersEncy_Body");
-        Texture2D protoNumbersBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoNumbersEncy");
+        Texture2D protoNumbersBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoBearingsEncy");
         
         PDAHandler.AddEncyclopediaEntry("ProtoNumbersEncy", "DownloadedData/Prototype/AlienClues", protoNumbersTitle,
             protoNumbersDescription, protoNumbersBackground, unlockSound: PDAHandler.UnlockBasic);
         #endregion
 
+        #region Puzzle Bearings
+
+        string protoBearingsTitle = Language.main.Get("ProtoBearingsEncy_Title");
+        string protoBearingsDescription = Language.main.Get("ProtoBearingsEncy_Body");
+        Texture2D protoBearingsBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoBearingsEncy");
+        
+        PDAHandler.AddEncyclopediaEntry("ProtoBearingsEncy", "DownloadedData/Prototype/AlienClues", protoBearingsTitle,
+            protoBearingsDescription, protoBearingsBackground, unlockSound: PDAHandler.UnlockBasic);
+        #endregion
+        
         #region Particle Transmitter
         string transmitterTitle = Language.main.Get("ProtoPhaseGateTransmitterEncy_Title");
         string transmitterDescription = Language.main.Get("ProtoPhaseGateTransmitterEncy_Body");

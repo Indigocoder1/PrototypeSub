@@ -192,6 +192,9 @@
   "ProtoNumbersEncy_Title": "Alien Numerical System Analysis",
   "ProtoNumbersEncy_Body": "This facility appears to have been dedicated to exemplifying and demonstrating the numerical system used by the alien species. While the extent to which the shown symbols are utilised in alien technology is unknown, several characteristics can be observed:\n\n1. Base-9\nUnlike typical human numbers, the aliens appear to use a nonary (base 9) number system. Because nonary is not typically used in digital computing, the aliens may have evolved alongside the need for low-level technological interfaces through base-3, then migrated to a more complex number system.\n\n2. Visual symmetry\nEach symbol is both horizontally and vertically symmetrical. While it is unclear, this may indicate a number system of higher complexity wherein symbols are merged together to represent larger values, while still being identifiable as their original numbers.\n\n<b>Assessment: These symbols are likely to appear in other instances of alien technology. Use this databank entry as a reference in such cases.</b>",
 
+  "ProtoBearingsEncy_Title": "Alien Bearing System Analysis",
+  "ProtoBearingsEncy_Body": "REQUIRES DESCRIPTION",
+  
   "TransmissionTerminalEncy_Title": "Transmission Device",
   "TransmissionTerminalEncy_Body": "This device is of unique build. By analysing its safety mechanisms, it is clear that normal alien technology follows distinct manufacturing regulations. This device, however, functions irrespective of these guidelines, suggesting its creation was either a secret, or that the enforcement of these regulations was impossible at the time of its design.\n\n1. Data transmission\nThe device's primary function is to transmit data of type: [NEURAL CLUSTER] over distances of thousands, possibly millions of light-years. The device must be manually 'targeted' at the transmission receiving point, suggesting that said point's location was unknown at the time of the device's creation.\n\n2. Prototype compatibility\nThe device is configured to be deployed by the Prototype. As it does so, data of type: [NEURAL CLUSTER] is siphoned from the Prototype into the device, which, following the input of a target pattern, is then sent to its target.",
 
@@ -367,6 +370,7 @@
   "ProtoFacilityLocationsHint": "This vessel's construction has prompted a broadcast from a nearby alien source. Downloading summary to databank.",
   "OnPrecursorSuitPickup": "When operating equipment infused with alien technology, please carefully document any unwanted side effects <duration=7043>\nsuch as poor blood circulation, confusion, feelings of invincibility and death to a wellbeing journal for later analysis.<delay=7043><duration=8193>",
   "ProtoNumbersHint": "For your convenience, this PDA has compiled a sheet of alien numbers and their corresponding values for future reference.<delay=1000><duration=13000>",
+  "ProtoBearingsHint": "Here's the bearings!",
   "InterceptorFacilityTabletUnlock": "Translating local alien broadcast: Archway clearance is required from all island personnel. Issuing clearance key schematics…<duration=13000>",
   "PDA_OnEnterVoidWyrmActivated": "Alert. High priority radio message received<duration=2000>",
   "PDA_OnApproachWarpCore": "Warning: Detecting unstable dark energy readings ahead. Proceed with caution.",

@@ -343,11 +343,6 @@ internal static class StoryGoalsRegisterer
         #endregion
 
         #region Number Puzzle Completion
-        StoryGoalHandler.RegisterCustomEvent("ProtoNumberPuzzleComplete", () =>
-        {
-
-        });
-
         StoryGoalHandler.RegisterCustomEvent("Ency_ProtoNumbers", () =>
         {
             PDAEncyclopedia.Add("ProtoNumbersEncy", true);
@@ -361,6 +356,15 @@ internal static class StoryGoalsRegisterer
             "ProtoNumberPuzzleComplete");
         StoryGoalHandler.RegisterCompoundGoal("ProtoNumbersHint", Story.GoalType.Story, 10f,
             "ProtoNumberPuzzleComplete");
+        #endregion
+
+        #region Bearing Puzzle Completion
+
+        StoryGoalHandler.RegisterCompoundGoal("ProtoNumbersEncy", Story.GoalType.Encyclopedia, 15f,
+            "ProtoBearingPuzzleComplete");
+        StoryGoalHandler.RegisterCompoundGoal("ProtoBearingsHint", Story.GoalType.PDA, 10f,
+            "ProtoBearingPuzzleComplete");
+
         #endregion
 
         #region Calibration Site Completion
