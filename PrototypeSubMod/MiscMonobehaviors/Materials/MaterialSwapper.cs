@@ -1,24 +1,22 @@
 ﻿using UnityEngine;
 
+namespace PrototypeSubMod.MiscMonobehaviors.Materials;
+
 public class MaterialSwapper : MonoBehaviour
 {
     [SerializeField] private Material materialFrom;
     [SerializeField] private Material materialTo;
-    [SerializeField] private bool swapMaterials;
-    
-    private void OnDrawGizmosSelected()
-    {
-        if (!swapMaterials) return;
-        swapMaterials = false;
 
+    public void SwapMaterials(bool reverse = false)
+    {
         foreach (var rend in GetComponentsInChildren<Renderer>(true))
         {
             var materials = rend.sharedMaterials;
             for (var i = 0; i < materials.Length; i++)
             {
-                if (materials[i] == materialFrom)
+                if (materials[i] == (reverse ? materialTo : materialFrom))
                 {
-                    materials[i] = materialTo;
+                    materials[i] = reverse ? materialFrom : materialTo;
                 }
             }
 

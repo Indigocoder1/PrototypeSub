@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PrototypeSubMod.Credits;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.PrototypeStory.TransmissionDevice;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class SubTransmissionCinematic : MonoBehaviour
     private static readonly int TransmissionDeactivated = Animator.StringToHash("TransmissionDeactivated");
     public event Action OnCinematicComplete;
 
+    [SerializeField] private MaterialSwapper materialSwapper;
     [SerializeField] private EmissionColorController subEmissionController;
     [SerializeField] private EmissionColorController finEmissionController;
     [SerializeField] private ProtoFinsManager finsManager;
@@ -31,6 +33,7 @@ public class SubTransmissionCinematic : MonoBehaviour
     
     public void PlayCinematic(TransmissionDeviceManager transmissionDeviceManager)
     {
+        materialSwapper.SwapMaterials();
         StartCoroutine(PlayCinematicAsync(transmissionDeviceManager));
     }
 
@@ -71,6 +74,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         finEmissionController.RemoveTempColor(this);
         subEmissionController.enabled = true;
         subEmissionController.ForceUpdate();
+        materialSwapper.SwapMaterials(true);
     }
 
     private void OnDisable()
