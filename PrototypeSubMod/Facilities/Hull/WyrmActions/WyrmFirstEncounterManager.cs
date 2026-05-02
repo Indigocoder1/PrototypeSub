@@ -9,6 +9,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
 {
     public static event Action OnFirstEncounterStarted;
     public static event Action OnFirstEncounterEnded;
+    public static event Action OnDespawned;
     
     [SerializeField] private ProtoAggressiveWorm aggressiveWorm;
     [SerializeField] private WyrmAction[] predeterminedActions;
@@ -20,6 +21,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     private void Start()
     {
         CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
+        aggressiveWorm.OnDespawn += OnDespawned;
         
         if (FirstEncounterCompleted()) return;
 

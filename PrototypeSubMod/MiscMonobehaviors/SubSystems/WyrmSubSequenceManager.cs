@@ -17,6 +17,7 @@ public class WyrmSubSequenceManager : MonoBehaviour
     {
         WyrmFirstEncounterManager.OnFirstEncounterStarted += OnSequenceStarted;
         WyrmFirstEncounterManager.OnFirstEncounterEnded += OnSequenceEnded;
+        WyrmFirstEncounterManager.OnDespawned += OnSequenceEnded;
         ProtoDestructionEvent.OnSubDestroyed += OnSequenceEnded;
     }
 
@@ -37,5 +38,6 @@ public class WyrmSubSequenceManager : MonoBehaviour
         WyrmFirstEncounterManager.OnFirstEncounterStarted -= OnSequenceStarted;
         WyrmFirstEncounterManager.OnFirstEncounterEnded -= OnSequenceEnded;
         ProtoDestructionEvent.OnSubDestroyed -= OnSequenceEnded;
+        WyrmFirstEncounterManager.OnDespawned -= OnSequenceEnded;
     }
 }
