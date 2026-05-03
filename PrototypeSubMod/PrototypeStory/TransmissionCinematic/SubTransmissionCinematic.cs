@@ -12,6 +12,7 @@ public class SubTransmissionCinematic : MonoBehaviour
 {
     public event Action OnCinematicComplete;
     
+    [SerializeField] private SubRoot subRoot;
     [SerializeField] private Transform transmissionDeviceLocation;
     [SerializeField] private Animator cinematicAnimator;
     [SerializeField] private EmissionColorController subEmissionController;
@@ -39,6 +40,9 @@ public class SubTransmissionCinematic : MonoBehaviour
         sdfCutout.SetActive(false);
         functionalityRoot.SetActive(true);
         cinematicAnimator.enabled = true;
+        subRoot.enabled = false;
+        subRoot.lightControl.emissiveController.renderers.Clear();
+        subRoot.lightControl.LerpToState(2);
         StartCoroutine(PlayCinematicAsync(transmissionDeviceManager));
     }
 
