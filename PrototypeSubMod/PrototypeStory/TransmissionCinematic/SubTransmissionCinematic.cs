@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using PrototypeSubMod.Credits;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
-using PrototypeSubMod.MiscMonobehaviors.SubSystems;
 using PrototypeSubMod.PrototypeStory.TransmissionDevice;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic;
 
 public class SubTransmissionCinematic : MonoBehaviour
 {
-    private static readonly int TransmissionDeactivated = Animator.StringToHash("TransmissionDeactivated");
     public event Action OnCinematicComplete;
-
-    [SerializeField] private MaterialSwapper materialSwapper;
-    [SerializeField] private EmissionColorController subEmissionController;
-    [SerializeField] private EmissionColorController finEmissionController;
-    [SerializeField] private ProtoFinsManager finsManager;
-    [SerializeField] private Transform transmissionDeviceLocation;
     
-    [Header("Animators")]
-    [SerializeField] private Animator pistonsAnimator;
+    [SerializeField] private Transform transmissionDeviceLocation;
     [SerializeField] private Animator cinematicAnimator;
+    [SerializeField] private EmissionColorController subEmissionController;
+    [SerializeField] private GameObject sdfCutout;
+    [SerializeField] private MaterialSwapper materialSwapper;
+    [SerializeField] private CinematicShot[] cinematicShots;
+
+    private int shotIndex;
     
     public void PlayCinematic()
     {
@@ -34,15 +29,20 @@ public class SubTransmissionCinematic : MonoBehaviour
     public void PlayCinematic(TransmissionDeviceManager transmissionDeviceManager)
     {
         materialSwapper.SwapMaterials();
+        sdfCutout.gameObject.SetActive(false);
         StartCoroutine(PlayCinematicAsync(transmissionDeviceManager));
     }
 
     private IEnumerator PlayCinematicAsync(TransmissionDeviceManager transmissionDeviceManager)
     {
-        const float fadeTime = 0.2f;
+        const float fadeTime = 0.3f;
         ProtoScreenFadeManager.instance.FadeIn(fadeTime);
         yield return new WaitForSeconds(fadeTime);
 
+        var shot = cinematicShots[shotIndex];
+        shot.PlayShot(cinematicAnimator);
+        shot.OnShotCompleted += OnShotCompleted;
+        
         subEmissionController.enabled = false;
         
         if (transmissionDeviceManager)
@@ -51,34 +51,18 @@ public class SubTransmissionCinematic : MonoBehaviour
             transmissionDeviceManager.transform.rotation = transmissionDeviceLocation.rotation;
         }
         
-        cinematicAnimator.SetTrigger("StartCinematic");
-        
         ProtoScreenFadeManager.instance.FadeOut(fadeTime);
     }
 
-    public void DeactivateFins()
+    private void OnShotCompleted()
     {
-        finsManager.SetTransmissionDeactivated(true);
-    }
-
-    public void DeactivatePistons()
-    {
-        pistonsAnimator.SetBool(TransmissionDeactivated, true);
-        finEmissionController.RegisterTempColor(this, new EmissionColorController.EmissionRegistrarData(Color.black));
-    }
-    
-    public void EndCinematic()
-    {
-        finsManager.SetTransmissionDeactivated(false);
-        pistonsAnimator.SetBool(TransmissionDeactivated, false);
-        finEmissionController.RemoveTempColor(this);
-        subEmissionController.enabled = true;
-        subEmissionController.ForceUpdate();
-        materialSwapper.SwapMaterials(true);
-    }
-
-    private void OnDisable()
-    {
-        EndCinematic();
+        cinematicShots[shotIndex].OnShotCompleted -= OnShotCompleted;
+        shotIndex++;
+        
+        if (shotIndex >= cinematicShots.Length) return;
+        
+        var shot = cinematicShots[shotIndex];
+        shot.PlayShot(cinematicAnimator);
+        shot.OnShotCompleted += OnShotCompleted;
     }
 }

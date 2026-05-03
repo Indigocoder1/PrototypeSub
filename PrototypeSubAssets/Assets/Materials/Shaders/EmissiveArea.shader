@@ -55,6 +55,7 @@
             float4 _NoiseTex_ST;
 
             float4x4 _EmissiveAreaTransformMatrix;
+            float3 _MatrixPosOffset;
             fixed4 _EmissiveColor;
             half _EmissiveStrength;
             half _UseMatrix;
@@ -100,13 +101,13 @@
             {
                 fixed4 emissive = tex2D(_EmissiveTex, i.uv);
                 fixed4 noise = triplanarTex(i.worldPos, _NoiseTex);
-
+                
                 float noiseVal = noise.r * _NoiseMultiplier;
                 float posMin = _UVTarget - _UVSpread;
                 float posMax = _UVTarget + _UVSpread;
 
-                float3 coord = i.worldPos * (1 - _UseMatrix) + mul(_EmissiveAreaTransformMatrix, i.worldPos) * _UseMatrix;
-                float scalar = 
+                float3 coord = i.worldPos * (1 - _UseMatrix) + mul(_EmissiveAreaTransformMatrix, i.worldPos + _MatrixPosOffset) * _UseMatrix;
+                float scalar =
                               coord.x * saturate(1 - _Axis)
                             + coord.y * saturate(2 - _Axis) * saturate(abs(_Axis - 2)) * saturate(_Axis)
                             + coord.z * saturate(3 - _Axis) * saturate(abs(_Axis - 1)) * saturate(_Axis);

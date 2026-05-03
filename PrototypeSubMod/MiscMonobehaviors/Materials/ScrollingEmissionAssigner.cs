@@ -54,16 +54,16 @@ internal class ScrollingEmissionAssigner : MonoBehaviour
             Invoke(nameof(ResetDuration), timeBetweenPasses);
         }
 
-        float normaliedValue = currentTime / duration;
+        float normalizedValue = currentTime / duration;
         if (invertDirection)
         {
-            normaliedValue = 1 - normaliedValue;
+            normalizedValue = 1 - normalizedValue;
         }
 
         foreach (var rend in renderers)
         {
-            rend.material.SetFloat("_UVTarget", normaliedValue);
-            rend.material.SetFloat("_NoiseMultiplier", noiseOverTime.Evaluate(normaliedValue));
+            rend.material.SetFloat("_UVTarget", normalizedValue);
+            rend.material.SetFloat("_NoiseMultiplier", noiseOverTime.Evaluate(normalizedValue));
         }
     }
 
