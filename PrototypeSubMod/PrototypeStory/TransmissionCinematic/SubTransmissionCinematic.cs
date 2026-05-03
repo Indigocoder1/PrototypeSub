@@ -16,11 +16,18 @@ public class SubTransmissionCinematic : MonoBehaviour
     [SerializeField] private Animator cinematicAnimator;
     [SerializeField] private EmissionColorController subEmissionController;
     [SerializeField] private GameObject sdfCutout;
+    [SerializeField] private GameObject functionalityRoot;
     [SerializeField] private MaterialSwapper materialSwapper;
     [SerializeField] private CinematicShot[] cinematicShots;
 
     private int shotIndex;
-    
+
+    private void Start()
+    {
+        cinematicAnimator.enabled = false;
+        functionalityRoot.SetActive(false);
+    }
+
     public void PlayCinematic()
     {
         PlayCinematic(null);
@@ -29,7 +36,9 @@ public class SubTransmissionCinematic : MonoBehaviour
     public void PlayCinematic(TransmissionDeviceManager transmissionDeviceManager)
     {
         materialSwapper.SwapMaterials();
-        sdfCutout.gameObject.SetActive(false);
+        sdfCutout.SetActive(false);
+        functionalityRoot.SetActive(true);
+        cinematicAnimator.enabled = true;
         StartCoroutine(PlayCinematicAsync(transmissionDeviceManager));
     }
 
