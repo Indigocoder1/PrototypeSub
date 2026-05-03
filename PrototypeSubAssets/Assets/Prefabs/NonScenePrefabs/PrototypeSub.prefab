@@ -20823,8 +20823,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkObjects:
-  - {fileID: 2110194062325149647}
   - {fileID: 4542840247113547803}
+  - {fileID: 2110194062325149647}
   clearVFXControllers: 0
   lineWidth: 0
 --- !u!114 &7560765454145177243
@@ -20840,8 +20840,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkObjects:
-  - {fileID: 1105809414146608101}
   - {fileID: 783682297572090559}
+  - {fileID: 1105809414146608101}
   clearVFXControllers: 0
   lineWidth: 0
 --- !u!114 &1420083079226533927
@@ -20857,8 +20857,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkObjects:
-  - {fileID: 3199752255534619792}
   - {fileID: 5668888650632438952}
+  - {fileID: 3199752255534619792}
   clearVFXControllers: 0
   lineWidth: 0
 --- !u!1 &1501700868114153907
@@ -26320,7 +26320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882609274538984172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.7, y: 13.14, z: 23.67}
+  m_LocalPosition: {x: 8.14, y: 13.14, z: 22.17}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 3742808248224552120}
@@ -51513,7 +51513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3683976433819380390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.72, y: 7.71, z: 20.62}
+  m_LocalPosition: {x: 8.41, y: 7.71, z: 18.29}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 3742808248224552120}
@@ -130165,7 +130165,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8379494007792543043, guid: e343728590fefc047882de898ed2ace1, type: 3}
+    - {fileID: 555404804622129779, guid: e343728590fefc047882de898ed2ace1, type: 3}
+    - {fileID: 7392254364625955300, guid: e343728590fefc047882de898ed2ace1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e343728590fefc047882de898ed2ace1, type: 3}
 --- !u!4 &7108513218533745832 stripped
 Transform:
