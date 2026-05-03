@@ -16,6 +16,7 @@ public class SubTransmissionCinematic : MonoBehaviour
     [SerializeField] private Transform transmissionDeviceLocation;
     [SerializeField] private Animator cinematicAnimator;
     [SerializeField] private EmissionColorController subEmissionController;
+    [SerializeField] private PrecursorTeleporter subTeleporter;
     [SerializeField] private GameObject sdfCutout;
     [SerializeField] private GameObject functionalityRoot;
     [SerializeField] private MaterialSwapper materialSwapper;
@@ -43,6 +44,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         subRoot.enabled = false;
         subRoot.lightControl.emissiveController.renderers.Clear();
         subRoot.lightControl.LerpToState(2);
+        subTeleporter.ToggleDoor(false);
         StartCoroutine(PlayCinematicAsync(transmissionDeviceManager));
     }
 

@@ -24,6 +24,11 @@ public class EnergyTransferShot : CinematicShot
     {
         lightningObjects.SetActive(true);
     }
+    
+    public void DisableLightningObjects()
+    {
+        lightningObjects.SetActive(false);
+    }
 
     public void SpawnImpactFrames()
     {

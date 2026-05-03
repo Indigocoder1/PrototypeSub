@@ -13445,7 +13445,7 @@ GameObject:
   m_Layer: 0
   m_Name: LightningRoot3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -26321,7 +26321,7 @@ Transform:
   m_GameObject: {fileID: 1882609274538984172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.7, y: 13.14, z: 23.67}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 3742808248224552120}
   m_RootOrder: 1
@@ -51514,7 +51514,7 @@ Transform:
   m_GameObject: {fileID: 3683976433819380390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.72, y: 7.71, z: 20.62}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 3742808248224552120}
   m_RootOrder: 0
@@ -82986,7 +82986,7 @@ GameObject:
   m_Layer: 0
   m_Name: LightningRoot2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -92967,7 +92967,7 @@ GameObject:
   m_Layer: 0
   m_Name: LightningRoot1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -118311,9 +118311,11 @@ MonoBehaviour:
   m_Script: {fileID: -1369944267, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subRoot: {fileID: 6246764057006774658}
   transmissionDeviceLocation: {fileID: 8633221664925078231}
   cinematicAnimator: {fileID: 5730738829192544641}
   subEmissionController: {fileID: 3371763760948927259}
+  subTeleporter: {fileID: 712578900503129357}
   sdfCutout: {fileID: 884482549629992693}
   functionalityRoot: {fileID: 6553620563725203966}
   materialSwapper: {fileID: 2356930403814794647}
