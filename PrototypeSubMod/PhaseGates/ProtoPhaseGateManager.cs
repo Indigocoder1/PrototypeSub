@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace PrototypeSubMod.PhaseGates;
 
-internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
+internal class ProtoPhaseGateManager : MonoBehaviour, IProtoTreeEventListener
 {
     public static event Action OnPhaseGateDeactivated;
     
@@ -41,9 +41,9 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
     private void UpdateConnectedGate()
     {
         if (Plugin.GlobalSaveData.phaseGateLocations.Count % 2 == 1) return;
-        
-        int offset = -(gateIndex % 2 * 2 - 1);
-        connectedGateLocation = Plugin.GlobalSaveData.phaseGateLocations.Values.ElementAt(gateIndex + offset);
+
+        var index = (gateIndex + 1) % 2;
+        connectedGateLocation = Plugin.GlobalSaveData.phaseGateLocations.Values.ElementAt(index);
 
         var matrix = Matrix4x4.TRS(connectedGateLocation.Position,
             Quaternion.LookRotation(connectedGateLocation.TeleporterForward), Vector3.one);
@@ -265,9 +265,9 @@ internal class ProtoPhaseGateManager : MonoBehaviour, IProtoEventListener
         Plugin.GlobalSaveData.phaseGateIndices[prefabIdentifier.Id] = gateIndex;
     }
 
-    public void OnProtoSerialize(ProtobufSerializer serializer) { }
+    public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }
 
-    public void OnProtoDeserialize(ProtobufSerializer serializer)
+    public void OnProtoDeserializeObjectTree(ProtobufSerializer serializer)
     {
         if (!Plugin.GlobalSaveData.phaseGateIndices.TryGetValue(prefabIdentifier.Id, out gateIndex)) return;
         
