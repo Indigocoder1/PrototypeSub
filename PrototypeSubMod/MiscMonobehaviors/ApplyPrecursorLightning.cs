@@ -13,7 +13,7 @@ public class ApplyPrecursorLightning : MonoBehaviour
     private readonly List<VFXElectricArcs> electricArcs = new();
     private GameObject electricArcPrefab;
     
-    private void Start()
+    private void Awake()
     {
         if (linkObjects.Length < 2)
         {
@@ -73,9 +73,8 @@ public class ApplyPrecursorLightning : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         
-        for (int i = 0; i < electricArc.lines.Length; i++)
+        foreach (var line in electricArc.lines)
         {
-            var line = electricArc.lines[i];
             line.line.useWorldSpace = false;
             line.line.startWidth = lineWidth;
             line.line.endWidth = lineWidth;
