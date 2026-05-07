@@ -385,7 +385,7 @@
   "OnEnterProtoNumberPuzzle_ProfileNotFound": "FACILITY: NO PROFILE DETECTED. REPORT TO QUARANTINE ENFORCEMENT PLATFORM FOR IMMEDIATE NEURAL SCAN.<duration=6214>",
   "OnEnterProtoNumberPuzzle_ProfileFound": "FACILITY: PROFILE FOUND. PROCEED WITH COGNITIVE TRIAL.<duration=3536>",
 
-  "EngineFacilityReturnHint": "FACILITY: UNAUTHORIZED COMMAND ISSUED TO PROTOTYPE ION REACTOR TESTING FACILITY<duration=5000>\nBLOCKING COMMA┃▙▗┫-N- ▞┣ ▘D-┻▝▚┃▖━<delay=5000><duration=5000>\nCOMMAND ACCEPTED. PASSAGE UNLOCKED.<delay=10000><duration=5000>",
+  "EngineFacilityReturnHint": "Translating global alien broadcast:<duration=2000>\n'Unauthorized command issued to Ion Reactor Testing Facility. Blocking command ┃▙▗┫-n- ▞┣ ▘d-┻▝▚┃ <delay=2010><duration=5000>\nCommand accepted. Passage unlocked.<delay=4020><duration=3000>\nSignal location uploaded to PDA.<delay=6030><duration=2000>",
 
   "ProtoCalibrationCodeEncy_Title": "Transmission Calibration Code",
   "ProtoCalibrationCodeEncy_Body": "A local alien broadcast has outlined a six-point pattern matching the movements of the Prototype during the prior exercise.\n\nThe pattern appears to represent a highly precise set of instructions to assist in the transmission of data type: [NEURAL CLUSTER]. While it is unknown why such data may require transmitting, it may lead to further acquisition of valuable alien data.\n\n<b>Assessment: Continue following alien instructions to retrieve advanced technologies. Mutual profit will follow.</b>",

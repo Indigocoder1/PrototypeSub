@@ -418,8 +418,8 @@ internal static class StoryGoalsRegisterer
             PDALog.Add("EngineFacilityReturnHint");
         });
 
-        StoryGoalHandler.RegisterCompoundGoal("EngineFacilityReturnHint", Story.GoalType.PDA, 1000f, "OrionSurgicalRoomTome");
-        StoryGoalHandler.RegisterCompoundGoal("EngineScream", Story.GoalType.Story, 7f, "EngineFacilityReturnHint");
+        StoryGoalHandler.RegisterCompoundGoal("EngineScream", Story.GoalType.Story, 200f, "OrionSurgicalRoomTome");
+        StoryGoalHandler.RegisterCompoundGoal("EngineFacilityReturnHint", Story.GoalType.PDA, 70f, "EngineFacilityReturnHint");
         #endregion
 
         #region Fins first installed
