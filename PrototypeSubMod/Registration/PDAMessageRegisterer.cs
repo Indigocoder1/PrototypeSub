@@ -64,7 +64,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.orionEntries.Add(("Proto_FirstInteract", "Proto_FirstInteract"));
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionStart", "Proto_ConstructionStart"));
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionFinish", "Proto_ConstructionFinish"));
-        PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnTransmissionDeviceFirstLoaded"));
+        PDALog_Patches.orionEntries.Add(("Proto_UnauthorizedDevice", "Proto_OnTransmissionDeviceFirstLoaded"));
         PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnCalibrationRunCompleted"));
         PDALog_Patches.orionEntries.Add(("PlaceholderVoiceline", "Proto_OnTransmissionSiteReached"));
         
