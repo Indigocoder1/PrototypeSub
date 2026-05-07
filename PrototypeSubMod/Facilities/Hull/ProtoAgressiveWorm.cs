@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PrototypeSubMod.PrototypeStory;
 using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull;
@@ -54,6 +55,7 @@ public class ProtoAggressiveWorm : Creature
         segmentCount = spineManager.GetSpineSegmentCount();
 
         StartCoroutine(RandomRoar());
+        ProtoStoryLocker.onEndingStart += ForceDespawn;
     }
 
     private IEnumerator RandomRoar()
@@ -277,6 +279,7 @@ public class ProtoAggressiveWorm : Creature
     public override void OnDestroy()
     {
         OnDespawn?.Invoke();
+        ProtoStoryLocker.onEndingStart -= ForceDespawn;
     }
 
     private IEnumerator EatPlayer()
