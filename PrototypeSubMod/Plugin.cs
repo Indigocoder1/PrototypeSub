@@ -513,6 +513,7 @@ namespace PrototypeSubMod
             
             foreach (var asset in customFmodRequest.allAssets)
             {
+                Logger.LogDebug($"Registering audio for {asset}");
                 SubAudioLoader.RegisterAssetAudio((CustomFMODAsset)asset);
             }
             
