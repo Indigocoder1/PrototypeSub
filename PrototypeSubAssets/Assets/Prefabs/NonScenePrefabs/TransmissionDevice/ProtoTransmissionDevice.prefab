@@ -284,7 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinematicManager: {fileID: 2314819926045900736}
   deviceAnimator: {fileID: 349733258600261898}
-  cinematicAnimator: {fileID: 1702810886726562352}
   poweredDownObjects: {fileID: 349733259617394398}
   poweredUpObjects: {fileID: 349733258815225965}
   activationDelay: 2.5
@@ -431,6 +430,8 @@ MonoBehaviour:
   m_Script: {fileID: -460796855, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deviceAnimator: {fileID: 349733258600261898}
+  cinematicAnimator: {fileID: 1702810886726562352}
   ionCubesRenderer: {fileID: 7116929259030652933}
   ionCrystalMatIndex: 3
   emissionOverTime:

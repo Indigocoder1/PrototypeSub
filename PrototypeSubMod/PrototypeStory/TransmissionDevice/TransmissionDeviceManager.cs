@@ -13,7 +13,6 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
 {
     [SerializeField] private DeviceCinematicManager cinematicManager;
     [SerializeField] private Animator deviceAnimator;
-    [SerializeField] private Animator cinematicAnimator;
     [SerializeField] private GameObject poweredDownObjects;
     [SerializeField] private GameObject poweredUpObjects;
     [SerializeField] private float activationDelay;
@@ -170,19 +169,13 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
         Player.main.playerController.SetEnabled(false);
         Inventory.main.quickSlots.DeselectImmediate();
         Player.main.FreezeStats();
+        BreathingSound_Patches.SetStopBreathingSounds(true);
 
         var transmissionCinematic = ownerSub.GetComponentInChildren<SubTransmissionCinematic>();
         transmissionCinematic.PlayCinematic(cinematicManager);
-        transmissionCinematic.OnCinematicComplete += OnSubCinematicFinished;
 
         HideForScreenshots.Hide(HideForScreenshots.HideType.Mask | HideForScreenshots.HideType.HUD | HideForScreenshots.HideType.ViewModel);
         GUIController_Patches.SetDenyHideCycling(true);
-    }
-
-    private void OnSubCinematicFinished()
-    {
-        cinematicAnimator.SetTrigger("PlayAnim");
-        deviceAnimator.SetTrigger("Fire");
     }
 
     public void FadeToBlack()
@@ -201,6 +194,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
         Player.main.cinematicModeActive = false;
         Player.main.UnfreezeStats();
         GUIController_Patches.SetDenyHideCycling(false);
+        BreathingSound_Patches.SetStopBreathingSounds(false);
         PlayCredits();
     }
     
@@ -222,6 +216,11 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
         deployed = true;
         deviceAnimator.SetTrigger("ActivateInstant");
         idleSfx.Play();
+    }
+
+    private void OnDestroy()
+    {
+        OnCinematicFinished();
     }
 
     public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }

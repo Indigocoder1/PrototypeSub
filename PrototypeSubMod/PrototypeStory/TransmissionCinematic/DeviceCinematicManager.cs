@@ -8,6 +8,11 @@ public class DeviceCinematicManager : MonoBehaviour
     private static readonly int EmissionLm = Shader.PropertyToID($"_EmissionLM");
     private static readonly int EmissionLmNight = Shader.PropertyToID("_EmissionLMNight");
     
+    [Header("Animators")]
+    [SerializeField] private Animator deviceAnimator;
+    [SerializeField] private Animator cinematicAnimator;
+    
+    [Header("Emission pulse")]
     [SerializeField] private Renderer ionCubesRenderer;
     [SerializeField] private int ionCrystalMatIndex;
     [SerializeField] private AnimationCurve emissionOverTime;
