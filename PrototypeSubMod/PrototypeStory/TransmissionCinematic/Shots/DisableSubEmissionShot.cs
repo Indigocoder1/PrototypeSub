@@ -43,4 +43,9 @@ public class DisableSubEmissionShot : CinematicShot
     {
         OnShotCompleted?.Invoke(deviceCinematicManager);
     }
+
+    public void PrepFiringPos()
+    {
+        deviceCinematicManager.PrepFiringPos();
+    }
 }
