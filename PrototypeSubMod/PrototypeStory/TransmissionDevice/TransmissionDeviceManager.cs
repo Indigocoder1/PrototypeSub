@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using PrototypeSubMod.Credits;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.PrototypeStory.TransmissionCinematic;
@@ -8,8 +9,9 @@ using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionDevice;
 
-public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
+public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IProtoTreeEventListener
 {
+    [SerializeField] private DeviceCinematicManager cinematicManager;
     [SerializeField] private Animator deviceAnimator;
     [SerializeField] private Animator cinematicAnimator;
     [SerializeField] private GameObject poweredDownObjects;
@@ -125,7 +127,9 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
     private IEnumerator ActivateDevice()
     {
         deviceAnimator.SetTrigger("Activate");
-        Plugin.GlobalSaveData.activatedTransmissionDevices.Add(GetComponent<PrefabIdentifier>().Id);
+        var deviceID = GetComponent<PrefabIdentifier>().Id;
+        var ownerID = ownerSub.GetComponent<PrefabIdentifier>().Id;
+        Plugin.GlobalSaveData.activatedTransmissionDevices.Add(deviceID, ownerID);
         activateSfx.Play();
         yield return new WaitForSeconds(activationDelay);
         
@@ -168,7 +172,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         Player.main.FreezeStats();
 
         var transmissionCinematic = ownerSub.GetComponentInChildren<SubTransmissionCinematic>();
-        transmissionCinematic.PlayCinematic(this);
+        transmissionCinematic.PlayCinematic(cinematicManager);
         transmissionCinematic.OnCinematicComplete += OnSubCinematicFinished;
 
         HideForScreenshots.Hide(HideForScreenshots.HideType.Mask | HideForScreenshots.HideType.HUD | HideForScreenshots.HideType.ViewModel);
@@ -210,7 +214,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
 
     private void OnEnable()
     {
-        if (!Plugin.GlobalSaveData.activatedTransmissionDevices.Contains(GetComponent<PrefabIdentifier>().Id)) return;
+        if (!Plugin.GlobalSaveData.activatedTransmissionDevices.ContainsKey(GetComponent<PrefabIdentifier>().Id)) return;
         
         poweredDownObjects.SetActive(false);
         poweredUpObjects.SetActive(true);
@@ -218,5 +222,24 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager
         deployed = true;
         deviceAnimator.SetTrigger("ActivateInstant");
         idleSfx.Play();
+    }
+
+    public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }
+    
+    public void OnProtoDeserializeObjectTree(ProtobufSerializer serializer)
+    {
+        var deviceID = GetComponent<PrefabIdentifier>().Id;
+        if (!Plugin.GlobalSaveData.activatedTransmissionDevices.TryGetValue(deviceID, out var subID)) return;
+
+        var subRoots = Resources.FindObjectsOfTypeAll(typeof(SubRoot)).Select(s => (SubRoot)s);
+        var ownerSub = subRoots.FirstOrDefault(i => i.GetComponent<PrefabIdentifier>().Id == subID);
+        if (ownerSub == null)
+        {
+            Plugin.Logger.LogWarning($"Didn't find a SubRoot with id = {subID} in the scene. Resetting {deviceID} device.");
+            OnExamine();
+            return;
+        }
+
+        this.ownerSub = ownerSub;
     }
 }
