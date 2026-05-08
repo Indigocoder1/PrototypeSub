@@ -9,7 +9,7 @@ public class FinDisableShot : CinematicShot
 {
     private static readonly int TransmissionDeactivated = Animator.StringToHash("TransmissionDeactivated");
     
-    public override event Action OnShotCompleted;
+    public override event Action<DeviceCinematicManager> OnShotCompleted;
     
     [SerializeField] private EmissionColorController finEmissionController;
     [SerializeField] private ProtoFinsManager finsManager;
@@ -28,6 +28,6 @@ public class FinDisableShot : CinematicShot
 
     public void EndFinsShot()
     {
-        OnShotCompleted?.Invoke();
+        OnShotCompleted?.Invoke(deviceCinematicManager);
     }
 }

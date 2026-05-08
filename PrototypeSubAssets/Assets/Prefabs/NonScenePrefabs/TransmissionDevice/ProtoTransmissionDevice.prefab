@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 2184415061058574208}
   - component: {fileID: 454087779477832224}
   - component: {fileID: 7857840474176513873}
+  - component: {fileID: 2314819926045900736}
   m_Layer: 0
   m_Name: ProtoTransmissionDevice
   m_TagString: Untagged
@@ -281,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 238525257, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinematicManager: {fileID: 2314819926045900736}
   deviceAnimator: {fileID: 349733258600261898}
   cinematicAnimator: {fileID: 1702810886726562352}
   poweredDownObjects: {fileID: 349733259617394398}
@@ -417,6 +419,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   immuneToRepulsionCannon: 1
+--- !u!114 &2314819926045900736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349733257736879899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -460796855, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ionCubesRenderer: {fileID: 7116929259030652933}
+  ionCrystalMatIndex: 3
+  emissionOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: 0.15072171
+      outSlope: 0.15072171
+      tangentMode: 0
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.7525084
+    - serializedVersion: 3
+      time: 0.2574497
+      value: 25
+      inSlope: 0.21970211
+      outSlope: 0.21970211
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.28665298
+      outWeight: 0.15477198
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: -0.000004001894
+      outSlope: -0.000004001894
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &349733258815225965
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +1001,8 @@ MonoBehaviour:
   arcTarget: {fileID: 1037497349014320983}
   setToTile: 1
   textureScale: {x: 0.1, y: 1}
+  startWidth: 1
+  endWidth: 0.4
 --- !u!1 &6909046365872742854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,6 +1881,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f59a97fe8ff547418313f3ae77edaf9, type: 3}
+--- !u!4 &840669023146716080 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8110938336541572420, guid: 1f59a97fe8ff547418313f3ae77edaf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 349733258600261900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &787253258043450739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8199258175611810689, guid: 1f59a97fe8ff547418313f3ae77edaf9,
@@ -1839,12 +1896,6 @@ Transform:
 --- !u!4 &729678041120622277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1079411199292469193, guid: 1f59a97fe8ff547418313f3ae77edaf9,
-    type: 3}
-  m_PrefabInstance: {fileID: 349733258600261900}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4023812350135055590 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3678865339235638762, guid: 1f59a97fe8ff547418313f3ae77edaf9,
     type: 3}
   m_PrefabInstance: {fileID: 349733258600261900}
   m_PrefabAsset: {fileID: 0}
@@ -1866,15 +1917,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 349733258600261900}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &840669023146716080 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8110938336541572420, guid: 1f59a97fe8ff547418313f3ae77edaf9,
-    type: 3}
-  m_PrefabInstance: {fileID: 349733258600261900}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5415332920345422054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3459432936281423382, guid: 1f59a97fe8ff547418313f3ae77edaf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 349733258600261900}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4023812350135055590 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3678865339235638762, guid: 1f59a97fe8ff547418313f3ae77edaf9,
     type: 3}
   m_PrefabInstance: {fileID: 349733258600261900}
   m_PrefabAsset: {fileID: 0}

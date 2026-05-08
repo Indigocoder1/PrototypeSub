@@ -5,7 +5,7 @@ namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic.Shots;
 
 public class EnergyTransferShot : CinematicShot
 {
-    public override event Action OnShotCompleted;
+    public override event Action<DeviceCinematicManager> OnShotCompleted;
 
     [SerializeField] private GameObject lightningObjects;
     [SerializeField] private PrefabSpawn[] impactFrameSpawners;
@@ -17,7 +17,7 @@ public class EnergyTransferShot : CinematicShot
 
     public void EndEnergyTransferShot()
     {
-        OnShotCompleted?.Invoke();
+        OnShotCompleted?.Invoke(deviceCinematicManager);
     }
 
     public void EnableLightningObjects()
