@@ -50,7 +50,7 @@ public class DeviceCinematicManager : MonoBehaviour
         deviceAnimator.SetTrigger(ChargeUp);
     }
 
-    public void FireLaser()
+    public void FireLaserAnim()
     {
         deviceAnimator.SetTrigger(Fire);
     }

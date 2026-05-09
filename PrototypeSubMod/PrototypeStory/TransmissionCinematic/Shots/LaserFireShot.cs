@@ -9,6 +9,7 @@ public class LaserFireShot : CinematicShot
 
     [SerializeField] private float emissionPulseDuration;
     [SerializeField] private float emissionIntensityMultiplier;
+    [SerializeField] private PrefabSpawn impactFrame;
     
     public void PulseDeviceEmissionLong()
     {
@@ -20,8 +21,13 @@ public class LaserFireShot : CinematicShot
         deviceCinematicManager.ChargeLaser();
     }
 
-    public void FireLaser()
+    public void StartLaserFireAnim()
     {
-        deviceCinematicManager.FireLaser();
+        deviceCinematicManager.FireLaserAnim();
+    }
+
+    public void SpawnLaserImpactFrame()
+    {
+        impactFrame.SpawnManual();
     }
 }
