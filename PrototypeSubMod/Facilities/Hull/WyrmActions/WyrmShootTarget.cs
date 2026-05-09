@@ -18,7 +18,6 @@ public class WyrmShootTarget : WyrmAction
     [SerializeField] private float attackDamage;
     [SerializeField] private float chargeUpTime;
     [SerializeField] private float laserTravelTime;
-    [SerializeField] private float timePassiveAfterParries;
     [SerializeField] private float timeBetweenTargetJitters = 0.2f;
     [SerializeField] private float jitterMagnitude = 5f;
     [SerializeField] private float targetingSpeedMultiplier = 0.5f;
@@ -29,7 +28,6 @@ public class WyrmShootTarget : WyrmAction
     [SerializeField] private FMOD_CustomEmitter shotTravelSfx;
     [SerializeField] private FMOD_CustomEmitter shotHitSfx;
     [SerializeField] private FMOD_CustomEmitter shotReflectSfx;
-    [SerializeField] private FMOD_CustomEmitter reflectShutdownSfx;
     [SerializeField] private FMOD_CustomEmitter shotChargeStartSfx;
     
     private GameObject laserVFX;

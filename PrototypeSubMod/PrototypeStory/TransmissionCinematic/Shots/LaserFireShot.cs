@@ -1,4 +1,5 @@
 ﻿using System;
+using PrototypeSubMod.VehicleAccess;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic.Shots;
@@ -7,9 +8,10 @@ public class LaserFireShot : CinematicShot
 {
     public override event Action<DeviceCinematicManager> OnShotCompleted;
 
+    [SerializeField] private PrefabSpawn impactFrame;
+    [SerializeField] private QepLaserSpawner laserSpawner;
     [SerializeField] private float emissionPulseDuration;
     [SerializeField] private float emissionIntensityMultiplier;
-    [SerializeField] private PrefabSpawn impactFrame;
     
     public void PulseDeviceEmissionLong()
     {
@@ -30,4 +32,9 @@ public class LaserFireShot : CinematicShot
     {
         impactFrame.SpawnManual();
     }
+
+    public void PlayWarmupVFX() => laserSpawner.PlayWarmupVFX();
+    public void StopWarmupVFX() => laserSpawner.StopWarmupVFX();
+    public void PlayMuzzleVFX() => laserSpawner.PlayMuzzleVFX();
+    public void PlayLaserVFX() => laserSpawner.PlayLaserVFX();
 }
