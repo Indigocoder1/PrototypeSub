@@ -8,7 +8,8 @@ public class DeviceCinematicManager : MonoBehaviour
     private static readonly int EmissionLm = Shader.PropertyToID($"_EmissionLM");
     private static readonly int EmissionLmNight = Shader.PropertyToID("_EmissionLMNight");
     private static readonly int FiringPos = Animator.StringToHash("PrepFiringPos");
-    private static readonly int Laser = Animator.StringToHash("FireLaser");
+    private static readonly int Fire = Animator.StringToHash("Fire");
+    private static readonly int ChargeUp = Animator.StringToHash("ChargeUp");
 
     [Header("Animators")]
     [SerializeField] private Animator deviceAnimator;
@@ -43,9 +44,14 @@ public class DeviceCinematicManager : MonoBehaviour
     {
         cinematicAnimator.SetTrigger(FiringPos);
     }
+    
+    public void ChargeLaser()
+    {
+        deviceAnimator.SetTrigger(ChargeUp);
+    }
 
     public void FireLaser()
     {
-        deviceAnimator.SetTrigger(Laser);
+        deviceAnimator.SetTrigger(Fire);
     }
 }

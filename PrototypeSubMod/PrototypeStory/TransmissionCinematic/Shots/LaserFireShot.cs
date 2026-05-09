@@ -15,6 +15,11 @@ public class LaserFireShot : CinematicShot
         deviceCinematicManager.PulseEmission(emissionPulseDuration, emissionIntensityMultiplier);
     }
 
+    public void ChargeUpDevice()
+    {
+        deviceCinematicManager.ChargeLaser();
+    }
+
     public void FireLaser()
     {
         deviceCinematicManager.FireLaser();
