@@ -8,6 +8,7 @@ public class DeviceCinematicManager : MonoBehaviour
     private static readonly int EmissionLm = Shader.PropertyToID($"_EmissionLM");
     private static readonly int EmissionLmNight = Shader.PropertyToID("_EmissionLMNight");
     private static readonly int FiringPos = Animator.StringToHash("PrepFiringPos");
+    private static readonly int Laser = Animator.StringToHash("FireLaser");
 
     [Header("Animators")]
     [SerializeField] private Animator deviceAnimator;
@@ -18,19 +19,19 @@ public class DeviceCinematicManager : MonoBehaviour
     [SerializeField] private int ionCrystalMatIndex;
     [SerializeField] private AnimationCurve emissionOverTime;
     
-    public void PulseEmission(float duration = 1f)
+    public void PulseEmission(float duration = 1f, float intensityScalar = 1f)
     {
-        StartCoroutine(PulseEmissionAsync(duration));
+        StartCoroutine(PulseEmissionAsync(duration, intensityScalar));
     }
 
-    private IEnumerator PulseEmissionAsync(float duration)
+    private IEnumerator PulseEmissionAsync(float duration, float intensityScalar)
     {
         float currentTime = 0;
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
             var mat = ionCubesRenderer.materials[ionCrystalMatIndex];
-            var emission = emissionOverTime.Evaluate(currentTime / duration);
+            var emission = emissionOverTime.Evaluate(currentTime / duration) * intensityScalar;
             mat.SetFloat(EmissionLm, emission);
             mat.SetFloat(EmissionLmNight, emission);
 
@@ -41,5 +42,10 @@ public class DeviceCinematicManager : MonoBehaviour
     public void PrepFiringPos()
     {
         cinematicAnimator.SetTrigger(FiringPos);
+    }
+
+    public void FireLaser()
+    {
+        deviceAnimator.SetTrigger(Laser);
     }
 }
