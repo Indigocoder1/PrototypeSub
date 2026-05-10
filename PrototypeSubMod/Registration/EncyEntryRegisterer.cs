@@ -537,7 +537,7 @@ internal static class EncyEntryRegisterer
 
         string protoNumbersTitle = Language.main.Get("ProtoNumbersEncy_Title");
         string protoNumbersDescription = Language.main.Get("ProtoNumbersEncy_Body");
-        Texture2D protoNumbersBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoBearingsEncy");
+        Texture2D protoNumbersBackground = Plugin.GeneralAssetBundle.LoadAsset<Texture2D>("ProtoNumbersEncy");
         
         PDAHandler.AddEncyclopediaEntry("ProtoNumbersEncy", "DownloadedData/Prototype/AlienClues", protoNumbersTitle,
             protoNumbersDescription, protoNumbersBackground, unlockSound: PDAHandler.UnlockBasic);
