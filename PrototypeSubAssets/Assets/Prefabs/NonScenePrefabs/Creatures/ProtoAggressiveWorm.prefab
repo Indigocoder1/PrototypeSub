@@ -7289,7 +7289,6 @@ MonoBehaviour:
   attackDamage: 2500
   chargeUpTime: 10
   laserTravelTime: 1.5
-  timePassiveAfterParries: 30
   timeBetweenTargetJitters: 0.05
   jitterMagnitude: 0.2
   targetingSpeedMultiplier: 0.4
@@ -7298,7 +7297,6 @@ MonoBehaviour:
   shotTravelSfx: {fileID: 8438192860530699916}
   shotHitSfx: {fileID: 2855742536239814733}
   shotReflectSfx: {fileID: 4519176224539796307}
-  reflectShutdownSfx: {fileID: 1179468046105338022}
   shotChargeStartSfx: {fileID: 8641488922426855222}
 --- !u!114 &4846019268480220019
 MonoBehaviour:
@@ -7376,6 +7374,7 @@ MonoBehaviour:
   aggressiveWorm: {fileID: 7131750357433951656}
   predeterminedActions:
   - {fileID: 4846019268480220019}
+  - {fileID: 1020735297128332148}
   - {fileID: 2563168583705512565}
   firstAggressionTime: 10
 --- !u!1 &5358476355074318651
