@@ -170,6 +170,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
         Inventory.main.quickSlots.DeselectImmediate();
         Player.main.FreezeStats();
         BreathingSound_Patches.SetStopBreathingSounds(true);
+        Camera.main.GetComponent<WaterSurfaceOnCamera>().enabled = false;
 
         var transmissionCinematic = ownerSub.GetComponentInChildren<SubTransmissionCinematic>();
         transmissionCinematic.PlayCinematic(cinematicManager);

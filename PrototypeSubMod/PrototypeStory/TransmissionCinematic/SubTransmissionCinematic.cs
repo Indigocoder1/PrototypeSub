@@ -66,6 +66,8 @@ public class SubTransmissionCinematic : MonoBehaviour
             cinematicManager.transform.rotation = transmissionDeviceLocation.rotation;
         }
         
+        subRoot.transform.position = Plugin.TransmissionSitePos;
+        
         ProtoScreenFadeManager.instance.FadeOut(fadeTime);
     }
 

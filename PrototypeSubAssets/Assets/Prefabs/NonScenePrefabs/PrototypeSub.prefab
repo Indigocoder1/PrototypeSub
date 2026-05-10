@@ -117356,6 +117356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applicationCamera: {fileID: 4359274872096516121}
   addWBOIT: 1
+  addWaterSurfaceOnCamera: 1
 --- !u!1 &8753280145954753684
 GameObject:
   m_ObjectHideFlags: 0
@@ -124535,7 +124536,7 @@ PrefabInstance:
     - target: {fileID: 349733257736879899, guid: e343728590fefc047882de898ed2ace1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 729678041120622277, guid: e343728590fefc047882de898ed2ace1,
         type: 3}
