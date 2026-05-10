@@ -24,16 +24,27 @@ internal class EngineCameraShake : MonoBehaviour
 
     public void PushUpShake()
     {
+        if (!InRange()) return;
+        
         MainCameraControl.main.ShakeCamera(intensity_LU, duration_LU, shakeMode_LU, shakeFrequency_LU);
     }
 
     public void PullDownShake()
     {
+        if (!InRange()) return;
+        
         MainCameraControl.main.ShakeCamera(intensity_LD, duration_LD, shakeMode_LD, shakeFrequency_LD);
     }
 
     public void LockShake()
     {
+        if (!InRange()) return;
+        
         MainCameraControl.main.ShakeCamera(intensity_LL, duration_LL, shakeMode_LL, shakeFrequency_LL);
+    }
+
+    private bool InRange()
+    {
+        return Vector3.Distance(Player.main.transform.position, transform.position) < 4f;
     }
 }
