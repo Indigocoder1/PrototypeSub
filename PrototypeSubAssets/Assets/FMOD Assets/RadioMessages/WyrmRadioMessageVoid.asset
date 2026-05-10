@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: WyrmRadioMessageVoid
   id: 
-  audioClip: {fileID: 8300000, guid: 12942018063247748a915595fc8c54b2, type: 3}
+  audioClip: {fileID: 8300000, guid: 811f717affc9e7140a44192109f56d87, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0
