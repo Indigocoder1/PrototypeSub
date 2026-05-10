@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using PrototypeSubMod.VehicleAccess;
 using UnityEngine;
 
@@ -31,6 +32,20 @@ public class LaserFireShot : CinematicShot
 
     public void SpawnLaserImpactFrame()
     {
+        if (impactFrame.spawnedObj)
+        {
+            Destroy(impactFrame.spawnedObj);
+            StartCoroutine(SpawnFrameAsync());
+        }
+        else
+        {
+            impactFrame.SpawnManual();
+        }
+    }
+
+    private IEnumerator SpawnFrameAsync()
+    {
+        yield return null;
         impactFrame.SpawnManual();
     }
 
