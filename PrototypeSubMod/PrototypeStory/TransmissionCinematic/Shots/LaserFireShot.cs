@@ -9,6 +9,7 @@ public class LaserFireShot : CinematicShot
     public override event Action<DeviceCinematicManager> OnShotCompleted;
 
     [SerializeField] private PrefabSpawn impactFrame;
+    [SerializeField] private PrefabSpawn cinematicWorm;
     [SerializeField] private QepLaserSpawner laserSpawner;
     [SerializeField] private float emissionPulseDuration;
     [SerializeField] private float emissionIntensityMultiplier;
@@ -31,6 +32,21 @@ public class LaserFireShot : CinematicShot
     public void SpawnLaserImpactFrame()
     {
         impactFrame.SpawnManual();
+    }
+
+    public void SpawnCinematicWorm()
+    {
+        cinematicWorm.SpawnManual();
+    }
+
+    public void DestroyCinematicWorm()
+    {
+        Destroy(cinematicWorm.spawnedObj);
+    }
+
+    public void EndLaserFireShot()
+    {
+        OnShotCompleted?.Invoke(deviceCinematicManager);
     }
 
     public void PlayWarmupVFX() => laserSpawner.PlayWarmupVFX();
