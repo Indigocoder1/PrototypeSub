@@ -11,7 +11,6 @@ public class VoidGhostLeviathanSpawnerPatch
     private static bool IsPlayerInVoid_Prefix()
     {
         StoryGoalManager storyGoalManager = StoryGoalManager.main;
-        return !storyGoalManager.IsGoalComplete("HullFacilityWormTerminalEncy") ||
-               !storyGoalManager.IsGoalComplete("StartedCalibrationRun");
+        return !storyGoalManager.IsGoalComplete("HullFacilityWormTerminalEncy");
     }
 }
