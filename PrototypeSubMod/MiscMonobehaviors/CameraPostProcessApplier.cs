@@ -9,6 +9,7 @@ public class CameraPostProcessApplier : MonoBehaviour
 {
     [SerializeField] private Camera applicationCamera;
     [SerializeField] private bool addWBOIT;
+    [SerializeField] private bool addWaterSurfaceOnCamera;
 
     private List<WaterClipProxy> waterClipProxies = new();
     
@@ -32,6 +33,14 @@ public class CameraPostProcessApplier : MonoBehaviour
             wboit.camera = applicationCamera;
             wboit.guiCamera = null;
         }
+
+        if (addWaterSurfaceOnCamera)
+        {
+            var onCamera = gameObject.EnsureComponent<WaterSurfaceOnCamera>()
+                .CopyComponent(mainCamera.GetComponent<WaterSurfaceOnCamera>());
+            onCamera.camera = applicationCamera;
+        }
+        
         var behavior = gameObject.EnsureComponent<PostProcessingBehaviour>().CopyComponent(mainCamera.GetComponent<PostProcessingBehaviour>());
         behavior.m_Camera = applicationCamera;
         gameObject.SetActive(true);

@@ -4,6 +4,7 @@ using Story;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using PrototypeSubMod.PrototypeStory;
 using PrototypeSubMod.PrototypeStory.CalibrationSite;
 using PrototypeSubMod.Registration;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
     public void ScheduledUpdate()
     {
         if (WaitScreen.IsWaiting) return;
+        
+        if (ProtoStoryLocker.StoryEndingActive) return;
 
         if ((!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy") || 
             !StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun")) &&

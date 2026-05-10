@@ -8,18 +8,18 @@ namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic.Shots;
 
 public class DisableSubEmissionShot : CinematicShot
 {
-    public override event Action OnShotCompleted;
+    public override event Action<DeviceCinematicManager> OnShotCompleted;
     
     [FormerlySerializedAs("emissionAreaProgress")] [SerializeField] private EmissionAreaManager emissionAreaManager;
     [SerializeField] private float timeToDisableEmission;
     [SerializeField] private AnimationCurve progressOverTime;
     [SerializeField] private AnimationCurve intensityOverTime;
 
-    public override void PlayShot(Animator animator)
+    public override void PlayShot(Animator animator, DeviceCinematicManager cinematicManager)
     {
         emissionAreaManager.UpdateRenderers();
         StartCoroutine(DisableEmissionAsync());
-        base.PlayShot(animator);
+        base.PlayShot(animator, cinematicManager);
     }
 
     private IEnumerator DisableEmissionAsync()
@@ -32,5 +32,20 @@ public class DisableSubEmissionShot : CinematicShot
             currentTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void PulseDeviceEmission()
+    {
+        deviceCinematicManager?.PulseEmission();
+    }
+
+    public void EndEmissionShot()
+    {
+        OnShotCompleted?.Invoke(deviceCinematicManager);
+    }
+
+    public void PrepFiringPos()
+    {
+        deviceCinematicManager.PrepFiringPos();
     }
 }

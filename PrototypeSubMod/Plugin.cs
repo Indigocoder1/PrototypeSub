@@ -513,7 +513,15 @@ namespace PrototypeSubMod
             
             foreach (var asset in customFmodRequest.allAssets)
             {
-                SubAudioLoader.RegisterAssetAudio((CustomFMODAsset)asset);
+                var customAsset = (CustomFMODAsset)asset;
+                if (customAsset.audioClip == null)
+                {
+                    Logger.LogWarning($"{customAsset} does not have an audio clip! Skipping registration");
+                    continue;
+                }
+                
+                Logger.LogDebug($"Registering audio for {customAsset}");
+                SubAudioLoader.RegisterAssetAudio(customAsset);
             }
             
             var multiFmodRequest = AudioBundle.LoadAllAssetsAsync(typeof(MultiClipFMODAsset));

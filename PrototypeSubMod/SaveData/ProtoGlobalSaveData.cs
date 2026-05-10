@@ -25,7 +25,7 @@ internal class ProtoGlobalSaveData : SaveDataCache
     public Dictionary<string, PhaseGateLocation> phaseGateLocations = new();
     public List<string> unlockedCategoriesLastCheck = new();
     public List<string> repairedEngineFacilityPoints = new();
-    public List<string> activatedTransmissionDevices = new();
+    public Dictionary<string, string> activatedTransmissionDevices = new();
     public Dictionary<string, ColorSelection> colorFactorSelections = new();
     
     public Vector3? tetherFactorMarkerLocation = null;
