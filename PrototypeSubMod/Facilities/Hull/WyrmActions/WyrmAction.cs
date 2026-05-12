@@ -75,6 +75,12 @@ public abstract class WyrmAction : CreatureAction
         StartCoroutine(ProgressActionDelayed());
     }
 
+    protected void ForceActionComplete()
+    {
+        performing = false;
+        OnActionComplete?.Invoke();
+    }
+
     private IEnumerator ProgressActionDelayed()
     {
         int stageWhenStarted = AttackStage;

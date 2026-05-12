@@ -85,7 +85,7 @@ public class WyrmRamTarget : WyrmAction
 
     private void OnHitSub(SubRoot subRoot)
     {
-        if (!performing) return;
+        if (!performing || hasDamagedTarget) return;
         
         subRoot.live.TakeDamage(attackDamage, transform.position, DamageType.Drill, gameObject);
         var damageInfo = LiveMixin.damageInfoPool.Get();
@@ -93,7 +93,8 @@ public class WyrmRamTarget : WyrmAction
         // Required to update the Cyclops voicelines and call the destruction sequence
         subRoot.live.NotifyAllAttachedDamageReceivers(damageInfo);
         LiveMixin.damageInfoPool.Return(damageInfo);
+        hasDamagedTarget = true;
 
-        performing = false;
+        ForceActionComplete();
     }
 }
