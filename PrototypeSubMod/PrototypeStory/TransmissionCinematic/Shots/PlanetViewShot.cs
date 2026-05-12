@@ -25,6 +25,16 @@ public class PlanetViewShot : CinematicShot
         base.PlayShot(animator, cinematicManager);
         volumes = FindObjectsOfType<WaterscapeVolume>().ToList();
         SetFogActive(false);
+        ForceDay();
+    }
+    
+    private void ForceDay()
+    {
+        var dayNightCycle = DayNightCycle.main;
+        dayNightCycle.timePassedAsDouble += 1200 - dayNightCycle.timePassed % 1200 + 600;
+        dayNightCycle.skipTimeMode = false;
+        dayNightCycle._dayNightSpeed = 1;
+        dayNightCycle.UpdateAtmosphere();
     }
 
     public void SpawnPlanetLaser()

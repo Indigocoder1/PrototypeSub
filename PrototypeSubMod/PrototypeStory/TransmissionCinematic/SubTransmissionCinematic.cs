@@ -3,6 +3,7 @@ using System.Collections;
 using PrototypeSubMod.Credits;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
+using PrototypeSubMod.Patches;
 using PrototypeSubMod.PrototypeStory.TransmissionDevice;
 using PrototypeSubMod.Upgrades;
 using UnityEngine;
@@ -43,7 +44,8 @@ public class SubTransmissionCinematic : MonoBehaviour
         {
             upgrade.SetUpgradeEnabled(false);
         }
-        
+
+        StoryGoal_Patches.SetBlockGoalCompletion(true);
         materialSwapper.SwapMaterials();
         sdfCutout.SetActive(false);
         functionalityRoot.SetActive(true);
@@ -88,5 +90,10 @@ public class SubTransmissionCinematic : MonoBehaviour
         var shot = cinematicShots[shotIndex];
         shot.PlayShot(cinematicAnimator, cinematicManager);
         shot.OnShotCompleted += OnShotCompleted;
+    }
+
+    private void OnDestroy()
+    {
+        StoryGoal_Patches.SetBlockGoalCompletion(false);
     }
 }
