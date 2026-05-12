@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
-  m_Name: LightGenerate
+  m_Name: PDA_HoverfishPlushUnlock
   m_EditorClassIdentifier: 
-  path: LightGenerate
+  path: PDA_HoverfishPlushUnlock
   id: 
-  audioClip: {fileID: 8300000, guid: 00e020bfcbb2ef74bac6e3344984b981, type: 3}
+  audioClip: {fileID: 8300000, guid: 5170cf56ae53ead46bb3a96505a594ac, type: 3}
   doNotAutoRegister: 0
-  mode: 4210704
-  maxDistance3D: 5
+  mode: 4210832
+  maxDistance3D: 0
   minDistance3D: 0
   fadeOutTime: -1
-  bus: 0
+  bus: 1
   customBusPath: 

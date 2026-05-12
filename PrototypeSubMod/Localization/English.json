@@ -371,9 +371,10 @@
   "OnPrecursorSuitPickup": "When operating equipment infused with alien technology, please carefully document any unwanted side effects <duration=7043>\nsuch as poor blood circulation, confusion, feelings of invincibility and death to a wellbeing journal for later analysis.<delay=7043><duration=8193>",
   "ProtoNumbersHint": "For your convenience, this PDA has compiled a sheet of alien numbers and their corresponding values for future reference.<delay=1000><duration=13000>",
   "ProtoBearingsHint": "Here's the bearings!",
-  "InterceptorFacilityTabletUnlock": "Translating local alien broadcast: Archway clearance is required from all island personnel. Issuing clearance key schematics…<duration=13000>",
+  "InterceptorFacilityTabletUnlock": "Translating local alien broadcast: “Archway clearance is required from all island personnel. Issuing clearance key schematics…”<duration=13000>",
   "PDA_OnEnterVoidWyrmActivated": "Alert. High priority radio message received<duration=2000>",
   "PDA_OnApproachWarpCore": "Warning: Detecting dark energy readings ahead. Proceed with caution.",
+  "OnHoverfishPlushUnlocked": "Detecting prolonged voluntary exposure to acquired alien specimen: “Hoverfish”.<duration=6000>\nIn accordance with the Alterra Corporation's revised emergency mental wellbeing treaty, this PDA has synthesized a tool to aid in your attachment to this creature.<duration=10000><delay=6010>\nAlways remember: True survivors come home with new friends.<duration=5000><delay=16020>",
 
   "ProtoBlinkFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
   "ProtoBiomechanicsFactorUnlock": "Detecting local schematic broadcast. Outputting results to databank.<duration=3500>",
@@ -385,7 +386,7 @@
   "OnEnterProtoNumberPuzzle_ProfileNotFound": "FACILITY: NO PROFILE DETECTED. REPORT TO QUARANTINE ENFORCEMENT PLATFORM FOR IMMEDIATE NEURAL SCAN.<duration=6214>",
   "OnEnterProtoNumberPuzzle_ProfileFound": "FACILITY: PROFILE FOUND. PROCEED WITH COGNITIVE TRIAL.<duration=3536>",
 
-  "EngineFacilityReturnHint": "Translating global alien broadcast:<duration=2000>\n'Unauthorized command issued to Ion Reactor Testing Facility. Blocking command ┃▙▗┫-n- ▞┣ ▘d-┻▝▚┃ <delay=2010><duration=5000>\nCommand accepted. Passage unlocked.<delay=4020><duration=3000>\nSignal location uploaded to PDA.<delay=6030><duration=2000>",
+  "EngineFacilityReturnHint": "Translating global alien broadcast:<duration=2000>\n“Unauthorized command issued to Ion Reactor Testing Facility. Blocking command ┃▙▗┫-n- ▞┣ ▘d-┻▝▚┃ <delay=2010><duration=5000>\nCommand accepted. Passage unlocked.<delay=4020><duration=3000>\nSignal location uploaded to PDA”.<delay=6030><duration=2000>",
 
   "ProtoCalibrationCodeEncy_Title": "Transmission Calibration Code",
   "ProtoCalibrationCodeEncy_Body": "A local alien broadcast has outlined a six-point pattern matching the movements of the Prototype during the prior exercise.\n\nThe pattern appears to represent a highly precise set of instructions to assist in the transmission of data type: [NEURAL CLUSTER]. While it is unknown why such data may require transmitting, it may lead to further acquisition of valuable alien data.\n\n<b>Assessment: Continue following alien instructions to retrieve advanced technologies. Mutual profit will follow.</b>",

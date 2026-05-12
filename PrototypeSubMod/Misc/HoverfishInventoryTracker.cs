@@ -9,7 +9,7 @@ public class HoverfishInventoryTracker : MonoBehaviour
 {
 
 	private float timeHeld = 0f;
-	private float timeToHold = 300f; // 5 minutes
+	private float timeToHold = 1000f; // 10 minutes
 	private bool isPickedUp = false;
 
 

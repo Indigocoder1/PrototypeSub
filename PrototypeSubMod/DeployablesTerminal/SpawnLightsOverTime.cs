@@ -56,6 +56,6 @@ internal class SpawnLightsOverTime : MonoBehaviour
         terminal.IgnoreSoundNextEquip();
         terminal.equipment.AddItem(freeSlot, pickupable.inventoryItem, true);
         
-        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("LightGenerate"), Player.main.transform.position);
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("LightGenerate"), transform.position);
     }
 }
