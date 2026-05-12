@@ -1,5 +1,6 @@
 ﻿using PrototypeSubMod.Prefabs;
 using System.Collections;
+using Nautilus.Utility;
 using UnityEngine;
 using UWE;
 
@@ -54,5 +55,7 @@ internal class SpawnLightsOverTime : MonoBehaviour
         instance.gameObject.SetActive(false);
         terminal.IgnoreSoundNextEquip();
         terminal.equipment.AddItem(freeSlot, pickupable.inventoryItem, true);
+        
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("LightGenerate"), Player.main.transform.position);
     }
 }
