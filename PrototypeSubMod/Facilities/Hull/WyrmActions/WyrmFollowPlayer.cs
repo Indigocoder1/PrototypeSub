@@ -36,6 +36,14 @@ public class WyrmFollowPlayer : WyrmAction
         float angleBetween = Vector3.Angle(dir, forward);
         dir = Vector3.RotateTowards(dir, forward, angleBetween * (1 - maxAngleFromForward / 90) * Mathf.Deg2Rad, 1);
 
+        var currentSub = Player.main.currentSub;
+        if (currentSub && Vector3.Dot(transform.forward, currentSub.transform.forward) < 0)
+        {
+            var sign = Mathf.Sign(Random.Range(-2f, 2f));
+            sign = sign == 0 ? 1 : sign;
+            dir = currentSub.transform.right * sign;
+        }
+        
         var targetPoint = Player.main.transform.position + dir.normalized * offsetFromPlayer;
         return new[] { targetPoint };
     }

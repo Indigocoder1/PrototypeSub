@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Nautilus.Utility;
-using PrototypeSubMod.LightDistortionField;
+﻿using PrototypeSubMod.LightDistortionField;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -124,7 +121,7 @@ public class WyrmDartAction : WyrmAction
             points[2] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.right * (rightHandSign * setupOffset), setupOffset / 2f);
             var magnitudeMultiplier = targetRb == null
                 ? 1
-                : Mathf.Lerp(2, 5f, Mathf.InverseLerp(1, 15, Mathf.Clamp(targetRb.velocity.magnitude, 1, 15)));
+                : Mathf.Lerp(30, 60f, Mathf.InverseLerp(1, 15, Mathf.Clamp(targetRb.velocity.magnitude, 1, 15)));
             points[3] = targetCloakHandler.GetClosestPointOnSurface(target.position + target.forward * (setupOffset * magnitudeMultiplier));
             points[4] = points[3] - target.right * (rightHandSign * setupOffset);
         }

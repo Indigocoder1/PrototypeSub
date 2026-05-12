@@ -7320,7 +7320,7 @@ MonoBehaviour:
   minActionCheckInterval: -1
   wormAnimator: {fileID: 5351068426189712924}
   activationChance: 0.85
-  maxTimePerStage: 15
+  maxTimePerStage: 30
   roarManager: {fileID: 121548284677876063}
   increasedSpeed: 60
   maxDistMovedToRecalculate: 250
