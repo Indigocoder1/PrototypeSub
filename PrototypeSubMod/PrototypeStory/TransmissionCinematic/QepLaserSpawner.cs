@@ -56,4 +56,11 @@ public class QepLaserSpawner : MonoBehaviour
     {
         laserVFX.gameObject.SetActive(true);
     }
+
+    public void DeleteEffects()
+    {
+        Destroy(laserVFX.gameObject);
+        Destroy(muzzleVFX.gameObject);
+        Destroy(warmupVFX.gameObject);
+    }
 }

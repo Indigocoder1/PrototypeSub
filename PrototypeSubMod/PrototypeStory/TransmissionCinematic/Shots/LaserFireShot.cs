@@ -61,6 +61,7 @@ public class LaserFireShot : CinematicShot
 
     public void EndLaserFireShot()
     {
+        laserSpawner.DeleteEffects();
         OnShotCompleted?.Invoke(deviceCinematicManager);
     }
 
