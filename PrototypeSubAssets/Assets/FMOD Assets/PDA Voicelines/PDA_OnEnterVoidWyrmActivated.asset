@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: PDA_OnEnterVoidWyrmActivated
   id: 
-  audioClip: {fileID: 8300000, guid: 33d80c060b896bd4a8c5ed7d3e9b9ce8, type: 3}
+  audioClip: {fileID: 8300000, guid: c75ff2486e17b6c4dbdd0d25b182fcaa, type: 3}
   doNotAutoRegister: 0
   mode: 4210832
   maxDistance3D: 0
