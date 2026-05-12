@@ -1,4 +1,5 @@
 ﻿using Nautilus.Handlers;
+using Nautilus.Utility;
 using PrototypeSubMod.Prefabs;
 using Story;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class SecretDoorTrigger : MonoBehaviour
     private static readonly int Door = Animator.StringToHash("OpenDoor");
     
     [SerializeField] private Animator animator;
+    [SerializeField] private FMOD_CustomEmitter doorOpenSFX;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -22,5 +24,6 @@ public class SecretDoorTrigger : MonoBehaviour
     private void OpenDoor()
     {
         animator.SetTrigger(Door);
+        doorOpenSFX.Play();
     }
 }
