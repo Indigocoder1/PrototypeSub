@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: ElectricExplosion
   id: 
-  audioClip: {fileID: 8300000, guid: 6ed9e608d48395b49800129053c3ef68, type: 3}
+  audioClip: {fileID: 8300000, guid: c66669e453f348545af4811d55a3ea60, type: 3}
   doNotAutoRegister: 0
   mode: 4210704
   maxDistance3D: 250
   minDistance3D: 0
-  fadeOutTime: -1
-  bus: 4
+  fadeOutTime: 0
+  bus: 6
   customBusPath: 
