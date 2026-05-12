@@ -4,6 +4,7 @@ using PrototypeSubMod.Credits;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.PrototypeStory.TransmissionDevice;
+using PrototypeSubMod.Upgrades;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic;
@@ -37,6 +38,12 @@ public class SubTransmissionCinematic : MonoBehaviour
     
     public void PlayCinematic(DeviceCinematicManager cinematicManager)
     {
+        var upgradeManager = subRoot.GetComponentInChildren<ProtoUpgradeManager>();
+        foreach (var upgrade in upgradeManager.GetInstalledUpgrades())
+        {
+            upgrade.SetUpgradeEnabled(false);
+        }
+        
         materialSwapper.SwapMaterials();
         sdfCutout.SetActive(false);
         functionalityRoot.SetActive(true);
