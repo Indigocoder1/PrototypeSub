@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
+using Nautilus.Utility;
 using PrototypeSubMod.Prefabs;
 using Story;
 using TMPro;
@@ -25,6 +26,7 @@ internal class NewUpgradesScreen : MonoBehaviour
     [SerializeField] private GameObject downloadingObjects;
     [SerializeField] private Image progressBar;
     [SerializeField] private float downloadLength;
+    [SerializeField] private FMOD_CustomEmitter upgradeUploadSFX;
     
     [Header("Sprites")]
     [SerializeField] private Button downloadButton;
@@ -124,6 +126,7 @@ internal class NewUpgradesScreen : MonoBehaviour
         buttonObjects.SetActive(false);
         downloadingObjects.SetActive(true);
         UpdateStoredUnlocks();
+        upgradeUploadSFX.Play();
     }
 
     public List<ProtoUpgradeCategory> GetUnlocksSinceLastCheck()

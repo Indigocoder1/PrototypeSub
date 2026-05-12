@@ -1,4 +1,6 @@
-﻿using PrototypeSubMod.LightDistortionField;
+﻿using System.Collections;
+using Nautilus.Utility;
+using PrototypeSubMod.LightDistortionField;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -99,9 +101,13 @@ public class WyrmDartAction : WyrmAction
         roarManager.PlayRoar(Player.main.transform.position);
         speedIncreased = true;
         
-        if (Random.Range(0f, 1000f) < 1)
+        if (Random.Range(0, 1000) == 0)
         {
             dartSpecialSFX.Play();
+        }
+        else
+        {
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("WormDart"), transform.position);
         }
 
         wormAnimator.SetTravelTarget(movementPoints[AttackStage], OnReachedTargetPoint);

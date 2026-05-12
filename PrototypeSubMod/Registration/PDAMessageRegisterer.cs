@@ -35,10 +35,10 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBearingsHint"));
         PDALog_Patches.entries.Add(("PDA_Lifepod3", "Lifepod3PDA"));
         PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoBearingPuzzle"));
-        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "EngineFacilityReturnHint"));
-        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "InterceptorFacilityTabletUnlock"));
+        PDALog_Patches.entries.Add(("PDA_PassageUnlocked", "EngineFacilityReturnHint"));
+        PDALog_Patches.entries.Add(("PDA_InterceptorFacilityTabletUnlock", "InterceptorFacilityTabletUnlock"));
         PDALog_Patches.entries.Add(("PDA_OnEnterVoidWyrmActivated", "PDA_OnEnterVoidWyrmActivated"));
-        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "PDA_OnApproachWarpCore"));
+        PDALog_Patches.entries.Add(("PDA_DarkEnergyReadings", "PDA_OnApproachWarpCore"));
         PDALog_Patches.entries.Add(("PDA_SparseReefWyrm", "OnSparseReefWyrmScanned"));
         PDALog_Patches.entries.Add(("PDA_GrassyWyrm", "OnGrassyWyrmScanned"));
         PDALog_Patches.entries.Add(("PDA_OnAlmaniteIdentified", "OnAlmaniteIdentified"));
