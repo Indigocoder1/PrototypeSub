@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
-  m_Name: PDA_SparseReefWyrm
+  m_Name: BuildTerminalUpgradeUpload
   m_EditorClassIdentifier: 
-  path: PDA_SparseReefWyrm
+  path: BuildTerminalUpgradeUpload
   id: 
-  audioClip: {fileID: 8300000, guid: ccf0bf50951765c43ac3b6c2c4f3aa21, type: 3}
+  audioClip: {fileID: 8300000, guid: 0e36f058c30c4c44983c021bb11f4ecb, type: 3}
   doNotAutoRegister: 0
-  mode: 4210832
+  mode: 4210704
   maxDistance3D: 0
   minDistance3D: 0
   fadeOutTime: -1
-  bus: 1
+  bus: 6
   customBusPath: 
