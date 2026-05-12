@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Nautilus.Utility;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
@@ -114,7 +115,8 @@ public class PrecursorSuitManager : MonoBehaviour
     private void GivePlayerWarperRemnant()
     {
         if (!Plugin.GlobalSaveData.precursorSuitGivesRemnants) return;
-
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("AlmaniteGenerate"), Player.main.transform.position);
+        
         StartCoroutine(SpawnRemnantAsync());
     }
 
