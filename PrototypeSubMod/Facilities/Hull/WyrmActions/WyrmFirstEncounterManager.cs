@@ -67,7 +67,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         newAction.OnActionComplete += OnActionCompleted;
     }
 
-    private bool FirstEncounterCompleted()
+    public bool FirstEncounterCompleted()
     {
         return StoryGoalManager.main.IsGoalComplete("WyrmFirstEncounterComplete");
     }

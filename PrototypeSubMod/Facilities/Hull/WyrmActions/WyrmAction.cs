@@ -13,6 +13,7 @@ public abstract class WyrmAction : CreatureAction
     [SerializeField] private float maxTimePerStage = 20f;
 
     public event Action OnActionComplete;
+    public event Action OnActionStart;
     protected int AttackStage { get; private set; }
     protected event Action OnReachedTarget;
     protected bool performing;
@@ -44,6 +45,7 @@ public abstract class WyrmAction : CreatureAction
 
         performing = true;
         AttackStage = 0;
+        OnActionStart?.Invoke();
         
         base.Perform(creature, time, deltaTime);
 

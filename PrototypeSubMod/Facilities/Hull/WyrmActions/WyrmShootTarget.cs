@@ -4,13 +4,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull.WyrmActions;
 
 public class WyrmShootTarget : WyrmAction
 {
+    public event Action OnStartTargeting;
+    public event Action OnLaserImpact;
+    
     [SerializeField] private LineRenderer targetingLineRenderer;
     [SerializeField] private Transform laserOrigin;
     [SerializeField] private AnimationCurve beamLengthCurve;
@@ -129,6 +131,7 @@ public class WyrmShootTarget : WyrmAction
             currentChargeUpTime = chargeUpTime;
             FMODUWE.PlayOneShot(shotChargeSfx.asset, transform.position);
             targetingLineRenderer.enabled = true;
+            OnStartTargeting?.Invoke();
         }
     }
 
@@ -270,6 +273,8 @@ public class WyrmShootTarget : WyrmAction
         laserVFX.SetActive(false);
         muzzleVFX.SetActive(false);
 
+        OnLaserImpact?.Invoke();
+        
         var mixins = GetAttackMixins(laserTargetPoint);
         if (mixins.Count == 0) yield break;
 
