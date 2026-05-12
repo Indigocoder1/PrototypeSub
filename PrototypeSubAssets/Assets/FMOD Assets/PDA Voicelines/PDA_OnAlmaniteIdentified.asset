@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: PDA_OnAlmaniteIdentified
   id: 
-  audioClip: {fileID: 8300000, guid: 608dbb77bcdb6e74795f964f92f1cd2e, type: 3}
+  audioClip: {fileID: 8300000, guid: a9973c1b713134b46adfc225cc0e89f7, type: 3}
   doNotAutoRegister: 0
   mode: 4210832
   maxDistance3D: 0
