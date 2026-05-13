@@ -2,11 +2,11 @@
     "craftAmount": 1,
     "Ingredients": [
       {
-        "techType": "AlienBuildingBlock",
-        "amount": 2
+        "techType": "Proto_PrecursorIngot",
+        "amount": 1
       },
       {
-        "techType": "PrecursorKey_Purple",
+        "techType": "EngineFacilityKey",
         "amount": 1
       }
     ]

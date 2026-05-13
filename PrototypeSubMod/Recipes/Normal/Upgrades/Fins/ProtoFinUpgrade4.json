@@ -3,10 +3,10 @@
     "Ingredients": [
       {
         "techType": "Proto_PrecursorIngot",
-        "amount": 2
+        "amount": 1
       },
       {
-        "techType": "PrecursorKey_Blue",
+        "techType": "HullFacilityKey",
         "amount": 1
       }
     ]
