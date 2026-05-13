@@ -359,8 +359,13 @@ internal static class StoryGoalsRegisterer
         #endregion
 
         #region Bearing Puzzle Completion
-
-        StoryGoalHandler.RegisterCompoundGoal("ProtoNumbersEncy", Story.GoalType.Encyclopedia, 15f,
+        
+        StoryGoalHandler.RegisterCustomEvent("ProtoBearingsEncy", () =>
+        {
+            PDAEncyclopedia.Add("ProtoBearingsEncy", true);
+        });
+        
+        StoryGoalHandler.RegisterCompoundGoal("ProtoBearingsEncy", Story.GoalType.Encyclopedia, 20f,
             "ProtoBearingPuzzleComplete");
         StoryGoalHandler.RegisterCompoundGoal("ProtoBearingsHint", Story.GoalType.PDA, 10f,
             "ProtoBearingPuzzleComplete");
