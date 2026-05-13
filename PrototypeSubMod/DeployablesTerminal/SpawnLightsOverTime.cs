@@ -12,6 +12,7 @@ internal class SpawnLightsOverTime : MonoBehaviour
 
     [SerializeField] private DeployablesStorageTerminal terminal;
     [SerializeField] private float timeBetweenSpawns;
+    [SerializeField] private int initialLightCount = 4;
 
     private float currentSpawnTimer;
 
@@ -27,7 +28,21 @@ internal class SpawnLightsOverTime : MonoBehaviour
         var prefabTask = PrefabDatabase.GetPrefabAsync(DeployableLight_Craftable.prefabInfo.ClassID);
         yield return prefabTask;
 
-        if (!prefabTask.TryGetPrefab(out DeployableLightPrefab)) throw new System.Exception($"Error retriving deployable light prefab");
+        if (!prefabTask.TryGetPrefab(out DeployableLightPrefab)) throw new System.Exception($"Error retrieving deployable light prefab");
+        
+        SpawnDefaultLights();
+    }
+
+    private void SpawnDefaultLights()
+    {
+        if (Plugin.GlobalSaveData.spawnedInitialDecoys) return;
+
+        for (int i = 0; i < initialLightCount; i++)
+        {
+            SpawnLight();
+        }
+
+        Plugin.GlobalSaveData.spawnedInitialDecoys = true;
     }
 
     private void Update()
