@@ -1,5 +1,6 @@
 ﻿using System;
 using Nautilus.Utility;
+using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.Puzzles.BearingPuzzle;
 using Story;
 using UnityEngine;
@@ -37,6 +38,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     private void Start()
     {
         calibrationObjects.SetActive(false);
+        ProtoDestructionEvent.OnSubDestroyed += FailCalibration;
         
         if (StoryGoalManager.main.IsGoalComplete("OnCalibrationRunCompleted")) return;
         
@@ -80,11 +82,8 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         if (GetNormalizedDistFromCenter() < 1) return;
         
         FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineScream"), transform.position);
-        doingCalibrationRun = false;
-        nextPointIndex = 1;
-        calibrationObjects.SetActive(false);
-        OnCalibrationFailed?.Invoke();
         voiceNotificationManager.PlayVoiceNotification(failedCalibrationVoiceline);
+        FailCalibration();
     }
 
     private void HandleIndexIncrements()
@@ -119,14 +118,19 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
             if ((transform.position - calibrationPoints[i]).sqrMagnitude > distToCountAsReached * distToCountAsReached) continue;
 
             ErrorMessage.AddError("Wrong point reached! Calibration failed");
-            doingCalibrationRun = false;
-            nextPointIndex = 1;
-            calibrationObjects.SetActive(false);
-            OnCalibrationFailed?.Invoke();
             voiceNotificationManager.PlayVoiceNotification(failedCalibrationVoiceline);
+            FailCalibration();
 
             break;
         }
+    }
+
+    private void FailCalibration()
+    {
+        doingCalibrationRun = false;
+        nextPointIndex = 1;
+        calibrationObjects.SetActive(false);
+        OnCalibrationFailed?.Invoke();
     }
 
     public float GetNormalizedDistFromCenter()
@@ -168,5 +172,10 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     public void OnDisable()
     {
         UpdateSchedulerUtils.Deregister(this);
+    }
+
+    private void OnDestroy()
+    {
+        ProtoDestructionEvent.OnSubDestroyed -= FailCalibration;
     }
 }
