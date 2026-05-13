@@ -32,9 +32,9 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_HoverfishPlushUnlock", "OnHoverfishPlushUnlocked"));
         PDALog_Patches.entries.Add(("PlaceholderPDAVoiceline", "ProtoTransmissionSiteHint"));
         PDALog_Patches.entries.Add(("NumbersPDACompile", "ProtoNumbersHint"));
-        PDALog_Patches.entries.Add(("PlaceholderVoiceline", "ProtoBearingsHint"));
+        PDALog_Patches.entries.Add(("PDA_BearingsHint", "ProtoBearingsHint"));
         PDALog_Patches.entries.Add(("PDA_Lifepod3", "Lifepod3PDA"));
-        PDALog_Patches.entries.Add(("Proto_ApproachTerminal", "OnEnterProtoBearingPuzzle"));
+        PDALog_Patches.entries.Add(("PDA_OnEnterProtoBearingPuzzle", "OnEnterProtoBearingPuzzle"));
         PDALog_Patches.entries.Add(("PDA_EngineFacilityReturnHint", "EngineFacilityReturnHint"));
         PDALog_Patches.entries.Add(("PDA_InterceptorFacilityTabletUnlock", "InterceptorFacilityTabletUnlock"));
         PDALog_Patches.entries.Add(("PDA_OnEnterVoidWyrmActivated", "PDA_OnEnterVoidWyrmActivated"));
