@@ -13,6 +13,8 @@ public class SecretDoorTrigger : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private FMOD_CustomEmitter doorOpenSFX;
     
+    private bool isDoorOpen = false;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject != Player.main.gameObject) return;
@@ -24,6 +26,8 @@ public class SecretDoorTrigger : MonoBehaviour
     private void OpenDoor()
     {
         animator.SetTrigger(Door);
+        if (isDoorOpen) return;
         doorOpenSFX.Play();
+        isDoorOpen = true;
     }
 }
