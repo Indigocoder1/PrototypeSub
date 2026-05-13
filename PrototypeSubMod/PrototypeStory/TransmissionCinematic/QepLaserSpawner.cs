@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
+using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic;
 
-public class QepLaserSpawner : MonoBehaviour
+public class QepLaserSpawner : MonoBehaviour, IMaterialModifier
 {
+    public event Action<GameObject> onEditMaterial;
+    
     [SerializeField] private Transform warmupParent;
     [SerializeField] private Transform beamParent;
     [SerializeField] private Transform muzzleParent;
@@ -27,6 +31,8 @@ public class QepLaserSpawner : MonoBehaviour
         UWE.Utils.ZeroTransform(warmupVFX.gameObject);
         UWE.Utils.ZeroTransform(muzzleVFX.gameObject);
         UWE.Utils.ZeroTransform(laserVFX);
+
+        onEditMaterial?.Invoke(laserVFX);
 
         Destroy(muzzleVFX.GetComponent<VFXDestroyAfterSeconds>());
         
