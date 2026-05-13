@@ -106,7 +106,7 @@ internal class ProtoMotorHandler : MonoBehaviour
     {
         if (GetMaxSpeed() == 0) return 0;
         
-        return motorMode.subRoot.rigidbody.velocity.magnitude / GetMaxSpeed();
+        return Mathf.Clamp01(motorMode.subRoot.rigidbody.velocity.magnitude / GetMaxSpeed());
     }
 
     /// <summary>
