@@ -33329,6 +33329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terminal: {fileID: 2874070112182103862}
   timeBetweenSpawns: 300
+  initialLightCount: 4
 --- !u!1 &2308519459883720451
 GameObject:
   m_ObjectHideFlags: 0
@@ -57000,6 +57001,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   motorMode: {fileID: 2278157053698757509}
   emissionController: {fileID: 3371763760948927259}
+  lightingController: {fileID: 166681490149920772}
+  lightingControllerManager: {fileID: 1369342963250766631}
   disableDuration: 6
   voiceNotificationManager: {fileID: 5389210478452801882}
   engineRestartNotification: {fileID: 5685915161345486246}
