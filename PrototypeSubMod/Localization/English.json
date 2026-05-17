@@ -393,6 +393,7 @@
   
   "OnGrassyWyrmScanned": "This alien structure appears to be of alien origin. Purpose unknown. Further data required.<duration=5000>",
   "OnSparseReefWyrmScanned": "This alien structure appears to be of alien origin. Onboard systems are receiving encrypted data packets from an unknown source.<duration=5000>\nSignal location uploaded to PDA.<delay=5000><duration=1000>",
+  "OnEnterVoidWyrmActive": "Detecting food chain disturbance in ecological dead zone. Zero leviathan class lifeforms detected.",
   
   // Puzzle facility voicelines
   "BearingPuzzleComplete": "FACILITY: SPATIAL NAVIGATION COGNITIVE TRIAL COMPLETE.<duration=3246>\nFACILITY: UPLOADING RESULTS TO QUARANTINE ENFORCEMENT PLATFORM.<delay=3360><duration=3540>",

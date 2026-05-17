@@ -42,6 +42,7 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.entries.Add(("PDA_SparseReefWyrm", "OnSparseReefWyrmScanned"));
         PDALog_Patches.entries.Add(("PDA_GrassyWyrm", "OnGrassyWyrmScanned"));
         PDALog_Patches.entries.Add(("PDA_OnAlmaniteIdentified", "OnAlmaniteIdentified"));
+        PDALog_Patches.entries.Add(("PDA_FoodChainDisturbance", "OnEnterVoidWyrmActive"));
 
         // Bad ending voicelines
         PDALog_Patches.entries.Add(("PDA_BadEndingIntro", "BadEndingIntro"));
