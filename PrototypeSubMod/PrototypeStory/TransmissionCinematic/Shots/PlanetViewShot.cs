@@ -12,9 +12,10 @@ public class PlanetViewShot : CinematicShot
     
     [SerializeField] private QepLaserSpawner laserSpawner;
     [SerializeField] private Spawn4546B planetSpawner;
+    [SerializeField] private PostProcessOverride planetViewOverrides;
 
     private List<WaterscapeVolume> volumes;
-
+    
     private void Start()
     {
         planetSpawner.SpawnPlanet();
@@ -24,6 +25,7 @@ public class PlanetViewShot : CinematicShot
     {
         base.PlayShot(animator, cinematicManager);
         volumes = FindObjectsOfType<WaterscapeVolume>().ToList();
+        planetViewOverrides.ApplyOverrides();
         SetFogActive(false);
         ForceDay();
     }
