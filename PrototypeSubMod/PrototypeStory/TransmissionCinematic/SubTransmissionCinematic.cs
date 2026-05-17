@@ -18,6 +18,7 @@ public class SubTransmissionCinematic : MonoBehaviour
     [SerializeField] private Transform transmissionDeviceLocation;
     [SerializeField] private Animator cinematicAnimator;
     [SerializeField] private EmissionColorController subEmissionController;
+    [SerializeField] private Light[] subLights;
     [SerializeField] private PrecursorTeleporter subTeleporter;
     [SerializeField] private GameObject sdfCutout;
     [SerializeField] private GameObject functionalityRoot;
@@ -44,7 +45,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         {
             upgrade.SetUpgradeEnabled(false);
         }
-
+        
         StoryGoal_Patches.SetBlockGoalCompletion(true);
         materialSwapper.SwapMaterials();
         sdfCutout.SetActive(false);
@@ -55,6 +56,11 @@ public class SubTransmissionCinematic : MonoBehaviour
         subRoot.lightControl.LerpToState(2);
         subTeleporter.ToggleDoor(false);
         StartCoroutine(PlayCinematicAsync(cinematicManager));
+
+        foreach (var light in subLights)
+        {
+            light.enabled = false;
+        }
     }
 
     private IEnumerator PlayCinematicAsync(DeviceCinematicManager cinematicManager)
