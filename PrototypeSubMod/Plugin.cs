@@ -121,6 +121,7 @@ namespace PrototypeSubMod
         internal static GameObject welderPrefab;
         
         internal static PingType PrototypePingType { get; private set; }
+        internal static PingType HintPingType { get; private set; }
 
         internal const string DEFENSE_CHAMBER_BIOME_NAME = "protodefensefacility";
         internal const string ENGINE_FACILITY_BIOME_NAME = "protoenginefacility";
@@ -338,6 +339,8 @@ namespace PrototypeSubMod
             
             PrototypePingType = EnumHandler.AddEntry<PingType>("PrototypeSub")
                 .WithIcon(GeneralAssetBundle.LoadAsset<Sprite>("Proto_HUD_Marker"));
+            HintPingType = EnumHandler.AddEntry<PingType>("Hint")
+                .WithIcon(GeneralAssetBundle.LoadAsset<Sprite>("Hint_HUD_Marker"));
             
             Logger.LogDebug("Set ping type");
             yield return PrefabRegisterer.Register();
@@ -516,7 +519,7 @@ namespace PrototypeSubMod
                 var customAsset = (CustomFMODAsset)asset;
                 if (customAsset.audioClip == null)
                 {
-                    Logger.LogWarning($"{customAsset} does not have an audio clip! Skipping registration");
+                    Logger.LogError($"{customAsset} does not have an audio clip! Skipping registration");
                     continue;
                 }
                 

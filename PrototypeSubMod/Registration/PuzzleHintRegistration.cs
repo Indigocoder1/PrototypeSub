@@ -23,7 +23,7 @@ public static class PuzzleHintRegistration
 
         #region Calibration Site Ping
 
-        var calibrationPingTechType = CustomPing.CreatePing("CalibrationSitePing", PingType.Signal,
+        var calibrationPingTechType = CustomPing.CreatePing("CalibrationSitePing", Plugin.HintPingType,
             visitable: false, components: typeof(DestroyOnCalibrationCompletion));
         StoryGoalHandler.RegisterCustomEvent("OnPlayProtoRadioMessage3", () =>
         {
@@ -33,8 +33,8 @@ public static class PuzzleHintRegistration
 
         #region Transmission Site Hint
 
-        var transmissionStartTechType = CustomPing.CreatePing("TransmissionSiteStartPing", PingType.Signal, visitable: false);
-        var transmissionSiteTechType = CustomPing.CreatePing("TransmissionSitePing", PingType.Signal);
+        var transmissionStartTechType = CustomPing.CreatePing("TransmissionSiteStartPing", Plugin.HintPingType, visitable: false);
+        var transmissionSiteTechType = CustomPing.CreatePing("TransmissionSitePing", Plugin.HintPingType);
         StoryGoalHandler.RegisterCompoundGoal("ProtoTransmissionSiteHint", Story.GoalType.Story, 20,
             "OnPlayProtoRadioMessage4");
         StoryGoalHandler.RegisterCustomEvent("ProtoTransmissionSiteHint", () =>

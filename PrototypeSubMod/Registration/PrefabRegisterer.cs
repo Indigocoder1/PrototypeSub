@@ -167,7 +167,7 @@ internal static class PrefabRegisterer
                 new() { biome = BiomeType.InactiveLavaZone_Chamber_Floor, probability = 0.02f, count = 1},
             });
         
-        Plugin.StoryEndPingTechType = CustomPing.CreatePing("StoryEndPingType", PingType.Signal);
+        Plugin.StoryEndPingTechType = CustomPing.CreatePing("StoryEndPingType", Plugin.HintPingType);
         
         var AssetBundle = Plugin.GeneralAssetBundle;
         Texture2D dogIco = AssetBundle.LoadAsset<Texture2D>("dogPosterIcon");
