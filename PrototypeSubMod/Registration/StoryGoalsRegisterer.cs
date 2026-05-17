@@ -196,7 +196,18 @@ internal static class StoryGoalsRegisterer
         StoryGoalHandler.RegisterCustomEvent("HullFacilityWormTerminalEncy", () =>
         {
             PDAEncyclopedia.Add("HullFacilityWormTerminalEncy", true);
-            StoryGoalHandler.RegisterBiomeGoal("WyrmRadioMessageVoid",  Story.GoalType.Radio, "void", 20f);
+            
+            // Set up new void goals
+            
+            StoryGoalHandler.RegisterCustomEvent("OnEnterVoidWyrmActive", () =>
+            {
+                PDALog.Add("OnEnterVoidWyrmActive");
+            });
+            
+            StoryGoalHandler.RegisterBiomeGoal("OnEnterVoidWyrmActive", Story.GoalType.PDA, "void", 5f);
+            
+            StoryGoalHandler.RegisterBiomeGoal("WyrmRadioMessageVoid",  Story.GoalType.Radio, "void", 40f);
+            
         });
         #endregion
 
