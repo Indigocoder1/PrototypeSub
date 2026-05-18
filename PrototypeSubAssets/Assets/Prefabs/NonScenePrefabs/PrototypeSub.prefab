@@ -158161,6 +158161,7 @@ MonoBehaviour:
   - {fileID: 8876276198701322440}
   - {fileID: 2386290758044675103}
   - {fileID: 4713072137274198217}
+  - {fileID: 6628646809877269786}
 --- !u!114 &2369679657548841611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164655,7 +164656,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 40a88e552c7419143b83533df3b94af5,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a88e552c7419143b83533df3b94af5, type: 3}
@@ -165536,7 +165537,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b1d08e9d090f9e74cb4ef612354a9e1a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d08e9d090f9e74cb4ef612354a9e1a, type: 3}
