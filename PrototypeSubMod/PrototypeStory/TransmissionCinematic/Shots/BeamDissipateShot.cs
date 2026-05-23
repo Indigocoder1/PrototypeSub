@@ -11,6 +11,7 @@ public class BeamDissipateShot : CinematicShot
     [SerializeField] private QepLaserSpawner laserSpawner;
     [SerializeField] private PostProcessOverride largeBloomOverride;
     [SerializeField] private BeamAlphaController alphaController;
+    [SerializeField] private ParticleSystem laserParticles;
 
     public override void PlayShot(Animator animator, DeviceCinematicManager cinematicManager)
     {
@@ -22,5 +23,10 @@ public class BeamDissipateShot : CinematicShot
     public void PlayAlphaEffect(float duration)
     {
         alphaController.PlayAlphaAnimation(duration);
+    }
+
+    public void PlayBeamParticles()
+    {
+        laserParticles.Play();
     }
 }
