@@ -69,4 +69,9 @@ public class QepLaserSpawner : MonoBehaviour, IMaterialModifier
         Destroy(muzzleVFX.gameObject);
         Destroy(warmupVFX.gameObject);
     }
+
+    public GameObject GetLaserObject()
+    {
+        return laserVFX.gameObject;
+    }
 }

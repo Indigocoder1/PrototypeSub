@@ -48,7 +48,6 @@ public class PlanetViewShot : CinematicShot
     {
         laserSpawner.DeleteEffects();
         OnShotCompleted?.Invoke(deviceCinematicManager);
-        SetFogActive(true);
     }
 
     private void SetFogActive(bool active)
