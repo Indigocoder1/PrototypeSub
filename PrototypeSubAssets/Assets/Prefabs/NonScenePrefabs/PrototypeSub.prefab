@@ -12768,7 +12768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Proto_CalibrationPointReached
-  sound: {fileID: 11400000, guid: 5ce86571cea06ec498b37ccda60c9731, type: 2}
+  sound: {fileID: 11400000, guid: 737f3e46f0025b943819bda9a2758467, type: 2}
   minInterval: 15
 --- !u!1 &498543400586826796
 GameObject:
@@ -23925,7 +23925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Proto_CalibrationTestStarted
-  sound: {fileID: 11400000, guid: 5ce86571cea06ec498b37ccda60c9731, type: 2}
+  sound: {fileID: 11400000, guid: 87a8f6696ef14484683034add85aff48, type: 2}
   minInterval: 15
 --- !u!1 &1367142639365980592
 GameObject:
@@ -82901,7 +82901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Proto_CalibrationEngineRestart
-  sound: {fileID: 11400000, guid: 5ce86571cea06ec498b37ccda60c9731, type: 2}
+  sound: {fileID: 11400000, guid: c3051be7c98412b42bd4ad959d7227c6, type: 2}
   minInterval: 15
 --- !u!1 &4529555044294690265
 GameObject:
