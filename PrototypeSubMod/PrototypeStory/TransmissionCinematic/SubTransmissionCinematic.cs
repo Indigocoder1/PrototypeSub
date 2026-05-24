@@ -45,6 +45,8 @@ public class SubTransmissionCinematic : MonoBehaviour
         {
             upgrade.SetUpgradeEnabled(false);
         }
+
+        Utils.StopAllFMODEvents(subRoot.gameObject);
         
         StoryGoal_Patches.SetBlockGoalCompletion(true);
         materialSwapper.SwapMaterials();
