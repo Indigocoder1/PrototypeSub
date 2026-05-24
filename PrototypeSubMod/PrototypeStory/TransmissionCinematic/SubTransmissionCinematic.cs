@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using FMODUnity;
 using PrototypeSubMod.Credits;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
@@ -47,6 +48,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         }
 
         Utils.StopAllFMODEvents(subRoot.gameObject);
+        SNCameraRoot.main.GetComponent<StudioListener>().enabled = false;
         
         StoryGoal_Patches.SetBlockGoalCompletion(true);
         materialSwapper.SwapMaterials();

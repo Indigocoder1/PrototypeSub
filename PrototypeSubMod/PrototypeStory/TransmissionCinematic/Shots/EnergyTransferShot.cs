@@ -1,6 +1,7 @@
 ﻿using System;
 using PrototypeSubMod.MiscMonobehaviors;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic.Shots;
 
@@ -11,6 +12,9 @@ public class EnergyTransferShot : CinematicShot
     [SerializeField] private GameObject lightningObjects;
     [SerializeField] private PrefabSpawn[] impactFrameSpawners;
     [SerializeField] private PostProcessOverride defaultPostProcessing;
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter energyTransferSfx;
 
     public override void PlayShot(Animator animator, DeviceCinematicManager cinematicManager)
     {
@@ -31,6 +35,7 @@ public class EnergyTransferShot : CinematicShot
     public void EnableLightningObjects()
     {
         lightningObjects.SetActive(true);
+        energyTransferSfx.Play();
     }
     
     public void DisableLightningObjects()

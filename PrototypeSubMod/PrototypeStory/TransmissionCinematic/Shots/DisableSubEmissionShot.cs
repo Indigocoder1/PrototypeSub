@@ -14,6 +14,10 @@ public class DisableSubEmissionShot : CinematicShot
     [SerializeField] private float timeToDisableEmission;
     [SerializeField] private AnimationCurve progressOverTime;
     [SerializeField] private AnimationCurve intensityOverTime;
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter emissionDisableSfx;
+    [SerializeField] private FMOD_CustomEmitter devicePulseSfx;
 
     public override void PlayShot(Animator animator, DeviceCinematicManager cinematicManager)
     {
@@ -34,9 +38,15 @@ public class DisableSubEmissionShot : CinematicShot
         }
     }
 
+    public void PlayTransferSfx()
+    {
+        emissionDisableSfx.Play();
+    }
+
     public void PulseDeviceEmission()
     {
         deviceCinematicManager?.PulseEmission();
+        devicePulseSfx.Play();
     }
 
     public void EndEmissionShot()

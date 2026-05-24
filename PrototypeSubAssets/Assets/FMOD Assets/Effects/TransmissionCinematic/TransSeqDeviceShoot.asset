@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
   m_Name: TransSeqDeviceShoot
   m_EditorClassIdentifier: 
-  path: TransDeviceShoot
+  path: TransSeqDeviceShoot
   id: 
   audioClip: {fileID: 8300000, guid: fabff386d57191944938db94b5340faf, type: 3}
   doNotAutoRegister: 0
-  mode: 4210704
+  mode: 16392
   maxDistance3D: 0
   minDistance3D: 0
   fadeOutTime: -1

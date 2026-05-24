@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using PrototypeSubMod.VehicleAccess;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrototypeStory.TransmissionCinematic.Shots;
@@ -15,6 +14,17 @@ public class LaserFireShot : CinematicShot
     [SerializeField] private float emissionPulseDuration;
     [SerializeField] private float emissionIntensityMultiplier;
     
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter deviceChargeSfx;
+    [SerializeField] private FMOD_CustomEmitter laserFireSfx;
+    [SerializeField] private FMOD_CustomEmitter wyrmScreechSfx;
+
+    public override void PlayShot(Animator animator, DeviceCinematicManager cinematicManager)
+    {
+        base.PlayShot(animator, cinematicManager);
+        deviceChargeSfx.Play();
+    }
+
     public void PulseDeviceEmissionLong()
     {
         deviceCinematicManager.PulseEmission(emissionPulseDuration, emissionIntensityMultiplier);
@@ -28,6 +38,16 @@ public class LaserFireShot : CinematicShot
     public void StartLaserFireAnim()
     {
         deviceCinematicManager.FireLaserAnim();
+    }
+
+    public void PlayWyrmScreechSfx()
+    {
+        wyrmScreechSfx.Play();
+    }
+
+    public void PlayLaserFireSfx()
+    {
+        laserFireSfx.Play();
     }
 
     public void SpawnLaserImpactFrame()

@@ -2429,6 +2429,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 8.966666
+    functionName: PlayLaserFireSfx
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 8.966666
     functionName: SpawnLaserImpactFrame
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -2458,6 +2465,13 @@ AnimationClip:
     messageOptions: 0
   - time: 13.1
     functionName: SpawnCinematicWorm
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 13.85
+    functionName: PlayWyrmScreechSfx
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

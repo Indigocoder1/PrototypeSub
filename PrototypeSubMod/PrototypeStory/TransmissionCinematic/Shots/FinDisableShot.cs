@@ -14,10 +14,14 @@ public class FinDisableShot : CinematicShot
     [SerializeField] private EmissionColorController finEmissionController;
     [SerializeField] private ProtoFinsManager finsManager;
     [SerializeField] private Animator pistonsAnimator;
+    
+    [Header("SFX")]
+    [SerializeField] private FMOD_CustomEmitter finsLockingSfx;
 
     public void DeactivateFins()
     {
         finsManager.SetTransmissionDeactivated(true);
+        finsLockingSfx.Play();
     }
 
     public void DeactivatePistons()
