@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
-  m_Name: EngineTempPowerDown
+  m_Name: SubPowerDown
   m_EditorClassIdentifier: 
-  path: EngineTempPowerDown
+  path: SubPowerDown
   id: 
   audioClip: {fileID: 8300000, guid: 3918b8c4fa5773b4cb5534aa231dc16d, type: 3}
   doNotAutoRegister: 0
