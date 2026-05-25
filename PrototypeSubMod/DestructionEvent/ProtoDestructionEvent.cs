@@ -53,15 +53,15 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
         if (Plugin.GlobalSaveData.prototypeDestroyed) return;
 
         StartCoroutine(OnDestroySub());
+        OnSubDestroyed?.Invoke();
+
+        subRoot.voiceNotificationManager.PlayVoiceNotification(reactorMeltdownOccurred, false, true);
     }
 
     private void DestroySub()
     {
         Plugin.GlobalSaveData.prototypeDestroyed = true;
-
-        OnSubDestroyed?.Invoke();
-
-        subRoot.voiceNotificationManager.PlayVoiceNotification(reactorMeltdownOccurred, false, true);
+        
         hydrolockDoorsAnimator.SetBool(HydrolockEnabled, true);
         radiationObject.SetActive(true);
 

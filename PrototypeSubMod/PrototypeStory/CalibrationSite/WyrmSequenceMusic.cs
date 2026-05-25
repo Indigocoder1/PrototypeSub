@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections;
+using FMOD;
+using FMOD.Studio;
+using Nautilus.Handlers;
+using Nautilus.Utility;
+using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.PrototypeStory.CalibrationSite;
 
@@ -9,7 +15,6 @@ public class WyrmSequenceMusic : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private WyrmFirstEncounterManager encounterManager;
-    [SerializeField] private WyrmAction dartAction;
     [SerializeField] private WyrmAction ramAction;
     [SerializeField] private WyrmShootTarget laserAction;
     
@@ -26,44 +31,63 @@ public class WyrmSequenceMusic : MonoBehaviour
     private FMOD_CustomEmitter currentSfxLoop;
     private FMOD_CustomEmitter nextLoopWanted;
     private bool eventRegistered;
+    private bool stopSfx;
     
     private void Start()
     {
         if (encounterManager.FirstEncounterCompleted()) return;
         
-        currentSfxLoop = introOneShot;
-        nextLoopWanted = dartActionLoop;
-        StartCoroutine(PlayLoops());
-        
         ramAction.OnActionComplete += OnRamHitTarget;
         laserAction.OnStartTargeting += OnLaserTargetingStart;
         laserAction.OnLaserImpact += OnLaserImpact;
         CalibrationRunManager.OnPointReached += OnReachNode;
+        ProtoDestructionEvent.OnSubDestroyed += OnSubDestroyed;
         eventRegistered = true;
+        StartCoroutine(StartMusicAsync());
+    }
+
+    private IEnumerator StartMusicAsync()
+    {
+        yield return new WaitForSeconds(Random.Range(0, 0.2f));
+        
+        currentSfxLoop = introOneShot;
+        nextLoopWanted = dartActionLoop;
+        StartCoroutine(PlayLoops());
     }
 
     private IEnumerator PlayLoops()
     {
-        currentSfxLoop.Play();
-        
-        while (gameObject.activeInHierarchy)
+        CustomSoundHandler.TryGetCustomSoundChannel(currentSfxLoop.GetInstanceID(), out var channel);
+        if (channel.isPlaying(out var playing) != RESULT.OK || !playing)
         {
-            yield return null;
-            
-            if (currentSfxLoop.playing) continue;
-
-            if (nextLoopWanted != null)
-            {
-                currentSfxLoop = nextLoopWanted;
-                Plugin.Logger.LogInfo($"Assigning current SFX to {nextLoopWanted}");
-                nextLoopWanted = null;
-            }
-            
             currentSfxLoop.Play();
-            Plugin.Logger.LogInfo($"Playing current SFX");
         }
 
-        currentSfxLoop.Stop();
+        var durationMS = AudioUtils.GetFmodAssetDuration(currentSfxLoop.asset);
+        var timeStarted = Time.time;
+
+        CustomSoundHandler.TryGetCustomSoundChannel(currentSfxLoop.GetInstanceID(), out channel);
+        yield return new WaitUntil(() =>
+        {
+            var timePassedCheck = (Time.time - timeStarted) * 1000 > durationMS;
+            channel.isPlaying(out var isPlaying);
+            var channelPlayingCheck = !isPlaying;
+            return timePassedCheck || channelPlayingCheck;
+        });
+
+        if (nextLoopWanted != null)
+        {
+            currentSfxLoop = nextLoopWanted;
+            nextLoopWanted = null;
+        }
+
+        if (!stopSfx)
+        {
+            currentSfxLoop.Play();
+            StartCoroutine(PlayLoops());
+        }
+        
+        stopSfx = false;
     }
 
     private void OnRamHitTarget()
@@ -74,8 +98,9 @@ public class WyrmSequenceMusic : MonoBehaviour
 
     private void OnLaserTargetingStart()
     {
-        StopCoroutine(nameof(PlayLoops));
+        stopSfx = true;
         currentSfxLoop.Stop();
+        StopCoroutine(nameof(PlayLoops));
         
         laserAction.OnStartTargeting -= OnLaserTargetingStart;
     }
@@ -84,6 +109,7 @@ public class WyrmSequenceMusic : MonoBehaviour
     {
         currentSfxLoop = intenseIntro;
         nextLoopWanted = intense1;
+        stopSfx = false;
         StartCoroutine(PlayLoops());
         laserAction.OnLaserImpact -= OnLaserImpact;
     }
@@ -104,5 +130,13 @@ public class WyrmSequenceMusic : MonoBehaviour
         if (!eventRegistered) return;
         
         CalibrationRunManager.OnPointReached -= OnReachNode;
+        ProtoDestructionEvent.OnSubDestroyed -= OnSubDestroyed;
+    }
+
+    private void OnSubDestroyed()
+    {
+        stopSfx = true;
+        currentSfxLoop.Stop();
+        StopCoroutine(nameof(PlayLoops));
     }
 }

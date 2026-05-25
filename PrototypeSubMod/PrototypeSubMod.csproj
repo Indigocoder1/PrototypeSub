@@ -25,7 +25,7 @@
     <PackageReference Include="Unity.InputSystem" Version="1.4.1" IncludeAssets="compile"/>
     <PackageReference Include="Subnautica.GameLibs" Version="82304.0.0-r.0"/>
     <PackageReference Include="PolySharp" Version="1.15.0"/>
-    <PackageReference Include="Subnautica.Nautilus" Version="1.*-*" PrivateAssets="all"/>
+    <!-- <PackageReference Include="Subnautica.Nautilus" Version="1.*-*" PrivateAssets="all"/> -->
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -38,6 +38,9 @@
     </Reference>
     <Reference Include="SuitLib">
       <HintPath>$(ModFolder)\SuitLib\SuitLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Nautilus">
+      <HintPath>$(ModFolder)\Nautilus\Nautilus.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.json">
       <HintPath>$(GameDir)\Subnautica_Data\Managed\Newtonsoft.json.dll</HintPath>
