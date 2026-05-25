@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using UnityEngine;
 
@@ -14,21 +15,26 @@ public class WyrmSequenceMusic : MonoBehaviour
     
     [Header("Emitters")]
     [SerializeField] private FMOD_CustomEmitter introOneShot;
-    [SerializeField] private FMOD_CustomLoopingEmitter dartActionLoop;
-    [SerializeField] private FMOD_CustomLoopingEmitter laserActionLoop;
-    [SerializeField] private FMOD_CustomLoopingEmitter laserImpact;
-    [SerializeField] private FMOD_CustomLoopingEmitter node2Loop;
-    [SerializeField] private FMOD_CustomLoopingEmitter node4Loop;
+    [SerializeField] private FMOD_CustomEmitter dartActionLoop;
+    [SerializeField] private FMOD_CustomEmitter laserActionLoop;
+    [SerializeField] private FMOD_CustomEmitter intenseIntro;
+    [SerializeField] private FMOD_CustomEmitter intense1;
+    [SerializeField] private FMOD_CustomEmitter intense2;
+    [SerializeField] private FMOD_CustomEmitter intense3;
     [SerializeField] private FMOD_CustomEmitter musicOutro;
 
+    private FMOD_CustomEmitter currentSfxLoop;
+    private FMOD_CustomEmitter nextLoopWanted;
     private bool eventRegistered;
     
     private void Start()
     {
         if (encounterManager.FirstEncounterCompleted()) return;
-
-        introOneShot.Play();
-        dartAction.OnActionStart += OnDartStart;
+        
+        currentSfxLoop = introOneShot;
+        nextLoopWanted = dartActionLoop;
+        StartCoroutine(PlayLoops());
+        
         ramAction.OnActionComplete += OnRamHitTarget;
         laserAction.OnStartTargeting += OnLaserTargetingStart;
         laserAction.OnLaserImpact += OnLaserImpact;
@@ -36,49 +42,61 @@ public class WyrmSequenceMusic : MonoBehaviour
         eventRegistered = true;
     }
 
-    private void OnDartStart()
+    private IEnumerator PlayLoops()
     {
-        introOneShot.Stop();
-        dartActionLoop.Play();
-        dartAction.OnActionStart -= OnDartStart;
+        currentSfxLoop.Play();
+        
+        while (gameObject.activeInHierarchy)
+        {
+            yield return null;
+            
+            if (currentSfxLoop.playing) continue;
+
+            if (nextLoopWanted != null)
+            {
+                currentSfxLoop = nextLoopWanted;
+                Plugin.Logger.LogInfo($"Assigning current SFX to {nextLoopWanted}");
+                nextLoopWanted = null;
+            }
+            
+            currentSfxLoop.Play();
+            Plugin.Logger.LogInfo($"Playing current SFX");
+        }
+
+        currentSfxLoop.Stop();
     }
 
     private void OnRamHitTarget()
     {
-        dartActionLoop.Stop();
-        laserActionLoop.Start();
+        nextLoopWanted = laserActionLoop;
         ramAction.OnActionComplete -= OnRamHitTarget;
     }
 
     private void OnLaserTargetingStart()
     {
-        laserActionLoop.Stop();
+        StopCoroutine(nameof(PlayLoops));
+        currentSfxLoop.Stop();
+        
         laserAction.OnStartTargeting -= OnLaserTargetingStart;
     }
 
     private void OnLaserImpact()
     {
-        laserImpact.Play();
+        currentSfxLoop = intenseIntro;
+        nextLoopWanted = intense1;
+        StartCoroutine(PlayLoops());
         laserAction.OnLaserImpact -= OnLaserImpact;
     }
     
     private void OnReachNode(int point)
     {
-        switch (point)
+        nextLoopWanted = point switch
         {
-            case 1:
-                laserImpact.Stop();
-                node2Loop.Play();
-                break;
-            case 3:
-                node2Loop.Stop();
-                node4Loop.Play();
-                break;
-            case 5:
-                node4Loop.Stop();
-                musicOutro.Play();
-                break;
-        }
+            2 => intense2,
+            4 => intense3,
+            5 => musicOutro,
+            _ => nextLoopWanted
+        };
     }
 
     private void OnDestroy()

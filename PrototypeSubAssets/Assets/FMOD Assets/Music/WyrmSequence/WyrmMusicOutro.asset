@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
   m_Name: WyrmMusicOutro
   m_EditorClassIdentifier: 
-  path: WyrmMusic3
+  path: WyrmMusicOutro
   id: 
   audioClip: {fileID: 0}
   doNotAutoRegister: 0
-  mode: 16394
+  mode: 16392
   maxDistance3D: 0
   minDistance3D: 0
   fadeOutTime: 2

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 695924059, guid: 05b2873035fc0cb47b172f8f145ed69c, type: 3}
-  m_Name: WyrmMusic5
+  m_Name: WyrmIntense2
   m_EditorClassIdentifier: 
-  path: WyrmMusic3
+  path: WyrmIntense2
   id: 
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: d4515c8fbda38314ca9363835304e8d7, type: 3}
   doNotAutoRegister: 0
-  mode: 16394
+  mode: 16392
   maxDistance3D: 0
   minDistance3D: 0
   fadeOutTime: 2
