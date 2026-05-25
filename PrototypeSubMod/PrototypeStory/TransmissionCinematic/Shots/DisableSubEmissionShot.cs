@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using PrototypeSubMod.Credits;
 using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -47,6 +48,18 @@ public class DisableSubEmissionShot : CinematicShot
     {
         deviceCinematicManager?.PulseEmission();
         devicePulseSfx.Play();
+    }
+
+    public void FadeInOut(float duration)
+    {
+        StartCoroutine(FadeInOutAsync(duration));
+    }
+
+    private IEnumerator FadeInOutAsync(float duration)
+    {
+        ProtoScreenFadeManager.instance.FadeIn(duration * 0.5f);
+        yield return new WaitForSeconds(duration * 0.5f);
+        ProtoScreenFadeManager.instance.FadeOut(duration * 0.5f);
     }
 
     public void EndEmissionShot()

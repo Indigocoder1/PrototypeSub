@@ -396,7 +396,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 19.033333
+    m_StopTime: 17
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1287,21 +1287,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 16.15
-    functionName: PrepFiringPos
+  - time: 16.5
+    functionName: FadeInOut
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 1
     intParameter: 0
     messageOptions: 0
-  - time: 18.033333
-    functionName: PulseDeviceEmission
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 19.033333
+  - time: 17
     functionName: EndEmissionShot
     data: 
     objectReferenceParameter: {fileID: 0}
