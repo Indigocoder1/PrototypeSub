@@ -15,6 +15,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     [SerializeField] private WyrmAction[] predeterminedActions;
     [SerializeField] private float firstAggressionTime;
 
+    private WyrmAction lastAction;
     private bool startedSequence;
     private int actionStage;
     
@@ -26,6 +27,8 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         
         if (FirstEncounterCompleted()) return;
 
+        actionStage = 0;
+        startedSequence = false;
         aggressiveWorm.SetTimeInVoidForAggression(firstAggressionTime);
         OnFirstEncounterStarted?.Invoke();
     }
@@ -34,22 +37,22 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     {
         if (FirstEncounterCompleted()) return;
         
-        if (startedSequence && !aggressiveWorm.IsAggressive())
-        {
-            actionStage = 0;
-            startedSequence = false;
-        }
-        
         if (startedSequence || !aggressiveWorm.IsAggressive()) return;
-
+        
         foreach (var wyrmAction in aggressiveWorm.actions)
         {
             wyrmAction.SendMessage("OverrideStopPerform", SendMessageOptions.DontRequireReceiver);
         }
         
         var action = predeterminedActions[actionStage];
+        if (lastAction == action)
+        {
+            action.OnActionComplete -= OnActionCompleted;
+        }
+        Plugin.Logger.LogInfo($"Starting {action} from encounter manager update");
         action.Perform(null, 0, 0);
         action.OnActionComplete += OnActionCompleted;
+        lastAction = action;
         startedSequence = true;
     }
 
@@ -69,8 +72,10 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         }
         
         var newAction = predeterminedActions[actionStage];
+        Plugin.Logger.LogInfo($"Starting {newAction} from encounter manager event");
         newAction.Perform(null, 0, 0);
         newAction.OnActionComplete += OnActionCompleted;
+        lastAction = newAction;
     }
 
     public bool FirstEncounterCompleted()
