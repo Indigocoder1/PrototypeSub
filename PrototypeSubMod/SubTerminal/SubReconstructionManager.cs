@@ -1,4 +1,5 @@
-﻿using PrototypeSubMod.DestructionEvent;
+﻿using System;
+using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.PowerSystem;
 using PrototypeSubMod.Utility;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace PrototypeSubMod.SubTerminal;
 
 internal class SubReconstructionManager : MonoBehaviour
 {
+    public static event Action OnSubRebuilt;
+    
     [SerializeField] private ProtoBuildTerminal buildTerminal;
 
     public GameObject GetSubObject()
@@ -38,6 +41,7 @@ internal class SubReconstructionManager : MonoBehaviour
         }
         
         Plugin.GlobalSaveData.prototypeDestroyed = false;
+        OnSubRebuilt?.Invoke();
     }
 
     public void ReconstructSub()

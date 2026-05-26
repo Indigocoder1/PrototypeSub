@@ -1,4 +1,6 @@
-﻿using PrototypeSubMod.PowerSystem;
+﻿using System;
+using PrototypeSubMod.PowerSystem;
+using PrototypeSubMod.SubTerminal;
 using SubLibrary.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +13,11 @@ public class ChargeLevelDisplay : MonoBehaviour, IUIElement
     [SerializeField] private Image chargeBar;
 
     private bool destroyed;
+
+    private void Start()
+    {
+        SubReconstructionManager.OnSubRebuilt += OnSubRebuilt;
+    }
 
     public void UpdateUI()
     {
@@ -28,5 +35,15 @@ public class ChargeLevelDisplay : MonoBehaviour, IUIElement
     public void OnSubDestroyed()
     {
         destroyed = true;
+    }
+
+    private void OnSubRebuilt()
+    {
+        destroyed = false;
+    }
+
+    private void OnDestroy()
+    {
+        SubReconstructionManager.OnSubRebuilt -= OnSubRebuilt;
     }
 }
