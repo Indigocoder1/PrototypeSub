@@ -77084,7 +77084,7 @@ MonoBehaviour:
   emissionController: {fileID: 3371763760948927259}
   lightingController: {fileID: 166681490149920772}
   lightingControllerManager: {fileID: 1369342963250766631}
-  disableDuration: 6
+  disableDuration: 10
   voiceNotificationManager: {fileID: 5389210478452801882}
   engineRestartNotification: {fileID: 5685915161345486246}
   powerDownSfx: {fileID: 9171199765441148835}
@@ -115268,7 +115268,6 @@ MonoBehaviour:
   subRoot: {fileID: 6246764057006774658}
   mixin: {fileID: 4453924424643417328}
   hudCanvasGroup: {fileID: 1178562909987698232}
-  reactorMeltdownOccurred: {fileID: 0}
   hydrolockDoorsAnimator: {fileID: 1238373295649470532}
   radiationObject: {fileID: 8179709822249383269}
   meltdownWarningDuration: 18
