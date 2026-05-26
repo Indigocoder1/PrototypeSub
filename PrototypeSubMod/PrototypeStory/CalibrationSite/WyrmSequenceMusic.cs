@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using FMOD;
 using FMOD.Studio;
 using Nautilus.Handlers;
@@ -29,6 +30,9 @@ public class WyrmSequenceMusic : MonoBehaviour
 
     private FMOD_CustomEmitter currentSfxLoop;
     private FMOD_CustomEmitter nextLoopWanted;
+    private List<FMOD_CustomEmitter> intenseLoops = new();
+    private int intenseLoopIndex;
+    private bool wyrmLaserAttacked;
     private bool eventRegistered;
     private bool stopSfx;
     
@@ -77,12 +81,16 @@ public class WyrmSequenceMusic : MonoBehaviour
             return timePassedCheck || channelPlayingCheck;
         });
 
-        Plugin.Logger.LogInfo($"Duration was {durationMS}MS | Waited {(Time.time - timeStarted) * 1000}MS");
+        Plugin.Logger.LogInfo($"Duration was {durationMS}ms | Waited {(Time.time - timeStarted) * 1000}ms");
 
-        if (nextLoopWanted != null)
+        if (nextLoopWanted != null && (intenseLoops.Count == 0 || !wyrmLaserAttacked))
         {
             currentSfxLoop = nextLoopWanted;
-            nextLoopWanted = null;
+        }
+        else if (intenseLoops.Count > 0 && wyrmLaserAttacked)
+        {
+            currentSfxLoop = intenseLoops[intenseLoopIndex];
+            intenseLoopIndex = (intenseLoopIndex + 1) % intenseLoops.Count;
         }
 
         if (!stopSfx)
@@ -91,6 +99,7 @@ public class WyrmSequenceMusic : MonoBehaviour
             StartCoroutine(PlayLoops());
         }
         
+        nextLoopWanted = null;
         stopSfx = false;
     }
 
@@ -110,20 +119,25 @@ public class WyrmSequenceMusic : MonoBehaviour
     private void OnLaserImpact()
     {
         currentSfxLoop = intenseIntro;
-        nextLoopWanted = intense1;
+        intenseLoops.Insert(0, intense1);
         stopSfx = false;
+        wyrmLaserAttacked = true;
         StartCoroutine(PlayLoops());
         laserAction.OnLaserImpact -= OnLaserImpact;
     }
     
     private void OnReachNode(int point)
     {
-        nextLoopWanted = point switch
+        var addedLoop = point switch
         {
             2 => intense2,
             4 => intense3,
-            _ => nextLoopWanted
+            _ => null
         };
+        
+        if (addedLoop == null) return;
+
+        intenseLoops.Add(addedLoop);
     }
 
     private void OnCalibrationCompleted()

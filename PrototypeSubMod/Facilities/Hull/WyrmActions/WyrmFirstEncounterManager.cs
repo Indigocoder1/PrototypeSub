@@ -21,6 +21,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     private void Start()
     {
         CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
+        CalibrationRunManager.OnPointReached += OnPointReached;
         aggressiveWorm.OnDespawn += OnDespawned;
         
         if (FirstEncounterCompleted()) return;
@@ -84,8 +85,17 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         OnFirstEncounterEnded?.Invoke();
     }
 
+    private void OnPointReached(int index)
+    {
+        if (index != 0) return;
+        
+        actionStage = 0;
+        startedSequence = false;
+    }
+
     private void OnDestroy()
     {
         CalibrationRunManager.OnCalibrationCompleted -= OnCalibrationCompleted;
+        CalibrationRunManager.OnPointReached -= OnPointReached;
     }
 }
