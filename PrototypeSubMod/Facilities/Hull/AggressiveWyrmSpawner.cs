@@ -18,10 +18,11 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
     private bool canSpawn;
     private float minWyrmSpawnDelay = 20f;
     private float maxWyrmSpawnDelay = 40f;
-    private float calibrationSpawnDelay = 10f;
+    private float calibrationSpawnDelay = 20f;
 
     private void Start()
     {
+        wyrmSpawned = FindObjectsOfType<ProtoAggressiveWorm>().Length > 0;
         CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
         canSpawn = true;
     }
@@ -32,9 +33,14 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
         
         if (ProtoStoryLocker.StoryEndingActive) return;
 
-        if ((!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy") || 
-            !StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun")) &&
-            AtmosphereDirector.main.GetBiomeOverride() != BiomeRegisterer.DZMIRunupBiome) return;
+        var wyrmActivated = StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy");
+        var closeToCalibration = AtmosphereDirector.main.GetBiomeOverride() == "protovoid" &&
+                                 Vector3.Distance(Player.main.transform.position, CalibrationRunManager.InitialPoint) <
+                                 650;
+        var inDZMIRunup = AtmosphereDirector.main.GetBiomeOverride() == BiomeRegisterer.DZMIRunupBiome;
+        
+        // Always spawn the wyrm in the DZMI runup
+        if ((!wyrmActivated || !closeToCalibration) && !inDZMIRunup) return;
         
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";

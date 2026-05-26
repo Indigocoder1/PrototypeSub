@@ -44,7 +44,8 @@ public class WyrmSequenceMusic : MonoBehaviour
         laserAction.OnStartTargeting += OnLaserTargetingStart;
         laserAction.OnLaserImpact += OnLaserImpact;
         CalibrationRunManager.OnPointReached += OnReachNode;
-        CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
+        CalibrationRunManager.OnCalibrationCompleted += StopMusic;
+        CalibrationRunManager.OnCalibrationFailed += StopMusic;
         ProtoDestructionEvent.OnSubDestroyed += OnSubDestroyed;
         eventRegistered = true;
         StartCoroutine(StartMusicAsync());
@@ -140,11 +141,6 @@ public class WyrmSequenceMusic : MonoBehaviour
         intenseLoops.Add(addedLoop);
     }
 
-    private void OnCalibrationCompleted()
-    {
-        StopMusic();
-    }
-
     private void StopMusic()
     {
         stopSfx = true;
@@ -157,7 +153,8 @@ public class WyrmSequenceMusic : MonoBehaviour
         if (!eventRegistered) return;
         
         CalibrationRunManager.OnPointReached -= OnReachNode;
-        CalibrationRunManager.OnCalibrationCompleted -= OnCalibrationCompleted;
+        CalibrationRunManager.OnCalibrationCompleted -= StopMusic;
+        CalibrationRunManager.OnCalibrationFailed -= StopMusic;
         ProtoDestructionEvent.OnSubDestroyed -= OnSubDestroyed;
     }
 

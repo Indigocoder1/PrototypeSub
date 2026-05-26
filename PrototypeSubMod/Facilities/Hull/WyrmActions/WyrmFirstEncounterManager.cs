@@ -56,7 +56,12 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     private void OnActionCompleted()
     {
         predeterminedActions[actionStage].OnActionComplete -= OnActionCompleted;
-        actionStage++;
+
+        // Keep doing the dart action until reaching the calibration start
+        if (StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun"))
+        {
+            actionStage++;
+        }
 
         if (actionStage >= predeterminedActions.Length)
         {
