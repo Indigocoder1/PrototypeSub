@@ -26,7 +26,6 @@ public class WyrmSequenceMusic : MonoBehaviour
     [SerializeField] private FMOD_CustomEmitter intense1;
     [SerializeField] private FMOD_CustomEmitter intense2;
     [SerializeField] private FMOD_CustomEmitter intense3;
-    [SerializeField] private FMOD_CustomEmitter musicOutro;
 
     private FMOD_CustomEmitter currentSfxLoop;
     private FMOD_CustomEmitter nextLoopWanted;
@@ -41,6 +40,7 @@ public class WyrmSequenceMusic : MonoBehaviour
         laserAction.OnStartTargeting += OnLaserTargetingStart;
         laserAction.OnLaserImpact += OnLaserImpact;
         CalibrationRunManager.OnPointReached += OnReachNode;
+        CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
         ProtoDestructionEvent.OnSubDestroyed += OnSubDestroyed;
         eventRegistered = true;
         StartCoroutine(StartMusicAsync());
@@ -77,6 +77,8 @@ public class WyrmSequenceMusic : MonoBehaviour
             return timePassedCheck || channelPlayingCheck;
         });
 
+        Plugin.Logger.LogInfo($"Duration was {durationMS}MS | Waited {(Time.time - timeStarted) * 1000}MS");
+
         if (nextLoopWanted != null)
         {
             currentSfxLoop = nextLoopWanted;
@@ -100,9 +102,7 @@ public class WyrmSequenceMusic : MonoBehaviour
 
     private void OnLaserTargetingStart()
     {
-        stopSfx = true;
-        currentSfxLoop.Stop();
-        StopCoroutine(nameof(PlayLoops));
+        StopMusic();
         
         laserAction.OnStartTargeting -= OnLaserTargetingStart;
     }
@@ -122,9 +122,20 @@ public class WyrmSequenceMusic : MonoBehaviour
         {
             2 => intense2,
             4 => intense3,
-            5 => musicOutro,
             _ => nextLoopWanted
         };
+    }
+
+    private void OnCalibrationCompleted()
+    {
+        StopMusic();
+    }
+
+    private void StopMusic()
+    {
+        stopSfx = true;
+        currentSfxLoop.Stop();
+        StopCoroutine(nameof(PlayLoops));
     }
 
     private void OnDestroy()
@@ -132,6 +143,7 @@ public class WyrmSequenceMusic : MonoBehaviour
         if (!eventRegistered) return;
         
         CalibrationRunManager.OnPointReached -= OnReachNode;
+        CalibrationRunManager.OnCalibrationCompleted -= OnCalibrationCompleted;
         ProtoDestructionEvent.OnSubDestroyed -= OnSubDestroyed;
     }
 

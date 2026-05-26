@@ -1187,57 +1187,6 @@ Transform:
   m_Father: {fileID: 1563852477254856907}
   m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: -89.98021, y: -0.000008651425, z: 0}
---- !u!1 &931999139905760216
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4178116703982407791}
-  - component: {fileID: 569612372415497184}
-  m_Layer: 0
-  m_Name: TrailerOutro
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4178116703982407791
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931999139905760216}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5072453563914416605}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &569612372415497184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931999139905760216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: 5a27851b191780c4080b443d47f0fced, type: 2}
-  playOnAwake: 0
-  stopImmediatelyOnDisable: 0
-  followParent: 0
-  restartOnPlay: 1
-  debug: 0
-  subtitlesKey: 
-  playSubtitlesWithUnscaledTime: 1
 --- !u!1 &972757089989905464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,7 +2413,6 @@ Transform:
   - {fileID: 8242905825612650526}
   - {fileID: 9182806731834568698}
   - {fileID: 2501873112851885463}
-  - {fileID: 4178116703982407791}
   m_Father: {fileID: 4699808734583788080}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9602,7 +9550,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   encounterManager: {fileID: 6168566770618422719}
-  dartAction: {fileID: 4846019268480220019}
   ramAction: {fileID: 1020735297128332148}
   laserAction: {fileID: 2563168583705512565}
   introOneShot: {fileID: 1269773081994889089}
@@ -9612,7 +9559,7 @@ MonoBehaviour:
   intense1: {fileID: 2891693625862684162}
   intense2: {fileID: 7091299895988206361}
   intense3: {fileID: 200377238227694141}
-  musicOutro: {fileID: 569612372415497184}
+  musicOutro: {fileID: 0}
 --- !u!1 &6929183893811062448
 GameObject:
   m_ObjectHideFlags: 0
