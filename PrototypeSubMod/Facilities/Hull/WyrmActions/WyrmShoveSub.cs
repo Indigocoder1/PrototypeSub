@@ -9,11 +9,14 @@ public class WyrmShoveSub : MonoBehaviour
 
     [SerializeField] private float shoveImpulse;
     [SerializeField] private FMOD_CustomEmitter impactSfx;
+    [SerializeField] private WyrmRamTarget wyrmRamTarget;
 
     private float timeLastHit;
     
     private void OnTriggerEnter(Collider other)
     {
+        if (!wyrmRamTarget.IsPerforming()) return;
+        
         var subRoot = other.GetComponentInParent<SubRoot>();
         if (!subRoot) return;
         

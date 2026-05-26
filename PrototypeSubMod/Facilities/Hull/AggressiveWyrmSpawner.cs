@@ -53,22 +53,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
         
         if (!inVoid || !canSpawn || wyrmSpawned) return;
         
-        var (hitPoint, info) = FindSpawnPoint();
-        var point = info.point;
-        var normal = info.normal;
-        if (!hitPoint)
-        {
-            const float spawnOffset = 250;
-            var playerPos = Player.main.transform.position;
-            var dir = (-playerPos.normalized - Vector3.up) / 2;
-            dir.Normalize();
-            point = playerPos + dir * spawnOffset;
-            normal = -dir;
-            Plugin.Logger.LogInfo($"Wyrm spawner didn't detect any hits. Resorting to fallback spawn location");
-        }
-        
-        Plugin.Logger.LogInfo($"Entered the void | Spawn point at {point}");
-        StartCoroutine(SpawnWyrm(point, normal));
+        StartCoroutine(SpawnWyrm());
         wyrmSpawned = true;
     }
 
@@ -77,7 +62,7 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
         canSpawn = false;
     }
 
-    private IEnumerator SpawnWyrm(Vector3 point, Vector3 normal)
+    private IEnumerator SpawnWyrm()
     {
         var delay = Random.Range(minWyrmSpawnDelay, maxWyrmSpawnDelay);
         if (!StoryGoalManager.main.IsGoalComplete("WyrmFirstEncounterComplete"))
@@ -85,7 +70,22 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
             delay = calibrationSpawnDelay + Random.Range(-2f, 2f);
         }
         
+        Plugin.Logger.LogInfo($"Entered the void | Spawning wyrm in {delay} seconds");
         yield return new WaitForSeconds(delay);
+        
+        var (hitPoint, info) = FindSpawnPoint();
+        var point = info.point;
+        var normal = info.normal;
+        if (!hitPoint)
+        {
+            const float spawnOffset = 350;
+            var playerPos = Player.main.transform.position;
+            var dir = (-playerPos.normalized - Vector3.up) / 2;
+            dir.Normalize();
+            point = playerPos + dir * spawnOffset;
+            normal = -dir;
+            Plugin.Logger.LogInfo($"Wyrm spawner didn't detect any hits. Resorting to fallback spawn location");
+        }
 
         var biomeString = Player.main.GetBiomeString();
         bool inVoid = biomeString is "void" or "";

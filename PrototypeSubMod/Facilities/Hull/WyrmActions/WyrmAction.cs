@@ -83,6 +83,8 @@ public abstract class WyrmAction : CreatureAction
         OnActionComplete?.Invoke();
     }
 
+    public bool IsPerforming() => performing;
+
     private IEnumerator ProgressActionDelayed()
     {
         int stageWhenStarted = AttackStage;

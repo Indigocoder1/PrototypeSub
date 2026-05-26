@@ -82,8 +82,6 @@ public class WyrmSequenceMusic : MonoBehaviour
             return timePassedCheck || channelPlayingCheck;
         });
 
-        Plugin.Logger.LogInfo($"Duration was {durationMS}ms | Waited {(Time.time - timeStarted) * 1000}ms");
-
         if (nextLoopWanted != null && (intenseLoops.Count == 0 || !wyrmLaserAttacked))
         {
             currentSfxLoop = nextLoopWanted;

@@ -9559,7 +9559,6 @@ MonoBehaviour:
   intense1: {fileID: 2891693625862684162}
   intense2: {fileID: 7091299895988206361}
   intense3: {fileID: 200377238227694141}
-  musicOutro: {fileID: 0}
 --- !u!1 &6929183893811062448
 GameObject:
   m_ObjectHideFlags: 0
@@ -12129,6 +12128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shoveImpulse: 1500000
   impactSfx: {fileID: 3899844511224395324}
+  wyrmRamTarget: {fileID: 1020735297128332148}
 --- !u!1 &8412220139845116049
 GameObject:
   m_ObjectHideFlags: 0
