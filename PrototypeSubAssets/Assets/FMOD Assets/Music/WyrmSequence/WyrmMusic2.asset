@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: WyrmMusic2
   id: 
-  audioClip: {fileID: 8300000, guid: fad34b12fd8c49e43b2bed1971d4f7e3, type: 3}
+  audioClip: {fileID: 8300000, guid: 4f8deb01ee6e29747bfe836767cb1596, type: 3}
   doNotAutoRegister: 0
   mode: 16392
   maxDistance3D: 0
