@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using PrototypeSubMod.VehicleAccess;
 using SubLibrary.SubFire;
 using UnityEngine;
 
@@ -9,12 +8,11 @@ namespace PrototypeSubMod.DestructionEvent;
 internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
 {
     private static readonly int HydrolockEnabled = Animator.StringToHash("HydrolockEnabled");
-    public static event Action OnSubDestroyed; 
+    public static event Action OnSubDestroyed;
     
     [SerializeField] private SubRoot subRoot;
     [SerializeField] private LiveMixin mixin;
     [SerializeField] private CanvasGroup hudCanvasGroup;
-    [SerializeField] private VoiceNotification reactorMeltdownOccurred;
     [SerializeField] private Animator hydrolockDoorsAnimator;
     [SerializeField] private GameObject radiationObject;
     [SerializeField] private float meltdownWarningDuration = 18f;
@@ -54,8 +52,6 @@ internal class ProtoDestructionEvent : MonoBehaviour, IOnTakeDamage
 
         StartCoroutine(OnDestroySub());
         OnSubDestroyed?.Invoke();
-
-        subRoot.voiceNotificationManager.PlayVoiceNotification(reactorMeltdownOccurred, false, true);
     }
 
     private void DestroySub()

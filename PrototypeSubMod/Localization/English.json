@@ -477,8 +477,7 @@
   "DarkMatterDetected": "DARK ENERGY DETECTED",
 
   // Voice Notifications
-  "Proto_AbandonShip": "PROTOTYPE: Critical Warning: Reactor meltdown imminent! Abandon ship!",
-  "Proto_MeltdownOccurred": "PROTOTYPE: Warning: Reactor meltdown in progress! Sealing emergency radiation shielding.",
+  "Proto_AbandonShip": "PROTOTYPE: Warning: Reactor meltdown in progress! Sealing emergency radiation shielding.",
   "Proto_AheadFlank": "PROTOTYPE: Ahead flank - Emergency speed!",
   "Proto_AheadSlow": "PROTOTYPE: Ahead slow.",
   "Proto_AheadStandard": "PROTOTYPE: Ahead standard.",
