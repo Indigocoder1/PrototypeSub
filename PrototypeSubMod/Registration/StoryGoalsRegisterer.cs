@@ -384,17 +384,8 @@ internal static class StoryGoalsRegisterer
         #endregion
 
         #region Calibration Site Completion
-        StoryGoalHandler.RegisterCustomEvent("OnCalibrationRunCompleted", () =>
-        {
-        });
 
-        StoryGoalHandler.RegisterCustomEvent("ProtoCalibrationCodeEncy", () =>
-        {
-            PDALog.Add("Proto_OnCalibrationRunCompleted");
-            PDAEncyclopedia.Add("ProtoCalibrationCodeEncy", true);
-        });
-
-        StoryGoalHandler.RegisterCompoundGoal("ProtoCalibrationCodeEncy", Story.GoalType.Story, 15f,
+        StoryGoalHandler.RegisterCompoundGoal("ProtoCalibrationCodeEncy", Story.GoalType.Encyclopedia, 15f,
             "OnCalibrationRunCompleted");
 
         #endregion

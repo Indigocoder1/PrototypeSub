@@ -522,7 +522,6 @@
   "Proto_CriticalPower": "PROTOTYPE: Warning: Ion reserves critical",
   "Proto_FireSuppression": "PROTOTYPE: Stabilizing internal circuitry",
   "Proto_OnTransmissionDeviceFirstLoaded": "PROTOTYPE: Warning: Unauthorized device detected in loading bay.<duration=4500>\nRemove immedia-▖▞┫▗▝┓┏<delay=4556><duration=4900>",
-  "Proto_OnCalibrationRunCompleted": "┏┗ -▗▘┏: Transmission calibration complete. Broadcasting calibration key.<duration=4500>",
   "Proto_CalibrationPointReached": "┏┗ -▗▘┏: Node reached. Please proceed.",
   "Proto_CalibrationTestFailed": "┏┗ -▗▘┏: Transmission calibration failed. Return to calibration start.",
   "Proto_CalibrationTestStarted": "┏┗ -▗▘┏: Transmission calibration initialized. Please proceed.",
