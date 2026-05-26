@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: WyrmIntense3
   id: 
-  audioClip: {fileID: 8300000, guid: eea38d9a1fe58fd40ad4a0ee88535732, type: 3}
+  audioClip: {fileID: 8300000, guid: 7f854020fa77ec849bbdc14507bcfbbb, type: 3}
   doNotAutoRegister: 0
   mode: 16392
   maxDistance3D: 0
