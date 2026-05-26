@@ -25,6 +25,8 @@ public static class PrefabPlaceholder_Patches
 
     private static string GetVolumeBiome(Vector3 worldPosition)
     {
+        if (AtmosphereDirector.main == null) return null;
+        
         foreach (var volume in AtmosphereDirector.main.GetVolumes())
         {
             if (volume.overrideBiome == string.Empty) continue;
@@ -39,6 +41,8 @@ public static class PrefabPlaceholder_Patches
 
     public static bool InFacilityBiome(Vector3 worldPosition)
     {
+        if (LargeWorld.main == null) return false;
+        
         var currentBiome = (GetVolumeBiome(worldPosition) ?? LargeWorld.main.GetBiome(worldPosition)).ToLower();
         return currentBiome.Contains("proto") && currentBiome.Contains("facility");
     }

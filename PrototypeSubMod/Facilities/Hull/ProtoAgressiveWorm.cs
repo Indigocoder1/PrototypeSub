@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace PrototypeSubMod.Facilities.Hull;
 
-public class ProtoAggressiveWorm : Creature
+public class ProtoAggressiveWorm : Creature, IProtoTreeEventListener
 {
     public event Action OnDespawn;
 
@@ -43,19 +43,28 @@ public class ProtoAggressiveWorm : Creature
     private float damageTimer;
     private bool playerBeingEaten;
 
-    public override void Start()
+    private void Awake()
     {
-        base.Start();
-
+        // If there's more than one wyrm spawned somehow, destroy this one
+        if (FindObjectsOfType<ProtoAggressiveWorm>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        
         roarManager.PlayRoar(Player.main.transform.position);
         liveMixin.invincible = true;
         GetComponent<Rigidbody>().useGravity = false;
-        StartCoroutine(RetrieveSegmentRends());
-        headRenderers = headObject.GetComponentsInChildren<Renderer>();
         segmentCount = spineManager.GetSpineSegmentCount();
-
-        StartCoroutine(RandomRoar());
+        RetrieveRenderers();
+        
+        UWE.CoroutineHost.StartCoroutine(RandomRoar());
         ProtoStoryLocker.onEndingStart += ForceDespawn;
+    }
+
+    private void RetrieveRenderers()
+    {
+        UWE.CoroutineHost.StartCoroutine(RetrieveSegmentRends());
+        headRenderers = headObject.GetComponentsInChildren<Renderer>(true);
     }
 
     private IEnumerator RandomRoar()
@@ -71,7 +80,7 @@ public class ProtoAggressiveWorm : Creature
             // ErrorMessage.AddError("Stopping roar.");
             yield break;
         }
-        StartCoroutine(RandomRoar());
+        UWE.CoroutineHost.StartCoroutine(RandomRoar());
     }
     
     public override bool TryStartAction(CreatureAction action)
@@ -101,6 +110,8 @@ public class ProtoAggressiveWorm : Creature
 
     private void Update()
     {
+        if (WaitScreen.IsWaiting) return;
+        
         HandleEatPlayer();
         HandleVoidTimer();
         
@@ -141,7 +152,7 @@ public class ProtoAggressiveWorm : Creature
 
             if (mixin == player.liveMixin && !player.currentSub && !playerBeingEaten)
             {
-                StartCoroutine(EatPlayer());
+                UWE.CoroutineHost.StartCoroutine(EatPlayer());
                 hasDamagedTarget = true;
                 break;
             }
@@ -297,5 +308,17 @@ public class ProtoAggressiveWorm : Creature
         yield return new WaitForSeconds(5f);
 
         playerBeingEaten = false;
+    }
+
+    public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }
+
+    public void OnProtoDeserializeObjectTree(ProtobufSerializer serializer)
+    {
+        secondsInVoid = 0;
+        numSegmentsAggressiveLastFrame = 0;
+        if (headRenderers == null || segmentRenderers == null)
+        {
+            RetrieveRenderers();
+        }
     }
 }

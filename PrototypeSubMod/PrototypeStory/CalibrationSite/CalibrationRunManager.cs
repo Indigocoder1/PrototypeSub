@@ -161,6 +161,8 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         StoryGoalManager.main.OnGoalComplete("StartedCalibrationRun");
     }
 
+    public bool IsDoingCalibrationRun() => doingCalibrationRun;
+
     public string GetProfileTag() => "CalibrationRunManager";
     public int scheduledUpdateIndex { get; set; }
     

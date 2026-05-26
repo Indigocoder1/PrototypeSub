@@ -16,14 +16,22 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     [SerializeField] private float firstAggressionTime;
 
     private WyrmAction lastAction;
+    private bool doingCalibrationRun;
     private bool startedSequence;
     private int actionStage;
     
     private void Start()
     {
         CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
+        CalibrationRunManager.OnCalibrationFailed += OnCalibrationFailed;
         CalibrationRunManager.OnPointReached += OnPointReached;
         aggressiveWorm.OnDespawn += OnDespawned;
+
+        var runManager = FindObjectOfType<CalibrationRunManager>();
+        if (runManager && runManager.IsDoingCalibrationRun())
+        {
+            doingCalibrationRun = true;
+        }
         
         if (FirstEncounterCompleted()) return;
 
@@ -49,7 +57,6 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         {
             action.OnActionComplete -= OnActionCompleted;
         }
-        Plugin.Logger.LogInfo($"Starting {action} from encounter manager update");
         action.Perform(null, 0, 0);
         action.OnActionComplete += OnActionCompleted;
         lastAction = action;
@@ -61,7 +68,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         predeterminedActions[actionStage].OnActionComplete -= OnActionCompleted;
 
         // Keep doing the dart action until reaching the calibration start
-        if (StoryGoalManager.main.IsGoalComplete("StartedCalibrationRun"))
+        if (doingCalibrationRun)
         {
             actionStage++;
         }
@@ -72,7 +79,6 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         }
         
         var newAction = predeterminedActions[actionStage];
-        Plugin.Logger.LogInfo($"Starting {newAction} from encounter manager event");
         newAction.Perform(null, 0, 0);
         newAction.OnActionComplete += OnActionCompleted;
         lastAction = newAction;
@@ -93,6 +99,7 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         StoryGoalManager.main.OnGoalComplete("WyrmFirstEncounterComplete");
         aggressiveWorm.ForceDespawn();
         OnFirstEncounterEnded?.Invoke();
+        doingCalibrationRun = false;
     }
 
     private void OnPointReached(int index)
@@ -101,11 +108,18 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         
         actionStage = 0;
         startedSequence = false;
+        doingCalibrationRun = true;
+    }
+
+    private void OnCalibrationFailed()
+    {
+        doingCalibrationRun = false;
     }
 
     private void OnDestroy()
     {
         CalibrationRunManager.OnCalibrationCompleted -= OnCalibrationCompleted;
+        CalibrationRunManager.OnCalibrationFailed -= OnCalibrationFailed;
         CalibrationRunManager.OnPointReached -= OnPointReached;
     }
 }

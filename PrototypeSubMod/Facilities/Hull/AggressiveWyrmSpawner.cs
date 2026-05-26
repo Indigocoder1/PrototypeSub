@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace PrototypeSubMod.Facilities.Hull;
 
-public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
+public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour, IProtoTreeEventListener
 {
     private bool wyrmSpawned;
     private bool canSpawn;
@@ -22,7 +22,6 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
 
     private void Start()
     {
-        wyrmSpawned = FindObjectsOfType<ProtoAggressiveWorm>().Length > 0;
         CalibrationRunManager.OnCalibrationCompleted += OnCalibrationCompleted;
         canSpawn = true;
     }
@@ -72,6 +71,12 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
         
         Plugin.Logger.LogInfo($"Entered the void | Spawning wyrm in {delay} seconds");
         yield return new WaitForSeconds(delay);
+
+        if (WyrmAlreadySpawned())
+        {
+            wyrmSpawned = true;
+            yield break;
+        }
         
         var (hitPoint, info) = FindSpawnPoint();
         var point = info.point;
@@ -160,4 +165,21 @@ public class AggressiveWyrmSpawner : MonoBehaviour, IScheduledUpdateBehaviour
     }
 
     public int scheduledUpdateIndex { get; set; }
+    public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }
+
+    public void OnProtoDeserializeObjectTree(ProtobufSerializer serializer)
+    {
+        var wyrmAlreadyExists = WyrmAlreadySpawned();
+        if (wyrmAlreadyExists && wyrmSpawned)
+        {
+            StopCoroutine(nameof(SpawnWyrm));
+        }
+
+        wyrmSpawned = wyrmAlreadyExists;
+    }
+
+    private bool WyrmAlreadySpawned()
+    {
+        return FindObjectsOfType<ProtoAggressiveWorm>().Length > 0;
+    }
 }
