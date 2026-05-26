@@ -25,6 +25,7 @@ public class SubTransmissionCinematic : MonoBehaviour
     [SerializeField] private GameObject functionalityRoot;
     [SerializeField] private MaterialSwapper materialSwapper;
     [SerializeField] private CinematicShot[] cinematicShots;
+    [SerializeField] private FMOD_CustomEmitter cinematicMusic;
     
     private int shotIndex;
 
@@ -73,6 +74,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         ProtoScreenFadeManager.instance.FadeIn(fadeTime);
         yield return new WaitForSeconds(fadeTime);
 
+        cinematicMusic.Play();
         var shot = cinematicShots[shotIndex];
         shot.PlayShot(cinematicAnimator, cinematicManager);
         shot.OnShotCompleted += OnShotCompleted;
