@@ -63,10 +63,12 @@ public class WyrmSequenceMusic : MonoBehaviour
             currentSfxLoop.Play();
         }
 
-        var durationMS = AudioUtils.GetFmodAssetDuration(currentSfxLoop.asset);
-        var timeStarted = Time.time;
-
         CustomSoundHandler.TryGetCustomSoundChannel(currentSfxLoop.GetInstanceID(), out channel);
+
+        channel.getCurrentSound(out var sound);
+        sound.getLength(out var durationMS, TIMEUNIT.MS);
+        var timeStarted = Time.time;
+        
         yield return new WaitUntil(() =>
         {
             var timePassedCheck = (Time.time - timeStarted) * 1000 > durationMS;
