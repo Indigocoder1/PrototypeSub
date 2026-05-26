@@ -16,6 +16,12 @@ public class TransmissionRunupMusic : MonoBehaviour, IScheduledUpdateBehaviour
     
     public void ScheduledUpdate()
     {
+        if (IngameMenu.IsQuitting())
+        {
+            musicPlayer.Stop();
+            return;
+        }
+        
         var inRunup = Player.main.biomeString == BiomeRegisterer.TransmissionRunupBiome;
 
         if (inRunup && !wasInRunup)
