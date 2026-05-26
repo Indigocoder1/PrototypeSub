@@ -40,7 +40,8 @@ public class FactorUnlockTerminal : MonoBehaviour
         if (!Language.main.Contains(pdaLog))
         {
             StartCoroutine(UnlockFactorDelayed(0));
-            throw new System.Exception($"No language line for {pdaLog} detected!");
+            Plugin.Logger.LogWarning($"No language line for {pdaLog} detected!");
+            return;
         }
         
         PDALog.Add(pdaLog);
