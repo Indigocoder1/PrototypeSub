@@ -36,6 +36,8 @@ internal class ProtoStrafe : ProtoUpgrade
                 strafeOffSfx.Play();
             }
         }
+
+        subControl.throttle = Vector3.ClampMagnitude(subControl.throttle, 1);
     }
 
     private void FixedUpdate()
