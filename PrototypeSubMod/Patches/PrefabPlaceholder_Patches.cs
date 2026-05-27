@@ -43,7 +43,8 @@ public static class PrefabPlaceholder_Patches
     {
         if (LargeWorld.main == null) return false;
         
-        var currentBiome = (GetVolumeBiome(worldPosition) ?? LargeWorld.main.GetBiome(worldPosition)).ToLower();
+        var currentBiome = (GetVolumeBiome(worldPosition) ?? LargeWorld.main.GetBiome(worldPosition))?.ToLower();
+        if (currentBiome == null) return false;
         return currentBiome.Contains("proto") && currentBiome.Contains("facility");
     }
 }

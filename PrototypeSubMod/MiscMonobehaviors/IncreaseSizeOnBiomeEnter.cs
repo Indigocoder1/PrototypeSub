@@ -23,7 +23,7 @@ public class IncreaseSizeOnBiomeEnter : MonoBehaviour, IScheduledUpdateBehaviour
             transform.localScale *= scaleFactor;
             hasScaledUp = true;
         }
-        else if (hasScaledUp && Player.main.biomeString == biome)
+        else if (hasScaledUp && Player.main.biomeString != biome)
         {
             transform.localScale *= (1 / scaleFactor);
             hasScaledUp = false;

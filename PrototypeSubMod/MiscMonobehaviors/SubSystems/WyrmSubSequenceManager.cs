@@ -1,5 +1,5 @@
-﻿using System;
-using PrototypeSubMod.DestructionEvent;
+﻿using PrototypeSubMod.DestructionEvent;
+using PrototypeSubMod.Facilities.Hull;
 using PrototypeSubMod.Facilities.Hull.WyrmActions;
 using PrototypeSubMod.MiscMonobehaviors.Emission;
 using UnityEngine;
@@ -19,6 +19,11 @@ public class WyrmSubSequenceManager : MonoBehaviour
         WyrmFirstEncounterManager.OnFirstEncounterEnded += OnSequenceEnded;
         WyrmFirstEncounterManager.OnDespawned += OnSequenceEnded;
         ProtoDestructionEvent.OnSubDestroyed += OnSequenceEnded;
+
+        if (FindObjectsOfType<ProtoAggressiveWorm>().Length > 0)
+        {
+            OnSequenceStarted();
+        }
     }
 
     private void OnSequenceStarted()

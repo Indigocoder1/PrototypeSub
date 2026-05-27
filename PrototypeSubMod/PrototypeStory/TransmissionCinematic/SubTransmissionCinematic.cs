@@ -42,6 +42,7 @@ public class SubTransmissionCinematic : MonoBehaviour
     
     public void PlayCinematic(DeviceCinematicManager cinematicManager)
     {
+        subRoot.voiceNotificationManager.ClearQueue();
         var upgradeManager = subRoot.GetComponentInChildren<ProtoUpgradeManager>();
         foreach (var upgrade in upgradeManager.GetInstalledUpgrades())
         {
@@ -59,6 +60,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         subRoot.enabled = false;
         subRoot.lightControl.emissiveController.renderers.Clear();
         subRoot.lightControl.LerpToState(2);
+        subRoot.GetComponent<CrushDamage>().SetExtraCrushDepth(100000);
         subTeleporter.ToggleDoor(false);
         StartCoroutine(PlayCinematicAsync(cinematicManager));
 
@@ -70,9 +72,10 @@ public class SubTransmissionCinematic : MonoBehaviour
 
     private IEnumerator PlayCinematicAsync(DeviceCinematicManager cinematicManager)
     {
-        const float fadeTime = 0.3f;
+        const float fadeTime = 3f;
+        const float waitTime = 4f;
         ProtoScreenFadeManager.instance.FadeIn(fadeTime);
-        yield return new WaitForSeconds(fadeTime);
+        yield return new WaitForSeconds(waitTime);
 
         cinematicMusic.Play();
         var shot = cinematicShots[shotIndex];

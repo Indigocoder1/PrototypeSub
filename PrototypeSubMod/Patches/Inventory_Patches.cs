@@ -100,10 +100,33 @@ internal class Inventory_Patches
         if (string.IsNullOrEmpty(slotB)) return true;
         
         var itemB = equipmentB.GetItemInSlot(slotB);
-        var tt = itemB?.techType ?? TechType.None;
-        if (itemB == null) return true;
+        
+        var aIsPrecursorSuit = itemA != null && itemA.techType == PrecursorSuit.prefabInfo.TechType;
+        var bIsPrecursorSuit = itemB != null && itemB.techType == PrecursorSuit.prefabInfo.TechType;
 
-        if (itemB.techType == PrecursorSuit.prefabInfo.TechType && itemA.techType != PrecursorSuit.prefabInfo.TechType)
+        if ((aIsPrecursorSuit && !bIsPrecursorSuit) || (bIsPrecursorSuit && !aIsPrecursorSuit))
+        {
+            ErrorMessage.AddError(Language.main.Get("ProtoSuitUnequipWarning"));
+            __result = false;
+            return false;
+        }
+
+        return true;
+    }
+    
+    [HarmonyPatch(nameof(Inventory.AddOrSwap)), HarmonyPrefix]
+    [HarmonyPatch(new [] { typeof(InventoryItem), typeof(IItemsContainer), typeof(InventoryItem) })]
+    private static bool AddOrSwap_ItemsContainer_Prefix(InventoryItem itemA, IItemsContainer containerB, InventoryItem itemB, ref bool __result)
+    {
+        if (Player.main.GetComponent<FactorActivationManager>().GetEquippedFactors().Count == 0)
+        {
+            return true;
+        }
+        
+        var aIsPrecursorSuit = itemA != null && itemA.techType == PrecursorSuit.prefabInfo.TechType;
+        var bIsPrecursorSuit = itemB != null && itemB.techType == PrecursorSuit.prefabInfo.TechType;
+
+        if ((aIsPrecursorSuit && !bIsPrecursorSuit) || (bIsPrecursorSuit && !aIsPrecursorSuit))
         {
             ErrorMessage.AddError(Language.main.Get("ProtoSuitUnequipWarning"));
             __result = false;

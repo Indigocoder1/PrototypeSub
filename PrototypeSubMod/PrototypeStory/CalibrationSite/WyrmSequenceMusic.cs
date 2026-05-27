@@ -148,6 +148,8 @@ public class WyrmSequenceMusic : MonoBehaviour
 
     private void OnDestroy()
     {
+        StopMusic();
+        
         if (!eventRegistered) return;
         
         CalibrationRunManager.OnPointReached -= OnReachNode;

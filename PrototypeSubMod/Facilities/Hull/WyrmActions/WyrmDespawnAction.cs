@@ -18,6 +18,8 @@ public class WyrmDespawnAction : CreatureAction
     {
         if (performing) return;
         
+        if (WaitScreen.IsWaiting) return;
+        
         base.Perform(creature, time, deltaTime);
         
         performing = true;
@@ -29,7 +31,7 @@ public class WyrmDespawnAction : CreatureAction
         Plugin.Logger.LogInfo($"Started despawn action");
     }
 
-    // I don't remember why I added this, but it's probably important so I'll leave it for now
+    // I don't remember why I added this, but it's probably important, so I'll leave it for now
     private IEnumerator TargetRecheck(Vector3 targetPoint)
     {
         yield return new WaitForSeconds(1f);

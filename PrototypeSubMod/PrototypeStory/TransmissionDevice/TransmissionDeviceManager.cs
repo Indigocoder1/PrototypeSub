@@ -159,9 +159,13 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
 
     public void PlayEndingCinematic()
     {
+        const string toolAttachPath =
+            "body/player_view/export_skeleton/head_rig/neck/chest/clav_R/clav_R_aim/shoulder_R/elbow_R/hand_R/attach1";
+        
         Player.main.pda.Close();
         Player.main.pda.Deactivated();
         Player.main.SetScubaMaskActive(false);
+        Player.main.transform.Find(toolAttachPath).gameObject.SetActive(false);
         HideForScreenshots.Hide(HideForScreenshots.HideType.HUD);
         Player_Patches.SetOxygenReqOverride(true, 0);
         IngameMenu_Patches.SetDenySaving(true);

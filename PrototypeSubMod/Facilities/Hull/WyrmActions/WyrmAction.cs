@@ -57,10 +57,14 @@ public abstract class WyrmAction : CreatureAction
     public virtual void OverrideStopPerform()
     {
         performing = false;
+        // Clear all listeners
+        OnActionComplete = null;
     }
 
     protected void OnReachedTargetPoint()
     {
+        if (!performing) return;
+        
         AttackStage++;
         
         OnReachedTarget?.Invoke();
@@ -81,6 +85,11 @@ public abstract class WyrmAction : CreatureAction
     {
         performing = false;
         OnActionComplete?.Invoke();
+    }
+
+    public void ClearActionCompleteListeners()
+    {
+        OnActionComplete = null;
     }
 
     public bool IsPerforming() => performing;
