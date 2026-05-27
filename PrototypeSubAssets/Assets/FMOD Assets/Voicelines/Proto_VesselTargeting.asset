@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: Proto_VesselTargeting
   id: 
-  audioClip: {fileID: 8300000, guid: 9c8ba26ae6695c04ebcc6194db3195fb, type: 3}
+  audioClip: {fileID: 8300000, guid: bc7aa3b7b846f604eab6a3261740dab0, type: 3}
   doNotAutoRegister: 0
   mode: 4210696
   maxDistance3D: 0
