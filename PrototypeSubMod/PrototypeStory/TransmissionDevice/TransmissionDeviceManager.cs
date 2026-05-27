@@ -178,6 +178,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
 
         var transmissionCinematic = ownerSub.GetComponentInChildren<SubTransmissionCinematic>();
         transmissionCinematic.PlayCinematic(cinematicManager);
+        transmissionCinematic.OnCinematicComplete += OnCinematicFinished;
 
         HideForScreenshots.Hide(HideForScreenshots.HideType.Mask | HideForScreenshots.HideType.HUD | HideForScreenshots.HideType.ViewModel);
         GUIController_Patches.SetDenyHideCycling(true);
@@ -187,20 +188,20 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
     {
         ProtoScreenFadeManager.instance.FadeIn(1);
     }
-
+    
     public void OnCinematicFinished()
     {
-        ErrorMessage.AddError("Cinematic finished");
+        ResetStaticVariables();
+        PlayCredits();
+    }
+    
+    public static void ResetStaticVariables()
+    {
         Player_Patches.SetOxygenReqOverride(false, 0);
         HideForScreenshots.Hide(HideForScreenshots.HideType.None);
         IngameMenu_Patches.SetDenySaving(false);
-        Player.main.SetHeadVisible(false);
-        Player.main.playerController.SetEnabled(true);
-        Player.main.cinematicModeActive = false;
-        Player.main.UnfreezeStats();
         GUIController_Patches.SetDenyHideCycling(false);
         BreathingSound_Patches.SetStopBreathingSounds(false);
-        PlayCredits();
     }
     
     private void PlayCredits()
@@ -225,7 +226,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
 
     private void OnDestroy()
     {
-        OnCinematicFinished();
+        ResetStaticVariables();
     }
 
     public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }

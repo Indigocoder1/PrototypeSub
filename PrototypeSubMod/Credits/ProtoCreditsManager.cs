@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using PrototypeSubMod.PrototypeStory.TransmissionDevice;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace PrototypeSubMod.Credits;
@@ -13,13 +15,19 @@ internal class ProtoCreditsManager : MonoBehaviour
     [SerializeField] private RectTransform creditsTextRect;
     [SerializeField] private TextMeshProUGUI creditsText;
     [SerializeField] private RectTransform titleImage;
+    [SerializeField] private FMOD_CustomEmitter normalMusic;
     [SerializeField] private float creditsLength;
     
     [Header("Transmission Ending")]
-    [SerializeField] private float additionalCreditsLength;
+    [SerializeField] private GameObject starsCanvas;
+    [SerializeField] private float transmissionCreditsLength;
+    [SerializeField] private float waitAfterCredits;
     [SerializeField] private float timePlayTransmissionVoiceline;
+    [SerializeField] private FMOD_CustomEmitter transmissionMusic;
     [SerializeField] private FMOD_CustomEmitter transmissionVoiceline;
-    
+
+    private float UsedCreditsLength => QueueTransmissionEnding ? transmissionCreditsLength : creditsLength;
+
     private float creditsSpeed;
     private float currentCreditsLength;
     private bool loadedMainMenu;
@@ -31,6 +39,19 @@ internal class ProtoCreditsManager : MonoBehaviour
     
     private void Start()
     {
+        TransmissionDeviceManager.ResetStaticVariables();
+        
+        if (QueueTransmissionEnding)
+        {
+            transmissionMusic.Play();
+        }
+        else
+        {
+            normalMusic.Play();
+        }
+        
+        starsCanvas.SetActive(QueueTransmissionEnding);
+        
         creditsText.text = Language.main.Get("ProtoCreditsText");
         Canvas.ForceUpdateCanvases();
         
@@ -40,7 +61,7 @@ internal class ProtoCreditsManager : MonoBehaviour
         yOffset = -(maskYHeight / 2) - (textYHeight / 2) - (imageHeight / 2);
         creditsTextRect.localPosition = new Vector3(0, yOffset, 0);
         
-        creditsSpeed = (textYHeight + maskYHeight + imageHeight) / creditsLength;
+        creditsSpeed = (textYHeight + maskYHeight + imageHeight) / UsedCreditsLength;
         
         initialized = true;
     }
@@ -49,7 +70,7 @@ internal class ProtoCreditsManager : MonoBehaviour
     {
         if (!initialized) return;
 
-        var targetLength = creditsLength + (QueueTransmissionEnding ? additionalCreditsLength : 0);
+        var targetLength = UsedCreditsLength + (QueueTransmissionEnding ? waitAfterCredits : 0);
         if (currentCreditsLength < targetLength)
         {
             currentCreditsLength += Time.deltaTime;

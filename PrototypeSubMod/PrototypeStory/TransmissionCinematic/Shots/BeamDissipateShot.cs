@@ -29,4 +29,9 @@ public class BeamDissipateShot : CinematicShot
     {
         laserParticles.Play();
     }
+
+    public void EndBeamDissipateShot()
+    {
+        OnShotCompleted?.Invoke(deviceCinematicManager);
+    }
 }

@@ -99,8 +99,12 @@ public class SubTransmissionCinematic : MonoBehaviour
     {
         cinematicShots[shotIndex].OnShotCompleted -= OnShotCompleted;
         shotIndex++;
-        
-        if (shotIndex >= cinematicShots.Length) return;
+
+        if (shotIndex >= cinematicShots.Length)
+        {
+            OnCinematicComplete?.Invoke();
+            return;
+        }
         
         var shot = cinematicShots[shotIndex];
         shot.PlayShot(cinematicAnimator, cinematicManager);
