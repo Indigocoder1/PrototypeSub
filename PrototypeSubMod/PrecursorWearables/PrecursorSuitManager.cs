@@ -126,7 +126,7 @@ public class PrecursorSuitManager : MonoBehaviour
         yield return task;
 
         var prefab = task.GetResult();
-        var pickupable = GameObject.Instantiate(prefab).GetComponent<Pickupable>();
+        var pickupable = Instantiate(prefab).GetComponent<Pickupable>();
         Inventory.main.ForcePickup(pickupable);
     }
 

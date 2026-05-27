@@ -28,6 +28,7 @@ internal class Player_Patches
     private static void Start_Postfix()
     {
         Player.main.gameObject.AddComponent<FactorActivationManager>();
+        Player.main.gameObject.AddComponent<PrecursorSuitFirstAnim>();
         Player.main.gameObject.AddComponent<PrecursorSuitManager>();
         Player.main.gameObject.AddComponent<AggressiveWyrmSpawner>();
         Player.main.gameObject.AddComponent<RandomSirenManager>();
