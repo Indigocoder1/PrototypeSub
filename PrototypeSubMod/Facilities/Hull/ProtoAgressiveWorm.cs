@@ -35,13 +35,14 @@ public class ProtoAggressiveWorm : Creature, IProtoTreeEventListener
     private List<Renderer>[] segmentRenderers;
     private List<CreatureAction> recentActions = new();
     private VFXElectricArcs[] electricArcs;
+    private float timeDeserialized;
     private float secondsInVoid;
-    private bool wasAggressive;
+    private float damageTimer;
     private int segmentCount;
     private int numSegmentsAggressiveLastFrame;
     private bool hasDamagedTarget;
-    private float damageTimer;
     private bool playerBeingEaten;
+    private bool wasAggressive;
 
     private void Awake()
     {
@@ -111,6 +112,8 @@ public class ProtoAggressiveWorm : Creature, IProtoTreeEventListener
     private void Update()
     {
         if (WaitScreen.IsWaiting) return;
+        
+        if (Time.time - timeDeserialized < 5f) return;
         
         HandleEatPlayer();
         HandleVoidTimer();
@@ -275,6 +278,7 @@ public class ProtoAggressiveWorm : Creature, IProtoTreeEventListener
 
     public void ForceDespawn()
     {
+        Plugin.Logger.LogInfo("Force despawning the wyrm");
         DespawnWorm();
     }
 
@@ -320,5 +324,7 @@ public class ProtoAggressiveWorm : Creature, IProtoTreeEventListener
         {
             RetrieveRenderers();
         }
+
+        timeDeserialized = Time.time;
     }
 }

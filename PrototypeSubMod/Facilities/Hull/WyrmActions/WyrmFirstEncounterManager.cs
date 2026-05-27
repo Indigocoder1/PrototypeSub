@@ -15,7 +15,6 @@ public class WyrmFirstEncounterManager : MonoBehaviour
     [SerializeField] private WyrmAction[] predeterminedActions;
     [SerializeField] private float firstAggressionTime;
 
-    private WyrmAction lastAction;
     private bool doingCalibrationRun;
     private bool startedSequence;
     private int actionStage;
@@ -27,6 +26,11 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         CalibrationRunManager.OnPointReached += OnPointReached;
         aggressiveWorm.OnDespawn += OnDespawned;
 
+        foreach (var wyrmAction in aggressiveWorm.actions)
+        {
+            wyrmAction.SendMessage("OverrideStopPerform", SendMessageOptions.DontRequireReceiver);
+        }
+        
         var runManager = FindObjectOfType<CalibrationRunManager>();
         if (runManager && runManager.IsDoingCalibrationRun())
         {
@@ -36,7 +40,6 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         if (FirstEncounterCompleted()) return;
 
         actionStage = 0;
-        startedSequence = false;
         aggressiveWorm.SetTimeInVoidForAggression(firstAggressionTime);
         OnFirstEncounterStarted?.Invoke();
     }
@@ -53,19 +56,16 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         }
         
         var action = predeterminedActions[actionStage];
-        if (lastAction == action)
-        {
-            action.OnActionComplete -= OnActionCompleted;
-        }
+        Plugin.Logger.LogInfo($"Starting {action} from Update");
         action.Perform(null, 0, 0);
         action.OnActionComplete += OnActionCompleted;
-        lastAction = action;
         startedSequence = true;
     }
 
     private void OnActionCompleted()
     {
-        predeterminedActions[actionStage].OnActionComplete -= OnActionCompleted;
+        Plugin.Logger.LogInfo($"{predeterminedActions[actionStage]} completed");
+        predeterminedActions[actionStage].ClearActionCompleteListeners();
 
         // Keep doing the dart action until reaching the calibration start
         if (doingCalibrationRun)
@@ -79,9 +79,9 @@ public class WyrmFirstEncounterManager : MonoBehaviour
         }
         
         var newAction = predeterminedActions[actionStage];
+        Plugin.Logger.LogInfo($"Starting {newAction} from OnActionCompleted");
         newAction.Perform(null, 0, 0);
         newAction.OnActionComplete += OnActionCompleted;
-        lastAction = newAction;
     }
 
     public bool FirstEncounterCompleted()
