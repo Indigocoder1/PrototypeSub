@@ -312,7 +312,7 @@
 
   // Phase Gates
   "ProtoPhaseGateStabilizer": "Dark Energy Stabilizer",
-  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark energy in alien technology.",
+  "Tooltip_ProtoPhaseGateStabilizer": "A device used to control dark energy in alien technology. Can be equipped to prevent unwanted teleportation.",
   "ProtoPhaseGateStructure": "Almanite Core",
   "Tooltip_ProtoPhaseGateStructure": "A strong core used in deployable alien architecture.",
   "ProtoPhaseGateTransmitter": "Particle Transmitter",
