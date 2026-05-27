@@ -25,6 +25,8 @@ public class PrecursorSuitFirstAnim : MonoBehaviour
         if (itemInGloves == null || itemInGloves.techType != PrecursorPropulsionGloves.PrefabInfo.TechType) return;
 
         Player.main.playerAnimator.SetBool("suit_first_use", true);
+        
+        PDALog.Add("PDA_Augments");
 
         StoryGoalManager.main.OnGoalComplete("PrecursorSuitFirstInspect");
         UWE.CoroutineHost.StartCoroutine(DisableAnimParamDelayed());
