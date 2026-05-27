@@ -100,4 +100,6 @@ public class FactorActivationManager : MonoBehaviour
     {
         return equippedFactors.Any(f => f.GetType() == factorType);
     }
+
+    public List<Factor> GetEquippedFactors() => equippedFactors;
 }
