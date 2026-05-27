@@ -129,8 +129,8 @@ public class WyrmSequenceMusic : MonoBehaviour
     {
         var addedLoop = point switch
         {
-            2 => intense2,
-            4 => intense3,
+            1 => intense2,
+            3 => intense3,
             _ => null
         };
         
