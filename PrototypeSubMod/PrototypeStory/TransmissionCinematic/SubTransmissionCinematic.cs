@@ -70,9 +70,10 @@ public class SubTransmissionCinematic : MonoBehaviour
 
     private IEnumerator PlayCinematicAsync(DeviceCinematicManager cinematicManager)
     {
-        const float fadeTime = 0.3f;
+        const float fadeTime = 3f;
+        const float waitTime = 4f;
         ProtoScreenFadeManager.instance.FadeIn(fadeTime);
-        yield return new WaitForSeconds(fadeTime);
+        yield return new WaitForSeconds(waitTime);
 
         cinematicMusic.Play();
         var shot = cinematicShots[shotIndex];
