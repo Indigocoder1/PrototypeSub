@@ -42,6 +42,7 @@ public class SubTransmissionCinematic : MonoBehaviour
     
     public void PlayCinematic(DeviceCinematicManager cinematicManager)
     {
+        subRoot.voiceNotificationManager.ClearQueue();
         var upgradeManager = subRoot.GetComponentInChildren<ProtoUpgradeManager>();
         foreach (var upgrade in upgradeManager.GetInstalledUpgrades())
         {
