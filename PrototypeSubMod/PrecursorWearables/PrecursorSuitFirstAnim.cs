@@ -17,10 +17,12 @@ public class PrecursorSuitFirstAnim : MonoBehaviour
     private void CheckWearables()
     {
         if (StoryGoalManager.main.IsGoalComplete("PrecursorSuitFirstInspect")) return;
-        
-        if (Inventory.main.equipment.GetItemInSlot("Body").techType != PrecursorSuit.prefabInfo.TechType) return;
-        
-        if (Inventory.main.equipment.GetItemInSlot("Gloves").techType != PrecursorPropulsionGloves.PrefabInfo.TechType) return;
+
+        var itemInBody = Inventory.main.equipment.GetItemInSlot("Body");
+        if (itemInBody == null || itemInBody.techType != PrecursorSuit.prefabInfo.TechType) return;
+
+        var itemInGloves = Inventory.main.equipment.GetItemInSlot("Gloves");
+        if (itemInGloves == null || itemInGloves.techType != PrecursorPropulsionGloves.PrefabInfo.TechType) return;
 
         Player.main.playerAnimator.SetBool("suit_first_use", true);
 
