@@ -60,6 +60,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         subRoot.enabled = false;
         subRoot.lightControl.emissiveController.renderers.Clear();
         subRoot.lightControl.LerpToState(2);
+        subRoot.GetComponent<CrushDamage>().SetExtraCrushDepth(100000);
         subTeleporter.ToggleDoor(false);
         StartCoroutine(PlayCinematicAsync(cinematicManager));
 
