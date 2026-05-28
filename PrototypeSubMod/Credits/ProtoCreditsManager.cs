@@ -43,25 +43,30 @@ internal class ProtoCreditsManager : MonoBehaviour
         
         if (QueueTransmissionEnding)
         {
-            transmissionMusic.Play();
+            transmissionMusic?.Play();
         }
         else
         {
-            normalMusic.Play();
+            normalMusic?.Play();
         }
         
         starsCanvas.SetActive(QueueTransmissionEnding);
-        
-        creditsText.text = Language.main.Get("ProtoCreditsText");
+
+        if (Language._main)
+        {
+            creditsText.text = Language.main.Get("ProtoCreditsText");
+        }
         Canvas.ForceUpdateCanvases();
+
+        const float extraOffset = 100;
         
         maskYHeight = canvas.GetComponent<RectTransform>().rect.height;
         textYHeight = creditsTextRect.rect.height;
         var imageHeight = titleImage.rect.height;
-        yOffset = -(maskYHeight / 2) - (textYHeight / 2) - (imageHeight / 2);
+        yOffset = -(maskYHeight / 2) - (textYHeight / 2) - imageHeight - extraOffset;
         creditsTextRect.localPosition = new Vector3(0, yOffset, 0);
         
-        creditsSpeed = (textYHeight + maskYHeight + imageHeight) / UsedCreditsLength;
+        creditsSpeed = (textYHeight + maskYHeight + imageHeight + extraOffset) / UsedCreditsLength;
         
         initialized = true;
     }
