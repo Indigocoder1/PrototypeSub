@@ -498,7 +498,7 @@ MonoBehaviour:
   asset: {fileID: 11400000, guid: d294b16ea71ae234fb4a1515360ea247, type: 2}
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
-  followParent: 0
+  followParent: 1
   restartOnPlay: 0
   debug: 0
   subtitlesKey: 
@@ -1008,8 +1008,8 @@ MonoBehaviour:
   creditsLength: 120
   starsCanvas: {fileID: 1617207589}
   transmissionCreditsLength: 90
-  waitAfterCredits: 40
-  timePlayTransmissionVoiceline: 130
+  waitAfterCredits: 45
+  timePlayTransmissionVoiceline: 100
   transmissionMusic: {fileID: 677665620}
   transmissionVoiceline: {fileID: 768306056}
 --- !u!1 &4892765202640835361
