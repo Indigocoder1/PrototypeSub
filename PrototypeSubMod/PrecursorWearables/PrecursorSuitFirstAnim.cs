@@ -28,15 +28,31 @@ public class PrecursorSuitFirstAnim : MonoBehaviour
         
         PDALog.Add("PDA_Augments");
 
+        var restoreQuickSlot = -1;
+        if (Inventory.main.GetHeldTool() != null)
+        {
+            restoreQuickSlot = Inventory.main.quickSlots.activeSlot;
+        }
+
+        Inventory.main.quickSlots.SetSuspendSlotActivation(true);
+
+        Inventory.main.ReturnHeld();
         StoryGoalManager.main.OnGoalComplete("PrecursorSuitFirstInspect");
-        UWE.CoroutineHost.StartCoroutine(DisableAnimParamDelayed());
+        UWE.CoroutineHost.StartCoroutine(DisableAnimParamDelayed(restoreQuickSlot));
     }
 
-    private IEnumerator DisableAnimParamDelayed()
+    private IEnumerator DisableAnimParamDelayed(int restoreQuickSlot)
     {
-        yield return null;
+        yield return new WaitForSeconds(4f);
         
         Player.main.playerAnimator.SetBool("suit_first_use", false);
+
+        if (restoreQuickSlot != -1)
+        {
+            Inventory.main.quickSlots.Select(restoreQuickSlot);
+        }
+        
+        Inventory.main.quickSlots.SetSuspendSlotActivation(false);
     }
 
     private void OnDestroy()
