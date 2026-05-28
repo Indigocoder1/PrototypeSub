@@ -12,6 +12,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
     public static readonly Vector3 InitialPoint = new(-2720, -390, 420);
 
     public static event Action<int> OnPointReached;
+    public static event Action OnCalibrationStarted;
     public static event Action OnCalibrationFailed;
     public static event Action OnCalibrationCompleted;
     
@@ -154,6 +155,7 @@ public class CalibrationRunManager : MonoBehaviour, IScheduledUpdateBehaviour
         
         doingCalibrationRun = true;
         OnPointReached?.Invoke(0);
+        OnCalibrationStarted?.Invoke();
         calibrationObjects.SetActive(true);
         voiceNotificationManager.PlayVoiceNotification(startedCalibrationVoiceline);
         FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("DefenseDoorSignal_Searching"), transform.position);
