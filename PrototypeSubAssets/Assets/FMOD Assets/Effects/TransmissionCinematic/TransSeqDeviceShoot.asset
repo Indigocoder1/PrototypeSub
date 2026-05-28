@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: TransSeqDeviceShoot
   id: 
-  audioClip: {fileID: 8300000, guid: fabff386d57191944938db94b5340faf, type: 3}
+  audioClip: {fileID: 8300000, guid: 128878e1301ee5a40866e32d6700a6ee, type: 3}
   doNotAutoRegister: 0
   mode: 16392
   maxDistance3D: 0
