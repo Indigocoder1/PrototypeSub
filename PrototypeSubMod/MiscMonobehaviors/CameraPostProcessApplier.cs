@@ -27,10 +27,13 @@ public class CameraPostProcessApplier : MonoBehaviour
         var mainCamera = Camera.main;
 
         gameObject.SetActive(false);
-        gameObject.EnsureComponent<ColorCorrection>().CopyComponent(mainCamera.GetComponent<ColorCorrection>());
-        gameObject.EnsureComponent<LensWater>().CopyComponent(mainCamera.GetComponent<LensWater>());
-        gameObject.EnsureComponent<LensWaterController>().CopyComponent(mainCamera.GetComponent<LensWaterController>());
-        gameObject.EnsureComponent<WaterscapeVolumeOnCamera>().CopyComponent(mainCamera.GetComponent<WaterscapeVolumeOnCamera>());
+        if (mainCamera.GetComponent<ColorCorrection>() != null)
+        {
+            gameObject.EnsureComponent<ColorCorrection>().CopyComponent(mainCamera.GetComponent<ColorCorrection>());
+            gameObject.EnsureComponent<LensWater>().CopyComponent(mainCamera.GetComponent<LensWater>());
+            gameObject.EnsureComponent<LensWaterController>().CopyComponent(mainCamera.GetComponent<LensWaterController>());
+            gameObject.EnsureComponent<WaterscapeVolumeOnCamera>().CopyComponent(mainCamera.GetComponent<WaterscapeVolumeOnCamera>());
+        }
         if (addWBOIT)
         {
             var wboit = gameObject.EnsureComponent<WBOIT>().CopyComponent(mainCamera.GetComponent<WBOIT>());
@@ -44,9 +47,20 @@ public class CameraPostProcessApplier : MonoBehaviour
                 .CopyComponent(mainCamera.GetComponent<WaterSurfaceOnCamera>());
             onCamera.camera = applicationCamera;
         }
+
+        if (mainCamera.GetComponent<PostProcessingBehaviour>())
+        {
+            var behavior = gameObject.EnsureComponent<PostProcessingBehaviour>()
+                .CopyComponent(mainCamera.GetComponent<PostProcessingBehaviour>());
+            behavior.m_Camera = applicationCamera;
+        }
+        else
+        {
+            var behavior = gameObject.EnsureComponent<PostProcessingBehaviour>();
+            behavior.m_Camera = applicationCamera;
+            behavior.profile = UwePostProcessingManager.currentProfile;
+        }
         
-        var behavior = gameObject.EnsureComponent<PostProcessingBehaviour>().CopyComponent(mainCamera.GetComponent<PostProcessingBehaviour>());
-        behavior.m_Camera = applicationCamera;
         gameObject.SetActive(true);
 
         componentsAdded = true;

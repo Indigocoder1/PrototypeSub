@@ -35,8 +35,7 @@ internal class ProtoRepairBot_Spawned
         bot.GetComponentInChildren<FMOD_CustomLoopingEmitter>().playOnAwake = false;
 
         bot.GetComponent<TechTag>().type = prefabInfo.TechType;
-
-        prefab.SetActive(true);
+        
         prefabOut.Set(prefab);
     }
 

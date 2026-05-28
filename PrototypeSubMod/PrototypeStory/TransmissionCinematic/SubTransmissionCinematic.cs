@@ -78,6 +78,7 @@ public class SubTransmissionCinematic : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         cinematicMusic.Play();
+        HandReticle.main.iconCanvas.gameObject.SetActive(false);
         var shot = cinematicShots[shotIndex];
         shot.PlayShot(cinematicAnimator, cinematicManager);
         shot.OnShotCompleted += OnShotCompleted;
