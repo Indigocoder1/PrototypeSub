@@ -32,7 +32,8 @@ internal class ProtoDeployableManager : ProtoUpgrade
 
     public void TryLaunchLight()
     {
-        bool terrainInWay = Physics.Raycast(lightSpawnTransform.position, lightSpawnTransform.forward, 50,
+        var terrainInWay = Physics.SphereCast(new Ray(lightSpawnTransform.position, lightSpawnTransform.forward), 5,
+            50,
             1 << LayerID.TerrainCollider);
         
         if (lightCount > 0 && canDeployLight && !terrainInWay)
@@ -51,7 +52,7 @@ internal class ProtoDeployableManager : ProtoUpgrade
     {
         canDeployLight = false;
 
-        string slot = availableLightSlots[availableLightSlots.Count - 1];
+        var slot = availableLightSlots[^1];
         storageTerminal.equipment.RemoveItem(slot, true, false);
 
         Invoke(nameof(SpawnLightDelayed), launchLightDelay);

@@ -16,8 +16,8 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
     [SerializeField] private Stabilizer stabilizer;
     [SerializeField] private float scaleSpeed;
     [SerializeField] private Light light;
-    [SerializeField] private Collider sphereCollider;
-    [SerializeField] private Collider[] halfColliders;
+    [SerializeField] private Collider[] undeployedColliders;
+    [SerializeField] private Collider[] deployedColliders;
     [SerializeField] private float deployDelay;
     [SerializeField] private float lifetime;
 
@@ -42,8 +42,7 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
 
     private void Awake()
     {
-        sphereCollider.enabled = false;
-
+        SetCollidersDeployed(false);
         lightRange = light.range;
         volumetricSize = light.transform.localScale;
 
@@ -54,6 +53,19 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
         ecoTarget.enabled = false;
 
         Plugin.GlobalSaveData.OnStartedSaving += SaveLifetimes;
+    }
+
+    private void SetCollidersDeployed(bool deployed)
+    {
+        foreach (var col in undeployedColliders)
+        {
+            col.enabled = !deployed;
+        }
+        
+        foreach (var col in deployedColliders)
+        {
+            col.enabled = deployed;
+        }
     }
 
     private void Start()
@@ -70,7 +82,6 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
 
     public void LaunchWithForce(float force, Vector3 previousVelocity)
     {
-        sphereCollider.enabled = false;
         stabilizer.enabled = false;
 
         rb.AddForce((transform.forward * force) + previousVelocity, ForceMode.Impulse);
@@ -78,11 +89,6 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
         Invoke(nameof(ActivateLight), deployDelay);
         Invoke(nameof(ActivateColliders), deployDelay / 4f);
         Destroy(pickupable);
-
-        foreach (var item in halfColliders)
-        {
-            item.enabled = false;
-        }
     }
 
     private void OnDrop()
@@ -102,10 +108,7 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
 
     private void ActivateColliders()
     {
-        foreach (var item in halfColliders)
-        {
-            item.enabled = true;
-        }
+        SetCollidersDeployed(false);
     }
 
     private void Update()
@@ -118,12 +121,7 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
         {
             BreakLight();
         }
-
-        if (currentLifetime >= 0.25f)
-        {
-            sphereCollider.enabled = true;
-        }
-
+        
         if (!activated) return;
 
         float targetRange = activated && !piecesSeparated ? lightRange : 0;
@@ -187,6 +185,11 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
     {
         BreakLight();
         currentLifetime = 0;
+    }
+
+    public void OnDeployAnimFinished()
+    {
+        SetCollidersDeployed(true);
     }
 
     public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }
