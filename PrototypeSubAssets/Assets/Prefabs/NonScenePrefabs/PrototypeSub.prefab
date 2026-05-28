@@ -142825,7 +142825,7 @@ MonoBehaviour:
   invalidOperationNotification: {fileID: 5744166132657847796}
   fovIncrease: 15
   speedBaseBonus: 7
-  turningTorqueMultiplier: 2
+  turningTorqueMultiplier: 4
   secondsToDrainCharge: 10
   chanceForHullBreach: 0.13
   hullBreachMinActiveTime: 20
