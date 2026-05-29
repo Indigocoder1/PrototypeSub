@@ -287,6 +287,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6941365558649897287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7602382093698735253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1344084569, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localMinY: 0
+  localMaxY: 0
+  posOffset: {x: 0, y: -0.125, z: 0}
+  eulerOffset: {x: -90, y: 0, z: 0}
+  scaleFactor: 12.5
+  allowOnAnyComponent: 0
 --- !u!1 &7295972055697126266
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,9 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSfx: {fileID: 990565595549176506}
-  stopSfx: {fileID: 5395093707757298704}
   loopingSfx: {fileID: 694197739994067001}
-  stopDueToChargeSfx: {fileID: 7098043056426806188}
   rechargeLoopSfx: {fileID: 4756792966471303534}
   rechargeFinishedSfx: {fileID: 8194427234817659319}
   frequencyOverCharge:
@@ -557,9 +573,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  resourceBarFadeDelay: 1
-  resourceFadeInTime: 0.2
-  resourceFadeOutTime: 0.5
 --- !u!1 &8187672379559629987
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,6 +765,12 @@ PrefabInstance:
 --- !u!4 &7118720485860591151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 09f1e9de84e68e241933a1d126bc92f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7295972055608533444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7602382093698735253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 09f1e9de84e68e241933a1d126bc92f6,
     type: 3}
   m_PrefabInstance: {fileID: 7295972055608533444}
   m_PrefabAsset: {fileID: 0}
