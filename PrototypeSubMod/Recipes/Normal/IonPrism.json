@@ -4,14 +4,6 @@
       {
         "techType": "PrecursorIonCrystalMatrix",
         "amount": 2
-      },
-      {
-        "techType": "Kyanite",
-        "amount": 1
-      },
-      {
-        "techType": "AlienBuildingBlock",
-        "amount": 1
       }
     ]
   }
