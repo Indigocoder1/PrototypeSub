@@ -77788,7 +77788,7 @@ MonoBehaviour:
   - {fileID: 26816724303997190}
   - {fileID: 3274634815981272787}
   - {fileID: 310845984879026037}
-  defaultAbilityIndex: 2
+  defaultAbilityIndex: 1
   distributor: {fileID: 3451990594638149854}
   tetherManager: {fileID: 1496008767091281460}
   upgradeManager: {fileID: 9153870078702174837}
