@@ -172,27 +172,6 @@ internal class uGUI_Equipment_Patches
         __instance.SendMessageUpwards("RefreshFactorSlots");
     }
 
-    [HarmonyPatch(nameof(uGUI_Equipment.OnPointerClick)), HarmonyPrefix]
-    private static bool OnPointerClick_Prefix(uGUI_EquipmentSlot instance)
-    {
-        if (instance.slot != "Body") return true;
-
-        bool hasFactor = false;
-        foreach (var slot in FactorEquipmentManager.FactorSlots)
-        {
-            if (Inventory.main.equipment.GetItemInSlot(slot) != null)
-            {
-                hasFactor = true;
-                break;
-            }
-        }
-
-        if (!hasFactor) return true;
-
-        ErrorMessage.AddError(Language.main.Get("ProtoSuitUnequipWarning"));
-        return false;
-    }
-
     private static uGUI_EquipmentSlot CloneSlot(uGUI_Equipment equipmentMenu, string childName, string newSlotName, float scale)
     {
         Transform newSlot = GameObject.Instantiate(equipmentMenu.transform.Find(childName), equipmentMenu.transform);

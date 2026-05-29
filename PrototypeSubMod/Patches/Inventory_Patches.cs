@@ -91,6 +91,11 @@ internal class Inventory_Patches
     [HarmonyPatch(new [] { typeof(InventoryItem), typeof(Equipment), typeof(string) })]
     private static bool AddOrSwap_Equipment_Prefix(InventoryItem itemA, Equipment equipmentB, string slotB, ref bool __result)
     {
+        if (Player.main.GetComponent<FactorActivationManager>().GetEquippedFactors().Count == 0)
+        {
+            return true;
+        }
+        
         if (string.IsNullOrEmpty(slotB))
         {
             var equipmentType = TechData.GetEquipmentType(itemA.item.GetTechType());
@@ -122,10 +127,16 @@ internal class Inventory_Patches
         {
             return true;
         }
+
+        if (itemB == null && containerB is Equipment)
+        {
+            // This will route to the other AddOrSwap check within the vanilla method
+            return true;
+        }
         
         var aIsPrecursorSuit = itemA != null && itemA.techType == PrecursorSuit.prefabInfo.TechType;
         var bIsPrecursorSuit = itemB != null && itemB.techType == PrecursorSuit.prefabInfo.TechType;
-
+        
         if ((aIsPrecursorSuit && !bIsPrecursorSuit) || (bIsPrecursorSuit && !aIsPrecursorSuit))
         {
             ErrorMessage.AddError(Language.main.Get("ProtoSuitUnequipWarning"));
