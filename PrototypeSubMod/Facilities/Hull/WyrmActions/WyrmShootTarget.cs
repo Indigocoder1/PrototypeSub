@@ -321,6 +321,8 @@ public class WyrmShootTarget : WyrmAction
             if (mixin == null) continue;
             
             if (mixins.Contains(mixin)) continue;
+            
+            if (mixin.GetComponent<Constructable>()) continue;
 
             mixins.Add(mixin);
         }
