@@ -67,6 +67,19 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
             col.enabled = deployed;
         }
     }
+    
+    private void SetAllCollidersEnabled(bool enabled)
+    {
+        foreach (var col in undeployedColliders)
+        {
+            col.enabled = enabled;
+        }
+        
+        foreach (var col in deployedColliders)
+        {
+            col.enabled = enabled;
+        }
+    }
 
     private void Start()
     {
@@ -86,6 +99,7 @@ internal class DeployableLight : MonoBehaviour, IProtoTreeEventListener
 
         rb.AddForce((transform.forward * force) + previousVelocity, ForceMode.Impulse);
 
+        SetAllCollidersEnabled(false);
         Invoke(nameof(ActivateLight), deployDelay);
         Invoke(nameof(ActivateColliders), deployDelay / 4f);
         Destroy(pickupable);
