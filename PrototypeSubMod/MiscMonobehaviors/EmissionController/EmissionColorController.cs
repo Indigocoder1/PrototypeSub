@@ -9,6 +9,8 @@ namespace PrototypeSubMod.MiscMonobehaviors.Emission;
 
 internal class EmissionColorController : PrefabModifier
 {
+    private static readonly int GlowColor = Shader.PropertyToID("_GlowColor");
+    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
     [SerializeField] private GameObject[] objectRoots;
     [SerializeField] private float transitionSpeed;
     [SerializeField] private bool updateOnStart = true;
@@ -58,9 +60,14 @@ internal class EmissionColorController : PrefabModifier
 
             foreach (var mat in rend.materials)
             {
-                if (!mat.IsKeywordEnabled("MARMO_EMISSION")) continue;
-
-                trackedMaterials.Add(mat, mat.GetColor("_GlowColor"));
+                if (mat.IsKeywordEnabled("MARMO_EMISSION"))
+                {
+                    trackedMaterials.Add(mat, mat.GetColor(GlowColor));
+                }
+                else if (mat.IsKeywordEnabled("_EMISSION"))
+                {
+                    trackedMaterials.Add(mat, mat.GetColor(EmissionColor));
+                }
             }
         }
     }
@@ -82,8 +89,10 @@ internal class EmissionColorController : PrefabModifier
         foreach (var material in trackedMaterials.Keys)
         {
             Color targetCol = tempColorActive ? tempColor : trackedMaterials[material];
-            Color currentCol = Color.Lerp(material.GetColor("_GlowColor"), targetCol, currentTransitionTime / transitionTimeOut);
-            material.SetColor("_GlowColor", currentCol);
+            var keyword = material.IsKeywordEnabled("MARMO_EMISSION") ? GlowColor : EmissionColor;
+            
+            Color currentCol = Color.Lerp(material.GetColor(keyword), targetCol, currentTransitionTime / transitionTimeOut);
+            material.SetColor(keyword, currentCol);
         }
     }
 

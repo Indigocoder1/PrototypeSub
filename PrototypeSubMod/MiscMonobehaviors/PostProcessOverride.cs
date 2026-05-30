@@ -11,8 +11,10 @@ public class PostProcessOverride : MonoBehaviour
     [SerializeField] private CameraPostProcessApplier postProcessApplier;
     [SerializeField] private bool applyOnStart;
     [SerializeField] private BloomModel bloomOverride;
+    [SerializeField] private FogModel fogOverride;
 
     private BloomModel originalBloom;
+    private FogModel originalFog;
 
     private void Start()
     {
@@ -38,15 +40,17 @@ public class PostProcessOverride : MonoBehaviour
     {
         OnBeforeOverrideApplied?.Invoke();
         originalBloom = UwePostProcessingManager.currentProfile.bloom;
+        originalFog = UwePostProcessingManager.currentProfile.fog;
         UwePostProcessingManager.currentProfile.bloom = bloomOverride;
+        UwePostProcessingManager.currentProfile.fog = fogOverride;
     }
 
     public void ResetEffects()
     {
-        if (originalBloom == null) return;
-
-        Plugin.Logger.LogInfo($"Resetting bloom settings");
+        if (originalBloom == null || originalFog == null) return;
+        
         UwePostProcessingManager.currentProfile.bloom = originalBloom;
+        UwePostProcessingManager.currentProfile.fog = originalFog;
     }
 
     private void OnDestroy()

@@ -3,7 +3,6 @@ using PrototypeSubMod.PrototypeStory.TransmissionDevice;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace PrototypeSubMod.Credits;
 
@@ -16,22 +15,27 @@ internal class ProtoCreditsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI creditsText;
     [SerializeField] private RectTransform titleImage;
     [SerializeField] private FMOD_CustomEmitter normalMusic;
+    [SerializeField] private GameObject endingCinematicObjects;
     [SerializeField] private float creditsLength;
+    [SerializeField] private float normalWaitAfterCredits;
+    [SerializeField] private float timeActivateBadCinematic;
     
     [Header("Transmission Ending")]
     [SerializeField] private GameObject starsCanvas;
     [SerializeField] private float transmissionCreditsLength;
-    [SerializeField] private float waitAfterCredits;
+    [SerializeField] private float transmissionWaitAfterCredits;
     [SerializeField] private float timePlayTransmissionVoiceline;
     [SerializeField] private FMOD_CustomEmitter transmissionMusic;
     [SerializeField] private FMOD_CustomEmitter transmissionVoiceline;
 
     private float UsedCreditsLength => QueueTransmissionEnding ? transmissionCreditsLength : creditsLength;
+    private float PostCreditsWait => QueueTransmissionEnding ? transmissionWaitAfterCredits : normalWaitAfterCredits;
 
     private float creditsSpeed;
     private float currentCreditsLength;
     private bool loadedMainMenu;
     private bool initialized;
+    private bool playingBadCinematic;
 
     private float maskYHeight;
     private float textYHeight;
@@ -51,6 +55,7 @@ internal class ProtoCreditsManager : MonoBehaviour
         }
         
         starsCanvas.SetActive(QueueTransmissionEnding);
+        endingCinematicObjects.SetActive(false);
 
         if (Language._main)
         {
@@ -75,7 +80,7 @@ internal class ProtoCreditsManager : MonoBehaviour
     {
         if (!initialized) return;
 
-        var targetLength = UsedCreditsLength + (QueueTransmissionEnding ? waitAfterCredits : 0);
+        var targetLength = UsedCreditsLength + PostCreditsWait;
         if (currentCreditsLength < targetLength)
         {
             currentCreditsLength += Time.deltaTime;
@@ -91,6 +96,11 @@ internal class ProtoCreditsManager : MonoBehaviour
             !transmissionVoiceline.playing)
         {
             transmissionVoiceline.Play();
+        }
+        else if (currentCreditsLength > timeActivateBadCinematic && !QueueTransmissionEnding && !playingBadCinematic)
+        {
+            endingCinematicObjects.SetActive(true);
+            playingBadCinematic = true;
         }
     }
 
