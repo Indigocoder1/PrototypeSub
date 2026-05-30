@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PrototypeSubMod.MiscMonobehaviors;
 
 public class IncreaseSizeOnBiomeEnter : MonoBehaviour, IScheduledUpdateBehaviour
 {
+    public static event Action<(string biome, bool sizeIncreased)> OnBiomeSizeChanged;
+    
     [SerializeField] public string biome;
     [SerializeField] public float scaleFactor;
 
@@ -22,11 +25,13 @@ public class IncreaseSizeOnBiomeEnter : MonoBehaviour, IScheduledUpdateBehaviour
         {
             transform.localScale *= scaleFactor;
             hasScaledUp = true;
+            OnBiomeSizeChanged?.Invoke((biome, hasScaledUp));
         }
         else if (hasScaledUp && Player.main.biomeString != biome)
         {
             transform.localScale *= (1 / scaleFactor);
             hasScaledUp = false;
+            OnBiomeSizeChanged?.Invoke((biome, hasScaledUp));
         }
     }
 

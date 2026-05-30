@@ -402,11 +402,6 @@ internal static class StoryGoalsRegisterer
         StoryGoalHandler.RegisterCompoundGoal("AlmaniteEncy", Story.GoalType.Story, 5f, "OnAlmaniteIdentified");
         #endregion
 
-        #region On Transmission Site Reached
-        StoryGoalHandler.RegisterBiomeGoal("Proto_OnTransmissionSiteReached", Story.GoalType.PDA,
-            BiomeRegisterer.TransmissionSiteBiome, 10f);
-        #endregion
-
         #region Transmission Device First Loaded
         StoryGoalHandler.RegisterCustomEvent("TransmissionDeviceFirstLoaded", () =>
         {
