@@ -84,7 +84,7 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
 
     public void OnSelectedChanged(bool changed) { }
 
-    public bool GetActive() => true;
+    public bool GetActive() => false;
 
     public bool GetCanActivate() => true;
 
