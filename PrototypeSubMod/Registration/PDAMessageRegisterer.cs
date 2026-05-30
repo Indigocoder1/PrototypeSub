@@ -67,8 +67,6 @@ internal static class PDAMessageRegisterer
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionStart", "Proto_ConstructionStart"));
         PDALog_Patches.orionEntries.Add(("Proto_ConstructionFinish", "Proto_ConstructionFinish"));
         PDALog_Patches.orionEntries.Add(("Proto_UnauthorizedDevice", "Proto_OnTransmissionDeviceFirstLoaded"));
-        PDALog_Patches.orionEntries.Add(("Proto_TransmissionSiteReached", "Proto_OnTransmissionSiteReached"));
-        
 
         sw.Stop();
         Plugin.Logger.LogInfo($"PDA Messages registered in {sw.ElapsedMilliseconds}ms");
