@@ -6711,7 +6711,7 @@ MonoBehaviour:
   normalMusic: {fileID: 1282755580}
   endingCinematicObjects: {fileID: 122981466}
   creditsLength: 120
-  normalWaitAfterCredits: 25
+  normalWaitAfterCredits: 30
   timeActivateBadCinematic: 125
   starsCanvas: {fileID: 1617207589}
   transmissionCreditsLength: 90
