@@ -35,7 +35,7 @@ internal class ProtoStoryLocker : MonoBehaviour
 
     [Header("Locking")]
     [SerializeField] private SubRoot subRoot;
-    [SerializeField] private ProtoUpgradeManager upgradeManager;
+    [SerializeField] private SelectionMenuManager selectionMenuManager;
     [SerializeField] private ProtoMotorHandler motorHandler;
     [SerializeField] private GameObject hydrolockCloseTrigger;
     [SerializeField] private Animator watergateAnimator;
@@ -102,11 +102,10 @@ internal class ProtoStoryLocker : MonoBehaviour
         subRoot.live.invincible = true;
 
         var tetherManager = subRoot.GetComponentInChildren<TetherManager>();
-        foreach (var upgrade in upgradeManager.GetInstalledUpgrades())
+        foreach (var abilityIcon in selectionMenuManager.GetAbilityIcons())
         {
-            upgrade.SetUpgradeEnabled(false);
-            upgrade.SetUpgradeLocked(true);
-            tetherManager.UpdateIcon(upgrade);
+            abilityIcon.ForceDisabled();
+            tetherManager.UpdateIcon(abilityIcon);
         }
 
         StoryGoalManager.main.OnGoalComplete("Proto_DeadZoneMappingInitialized");

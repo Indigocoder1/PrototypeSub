@@ -13,16 +13,25 @@ internal class GenericRadialAbility : MonoBehaviour, IAbilityIcon
     [SerializeField] private UnityEvent onActivated;
     [SerializeField] private UnityEvent onUnselected;
 
-    public bool GetShouldShow() => showAbility;
+    public bool GetShouldShow() => showAbility && !forceDisabled;
     public bool GetIsInstalled() => true;
+    public void ForceDisabled()
+    {
+        forceDisabled = true;
+        OnSelectedChanged(false);
+    }
+
     public Sprite GetSprite() => sprite;
     public TechType GetTechType() => TechType.None;
-    public bool GetCanActivate() => true;
+    public bool GetCanActivate() => !forceDisabled;
 
     private bool activationFailure;
+    private bool forceDisabled;
     
     public bool OnActivated()
     {
+        if (forceDisabled) return false;
+        
         if (GetActive() && !allowActivationWhenActive) return false;
 
         onActivated?.Invoke();

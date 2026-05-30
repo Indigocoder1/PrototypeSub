@@ -20,6 +20,8 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
     [SerializeField] private float launchDelay;
     [SerializeField] private float launchForce;
 
+    private bool forceDisabled;
+    
     private void Start()
     {
         deployableStorage.equipment.onEquip += OnItemChanged;
@@ -86,11 +88,16 @@ public class TransmissionDeviceLauncher : MonoBehaviour, IAbilityIcon
 
     public bool GetActive() => false;
 
-    public bool GetCanActivate() => true;
+    public bool GetCanActivate() => !forceDisabled;
 
     public bool GetShouldShow()
     {
         return HasTransmissionDevice();
+    }
+
+    public void ForceDisabled()
+    {
+        forceDisabled = true;
     }
 
     public Sprite GetSprite()

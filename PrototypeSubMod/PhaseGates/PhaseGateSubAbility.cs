@@ -53,6 +53,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     private bool deconstructing;
     private bool deconstructRequested;
     private bool hadRoomForDeployment;
+    private bool forceDisabled;
 
     private void Start()
     {
@@ -333,7 +334,7 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     }
 
     public bool GetActive() => false;
-    public bool GetCanActivate() => true;
+    public bool GetCanActivate() => !forceDisabled;
 
     public bool GetShouldShow()
     {
@@ -349,6 +350,12 @@ public class PhaseGateSubAbility : MonoBehaviour, IAbilityIcon
     }
 
     public bool GetIsInstalled() => true;
+    public void ForceDisabled()
+    {
+        forceDisabled = true;
+        OnSelectedChanged(false);
+    }
+
     public Sprite GetSprite()
     {
         return HasPhaseGate() ? constructIcon : deconstructIcon;
