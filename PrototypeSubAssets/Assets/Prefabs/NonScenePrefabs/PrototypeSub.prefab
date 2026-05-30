@@ -2278,7 +2278,7 @@ MonoBehaviour:
   saveLockDistance: 1000
   checkInterval: 2
   subRoot: {fileID: 6246764057006774658}
-  upgradeManager: {fileID: 9153870078702174837}
+  selectionMenuManager: {fileID: 2803608410014716689}
   motorHandler: {fileID: 1047782073636578443}
   hydrolockCloseTrigger: {fileID: 717051085406027840}
   watergateAnimator: {fileID: 1238373295649470532}

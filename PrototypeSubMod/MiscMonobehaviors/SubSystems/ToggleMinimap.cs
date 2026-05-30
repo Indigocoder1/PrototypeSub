@@ -16,6 +16,7 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
     [SerializeField] private float secondsToConsumeCharge;
 
     private ProtoSonarVFXManager sonarVFX;
+    private bool forceDisabled;
 
     private void Start()
     {
@@ -77,9 +78,16 @@ internal class ToggleMinimap : MonoBehaviour, IAbilityIcon
         return sonarVFX.activated;
     }
 
-    public bool GetCanActivate() => true;
-    public bool GetShouldShow() => true;
+    public bool GetCanActivate() => !forceDisabled;
+    public bool GetShouldShow() => !forceDisabled;
     public bool GetIsInstalled() => true;
+    public void ForceDisabled()
+    {
+        forceDisabled = true;
+        nearfieldSFX.Stop();
+        sonarVFX.SetActivated(false);
+    }
+
     public Sprite GetSprite() => minimapSprite;
     public TechType GetTechType() => TechType.None;
 }

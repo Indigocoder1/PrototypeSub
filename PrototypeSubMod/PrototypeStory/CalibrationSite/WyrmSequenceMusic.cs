@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using FMOD;
-using FMOD.Studio;
 using Nautilus.Handlers;
-using Nautilus.Utility;
 using PrototypeSubMod.DestructionEvent;
 using PrototypeSubMod.Facilities.Hull.WyrmActions;
+using PrototypeSubMod.Registration;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,6 +36,8 @@ public class WyrmSequenceMusic : MonoBehaviour
     
     private void Start()
     {
+        if (AtmosphereDirector.main.GetBiomeOverride() == BiomeRegisterer.DZMIRunupBiome) return;
+        
         if (encounterManager.FirstEncounterCompleted()) return;
         
         ramAction.OnActionComplete += OnRamHitTarget;

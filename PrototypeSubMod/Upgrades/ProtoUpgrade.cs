@@ -78,6 +78,10 @@ internal abstract class ProtoUpgrade : MonoBehaviour, IProtoUpgrade, IAbilityIco
     }
 
     public virtual bool GetIsInstalled() => upgradeInstalled;
+    public void ForceDisabled()
+    {
+        SetUpgradeEnabled(false);
+    }
 
     public virtual Sprite GetSprite()
     {
