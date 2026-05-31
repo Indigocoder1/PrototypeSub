@@ -33,7 +33,7 @@ internal class ProtoCreditsManager : MonoBehaviour
 
     private float creditsSpeed;
     private float currentCreditsLength;
-    private bool loadedMainMenu;
+    private bool loadingMainMenu;
     private bool initialized;
     private bool playingBadCinematic;
 
@@ -78,7 +78,7 @@ internal class ProtoCreditsManager : MonoBehaviour
 
     private void Update()
     {
-        if (!initialized) return;
+        if (!initialized || loadingMainMenu) return;
 
         var targetLength = UsedCreditsLength + PostCreditsWait;
         if (currentCreditsLength < targetLength)
@@ -86,10 +86,10 @@ internal class ProtoCreditsManager : MonoBehaviour
             currentCreditsLength += Time.deltaTime;
             creditsTextRect.localPosition += new Vector3(0, creditsSpeed * Time.deltaTime, 0);
         }
-        else if (!loadedMainMenu)
+        else if (!loadingMainMenu)
         {
-            StartCoroutine(LoadMainMenu());
-            loadedMainMenu = true;
+            SceneCleaner.Open();
+            loadingMainMenu = true;
         }
 
         if (currentCreditsLength >= timePlayTransmissionVoiceline && QueueTransmissionEnding &&
@@ -102,12 +102,5 @@ internal class ProtoCreditsManager : MonoBehaviour
             endingCinematicObjects.SetActive(true);
             playingBadCinematic = true;
         }
-    }
-
-    private IEnumerator LoadMainMenu()
-    {
-        QueueTransmissionEnding = false;
-        yield return new WaitForSeconds(1);
-        SceneCleaner.Open();
     }
 }
