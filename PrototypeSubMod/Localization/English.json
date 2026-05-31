@@ -96,7 +96,7 @@
   "ProtoInterceptorEncy_Title": "UNUSED",
   "ProtoInterceptorEncy_Body": "UNUSED.",
   "ProtoRepairDroidsEncy_Title": "Repair Droids",
-  "ProtoRepairDroidsEncy_Body": "This schematic details protocols enabling access to 4 autonomous maintenance robot assembly depots located in the Prototype’s upper stern. Autonomous repair droid construction schematics match data found in background scans of previously-discovered alien facilities.\n\nRepair droids possess advanced welding technology capable of repairing external hull damage over time.\nSafety protocols onboard maintenance robots prevent droid deployment during creature attacks.",
+  "ProtoRepairDroidsEncy_Body": "This schematic details protocols enabling access to 4 autonomous maintenance robot assembly depots located in the Prototype’s upper stern. Autonomous repair droid construction schematics match data found in background scans of previously-discovered alien facilities. Repair droids possess advanced welding technology capable of repairing external hull damage over time.",
   "ProtoDepthOptimizersEncy_Title": "Depth Optimizers",
   "ProtoDepthOptimizersEncy_Body": "This protocol activates passive depth optimizers built into the hull of the Prototype. These optimizers semi-permanently reinforce the Prototype’s hull, allowing for near unlimited crush depth and greater efficiency at increased depths.",
   "ProtoIonBarrierEncy_Title": "Ion Barrier",
