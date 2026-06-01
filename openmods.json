@@ -17,7 +17,7 @@
   "links": [
     { "label": "Discord", "icon": "chat", "url": "https://discord.gg/fmaVHsnmMf" }
   ],
-  "media": [
+  "thumbnail": [
     { "type": "image", "url": "PrototypeThumbnail.webp" }
   ],
   "install": {
