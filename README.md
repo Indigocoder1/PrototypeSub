@@ -44,7 +44,7 @@ You may notice a "TerrainPatches" folder inside the main mod folder. Please do n
 https://discord.gg/dwwfdy3bJN﻿
 
 ## Support the developers
-Note: Does not grant special development access or increase mod content
+Note: Does not grant special development access or increase mod content<br>
 https://ko-fi.com/prototechmodteam﻿
 
 ## Interested in the code?
