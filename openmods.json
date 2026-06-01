@@ -17,9 +17,13 @@
   "links": [
     { "label": "Discord", "icon": "chat", "url": "https://discord.gg/fmaVHsnmMf" }
   ],
-  "thumbnail": [
-    { "type": "image", "url": "PrototypeThumbnail.webp" }
+  "media": [
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=XImWTTPODyE"
+    }
   ],
+  "thumbnail": "PrototypeThumbnail.webp",
   "install": {
     "path": "BepInEx/plugins"
   }
