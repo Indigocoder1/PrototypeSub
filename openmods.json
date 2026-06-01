@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "name": "The Prototype",
+  "supportedGameId": "subnautica",
+  "dependencies": {
+    "2.0.0": [
+      {
+        "modId": 30,
+        "fromRelease": "1.0.0-pre.49"
+      },
+      {
+        "modId": 56,
+        "fromRelease": "v1.2.2"
+      }
+    ]
+  },
+  "links": [
+    { "label": "Discord", "icon": "chat", "url": "https://discord.gg/fmaVHsnmMf" }
+  ],
+  "media": [
+    { "type": "image", "url": "PrototypeThumbnail.webp" }
+  ],
+  "install": {
+    "path": "BepInEx/plugins"
+  }
+}
