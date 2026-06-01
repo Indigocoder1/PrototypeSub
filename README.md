@@ -24,7 +24,7 @@ The Prototype features an all-new additional storyline to the Subnautica base ga
   3.  Place the "PrototypeSubMod" folder inside your plugins folder
   4.  Example folder structure: 
 
-    `﻿BepInEx/plugins/PrototypeSubMod`
+    BepInEx/plugins/PrototypeSubMod
 
 
 
