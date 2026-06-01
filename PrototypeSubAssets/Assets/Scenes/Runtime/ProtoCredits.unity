@@ -6243,7 +6243,7 @@ MonoBehaviour:
   m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: 2d582fecccee70b4d91a6eeb2994514a, type: 2}
+  asset: {fileID: 11400000, guid: f65763f96d8f0d84e9795a6db1432b78, type: 2}
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
   followParent: 0
@@ -6359,7 +6359,7 @@ MonoBehaviour:
   m_Script: {fileID: -1699601541, guid: 06dd3d5416bf43ea368cc39ff96e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: f65763f96d8f0d84e9795a6db1432b78, type: 2}
+  asset: {fileID: 11400000, guid: 2d582fecccee70b4d91a6eeb2994514a, type: 2}
   playOnAwake: 0
   stopImmediatelyOnDisable: 0
   followParent: 0
@@ -6839,13 +6839,13 @@ MonoBehaviour:
   titleImage: {fileID: 520717150}
   normalMusic: {fileID: 1282755580}
   endingCinematicObjects: {fileID: 122981466}
-  creditsLength: 120
+  creditsLength: 90
   normalWaitAfterCredits: 30
-  timeActivateBadCinematic: 125
+  timeActivateBadCinematic: 95
   starsCanvas: {fileID: 1617207589}
-  transmissionCreditsLength: 90
+  transmissionCreditsLength: 120
   transmissionWaitAfterCredits: 50
-  timePlayTransmissionVoiceline: 100
+  timePlayTransmissionVoiceline: 130
   transmissionMusic: {fileID: 1412566885}
   transmissionVoiceline: {fileID: 2117297206}
 --- !u!4 &1727048779

@@ -142,7 +142,7 @@ public class WyrmSequenceMusic : MonoBehaviour
     private void StopMusic()
     {
         stopSfx = true;
-        currentSfxLoop.Stop();
+        currentSfxLoop?.Stop();
         StopCoroutine(nameof(PlayLoops));
     }
 
