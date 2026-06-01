@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using PrototypeSubMod.PrototypeStory.TransmissionDevice;
+using PrototypeSubMod.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,6 +10,7 @@ namespace PrototypeSubMod.Credits;
 
 internal class ProtoCreditsManager : MonoBehaviour
 {
+    [SaveStateReference(false)]
     public static bool QueueTransmissionEnding;
     
     [SerializeField] private Canvas canvas;
@@ -88,6 +91,7 @@ internal class ProtoCreditsManager : MonoBehaviour
         }
         else if (!loadingMainMenu)
         {
+            QueueTransmissionEnding = false;
             SceneCleaner.Open();
             loadingMainMenu = true;
         }
@@ -102,5 +106,10 @@ internal class ProtoCreditsManager : MonoBehaviour
             endingCinematicObjects.SetActive(true);
             playingBadCinematic = true;
         }
+    }
+
+    private void OnDestroy()
+    {
+        QueueTransmissionEnding = false;
     }
 }
