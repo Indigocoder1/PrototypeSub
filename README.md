@@ -15,7 +15,7 @@ The Prototype features an all-new additional storyline to the Subnautica base ga
   -  Many upgrades to install on The Prototype that allow for various playstyles
 
 
-<color=red>THIS MOD IS FOR THE LATEST SUBNAUTICA VERSION ONLY/color>
+<span style="color:red">THIS MOD IS FOR THE LATEST SUBNAUTICA VERSION ONLY</span>
 
 # How to install
 
