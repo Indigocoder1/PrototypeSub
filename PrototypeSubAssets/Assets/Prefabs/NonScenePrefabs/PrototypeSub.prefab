@@ -136624,7 +136624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Proto_CalibrationTestFailed
-  sound: {fileID: 11400000, guid: 5ce86571cea06ec498b37ccda60c9731, type: 2}
+  sound: {fileID: 11400000, guid: 323332b1530b0e844be3d43509a68bbf, type: 2}
   minInterval: 15
 --- !u!1 &7643486218918561889
 GameObject:
