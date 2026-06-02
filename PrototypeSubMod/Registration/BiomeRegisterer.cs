@@ -187,7 +187,7 @@ internal static class BiomeRegisterer
         transmissionVolumePrefab.Register();
         
         var transmissionSpawnInfo = new SpawnInfo(transmissionPrefabInfo.ClassID, Plugin.TransmissionSitePos, 
-            Quaternion.identity, Vector3.one * 300);
+            Quaternion.identity, Vector3.one * 625);
         CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(transmissionSpawnInfo);
 
         var transmissionSiteSettings = BiomeUtils.CreateBiomeSettings(new Vector3(150, 27.435f, 5.295f), 10f, Color.white, 4f,
