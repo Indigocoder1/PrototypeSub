@@ -168,6 +168,14 @@ internal static class EncyEntryRegisterer
             blueprint = AlienBuildingBlock.prefabInfo.TechType
         };
         PDAHandler.AddCustomScannerEntry(alienBuildingBlockEntryData);
+
+        StoryGoalHandler.RegisterItemGoal("OnAlmanitePickedUp", Story.GoalType.Story,
+            WarperRemnant.prefabInfo.TechType);
+        StoryGoalHandler.RegisterCustomEvent("OnAlmanitePickedUp", () =>
+        {
+            PDAEncyclopedia.Add("AlienBuildingBlockEncy", true);
+            KnownTech.Add(AlienBuildingBlock.prefabInfo.TechType);
+        });
         #endregion
 
         #region Ion Cube Matrix
