@@ -11,6 +11,14 @@
       {
         "modId": 56,
         "fromRelease": "v1.2.2"
+      },
+      {
+        "modId": 131,
+        "fromRelease": "v1.7.5"
+      },
+      {
+        "modId": 132,
+        "fromRelease": "v1.1.7"
       }
     ]
   },
