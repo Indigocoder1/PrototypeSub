@@ -92,6 +92,8 @@ public class WyrmSequenceMusic : MonoBehaviour
             intenseLoopIndex = (intenseLoopIndex + 1) % intenseLoops.Count;
         }
 
+        currentSfxLoop.Stop();
+        
         if (!stopSfx)
         {
             currentSfxLoop.Play();
@@ -127,6 +129,11 @@ public class WyrmSequenceMusic : MonoBehaviour
     
     private void OnReachNode(int point)
     {
+        if (point == 0 && !currentSfxLoop.playing)
+        {
+            StartCoroutine(PlayLoops());
+        }
+        
         var addedLoop = point switch
         {
             1 => intense2,
