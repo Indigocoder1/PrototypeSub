@@ -3,6 +3,7 @@ using Nautilus.Assets.Gadgets;
 using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs;
@@ -35,7 +36,7 @@ public class ProtoPhaseGateStructure
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStructure");
         var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
-        MaterialUtils.ApplySNShaders(instance);
+        MaterialUtils.ApplySNShaders(instance, modifiers: new DefaultMaterialModifier());
         
         return instance;
     }

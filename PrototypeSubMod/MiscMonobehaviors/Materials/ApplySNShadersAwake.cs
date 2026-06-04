@@ -7,6 +7,6 @@ public class ApplySNShadersAwake : MonoBehaviour
 {
     private void Awake()
     {
-        MaterialUtils.ApplySNShaders(gameObject);
+        MaterialUtils.ApplySNShaders(gameObject, modifiers: new DefaultMaterialModifier());
     }
 }

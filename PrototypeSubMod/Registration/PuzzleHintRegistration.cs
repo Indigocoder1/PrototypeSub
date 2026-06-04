@@ -32,7 +32,7 @@ public static class PuzzleHintRegistration
         #endregion
 
         #region Transmission Site Hint
-
+        
         var transmissionStartTechType = CustomPing.CreatePing("TransmissionSiteStartPing", Plugin.HintPingType, visitable: false);
         var transmissionSiteTechType = CustomPing.CreatePing("TransmissionSitePing", Plugin.HintPingType);
         StoryGoalHandler.RegisterCompoundGoal("ProtoTransmissionSiteHint", Story.GoalType.Story, 20,

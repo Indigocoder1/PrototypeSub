@@ -2,6 +2,7 @@
 using Nautilus.Assets.Gadgets;
 using Nautilus.Handlers;
 using Nautilus.Utility;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs.DecorativeWyrms;
@@ -27,7 +28,7 @@ internal static class ProtoSparseReefWyrms
     {
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoSparseReefWyrm");
         var instance = UWE.Utils.InstantiateDeactivated(prefab);
-        MaterialUtils.ApplySNShaders(instance);
+        MaterialUtils.ApplySNShaders(instance, modifiers: new DefaultMaterialModifier());
 
         return instance;
     }

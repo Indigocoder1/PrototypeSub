@@ -3,6 +3,7 @@ using Nautilus.Assets.Gadgets;
 using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 using static GameObjectPoolPrefabMap;
 
@@ -37,7 +38,7 @@ public class ProtoPhaseGateItem
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("AlienFramework");
         var instance = UWE.Utils.InstantiateDeactivated(prefab);
 
-        MaterialUtils.ApplySNShaders(instance);
+        MaterialUtils.ApplySNShaders(instance, modifiers: new DefaultMaterialModifier());
         
         foreach (var rend in instance.GetComponentsInChildren<Renderer>(true))
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using Nautilus.Assets;
 using Nautilus.Utility;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.Utility;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ internal class PrecursorPhaseGate
         
         var instance = Object.Instantiate(returnPrefab);
         
-        MaterialUtils.ApplySNShaders(instance);
+        MaterialUtils.ApplySNShaders(instance, modifiers: new DefaultMaterialModifier());
 
         yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
         

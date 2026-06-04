@@ -4,6 +4,7 @@ using Nautilus.Assets.Gadgets;
 using Nautilus.Handlers;
 using Nautilus.Utility;
 using PrototypeSubMod.Compatibility;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs;
@@ -36,7 +37,7 @@ public class ProtoPhaseGateStabilizer
     {
         var prefab = Plugin.GeneralAssetBundle.LoadAsset<GameObject>("ProtoPhaseGateStabilizer");
         
-        MaterialUtils.ApplySNShaders(prefab);
+        MaterialUtils.ApplySNShaders(prefab, modifiers: new DefaultMaterialModifier());
         
         return prefab;
     }

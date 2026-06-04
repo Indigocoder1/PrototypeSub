@@ -1,6 +1,7 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Utility;
 using System.Collections;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs.FacilityProps;
@@ -29,7 +30,7 @@ internal class ProtoLogo_World
 
         yield return new WaitUntil(() => MaterialUtils.IsReady);
 
-        MaterialUtils.ApplySNShaders(gameObject);
+        MaterialUtils.ApplySNShaders(gameObject, modifiers: new DefaultMaterialModifier());
 
         prefabOut.Set(gameObject);
     }

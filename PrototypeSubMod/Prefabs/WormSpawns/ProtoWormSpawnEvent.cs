@@ -2,6 +2,7 @@
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Utility;
+using PrototypeSubMod.MiscMonobehaviors.Materials;
 using PrototypeSubMod.Utility;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class ProtoWormSpawnEvent
         IEnumerator GetPrefab(IOut<GameObject> prefabOut)
         {
             var instance = UWE.Utils.InstantiateDeactivated(prefab);
-            MaterialUtils.ApplySNShaders(instance);
+            MaterialUtils.ApplySNShaders(instance, modifiers: new DefaultMaterialModifier());
             yield return ProtoMatDatabase.ReplaceVanillaMats(instance);
 
             prefabOut.Set(instance);

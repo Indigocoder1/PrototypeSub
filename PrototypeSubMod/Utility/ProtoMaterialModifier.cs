@@ -33,7 +33,9 @@ internal class ProtoMaterialModifier : MaterialModifier
     {
         if (renderer is ParticleSystemRenderer) return true;
 
-        if (!renderer.TryGetComponent<DontApplySNShaders>(out var dontApply)) return false;
+        var dontApply = renderer.GetComponent<DontApplySNShaders>();
+        dontApply ??= renderer.GetComponentInParent<DontApplySNShaders>();
+        if (dontApply == null) return true;
 
         return dontApply.blacklistedMaterials.Count == 0 || dontApply.blacklistedMaterials.Any(m => m.shader == material.shader);
     }
