@@ -18,7 +18,7 @@ public static class RadioMessageRegisterer
         StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage3", Story.GoalType.Radio, 1000, "ProtoRadioMessage2", "HullFacilityWormTerminalEncy");
         
         RegisterMessage("ProtoRadioMessage4", "ProtoRadioMessage3");
-        StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage4", Story.GoalType.Radio, 500, "OnCalibrationRunCompleted");
+        StoryGoalHandler.RegisterCompoundGoal("ProtoRadioMessage4", Story.GoalType.Radio, 500, "OnCalibrationRunCompleted", "TransmissionDeviceUnlock");
         
         // Wyrm messages
         RegisterMessage("WyrmRadioMessageActivated", "WyrmRadioMessageActivated");

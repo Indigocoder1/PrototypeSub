@@ -42,8 +42,6 @@ public static class PuzzleHintRegistration
             PDALog.Add("ProtoTransmissionSiteHint");
             PDAEncyclopedia.Add("ProtoTransmissionSiteEncy", true);
             PDAEncyclopedia.Add("TransmissionSiteHint", true);
-            // UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionStartTechType, Plugin.TransmissionSiteStartPos));
-            //UWE.CoroutineHost.StartCoroutine(SpawnPrefab(transmissionSiteTechType, Plugin.TransmissionSitePos));
         });
 
         #endregion
