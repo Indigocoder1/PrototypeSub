@@ -412,15 +412,18 @@ internal static class StoryGoalsRegisterer
         #region Engine Facility Scream + PDA hint
         StoryGoalHandler.RegisterCustomEvent("EngineScream", () =>
         {
-            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineScream"), new Vector3(-1000, -400, -1100));
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("EngineScream"), Plugin.FACILITY_POSITIONS["EngineFacility"]);
         });
 
+        var engineFacilityReturnHint = CustomPing.CreatePing("EngineFacilityReturnPing", Plugin.HintPingType);
         StoryGoalHandler.RegisterCustomEvent("EngineFacilityReturnHint", () =>
         {
             PDALog.Add("EngineFacilityReturnHint");
+            UWE.CoroutineHost.StartCoroutine(PuzzleHintRegistration.SpawnPrefab(engineFacilityReturnHint,
+                Plugin.FACILITY_POSITIONS["EngineFacility"]));
         });
 
-        StoryGoalHandler.RegisterCompoundGoal("EngineScream", Story.GoalType.Story, 1000f, "OrionSurgicalRoomTome");
+        StoryGoalHandler.RegisterCompoundGoal("EngineScream", Story.GoalType.Story, 1000f, "HullFacilityWormTerminalEncy");
         StoryGoalHandler.RegisterCompoundGoal("EngineFacilityReturnHint", Story.GoalType.PDA, 10f, "EngineScream");
         #endregion
 

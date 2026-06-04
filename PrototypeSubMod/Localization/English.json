@@ -388,7 +388,7 @@
   "OnEnterProtoNumberPuzzle_ProfileFound": "FACILITY: PROFILE FOUND. PROCEED WITH COGNITIVE TRIAL.<duration=3536>",
 
   "EngineFacilityReturnHint": "Translating local alien broadcast:<duration=2000>\n“Unauthorized command issued to Ion Reactor Testing Facility. Blocking command ┃▙▗┫-n- ▞┣ ▘d-┻▝▚┃ <delay=2010><duration=10000>\nCommand accepted. Passage unlocked. Signal location uploaded to PDA.”<delay=12020><duration=3000>",
-
+  
   "ProtoCalibrationCodeEncy_Title": "Transmission Calibration Code",
   "ProtoCalibrationCodeEncy_Body": "A local alien broadcast has outlined a six-point pattern matching the movements of the Prototype during the prior exercise.\n\nThe pattern appears to represent a highly precise set of instructions to assist in the transmission of data type: [NEURAL CLUSTER]. While it is unknown why such data may require transmitting, it may lead to further acquisition of valuable alien data.\n\n<b>Assessment: Continue following alien instructions to retrieve advanced technologies. Mutual profit will follow.</b>",
   
@@ -561,6 +561,7 @@
   "BearingPuzzlePing": "▗▚▖┗▞┃▜┓┫┇┇▄▚━┏━▚┃┣",
   "CalibrationSitePing": "▘▖▄▞▗┗▖┣▞┏┃┛▞┣▚",
   "TransmissionSiteStartPing": "┣┗▖┃┛━▞┣▗▖▗▖┅",
+  "EngineFacilityReturnPing": "▙▚▛▚┃┛▚",
   "ProtoGrandReefPing": "Alien signal",
 
   // Build terminal

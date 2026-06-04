@@ -19,7 +19,7 @@ public class SecretDoorTrigger : MonoBehaviour
     {
         if (other.gameObject != Player.main.gameObject) return;
 
-        if (!StoryGoalManager.main.IsGoalComplete("OrionSurgicalRoomTome")) return;
+        if (!StoryGoalManager.main.IsGoalComplete("HullFacilityWormTerminalEncy")) return;
         OpenDoor();
     }
 
