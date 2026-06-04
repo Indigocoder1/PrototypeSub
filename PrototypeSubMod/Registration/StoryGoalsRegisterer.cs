@@ -435,10 +435,10 @@ internal static class StoryGoalsRegisterer
 
         #region Extra worms
 
+        var grandReefPing = CustomPing.CreatePing("ProtoGrandReefPing", Plugin.HintPingType);
         StoryGoalHandler.RegisterCustomEvent("OnScannedSparseReefWyrms", () =>
         {
             PDALog.Add("OnSparseReefWyrmScanned");
-            var grandReefPing = CustomPing.CreatePing("ProtoGrandReefPing", Plugin.HintPingType);
             UWE.CoroutineHost.StartCoroutine(
                 PuzzleHintRegistration.SpawnPrefab(grandReefPing, new Vector3(-1147, -445, -1110)));
         });
