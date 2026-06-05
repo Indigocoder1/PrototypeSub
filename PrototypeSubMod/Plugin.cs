@@ -40,7 +40,7 @@ namespace PrototypeSubMod
 {
     [BepInPlugin(GUID, pluginName, versionString)]
     [BepInDependency("com.snmodding.nautilus", "1.0.0.49")]
-    [BepInDependency("com.indigocoder.sublibrary", "1.7.5")]
+    [BepInDependency("com.indigocoder.sublibrary", "1.7.6")]
     [BepInDependency("Esper89.TerrainPatcher", "1.2.2")]
     [BepInDependency("Indigocoder.SuitLib", "1.1.8")]
     [BepInDependency("ArchitectsLibrary", BepInDependency.DependencyFlags.SoftDependency)]
@@ -54,7 +54,7 @@ namespace PrototypeSubMod
     {
         private const string GUID = "com.prototech.prototypesub";
         private const string pluginName = "Prototype Sub";
-        private const string versionString = "2.0.3";
+        private const string versionString = "2.0.4";
 
         public new static ManualLogSource Logger { get; private set; }
 
