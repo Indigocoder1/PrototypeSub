@@ -83,7 +83,7 @@ public class CodeProgressManager : MonoBehaviour
         while (time < duration)
         {
             lineRenderer.material.SetFloat("_FillAmount", time / duration);
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             yield return new WaitForEndOfFrame();
         }
         
