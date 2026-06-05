@@ -47,10 +47,10 @@ public class uGUI_TransmissionTab : uGUI_PDATab
 
     public void OnTransmitClicked()
     {
-        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ButtonSelect"), Player.main.transform.position);
+        FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ProtoCodeInput"), Player.main.transform.position);
         if (!onCorrectSequence || !InTransmissionSite())
         {
-            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("TetherNoPower"), Player.main.transform.position);
+            FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ProtoIncorrectCode"), Player.main.transform.position);
             return;
         }
         
