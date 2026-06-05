@@ -17,5 +17,9 @@ internal class EntryWaterGate : MonoBehaviour
         if (!isPlayerCol) return;
 
         Player.main.SetCurrentSub(setInSub ? subRoot : null, true);
+        if (setInSub)
+        {
+            Player.main.precursorOutOfWater = false;
+        }
     }
 }
