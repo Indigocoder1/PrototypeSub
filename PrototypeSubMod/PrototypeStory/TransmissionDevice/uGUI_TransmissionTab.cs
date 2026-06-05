@@ -51,7 +51,17 @@ public class uGUI_TransmissionTab : uGUI_PDATab
         if (!onCorrectSequence || !InTransmissionSite())
         {
             FMODUWE.PlayOneShot(AudioUtils.GetFmodAsset("ProtoIncorrectCode"), Player.main.transform.position);
-            return;
+            if (!onCorrectSequence)
+            {
+                ErrorMessage.AddError(Language.main.Get("ProtoInvalidTransmissionCode"));
+                return;
+            }
+
+            if (!InTransmissionSite())
+            {
+                ErrorMessage.AddError(Language.main.Get("ProtoInvalidTransmissionLocation"));
+                return;
+            }
         }
         
         onTransmissionComplete?.Invoke();
