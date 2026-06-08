@@ -148,7 +148,7 @@ namespace PrototypeSubMod
             { "TransmissionSiteStart", new Vector3(-1011f, -351f, -1645f) }
         };
         internal static TechType StoryEndPingTechType;
-        internal static GridSaveData pathfindingGridSaveData;
+        internal static GridSaveData PathfindingGridSaveData;
         internal static event Action<GridSaveData> onLoadGridSaveData;
 
         private static bool Initialized;
@@ -573,14 +573,21 @@ namespace PrototypeSubMod
 
         private void LoadPathfindingGrid()
         {
-            byte[] bytes = GeneralAssetBundle.LoadAsset<TextAsset>("SaveGrid.grid").bytes;
-            ThreadStart threadStart = () => DeserializeGridData(bytes, saveData =>
-            {
-                pathfindingGridSaveData = saveData;
-                onLoadGridSaveData?.Invoke(saveData);
-            });
+            var quality = OptionRegisterer.Options.PathfindingQuality;
+            if (quality == OptionRegisterer.PathfindingQuality.ProtoQualityDisabled) return;
 
-            var gridLoadThread = new Thread(threadStart);
+            var postfix = quality == OptionRegisterer.PathfindingQuality.ProtoQualityLow ? "Low" : "High";
+            var targetAsset = $"SaveGrid_{postfix}.grid";
+            var bytes = GeneralAssetBundle.LoadAsset<TextAsset>(targetAsset).bytes;
+
+            void ThreadStart() =>
+                DeserializeGridData(bytes, saveData =>
+                {
+                    PathfindingGridSaveData = saveData;
+                    onLoadGridSaveData?.Invoke(saveData);
+                });
+
+            var gridLoadThread = new Thread(ThreadStart);
             gridLoadThread.Start();
         }
 

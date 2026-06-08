@@ -38,7 +38,6 @@ public class PathRequestManager : MonoBehaviour
         if (!pathfinder.pathfindingGrid.initialized || pathfinder.pathfindingGrid.GetGrid() == null)
         {
             request.callback(Array.Empty<PathData>(), false);
-            Plugin.Logger.LogWarning("Grid not initialized. Returning");
             return;
         }
         

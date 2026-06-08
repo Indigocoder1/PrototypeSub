@@ -25714,7 +25714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &687535680
 Transform:
   m_ObjectHideFlags: 0
@@ -51322,10 +51322,9 @@ MonoBehaviour:
   focusObject: {fileID: 0}
   root: {fileID: 687535680}
   gridWorldSize: {x: 15, y: 22, z: 70}
-  nodeRadius: 0.2
+  nodeRadius: 0.35
   rayCount: 10
   obstacleProximityPenalty: 10
-  collidersParent: {fileID: 156695300}
   centerOfObjects: {fileID: 1195005650}
   intersectionCheckDistance: 1
   minSurfaceAngle: -90
@@ -51334,7 +51333,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 256
     terrainPenalty: 0
-  gridSaveFile: {fileID: 4900000, guid: 4b93aece442f7fe4c97fd26345b90e0f, type: 3}
+  gridSaveFile: {fileID: 4900000, guid: 3f4f4340dda727940860628f0b065e1e, type: 3}
   useSaveFileAsGrid: 0
 --- !u!4 &1457642717
 Transform:
@@ -114141,7 +114140,6 @@ MonoBehaviour:
   nodeRadius: 0.2
   rayCount: 10
   obstacleProximityPenalty: 10
-  collidersParent: {fileID: 3306764326845377749}
   centerOfObjects: {fileID: 315615732}
   intersectionCheckDistance: 1
   minSurfaceAngle: -90

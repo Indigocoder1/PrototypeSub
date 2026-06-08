@@ -25,7 +25,6 @@ public class PathfindingGrid : MonoBehaviour
     public float nodeRadius;
     public int rayCount;
     public int obstacleProximityPenalty = 10;
-    public Transform collidersParent;
     public Transform centerOfObjects;
     public float intersectionCheckDistance;
     [Range(-90, 90)] public float minSurfaceAngle = 0f;
@@ -37,7 +36,6 @@ public class PathfindingGrid : MonoBehaviour
 
     private LayerMask walkableMask;
     private GridNode[,,] grid;
-    private Collider[] colliders;
     private Vector3[] pointsOnSphere;
     private Vector3 posAtGridGen;
     private Quaternion rotationAtGridGen;
@@ -53,14 +51,16 @@ public class PathfindingGrid : MonoBehaviour
         
         if (useSaveFileAsGrid)
         {
-            if (Plugin.pathfindingGridSaveData != null)
+            /*
+            if (Plugin.PathfindingGridSaveData != null)
             {
-                OnGridSaveDataLoaded(Plugin.pathfindingGridSaveData);
+                OnGridSaveDataLoaded(Plugin.PathfindingGridSaveData);
             }
             else
             {
                 Plugin.onLoadGridSaveData += OnGridSaveDataLoaded;
             }
+            */
         }
         else
         {
@@ -97,11 +97,6 @@ public class PathfindingGrid : MonoBehaviour
         gridSizeZ = Mathf.RoundToInt(gridWorldSize.z / nodeDiameter);
 
         pointsOnSphere = PointsOnSphere(rayCount);
-
-        if (collidersParent != null)
-        {
-            colliders = collidersParent.GetComponentsInChildren<Collider>();
-        }
 
         if (walkableRegions == null) return;
 

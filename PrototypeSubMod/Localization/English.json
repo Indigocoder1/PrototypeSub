@@ -5,7 +5,15 @@
 
   // Title screen
   "ProtoModName": "The Prototype Expansion: Phase Gate Update",
-
+  
+  // Options
+  "ProtoModOptions": "The Prototype",
+  "ProtoPathfindingQuality": "Repair bot pathfinding quality",
+  "PathfindingQualityTooltip": "Higher values consume more memory but don't clip into the sub as much. Requires game restart upon change.",
+  "ProtoQualityDisabled": "Disabled",
+  "ProtoQualityLow": "Low",
+  "ProtoQualityHigh": "High",
+  
   // Items
   "Proto_PrecursorIngot": "Almanite framework",
   "Tooltip_Proto_PrecursorIngot": "Advanced metallic alloy used in alien architecture. Unprecedented integrity.",
