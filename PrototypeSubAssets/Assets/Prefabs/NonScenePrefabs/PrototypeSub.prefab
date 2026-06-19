@@ -79129,7 +79129,6 @@ MonoBehaviour:
   nodeRadius: 0.2
   rayCount: 10
   obstacleProximityPenalty: 10
-  collidersParent: {fileID: 0}
   centerOfObjects: {fileID: 0}
   intersectionCheckDistance: 1
   minSurfaceAngle: -35
@@ -160509,7 +160508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Proto_AbandonShip
-  sound: {fileID: 11400000, guid: 5ce86571cea06ec498b37ccda60c9731, type: 2}
+  sound: {fileID: 11400000, guid: 478a2d763151d774f9c1f107729d9653, type: 2}
   minInterval: 0
 --- !u!114 &8825268564763005431
 MonoBehaviour:
