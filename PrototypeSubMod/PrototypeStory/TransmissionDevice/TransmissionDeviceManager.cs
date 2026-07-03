@@ -169,7 +169,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
         pda.ManagedUpdate();
         
         Player.main.SetScubaMaskActive(false);
-        Player.main.transform.Find(toolAttachPath).gameObject.SetActive(false);
+        Player.main.transform.Find(toolAttachPath)?.gameObject.SetActive(false);
         HideForScreenshots.Hide(HideForScreenshots.HideType.HUD);
         Player_Patches.SetOxygenReqOverride(true, 0);
         IngameMenu_Patches.SetDenySaving(true);
@@ -231,6 +231,7 @@ public class TransmissionDeviceManager : MonoBehaviour, IItemSelectorManager, IP
     private void OnDestroy()
     {
         ResetStaticVariables();
+        uGUI_PDA.main.GetComponentInChildren<uGUI_TransmissionTab>(true).onTransmissionComplete += PlayEndingCinematic;
     }
 
     public void OnProtoSerializeObjectTree(ProtobufSerializer serializer) { }
