@@ -7,6 +7,7 @@ using PrototypeSubMod.Factors;
 using PrototypeSubMod.PrecursorWearables;
 using SuitLib;
 using System.Collections.Generic;
+using BepInEx.Bootstrap;
 using UnityEngine;
 
 namespace PrototypeSubMod.Prefabs;
@@ -69,6 +70,14 @@ public static class PrecursorSuit
             { "_SpecTex", armsTex },
             { "_Illum", armsEmission }
         };
+
+        if (Chainloader.PluginInfos.ContainsKey("com.github.tinyhoot.DeathrunRemade"))
+        {
+            var deathrunAPI = HarmonyLib.AccessTools.TypeByName("DeathrunRemade.DeathrunAPI");
+
+            var addSuitCrushDepthMethod = deathrunAPI.GetMethod("AddSuitCrushDepth", new [] { typeof(TechType), typeof(IEnumerable<float>) });
+            addSuitCrushDepthMethod.Invoke(null, new object[] { prefabInfo.TechType, new [] { 2400f, 2000f } });
+        }
 
         var suit = new ModdedSuit(suitTextures, armTextures, ModdedSuitsManager.VanillaModel.WaterFiltration,
             prefabInfo.TechType, ModdedSuitsManager.Modifications.Reinforced, tempValue: 25f);
