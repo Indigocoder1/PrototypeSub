@@ -3,7 +3,7 @@
   "name": "The Prototype",
   "supportedGameId": "subnautica",
   "dependencies": {
-    "2.0.4": [
+    "2.0.5": [
       {
         "modId": 30,
         "fromRelease": "1.0.0-pre.49"

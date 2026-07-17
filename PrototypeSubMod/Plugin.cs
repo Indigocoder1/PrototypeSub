@@ -54,7 +54,7 @@ namespace PrototypeSubMod
     {
         private const string GUID = "com.prototech.prototypesub";
         private const string pluginName = "Prototype Sub";
-        private const string versionString = "2.0.4";
+        private const string versionString = "2.0.5";
 
         public new static ManualLogSource Logger { get; private set; }
 
