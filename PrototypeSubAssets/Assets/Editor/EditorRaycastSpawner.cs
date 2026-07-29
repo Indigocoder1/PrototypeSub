@@ -4,7 +4,7 @@ using UnityEngine;
 public class EditorRaycastSpawner : EditorWindow
 {
     private static bool active;
-    private static bool zOut;
+    private static bool forwardOppositeToNormal;
     private static Transform parent;
     private static Material material;
 
@@ -31,7 +31,7 @@ public class EditorRaycastSpawner : EditorWindow
             {
                 var point = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 point.transform.position = hitInfo.point + hitInfo.normal * 0.25f;
-                point.transform.forward = hitInfo.normal * (zOut ? 1 : -1);
+                point.transform.forward = hitInfo.normal * (forwardOppositeToNormal ? -1 : 1);
                 point.transform.localScale = Vector3.one * 0.2f;
                 point.transform.SetParent(parent);
                 DestroyImmediate(point.GetComponent<Collider>());
@@ -56,7 +56,7 @@ public class EditorRaycastSpawner : EditorWindow
         }
 
         GUILayout.Label("Active = " + active);
-        zOut = GUILayout.Toggle(zOut, "Forward is opposite to normal");
+        forwardOppositeToNormal = GUILayout.Toggle(forwardOppositeToNormal, "Forward is opposite to normal");
         GUILayout.BeginHorizontal();
         GUILayout.Label("Attach parent ");
         parent = (Transform)EditorGUILayout.ObjectField(parent, typeof(Transform), true);
