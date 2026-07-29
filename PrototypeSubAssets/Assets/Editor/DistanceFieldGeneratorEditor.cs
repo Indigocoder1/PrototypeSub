@@ -1,13 +1,10 @@
 ﻿using UnityEditor;
 using SubLibrary.Utilities;
 using UnityEngine;
-using static Int3;
 
 [CustomEditor(typeof(GenerateDistanceField))]
 public class DistanceFieldGeneratorEditor : Editor
 {
-    private const int MAX_LABEL_WIDTH = 10;
-
     public override void OnInspectorGUI()
     {
         GenerateDistanceField generator = target as GenerateDistanceField;
@@ -54,7 +51,6 @@ public class DistanceFieldGeneratorEditor : Editor
             Vector3 resolution = generator.bounds.size * generator.pixelsPerUnit;
             var texture = new Texture3D((int)resolution.x, (int)resolution.y, (int)resolution.z, TextureFormat.Alpha8, 1)
             {
-                //Idk why this is needed but Lee said so in the Seal commits ¯\_(ツ)_/¯
                 wrapMode = TextureWrapMode.Clamp
             };
 

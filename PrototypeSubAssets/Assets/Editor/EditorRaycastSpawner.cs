@@ -1,16 +1,17 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public class LavaAttachSpawner : EditorWindow
+public class EditorRaycastSpawner : EditorWindow
 {
     private static bool active;
+    private static bool zOut;
     private static Transform parent;
     private static Material material;
 
-    [MenuItem("Tools/Lava larva attach points")]
+    [MenuItem("Tools/Editor raycast spawner")]
     private static void Init()
     {
-        var window = (LavaAttachSpawner)EditorWindow.GetWindow(typeof(LavaAttachSpawner));
+        var window = (EditorRaycastSpawner)GetWindow(typeof(EditorRaycastSpawner));
         window.Show();
         HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
     }
@@ -30,12 +31,12 @@ public class LavaAttachSpawner : EditorWindow
             {
                 var point = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 point.transform.position = hitInfo.point + hitInfo.normal * 0.25f;
-                point.transform.forward = -hitInfo.normal;
+                point.transform.forward = hitInfo.normal * (zOut ? 1 : -1);
                 point.transform.localScale = Vector3.one * 0.2f;
                 point.transform.SetParent(parent);
                 DestroyImmediate(point.GetComponent<Collider>());
 
-                point.name = $"LavaLarvaAttachPoint ({parent.childCount})";
+                point.name = $"SpawnedPoint ({parent.childCount})";
 
                 if (material != null)
                 {
@@ -49,13 +50,20 @@ public class LavaAttachSpawner : EditorWindow
 
     private void OnGUI()
     {
-        if (GUILayout.Button("Enable Raycasting"))
+        if (GUILayout.Button("Toggle Raycasting"))
         {
             active = !active;
         }
 
         GUILayout.Label("Active = " + active);
+        zOut = GUILayout.Toggle(zOut, "Forward is opposite to normal");
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Attach parent ");
         parent = (Transform)EditorGUILayout.ObjectField(parent, typeof(Transform), true);
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Spawned transform material ");
         material = (Material)EditorGUILayout.ObjectField(material, typeof(Material), false);
+        GUILayout.EndHorizontal();
     }
 }

@@ -80800,9 +80800,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5333095177394496615}
   - component: {fileID: 5202357977066950053}
-  - component: {fileID: 4164982998387852570}
   - component: {fileID: 2561931561957246691}
   - component: {fileID: 200788509770894644}
+  - component: {fileID: 4164982998387852570}
   m_Layer: 17
   m_Name: EngineRpmSfxManager
   m_TagString: Untagged
@@ -80889,21 +80889,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playLoopSFXWhenNotMoving: 1
---- !u!114 &4164982998387852570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4346722548415644783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 17134528, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rpmManager: {fileID: 5202357977066950053}
-  impulseSfx: {fileID: 200788509770894644}
-  timeToSfxAllowed: 60
 --- !u!114 &2561931561957246691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80947,6 +80932,21 @@ MonoBehaviour:
   debug: 0
   subtitlesKey: 
   playSubtitlesWithUnscaledTime: 1
+--- !u!114 &4164982998387852570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4346722548415644783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 17134528, guid: a7cf2516c626129479cfce7cab60699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rpmManager: {fileID: 5202357977066950053}
+  impulseSfx: {fileID: 200788509770894644}
+  timeToSfxAllowed: 60
 --- !u!1 &4353771001357202758
 GameObject:
   m_ObjectHideFlags: 0
