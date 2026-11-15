@@ -5,7 +5,7 @@ using Nautilus.Utility;
 using PrototypeSubMod.Patches;
 using PrototypeSubMod.Prefabs;
 using PrototypeSubMod.Prefabs.AlienBuildingBlock;
-using SuitLib;
+using SuitLib.API;
 using UnityEngine;
 
 namespace PrototypeSubMod.PrecursorWearables;

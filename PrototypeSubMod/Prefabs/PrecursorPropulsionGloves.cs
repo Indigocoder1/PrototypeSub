@@ -3,11 +3,9 @@ using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Handlers;
 using PrototypeSubMod.Compatibility;
-using SuitLib;
+using SuitLib.API;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static GameObjectPoolPrefabMap;
 
 namespace PrototypeSubMod.Prefabs;
 

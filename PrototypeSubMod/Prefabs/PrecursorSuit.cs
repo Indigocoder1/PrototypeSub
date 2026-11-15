@@ -5,7 +5,7 @@ using Nautilus.Handlers;
 using PrototypeSubMod.Compatibility;
 using PrototypeSubMod.Factors;
 using PrototypeSubMod.PrecursorWearables;
-using SuitLib;
+using SuitLib.API;
 using System.Collections.Generic;
 using BepInEx.Bootstrap;
 using UnityEngine;
